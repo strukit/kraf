@@ -1,0 +1,27 @@
+ARG LINUX_BASE_IMAGE=registry.access.redhat.com/ubi10/ubi-minimal
+
+FROM ${LINUX_BASE_IMAGE} AS setup-environment
+
+ARG ARCH_RUST
+ARG ARCH_CONTAINER
+ARG RUSTUP_VERSION=1.29.1
+ARG WORKSPACE
+
+RUN microdnf install -y \
+    gcc \
+    gdb \
+    && microdnf clean all
+
+ENV HOME=/root
+ENV PATH=$HOME/.bin:${PATH}
+
+WORKDIR $HOME
+
+ADD --chmod=0755 https://static.rust-lang.org/rustup/archive/${RUSTUP_VERSION}/${ARCH_RUST}-unknown-linux-gnu/rustup-init \
+    $HOME/.bin/rustup-init
+
+ENV CARGO_HOME=$HOME/.cargo \
+    RUSTUP_HOME=$HOME/.rustup \
+    PATH=$HOME/.cargo/bin:${PATH}
+
+RUN rustup-init -y --default-toolchain none

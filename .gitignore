@@ -1,0 +1,78 @@
+# ============================================================================
+#
+# NOTE: This repository denies everything by default and permits only the
+#       paths required by the repository.
+#
+#       To ensure compatibility, always start folder paths with **/
+#       (e.g., **/tmp) to match both .gitignore and .dockerignore behaviors.
+#
+#       The .dockerignore file should be a symbolic link to .gitignore.
+#
+# ============================================================================
+
+*
+**/.git
+
+!**/.ignore
+!**/.gitignore
+
+!/.gitattributes
+
+!/.worktrees/
+!/.worktrees/.keep
+
+!/.github/
+!/.github/**
+
+!/*.json
+!/*.jsonc
+!/*.toml
+!/*.hcl
+!/*.yaml
+!/*.yml
+
+!**/.dockerignore
+!**/*.dockerignore
+
+!**/Containerfile
+!**/Containerfile.windows
+!**/Containerfile.linux
+
+!**/Dockerfile
+!**/Dockerfile.windows
+!**/Dockerfile.linux
+
+!/Cargo.toml
+!/Cargo.lock
+
+!/.config/
+!/.config/.keep
+!/.config/*.json
+!/.config/*.jsonc
+!/.config/*.toml
+!/.config/*.hcl
+!/.config/*.yaml
+
+!/.vscode/
+!/.vscode/**
+
+!/.cargo/
+!/.cargo/**
+
+!/.idea
+!/.idea/**
+
+!/docs/
+!/docs/**/
+!/docs/**/*.md
+
+!/src/
+!/src/**/
+!/src/**/*.rs
+!/src/**/Cargo.toml
+!/src/**/*.md
+
+!/README.md
+!/AGENTS.md
+!/BUILDING.md
+!/LICENSE

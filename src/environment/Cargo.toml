@@ -1,0 +1,19 @@
+[package]
+name = "kraf-environment"
+version.workspace = true
+categories = ["development-tools", "os"]
+edition.workspace = true
+keywords = ["environment", "variables", "platform", "cross-platform"]
+license = "MIT"
+readme = "../../README.md"
+repository = "https://github.com/strukit/kraf"
+description = "Cross-platform environment variable resolution and mapping"
+
+[lints]
+workspace = true
+
+[dependencies]
+kraf-core.workspace = true
+
+[lib]
+path = "./src/lib.rs"

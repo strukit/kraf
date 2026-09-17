@@ -1,0 +1,10 @@
+include = [
+  { path = "config.local.toml", optional = true },
+]
+
+[build]
+target-dir = ".dist/"
+build-dir = ".cache/target"
+
+[alias]
+lint = "clippy"

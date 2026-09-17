@@ -1,0 +1,36 @@
+# escape=`
+
+ARG WINDOWS_BUILD_IMAGE=mcr.microsoft.com/windows/servercore:ltsc2025
+ARG ARCH
+
+FROM ${WINDOWS_BUILD_IMAGE}-${ARCH} AS setup-environment
+
+ARG ARCH
+ARG ARCH_RUST
+ARG RUSTUP_VERSION=1.29.1
+ARG WORKSPACE
+
+ENV ARCH=${ARCH}
+ENV VS_BUILD_TOOLS_PATH=C:\BuildTools
+ENV TEMP=C:\Temp
+
+SHELL ["powershell", "-NoLogo", "-NoProfile", "-Command", "$ErrorActionPreference = 'Stop';"]
+
+ADD https://aka.ms/vs/18/stable/vs_buildtools.exe ${TEMP}\build_tools.exe
+
+ADD https://static.rust-lang.org/rustup/archive/${RUSTUP_VERSION}/${ARCH_RUST}-pc-windows-msvc/rustup-init.exe ${TEMP}\rustup-init.exe
+
+WORKDIR ${WORKSPACE}
+
+COPY .msvc.json .
+
+RUN $installer = Start-Process -Wait -PassThru -FilePath "$env:TEMP\build_tools.exe" -ArgumentList `
+    '--quiet', '--wait', '--norestart', '--nocache', `
+    '--installPath', 'C:\BuildTools', '--config', '.msvc.json'; `
+    if ($installer.ExitCode -ne 0) { throw ('Build Tools installer failed with exit code {0}' -f $installer.ExitCode) }
+
+SHELL ["powershell", "-NoLogo", "-NoProfile", "-Command", "$ErrorActionPreference = 'Stop'; & \"$env:VS_BUILD_TOOLS_PATH\\Common7\\Tools\\Launch-VsDevShell.ps1\" -VsInstallationPath $env:VS_BUILD_TOOLS_PATH -Arch $env:ARCH -HostArch $env:ARCH -NoLogo;"]
+
+RUN & "$env:TEMP\rustup-init.exe" -y --profile minimal --default-toolchain none
+
+RUN Get-ChildItem "$env:TEMP" -Force | Remove-Item -Force -Recurse

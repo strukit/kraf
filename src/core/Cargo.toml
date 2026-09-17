@@ -1,0 +1,18 @@
+[package]
+name = "kraf-core"
+version.workspace = true
+categories = ["development-tools"]
+edition.workspace = true
+keywords = ["process", "execution", "host", "child"]
+license = "MIT"
+readme = "../../README.md"
+repository = "https://github.com/strukit/kraf"
+description = "Core process execution primitives for host and child process management"
+
+[lints]
+workspace = true
+
+[dependencies]
+
+[lib]
+path = "./src/lib.rs"

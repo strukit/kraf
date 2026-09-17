@@ -1,0 +1,19 @@
+{
+  "language": "en",
+  "dictionaries": ["cpp", "filetypes", "go", "powershell", "softwareTerms", "misc"],
+  "ignorePaths": ["cspell.json"],
+  "words": [
+    "ltsc",
+    "containerfile",
+    "kraf",
+    "!kraft",
+    "!black",
+    "replacen",
+    "manpath",
+    "colorterm",
+    "buildx",
+    "rustup",
+    "clippy",
+    "worktrees"
+  ]
+}

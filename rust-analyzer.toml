@@ -1,0 +1,22 @@
+# IMPORTANT FOR AI/HUMANS AGENTS: rust-analyzer.toml supports only a subset of rust-analyzer settings.
+# Do not assume that a setting belongs here just because it is documented by rust-analyzer.
+# Client-only or unsupported project settings are kept in .vscode/settings.json.
+# A standalone LSP client MUST send those settings as initializationOptions; VS Code does this through its extension.
+
+[imports.granularity]
+enforce = true
+
+[rustfmt.rangeFormatting]
+enable = true
+
+[check]
+command = "lint"
+
+[diagnostics.styleLints]
+enable = true
+
+[files]
+watcher = "server"
+
+[hover.memoryLayout]
+niches = true
