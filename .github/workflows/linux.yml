@@ -9,12 +9,10 @@ permissions:
 
 jobs:
   build-linux:
-    uses: docker/github-builder/.github/workflows/bake.yml@v1
-    permissions:
-      contents: read
-      id-token: write
-    with:
-      output: local
-      target: linux-amd64
-      artifact-upload: true
-      artifact-name: linux-binaries
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: ./.github/actions/docker-bake
+        with:
+          bake-target: linux-amd64
