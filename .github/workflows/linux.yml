@@ -1,0 +1,20 @@
+name: Linux build
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-linux:
+    uses: docker/github-builder/.github/workflows/bake.yml@v1
+    permissions:
+      contents: read
+      id-token: write
+    with:
+      output: local
+      target: linux
+      artifact-upload: true
+      artifact-name: linux-binaries
