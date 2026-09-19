@@ -15,6 +15,6 @@ jobs:
       id-token: write
     with:
       output: local
-      target: linux
+      target: linux-amd64
       artifact-upload: true
       artifact-name: linux-binaries
