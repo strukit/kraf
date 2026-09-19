@@ -15,8 +15,6 @@ runs:
         cache-binary: false
         use: true
         version: v0.37.1
-        driver-opts: |
-          image=moby/buildkit:v0.33.0
 
     - name: Docker Bake (${{ inputs.bake-target }})
       uses: docker/bake-action@v7
