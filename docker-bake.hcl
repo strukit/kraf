@@ -99,6 +99,6 @@ target "lint" {
 }
 
 group "linux" {
-  targets = [ "linux-amd64", "linux-amr64" ]
+  targets = [ "linux-amd64", "linux-arm64" ]
   
 }
