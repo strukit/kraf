@@ -1,0 +1,54 @@
+---
+title: Environment variables host mappings - SPEC
+summary: Requirements for platform-specific environment-variable mappings.
+tags: [environment, env-var, specification, spec, host, platform]
+status: draft
+---
+
+> [!IMPORTANT]
+> Requirements in this specification use EARS notation. **SHALL** and **SHALL
+> NOT** define mandatory behavior; **SHOULD** and **SHOULD NOT** define expected
+> behavior that requires an explicit justification to deviate from; **MAY**
+> defines optional behavior.
+>
+> These terms follow RFC 2119 and RFC 8174.
+
+## Requirements
+
+### ENV_VAR_HOST-REQ-0001
+
+Name: Supported-platform mapping completeness
+
+**Links:**
+
+- [ENV_VAR_HOST-ACC-0001](./env-var-host.acceptance.md#env_var_host-acc-0001)
+- [ENV_VAR_HOST-ACC-0002](./env-var-host.acceptance.md#env_var_host-acc-0002)
+- [ENV_VAR_HOST-ACC-0003](./env-var-host.acceptance.md#env_var_host-acc-0003)
+
+**Status**:
+
+- Requirement status: Draft
+- Implementation status: Implemented
+- Verification status: Not verified
+
+**SHALL:** Every supported platform mapping declares every shared canonical
+environment-variable key.
+
+---
+
+### ENV_VAR_HOST-REQ-0002
+
+Name: Session-owned directory sources
+
+**Links:**
+
+- [ENV_VAR_HOST-ACC-0004](./env-var-host.acceptance.md#env_var_host-acc-0004)
+
+**Status**:
+
+- Requirement status: Draft
+- Implementation status: Implemented
+- Verification status: Not verified
+
+**SHALL:** The WORKDIR and HOME declaration families use provided values rather
+than values imported from the host.
