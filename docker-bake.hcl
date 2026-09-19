@@ -35,7 +35,6 @@ target "setup" {
   }
 }
 
-# docker buildx bake linux
 # docker buildx bake linux-amd64 (linux/amd64)
 # docker buildx bake linux-arm64 (linux/arm64)
 target "linux" {
@@ -51,7 +50,6 @@ target "linux" {
   }
 }
 
-# docker buildx bake windows
 # docker buildx bake windows-amd64 
 # docker buildx bake windows-arm64 
 target "windows" {
@@ -98,4 +96,9 @@ target "lint" {
   args = {
     WORKSPACE = resolve_workspace()
   }
+}
+
+group "linux" {
+  targets = [ "linux-amd64", "linux-amr64" ]
+  
 }
