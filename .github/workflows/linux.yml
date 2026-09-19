@@ -9,10 +9,23 @@ permissions:
 
 jobs:
   build-linux:
-    runs-on: ubuntu-24.04
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      matrix:
+        include:
+          - runner: ubuntu-26.04
+            target: linux-amd64
+
+          - runner: ubuntu-26.04-arm
+            target: linux-arm64
+
+          - runner: windows-2025
+            target: windows-amd64
+            
+          - runner: windows-11-arm
+            target: windows-arm64
     steps:
       - uses: actions/checkout@v6
-
       - uses: ./.github/actions/docker-bake
         with:
-          bake-target: linux-amd64
+          bake-target: ${{ matrix.target }}
