@@ -8,6 +8,7 @@ permissions:
 
 jobs:
   build:
+    name: Build - ${{ matrix.target }}
     runs-on: ${{ matrix.runner }}
     strategy:
       fail-fast: false
