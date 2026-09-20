@@ -15,7 +15,7 @@ runs:
       with:
         version: v0.37.1
         cache-binary: false
-        driver: remote
+        platforms: linux/amd64,linux/arm64, windows/amd64
         use: true
 
     - name: Docker Bake (${{ inputs.bake-target }})
