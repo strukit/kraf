@@ -42,6 +42,8 @@
 !**/Dockerfile.windows
 !**/Dockerfile.linux
 
+!**/Dockerfile*.rego
+
 !/Cargo.toml
 !/Cargo.lock
 
