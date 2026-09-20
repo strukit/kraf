@@ -18,6 +18,10 @@ allow if {
 }
 
 allow if {
+  input.image.host == "registry.access.redhat.com"  # Docker Hardened Images
+}
+
+allow if {
   input.http.schema == "https"
 }
 
