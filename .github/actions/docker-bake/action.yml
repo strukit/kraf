@@ -8,10 +8,11 @@ inputs:
 
 runs:
   using: composite
+
   steps:
     - name: Set up Docker
       uses: docker/setup-docker-action@v5
-      
+
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v4
       with:
@@ -26,4 +27,5 @@ runs:
         source: https://github.com/${{ github.repository }}.git#${{ github.sha }}
         targets: ${{ inputs.bake-target }}
       env:
+        EXPERIMENTAL_BUILDKIT_SOURCE_POLICY: 0
         BUILDX_BAKE_GIT_AUTH_TOKEN: ${{ github.token }}
