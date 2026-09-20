@@ -13,6 +13,7 @@ function "resolve_workspace" {
 
 target "_common" {
   context    = "."
+  policy     = ""
 }
 
 target "setup" {

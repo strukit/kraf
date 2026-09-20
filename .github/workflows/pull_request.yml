@@ -1,7 +1,6 @@
-name: Linux build
+name: Pull Request 
 
 on:
-  push:
   pull_request:
 
 permissions:
@@ -22,9 +21,6 @@ jobs:
 
           - runner: windows-2025
             target: windows-amd64
-
-          - runner: windows-11-arm
-            target: windows-arm64
     steps:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/docker-bake
