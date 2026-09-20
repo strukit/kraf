@@ -13,7 +13,7 @@ function "resolve_workspace" {
 
 target "_common" {
   context    = "."
-  policy     = [""]
+  policy     = [{ disabled = true }]
 }
 
 target "setup" {
