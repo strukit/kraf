@@ -13,7 +13,7 @@ function "resolve_workspace" {
 
 target "_common" {
   context    = "."
-  policy     = ""
+  policy     = [""]
 }
 
 target "setup" {
@@ -97,9 +97,4 @@ target "lint" {
   args = {
     WORKSPACE = resolve_workspace()
   }
-}
-
-group "linux" {
-  targets = [ "linux-amd64", "linux-arm64" ]
-  
 }
