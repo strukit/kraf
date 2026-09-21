@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   build-amd:
-    name: Build on Linux (amd64)
+    name: CI on Linux (amd-64)
     runs-on: ubuntu-26.04
 
     steps:
@@ -17,7 +17,7 @@ jobs:
           target: linux-amd64
 
   build-arm:
-    name: Build on Linux (amd64)
+    name: CI on Linux (arm-64)
     runs-on: ubuntu-26.04-arm
 
     steps:

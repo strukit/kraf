@@ -5,6 +5,10 @@ inputs:
   target:
     description: Bake target to execute.
     required: true
+
+  artifact-path:
+    description: Directory where Bake exports and the action uploads artifacts.
+    default: .dist
   
 runs:
   using: composite
@@ -21,6 +25,15 @@ runs:
       with:
         source: https://github.com/${{ github.repository }}.git#${{ github.sha }}
         targets: ${{ inputs.target }}
-
+        set: |
+          ${{ inputs.target }}.output=type=local,dest=${{ inputs.artifact-path }},platform-split=true
       env:
         BUILDX_BAKE_GIT_AUTH_TOKEN: ${{ github.token }}
+        ARTIFACT_PATH: ${{inputs.artifact-path}}
+
+    - name: Update artifacts
+      uses: actions/upload-artifact@v7
+      with:
+        name: ${{ inputs.target }}-artifact-${{github.ref}}
+        path: ${{ inputs.artifact-path }}
+        if-no-files-found: error
