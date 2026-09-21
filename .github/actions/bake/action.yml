@@ -26,10 +26,6 @@ runs:
         source: https://github.com/${{ github.repository }}.git#${{ github.sha }}
         targets: ${{ inputs.target }}
       env:
-        DOCKER_BUILD_CHECKS_ANNOTATIONS: true
-        DOCKER_BUILD_SUMMARY: false
-        DOCKER_BUILD_RECORD_UPLOAD: true
-
         BUILDX_BAKE_GIT_AUTH_TOKEN: ${{ github.token }}
         
         ARTIFACT_PATH: ${{inputs.artifact-path}}
