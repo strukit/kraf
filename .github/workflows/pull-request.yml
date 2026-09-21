@@ -8,18 +8,16 @@ permissions:
 
 jobs:
   build-amd:
-    name: CI on Linux (amd-64)
-    runs-on: ubuntu-26.04
-
+    name: Quality Gates - Linux (amd-64)
+    runs-on: ubuntu-26.04=
     steps:
       - uses: $/.github/actions/bake
         with:
           target: linux-amd64
 
   build-arm:
-    name: CI on Linux (arm-64)
+    name:  Quality Gates - Linux (arm-64)
     runs-on: ubuntu-26.04-arm
-
     steps:
       - uses: $/.github/actions/bake
         with:
