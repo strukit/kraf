@@ -1,11 +1,11 @@
 name: Docker Bake
-description: Executes a Docker Bake target from the repository Git source.
+description: General Docker Bake target executor.
 
 inputs:
-  bake-target:
-    description: Docker Bake target to execute.
+  target:
+    description: Bake target to execute.
     required: true
-
+  
 runs:
   using: composite
 
@@ -13,10 +13,7 @@ runs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v4
       with:
-        version: v0.37.1
-        driver: docker
         cache-binary: false
-        platforms: linux/amd64,linux/arm64, windows/amd64
         use: true
 
     - name: Docker Bake (${{ inputs.bake-target }})
