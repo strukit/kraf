@@ -27,11 +27,11 @@ ARG BINARY_EXT=""
 
 COPY --from=builder ${WORKSPACE}/.dist/release/kraf${BINARY_EXT} .
 
-FROM setup-workspace AS tester
+FROM builder AS tester
 
 RUN cargo test --workspace
 
-FROM setup-workspace AS linter
+FROM builder AS linter
 
 RUN cargo fmt --check
 RUN cargo lint
