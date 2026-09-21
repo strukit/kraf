@@ -16,11 +16,11 @@ runs:
         cache-binary: false
         use: true
 
-    - name: Docker Bake (${{ inputs.bake-target }})
+    - name: Bake target:(${{ inputs.target }})
       uses: docker/bake-action@v7
       with:
         source: https://github.com/${{ github.repository }}.git#${{ github.sha }}
-        targets: ${{ inputs.bake-target }}
+        targets: ${{ inputs.arget }}
 
       env:
         BUILDX_BAKE_GIT_AUTH_TOKEN: ${{ github.token }}
