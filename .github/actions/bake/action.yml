@@ -34,4 +34,5 @@ runs:
       with:
         name: ${{ inputs.target }}-artifact-${{github.ref}}
         path: ${{ inputs.artifact-path }}
-        if-no-files-found: error
+        include-hidden-files: true
+
