@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   build-amd:
-    name: Quality Gates - Linux (amd_64)
+    name: Quality Gates - Linux (amd64)
     runs-on: ubuntu-26.04
     steps:
       - uses: $/.github/actions/bake
@@ -20,7 +20,7 @@ jobs:
           target: linux-amd64
 
   build-arm:
-    name:  Quality Gates - Linux (arm_64)
+    name:  Quality Gates - Linux (arm64)
     runs-on: ubuntu-26.04-arm
     steps:
       - uses: $/.github/actions/bake
