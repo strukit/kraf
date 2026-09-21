@@ -20,7 +20,7 @@ runs:
       uses: docker/bake-action@v7
       with:
         source: https://github.com/${{ github.repository }}.git#${{ github.sha }}
-        targets: ${{ inputs.arget }}
+        targets: ${{ inputs.target }}
 
       env:
         BUILDX_BAKE_GIT_AUTH_TOKEN: ${{ github.token }}
