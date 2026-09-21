@@ -37,7 +37,7 @@ runs:
     - name: Update artifacts
       uses: actions/upload-artifact@v7
       with:
-        name: ${{ inputs.target }}-artifact-${{github.ref}}
+        name: ${{ inputs.target }}-artifact-pr-${{ github.event.pull_request.number }}
         path: ${{ inputs.artifact-path }}
         include-hidden-files: true
 
