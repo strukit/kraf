@@ -78,3 +78,7 @@
 !/AGENTS.md
 !/BUILDING.md
 !/LICENSE
+
+!/.agents
+!/.agents/**
+!/.agents/**/*
