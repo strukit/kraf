@@ -78,3 +78,7 @@
 !/AGENTS.md
 !/BUILDING.md
 !/LICENSE
+
+!/.skills
+!/.skills/**
+!/.skills/**/*

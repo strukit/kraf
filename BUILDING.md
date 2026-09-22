@@ -74,8 +74,8 @@ doesn't need frontmatter. Module `README.md` files do need it — see
 ## Agents
 
 Don't commit AI agent config that's exclusive to a single agent (Claude-only,
-Codex-only, etc.). Config meant to work across agents still doesn't belong in
-the repo — it lives in the dev's own environment.
+Codex-only, etc.) — it lives in the dev's own environment. Config meant to
+work across agents may be committed.
 
 ## Code standards
 
