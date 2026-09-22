@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "kraf-read": {
+      "type": "stdio",
+      "command": "./.dist/debug/kraf-mcp",
+      "args": []
+    }
+  },
+  "inputs": []
+}

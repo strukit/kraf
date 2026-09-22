@@ -1,0 +1,24 @@
+[package]
+name = "kraf-tools"
+version.workspace = true
+categories = ["development-tools"]
+edition.workspace = true
+keywords = ["tools", "agents"]
+license = "MIT"
+readme = "../../README.md"
+repository = "https://github.com/strukit/kraf"
+description = "Structured tools exposed to agents/CLIs"
+
+[lints]
+workspace = true
+
+[dependencies]
+kraf-core.workspace = true
+rmcp = { version = "3.4", features = ["server", "transport-io", "schemars"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+schemars = "1.0"
+tokio = { version = "1", features = ["sync", "macros", "rt", "time"] }
+
+[lib]
+path = "./src/lib.rs"

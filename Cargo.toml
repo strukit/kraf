@@ -3,6 +3,7 @@ resolver = "3"
 members = [
   "src/core",
   "src/environment",
+  "src/tools",
 ]
 
 [workspace.package]
@@ -12,6 +13,7 @@ edition = "2024"
 [workspace.dependencies]
 kraf-core = { path = "src/core", version = "0.0.1" }
 kraf-environment = { path = "src/environment", version = "0.0.1" }
+kraf-tools = { path = "src/tools", version = "0.0.1" }
 
 [workspace.lints.clippy]
 correctness = "deny"
@@ -46,3 +48,14 @@ workspace = true
 [dependencies]
 kraf-core.workspace = true
 kraf-environment.workspace = true
+kraf-tools.workspace = true
+rmcp = { version = "3.4", features = ["server", "transport-io"] }
+tokio = { version = "1", features = ["sync", "macros", "rt", "time"] }
+
+[[bin]]
+name = "kraf-read"
+path = "src/bin/read.rs"
+
+[[bin]]
+name = "kraf-mcp"
+path = "src/bin/mcp.rs"

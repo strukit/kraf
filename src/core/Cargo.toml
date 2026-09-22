@@ -13,6 +13,9 @@ description = "Core process execution primitives for host and child process mana
 workspace = true
 
 [dependencies]
+url = "2"
+sha2 = "0.10"
+tracing = "0.1"
 
 [lib]
 path = "./src/lib.rs"
