@@ -67,14 +67,15 @@ which Docker can't build for.
 ## Markdown front-matter
 
 Every `.md` file requires frontmatter with `title`, `summary`, and `tags` —
-makes docs easy to index for agents. Exception: `README.md`, which doesn't need
-frontmatter.
+makes docs easy to index for agents. Exception: the root `README.md`, which
+doesn't need frontmatter. Module `README.md` files do need it — see
+[Module README](./docs/README.md#readme-readmemd).
 
 ## Agents
 
 Don't commit AI agent config that's exclusive to a single agent (Claude-only,
-Codex-only, etc.). Config meant to work across agents still doesn't belong in
-the repo — it lives in the dev's own environment.
+Codex-only, etc.) — it lives in the dev's own environment. Config meant to
+work across agents may be committed.
 
 ## Code standards
 

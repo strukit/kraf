@@ -79,3 +79,7 @@
 !/BUILDING.md
 !/SPECIFICATIONS.md
 !/LICENSE
+
+!/.agents
+!/.agents/**
+!/.agents/**/*
