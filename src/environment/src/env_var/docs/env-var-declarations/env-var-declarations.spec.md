@@ -2,7 +2,6 @@
 title: Environment variables declaration - SPEC
 summary: Requirements for declaring environment variables.
 tags: [environment, env-var, specification, spec, declaration]
-status: draft
 ---
 
 > [!IMPORTANT]
@@ -15,20 +14,21 @@ status: draft
 
 ## Requirements
 
-### ENV_VAR_DECLARATIONS-REQ-0001
+### ENV-VAR_DECLARATIONS-REQ-0001
 
 Name: Static declaration
 
 **Links:**
 
-- [ENV_VAR_DECLARATIONS-ACC-0001](./env-var-declarations.acceptance.md#env_var_declarations-acc-0001)
-- [ENV_VAR_DECLARATIONS-ACC-0002](./env-var-declarations.acceptance.md#env_var_declarations-acc-0002)
+- [ENV-VAR_DECLARATIONS-ACC-0001](./env-var-declarations.acceptance.md#env-var_declarations-acc-0001)
+- [ENV-VAR_DECLARATIONS-ACC-0002](./env-var-declarations.acceptance.md#env-var_declarations-acc-0002)
+
+- [Intent](../env-var-intent.md): module intent.
 
 **Status**:
 
-- Requirement status: Draft
+- Doc status: Draft
 - Implementation status: Not implemented
-- Verification status: Not verified
 
 **SHALL:** The software resolves and projects only environment-variable
 declarations that are built into the software or packaged as immutable metadata
@@ -45,19 +45,20 @@ aliases, export aliases, or source eligibility.
 
 ---
 
-### ENV_VAR_DECLARATIONS-REQ-0002
+### ENV-VAR_DECLARATIONS-REQ-0002
 
 Name: Canonical key uniqueness
 
 **Links:**
 
-- [ENV_VAR_DECLARATIONS-ACC-0003](./env-var-declarations.acceptance.md#env_var_declarations-acc-0003)
+- [ENV-VAR_DECLARATIONS-ACC-0003](./env-var-declarations.acceptance.md#env-var_declarations-acc-0003)
+
+- [Intent](../env-var-intent.md): module intent.
 
 **Status**:
 
-- Requirement status: Draft
+- Doc status: Draft
 - Implementation status: Partially implemented
-- Verification status: Not verified
 
 **SHALL:** The software accepts at most one declaration for each canonical key.
 
@@ -67,21 +68,22 @@ Name: Canonical key uniqueness
 
 ---
 
-### ENV_VAR_DECLARATIONS-REQ-0003
+### ENV-VAR_DECLARATIONS-REQ-0003
 
 Name: Mapping mode validity
 
 **Links:**
 
-- [ENV_VAR_DECLARATIONS-ACC-0004](./env-var-declarations.acceptance.md#env_var_declarations-acc-0004)
-- [ENV_VAR_DECLARATIONS-ACC-0005](./env-var-declarations.acceptance.md#env_var_declarations-acc-0005)
-- [ENV_VAR_DECLARATIONS-ACC-0006](./env-var-declarations.acceptance.md#env_var_declarations-acc-0006)
+- [ENV-VAR_DECLARATIONS-ACC-0004](./env-var-declarations.acceptance.md#env-var_declarations-acc-0004)
+- [ENV-VAR_DECLARATIONS-ACC-0005](./env-var-declarations.acceptance.md#env-var_declarations-acc-0005)
+- [ENV-VAR_DECLARATIONS-ACC-0006](./env-var-declarations.acceptance.md#env-var_declarations-acc-0006)
+
+- [Intent](../env-var-intent.md): module intent.
 
 **Status**:
 
-- Requirement status: Draft
+- Doc status: Draft
 - Implementation status: Partially implemented
-- Verification status: Not verified
 
 **SHALL:** A declaration using merge import mode declares at least two import
 aliases.

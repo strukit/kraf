@@ -77,3 +77,15 @@ It does not:
 Session creation and process launch belong to the trap module. The trap provides
 session-owned values, requests a resolved projection, and applies that
 projection to its managed process.
+
+## Documentation
+
+- [Readme](../README.md): module overview.
+- [Declarations](./env-var-declarations/env-var-declarations.spec.md):
+  declarations Specification.
+- [Resolution](./env-var-resolution/env-var-resolution.spec.md):
+  resolution Specification.
+- [Projection](./env-var-projection/env-var-projection.spec.md):
+  projection Specification.
+- [Host mappings](./env-var-host/env-var-host.spec.md):
+  host mappings Specification.

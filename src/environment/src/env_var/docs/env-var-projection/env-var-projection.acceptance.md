@@ -2,82 +2,81 @@
 title: Environment variables projection - Acceptance
 summary: Acceptance scenarios for projecting environment variables.
 tags: [environment, env-var, acceptance, projection, gherkin]
-status: draft
 ---
 
-## ENV_VAR_PROJECTION-ACC-0001
+## ENV-VAR_PROJECTION-ACC-0001
 
 Name: Declared export alias is projected
 
 **Links:**
 
-- [ENV_VAR_PROJECTION-REQ-0001](./env-var-projection.spec.md#env_var_projection-req-0001)
+- [ENV-VAR_PROJECTION-REQ-0001](./env-var-projection.spec.md#env-var_projection-req-0001)
 
 **Status**:
 
-- Acceptance status: Draft
-- Verification status: Not verified
+- Doc status: Draft
+- Verification status: Unknown
 
 ```gherkin
-Feature: ENV_VAR_PROJECTION-FEAT-0001 — Environment variable projection
+Feature: ENV-VAR_PROJECTION-FEAT-0001 — Environment variable projection
 
-  Rule: ENV_VAR_PROJECTION-REQ-0001 — Explicit export authorization
+  Rule: ENV-VAR_PROJECTION-REQ-0001 — Explicit export authorization
 
-    Scenario: ENV_VAR_PROJECTION-ACC-0001 — Declared export alias is projected
-      Given "ENV_VAR_X" is declared as an export alias
-      And "ENV_VAR_X" has a resolved value
+    Scenario: ENV-VAR_PROJECTION-ACC-0001 — Declared export alias is projected
+      Given "ENV-VAR_X" is declared as an export alias
+      And "ENV-VAR_X" has a resolved value
       When the software applies the projection to a managed process
-      Then the managed process receives "ENV_VAR_X"
+      Then the managed process receives "ENV-VAR_X"
 ```
 
 ---
 
-## ENV_VAR_PROJECTION-ACC-0002
+## ENV-VAR_PROJECTION-ACC-0002
 
 Name: Non-exportable resolved value is not projected
 
 **Links:**
 
-- [ENV_VAR_PROJECTION-REQ-0001](./env-var-projection.spec.md#env_var_projection-req-0001)
+- [ENV-VAR_PROJECTION-REQ-0001](./env-var-projection.spec.md#env-var_projection-req-0001)
 
 **Status**:
 
-- Acceptance status: Draft
-- Verification status: Not verified
+- Doc status: Draft
+- Verification status: Unknown
 
 ```gherkin
-Feature: ENV_VAR_PROJECTION-FEAT-0001 — Environment variable projection
+Feature: ENV-VAR_PROJECTION-FEAT-0001 — Environment variable projection
 
-  Rule: ENV_VAR_PROJECTION-REQ-0001 — Explicit export
+  Rule: ENV-VAR_PROJECTION-REQ-0001 — Explicit export authorization
 
-    Scenario: ENV_VAR_PROJECTION-ACC-0002 — Non-exportable resolved value is not projected
-      Given "ENV_VAR_X" has a resolved value
-      And "ENV_VAR_X" is not declared as an export alias
+    Scenario: ENV-VAR_PROJECTION-ACC-0002 — Non-exportable resolved value is not projected
+      Given "ENV-VAR_X" has a resolved value
+      And "ENV-VAR_X" is not declared as an export alias
       When the software applies the projection to a managed process
-      Then the managed process does not receive "ENV_VAR_X"
+      Then the managed process does not receive "ENV-VAR_X"
 ```
 
 ---
 
-## ENV_VAR_PROJECTION-ACC-0003
+## ENV-VAR_PROJECTION-ACC-0003
 
 Name: Export aliases receive the canonical resolved value
 
 **Links:**
 
-- [ENV_VAR_PROJECTION-REQ-0002](./env-var-projection.spec.md#env_var_projection-req-0002)
+- [ENV-VAR_PROJECTION-REQ-0002](./env-var-projection.spec.md#env-var_projection-req-0002)
 
 **Status**:
 
-- Acceptance status: Draft
-- Verification status: Not verified
+- Doc status: Draft
+- Verification status: Unknown
 
 ```gherkin
-Feature: ENV_VAR_PROJECTION-FEAT-0001 — Environment variable projection
+Feature: ENV-VAR_PROJECTION-FEAT-0001 — Environment variable projection
 
-  Rule: ENV_VAR_PROJECTION-REQ-0002 — Export value symmetry
+  Rule: ENV-VAR_PROJECTION-REQ-0002 — Export value symmetry
 
-    Scenario: ENV_VAR_PROJECTION-ACC-0003 — Export aliases receive the canonical resolved value
+    Scenario: ENV-VAR_PROJECTION-ACC-0003 — Export aliases receive the canonical resolved value
       Given "HOME_TEMP" resolves to "/workspace/.tmp"
       And "TMPDIR" is an export alias of "HOME_TEMP"
       When the software resolves the declaration
