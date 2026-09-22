@@ -67,8 +67,9 @@ which Docker can't build for.
 ## Markdown front-matter
 
 Every `.md` file requires frontmatter with `title`, `summary`, and `tags` —
-makes docs easy to index for agents. Exception: `README.md`, which doesn't need
-frontmatter.
+makes docs easy to index for agents. Exception: the root `README.md`, which
+doesn't need frontmatter. Module `README.md` files do need it — see
+[Module README](./docs/README.md#readme-readmemd).
 
 ## Agents
 
