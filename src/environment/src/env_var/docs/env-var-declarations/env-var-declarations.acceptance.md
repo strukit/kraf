@@ -19,10 +19,10 @@ Feature: ENV_VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
   Rule: ENV_VAR_DECLARATIONS-REQ-0001 — Static declaration
 
     Scenario: ENV_VAR_DECLARATIONS-ACC-0001 — Unknown runtime declaration is rejected
-      Given no declaration exists for "EXAMPLE_TOKEN"
-      When runtime configuration provides a value for "EXAMPLE_TOKEN"
+      Given no declaration exists for "ENV_VAR_X"
+      When runtime configuration provides a value for "ENV_VAR_X"
       Then the software rejects the configuration
-      And "EXAMPLE_TOKEN" is not projected to a managed process
+      And "ENV_VAR_X" is not projected to a managed process
 ```
 
 ---
@@ -46,8 +46,8 @@ Feature: ENV_VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
   Rule: ENV_VAR_DECLARATIONS-REQ-0001 — Static declaration
 
     Scenario: ENV_VAR_DECLARATIONS-ACC-0002 — Known runtime declaration accepts a value
-      Given a declaration exists for "EXAMPLE_TOKEN"
-      When runtime configuration provides a value for "EXAMPLE_TOKEN"
+      Given a declaration exists for "ENV_VAR_X"
+      When runtime configuration provides a value for "ENV_VAR_X"
       Then the software accepts the configuration
 ```
 
@@ -72,7 +72,7 @@ Feature: ENV_VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
   Rule: ENV_VAR_DECLARATIONS-REQ-0002 — Canonical key uniqueness
 
     Scenario: ENV_VAR_DECLARATIONS-ACC-0003 — Duplicate canonical key is rejected
-      Given two declarations use the canonical key "EXAMPLE_TOKEN"
+      Given two declarations use the canonical key "ENV_VAR_X"
       When the software loads the declaration set
       Then the software rejects the declaration set
 ```

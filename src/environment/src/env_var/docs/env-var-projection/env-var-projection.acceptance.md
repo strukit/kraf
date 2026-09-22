@@ -24,10 +24,10 @@ Feature: ENV_VAR_PROJECTION-FEAT-0001 — Environment variable projection
   Rule: ENV_VAR_PROJECTION-REQ-0001 — Explicit export authorization
 
     Scenario: ENV_VAR_PROJECTION-ACC-0001 — Declared export alias is projected
-      Given "EXAMPLE_TOKEN" is declared as an export alias
-      And "EXAMPLE_TOKEN" has a resolved value
+      Given "ENV_VAR_X" is declared as an export alias
+      And "ENV_VAR_X" has a resolved value
       When the software applies the projection to a managed process
-      Then the managed process receives "EXAMPLE_TOKEN"
+      Then the managed process receives "ENV_VAR_X"
 ```
 
 ---
@@ -48,13 +48,13 @@ Name: Non-exportable resolved value is not projected
 ```gherkin
 Feature: ENV_VAR_PROJECTION-FEAT-0001 — Environment variable projection
 
-  Rule: ENV_VAR_PROJECTION-REQ-0001 — Explicit export authorization
+  Rule: ENV_VAR_PROJECTION-REQ-0001 — Explicit export
 
     Scenario: ENV_VAR_PROJECTION-ACC-0002 — Non-exportable resolved value is not projected
-      Given "INTERNAL_TOKEN" has a resolved value
-      And "INTERNAL_TOKEN" is not declared as an export alias
+      Given "ENV_VAR_X" has a resolved value
+      And "ENV_VAR_X" is not declared as an export alias
       When the software applies the projection to a managed process
-      Then the managed process does not receive "INTERNAL_TOKEN"
+      Then the managed process does not receive "ENV_VAR_X"
 ```
 
 ---
