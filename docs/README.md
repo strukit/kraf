@@ -173,7 +173,7 @@ THEN THE SOFTWARE SHALL <behavior>.
 
 **Layout:**
 
-```md
+````md
 ---
 title: <Area> - SPEC
 summary: <One-line summary of the requirements.>
@@ -204,10 +204,12 @@ Name: <Requirement name>
 - Doc status: Draft
 - Implementation status: Not implemented
 
+```text
 **WHEN:** <event>,
 
 **THE SOFTWARE SHALL:** <behavior>.
 ```
+````
 
 ### Acceptance (*.acceptance.md)
 

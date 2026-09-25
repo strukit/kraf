@@ -18,6 +18,7 @@
     "moby",
     "buildkit",
     "nocolor",
-    "preresolved"
-  ]
+    "preresolved",
+    "airgapped",
+  ],
 }

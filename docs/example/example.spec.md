@@ -20,14 +20,16 @@ Name: Explicit configuration
 
 **Links:**
 
-- [EXAMPLE_AREA-ACC-0001](./example.acceptance.md#example_area-acc-0001)
 - [Intent](../example-intent.md)
+- [EXAMPLE_AREA-ACC-0001](./example.acceptance.md#example_area-acc-0001)
 
 **Status**:
 
 - Doc status: Draft
 - Implementation status: Not implemented
 
+```text
 **WHEN:** Configuration provides an unknown key,
 
 **THE SOFTWARE SHALL:** reject the configuration.
+```
