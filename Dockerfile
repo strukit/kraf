@@ -25,7 +25,7 @@ FROM scratch AS builder-artifacts
 ARG WORKSPACE
 ARG BINARY_EXT=""
 
-COPY --from=builder ${WORKSPACE}/.dist/release/kraf${BINARY_EXT} .
+COPY --from=builder ${WORKSPACE}/dist/release/kraf${BINARY_EXT} .
 
 FROM builder AS tester
 
