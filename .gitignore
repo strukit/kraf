@@ -30,7 +30,7 @@
 !/*.hcl
 !/*.yaml
 !/*.yml
-!*.editorconfig
+!.editorconfig
 
 !**/.dockerignore
 !**/*.dockerignore
