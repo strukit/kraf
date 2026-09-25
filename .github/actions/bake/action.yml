@@ -8,7 +8,7 @@ inputs:
 
   artifact-path:
     description: Directory where Bake exports and the action uploads artifacts.
-    default: .dist
+    default: dist
   
 runs:
   using: composite

@@ -16,6 +16,6 @@
     "clippy",
     "worktrees",
     "moby",
-    "buildkit"
-  ]
+    "buildkit",
+  ],
 }
