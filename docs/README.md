@@ -210,9 +210,9 @@ Name: <Requirement name>
 - Implementation status: Not implemented
 
 ```text
-**WHEN:** <event>,
+WHEN: <event>,
 
-**THE SOFTWARE SHALL:** <behavior>.
+THE SOFTWARE SHALL: <behavior>.
 ```
 ````
 

@@ -29,7 +29,7 @@ Name: Explicit configuration
 - Implementation status: Not implemented
 
 ```text
-**WHEN:** Configuration provides an unknown key,
+WHEN: Configuration provides an unknown key,
 
-**THE SOFTWARE SHALL:** reject the configuration.
+THE SOFTWARE SHALL: reject the configuration.
 ```
