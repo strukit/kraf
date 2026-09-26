@@ -28,9 +28,9 @@ The model must make it possible to:
   across consumers;
 - make the environment received by a managed process explicit and reviewable.
 
-## Principles
+### Principles
 
-### Static declarations
+#### Static declarations
 
 Environment declarations are static capabilities.
 
@@ -43,7 +43,7 @@ Dynamic sources may provide values for existing declarations. They must not
 create new declarations, request undeclared host values, or expand the set of
 variables that a process may receive.
 
-### Security access
+#### Security access
 
 Only the environment module may read raw environment values from the host.
 
@@ -52,7 +52,7 @@ they own or explicitly declare as a dependency. This module must not expose an
 operation that enumerates all host environment variables, nor arbitrary
 string-based host lookups outside this module.
 
-### Explicit projection
+#### Explicit projection
 
 Importing an alias and exporting a value are separate permissions.
 

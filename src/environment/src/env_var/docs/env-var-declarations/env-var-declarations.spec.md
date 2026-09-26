@@ -30,14 +30,15 @@ Name: Static declaration
 - Implementation status: Not implemented
 
 ```text
-**SHALL:** The software resolves and projects only environment-variable
-declarations that are built into the software or packaged as immutable metadata
-with a plugin.
+The software SHALL resolve and project only environment-variable declarations
+that are built into the software or packaged as immutable metadata with a
+plugin.
 
-**MAY:** Runtime configuration provides values for known declarations.
+The software MAY accept values for known declarations from runtime
+configuration.
 
-**SHALL NOT:** Runtime configuration creates declarations or adds import
-aliases, export aliases, or source eligibility.
+The software SHALL NOT accept declarations, import aliases, export aliases, or
+source eligibility from runtime configuration.
 
 **WHEN:** Runtime configuration provides a value for an unknown declaration,
 
@@ -61,7 +62,7 @@ Name: Canonical key uniqueness
 - Implementation status: Partially implemented
 
 ```text
-**SHALL:** The software accepts at most one declaration for each canonical key.
+The software SHALL accept at most one declaration for each canonical key.
 
 **WHEN:** A declaration set contains duplicate canonical keys,
 
@@ -87,11 +88,12 @@ Name: Mapping mode validity
 - Implementation status: Partially implemented
 
 ```text
-**SHALL:** A declaration using merge import mode declares at least two import
-aliases.
+The software SHALL accept a declaration using merge import mode only when it
+declares at least two import aliases.
 
-**SHALL:** A declaration using pass-through import mode declares only its
-canonical key as an import alias.
+The software SHALL accept a declaration using pass-through import mode only when
+its canonical key is its only import alias.
 
-**SHALL NOT:** A declaration using pass-through import mode declares a fallback.
+The software SHALL NOT accept a declaration using pass-through import mode that
+declares a fallback.
 ```

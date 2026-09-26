@@ -30,8 +30,8 @@ Name: Explicit export authorization
 - Implementation status: Implemented
 
 ```text
-**SHALL:** The software projects only keys declared as export aliases by the
-active mappings.
+The software SHALL project only keys declared as export aliases by the active
+mappings.
 ```
 
 ---
@@ -51,6 +51,6 @@ Name: Export value symmetry
 - Implementation status: Implemented
 
 ```text
-**SHALL:** Every export alias produced by a declaration has the declaration's
-resolved value.
+The software SHALL assign the declaration's resolved value to every export alias
+the declaration produces.
 ```

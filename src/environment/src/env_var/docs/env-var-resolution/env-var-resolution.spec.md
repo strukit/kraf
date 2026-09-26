@@ -31,11 +31,11 @@ Name: Declared import dependency collection
 - Implementation status: Implemented
 
 ```text
-**SHALL:** The software collects only import aliases and the first valid dollar
+The software SHALL collect only import aliases and the first valid dollar
 variable reference in a declaration fallback.
 
-**SHALL:** The software deduplicates and lexicographically sorts collected
-import and export keys.
+The software SHALL deduplicate and lexicographically sort collected import and
+export keys.
 ```
 
 ---
@@ -57,9 +57,9 @@ Name: First-found resolution
 - Implementation status: Implemented
 
 ```text
-**SHALL:** A declaration using first-found import mode resolves the first
-available import alias in declaration order. A collected value is available when
-it is present, including when its value is empty.
+The software SHALL resolve a declaration using first-found import mode to the
+first available import alias in declaration order. A collected value is
+available when it is present, including when its value is empty.
 
 **WHEN:** No import alias provides a value,
 
@@ -87,12 +87,12 @@ Name: Path merge resolution
 - Implementation status: Implemented
 
 ```text
-**SHALL:** A declaration using merge import mode ignores empty imported values,
-splits each remaining value into paths using the current platform semantics, and
-joins the resulting paths in declaration order using the current platform path
-separator.
+The software SHALL resolve a declaration using merge import mode by ignoring
+empty imported values, splitting each remaining value into paths using the
+current platform semantics, and joining the resulting paths in declaration order
+using the current platform path separator.
 
-**SHALL NOT:** Merge resolution deduplicates path entries.
+The software SHALL NOT deduplicate path entries during merge resolution.
 
 **WHEN:** No import alias provides a non-empty path value,
 
@@ -126,11 +126,14 @@ Name: Placeholder expansion
 - Implementation status: Implemented
 
 ```text
-**SHALL:** When a fallback contains a tilde and a non-empty collected `HOME`
-value is available, the software replaces the first tilde with that value.
+**WHEN:** A fallback contains a tilde and a non-empty collected `HOME` value is
+available,
 
-**SHALL:** When a non-empty collected `HOME` value is available, tilde expansion
-takes precedence over dollar expansion.
+**THE SOFTWARE SHALL:** replace the first tilde with that value.
+
+**WHEN:** A non-empty collected `HOME` value is available,
+
+**THE SOFTWARE SHALL:** give tilde expansion precedence over dollar expansion.
 
 **WHEN:** A fallback contains a tilde but no non-empty collected `HOME` value is
 available,
@@ -138,10 +141,11 @@ available,
 **THE SOFTWARE SHALL:** leave the tilde unchanged and evaluate a dollar
 placeholder when one is present.
 
-**SHALL:** A dollar placeholder is the first dollar sign followed by one or more
-ASCII letters, digits, or underscores. The software replaces the first
-occurrence of that placeholder with the collected value whose key matches its
-name, including an empty value.
+A dollar placeholder is the first dollar sign followed by one or more ASCII
+letters, digits, or underscores.
+
+The software SHALL replace the first occurrence of that placeholder with the
+collected value whose key matches its name, including an empty value.
 
 **WHEN:** A dollar sign has no valid placeholder name or a dollar placeholder
 has no collected value,
@@ -170,16 +174,17 @@ Name: Source precedence and absence
 - Implementation status: Implemented
 
 ```text
-**SHALL:** A declaration without import aliases and with source `Provided` uses
-its collected canonical value when it is present, including when the value is
-empty.
+**WHEN:** A declaration without import aliases and with source `Provided` has a
+collected canonical value, including an empty value,
+
+**THE SOFTWARE SHALL:** resolve the declaration to that value.
 
 **WHEN:** That provided canonical value is absent,
 
 **THE SOFTWARE SHALL:** resolve the declaration fallback.
 
-**SHALL:** A declaration without import aliases and with source `Host` resolves
-its fallback without reading a collected value for its canonical key.
+The software SHALL resolve a declaration without import aliases and with source
+`Host` to its fallback without reading a collected value for its canonical key.
 
 **WHEN:** The selected source and fallback provide no value,
 
@@ -204,8 +209,8 @@ Name: Pass-through resolution
 - Implementation status: Implemented
 
 ```text
-**SHALL:** A declaration using pass-through import mode resolves the first
-available import alias in declaration order without applying a fallback.
+The software SHALL resolve a declaration using pass-through import mode to the
+first available import alias in declaration order without applying a fallback.
 
 **WHEN:** No import alias provides a value,
 
@@ -229,9 +234,8 @@ Name: Resolved output order
 - Implementation status: Implemented
 
 ```text
-**SHALL:** The software emits resolved declarations in active mapping order.
+The software SHALL emit resolved declarations in active mapping order.
 
-**SHALL:** For each declaration, the software emits the canonical key first,
-followed by its export aliases in declaration order. Every emitted key has the
-same resolved value.
+The software SHALL emit, for each declaration, the canonical key first, followed
+by its export aliases in declaration order, all with the same resolved value.
 ```
