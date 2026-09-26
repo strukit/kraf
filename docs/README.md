@@ -95,6 +95,11 @@ tags: [<tag1>, <tag2>, ...]
 > sources planned for its evolution. It does not imply that all of these
 > capabilities are already implemented.
 
+## Overview
+
+<Free-form, detailed description of the module: its model, concepts, and how
+they relate. May use subsections (###).>
+
 ## Documentation
 
 - [Intent](./docs/<feature>-intent.md): purpose, boundaries, and evolution of

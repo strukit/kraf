@@ -12,7 +12,7 @@ aliases, and projections exported to Kraf-managed processes.
 > concepts and sources planned for its evolution. It does not imply that all of
 > these capabilities are already implemented.
 
-## Concepts
+## Overview
 
 - [**Sources**](#sources): where environment-variable values, configuration, and
   restrictions come from.
