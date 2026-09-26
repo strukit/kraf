@@ -1,7 +1,7 @@
 ---
 title: Environment variables
 summary: Declarative model, resolution, and projection of environment variables in Kraf.
-tags: [environment, env var, resolution, projection]
+tags: [environment, env-var, resolution, projection]
 ---
 
 This module defines and resolves Kraf's declarative model for environment
