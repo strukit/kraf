@@ -20,19 +20,20 @@ Name: Supported-platform mapping completeness
 
 **Links:**
 
+- [Intent](../env-var-intent.md): module intent.
 - [ENV-VAR_HOST-ACC-0001](./env-var-host.acceptance.md#env-var_host-acc-0001)
 - [ENV-VAR_HOST-ACC-0002](./env-var-host.acceptance.md#env-var_host-acc-0002)
 - [ENV-VAR_HOST-ACC-0003](./env-var-host.acceptance.md#env-var_host-acc-0003)
-
-- [Intent](../env-var-intent.md): module intent.
 
 **Status**:
 
 - Doc status: Draft
 - Implementation status: Implemented
 
+```text
 **SHALL:** Every supported platform mapping declares every shared canonical
 environment-variable key.
+```
 
 ---
 
@@ -42,14 +43,15 @@ Name: Session-owned directory sources
 
 **Links:**
 
-- [ENV-VAR_HOST-ACC-0004](./env-var-host.acceptance.md#env-var_host-acc-0004)
-
 - [Intent](../env-var-intent.md): module intent.
+- [ENV-VAR_HOST-ACC-0004](./env-var-host.acceptance.md#env-var_host-acc-0004)
 
 **Status**:
 
 - Doc status: Draft
 - Implementation status: Implemented
 
+```text
 **SHALL:** The WORKDIR and HOME declaration families use provided values rather
 than values imported from the host.
+```

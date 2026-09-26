@@ -20,18 +20,19 @@ Name: Explicit export authorization
 
 **Links:**
 
+- [Intent](../env-var-intent.md): module intent.
 - [ENV-VAR_PROJECTION-ACC-0001](./env-var-projection.acceptance.md#env-var_projection-acc-0001)
 - [ENV-VAR_PROJECTION-ACC-0002](./env-var-projection.acceptance.md#env-var_projection-acc-0002)
-
-- [Intent](../env-var-intent.md): module intent.
 
 **Status**:
 
 - Doc status: Draft
 - Implementation status: Implemented
 
+```text
 **SHALL:** The software projects only keys declared as export aliases by the
 active mappings.
+```
 
 ---
 
@@ -41,14 +42,15 @@ Name: Export value symmetry
 
 **Links:**
 
-- [ENV-VAR_PROJECTION-ACC-0003](./env-var-projection.acceptance.md#env-var_projection-acc-0003)
-
 - [Intent](../env-var-intent.md): module intent.
+- [ENV-VAR_PROJECTION-ACC-0003](./env-var-projection.acceptance.md#env-var_projection-acc-0003)
 
 **Status**:
 
 - Doc status: Draft
 - Implementation status: Implemented
 
+```text
 **SHALL:** Every export alias produced by a declaration has the declaration's
 resolved value.
+```

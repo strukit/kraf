@@ -20,16 +20,16 @@ Name: Static declaration
 
 **Links:**
 
+- [Intent](../env-var-intent.md): module intent.
 - [ENV-VAR_DECLARATIONS-ACC-0001](./env-var-declarations.acceptance.md#env-var_declarations-acc-0001)
 - [ENV-VAR_DECLARATIONS-ACC-0002](./env-var-declarations.acceptance.md#env-var_declarations-acc-0002)
-
-- [Intent](../env-var-intent.md): module intent.
 
 **Status**:
 
 - Doc status: Draft
 - Implementation status: Not implemented
 
+```text
 **SHALL:** The software resolves and projects only environment-variable
 declarations that are built into the software or packaged as immutable metadata
 with a plugin.
@@ -42,6 +42,7 @@ aliases, export aliases, or source eligibility.
 **WHEN:** Runtime configuration provides a value for an unknown declaration,
 
 **THE SOFTWARE SHALL:** reject the configuration.
+```
 
 ---
 
@@ -51,20 +52,21 @@ Name: Canonical key uniqueness
 
 **Links:**
 
-- [ENV-VAR_DECLARATIONS-ACC-0003](./env-var-declarations.acceptance.md#env-var_declarations-acc-0003)
-
 - [Intent](../env-var-intent.md): module intent.
+- [ENV-VAR_DECLARATIONS-ACC-0003](./env-var-declarations.acceptance.md#env-var_declarations-acc-0003)
 
 **Status**:
 
 - Doc status: Draft
 - Implementation status: Partially implemented
 
+```text
 **SHALL:** The software accepts at most one declaration for each canonical key.
 
 **WHEN:** A declaration set contains duplicate canonical keys,
 
 **THE SOFTWARE SHALL:** reject the declaration set.
+```
 
 ---
 
@@ -74,17 +76,17 @@ Name: Mapping mode validity
 
 **Links:**
 
+- [Intent](../env-var-intent.md): module intent.
 - [ENV-VAR_DECLARATIONS-ACC-0004](./env-var-declarations.acceptance.md#env-var_declarations-acc-0004)
 - [ENV-VAR_DECLARATIONS-ACC-0005](./env-var-declarations.acceptance.md#env-var_declarations-acc-0005)
 - [ENV-VAR_DECLARATIONS-ACC-0006](./env-var-declarations.acceptance.md#env-var_declarations-acc-0006)
-
-- [Intent](../env-var-intent.md): module intent.
 
 **Status**:
 
 - Doc status: Draft
 - Implementation status: Partially implemented
 
+```text
 **SHALL:** A declaration using merge import mode declares at least two import
 aliases.
 
@@ -92,3 +94,4 @@ aliases.
 canonical key as an import alias.
 
 **SHALL NOT:** A declaration using pass-through import mode declares a fallback.
+```
