@@ -12,7 +12,7 @@ function "resolve_workspace" {
 }
 
 variable "ARTIFACT_PATH" {
-  default = ".dist"
+  default = "dist"
 }
 
 target "_common" {
@@ -71,7 +71,7 @@ target "windows" {
   dockerfile  = "Dockerfile"
   target      = "builder-artifacts"
   contexts    = { "setup-environment" = "target:setup-windows-${arch}" }
-  output      = ["type=local,dest=.dist,platform-split=true"]
+  output      = ["type=local,dest=dist,platform-split=true"]
 
   matrix = {
     arch     = ["amd64", "arm64"]

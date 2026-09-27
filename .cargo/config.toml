@@ -3,7 +3,7 @@ include = [
 ]
 
 [build]
-target-dir = ".dist/"
+target-dir = "dist/"
 build-dir = ".cache/target"
 
 [alias]

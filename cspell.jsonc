@@ -1,6 +1,6 @@
 {
   "language": "en",
-  "dictionaries": ["cpp", "filetypes", "go", "powershell", "softwareTerms", "misc", "bash"],
+  "dictionaries": ["cpp", "filetypes", "go", "powershell", "softwareTerms", "misc"],
   "ignorePaths": ["cspell.json"],
   "words": [
     "ltsc",
@@ -17,8 +17,5 @@
     "worktrees",
     "moby",
     "buildkit",
-    "nocolor",
-    "preresolved",
-    "airgapped",
   ],
 }
