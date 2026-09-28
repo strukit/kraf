@@ -27,9 +27,9 @@ Documentation lives with the feature it describes. Never in root /docs
 <feature>/
 └── docs/
     ├── <feature>-intent.md
-    └── <area>/
-        ├── <area>.spec.md
-        └── <area>.acceptance.md
+    └── <feature>-<area>/
+        ├── <feature>-<area>.spec.md
+        └── <feature>-<area>.acceptance.md
 ```
 
 Documentation does not need to map one-to-one to source files, platform files,
@@ -104,8 +104,8 @@ they relate. May use subsections (###).>
 
 - [Intent](./docs/<feature>-intent.md): purpose, boundaries, and evolution of
   this module.
-- [<Area>](./docs/<area>/<area>.spec.md): <area> requirements and acceptance
-  scenarios.
+- [<Area>](./docs/<feature>-<area>/<feature>-<area>.spec.md): <area>
+  requirements and acceptance scenarios.
 ```
 
 ### Intent (*.intent.md)
@@ -137,7 +137,7 @@ tags: [<tag1>, <tag2>, ...]
 ## Documentation
 
 - [Readme](../README.md): module overview.
-- [<Area>](./<area>/<area>.spec.md): <area> Specification.
+- [<Area>](./<feature>-<area>/<feature>-<area>.spec.md): <area> Specification.
 ```
 
 ### Specification (*.spec.md)
@@ -201,7 +201,7 @@ Name: <Requirement name>
 
 **Links:**
 
-- [<FEATURE>_<AREA>-ACC-0001](./<area>.acceptance.md#<feature>_<area>-acc-0001)
+- [<FEATURE>_<AREA>-ACC-0001](./<feature>-<area>.acceptance.md#<feature>_<area>-acc-0001)
 - [Intent](../<feature>-intent.md)
 
 **Status**:
@@ -266,7 +266,7 @@ Name: <Scenario name>
 
 **Links:**
 
-- [<FEATURE>_<AREA>-REQ-0001](./<area>.spec.md#<feature>_<area>-req-0001)
+- [<FEATURE>_<AREA>-REQ-0001](./<feature>-<area>.spec.md#<feature>_<area>-req-0001)
 
 **Status**:
 
