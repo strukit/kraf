@@ -27,6 +27,8 @@ Documentation lives with the feature it describes. Never in root /docs
 <feature>/
 └── docs/
     ├── <feature>-intent.md
+    ├── <feature>-adr/
+    │   └── <feature>-adr-0001-<slug>.md
     └── <feature>-<area>/
         ├── <feature>-<area>.spec.md
         └── <feature>-<area>.acceptance.md
@@ -64,11 +66,15 @@ full-text search.
 
 - A **Readme** links forward to its **Intent** and to each **Specification**.
 - An **Intent** links back to its **Readme** and forward to every
-  **Specification** it introduces.
+  **Specification** it introduces and every **ADR** that shapes it.
 - A **Specification** links back to its **Intent** and forward to its matching
-  **Acceptance** scenarios.
+  **Acceptance** scenarios. A requirement may also link to the **ADR** that
+  decided its behavior.
 - An **Acceptance** document links back to the **Specification** requirement it
   verifies.
+- An **ADR** links back to its **Intent** and to the **ADR** it supersedes or
+  is superseded by. It never links to requirements, so an accepted ADR never
+  needs to be edited when requirements change.
 
 No document is reachable only by knowing its file path.
 
@@ -138,6 +144,8 @@ tags: [<tag1>, <tag2>, ...]
 
 - [Readme](../README.md): module overview.
 - [<Area>](./<feature>-<area>/<feature>-<area>.spec.md): <area> Specification.
+- [<FEATURE>-ADR-0001](./<feature>-adr/<feature>-adr-0001-<slug>.md): <decision
+  title>.
 ```
 
 ### Specification (*.spec.md)
@@ -284,3 +292,69 @@ Feature: <FEATURE>_<AREA>-FEAT-0001 — <Feature description>
       Then <expected outcome>
 ```
 ````
+
+### ADR (*-adr-*.md)
+
+An Architecture Decision Record (ADR) records one architectural decision: the
+context that required it, what was decided, the alternatives considered, and
+its consequences. It explains why the module is built the way it is.
+
+ADRs live inside the module that owns the decision, never in root `/docs`. A
+decision that affects several modules lives in the module that owns it; the
+other modules link to it.
+
+**Identifier:**
+
+ADRs are numbered per feature, with no area.
+
+```text
+<FEATURE>-ADR-0001
+```
+
+**Status:**
+
+Each ADR declares one status:
+
+- **Doc status:** `Proposed`, `Accepted`, `Deprecated`, or
+  `Superseded by <FEATURE>-ADR-XXXX`.
+
+An `Accepted` ADR is immutable. To change a decision, write a new ADR that
+supersedes it and only update the old one's status.
+
+**Layout:**
+
+```md
+---
+title: <FEATURE>-ADR-0001 - <Decision title>
+summary: <One-line summary of the decision.>
+tags: [<feature>, adr, decision]
+---
+
+## <FEATURE>-ADR-0001
+
+Name: <Decision title>
+
+**Links:**
+
+- [Intent](../<feature>-intent.md)
+
+**Status**:
+
+- Doc status: Proposed
+
+## Context
+
+<The problem and the forces that require a decision.>
+
+## Decision
+
+<What was decided, stated plainly.>
+
+## Alternatives
+
+- <Alternative>: <why it was not chosen>.
+
+## Consequences
+
+<What becomes easier, harder, or required because of this decision.>
+```
