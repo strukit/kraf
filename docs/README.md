@@ -4,6 +4,10 @@ summary: Conventions for documenting feature intent, requirements, and acceptanc
 tags: [specification, requirements, acceptance, ears, documentation]
 ---
 
+> [!IMPORTANT]
+> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
+> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
+
 ## Purpose
 
 This document defines how this repo records feature intent, behavioral
@@ -21,7 +25,8 @@ A minimal, illustrative application of this convention:
 
 ## Docs layout
 
-Documentation lives with the feature it describes. Never in root /docs
+Documentation MUST live with the feature it describes; it MUST NOT be in root
+`/docs`.
 
 ```text
 <feature>/
@@ -34,13 +39,13 @@ Documentation lives with the feature it describes. Never in root /docs
         └── <feature>-<area>.acceptance.md
 ```
 
-Documentation does not need to map one-to-one to source files, platform files,
-or tests. Create a document when a domain behavior needs a durable contract.
+Documentation MAY map one-to-one to source files, platform files, or tests. A
+document SHOULD be created when a domain behavior needs a durable contract.
 
 ## Docs Identifiers
 
-Identifiers use an uppercase feature area, followed by a type and a four-digit
-sequence number.
+Identifiers MUST use an uppercase feature area, followed by a type and a
+four-digit sequence number.
 
 ```text
 <FEATURE>_<AREA>-REQ-0001
@@ -59,22 +64,22 @@ ENV-VAR_DECLARATIONS-ACC-0001
 
 ## Docs graph
 
-Every document links to the documents adjacent to it, so the full set forms a
-navigable graph instead of files nobody points into. This lets graph-based
+Every document MUST link to the documents adjacent to it, so the full set forms
+a navigable graph instead of files nobody points into. This lets graph-based
 retrieval (graph RAG) walk from any document to related context without a
 full-text search.
 
-- A **Readme** links forward to its **Intent** and to each **Specification**.
-- An **Intent** links back to its **Readme** and forward to every
+- A **Readme** MUST link forward to its **Intent** and to each **Specification**.
+- An **Intent** MUST link back to its **Readme** and forward to every
   **Specification** it introduces and every **ADR** that shapes it.
-- A **Specification** links back to its **Intent** and forward to its matching
-  **Acceptance** scenarios. A requirement may also link to the **ADR** that
-  decided its behavior.
-- An **Acceptance** document links back to the **Specification** requirement it
-  verifies.
-- An **ADR** links back to its **Intent** and to the **ADR** it supersedes or
-  is superseded by. It never links to requirements, so an accepted ADR never
-  needs to be edited when requirements change.
+- A **Specification** MUST link back to its **Intent** and forward to its
+  matching **Acceptance** scenarios. A requirement MAY also link to the **ADR**
+  that decided its behavior.
+- An **Acceptance** document MUST link back to the **Specification** requirement
+  it verifies.
+- An **ADR** MUST link back to its **Intent** and to the **ADR** it supersedes
+  or is superseded by, and MUST NOT link to requirements — so an accepted ADR
+  remains unchanged when requirements change.
 
 No document is reachable only by knowing its file path.
 
@@ -82,9 +87,9 @@ No document is reachable only by knowing its file path.
 
 ### Readme (*/README.md)
 
-Every module/feature folder has a `README.md` that orients a reader before they
-open its `docs/`. Unlike the root `README.md`, a module `README.md` requires
-[markdown front-matter](../BUILDING.md#markdown-front-matter)
+Every module/feature folder MUST have a `README.md` that orients a reader before
+they open its `docs/`. Unlike the root `README.md`, a module `README.md` MUST
+have [markdown front-matter](../BUILDING.md#markdown-front-matter).
 
 **Layout**:
 
@@ -134,7 +139,7 @@ tags: [<tag1>, <tag2>, ...]
 
 ## Intent
 
-<What the feature must make possible or guarantee.>
+<What the feature is intended to make possible or guarantee.>
 
 ## Boundaries
 
@@ -151,12 +156,12 @@ tags: [<tag1>, <tag2>, ...]
 ### Specification (*.spec.md)
 
 A specification defines normative, traceable behavioral requirements. Each
-requirement has a stable identifier, a name, statuses, and links to its
+requirement MUST have a stable identifier, a name, statuses, and links to its
 acceptance scenarios.
 
 **Status:**
 
-Each requirement declares two independent statuses:
+Each requirement MUST declare two independent statuses:
 
 - **Doc status:** `Draft`, `Accepted`, or `Superseded`.
 - **Implementation status:** `Not implemented`, `Partially implemented`,
@@ -164,15 +169,15 @@ Each requirement declares two independent statuses:
 
 **Language:**
 
-Specifications use EARS notation and the normative terms defined by RFC 2119 and
-RFC 8174.
+Specifications MUST use EARS notation and the normative terms defined by RFC
+2119 and RFC 8174.
 
 - **SHALL** and **SHALL NOT** define mandatory behavior.
 - **SHOULD** and **SHOULD NOT** define expected behavior that requires an
   explicit justification to deviate from.
 - **MAY** defines optional behavior.
 
-Use the EARS pattern that matches the behavior:
+A requirement MUST use the EARS pattern that matches the behavior:
 
 ```text
 The software SHALL <behavior>.
@@ -227,26 +232,27 @@ THE SOFTWARE SHALL: <behavior>.
 ### Acceptance (*.acceptance.md)
 
 An acceptance document defines observable scenarios derived from requirements.
-Scenarios use embedded Gherkin and link back to the requirement they verify.
+Scenarios MUST use embedded Gherkin and MUST link back to the requirement they
+verify.
 
-Each acceptance scenario declares its own acceptance and verification status.
-Implementation status belongs to the requirement, not to each scenario.
+Each acceptance scenario MUST declare its own acceptance and verification
+status. Implementation status belongs to the requirement, not to each scenario.
 
-A requirement may have multiple acceptance scenarios. An acceptance scenario
-belongs to one primary requirement.
+A requirement MAY have multiple acceptance scenarios. An acceptance scenario
+MUST belong to one primary requirement.
 
 **Status:**
 
-Each acceptance declares two independent statuses:
+Each acceptance MUST declare two independent statuses:
 
 - **Doc status:** `Draft`, `Accepted`, or `Superseded`.
 - **Verification status:** `Not Meets`, `Partially Meets`, `Meets` or `Unknown`
 
 **Language:**
 
-Acceptance scenarios use Gherkin. A `Feature` groups scenarios for one area, a
-`Rule` scopes scenarios to the requirement they verify, and a `Scenario` states
-one observable behavior as `Given`/`When`/`Then` steps.
+Acceptance scenarios MUST use Gherkin. A `Feature` groups scenarios for one
+area, a `Rule` scopes scenarios to the requirement they verify, and a `Scenario`
+states one observable behavior as `Given`/`When`/`Then` steps.
 
 ```gherkin
 Feature: <name>
@@ -299,13 +305,13 @@ An Architecture Decision Record (ADR) records one architectural decision: the
 context that required it, what was decided, the alternatives considered, and
 its consequences. It explains why the module is built the way it is.
 
-ADRs live inside the module that owns the decision, never in root `/docs`. A
-decision that affects several modules lives in the module that owns it; the
-other modules link to it.
+ADRs MUST live inside the module that owns the decision; they MUST NOT be in
+root `/docs`. A decision that affects several modules lives in the module that
+owns it, and the other modules MUST link to it.
 
 **Identifier:**
 
-ADRs are numbered per feature, with no area.
+ADRs MUST be numbered per feature, with no area.
 
 ```text
 <FEATURE>-ADR-0001
@@ -313,13 +319,13 @@ ADRs are numbered per feature, with no area.
 
 **Status:**
 
-Each ADR declares one status:
+Each ADR MUST declare one status:
 
 - **Doc status:** `Proposed`, `Accepted`, `Deprecated`, or
   `Superseded by <FEATURE>-ADR-XXXX`.
 
-An `Accepted` ADR is immutable. To change a decision, write a new ADR that
-supersedes it and only update the old one's status.
+An `Accepted` ADR is immutable. To change a decision, a new ADR MUST supersede
+it, and only the old one's status is updated.
 
 **Layout:**
 
@@ -358,3 +364,6 @@ Name: <Decision title>
 
 <What becomes easier, harder, or required because of this decision.>
 ```
+
+See [README.md](../README.md) for what Kraf is, and [BUILDING.md](../BUILDING.md)
+for the repo conventions.

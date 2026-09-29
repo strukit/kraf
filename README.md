@@ -16,12 +16,23 @@ doesn't.
 
 Kraf's guiding rule: **materialize only what the workload proves it needs.**
 
-The project is currently under active development. Its first working slice is
-environment variable resolution and isolation — an isolated `HOME` and working
-directory per run, real system state passed through deliberately rather than by
-accident — materialized into a shell you can use today.
+## Vision
+
+Kraf's larger aim is to expose a project as a headless IDE runtime for agents:
+not an editor, and not a closed platform, but a layer beneath or beside them.
+Optionally paired with isolated environments, it will surface a project's files,
+diagnostics, and language tooling — LSP, task runners, debugger, tests — as
+tools that replace or complement an agent's own built-in primitives. A
+structured `read`, for example, returns project knowledge where a raw file read
+returns only bytes.
+
+These tools are reachable through whatever host fits the workload — an agent
+CLI, or embedded in code as a library (C or WASM) — all calling the same
+runtime. Kraf aims to interoperate with the editors and toolchains a project
+already uses rather than replacing them.
 
 ## Contributing
 
-See [BUILDING.md](./BUILDING.md) for coding rules and conventions, and
+See [ARCHITECTURE.md](./ARCHITECTURE.md) for the architecture,
+[BUILDING.md](./BUILDING.md) for coding rules and conventions, and
 [AGENTS.md](./AGENTS.md) for AI agent instructions.

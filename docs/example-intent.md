@@ -11,8 +11,8 @@ reproduce, or audit.
 
 ## Intent
 
-The feature must make process configuration explicit rather than inheriting
-undeclared host state.
+The feature is intended to make process configuration explicit rather than
+inheriting undeclared host state.
 
 ## Boundaries
 
