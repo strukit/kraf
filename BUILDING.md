@@ -189,10 +189,8 @@ MUST NOT be used.
 
 ## Code standards
 
-Code invariants live in [CODE_STANDARDS.md](./CODE_STANDARDS.md) —
-non-negotiable rules you amend and MUST NOT break.
+See [CODE_STANDARDS.md](./CODE_STANDARDS.md) for the code standards.
 
 ## Related docs
 
 - [README.md](./README.md): what Kraf is.
-- [CODE_STANDARDS.md](./CODE_STANDARDS.md): code invariants.
