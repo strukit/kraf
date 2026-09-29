@@ -4,6 +4,14 @@ summary: Illustrative acceptance scenario used to demonstrate the acceptance for
 tags: [example, acceptance, gherkin]
 ---
 
+> [!IMPORTANT]
+> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
+> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
+>
+> This document MUST use these terms, in uppercase, when expressing normative
+> requirements, permissions, recommendations, or prohibitions. It MUST NOT use
+> alternative words or lowercase variants as normative keywords.
+
 ## EXAMPLE_AREA-ACC-0001
 
 Name: Unknown configuration key is rejected

@@ -279,5 +279,7 @@ modules.
   testable in isolation.
 - The materialization target is a Runner (OS or WASM worker), not a fixed OS.
 
-See [README.md](./README.md) for what Kraf is, and [BUILDING.md](./BUILDING.md)
-for the repo conventions.
+## Related docs
+
+- [README.md](./README.md): what Kraf is.
+- [BUILDING.md](./BUILDING.md): repo conventions.

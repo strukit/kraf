@@ -28,5 +28,7 @@ type/logic file, it MUST be named after the folder with a suffix (e.g.
 its parent's exact name (`clippy::module_inception`), and the suffix keeps it
 consistent with the folder's other files.
 
-See [BUILDING.md](./BUILDING.md) for the repo conventions, and
-[README.md](./README.md) for what Kraf is.
+## Related docs
+
+- [BUILDING.md](./BUILDING.md): repo conventions.
+- [README.md](./README.md): what Kraf is.

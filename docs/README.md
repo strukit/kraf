@@ -12,12 +12,15 @@ tags: [specification, requirements, acceptance, ears, documentation]
 > requirements, permissions, recommendations, or prohibitions. It MUST NOT use
 > alternative words or lowercase variants as normative keywords.
 
-## Purpose
+## Summary
 
 This document defines how this repo records feature intent, behavioral
 requirements, and acceptance scenarios.
 
 It defines the documentation protocol, not the behavior of a specific feature.
+These type-specific rules MUST be applied in addition to the repo-wide
+documentation standards in [BUILDING.md](../BUILDING.md); they do not waive
+those standards unless an exception is stated explicitly.
 
 ### Example
 
@@ -31,6 +34,12 @@ A minimal, illustrative application of this convention:
 
 Documentation MUST live with the feature it describes; it MUST NOT be in root
 `/docs`.
+
+> The feature-doc layout MUST NOT be applied to the [illustrative files in the
+> root `docs/` example set](#example). They demonstrate the documentation
+> conventions; they are not feature documentation and do not need a feature
+> folder with a nested `docs/` directory. Repo-wide standards in
+> [BUILDING.md](../BUILDING.md) still apply unless they state an exception.
 
 ```text
 <feature>/
@@ -73,7 +82,8 @@ a navigable graph instead of files nobody points into. This lets graph-based
 retrieval (graph RAG) walk from any document to related context without a
 full-text search.
 
-- A **Readme** MUST link forward to its **Intent** and to each **Specification**.
+- A **Readme** MUST link forward to its **Intent** and to each
+  **Specification**.
 - An **Intent** MUST link back to its **Readme** and forward to every
   **Specification** it introduces and every **ADR** that shapes it.
 - A **Specification** MUST link back to its **Intent** and forward to its
@@ -86,6 +96,10 @@ full-text search.
   remains unchanged when requirements change.
 
 No document is reachable only by knowing its file path.
+
+Repo-level documents that provide closing navigation links MUST group them
+under a `## Related docs` heading instead of writing them as a closing sentence.
+Feature documents MUST use the relationship sections defined by their type.
 
 ## Docs types
 
@@ -227,9 +241,8 @@ Name: <Requirement name>
 - Implementation status: Not implemented
 
 ```text
-WHEN: <event>,
-
-THE SOFTWARE SHALL: <behavior>.
+WHEN <event>,
+THE SOFTWARE SHALL <behavior>.
 ```
 ````
 
@@ -306,8 +319,8 @@ Feature: <FEATURE>_<AREA>-FEAT-0001 — <Feature description>
 ### ADR (*-adr-*.md)
 
 An Architecture Decision Record (ADR) records one architectural decision: the
-context that required it, what was decided, the alternatives considered, and
-its consequences. It explains why the module is built the way it is.
+context that required it, what was decided, the alternatives considered, and its
+consequences. It explains why the module is built the way it is.
 
 ADRs MUST live inside the module that owns the decision; they MUST NOT be in
 root `/docs`. A decision that affects several modules lives in the module that
@@ -325,8 +338,8 @@ ADRs MUST be numbered per feature, with no area.
 
 Each ADR MUST declare one status:
 
-- **Doc status:** `Proposed`, `Accepted`, `Deprecated`, or
-  `Superseded by <FEATURE>-ADR-XXXX`.
+- **Doc status:** `Proposed`, `Accepted`, `Deprecated`, or `Superseded by
+  <FEATURE>-ADR-XXXX`.
 
 An `Accepted` ADR is immutable. To change a decision, a new ADR MUST supersede
 it, and only the old one's status is updated.
@@ -369,5 +382,7 @@ Name: <Decision title>
 <What becomes easier, harder, or required because of this decision.>
 ```
 
-See [README.md](../README.md) for what Kraf is, and [BUILDING.md](../BUILDING.md)
-for the repo conventions.
+## Related docs
+
+- [README.md](../README.md): what Kraf is.
+- [BUILDING.md](../BUILDING.md): repo conventions.

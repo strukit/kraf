@@ -12,6 +12,29 @@ tags: [monorepo, conventions, testing, continuous-integration, documentation, ag
 > requirements, permissions, recommendations, or prohibitions. It MUST NOT use
 > alternative words or lowercase variants as normative keywords.
 
+## Summary (TL;DR)
+
+This section is a quick orientation for contributors and agent skills, not a
+separate source of truth. The linked documents below define the rules. This
+summary MUST be reviewed and updated when those rules change; matching skills
+and automations SHOULD be updated as part of the same change.
+
+- Organize the repo by feature/domain, not by language: see
+  [Module map](./ARCHITECTURE.md#module-map).
+- Dependencies MUST point inward and MUST NOT form a cycle: see
+  [Dependency rule](./ARCHITECTURE.md#dependency-rule).
+- Real logic MUST live in the lib, with the binary consuming it: see
+  [Lib-first](#lib-first).
+- Design for Linux, MacOS, and Windows from the start, isolating
+  platform-specific code: see [Multi-platform](#multi-platform).
+- Declare build/tool requirements in dedicated, versioned files: see
+  [Tools declared in files, with version](#tools-declared-in-files-with-version).
+- Keep feature documentation with its feature and make its docs graph navigable:
+  see [Docs layout](./docs/README.md#docs-layout) and
+  [Docs graph](./docs/README.md#docs-graph).
+- Keep portable repo guidance in shared skills/personas, not tool-specific
+  configuration: see [Agents](#agents).
+
 This file and [CODE_STANDARDS.md](./CODE_STANDARDS.md) are the repo's binding
 standards — its constitution. You amend them through a pull request; you MUST
 NOT break them. A rule stated as a preference is still binding, and its
@@ -27,16 +50,23 @@ is an implementation detail of each feature, not the repo's organizing axis.
 
 ## Docs standards
 
+> The root [`README.md`](./README.md) does not require front-matter or the
+> normative-language note because it introduces the repository rather than
+> defining conventions.
+
 ### Markdown front-matter
 
 Every doc MUST have front-matter with `title`, `summary`, and `tags` — it makes
-docs easy to index for agents. Exception: the root `README.md`, which doesn't
-need front-matter. Module `README.md` files MUST have it — see
+docs easy to index for agents. Module `README.md` files MUST have it — see
 [Module README](./docs/README.md#readme-readmemd).
 
 This applies to docs, not to every `.md`. A file that is not a doc but uses
 `.md` and carries its own front-matter schema — for example a skill's `SKILL.md`
 (`name`/`description`) — is out of scope.
+
+Repo instruction files, including `AGENTS.md` and skill `SKILL.md` files, MUST
+follow the normative-language requirements below, even when their own
+front-matter schema is exempt from this section's front-matter requirement.
 
 ### Normative language
 
@@ -45,11 +75,11 @@ that its normative keywords follow RFC 2119 and RFC 8174. A document carrying
 the note MUST use the listed terms, in uppercase, whenever it expresses a
 normative requirement, permission, recommendation, or prohibition. It MUST NOT
 express normative meaning through alternative keywords or lowercase variants of
-the listed terms. Exception: the root `README.md`.
+the listed terms.
 
-The note does not require a document to contain normative requirements or to
-use every listed term. A purely descriptive document MAY contain the note
-without adding an artificial requirement.
+The note does not require a document to contain normative requirements or to use
+every listed term. A purely descriptive document MAY contain the note without
+adding an artificial requirement.
 
 **Template:**
 
@@ -162,4 +192,7 @@ MUST NOT be used.
 Code invariants live in [CODE_STANDARDS.md](./CODE_STANDARDS.md) —
 non-negotiable rules you amend and MUST NOT break.
 
-See [README.md](./README.md) for what Kraf is.
+## Related docs
+
+- [README.md](./README.md): what Kraf is.
+- [CODE_STANDARDS.md](./CODE_STANDARDS.md): code invariants.

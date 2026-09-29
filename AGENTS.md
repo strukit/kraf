@@ -1,14 +1,18 @@
 ---
 title: AGENTS
-summary: Entry point for agent instructions and the repository conventions they must follow.
+summary: Entry point for agent instructions and the repository conventions they MUST follow.
 tags: [agents, instructions, repository, coding-conventions]
 ---
 
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
 > RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
+>
+> This document MUST use these terms, in uppercase, when expressing normative
+> requirements, permissions, recommendations, or prohibitions. It MUST NOT use
+> alternative words or lowercase variants as normative keywords.
 
-Start here. These are the references an agent must follow in this repo.
+Agents MUST start here and follow these repository references.
 
 ## Docs
 
