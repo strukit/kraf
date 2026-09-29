@@ -7,6 +7,10 @@ tags: [specification, requirements, acceptance, ears, documentation]
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
 > RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
+>
+> This document MUST use these terms, in uppercase, when expressing normative
+> requirements, permissions, recommendations, or prohibitions. It MUST NOT use
+> alternative words or lowercase variants as normative keywords.
 
 ## Purpose
 
