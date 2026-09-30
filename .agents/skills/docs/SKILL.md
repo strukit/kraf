@@ -33,7 +33,7 @@ everything they define.
 ## On edit
 
 You MUST re-read the same source(s) and keep the doc satisfying them after your
-change — nothing you add or remove may break what they require.
+change. You MUST NOT add or remove anything that breaks what they require.
 
 ## On review
 
