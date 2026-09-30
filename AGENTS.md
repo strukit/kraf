@@ -12,7 +12,10 @@ tags: [agents, instructions, repository, coding-conventions]
 > requirements, permissions, recommendations, or prohibitions. It MUST NOT use
 > alternative words or lowercase variants as normative keywords.
 
-Agents MUST start here and follow these repository references.
+When learning about Kraf or looking for documentation, agents MUST start here
+and follow the documentation links to documents relevant to the task. Agents
+MUST NOT use content search (such as grep or ripgrep) as a substitute for
+following those links.
 
 ## Docs
 
