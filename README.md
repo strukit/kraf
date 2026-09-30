@@ -31,8 +31,8 @@ CLI, or embedded in code as a library (C or WASM) — all calling the same
 runtime. Kraf aims to interoperate with the editors and toolchains a project
 already uses rather than replacing them.
 
-## Contributing
+## Related docs
 
-See [ARCHITECTURE.md](./ARCHITECTURE.md) for the architecture,
-[BUILDING.md](./BUILDING.md) for coding rules and conventions, and
-[AGENTS.md](./AGENTS.md) for AI agent instructions.
+- [ARCHITECTURE.md](./ARCHITECTURE.md): architecture.
+- [BUILDING.md](./BUILDING.md): coding rules and conventions.
+- [AGENTS.md](./AGENTS.md): AI agent instructions.
