@@ -39,6 +39,12 @@ You MUST check the requested documents against the applicable conventions.
 For a module review, you MUST include its `README.md` and `docs/`; if no module
 is specified, you MUST review the illustrative example set.
 
+You MUST inventory the Markdown files within the review scope and check that
+every document is reachable by following documentation links from the relevant
+entry point. You MAY use file search to build the inventory and content search
+to verify links or patterns. These searches MUST NOT replace following the
+documentation links to read and understand the documents.
+
 You MUST verify every relative link's target and any referenced identifier
 anchor. You MUST report contradictions within a source as separate findings.
 
