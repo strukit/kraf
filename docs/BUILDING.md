@@ -64,7 +64,7 @@ This applies to docs, not to every `.md`. A file that is not a doc but uses
 `.md` and carries its own front-matter schema — for example a skill's `SKILL.md`
 (`name`/`description`) — is out of scope.
 
-Repo instruction files, including `AGENTS.md` and skill `SKILL.md` files, MUST
+Repo instruction files, including [`AGENTS.md`](../AGENTS.md) and skill `SKILL.md` files, MUST
 follow the normative-language requirements below, even when their own
 front-matter schema is exempt from this section's front-matter requirement.
 
@@ -111,7 +111,7 @@ are not links.)
 
 ### Language-neutral docs
 
-Cross-domain docs (e.g. `ARCHITECTURE.md`, specs) describe the shape, not the
+Cross-domain docs (e.g. [`ARCHITECTURE.md`](./ARCHITECTURE.md), specs) describe the shape, not the
 implementation language: they MUST NOT use language-specific terms (e.g.
 "trait") or language-specific file names and extensions (e.g. `filesystem.rs`,
 `lib.rs`), and MUST refer to roles instead — "interface" for a trait, and the
