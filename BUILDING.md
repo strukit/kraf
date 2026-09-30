@@ -145,7 +145,7 @@ from platform-specific logic.
 ### Tools declared in files, with version
 
 Build/tool requirements MUST be declared in dedicated, versioned files, not
-hardcoded in scripts or docs. See `.msvc.json`: it declares what's needed to
+hardcoded in scripts or docs. See [`.msvc.json`](./.msvc.json): it declares what's needed to
 build on Windows (VC++ Tools components, Windows SDK version).
 
 ### Tests
@@ -159,8 +159,8 @@ build on Windows (VC++ Tools components, Windows SDK version).
 
 ### Ignored files
 
-`.gitignore` denies everything by default and only allowlists what the repo
-needs (see the file's own header comment). `.dockerignore` is a symlink to it,
+[`.gitignore`](./.gitignore) denies everything by default and only allowlists what the repo
+needs (see the file's own header comment). [`.dockerignore`](./.dockerignore) is a symlink to it,
 so the same allowlist keeps the Docker build context clean — no dirty/leftover
 files sneak into the builder.
 
