@@ -26,7 +26,7 @@ following those links.
   CI, naming, docs front-matter).
 - [CODE_STANDARDS.md](./CODE_STANDARDS.md) — non-negotiable code invariants
   (amend, never break).
-- [docs/README.md](./docs/README.md) — documentation & spec conventions (intent,
+- [docs/SPEC_CONVENTIONS.md](./docs/SPEC_CONVENTIONS.md) — documentation & spec conventions (intent,
   specification, acceptance, ADR).
 
 ## Skills

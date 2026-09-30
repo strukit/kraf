@@ -30,8 +30,8 @@ and automations SHOULD be updated as part of the same change.
 - Declare build/tool requirements in dedicated, versioned files: see
   [Tools declared in files, with version](#tools-declared-in-files-with-version).
 - Keep feature documentation with its feature and make its docs graph navigable:
-  see [Docs layout](./docs/README.md#docs-layout) and
-  [Docs graph](./docs/README.md#docs-graph).
+  see [Docs layout](./docs/SPEC_CONVENTIONS.md#docs-layout) and
+  [Docs graph](./docs/SPEC_CONVENTIONS.md#docs-graph).
 - Keep portable repo guidance in shared skills/personas, not tool-specific
   configuration: see [Agents](#agents).
 
@@ -58,7 +58,7 @@ is an implementation detail of each feature, not the repo's organizing axis.
 
 Every doc MUST have front-matter with `title`, `summary`, and `tags` — it makes
 docs easy to index for agents. Module `README.md` files MUST have it — see
-[Module README](./docs/README.md#readme-readmemd).
+[Module README](./docs/SPEC_CONVENTIONS.md#readme-readmemd).
 
 This applies to docs, not to every `.md`. A file that is not a doc but uses
 `.md` and carries its own front-matter schema — for example a skill's `SKILL.md`
@@ -95,7 +95,7 @@ adding an artificial requirement.
 
 A family of documents MAY define its own equivalent note that lists only the
 terms it uses — for example, specifications use the EARS block defined in
-[Specifications](./docs/README.md#specification-specmd) — as long as it cites
+[Specifications](./docs/SPEC_CONVENTIONS.md#specification-specmd) — as long as it cites
 RFC 2119 and RFC 8174 near the top.
 
 ### Docs graph
@@ -103,7 +103,7 @@ RFC 2119 and RFC 8174 near the top.
 Repo-level docs form a connected graph rooted at [README.md](./README.md): every
 doc MUST link to the docs adjacent to it, so none is reachable only by its file
 path. Feature docs (intent, specification, acceptance, ADR) follow their own
-graph — see [Specifications](./docs/README.md#docs-graph).
+graph — see [Specifications](./docs/SPEC_CONVENTIONS.md#docs-graph).
 
 Every reference to a specific file MUST be a navigable link, not a bare name —
 so the reader can follow it. (Generic references, like "a module's `README.md`",

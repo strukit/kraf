@@ -29,6 +29,7 @@ loaded — only that unknown keys are rejected.
 
 ## Documentation
 
-- [Readme](./README.md): module overview.
+- [Specification conventions](./SPEC_CONVENTIONS.md): documentation conventions
+  and illustrative examples.
 - [Example area specification](./example/example.spec.md): example area
   requirements and acceptance scenarios.

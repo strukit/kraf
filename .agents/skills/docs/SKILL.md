@@ -1,6 +1,6 @@
 ---
 name: docs
-description: Create, edit, and review any Markdown doc in this repo against the conventions in BUILDING.md and /docs/README.md. Use whenever a Markdown doc is created, edited, or reviewed anywhere in the repo.
+description: Create, edit, and review any Markdown doc in this repo against the conventions in BUILDING.md and /docs/SPEC_CONVENTIONS.md. Use whenever a Markdown doc is created, edited, or reviewed anywhere in the repo.
 user-invocable: true
 ---
 
@@ -15,7 +15,7 @@ user-invocable: true
 ## Sources of truth
 
 - [`BUILDING.md`](../../../BUILDING.md) — repo-wide documentation conventions.
-- [`docs/README.md`](../../../docs/README.md) — additional conventions for
+- [`docs/SPEC_CONVENTIONS.md`](../../../docs/SPEC_CONVENTIONS.md) — additional conventions for
   feature docs and their illustrative examples.
 
 Before any create, edit, or review, you MUST read the applicable sources in full:

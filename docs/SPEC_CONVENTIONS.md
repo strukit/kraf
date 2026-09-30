@@ -1,5 +1,5 @@
 ---
-title: Specifications
+title: Specification and documentation conventions
 summary: Conventions for documenting feature intent, requirements, and acceptance scenarios.
 tags: [specification, requirements, acceptance, ears, documentation]
 ---
