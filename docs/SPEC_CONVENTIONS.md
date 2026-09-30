@@ -139,7 +139,7 @@ they relate. May use subsections (###).>
   requirements and acceptance scenarios.
 ```
 
-### Intent (*.intent.md)
+### Intent (*-intent.md)
 
 An intent explains why a feature exists, the problem it addresses, its
 boundaries, and its non-goals. It is not normative.
