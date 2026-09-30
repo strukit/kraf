@@ -281,5 +281,5 @@ modules.
 
 ## Related docs
 
-- [README.md](./README.md): what Kraf is.
+- [README.md](../README.md): what Kraf is.
 - [BUILDING.md](./BUILDING.md): repo conventions.

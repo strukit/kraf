@@ -19,7 +19,7 @@ requirements, and acceptance scenarios.
 
 It defines the documentation protocol, not the behavior of a specific feature.
 These type-specific rules MUST be applied in addition to the repo-wide
-documentation standards in [BUILDING.md](../BUILDING.md); they do not waive
+documentation standards in [BUILDING.md](./BUILDING.md); they do not waive
 those standards unless an exception is stated explicitly.
 
 ### Example
@@ -39,7 +39,7 @@ Documentation MUST live with the feature it describes; it MUST NOT be in root
 > root `docs/` example set](#example). They demonstrate the documentation
 > conventions; they are not feature documentation and do not need a feature
 > folder with a nested `docs/` directory. Repo-wide standards in
-> [BUILDING.md](../BUILDING.md) still apply unless they state an exception.
+> [BUILDING.md](./BUILDING.md) still apply unless they state an exception.
 
 ```text
 <feature>/
@@ -109,7 +109,7 @@ Feature documents MUST use the relationship sections defined by their type.
 
 Every module/feature folder MUST have a `README.md` that orients a reader before
 they open its `docs/`. Unlike the root `README.md`, a module `README.md` MUST
-have [markdown front-matter](../BUILDING.md#markdown-front-matter).
+have [markdown front-matter](./BUILDING.md#markdown-front-matter).
 
 **Layout**:
 
@@ -394,4 +394,4 @@ Name: <Decision title>
 ## Related docs
 
 - [README.md](../README.md): what Kraf is.
-- [BUILDING.md](../BUILDING.md): repo conventions.
+- [BUILDING.md](./BUILDING.md): repo conventions.

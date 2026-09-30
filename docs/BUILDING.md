@@ -30,8 +30,8 @@ and automations SHOULD be updated as part of the same change.
 - Declare build/tool requirements in dedicated, versioned files: see
   [Tools declared in files, with version](#tools-declared-in-files-with-version).
 - Keep feature documentation with its feature and make its docs graph navigable:
-  see [Docs layout](./docs/SPEC_CONVENTIONS.md#docs-layout) and
-  [Docs graph](./docs/SPEC_CONVENTIONS.md#docs-graph).
+  see [Docs layout](./SPEC_CONVENTIONS.md#docs-layout) and
+  [Docs graph](./SPEC_CONVENTIONS.md#docs-graph).
 - Keep portable repo guidance in shared skills/personas, not tool-specific
   configuration: see [Agents](#agents).
 
@@ -50,7 +50,7 @@ is an implementation detail of each feature, not the repo's organizing axis.
 
 ## Docs standards
 
-> The root [`README.md`](./README.md) does not require front-matter or the
+> The root [`README.md`](../README.md) does not require front-matter or the
 > normative-language note because it introduces the repository rather than
 > defining conventions.
 
@@ -58,7 +58,7 @@ is an implementation detail of each feature, not the repo's organizing axis.
 
 Every doc MUST have front-matter with `title`, `summary`, and `tags` — it makes
 docs easy to index for agents. Module `README.md` files MUST have it — see
-[Module README](./docs/SPEC_CONVENTIONS.md#readme-readmemd).
+[Module README](./SPEC_CONVENTIONS.md#readme-readmemd).
 
 This applies to docs, not to every `.md`. A file that is not a doc but uses
 `.md` and carries its own front-matter schema — for example a skill's `SKILL.md`
@@ -95,15 +95,15 @@ adding an artificial requirement.
 
 A family of documents MAY define its own equivalent note that lists only the
 terms it uses — for example, specifications use the EARS block defined in
-[Specifications](./docs/SPEC_CONVENTIONS.md#specification-specmd) — as long as it cites
+[Specifications](./SPEC_CONVENTIONS.md#specification-specmd) — as long as it cites
 RFC 2119 and RFC 8174 near the top.
 
 ### Docs graph
 
-Repo-level docs form a connected graph rooted at [README.md](./README.md): every
+Repo-level docs form a connected graph rooted at [README.md](../README.md): every
 doc MUST link to the docs adjacent to it, so none is reachable only by its file
 path. Feature docs (intent, specification, acceptance, ADR) follow their own
-graph — see [Specifications](./docs/SPEC_CONVENTIONS.md#docs-graph).
+graph — see [Specifications](./SPEC_CONVENTIONS.md#docs-graph).
 
 Every reference to a specific file MUST be a navigable link, not a bare name —
 so the reader can follow it. (Generic references, like "a module's `README.md`",
@@ -145,7 +145,7 @@ from platform-specific logic.
 ### Tools declared in files, with version
 
 Build/tool requirements MUST be declared in dedicated, versioned files, not
-hardcoded in scripts or docs. See [`.msvc.json`](./.msvc.json): it declares what's needed to
+hardcoded in scripts or docs. See [`.msvc.json`](../.msvc.json): it declares what's needed to
 build on Windows (VC++ Tools components, Windows SDK version).
 
 ### Tests
@@ -159,8 +159,8 @@ build on Windows (VC++ Tools components, Windows SDK version).
 
 ### Ignored files
 
-[`.gitignore`](./.gitignore) denies everything by default and only allowlists what the repo
-needs (see the file's own header comment). [`.dockerignore`](./.dockerignore) is a symlink to it,
+[`.gitignore`](../.gitignore) denies everything by default and only allowlists what the repo
+needs (see the file's own header comment). [`.dockerignore`](../.dockerignore) is a symlink to it,
 so the same allowlist keeps the Docker build context clean — no dirty/leftover
 files sneak into the builder.
 
@@ -193,4 +193,4 @@ See [CODE_STANDARDS.md](./CODE_STANDARDS.md) for the code standards.
 
 ## Related docs
 
-- [README.md](./README.md): what Kraf is.
+- [README.md](../README.md): what Kraf is.

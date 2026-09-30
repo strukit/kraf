@@ -31,4 +31,4 @@ consistent with the folder's other files.
 ## Related docs
 
 - [BUILDING.md](./BUILDING.md): repo conventions.
-- [README.md](./README.md): what Kraf is.
+- [README.md](../README.md): what Kraf is.

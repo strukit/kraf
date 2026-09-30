@@ -33,6 +33,8 @@ already uses rather than replacing them.
 
 ## Related docs
 
-- [ARCHITECTURE.md](./ARCHITECTURE.md): architecture.
-- [BUILDING.md](./BUILDING.md): coding rules and conventions.
+- [docs/README.md](./docs/README.md): documentation index.
+
+- [ARCHITECTURE.md](./docs/ARCHITECTURE.md): architecture.
+- [BUILDING.md](./docs/BUILDING.md): coding rules and conventions.
 - [AGENTS.md](./AGENTS.md): AI agent instructions.

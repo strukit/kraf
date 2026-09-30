@@ -20,11 +20,11 @@ following those links.
 ## Docs
 
 - [README.md](./README.md) — what Kraf is.
-- [ARCHITECTURE.md](./ARCHITECTURE.md) — cross-domain architecture (system
+- [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) — cross-domain architecture (system
   context, modules, ports and adapters, dependency rule).
-- [BUILDING.md](./BUILDING.md) — repo conventions (organization, build, test,
+- [docs/BUILDING.md](./docs/BUILDING.md) — repo conventions (organization, build, test,
   CI, naming, docs front-matter).
-- [CODE_STANDARDS.md](./CODE_STANDARDS.md) — non-negotiable code invariants
+- [docs/CODE_STANDARDS.md](./docs/CODE_STANDARDS.md) — non-negotiable code invariants
   (amend, never break).
 - [docs/SPEC_CONVENTIONS.md](./docs/SPEC_CONVENTIONS.md) — documentation & spec conventions (intent,
   specification, acceptance, ADR).
