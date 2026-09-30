@@ -91,9 +91,11 @@ full-text search.
   that decided its behavior.
 - An **Acceptance** document MUST link back to the **Specification** requirement
   it verifies.
-- An **ADR** MUST link back to its **Intent** and to the **ADR** it supersedes
-  or is superseded by, and MUST NOT link to requirements — so an accepted ADR
-  remains unchanged when requirements change.
+- An **ADR** MUST link back to its **Intent** in its `Links` section. If it
+  supersedes another **ADR**, it MUST link to that ADR in the same section.
+  If it is superseded, its `Doc status` MUST link to the superseding **ADR**.
+  An ADR MUST NOT link to requirements — so an accepted ADR remains unchanged
+  when requirements change.
 
 No document is reachable only by knowing its file path.
 
@@ -341,8 +343,15 @@ Each ADR MUST declare one status:
 - **Doc status:** `Proposed`, `Accepted`, `Deprecated`, or `Superseded by
   <FEATURE>-ADR-XXXX`.
 
-An `Accepted` ADR is immutable. To change a decision, a new ADR MUST supersede
-it, and only the old one's status is updated.
+An `Accepted` ADR's content is immutable, except for its status. To change a
+decision, a new ADR MUST supersede it. Only the old ADR's status is updated,
+and it MUST link to the superseding ADR.
+
+For example:
+
+```md
+- Doc status: Superseded by [<FEATURE>-ADR-0002](./<feature>-adr-0002-<slug>.md).
+```
 
 **Layout:**
 
