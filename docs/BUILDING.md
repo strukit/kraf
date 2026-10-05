@@ -12,6 +12,15 @@ tags: [monorepo, conventions, testing, continuous-integration, documentation, ag
 > requirements, permissions, recommendations, or prohibitions. It MUST NOT use
 > alternative words or lowercase variants as normative keywords.
 
+---
+
+> [!IMPORTANT]
+> These are the Kraf codebase's **invariants** — non-negotiable rules that
+> codebase MUST follow. Treat them like a constitution: you MUST NOT break an
+> invariant, you **amend** it. Changing one is a deliberate decision made in a
+> pull request that edits this file — it MUST NOT be an ad-hoc exception slipped
+> into passing code.
+
 ## Summary (TL;DR)
 
 This section is a quick orientation for contributors and agent skills, not a
@@ -25,7 +34,7 @@ and automations SHOULD be updated as part of the same change.
   [Dependency rule](./ARCHITECTURE.md#dependency-rule).
 - Real logic MUST live in the lib, with the binary consuming it: see
   [Lib-first](#lib-first).
-- Design for Linux, MacOS, and Windows from the start, isolating
+- Design for Linux, Mac, and Windows from the start, isolating
   platform-specific code: see [Multi-platform](#multi-platform).
 - Declare build/tool requirements in dedicated, versioned files: see
   [Tools declared in files, with version](#tools-declared-in-files-with-version).
@@ -34,11 +43,6 @@ and automations SHOULD be updated as part of the same change.
   [Docs graph](./SPEC_CONVENTIONS.md#docs-graph).
 - Keep portable repo guidance in shared skills/personas, not tool-specific
   configuration: see [Agents](#agents).
-
-This file and [CODE_STANDARDS.md](./CODE_STANDARDS.md) are the repo's binding
-standards — its constitution. You amend them through a pull request; you MUST
-NOT break them. A rule stated as a preference is still binding, and its
-exceptions are part of the rule.
 
 ## Overview
 
@@ -64,9 +68,10 @@ This applies to docs, not to every `.md`. A file that is not a doc but uses
 `.md` and carries its own front-matter schema — for example a skill's `SKILL.md`
 (`name`/`description`) — is out of scope.
 
-Repo instruction files, including [`AGENTS.md`](../AGENTS.md) and skill `SKILL.md` files, MUST
-follow the normative-language requirements below, even when their own
-front-matter schema is exempt from this section's front-matter requirement.
+Repo instruction files, including [`AGENTS.md`](../AGENTS.md) and skill
+`SKILL.md` files, MUST follow the normative-language requirements below, even
+when their own front-matter schema is exempt from this section's front-matter
+requirement.
 
 ### Normative language
 
@@ -95,15 +100,18 @@ adding an artificial requirement.
 
 A family of documents MAY define its own equivalent note that lists only the
 terms it uses — for example, specifications use the EARS block defined in
-[Specifications](./SPEC_CONVENTIONS.md#specification-specmd) — as long as it cites
-RFC 2119 and RFC 8174 near the top.
+[Specifications](./SPEC_CONVENTIONS.md#specification-specmd) — as long as it
+cites RFC 2119 and RFC 8174 near the top.
 
 ### Docs graph
 
-Repo-level docs form a connected graph rooted at [README.md](../README.md): every
-doc MUST link to the docs adjacent to it, so none is reachable only by its file
-path. Feature docs (intent, specification, acceptance, ADR) follow their own
-graph — see [Specifications](./SPEC_CONVENTIONS.md#docs-graph).
+Repo-level docs form a connected graph rooted at [README.md](../README.md):
+every doc MUST link to every other doc it references, so no doc is reachable
+only by its file path. A link already in the body satisfies this rule; a
+separate Related docs section is OPTIONAL and MAY be used to consolidate
+outbound links in one place. A set of docs MAY define its own graph; when it does, that graph MUST be
+documented alongside the set. Always read the graph before navigating or linking
+across a set of docs.
 
 Every reference to a specific file MUST be a navigable link, not a bare name —
 so the reader can follow it. (Generic references, like "a module's `README.md`",
@@ -111,11 +119,11 @@ are not links.)
 
 ### Language-neutral docs
 
-Cross-domain docs (e.g. [`ARCHITECTURE.md`](./ARCHITECTURE.md), specs) describe the shape, not the
-implementation language: they MUST NOT use language-specific terms (e.g.
-"trait") or language-specific file names and extensions (e.g. `filesystem.rs`,
-`lib.rs`), and MUST refer to roles instead — "interface" for a trait, and the
-`lib` / `cli` / `mcp` entrypoints without an extension.
+Cross-domain docs (e.g. [`ARCHITECTURE.md`](./ARCHITECTURE.md), specs) describe
+the shape, not the implementation language: they MUST NOT use language-specific
+terms (e.g. "trait") or language-specific file names and extensions (e.g.
+`filesystem.rs`, `lib.rs`), and MUST refer to roles instead — "interface" for a
+trait, and the `lib` / `cli` / `mcp` entrypoints without an extension.
 
 ## Workspace standards
 
@@ -137,7 +145,7 @@ testable and reusable outside the CLI (another binary, another consumer, etc.).
 
 ### Multi-platform
 
-Every domain MUST be designed for multiple platforms (MacOS/Linux/Windows) from
+Every domain MUST be designed for multiple platforms (Mac/Linux/Windows) from
 the start, not bolted on later. Platform-specific code MUST be isolated (e.g.
 `_macos.rs`, `_linux.rs`, `_windows.rs`), and shared logic MUST stay separate
 from platform-specific logic.
@@ -145,8 +153,8 @@ from platform-specific logic.
 ### Tools declared in files, with version
 
 Build/tool requirements MUST be declared in dedicated, versioned files, not
-hardcoded in scripts or docs. See [`.msvc.json`](../.msvc.json): it declares what's needed to
-build on Windows (VC++ Tools components, Windows SDK version).
+hardcoded in scripts or docs. See [`.msvc.json`](../.msvc.json): it declares
+what's needed to build on Windows (VC++ Tools components, Windows SDK version).
 
 ### Tests
 
@@ -159,15 +167,16 @@ build on Windows (VC++ Tools components, Windows SDK version).
 
 ### Ignored files
 
-[`.gitignore`](../.gitignore) denies everything by default and only allowlists what the repo
-needs (see the file's own header comment). [`.dockerignore`](../.dockerignore) is a symlink to it,
-so the same allowlist keeps the Docker build context clean — no dirty/leftover
-files sneak into the builder.
+[`.gitignore`](../.gitignore) denies everything by default and only allowlists
+what the repo needs (see the file's own header comment).
+[`.dockerignore`](../.dockerignore) is a symlink to it, so the same allowlist
+keeps the Docker build context clean — no dirty/leftover files sneak into the
+builder.
 
 ### CI
 
 Everything that runs in CI (test, build, release) MUST be reproducible locally.
-We use Docker Bake for that — build in it for every platform, except MacOS,
+We use Docker Bake for that — build in it for every platform, except Mac,
 which Docker can't build for.
 
 ### Agents
@@ -176,20 +185,20 @@ Config exclusive to a single agent tool (Claude-only, Codex-only, etc.) MUST NOT
 be committed — it lives in the dev's own environment. What is portable across
 agents MAY be committed and, when it encodes a repo rule, SHOULD be: skills, and
 agent personas bound to this repo's standards — for example, a Rust reviewer
-that enforces [CODE_STANDARDS.md](./CODE_STANDARDS.md). A persona MUST be
+that enforces [CODE_CONVENTIONS.md](./CODE_CONVENTIONS.md). A persona MUST be
 committed in a vendor-neutral form; only the tool-specific glue stays personal.
 
 ### Naming
 
 #### Platform names
 
-Platform names MUST be written as `Linux`, `MacOS`, and `Windows` — in prose,
-docs, code, and diagrams. In particular, use `MacOS`; Apple's `macOS` styling
-MUST NOT be used.
+Platform names MUST be written as `Linux`, `Mac`, and `Windows` — in prose,
+docs, code, and diagrams. In particular, use `Mac`; Apple's `macOS` styling MUST
+NOT be used.
 
 ## Code standards
 
-See [CODE_STANDARDS.md](./CODE_STANDARDS.md) for the code standards.
+See [CODE_CONVENTIONS.md](./CODE_CONVENTIONS.md) for the code standards.
 
 ## Related docs
 

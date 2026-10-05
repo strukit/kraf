@@ -12,23 +12,17 @@ tags: [documentation, index, architecture, conventions]
 > requirements, permissions, recommendations, or prohibitions. It MUST NOT use
 > alternative words or lowercase variants as normative keywords.
 
-This index links to Kraf's repository-wide documentation and illustrative
-specification examples. Feature documentation lives with the feature it describes.
+This index links to Kraf's repository-wide documentation.
 
 ## Repository documentation
 
-- [Architecture](./ARCHITECTURE.md): system context, modules, ports and adapters,
-  and dependency rules.
-- [Building](./BUILDING.md): repository, build, test, and documentation conventions.
-- [Code standards](./CODE_STANDARDS.md): code invariants.
+- [Architecture](./ARCHITECTURE.md): system context, modules, ports and
+  adapters, and dependency rules.
+- [Building](./BUILDING.md): repository, build, test, and documentation
+  conventions.
+- [Code conventions](./CODE_CONVENTIONS.md): code invariants.
 - [Specification conventions](./SPEC_CONVENTIONS.md): intent, specification,
   acceptance, and ADR conventions.
-
-## Examples
-
-- [Example intent](./example-intent.md): purpose and boundaries.
-- [Example specification](./example/example.spec.md): behavioral requirements.
-- [Example acceptance](./example/example.acceptance.md): acceptance scenarios.
 
 ## Related docs
 

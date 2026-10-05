@@ -12,6 +12,15 @@ tags: [specification, requirements, acceptance, ears, documentation]
 > requirements, permissions, recommendations, or prohibitions. It MUST NOT use
 > alternative words or lowercase variants as normative keywords.
 
+---
+
+> [!IMPORTANT]
+> These are the Kraf codebase's **invariants** — non-negotiable rules that
+> codebase MUST follow. Treat them like a constitution: you MUST NOT break an
+> invariant, you **amend** it. Changing one is a deliberate decision made in a
+> pull request that edits this file — it MUST NOT be an ad-hoc exception slipped
+> into passing code.
+
 ## Summary
 
 This document defines how this repo records feature intent, behavioral
@@ -19,14 +28,14 @@ requirements, and acceptance scenarios.
 
 It defines the documentation protocol, not the behavior of a specific feature.
 These type-specific rules MUST be applied in addition to the repo-wide
-documentation standards in [BUILDING.md](./BUILDING.md); they do not waive
-those standards unless an exception is stated explicitly.
+documentation standards in [BUILDING.md](./BUILDING.md); they do not waive those
+standards unless an exception is stated explicitly.
 
 ### Example
 
 A minimal, illustrative application of this convention:
 
-- [Example intent](./example-intent.md)
+- [Example intent](./example/example-intent.md)
 - [Example area specification](./example/example.spec.md)
 - [Example area acceptance](./example/example.acceptance.md)
 
@@ -35,11 +44,12 @@ A minimal, illustrative application of this convention:
 Documentation MUST live with the feature it describes; it MUST NOT be in root
 `/docs`.
 
-> The feature-doc layout MUST NOT be applied to the [illustrative files in the
-> root `docs/` example set](#example). They demonstrate the documentation
-> conventions; they are not feature documentation and do not need a feature
-> folder with a nested `docs/` directory. Repo-wide standards in
-> [BUILDING.md](./BUILDING.md) still apply unless they state an exception.
+> The feature-doc layout MUST NOT be applied to the
+> [illustrative files in the root `docs/` example set](#example). They
+> demonstrate the documentation conventions; they are not feature documentation
+> and do not need a feature folder with a nested `docs/` directory. Repo-wide
+> standards in [BUILDING.md](./BUILDING.md) still apply unless they state an
+> exception.
 
 ```text
 <feature>/
@@ -92,15 +102,15 @@ full-text search.
 - An **Acceptance** document MUST link back to the **Specification** requirement
   it verifies.
 - An **ADR** MUST link back to its **Intent** in its `Links` section. If it
-  supersedes another **ADR**, it MUST link to that ADR in the same section.
-  If it is superseded, its `Doc status` MUST link to the superseding **ADR**.
-  An ADR MUST NOT link to requirements — so an accepted ADR remains unchanged
-  when requirements change.
+  supersedes another **ADR**, it MUST link to that ADR in the same section. If
+  it is superseded, its `Doc status` MUST link to the superseding **ADR**. An
+  ADR MUST NOT link to requirements — so an accepted ADR remains unchanged when
+  requirements change.
 
 No document is reachable only by knowing its file path.
 
-Repo-level documents that provide closing navigation links MUST group them
-under a `## Related docs` heading instead of writing them as a closing sentence.
+Repo-level documents that provide closing navigation links MUST group them under
+a `## Related docs` heading instead of writing them as a closing sentence.
 Feature documents MUST use the relationship sections defined by their type.
 
 ## Docs types
@@ -344,13 +354,14 @@ Each ADR MUST declare one status:
   <FEATURE>-ADR-XXXX`.
 
 An `Accepted` ADR's content is immutable, except for its status. To change a
-decision, a new ADR MUST supersede it. Only the old ADR's status is updated,
-and it MUST link to the superseding ADR.
+decision, a new ADR MUST supersede it. Only the old ADR's status is updated, and
+it MUST link to the superseding ADR.
 
 For example:
 
 ```md
-- Doc status: Superseded by [<FEATURE>-ADR-0002](./<feature>-adr-0002-<slug>.md).
+- Doc status: Superseded by
+  [<FEATURE>-ADR-0002](./<feature>-adr-0002-<slug>.md).
 ```
 
 **Layout:**
