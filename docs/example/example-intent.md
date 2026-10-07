@@ -24,13 +24,13 @@ inheriting undeclared host state.
 
 ## Boundaries
 
-This example does not define how configuration is stored, transmitted, or
-loaded — only that unknown keys are rejected.
+This example does not define how configuration is stored, transmitted, or loaded
+— only that unknown keys are rejected.
 
 ## Documentation
 
-- [Readme](./README.md): documentation index and example overview.
-- [Specification conventions](./SPEC_CONVENTIONS.md): documentation conventions
+- [Readme](../README.md): documentation index and example overview.
+- [Specification conventions](../SPEC_CONVENTIONS.md): documentation conventions
   and illustrative examples.
-- [Example area specification](./example/example.spec.md): example area
+- [Example area specification](./example.spec.md): example area
   requirements and acceptance scenarios.
