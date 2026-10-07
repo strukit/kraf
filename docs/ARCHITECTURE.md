@@ -77,8 +77,8 @@ flowchart TD
 - Kraf: discovers and loads features, exposes a project runtime, standalone
   tools, and embeddable libraries, and materializes the runtime where the
   workload runs.
-- Runner (Linux · Mac · Windows · WASM Worker): where Kraf materializes and
-  runs the project runtime.
+- Runner (Linux · Mac · Windows · WASM Worker): where Kraf materializes and runs
+  the project runtime.
 
 ## Containers
 
@@ -292,4 +292,4 @@ modules.
 ## Related docs
 
 - [README.md](../README.md): what Kraf is.
-- [BUILDING.md](./BUILDING.md): repo conventions.
+- [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md): repo conventions.

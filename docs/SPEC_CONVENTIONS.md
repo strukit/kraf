@@ -15,11 +15,10 @@ tags: [specification, requirements, acceptance, ears, documentation]
 ---
 
 > [!IMPORTANT]
-> These are the Kraf codebase's **invariants** — non-negotiable rules that
-> codebase MUST follow. Treat them like a constitution: you MUST NOT break an
-> invariant, you **amend** it. Changing one is a deliberate decision made in a
-> pull request that edits this file — it MUST NOT be an ad-hoc exception slipped
-> into passing code.
+> These are the Kraf codebase's **invariants** — mandatory rules that the
+> codebase MUST follow. You MUST NOT introduce ad-hoc exceptions. Changing an
+> invariant requires a deliberate decision in a pull request that edits this
+> file.
 
 ## Summary
 
@@ -28,7 +27,7 @@ requirements, and acceptance scenarios.
 
 It defines the documentation protocol, not the behavior of a specific feature.
 These type-specific rules MUST be applied in addition to the repo-wide
-documentation standards in [BUILDING.md](./BUILDING.md); they do not waive those
+documentation standards in [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md); they do not waive those
 standards unless an exception is stated explicitly.
 
 ### Example
@@ -48,7 +47,7 @@ Documentation MUST live with the feature it describes; it MUST NOT be in root
 > [illustrative files in the root `docs/` example set](#example). They
 > demonstrate the documentation conventions; they are not feature documentation
 > and do not need a feature folder with a nested `docs/` directory. Repo-wide
-> standards in [BUILDING.md](./BUILDING.md) still apply unless they state an
+> standards in [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md) still apply unless they state an
 > exception.
 
 ```text
@@ -119,7 +118,7 @@ Feature documents MUST use the relationship sections defined by their type.
 
 Every module/feature folder MUST have a `README.md` that orients a reader before
 they open its `docs/`. Unlike the root `README.md`, a module `README.md` MUST
-have [markdown front-matter](./BUILDING.md#markdown-front-matter).
+have [markdown front-matter](./GENERAL_CONVENTIONS.md#markdown-front-matter).
 
 **Layout**:
 
@@ -405,4 +404,4 @@ Name: <Decision title>
 ## Related docs
 
 - [README.md](../README.md): what Kraf is.
-- [BUILDING.md](./BUILDING.md): repo conventions.
+- [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md): repo conventions.

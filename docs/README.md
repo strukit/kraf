@@ -16,13 +16,13 @@ This index links to Kraf's repository-wide documentation.
 
 ## Repository documentation
 
-- [Architecture](./ARCHITECTURE.md): system context, modules, ports and
-  adapters, and dependency rules.
-- [Building](./BUILDING.md): repository, build, test, and documentation
+- [General conventions](./GENERAL_CONVENTIONS.md): repository, build, test, and documentation
   conventions.
 - [Code conventions](./CODE_CONVENTIONS.md): code invariants.
-- [Specification conventions](./SPEC_CONVENTIONS.md): intent, specification,
-  acceptance, and ADR conventions.
+- [Specification conventions](./SPEC_CONVENTIONS.md): docs-spec invariants for
+  intent, specification, acceptance, and ADR conventions.
+- [Architecture](./ARCHITECTURE.md): system context, modules, ports and
+  adapters, and dependency rules.
 
 ## Related docs
 

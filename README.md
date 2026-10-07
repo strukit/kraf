@@ -34,7 +34,5 @@ already uses rather than replacing them.
 ## Related docs
 
 - [AGENTS.md](./AGENTS.md): AI agent instructions.
-
 - [Documentation](./docs/README.md): repository documentation index.
 - [Architecture](./docs/ARCHITECTURE.md): architecture.
-- [Building](./docs/BUILDING.md): coding rules and conventions.

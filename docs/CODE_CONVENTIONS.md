@@ -15,11 +15,10 @@ tags: [code-standards, invariants, conventions, rust]
 ---
 
 > [!IMPORTANT]
-> These are the Kraf codebase's **invariants** — non-negotiable rules that
-> codebase MUST follow. Treat them like a constitution: you MUST NOT break an
-> invariant, you **amend** it. Changing one is a deliberate decision made in a
-> pull request that edits this file — it MUST NOT be an ad-hoc exception slipped
-> into passing code.
+> These are the Kraf codebase's **invariants** — mandatory rules that the
+> codebase MUST follow. You MUST NOT introduce ad-hoc exceptions. Changing an
+> invariant requires a deliberate decision in a pull request that edits this
+> file.
 
 ## Rust modules
 
@@ -30,7 +29,16 @@ type/logic file, it MUST be named after the folder with a suffix (e.g.
 its parent's exact name (`clippy::module_inception`), and the suffix keeps it
 consistent with the folder's other files.
 
+## Tests
+
+- Tests SHOULD be small and direct — no over-engineering.
+- Duplication is fine — there's no need to extract a shared helper/const just to
+  avoid repeating content between tests.
+- Tests MUST be self-contained: a test's setup lives inside the test itself, not
+  in a shared const/fixture defined elsewhere in the file, so the reader doesn't
+  have to scroll up to find out what a test uses.
+
 ## Related docs
 
-- [BUILDING.md](./BUILDING.md): repo conventions.
 - [README.md](../README.md): what Kraf is.
+- [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md): repo conventions.

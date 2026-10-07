@@ -1,7 +1,7 @@
 ---
-title: BUILDING
-summary: Conventions for organizing, building, testing, and documenting the Kraf monorepo.
-tags: [monorepo, conventions, testing, continuous-integration, documentation, agents]
+title: GENERAL CONVENTIONS
+summary: First conventions for organizing, code, docs the Kraf monorepo.
+tags: [monorepo, conventions, documentation, agents]
 ---
 
 > [!IMPORTANT]
@@ -15,34 +15,23 @@ tags: [monorepo, conventions, testing, continuous-integration, documentation, ag
 ---
 
 > [!IMPORTANT]
-> These are the Kraf codebase's **invariants** — non-negotiable rules that
-> codebase MUST follow. Treat them like a constitution: you MUST NOT break an
-> invariant, you **amend** it. Changing one is a deliberate decision made in a
-> pull request that edits this file — it MUST NOT be an ad-hoc exception slipped
-> into passing code.
-
-## Summary (TL;DR)
-
-This section is a quick orientation for contributors and agent skills, not a
-separate source of truth. The linked documents below define the rules. This
-summary MUST be reviewed and updated when those rules change; matching skills
-and automations SHOULD be updated as part of the same change.
-
-- Organize the repo by feature/domain, not by language: see
-  [Module map](./ARCHITECTURE.md#module-map).
-- Dependencies MUST point inward and MUST NOT form a cycle: see
-  [Dependency rule](./ARCHITECTURE.md#dependency-rule).
-- Real logic MUST live in the lib, with the binary consuming it: see
-  [Lib-first](#lib-first).
-- Design for Linux, Mac, and Windows from the start, isolating
-  platform-specific code: see [Multi-platform](#multi-platform).
-- Declare build/tool requirements in dedicated, versioned files: see
-  [Tools declared in files, with version](#tools-declared-in-files-with-version).
-- Keep feature documentation with its feature and make its docs graph navigable:
-  see [Docs layout](./SPEC_CONVENTIONS.md#docs-layout) and
-  [Docs graph](./SPEC_CONVENTIONS.md#docs-graph).
-- Keep portable repo guidance in shared skills/personas, not tool-specific
-  configuration: see [Agents](#agents).
+> These are the Kraf codebase's **invariants** — mandatory rules that the
+> codebase MUST follow. You MUST NOT introduce ad-hoc exceptions. Changing an
+> invariant requires a deliberate decision in a pull request that edits this
+> file.
+>
+> A convention document is a document whose purpose is to define rules and that
+> carries the invariants note near the top.
+>
+> Rules MUST be defined only in dedicated convention documents. Code comments,
+> commit messages, pull request descriptions, and any other content MUST NOT
+> introduce new rules; they MAY only reference or apply existing ones.
+>
+> Rules explicitly scoped to a particular document type or context MUST take
+> precedence over these general rules wherever they conflict, and only within
+> that scope. All non-conflicting general rules MUST remain in effect. Such
+> overrides do not require changing this file, but MUST themselves be defined in
+> a convention document.
 
 ## Overview
 
@@ -52,26 +41,11 @@ language** — it's by **feature/domain**. Each domain is its own folder
 next to the rest instead of becoming a separate per-language workspace. Language
 is an implementation detail of each feature, not the repo's organizing axis.
 
-## Docs standards
+## Docs Conventions
 
 > The root [`README.md`](../README.md) does not require front-matter or the
 > normative-language note because it introduces the repository rather than
 > defining conventions.
-
-### Markdown front-matter
-
-Every doc MUST have front-matter with `title`, `summary`, and `tags` — it makes
-docs easy to index for agents. Module `README.md` files MUST have it — see
-[Module README](./SPEC_CONVENTIONS.md#readme-readmemd).
-
-This applies to docs, not to every `.md`. A file that is not a doc but uses
-`.md` and carries its own front-matter schema — for example a skill's `SKILL.md`
-(`name`/`description`) — is out of scope.
-
-Repo instruction files, including [`AGENTS.md`](../AGENTS.md) and skill
-`SKILL.md` files, MUST follow the normative-language requirements below, even
-when their own front-matter schema is exempt from this section's front-matter
-requirement.
 
 ### Normative language
 
@@ -103,15 +77,28 @@ terms it uses — for example, specifications use the EARS block defined in
 [Specifications](./SPEC_CONVENTIONS.md#specification-specmd) — as long as it
 cites RFC 2119 and RFC 8174 near the top.
 
+### Markdown front-matter
+
+Every doc MUST have front-matter with `title`, `summary`, and `tags` — it makes
+docs easy to index for agents.
+
+This applies to docs, not to every `.md`. A file that is not a doc but uses
+`.md` and carries its own front-matter schema — for example a skill's `SKILL.md`
+(`name`/`description`).
+
+Repo instruction files, including [`AGENTS.md`](../AGENTS.md) and `SKILL.md`
+files, MUST follow the normative-language requirements below, even when their
+own front-matter schema is exempt from this section's front-matter requirement.
+
 ### Docs graph
 
 Repo-level docs form a connected graph rooted at [README.md](../README.md):
-every doc MUST link to every other doc it references, so no doc is reachable
+every doc MUST link to every parent doc it references, so no doc is reachable
 only by its file path. A link already in the body satisfies this rule; a
 separate Related docs section is OPTIONAL and MAY be used to consolidate
-outbound links in one place. A set of docs MAY define its own graph; when it does, that graph MUST be
-documented alongside the set. Always read the graph before navigating or linking
-across a set of docs.
+outbound links in one place. A set of docs MAY define its own graph; when it
+does, that graph MUST be documented alongside the set. Always read the graph
+before navigating or linking across a set of docs.
 
 Every reference to a specific file MUST be a navigable link, not a bare name —
 so the reader can follow it. (Generic references, like "a module's `README.md`",
@@ -125,18 +112,18 @@ terms (e.g. "trait") or language-specific file names and extensions (e.g.
 `filesystem.rs`, `lib.rs`), and MUST refer to roles instead — "interface" for a
 trait, and the `lib` / `cli` / `mcp` entrypoints without an extension.
 
-## Workspace standards
+## Workspace Conventions
 
 ### Std-first
 
-Code SHOULD prefer Rust's standard library over external crates, and SHOULD keep
+Code SHOULD prefer standard library over external libs, and SHOULD keep
 dependencies few and consolidated. Exceptions: official platform bindings,
-foundational runtimes/ packages, big-tech / Linux Foundation and friends
-packages. Code SHOULD NOT add convenience wrappers on top of another lib, or a
-"wrapper of a wrapper".
+foundational runtimes/packages, big-tech, Linux Foundation and friends packages.
+Code SHOULD NOT add convenience wrappers on top of another lib, or a "wrapper of
+a wrapper".
 
 Example: terminal handling uses `std::io::IsTerminal` + minimal syscalls, not
-crates like crossterm/portable-pty.
+lib/package like crossterm/portable-pty.
 
 ### Lib-first
 
@@ -156,28 +143,16 @@ Build/tool requirements MUST be declared in dedicated, versioned files, not
 hardcoded in scripts or docs. See [`.msvc.json`](../.msvc.json): it declares
 what's needed to build on Windows (VC++ Tools components, Windows SDK version).
 
-### Tests
-
-- Tests SHOULD be small and direct — no over-engineering.
-- Duplication is fine — there's no need to extract a shared helper/const just to
-  avoid repeating content between tests.
-- Tests MUST be self-contained: a test's setup lives inside the test itself, not
-  in a shared const/fixture defined elsewhere in the file, so the reader doesn't
-  have to scroll up to find out what a test uses.
-
 ### Ignored files
 
 [`.gitignore`](../.gitignore) denies everything by default and only allowlists
 what the repo needs (see the file's own header comment).
-[`.dockerignore`](../.dockerignore) is a symlink to it, so the same allowlist
-keeps the Docker build context clean — no dirty/leftover files sneak into the
-builder.
 
 ### CI
 
 Everything that runs in CI (test, build, release) MUST be reproducible locally.
-We use Docker Bake for that — build in it for every platform, except Mac,
-which Docker can't build for.
+We use Docker Bake for that — build in it for every platform, except Mac, which
+Docker can't build for.
 
 ### Agents
 
@@ -192,14 +167,10 @@ committed in a vendor-neutral form; only the tool-specific glue stays personal.
 
 #### Platform names
 
-Platform names MUST be written as `Linux`, `Mac`, and `Windows` — in prose,
-docs, code, and diagrams. In particular, use `Mac`; Apple's `macOS` styling MUST
-NOT be used.
+Platform names MUST be written as ```Linux```, ```MacOS```, and ```Windows```—
+in prose, docs, code, and diagrams. In particular, use```MacOS```; Apple's
+``macOS` styling MUST NOT be used.
 
-## Code standards
-
-See [CODE_CONVENTIONS.md](./CODE_CONVENTIONS.md) for the code standards.
-
-## Related docs
+## Related
 
 - [README.md](../README.md): what Kraf is.
