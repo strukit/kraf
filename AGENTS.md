@@ -49,7 +49,7 @@ the directory of the document containing the link.
 Agents MUST NOT use content search (such as grep or ripgrep) as a substitute for
 following those links, unless the user explicitly requests it.
 
-Example: in `docs/README.md`, the link [agent instructions](../AGENTS.md) points
+Example: in `docs/README.md`, the link [agent instructions](./AGENTS.md) points
 to `AGENTS.md` at the project root.
 
 If the destination also contains local links needed for the task, the agent MUST
