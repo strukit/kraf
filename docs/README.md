@@ -1,6 +1,6 @@
 ---
 title: Documentation
-summary: Index of Kraf's architecture, repository standards, and specification examples.
+summary: Index of Kraf's architecture and repository conventions.
 tags: [documentation, index, architecture, conventions]
 ---
 
@@ -16,15 +16,15 @@ This index links to Kraf's repository-wide documentation.
 
 ## Repository documentation
 
-- [General conventions](./GENERAL_CONVENTIONS.md): repository, build, test, and documentation
-  conventions.
+- [General conventions](./GENERAL_CONVENTIONS.md): repository, build, test, and
+  documentation conventions.
 - [Code conventions](./CODE_CONVENTIONS.md): code invariants.
 - [Specification conventions](./SPEC_CONVENTIONS.md): docs-spec invariants for
   intent, specification, acceptance, and ADR conventions.
 - [Architecture](./ARCHITECTURE.md): system context, modules, ports and
   adapters, and dependency rules.
 
-## Related docs
+## Related
 
 - [README.md](../README.md): what Kraf is.
 - [AGENTS.md](../AGENTS.md): agent instructions.

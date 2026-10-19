@@ -4,11 +4,19 @@ summary: Why Kraf resolves and projects environment variables through a declarat
 tags: [environment, env-var, intent, security, projection]
 ---
 
+> [!IMPORTANT]
+> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
+> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
+>
+> This document MUST use these terms, in uppercase, when expressing normative
+> requirements, permissions, recommendations, or prohibitions. It MUST NOT use
+> alternative words or lowercase variants as normative keywords.
+
 ## Problem
 
 Development environments inherit a large, implicit set of environment variables
 from the host. Their names, formats, availability, and meaning vary across
-platforms. Values may also come from personal preferences, project
+platforms. Values can also come from personal preferences, project
 configuration, organization policy, or the current Kraf session.
 
 When each tool or module reads the host environment directly, the resulting
@@ -17,10 +25,10 @@ allows undeclared host state to reach managed processes by accident.
 
 ## Intent
 
-This module should resolve environment variables through one declarative model
+This module resolves environment variables through one declarative model
 and produce an explicit projection for each managed process.
 
-The model must make it possible to:
+The model makes it possible to:
 
 - normalize platform-specific aliases behind canonical declarations;
 - combine values from Host, User, Organization, Project, and Session sources;
@@ -39,16 +47,16 @@ plugin source code or immutable plugin metadata distributed with the plugin. A
 declaration identifies an allowed variable and its behavior; it does not contain
 the final runtime value.
 
-Dynamic sources may provide values for existing declarations. They must not
+Dynamic sources MAY provide values for existing declarations. They MUST NOT
 create new declarations, request undeclared host values, or expand the set of
-variables that a process may receive.
+variables that a process can receive.
 
 #### Security access
 
-Only the environment module may read raw environment values from the host.
+Only the environment module MAY read raw environment values from the host.
 
-Other modules and plugins may obtain a resolved value only through a declaration
-they own or explicitly declare as a dependency. This module must not expose an
+Other modules and plugins MAY obtain a resolved value only through a declaration
+they own or explicitly declare as a dependency. This module MUST NOT expose an
 operation that enumerates all host environment variables, nor arbitrary
 string-based host lookups outside this module.
 
@@ -83,9 +91,9 @@ projection to its managed process.
 - [Readme](../README.md): module overview.
 - [Declarations](./env-var-declarations/env-var-declarations.spec.md):
   declarations Specification.
-- [Resolution](./env-var-resolution/env-var-resolution.spec.md):
-  resolution Specification.
-- [Projection](./env-var-projection/env-var-projection.spec.md):
-  projection Specification.
-- [Host mappings](./env-var-host/env-var-host.spec.md):
-  host mappings Specification.
+- [Resolution](./env-var-resolution/env-var-resolution.spec.md): resolution
+  Specification.
+- [Projection](./env-var-projection/env-var-projection.spec.md): projection
+  Specification.
+- [Host mappings](./env-var-host/env-var-host.spec.md): host mappings
+  Specification.

@@ -38,7 +38,7 @@ consistent with the folder's other files.
   in a shared const/fixture defined elsewhere in the file, so the reader doesn't
   have to scroll up to find out what a test uses.
 
-## Related docs
+## Related
 
 - [README.md](../README.md): what Kraf is.
 - [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md): repo conventions.

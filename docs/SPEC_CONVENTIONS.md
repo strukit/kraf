@@ -27,8 +27,8 @@ requirements, and acceptance scenarios.
 
 It defines the documentation protocol, not the behavior of a specific feature.
 These type-specific rules MUST be applied in addition to the repo-wide
-documentation standards in [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md); they do not waive those
-standards unless an exception is stated explicitly.
+documentation standards in [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md);
+they do not waive those standards unless an exception is stated explicitly.
 
 ### Example
 
@@ -47,8 +47,8 @@ Documentation MUST live with the feature it describes; it MUST NOT be in root
 > [illustrative files in the root `docs/` example set](#example). They
 > demonstrate the documentation conventions; they are not feature documentation
 > and do not need a feature folder with a nested `docs/` directory. Repo-wide
-> standards in [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md) still apply unless they state an
-> exception.
+> standards in [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md) still apply
+> unless they state an exception.
 
 ```text
 <feature>/
@@ -109,8 +109,8 @@ full-text search.
 No document is reachable only by knowing its file path.
 
 Repo-level documents that provide closing navigation links MUST group them under
-a `## Related docs` heading instead of writing them as a closing sentence.
-Feature documents MUST use the relationship sections defined by their type.
+a `## Related` heading instead of writing them as a closing sentence. Feature
+documents MUST use the relationship sections defined by their type.
 
 ## Docs types
 
@@ -128,6 +128,14 @@ title: <Feature name>
 summary: <One-line summary of what the module does.>
 tags: [<tag1>, <tag2>, ...]
 ---
+
+> [!IMPORTANT]
+> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
+> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
+>
+> This document MUST use these terms, in uppercase, when expressing normative
+> requirements, permissions, recommendations, or prohibitions. It MUST NOT use
+> alternative words or lowercase variants as normative keywords.
 
 <One or two paragraphs: what the module does and the concepts it introduces.>
 
@@ -161,6 +169,14 @@ title: <Feature name> intent
 summary: <One-line summary of why the feature exists.>
 tags: [<tag1>, <tag2>, ...]
 ---
+
+> [!IMPORTANT]
+> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
+> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
+>
+> This document MUST use these terms, in uppercase, when expressing normative
+> requirements, permissions, recommendations, or prohibitions. It MUST NOT use
+> alternative words or lowercase variants as normative keywords.
 
 ## Problem
 
@@ -302,6 +318,14 @@ summary: <One-line summary of the acceptance scenarios.>
 tags: [<feature>, <area>, acceptance, gherkin]
 ---
 
+> [!IMPORTANT]
+> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
+> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
+>
+> This document MUST use these terms, in uppercase, when expressing normative
+> requirements, permissions, recommendations, or prohibitions. It MUST NOT use
+> alternative words or lowercase variants as normative keywords.
+
 ## <FEATURE>_<AREA>-ACC-0001
 
 Name: <Scenario name>
@@ -401,7 +425,7 @@ Name: <Decision title>
 <What becomes easier, harder, or required because of this decision.>
 ```
 
-## Related docs
+## Related
 
 - [README.md](../README.md): what Kraf is.
 - [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md): repo conventions.

@@ -29,8 +29,8 @@ This example does not define how configuration is stored, transmitted, or loaded
 
 ## Documentation
 
-- [Readme](../README.md): documentation index and example overview.
+- [Readme](../README.md): documentation index.
 - [Specification conventions](../SPEC_CONVENTIONS.md): documentation conventions
   and illustrative examples.
-- [Example area specification](./example.spec.md): example area
-  requirements and acceptance scenarios.
+- [Example area specification](./example.spec.md): example area requirements and
+  acceptance scenarios.

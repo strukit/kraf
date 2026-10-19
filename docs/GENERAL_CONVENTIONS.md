@@ -1,6 +1,6 @@
 ---
 title: GENERAL CONVENTIONS
-summary: First conventions for organizing, code, docs the Kraf monorepo.
+summary: Repo-wide conventions for organizing, coding, and documenting the Kraf monorepo.
 tags: [monorepo, conventions, documentation, agents]
 ---
 
@@ -77,28 +77,27 @@ terms it uses — for example, specifications use the EARS block defined in
 [Specifications](./SPEC_CONVENTIONS.md#specification-specmd) — as long as it
 cites RFC 2119 and RFC 8174 near the top.
 
+Agent instruction files (for example `AGENTS.md` or `SKILL.md`) MUST follow
+these requirements.
+
 ### Markdown front-matter
 
 Every doc MUST have front-matter with `title`, `summary`, and `tags` — it makes
 docs easy to index for agents.
 
 This applies to docs, not to every `.md`. A file that is not a doc but uses
-`.md` and carries its own front-matter schema — for example a skill's `SKILL.md`
-(`name`/`description`).
-
-Repo instruction files, including [`AGENTS.md`](../AGENTS.md) and `SKILL.md`
-files, MUST follow the normative-language requirements below, even when their
-own front-matter schema is exempt from this section's front-matter requirement.
+`.md` and carries its own front-matter schema — for example `SKILL.md` — is
+out of scope.
 
 ### Docs graph
 
 Repo-level docs form a connected graph rooted at [README.md](../README.md):
 every doc MUST link to every parent doc it references, so no doc is reachable
 only by its file path. A link already in the body satisfies this rule; a
-separate Related docs section is OPTIONAL and MAY be used to consolidate
-outbound links in one place. A set of docs MAY define its own graph; when it
-does, that graph MUST be documented alongside the set. Always read the graph
-before navigating or linking across a set of docs.
+separate `Related` section is OPTIONAL and MAY be used to consolidate outbound
+links in one place. A set of docs MAY define its own graph; when it does, that
+graph MUST be documented alongside the set. Always read the graph before
+navigating or linking across a set of docs.
 
 Every reference to a specific file MUST be a navigable link, not a bare name —
 so the reader can follow it. (Generic references, like "a module's `README.md`",
@@ -132,10 +131,10 @@ testable and reusable outside the CLI (another binary, another consumer, etc.).
 
 ### Multi-platform
 
-Every domain MUST be designed for multiple platforms (Mac/Linux/Windows) from
+Every domain MUST be designed for multiple platforms (Linux/Mac/Windows) from
 the start, not bolted on later. Platform-specific code MUST be isolated (e.g.
-`_macos.rs`, `_linux.rs`, `_windows.rs`), and shared logic MUST stay separate
-from platform-specific logic.
+`_macos.rs`, `_linux.rs`, `_windows.rs`), and shared logic MUST stay separate from
+platform-specific logic.
 
 ### Tools declared in files, with version
 
@@ -147,6 +146,9 @@ what's needed to build on Windows (VC++ Tools components, Windows SDK version).
 
 [`.gitignore`](../.gitignore) denies everything by default and only allowlists
 what the repo needs (see the file's own header comment).
+[`.dockerignore`](../.dockerignore) is a symlink to it, so the same allowlist
+keeps the Docker build context clean — no dirty/leftover files sneak into the
+builder.
 
 ### CI
 
@@ -167,9 +169,12 @@ committed in a vendor-neutral form; only the tool-specific glue stays personal.
 
 #### Platform names
 
-Platform names MUST be written as ```Linux```, ```MacOS```, and ```Windows```—
-in prose, docs, code, and diagrams. In particular, use```MacOS```; Apple's
-``macOS` styling MUST NOT be used.
+In prose, docs, and diagrams, platform names MUST be written as `Linux`, `Mac`,
+and `Windows`; Apple's `macOS` styling MUST NOT be used.
+
+In code, each language MAY have its own convention for platform names, and that
+convention MUST take precedence over the rule above, only within that language's
+code.
 
 ## Related
 

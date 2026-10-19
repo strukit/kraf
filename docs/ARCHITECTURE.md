@@ -15,7 +15,7 @@ tags: [architecture, c4, ports-and-adapters, modules]
 ---
 
 > [!IMPORTANT]
-> These are the Kraf codebase's **invariants** — non-negotiable rules that
+> These are the Kraf codebase's **invariants** — non-negotiable rules that the
 > codebase MUST follow. Treat them like a constitution: you MUST NOT break an
 > invariant, you **amend** it. Changing one is a deliberate decision made in a
 > pull request that edits this file — it MUST NOT be an ad-hoc exception slipped
@@ -33,7 +33,7 @@ humans — call to inspect and operate on a project, exposing it as an IDE
 runtime: an isolated environment today, and its files, diagnostics, and language
 tooling next. The tools are organized into features, each owning its
 capabilities and their contracts, and reached through entrypoints — CLI, MCP, or
-an embeddable library. A Kraf `_read_file_`, for example, returns a file's
+an embeddable library. A Kraf `read_file`, for example, returns a file's
 content with a digest for conditional re-reads (a later read passing the digest
 gets "not changed" instead of the bytes again) and metadata like line count and
 MIME type, where a raw file read returns only bytes. It interoperates with
@@ -289,7 +289,7 @@ modules.
   testable in isolation.
 - The materialization target is a Runner (OS or WASM worker), not a fixed OS.
 
-## Related docs
+## Related
 
 - [README.md](../README.md): what Kraf is.
 - [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md): repo conventions.
