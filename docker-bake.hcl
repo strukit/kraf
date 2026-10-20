@@ -21,17 +21,6 @@ target "_common" {
   load       = false
 }
 
-target "_artifacts" {
-  inherits = ["_common"]
-
-  output = [{
-    type           = "local"
-    src            = "${resolve_workspace()}/dist/release/kraf"
-    dest           = ARTIFACT_PATH
-    platform-split = true
-  }]
-}
-
 target "setup" {
   name        = "setup-${platform}-${arch}"
   description = "Builds the environment for one platform/architecture."
@@ -56,10 +45,11 @@ target "setup" {
 # docker buildx bake build-linux-arm64 (linux/arm64)
 target "linux" {
   name        = "build-linux-${arch}"
-  inherits    = ["_artifacts"]
+  inherits    = ["_common"]
   dockerfile  = "Dockerfile"
   target      = "builder-artifacts"
   contexts    = { "setup-environment" = "target:setup-linux-${arch}" }
+  output      = ["type=local,dest=${ARTIFACT_PATH},platform-split=true"]
 
   matrix = {
     arch     = ["amd64", "arm64"]
@@ -77,10 +67,11 @@ target "linux" {
 # docker buildx bake build-windows-arm64 
 target "windows" {
   name        = "build-windows-${arch}"
-  inherits    = ["_artifacts"]
+  inherits    = ["_common"]
   dockerfile  = "Dockerfile"
   target      = "builder-artifacts"
   contexts    = { "setup-environment" = "target:setup-windows-${arch}" }
+  output      = ["type=local,dest=dist,platform-split=true"]
 
   matrix = {
     arch     = ["amd64", "arm64"]
@@ -88,6 +79,7 @@ target "windows" {
   }
   
   platforms = ["${platform}/${arch}"]
+
 
   args = {
     WORKSPACE  = resolve_workspace()
