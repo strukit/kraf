@@ -82,3 +82,5 @@
 !/.agents
 !/.agents/**
 !/.agents/**/*
+
+**/.DS_Store

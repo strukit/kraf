@@ -4,6 +4,14 @@ summary: Acceptance scenarios for declaring environment variables.
 tags: [environment, env-var, acceptance, declaration, gherkin]
 ---
 
+> [!IMPORTANT]
+> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
+> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
+>
+> This document MUST use these terms, in uppercase, when expressing normative
+> requirements, permissions, recommendations, or prohibitions. It MUST NOT use
+> alternative words or lowercase variants as normative keywords.
+
 ## ENV-VAR_DECLARATIONS-ACC-0001
 
 Name: Unknown runtime declaration is rejected

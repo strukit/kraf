@@ -12,6 +12,14 @@ tags: [specification, requirements, acceptance, ears, documentation]
 > requirements, permissions, recommendations, or prohibitions. It MUST NOT use
 > alternative words or lowercase variants as normative keywords.
 
+---
+
+> [!IMPORTANT]
+> These are the Kraf codebase's **invariants** — mandatory rules that the
+> codebase MUST follow. You MUST NOT introduce ad-hoc exceptions. Changing an
+> invariant requires a deliberate decision in a pull request that edits this
+> file.
+
 ## Summary
 
 This document defines how this repo records feature intent, behavioral
@@ -19,14 +27,14 @@ requirements, and acceptance scenarios.
 
 It defines the documentation protocol, not the behavior of a specific feature.
 These type-specific rules MUST be applied in addition to the repo-wide
-documentation standards in [BUILDING.md](./BUILDING.md); they do not waive
-those standards unless an exception is stated explicitly.
+documentation standards in [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md);
+they do not waive those standards unless an exception is stated explicitly.
 
 ### Example
 
 A minimal, illustrative application of this convention:
 
-- [Example intent](./example-intent.md)
+- [Example intent](./example/example-intent.md)
 - [Example area specification](./example/example.spec.md)
 - [Example area acceptance](./example/example.acceptance.md)
 
@@ -35,11 +43,12 @@ A minimal, illustrative application of this convention:
 Documentation MUST live with the feature it describes; it MUST NOT be in root
 `/docs`.
 
-> The feature-doc layout MUST NOT be applied to the [illustrative files in the
-> root `docs/` example set](#example). They demonstrate the documentation
-> conventions; they are not feature documentation and do not need a feature
-> folder with a nested `docs/` directory. Repo-wide standards in
-> [BUILDING.md](./BUILDING.md) still apply unless they state an exception.
+> The feature-doc layout MUST NOT be applied to the
+> [illustrative files in the root `docs/` example set](#example). They
+> demonstrate the documentation conventions; they are not feature documentation
+> and do not need a feature folder with a nested `docs/` directory. Repo-wide
+> standards in [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md) still apply
+> unless they state an exception.
 
 ```text
 <feature>/
@@ -92,16 +101,16 @@ full-text search.
 - An **Acceptance** document MUST link back to the **Specification** requirement
   it verifies.
 - An **ADR** MUST link back to its **Intent** in its `Links` section. If it
-  supersedes another **ADR**, it MUST link to that ADR in the same section.
-  If it is superseded, its `Doc status` MUST link to the superseding **ADR**.
-  An ADR MUST NOT link to requirements — so an accepted ADR remains unchanged
-  when requirements change.
+  supersedes another **ADR**, it MUST link to that ADR in the same section. If
+  it is superseded, its `Doc status` MUST link to the superseding **ADR**. An
+  ADR MUST NOT link to requirements — so an accepted ADR remains unchanged when
+  requirements change.
 
 No document is reachable only by knowing its file path.
 
-Repo-level documents that provide closing navigation links MUST group them
-under a `## Related docs` heading instead of writing them as a closing sentence.
-Feature documents MUST use the relationship sections defined by their type.
+Repo-level documents that provide closing navigation links MUST group them under
+a `## Related` heading instead of writing them as a closing sentence. Feature
+documents MUST use the relationship sections defined by their type.
 
 ## Docs types
 
@@ -109,7 +118,7 @@ Feature documents MUST use the relationship sections defined by their type.
 
 Every module/feature folder MUST have a `README.md` that orients a reader before
 they open its `docs/`. Unlike the root `README.md`, a module `README.md` MUST
-have [markdown front-matter](./BUILDING.md#markdown-front-matter).
+have [markdown front-matter](./GENERAL_CONVENTIONS.md#markdown-front-matter).
 
 **Layout**:
 
@@ -119,6 +128,14 @@ title: <Feature name>
 summary: <One-line summary of what the module does.>
 tags: [<tag1>, <tag2>, ...]
 ---
+
+> [!IMPORTANT]
+> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
+> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
+>
+> This document MUST use these terms, in uppercase, when expressing normative
+> requirements, permissions, recommendations, or prohibitions. It MUST NOT use
+> alternative words or lowercase variants as normative keywords.
 
 <One or two paragraphs: what the module does and the concepts it introduces.>
 
@@ -152,6 +169,14 @@ title: <Feature name> intent
 summary: <One-line summary of why the feature exists.>
 tags: [<tag1>, <tag2>, ...]
 ---
+
+> [!IMPORTANT]
+> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
+> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
+>
+> This document MUST use these terms, in uppercase, when expressing normative
+> requirements, permissions, recommendations, or prohibitions. It MUST NOT use
+> alternative words or lowercase variants as normative keywords.
 
 ## Problem
 
@@ -293,6 +318,14 @@ summary: <One-line summary of the acceptance scenarios.>
 tags: [<feature>, <area>, acceptance, gherkin]
 ---
 
+> [!IMPORTANT]
+> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
+> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
+>
+> This document MUST use these terms, in uppercase, when expressing normative
+> requirements, permissions, recommendations, or prohibitions. It MUST NOT use
+> alternative words or lowercase variants as normative keywords.
+
 ## <FEATURE>_<AREA>-ACC-0001
 
 Name: <Scenario name>
@@ -344,13 +377,14 @@ Each ADR MUST declare one status:
   <FEATURE>-ADR-XXXX`.
 
 An `Accepted` ADR's content is immutable, except for its status. To change a
-decision, a new ADR MUST supersede it. Only the old ADR's status is updated,
-and it MUST link to the superseding ADR.
+decision, a new ADR MUST supersede it. Only the old ADR's status is updated, and
+it MUST link to the superseding ADR.
 
 For example:
 
 ```md
-- Doc status: Superseded by [<FEATURE>-ADR-0002](./<feature>-adr-0002-<slug>.md).
+- Doc status: Superseded by
+  [<FEATURE>-ADR-0002](./<feature>-adr-0002-<slug>.md).
 ```
 
 **Layout:**
@@ -391,7 +425,7 @@ Name: <Decision title>
 <What becomes easier, harder, or required because of this decision.>
 ```
 
-## Related docs
+## Related
 
 - [README.md](../README.md): what Kraf is.
-- [BUILDING.md](./BUILDING.md): repo conventions.
+- [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md): repo conventions.
