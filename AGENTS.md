@@ -71,7 +71,3 @@ and MUST NOT assume its contents.
 - [ARCHITECTURE.md](./docs/ARCHITECTURE.md) — cross-domain architecture: system
   context, containers, modules, ports and adapters, dependency rule, decisions.
 
-## Skills
-
-- [.agents/skills/](./.agents/skills/) — each skill's `SKILL.md` front-matter
-  says when to use it.

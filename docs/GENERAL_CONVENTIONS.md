@@ -86,8 +86,8 @@ Every doc MUST have front-matter with `title`, `summary`, and `tags` — it make
 docs easy to index for agents.
 
 This applies to docs, not to every `.md`. A file that is not a doc but uses
-`.md` and carries its own front-matter schema — for example `SKILL.md` — is
-out of scope.
+`.md` and carries its own front-matter schema — for example `SKILL.md` — is out
+of scope.
 
 ### Docs graph
 
@@ -106,10 +106,13 @@ are not links.)
 ### Language-neutral docs
 
 Cross-domain docs (e.g. [`ARCHITECTURE.md`](./ARCHITECTURE.md), specs) describe
-the shape, not the implementation language: they MUST NOT use language-specific
-terms (e.g. "trait") or language-specific file names and extensions (e.g.
-`filesystem.rs`, `lib.rs`), and MUST refer to roles instead — "interface" for a
-trait, and the `lib` / `cli` / `mcp` entrypoints without an extension.
+the shape, not the implementation language: their normative prose MUST NOT use
+language-specific terms (e.g. "trait") or language-specific file names and
+extensions (e.g. `filesystem.rs`, `lib.rs`), and MUST refer to roles instead —
+"interface" for a trait, and the `lib` / `cli` / `mcp` entrypoints without an
+extension. Clearly identified examples MAY use language-specific terms, code
+symbols, file names, and extensions when they illustrate a language-neutral
+rule; they MUST NOT introduce a language-specific requirement.
 
 ## Workspace Conventions
 
@@ -133,8 +136,8 @@ testable and reusable outside the CLI (another binary, another consumer, etc.).
 
 Every domain MUST be designed for multiple platforms (Linux/Mac/Windows) from
 the start, not bolted on later. Platform-specific code MUST be isolated (e.g.
-`_macos.rs`, `_linux.rs`, `_windows.rs`), and shared logic MUST stay separate from
-platform-specific logic.
+`_macos.rs`, `_linux.rs`, `_windows.rs`), and shared logic MUST stay separate
+from platform-specific logic.
 
 ### Tools declared in files, with version
 

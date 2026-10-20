@@ -1,8 +1,8 @@
 use super::env_var_test_fixtures::ENV_VAR_MAPPING_FIXTURE;
 use crate::env_var::env_var_core::{EnvVar, EnvVarHostMapping, EnvVarImportMode, EnvVarSource};
 use crate::env_var::env_var_host::{ENV_VAR_FROM_HOST, env_var_collect, env_var_process_apply};
-use crate::env_var::env_var_host_macos::MACOS_MAPPINGS;
 use crate::env_var::env_var_host_linux::LINUX_MAPPINGS;
+use crate::env_var::env_var_host_macos::MACOS_MAPPINGS;
 use crate::env_var::env_var_host_windows::WINDOWS_MAPPINGS;
 
 use kraf_core::{HostProcess, Process};

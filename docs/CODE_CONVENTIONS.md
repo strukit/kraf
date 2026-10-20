@@ -34,9 +34,10 @@ consistent with the folder's other files.
 - Tests SHOULD be small and direct — no over-engineering.
 - Duplication is fine — there's no need to extract a shared helper/const just to
   avoid repeating content between tests.
-- Tests MUST be self-contained: a test's setup lives inside the test itself, not
-  in a shared const/fixture defined elsewhere in the file, so the reader doesn't
-  have to scroll up to find out what a test uses.
+- Tests SHOULD be self-contained: small setup SHOULD live inside the test so the
+  reader can see what it uses without navigating elsewhere. A shared
+  const/fixture MAY be used when inlining it would make the test unnecessarily
+  large or obscure its behavior.
 
 ## Related
 
