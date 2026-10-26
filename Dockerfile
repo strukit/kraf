@@ -16,22 +16,15 @@ RUN cargo fetch --locked
 
 COPY .. .
 
-FROM setup-workspace AS builder
+FROM setup-workspace AS build
 
 RUN cargo build --release
 
-FROM scratch AS builder-artifacts
-
-ARG WORKSPACE
-ARG BINARY_EXT=""
-
-COPY --from=builder ${WORKSPACE}/dist/release/kraf${BINARY_EXT} .
-
-FROM builder AS tester
+FROM build AS tester
 
 RUN cargo test --workspace
 
-FROM builder AS linter
+FROM build AS linter
 
 RUN cargo fmt --check
 RUN cargo lint

@@ -19,6 +19,7 @@ runs:
       with:
         cache-binary: false
         use: true
+        driver-opts: image=moby/buildkit:v0.34.0
 
     - name: Bake target:(${{ inputs.target }})
       uses: docker/bake-action@v7
@@ -35,5 +36,4 @@ runs:
       with:
         name: ${{ inputs.target }}-artifact-pr-${{ github.event.pull_request.number }}
         path: ${{ inputs.artifact-path }}
-        include-hidden-files: true
 
