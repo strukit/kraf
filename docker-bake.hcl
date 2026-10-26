@@ -47,7 +47,7 @@ target "linux" {
   name        = "build-linux-${arch}"
   inherits    = ["_common"]
   dockerfile  = "Dockerfile"
-  target      = "builder"
+  target      = "build"
   contexts    = { "setup-environment" = "target:setup-linux-${arch}" }
   output      = ["type=local,dest=${ARTIFACT_PATH},platform-split=true,src=${resolve_workspace()}/dist/release"]
 
@@ -69,7 +69,7 @@ target "windows" {
   name        = "build-windows-${arch}"
   inherits    = ["_common"]
   dockerfile  = "Dockerfile"
-  target      = "builder"
+  target      = "build"
   contexts    = { "setup-environment" = "target:setup-windows-${arch}" }
   output      = ["type=local,dest=dist,platform-split=true,src=${resolve_workspace()}/dist/release"]
 
