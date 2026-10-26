@@ -47,9 +47,9 @@ target "linux" {
   name        = "build-linux-${arch}"
   inherits    = ["_common"]
   dockerfile  = "Dockerfile"
-  target      = "builder-artifacts"
+  target      = "builder"
   contexts    = { "setup-environment" = "target:setup-linux-${arch}" }
-  output      = ["type=local,dest=${ARTIFACT_PATH},platform-split=true"]
+  output      = ["type=local,dest=${ARTIFACT_PATH},platform-split=true,src=${resolve_workspace()}/dist/release"]
 
   matrix = {
     arch     = ["amd64", "arm64"]
