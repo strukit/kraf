@@ -31,8 +31,18 @@ Name: Declared import dependency collection
 - Implementation status: Implemented
 
 ```text
-THE SOFTWARE SHALL collect only import aliases and the first valid dollar
-variable reference in a declaration fallback.
+THE SOFTWARE SHALL collect only the import aliases of a declaration and the
+placeholder name that follows the first dollar sign of its fallback.
+
+WHEN the software collects import dependencies for a declaration whose fallback
+has a first dollar sign followed by a placeholder name of one or more ASCII
+letters, digits, or underscores,
+THE SOFTWARE SHALL collect that placeholder name.
+
+IF the software collects import dependencies for a declaration whose fallback
+has a first dollar sign not followed by one or more ASCII letters, digits, or
+underscores,
+THEN THE SOFTWARE SHALL collect no placeholder name from that fallback.
 
 THE SOFTWARE SHALL deduplicate and lexicographically sort collected import and
 export keys.
@@ -127,35 +137,29 @@ Name: Placeholder expansion
 ```text
 WHILE a non-empty collected `HOME` value is available,
 WHEN the software expands a fallback that contains a tilde,
-THE SOFTWARE SHALL replace the first tilde with that value.
-
-WHILE a non-empty collected `HOME` value is available,
-WHEN the software expands a fallback,
-THE SOFTWARE SHALL give tilde expansion precedence over dollar expansion.
+THE SOFTWARE SHALL replace the first tilde with that value without evaluating
+any dollar placeholder.
 
 WHILE no non-empty collected `HOME` value is available,
 WHEN the software expands a fallback that contains a tilde,
 THE SOFTWARE SHALL leave the tilde unchanged.
 
-WHILE no non-empty collected `HOME` value is available,
-WHEN the software expands a fallback that contains a tilde and a dollar
-placeholder,
-THE SOFTWARE SHALL evaluate the dollar placeholder.
-
 THE SOFTWARE SHALL evaluate only the first dollar sign of a fallback.
 
-WHEN the software expands a fallback whose first dollar sign is followed by a
-placeholder name of one or more ASCII letters, digits, or underscores that
-matches the key of a collected value, including an empty value,
+WHEN the software expands a fallback without replacing a tilde, and the first
+dollar sign of the fallback is followed by a placeholder name of one or more
+ASCII letters, digits, or underscores that matches the key of a collected value,
+including an empty value,
 THE SOFTWARE SHALL replace that placeholder with the collected value.
 
-WHEN the software expands a fallback whose first dollar sign is followed by a
-placeholder name of one or more ASCII letters, digits, or underscores that
-matches no collected value,
+WHEN the software expands a fallback without replacing a tilde, and the first
+dollar sign of the fallback is followed by a placeholder name of one or more
+ASCII letters, digits, or underscores that matches no collected value,
 THE SOFTWARE SHALL preserve the placeholder literally.
 
-IF the software expands a fallback whose first dollar sign is not followed by
-one or more ASCII letters, digits, or underscores,
+IF the software expands a fallback without replacing a tilde, and the first
+dollar sign of the fallback is not followed by one or more ASCII letters,
+digits, or underscores,
 THEN THE SOFTWARE SHALL preserve the dollar sign literally.
 ```
 

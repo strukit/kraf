@@ -203,14 +203,15 @@ tags: [<tag1>, <tag2>, ...]
 
 A specification defines normative, traceable behavioral requirements. Each
 requirement MUST have a stable identifier, a name, statuses, and links to its
-acceptance scenarios, except an
-[`Undefined` requirement](#undefined-requirements).
+acceptance scenarios, except a requirement in the
+[`Undefined` format](#undefined-requirements).
 
 **Status:**
 
 Each requirement MUST declare two independent statuses:
 
-- **Doc status:** `Undefined`, `Draft`, `Accepted`, or `Superseded`.
+- **Doc status:** `Undefined`, `Draft`, `Accepted`, `Superseded`, or
+  `Withdrawn`.
 - **Implementation status:** `Not implemented`, `Partially implemented`,
   `Implemented` or `Unknown`
 
@@ -230,13 +231,20 @@ An `Undefined` requirement:
 
 When it is defined as a requirement, it MUST keep its identifier, change its Doc
 status, and gain an EARS block, an Implementation status, and acceptance
-scenarios. When it is decided by an ADR, its Doc status MUST become
-`Superseded`, and it MUST link to that ADR.
+scenarios.
 
-An `Undefined` requirement defines no behavior, so nothing can fail it. A review
-MUST NOT report it as a finding, defect, or non-conformance, and MUST NOT block
-a pull request because of it. A review MAY mention it only in a separate
-additional notes section, apart from its findings.
+When it is decided by an ADR, its Doc status MUST become `Superseded`, and it
+MUST link to that ADR. When it will not be defined, its Doc status MUST become
+`Withdrawn`, and the intent MUST be adjusted so that it no longer states what was
+withdrawn; the parts of the principle that other requirements or ADRs come from
+MUST remain. In both cases, only its Doc status changes, apart from the link to
+the ADR that decides it; it MUST keep its identifier and the rest of its
+structure unchanged, including its links and its `text` block.
+
+A requirement in the `Undefined` format defines no behavior, so nothing can fail
+it. A review MUST NOT report it as a finding, defect, or non-conformance, and
+MUST NOT block a pull request because of it. A review MAY mention it only in a
+separate additional notes section, apart from its findings.
 
 **Language:**
 
@@ -251,8 +259,8 @@ additional notes section, apart from its findings.
 >   (Wikipedia).
 
 Specifications MUST use EARS notation and the normative terms defined by RFC
-2119 and RFC 8174. An
-[`Undefined` requirement](#undefined-requirements) is exempt.
+2119 and RFC 8174. A requirement in the
+[`Undefined` format](#undefined-requirements) is exempt.
 
 - **SHALL** and **SHALL NOT** define mandatory behavior.
 - **SHOULD** and **SHOULD NOT** define expected behavior that requires an
