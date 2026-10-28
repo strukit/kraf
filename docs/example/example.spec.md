@@ -29,6 +29,6 @@ Name: Explicit configuration
 - Implementation status: Not implemented
 
 ```text
-WHEN configuration provides an unknown key,
-THE SOFTWARE SHALL reject the configuration.
+IF configuration provides an unknown key,
+THEN THE SOFTWARE SHALL reject the configuration.
 ```

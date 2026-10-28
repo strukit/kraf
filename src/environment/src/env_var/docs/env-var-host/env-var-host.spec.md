@@ -31,7 +31,7 @@ Name: Supported-platform mapping completeness
 - Implementation status: Implemented
 
 ```text
-The software SHALL declare every shared canonical environment-variable key in
+THE SOFTWARE SHALL declare every shared canonical environment-variable key in
 every supported platform mapping.
 ```
 
@@ -52,6 +52,6 @@ Name: Session-owned directory sources
 - Implementation status: Implemented
 
 ```text
-The software SHALL resolve the WORKDIR and HOME declaration families from
+THE SOFTWARE SHALL resolve the WORKDIR and HOME declaration families from
 provided values rather than from values imported from the host.
 ```

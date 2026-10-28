@@ -39,3 +39,26 @@ IF a module or plugin requests a resolved value for a declaration it neither
 owns nor declares as a dependency,
 THEN THE SOFTWARE SHALL reject the request.
 ```
+
+### ENV-VAR_ACCESS-REQ-0002
+
+Name: Host environment access isolation
+
+**Links:**
+
+- [Intent](../env-var-intent.md#security-access): module intent.
+
+**Status**:
+
+- Doc status: Undefined
+
+```text
+Isolation of host environment access, as stated in the intent's "Security
+access" principle, is not yet defined:
+
+- only the environment module reads raw host environment values;
+- the environment module exposes no operation that enumerates all host
+  environment variables;
+- the environment module exposes no arbitrary string-based host lookup outside
+  the module.
+```
