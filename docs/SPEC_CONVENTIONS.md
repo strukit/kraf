@@ -239,7 +239,9 @@ MUST link to that ADR. When it will not be defined, its Doc status MUST become
 withdrawn; the parts of the principle that other requirements or ADRs come from
 MUST remain. In both cases, only its Doc status changes, apart from the link to
 the ADR that decides it; it MUST keep its identifier and the rest of its
-structure unchanged, including its links and its `text` block.
+structure unchanged, including its links and its `text` block. After that
+change, its `text` block records what was open while it was `Undefined`; its
+Doc status, not the text, states whether it still applies.
 
 A requirement in the `Undefined` format defines no behavior, so nothing can fail
 it. A review MUST NOT report it as a finding, defect, or non-conformance, and
