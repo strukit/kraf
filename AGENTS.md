@@ -37,6 +37,14 @@ The only exception is an explicit user instruction, which applies to the task at
 hand only and does not change the rule. Agents MUST NOT override a rule on their
 own preference or judgment.
 
+## Reviews
+
+A review MUST NOT report or list missing content unless a convention document
+requires that content.
+
+When the user explicitly requests a deep review, the review MUST cover
+everything in its scope, including missing content.
+
 ## Memory
 
 Memory MAY inform a task but MUST NOT override a rule. When it conflicts with a

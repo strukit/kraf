@@ -191,7 +191,7 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
   Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
 
     Scenario: ENV-VAR_RESOLUTION-ACC-0007 — Tilde fallback expands from resolved home
-      Given "HOME" resolves to "/workspace"
+      Given "HOME" has the provided value "/workspace"
       And a declaration fallback is "~/.cache"
       When the software resolves the declaration
       Then the declaration resolves to "/workspace/.cache"
