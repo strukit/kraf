@@ -31,19 +31,15 @@ Name: Declared import dependency collection
 - Implementation status: Implemented
 
 ```text
-THE SOFTWARE SHALL NOT collect keys other than the import aliases of a
-declaration and the placeholder name that follows the first dollar sign of its
-fallback.
+THE SOFTWARE SHALL collect the import aliases of every active declaration.
 
 WHEN the software collects import dependencies for a declaration whose fallback
 has a first dollar sign followed by a placeholder name of one or more ASCII
 letters, digits, or underscores,
 THE SOFTWARE SHALL collect that placeholder name.
 
-IF the software collects import dependencies for a declaration whose fallback
-has a first dollar sign not followed by one or more ASCII letters, digits, or
-underscores,
-THEN THE SOFTWARE SHALL collect no placeholder name from that fallback.
+THE SOFTWARE SHALL NOT collect keys other than these import aliases and
+placeholder names.
 
 THE SOFTWARE SHALL deduplicate and lexicographically sort collected import and
 export keys.

@@ -167,10 +167,10 @@ becomes normative only through a requirement or an ADR that covers it.
 An intent MUST NOT carry the normative-language note and MUST NOT use normative
 keywords.
 
-A review MUST NOT report or list an intent principle that no requirement or ADR
-covers, including code that does not follow it, and MUST NOT block a pull
-request because of it. Listing what an intent states but the code does not
-implement is a separate task, done only when explicitly requested.
+Code that does not follow an intent principle that no requirement or ADR covers
+is acceptable: it is not an error or a defect, including a correctness defect. A
+review MUST NOT block a pull request because of such a principle, and MUST
+report it only when the user explicitly requests it.
 
 **Layout**:
 
