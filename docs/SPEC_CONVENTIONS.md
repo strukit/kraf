@@ -167,8 +167,10 @@ becomes normative only through a requirement or an ADR that covers it.
 An intent MUST NOT carry the normative-language note and MUST NOT use normative
 keywords.
 
-A principle that is not yet defined is recorded as an
-[`Undefined` requirement](#undefined-requirements).
+A review MUST NOT report or list an intent principle that no requirement or ADR
+covers, including code that does not follow it, and MUST NOT block a pull
+request because of it. Listing what an intent states but the code does not
+implement is a separate task, done only when explicitly requested.
 
 **Layout**:
 
@@ -203,50 +205,15 @@ tags: [<tag1>, <tag2>, ...]
 
 A specification defines normative, traceable behavioral requirements. Each
 requirement MUST have a stable identifier, a name, statuses, and links to its
-acceptance scenarios, except a requirement in the
-[`Undefined` format](#undefined-requirements).
+acceptance scenarios.
 
 **Status:**
 
 Each requirement MUST declare two independent statuses:
 
-- **Doc status:** `Undefined`, `Draft`, `Accepted`, `Superseded`, or
-  `Withdrawn`.
+- **Doc status:** `Draft`, `Accepted`, or `Superseded`.
 - **Implementation status:** `Not implemented`, `Partially implemented`,
   `Implemented` or `Unknown`
-
-#### Undefined requirements
-
-A requirement with Doc status `Undefined` records a behavior or decision that
-comes from the intent but is not yet defined. It needs further refinement and
-can become a requirement, an ADR, or neither. It is not normative.
-
-An `Undefined` requirement:
-
-- MUST link to its **Intent**.
-- MUST describe what remains to be defined in prose, without normative keywords,
-  inside a `text` block.
-- MUST NOT carry an EARS block, link to acceptance scenarios, or declare an
-  Implementation status.
-
-When it is defined as a requirement, it MUST keep its identifier, change its Doc
-status, and gain an EARS block, an Implementation status, and acceptance
-scenarios.
-
-When it is decided by an ADR, its Doc status MUST become `Superseded`, and it
-MUST link to that ADR. When it will not be defined, its Doc status MUST become
-`Withdrawn`, and the intent MUST be adjusted so that it no longer states what was
-withdrawn; the parts of the principle that other requirements or ADRs come from
-MUST remain. In both cases, only its Doc status changes, apart from the link to
-the ADR that decides it; it MUST keep its identifier and the rest of its
-structure unchanged, including its links and its `text` block. After that
-change, its `text` block records what was open while it was `Undefined`; its
-Doc status, not the text, states whether it still applies.
-
-A requirement in the `Undefined` format defines no behavior, so nothing can fail
-it. A review MUST NOT report it as a finding, defect, or non-conformance, and
-MUST NOT block a pull request because of it. A review MAY mention it only in a
-separate additional notes section, apart from its findings.
 
 **Language:**
 
@@ -261,8 +228,7 @@ separate additional notes section, apart from its findings.
 >   (Wikipedia).
 
 Specifications MUST use EARS notation and the normative terms defined by RFC
-2119 and RFC 8174. A requirement in the
-[`Undefined` format](#undefined-requirements) is exempt.
+2119 and RFC 8174.
 
 - **SHALL** and **SHALL NOT** define mandatory behavior.
 - **SHOULD** and **SHOULD NOT** define expected behavior that requires an
@@ -270,20 +236,20 @@ Specifications MUST use EARS notation and the normative terms defined by RFC
 - **MAY** defines optional behavior.
 
 An EARS requirement is made of, in this order: zero or more preconditions, zero
-or one trigger, the system name, and one or more system responses. In this
-repo, the system name is `THE SOFTWARE`. A precondition or a trigger MUST be
-stated only in its keyword clause, never inside the system response.
+or one trigger, the system name, and one or more system responses. In this repo,
+the system name is `THE SOFTWARE`. A precondition or a trigger MUST be stated
+only in its keyword clause, never inside the system response.
 
 A requirement MUST use the EARS pattern that matches the behavior:
 
-| Pattern           | Keyword          | Use when                                                                                         |
-| ----------------- | ---------------- | ------------------------------------------------------------------------------------------------ |
-| Ubiquitous        | (none)           | The behavior is always active.                                                                   |
-| Event-driven      | `WHEN`           | The behavior responds to an expected trigger.                                                    |
-| State-driven      | `WHILE`          | The behavior is active while a precondition holds.                                               |
-| Optional feature  | `WHERE`          | The behavior applies only where a feature is included.                                           |
+| Pattern           | Keyword          | Use when                                                                                          |
+| ----------------- | ---------------- | ------------------------------------------------------------------------------------------------- |
+| Ubiquitous        | (none)           | The behavior is always active.                                                                    |
+| Event-driven      | `WHEN`           | The behavior responds to an expected trigger.                                                     |
+| State-driven      | `WHILE`          | The behavior is active while a precondition holds.                                                |
+| Optional feature  | `WHERE`          | The behavior applies only where a feature is included.                                            |
 | Unwanted behavior | `IF`/`THEN`      | The behavior responds to an unwanted trigger: an error, a failure, invalid input, or a rejection. |
-| Complex           | `WHILE` + `WHEN` | The behavior responds to a trigger only while a precondition holds.                              |
+| Complex           | `WHILE` + `WHEN` | The behavior responds to a trigger only while a precondition holds.                               |
 
 ```text
 THE SOFTWARE SHALL <system response>.
@@ -346,22 +312,6 @@ Name: <Requirement name>
 ```text
 WHEN <trigger>,
 THE SOFTWARE SHALL <system response>.
-```
-
-### <FEATURE>_<AREA>-REQ-0002
-
-Name: <Requirement name>
-
-**Links:**
-
-- [Intent](../<feature>-intent.md)
-
-**Status**:
-
-- Doc status: Undefined
-
-```text
-<What remains to be defined, in prose, without normative keywords.>
 ```
 ````
 
