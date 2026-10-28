@@ -223,9 +223,7 @@ Each requirement MUST declare two independent statuses:
 >
 > - Mavin et al.,
 >   [Easy Approach to Requirements Syntax (EARS)](https://doi.org/10.1109/RE.2009.9)
->   (IEEE RE'09). <<<<<<< HEAD
-> - [Easy Approach to Requirements Syntax](https://en.wikipedia.org/wiki/Easy_Approach_to_Requirements_Syntax)
->   (Wikipedia). =======
+>   (IEEE RE'09).
 > - [Easy Approach to Requirements Syntax](https://en.wikipedia.org/w/index.php?title=Easy_Approach_to_Requirements_Syntax&oldid=1342972975)
 >   (Wikipedia, revision of 2026-03-11).
 
