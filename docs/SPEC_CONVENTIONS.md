@@ -160,10 +160,17 @@ they relate. MAY use subsections (###).>
 ### Intent (*-intent.md)
 
 An intent explains why a feature exists, the problem it addresses, its
-boundaries, and its non-goals. It is not normative.
+boundaries, and its non-goals. It is not normative: what it describes is not
+required to be implemented, specified, or accepted, now or later. A principle
+becomes normative only through a requirement or an ADR that covers it.
 
 An intent MUST NOT carry the normative-language note and MUST NOT use normative
 keywords.
+
+A review MUST NOT report or list an intent principle that no requirement or ADR
+covers, including code that does not follow it, and MUST NOT block a pull
+request because of it. Listing what an intent states but the code does not
+implement is a separate task, done only when explicitly requested.
 
 **Layout**:
 
@@ -210,6 +217,16 @@ Each requirement MUST declare two independent statuses:
 
 **Language:**
 
+> [!NOTE]
+> The sources below are the source of truth for EARS. Any doubt about EARS MUST
+> be resolved by consulting them; the rules below summarize them.
+>
+> - Mavin et al.,
+>   [Easy Approach to Requirements Syntax (EARS)](https://doi.org/10.1109/RE.2009.9)
+>   (IEEE RE'09).
+> - [Easy Approach to Requirements Syntax](https://en.wikipedia.org/w/index.php?title=Easy_Approach_to_Requirements_Syntax&oldid=1342972975)
+>   (Wikipedia, revision of 2026-03-11).
+
 Specifications MUST use EARS notation and the normative terms defined by RFC
 2119 and RFC 8174.
 
@@ -218,17 +235,52 @@ Specifications MUST use EARS notation and the normative terms defined by RFC
   explicit justification to deviate from.
 - **MAY** defines optional behavior.
 
+An EARS requirement is made of, in this order: zero or more preconditions, zero
+or one trigger, the system name, and one or more system responses. In this repo,
+the system name is `THE SOFTWARE`. A precondition or a trigger MUST be stated
+only in its keyword clause, never inside the system response.
+
 A requirement MUST use the EARS pattern that matches the behavior:
 
+| Pattern           | Keyword          | Use when                                                                                          |
+| ----------------- | ---------------- | ------------------------------------------------------------------------------------------------- |
+| Ubiquitous        | (none)           | The behavior is always active.                                                                    |
+| Event-driven      | `WHEN`           | The behavior responds to an expected trigger.                                                     |
+| State-driven      | `WHILE`          | The behavior is active while a precondition holds.                                                |
+| Optional feature  | `WHERE`          | The behavior applies only where a feature is included.                                            |
+| Unwanted behavior | `IF`/`THEN`      | The behavior responds to an unwanted trigger: an error, a failure, invalid input, or a rejection. |
+| Complex           | `WHILE` + `WHEN` | The behavior responds to a trigger only while a precondition holds.                               |
+
 ```text
-The software SHALL <behavior>.
+THE SOFTWARE SHALL <system response>.
 
-WHEN <event>,
-THE SOFTWARE SHALL <behavior>.
+WHEN <trigger>,
+THE SOFTWARE SHALL <system response>.
 
-IF <condition>,
-THEN THE SOFTWARE SHALL <behavior>.
+WHILE <precondition>,
+THE SOFTWARE SHALL <system response>.
+
+WHERE <feature is included>,
+THE SOFTWARE SHALL <system response>.
+
+IF <trigger>,
+THEN THE SOFTWARE SHALL <system response>.
+
+WHILE <precondition>,
+WHEN <trigger>,
+THE SOFTWARE SHALL <system response>.
 ```
+
+A requirement MUST use `IF … THEN` only for an unwanted trigger, and `WHEN` for
+an expected trigger. In a complex requirement, `WHILE` clauses MUST come before
+the `WHEN` clause. A requirement with more than three preconditions SHOULD be
+split into simpler requirements.
+
+EARS has no "or" between preconditions. Repeating the same system response in
+requirements with distinct preconditions is expected and is not duplication.
+
+A review MUST read the acceptance files linked from a specification before
+reporting one of its requirements as incorrect.
 
 **Layout:**
 
@@ -264,8 +316,8 @@ Name: <Requirement name>
 - Implementation status: Not implemented
 
 ```text
-WHEN <event>,
-THE SOFTWARE SHALL <behavior>.
+WHEN <trigger>,
+THE SOFTWARE SHALL <system response>.
 ```
 ````
 
