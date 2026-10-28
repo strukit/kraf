@@ -1,6 +1,6 @@
 ---
 title: Environment variables access - SPEC
-summary: Requirements for how modules and plugins access host and resolved environment values.
+summary: Requirements for how modules and plugins access resolved environment values.
 tags: [environment, env-var, specification, spec, access, security]
 ---
 
@@ -13,27 +13,6 @@ tags: [environment, env-var, specification, spec, access, security]
 > These terms follow RFC 2119 and RFC 8174.
 
 ## Requirements
-
-### ENV-VAR_ACCESS-REQ-0001
-
-Name: Host read isolation
-
-**Links:**
-
-- [Intent](../env-var-intent.md): module intent.
-- [ENV-VAR_ACCESS-ACC-0001](./env-var-access.acceptance.md#env-var_access-acc-0001)
-
-**Status**:
-
-- Doc status: Draft
-- Implementation status: Unknown
-
-```text
-The software SHALL read raw host environment values only within the environment
-module.
-```
-
----
 
 ### ENV-VAR_ACCESS-REQ-0002
 
@@ -59,29 +38,4 @@ THE SOFTWARE SHALL provide the resolved value.
 IF a module or plugin requests a resolved value for a declaration it neither
 owns nor declares as a dependency,
 THEN THE SOFTWARE SHALL reject the request.
-```
-
----
-
-### ENV-VAR_ACCESS-REQ-0003
-
-Name: No host enumeration or arbitrary lookup
-
-**Links:**
-
-- [Intent](../env-var-intent.md): module intent.
-- [ENV-VAR_ACCESS-ACC-0004](./env-var-access.acceptance.md#env-var_access-acc-0004)
-- [ENV-VAR_ACCESS-ACC-0005](./env-var-access.acceptance.md#env-var_access-acc-0005)
-
-**Status**:
-
-- Doc status: Draft
-- Implementation status: Unknown
-
-```text
-The software SHALL NOT expose an operation that enumerates all host environment
-variables.
-
-The software SHALL NOT expose a string-based host environment lookup outside
-the environment module.
 ```
