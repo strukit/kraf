@@ -39,6 +39,11 @@ agent CLI, a browser, or code that embeds them as a library (C or WASM), all
 calling the same runtime. Kraf aims to interoperate with the editors and
 toolchains a project already uses rather than replacing them.
 
+## Modules
+
+- [Environment variables](./src/environment/src/env_var/README.md): declarative
+  model, resolution, and projection of environment variables.
+
 ## Related
 
 - [AGENTS.md](./AGENTS.md): AI agent instructions.
@@ -51,8 +56,3 @@ toolchains a project already uses rather than replacing them.
   and tests.
 - [SPEC_CONVENTIONS.md](./docs/SPEC_CONVENTIONS.md): spec conventions: layout,
   identifiers, intent, specification, acceptance, ADR.
-
-## Modules
-
-- [Environment variables](./src/environment/src/env_var/README.md): declarative
-  model, resolution, and projection of environment variables.

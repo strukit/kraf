@@ -110,11 +110,12 @@ of scope.
 
 ### Docs graph
 
-Repo-level docs form a connected graph rooted at [README.md](../README.md):
-every doc MUST link to every parent doc it references, so no doc is reachable
-only by its file path. A link already in the body satisfies this rule; a
-separate `Related` section is OPTIONAL and MAY be used to consolidate outbound
-links in one place. A repo-level doc that provides closing navigation links MUST
+Repo-level docs form a connected graph rooted at [README.md](../README.md).
+Every repo-level doc other than README.md MUST be linked from at least one doc
+already in the graph, which is its parent, so no doc is reachable only by its
+file path. Every doc MUST link back to its parent. A link already in the body
+satisfies these rules; a separate `Related` section is OPTIONAL and MAY be used
+to consolidate outbound links in one place. A repo-level doc that provides closing navigation links MUST
 group them under a `## Related` heading instead of writing them as a closing
 sentence. A set of docs MAY define its own graph; when it does, that graph MUST
 be documented alongside the set. The graph MUST be read before navigating or

@@ -24,9 +24,15 @@ This document is the entry point for every agent task in this repository. Before
 starting any task, agents MUST start here and follow the documentation links to
 documents relevant to the task.
 
-Agents MUST act only on rules defined in convention documents and on skills that
-apply them. They MUST NOT raise, flag, or fix concerns that no convention
-document defines, and MUST NOT take on work that deterministic tooling performs.
+Agents MUST act only on rules defined in convention documents and on skills and
+agents that apply them. They MUST NOT raise, flag, or fix a preference that no
+convention document, skill, or agent defines, such as choosing one approach,
+name, or style over another, and MUST NOT take on work that deterministic
+tooling performs.
+
+Agents MUST report a correctness defect they find, such as code that produces a
+wrong result, fails, or contradicts its spec, even when no convention document
+defines it.
 
 The only exception is an explicit user instruction, which applies to the task at
 hand only and does not change the rule. Agents MUST NOT override a rule on their
@@ -52,8 +58,13 @@ follow its requirements.
 
 ## Workspace boundary
 
-Agents MUST NOT leave the working root for any operation, including reading,
-writing, executing commands, or navigating files.
+Agents MUST NOT leave the working root for any operation they perform directly,
+including reading a file, writing a file, navigating files, or executing a
+command whose working directory or path arguments are outside the working root.
+
+The rule applies to the agent's direct operations only. Files that a tool reads
+or writes on its own when the agent invokes it are not operations by the agent
+and are outside the scope of this rule.
 
 An explicit user instruction MAY authorize an operation outside the working root
 for the task at hand only. Before its first operation outside the working root,
