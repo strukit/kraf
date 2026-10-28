@@ -189,6 +189,15 @@ agent personas bound to this repo's standards — for example, a Rust reviewer
 that enforces [CODE_CONVENTIONS.md](./CODE_CONVENTIONS.md). A persona MUST be
 committed in a vendor-neutral form; only the tool-specific glue stays personal.
 
+### Pull requests
+
+A pull request description MUST follow the
+[pull request template](../.github/pull_request_template.md). Its `# Summary`
+MUST open with one short paragraph, without lists, stating what the pull
+request does and why; the itemized changes belong under
+`What does this pull request change?`. Every `<...>` placeholder in the template
+MUST be replaced with content; a placeholder MUST NOT remain in the description.
+
 ### Naming
 
 #### Platform names
