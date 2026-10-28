@@ -31,8 +31,9 @@ Name: Declared import dependency collection
 - Implementation status: Implemented
 
 ```text
-THE SOFTWARE SHALL collect only the import aliases of a declaration and the
-placeholder name that follows the first dollar sign of its fallback.
+THE SOFTWARE SHALL NOT collect keys other than the import aliases of a
+declaration and the placeholder name that follows the first dollar sign of its
+fallback.
 
 WHEN the software collects import dependencies for a declaration whose fallback
 has a first dollar sign followed by a placeholder name of one or more ASCII
@@ -155,12 +156,12 @@ THE SOFTWARE SHALL replace that placeholder with the collected value.
 WHEN the software expands a fallback without replacing a tilde, and the first
 dollar sign of the fallback is followed by a placeholder name of one or more
 ASCII letters, digits, or underscores that matches no collected value,
-THE SOFTWARE SHALL preserve the placeholder literally.
+THE SOFTWARE SHALL leave the fallback unchanged.
 
 IF the software expands a fallback without replacing a tilde, and the first
 dollar sign of the fallback is not followed by one or more ASCII letters,
 digits, or underscores,
-THEN THE SOFTWARE SHALL preserve the dollar sign literally.
+THEN THE SOFTWARE SHALL leave the fallback unchanged.
 ```
 
 ---
