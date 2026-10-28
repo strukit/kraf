@@ -223,9 +223,7 @@ Each requirement MUST declare two independent statuses:
 >
 > - Mavin et al.,
 >   [Easy Approach to Requirements Syntax (EARS)](https://doi.org/10.1109/RE.2009.9)
->   (IEEE RE'09). <<<<<<< HEAD
-> - [Easy Approach to Requirements Syntax](https://en.wikipedia.org/wiki/Easy_Approach_to_Requirements_Syntax)
->   (Wikipedia). =======
+>   (IEEE RE'09).
 > - [Easy Approach to Requirements Syntax](https://en.wikipedia.org/w/index.php?title=Easy_Approach_to_Requirements_Syntax&oldid=1342972975)
 >   (Wikipedia, revision of 2026-03-11).
 
@@ -244,14 +242,14 @@ only in its keyword clause, never inside the system response.
 
 A requirement MUST use the EARS pattern that matches the behavior:
 
-| Pattern           | Keyword          | Use when                                                                                          |
-| ----------------- | ---------------- | ------------------------------------------------------------------------------------------------- |
-| Ubiquitous        | (none)           | The behavior is always active.                                                                    |
-| Event-driven      | `WHEN`           | The behavior responds to an expected trigger.                                                     |
-| State-driven      | `WHILE`          | The behavior is active while a precondition holds.                                                |
-| Optional feature  | `WHERE`          | The behavior applies only where a feature is included.                                            |
-| Unwanted behavior | `IF`/`THEN`      | The behavior responds to an unwanted trigger: an error, a failure, invalid input, or a rejection. |
-| Complex           | `WHILE` + `WHEN` | The behavior responds to a trigger only while a precondition holds.                               |
+| Pattern           | Keyword         | Use when                                                                                         |
+| ----------------- | --------------- | ------------------------------------------------------------------------------------------------ |
+| Ubiquitous        | (none)          | The behavior is always active.                                                                   |
+| Event-driven      | `WHEN`          | The behavior responds to an expected trigger.                                                    |
+| State-driven      | `WHILE`         | The behavior is active while a precondition holds.                                               |
+| Optional feature  | `WHERE`         | The behavior applies only where a feature is included.                                           |
+| Unwanted behavior | `IF`/`THEN`     | The behavior responds to an unwanted trigger: an error, a failure, or invalid input.             |
+| Complex           | Any combination | The behavior needs more than one keyword clause, such as a trigger that applies only in a state. |
 
 ```text
 THE SOFTWARE SHALL <system response>.
@@ -274,9 +272,16 @@ THE SOFTWARE SHALL <system response>.
 ```
 
 A requirement MUST use `IF … THEN` only for an unwanted trigger, and `WHEN` for
-an expected trigger. In a complex requirement, `WHILE` clauses MUST come before
-the `WHEN` clause. A requirement with more than three preconditions SHOULD be
-split into simpler requirements.
+an expected trigger. In a complex requirement, the `WHERE` clause MUST come
+first, the `WHILE` clauses next, and the `WHEN` clause or the `IF … THEN` clause
+last. A requirement with more than three preconditions SHOULD be split into
+simpler requirements.
+
+EARS has no "or" between preconditions. Repeating the same system response in
+requirements with distinct preconditions is expected and is not duplication.
+
+A review MUST read the acceptance files linked from a specification before
+reporting one of its requirements as incorrect.
 
 EARS has no "or" between preconditions. Repeating the same system response in
 requirements with distinct preconditions is expected and is not duplication.

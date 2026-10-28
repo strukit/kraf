@@ -38,8 +38,8 @@ has a first dollar sign followed by a placeholder name of one or more ASCII
 letters, digits, or underscores,
 THE SOFTWARE SHALL collect that placeholder name.
 
-THE SOFTWARE SHALL NOT collect keys other than these import aliases and
-placeholder names.
+THE SOFTWARE SHALL NOT collect import dependencies other than these import
+aliases and placeholder names.
 
 THE SOFTWARE SHALL deduplicate and lexicographically sort collected import and
 export keys.
