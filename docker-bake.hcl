@@ -71,7 +71,7 @@ target "windows" {
   dockerfile  = "Dockerfile"
   target      = "build"
   contexts    = { "setup-environment" = "target:setup-windows-${arch}" }
-  output      = ["type=local,dest=dist,platform-split=true,src=${resolve_workspace()}/dist/release"]
+  output      = ["type=local,dest=${ARTIFACT_PATH},platform-split=true,src=${resolve_workspace()}/dist/release"]
 
   matrix = {
     arch     = ["amd64", "arm64"]

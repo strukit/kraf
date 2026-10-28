@@ -1,0 +1,5 @@
+services:
+  buildkitd:
+    image: ${BUILDKIT_IMAGE:-moby/buildkit:v0.34.0}
+    container_name: kraf-buildkitd
+    privileged: true
