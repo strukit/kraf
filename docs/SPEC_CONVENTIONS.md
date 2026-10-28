@@ -167,10 +167,15 @@ becomes normative only through a requirement or an ADR that covers it.
 An intent MUST NOT carry the normative-language note and MUST NOT use normative
 keywords.
 
-Code that does not follow an intent principle that no requirement or ADR covers
-is acceptable: it is not an error or a defect, including a correctness defect. A
-review MUST NOT block a pull request because of such a principle, and MUST
-report it only when the user explicitly requests it.
+An intent is an idea that still needs refinement. An intent, or any part of one,
+can lack a requirement, an ADR, code, or any other document that specifies or
+details it. This is expected and MUST NOT be treated as an error, a defect, or a
+problem.
+
+A review MUST NOT report or list parts of an intent that lack a requirement, an
+ADR, code, or any other document that specifies or details them, and MUST NOT
+block a pull request because of them, unless the user explicitly asks to see
+what the intent describes that is not yet specified or implemented.
 
 **Layout**:
 
@@ -217,15 +222,13 @@ Each requirement MUST declare two independent statuses:
 
 **Language:**
 
-> [!NOTE]
-> The sources below are the source of truth for EARS. Any doubt about EARS MUST
-> be resolved by consulting them; the rules below summarize them.
->
-> - Mavin et al.,
->   [Easy Approach to Requirements Syntax (EARS)](https://doi.org/10.1109/RE.2009.9)
->   (IEEE RE'09).
-> - [Easy Approach to Requirements Syntax](https://en.wikipedia.org/w/index.php?title=Easy_Approach_to_Requirements_Syntax&oldid=1342972975)
->   (Wikipedia, revision of 2026-03-11).
+The rules below summarize the EARS sources. An agent MAY consult the sources
+lazily: only when the rules below leave a doubt about EARS unresolved.
+
+Sources:
+
+- [EARS](https://en.wikipedia.org/w/index.php?title=Easy_Approach_to_Requirements_Syntax&oldid=1342972975)
+  (Wikipedia, revision of 2026-03-11).
 
 Specifications MUST use EARS notation and the normative terms defined by RFC
 2119 and RFC 8174.
@@ -276,12 +279,6 @@ an expected trigger. In a complex requirement, the `WHERE` clause MUST come
 first, the `WHILE` clauses next, and the `WHEN` clause or the `IF … THEN` clause
 last. A requirement with more than three preconditions SHOULD be split into
 simpler requirements.
-
-EARS has no "or" between preconditions. Repeating the same system response in
-requirements with distinct preconditions is expected and is not duplication.
-
-A review MUST read the acceptance files linked from a specification before
-reporting one of its requirements as incorrect.
 
 EARS has no "or" between preconditions. Repeating the same system response in
 requirements with distinct preconditions is expected and is not duplication.
@@ -348,6 +345,14 @@ Each acceptance MUST declare two independent statuses:
 - **Verification status:** `Not Meets`, `Partially Meets`, `Meets` or `Unknown`
 
 **Language:**
+
+The rules below summarize the Gherkin sources. An agent MAY consult the sources
+lazily: only when the rules below leave a doubt about Gherkin unresolved.
+
+Sources:
+
+- [Gherkin](https://github.com/cucumber/website/blob/9bca7375458301f81aaa2f7857587dd141688fab/docs/gherkin/reference.md)
+  (Cucumber, commit `9bca737` of 2025-01-26).
 
 Acceptance scenarios MUST use Gherkin. A `Feature` groups scenarios for one
 area, a `Rule` scopes scenarios to the requirement they verify, and a `Scenario`

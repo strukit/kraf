@@ -53,9 +53,8 @@ a convention document to take effect.
 
 A skill or agent MAY state preferences, such as formatting, layout, or naming
 choices, that agents follow when they create or edit content under it. A
-preference is not a rule: it MUST NOT override a convention document, and
-agents MUST NOT report a deviation from it as a defect, including in a code
-review.
+preference is not a rule: it MUST NOT override a convention document, and agents
+MUST NOT report a deviation from it as a defect, including in a code review.
 
 A skill file (`SKILL.md`) MUST carry the normative-language note defined in
 [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md#normative-language) and
@@ -100,6 +99,21 @@ follow them and SHOULD NOT reread files already consulted.
 
 If a file does not exist or cannot be read, the agent MUST report the limitation
 and MUST NOT assume its contents.
+
+### HTTP links
+
+An agent SHOULD follow an HTTP link only when the task needs its content, and
+MAY skip it otherwise.
+
+When an agent follows an HTTP link, it SHOULD request the raw-text form of the
+page when the site provides one, for example:
+
+- `https://www.rfc-editor.org/rfc/<rfc_id>` becomes
+  `https://www.rfc-editor.org/rfc/<rfc_id>.txt`.
+- `https://en.wikipedia.org/w/index.php?title=<title>&oldid=<oldid>` becomes
+  `https://en.wikipedia.org/w/index.php?title=<title>&oldid=<oldid>&action=raw`.
+- `https://github.com/<owner>/<repo>/blob/<ref>/<path>` becomes
+  `https://raw.githubusercontent.com/<owner>/<repo>/<ref>/<path>`.
 
 ## Related
 

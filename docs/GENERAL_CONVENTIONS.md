@@ -43,6 +43,11 @@ normative requirement, permission, recommendation, or prohibition. It MUST NOT
 express normative meaning through alternative keywords or lowercase variants of
 the listed terms.
 
+Sources:
+
+- [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+- [RFC 8174](https://www.rfc-editor.org/rfc/rfc8174).
+
 The note does not require a document to contain normative requirements or to use
 every listed term. A purely descriptive document MAY contain the note without
 adding an artificial requirement.
@@ -124,6 +129,11 @@ before navigating or linking across a set of docs.
 Every reference to a specific file MUST be a navigable link, not a bare name —
 so the reader can follow it. (Generic references, like "a module's `README.md`",
 are not links.)
+
+### HTTP links
+
+An HTTP link SHOULD use a URL whose content does not change, such as a pinned
+revision or a fixed commit, when the site provides one.
 
 ### Language-neutral docs
 
