@@ -8,7 +8,7 @@ tags: [environment, env-var, intent, security, projection]
 
 Development environments inherit a large, implicit set of environment variables
 from the host. Their names, formats, availability, and meaning vary across
-platforms. Values may also come from personal preferences, project
+platforms. Values can also come from personal preferences, project
 configuration, organization policy, or the current Kraf session.
 
 When each tool or module reads the host environment directly, the resulting
@@ -17,10 +17,10 @@ allows undeclared host state to reach managed processes by accident.
 
 ## Intent
 
-This module should resolve environment variables through one declarative model
-and produce an explicit projection for each managed process.
+This module resolves environment variables through one declarative model and
+produces an explicit projection for each managed process.
 
-The model must make it possible to:
+The model makes it possible to:
 
 - normalize platform-specific aliases behind canonical declarations;
 - combine values from Host, User, Organization, Project, and Session sources;
@@ -39,18 +39,19 @@ plugin source code or immutable plugin metadata distributed with the plugin. A
 declaration identifies an allowed variable and its behavior; it does not contain
 the final runtime value.
 
-Dynamic sources may provide values for existing declarations. They must not
-create new declarations, request undeclared host values, or expand the set of
-variables that a process may receive.
+Dynamic sources provide values for existing declarations. They do not create new
+declarations, request undeclared host values, or expand the set of variables
+that a process can receive.
 
 #### Security access
 
-Only the environment module may read raw environment values from the host.
+The environment module is the only one that reads raw environment values from
+the host.
 
-Other modules and plugins may obtain a resolved value only through a declaration
-they own or explicitly declare as a dependency. This module must not expose an
-operation that enumerates all host environment variables, nor arbitrary
-string-based host lookups outside this module.
+Other modules and plugins obtain a resolved value only through a declaration
+they own or explicitly declare as a dependency. This module exposes no operation
+that enumerates all host environment variables, and no arbitrary string-based
+host lookup outside this module.
 
 #### Explicit projection
 
@@ -80,12 +81,13 @@ projection to its managed process.
 
 ## Documentation
 
-- [Readme](../README.md): module overview.
+- [Readme](../README.md): Module overview.
 - [Declarations](./env-var-declarations/env-var-declarations.spec.md):
-  declarations Specification.
-- [Resolution](./env-var-resolution/env-var-resolution.spec.md):
-  resolution Specification.
-- [Projection](./env-var-projection/env-var-projection.spec.md):
-  projection Specification.
-- [Host mappings](./env-var-host/env-var-host.spec.md):
-  host mappings Specification.
+  Declarations Specification.
+- [Resolution](./env-var-resolution/env-var-resolution.spec.md): Resolution
+  Specification.
+- [Projection](./env-var-projection/env-var-projection.spec.md): Projection
+  Specification.
+- [Host mappings](./env-var-host/env-var-host.spec.md): Host mappings
+  Specification.
+- [Access](./env-var-access/env-var-access.spec.md): Access Specification.

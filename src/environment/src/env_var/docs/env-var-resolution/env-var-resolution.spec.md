@@ -61,9 +61,8 @@ The software SHALL resolve a declaration using first-found import mode to the
 first available import alias in declaration order. A collected value is
 available when it is present, including when its value is empty.
 
-WHEN: No import alias provides a value,
-
-THE SOFTWARE SHALL: resolve the declaration fallback.
+WHEN no import alias provides a value,
+THE SOFTWARE SHALL resolve the declaration fallback.
 ```
 
 ---
@@ -94,14 +93,12 @@ using the current platform path separator.
 
 The software SHALL NOT deduplicate path entries during merge resolution.
 
-WHEN: No import alias provides a non-empty path value,
+WHEN no import alias provides a non-empty path value,
+THE SOFTWARE SHALL resolve the declaration fallback.
 
-THE SOFTWARE SHALL: resolve the declaration fallback.
-
-WHEN: Joining the collected paths cannot produce a valid string for the
-current platform,
-
-THE SOFTWARE SHALL: resolve the declaration to an empty string.
+IF joining the collected paths cannot produce a valid string for the current
+platform,
+THEN THE SOFTWARE SHALL resolve the declaration to an empty string.
 ```
 
 ---
@@ -126,31 +123,25 @@ Name: Placeholder expansion
 - Implementation status: Implemented
 
 ```text
-WHEN: A fallback contains a tilde and a non-empty collected `HOME` value is
+WHEN a fallback contains a tilde and a non-empty collected `HOME` value is
 available,
+THE SOFTWARE SHALL replace the first tilde with that value.
 
-THE SOFTWARE SHALL: replace the first tilde with that value.
+WHEN a non-empty collected `HOME` value is available,
+THE SOFTWARE SHALL give tilde expansion precedence over dollar expansion.
 
-WHEN: A non-empty collected `HOME` value is available,
-
-THE SOFTWARE SHALL: give tilde expansion precedence over dollar expansion.
-
-WHEN: A fallback contains a tilde but no non-empty collected `HOME` value is
+WHEN a fallback contains a tilde but no non-empty collected `HOME` value is
 available,
-
-THE SOFTWARE SHALL: leave the tilde unchanged and evaluate a dollar
+THE SOFTWARE SHALL leave the tilde unchanged and evaluate a dollar
 placeholder when one is present.
 
-A dollar placeholder is the first dollar sign followed by one or more ASCII
-letters, digits, or underscores.
+The software SHALL evaluate only the first dollar sign and, when it is followed
+by one or more ASCII letters, digits, or underscores, replace that placeholder
+with the collected value whose key matches its name, including an empty value.
 
-The software SHALL replace the first occurrence of that placeholder with the
-collected value whose key matches its name, including an empty value.
-
-WHEN: A dollar sign has no valid placeholder name or a dollar placeholder
-has no collected value,
-
-THE SOFTWARE SHALL: preserve it literally.
+IF a dollar sign has no valid placeholder name or a dollar placeholder has no
+collected value,
+THEN THE SOFTWARE SHALL preserve it literally.
 ```
 
 ---
@@ -174,21 +165,18 @@ Name: Source precedence and absence
 - Implementation status: Implemented
 
 ```text
-WHEN: A declaration without import aliases and with source `Provided` has a
+WHEN a declaration without import aliases and with source `Provided` has a
 collected canonical value, including an empty value,
+THE SOFTWARE SHALL resolve the declaration to that value.
 
-THE SOFTWARE SHALL: resolve the declaration to that value.
-
-WHEN: That provided canonical value is absent,
-
-THE SOFTWARE SHALL: resolve the declaration fallback.
+WHEN that provided canonical value is absent,
+THE SOFTWARE SHALL resolve the declaration fallback.
 
 The software SHALL resolve a declaration without import aliases and with source
 `Host` to its fallback without reading a collected value for its canonical key.
 
-WHEN: The selected source and fallback provide no value,
-
-THE SOFTWARE SHALL: resolve the declaration to an empty string.
+WHEN the selected source and fallback provide no value,
+THE SOFTWARE SHALL resolve the declaration to an empty string.
 ```
 
 ---
@@ -212,9 +200,8 @@ Name: Pass-through resolution
 The software SHALL resolve a declaration using pass-through import mode to the
 first available import alias in declaration order without applying a fallback.
 
-WHEN: No import alias provides a value,
-
-THE SOFTWARE SHALL: resolve the declaration to an empty string.
+WHEN no import alias provides a value,
+THE SOFTWARE SHALL resolve the declaration to an empty string.
 ```
 
 ---

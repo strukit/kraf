@@ -40,9 +40,8 @@ configuration.
 The software SHALL NOT accept declarations, import aliases, export aliases, or
 source eligibility from runtime configuration.
 
-WHEN: Runtime configuration provides a value for an unknown declaration,
-
-THE SOFTWARE SHALL: reject the configuration.
+WHEN runtime configuration provides a value for an unknown declaration,
+THE SOFTWARE SHALL reject the configuration.
 ```
 
 ---
@@ -64,9 +63,8 @@ Name: Canonical key uniqueness
 ```text
 The software SHALL accept at most one declaration for each canonical key.
 
-WHEN: A declaration set contains duplicate canonical keys,
-
-THE SOFTWARE SHALL: reject the declaration set.
+WHEN a declaration set contains duplicate canonical keys,
+THE SOFTWARE SHALL reject the declaration set.
 ```
 
 ---

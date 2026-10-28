@@ -4,6 +4,13 @@ summary: Acceptance scenarios for environment-variable resolution.
 tags: [environment, env-var, acceptance, resolution, gherkin]
 ---
 
+> [!IMPORTANT]
+> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
+> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
+> [GENERAL_CONVENTIONS.md](../../../../../../docs/GENERAL_CONVENTIONS.md#normative-language).
+> This document MUST NOT use alternative words or lowercase variants as
+> normative keywords.
+
 ## ENV-VAR_RESOLUTION-ACC-0001
 
 Name: Import aliases are collected and deduplicated

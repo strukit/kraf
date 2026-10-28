@@ -4,6 +4,13 @@ summary: Declarative model, resolution, and projection of environment variables 
 tags: [environment, env-var, resolution, projection]
 ---
 
+> [!IMPORTANT]
+> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
+> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
+> [GENERAL_CONVENTIONS.md](../../../../docs/GENERAL_CONVENTIONS.md#normative-language).
+> This document MUST NOT use alternative words or lowercase variants as
+> normative keywords.
+
 This module defines and resolves Kraf's declarative model for environment
 variables: their sources (host, organization, user, project, and session),
 aliases, and projections exported to Kraf-managed processes.
@@ -40,7 +47,7 @@ A canonical definition of a variable in Kraf. A declaration specifies:
 - sources eligible to provide a value;
 - resolution strategy;
 - fallback;
-- keys that may be projected to a child process.
+- keys eligible for projection to a child process.
 
 ### Resolution
 
@@ -61,7 +68,7 @@ A projection is the set of effective variables exported by Kraf to a managed
 process.
 
 A declaration can produce one internal canonical key and zero or more export
-keys. Not every resolved value must be projected to a child process.
+keys. Not every resolved value is projected to a child process.
 
 ## Documentation
 
@@ -75,3 +82,6 @@ keys. Not every resolved value must be projected to a child process.
   requirements and acceptance scenarios.
 - [Host mappings](./docs/env-var-host/env-var-host.spec.md): platform mapping
   requirements and acceptance scenarios.
+- [Access](./docs/env-var-access/env-var-access.spec.md): access requirements
+  and acceptance scenarios.
+- [README.md](../../../../README.md): what Kraf is.

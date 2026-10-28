@@ -4,6 +4,13 @@ summary: Acceptance scenarios for platform-specific environment-variable mapping
 tags: [environment, env-var, acceptance, host, platform, gherkin]
 ---
 
+> [!IMPORTANT]
+> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
+> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
+> [GENERAL_CONVENTIONS.md](../../../../../../docs/GENERAL_CONVENTIONS.md#normative-language).
+> This document MUST NOT use alternative words or lowercase variants as
+> normative keywords.
+
 ## ENV-VAR_HOST-ACC-0001
 
 Name: Every shared canonical key has a Linux mapping
@@ -32,7 +39,7 @@ Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
 
 ## ENV-VAR_HOST-ACC-0002
 
-Name: Every shared canonical key has a MacOS mapping
+Name: Every shared canonical key has a Mac mapping
 
 **Links:**
 
@@ -48,10 +55,10 @@ Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
 
   Rule: ENV-VAR_HOST-REQ-0001 — Supported-platform mapping completeness
 
-    Scenario: ENV-VAR_HOST-ACC-0002 — Every shared canonical key has a MacOS mapping
+    Scenario: ENV-VAR_HOST-ACC-0002 — Every shared canonical key has a Mac mapping
       Given the shared canonical environment-variable keys
-      When the MacOS mappings are loaded
-      Then every shared canonical key has a MacOS mapping
+      When the Mac mappings are loaded
+      Then every shared canonical key has a Mac mapping
 ```
 
 ---

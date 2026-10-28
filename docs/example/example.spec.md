@@ -20,7 +20,7 @@ Name: Explicit configuration
 
 **Links:**
 
-- [Intent](../example-intent.md)
+- [Intent](./example-intent.md)
 - [EXAMPLE_AREA-ACC-0001](./example.acceptance.md#example_area-acc-0001)
 
 **Status**:
@@ -29,7 +29,6 @@ Name: Explicit configuration
 - Implementation status: Not implemented
 
 ```text
-WHEN Configuration provides an unknown key,
-
+WHEN configuration provides an unknown key,
 THE SOFTWARE SHALL reject the configuration.
 ```

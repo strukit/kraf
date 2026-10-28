@@ -1,0 +1,215 @@
+---
+title: GENERAL CONVENTIONS
+summary: Repo-wide conventions for organizing, coding, and documenting the Kraf monorepo.
+tags: [monorepo, conventions, documentation, agents]
+---
+
+> [!IMPORTANT]
+> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
+> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
+> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#normative-language). This
+> document MUST NOT use alternative words or lowercase variants as normative
+> keywords.
+
+---
+
+> [!IMPORTANT]
+> This is a convention document, as defined in
+> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#convention-documents): its
+> rules are mandatory and non-negotiable. Treat them like a constitution: a rule
+> changes only through a pull request that edits this document and MUST NOT be
+> bypassed by an ad-hoc exception in code.
+
+## Overview
+
+Kraf is a monorepo. It started in Rust, but the organization is **not by
+language** — it's by **feature/domain**. Each domain is its own folder
+(folder-per-feature); if a domain needs another language later, it lives right
+next to the rest instead of becoming a separate per-language workspace. Language
+is an implementation detail of each feature, not the repo's organizing axis.
+
+## Docs Conventions
+
+> The root [`README.md`](../README.md) does not require front-matter or the
+> normative-language note because it introduces the repository rather than
+> defining conventions.
+
+### Normative language
+
+Every document MUST carry, near the top, the note below (the Template) declaring
+that its normative keywords follow RFC 2119 and RFC 8174. A document carrying
+the note MUST use the listed terms, in uppercase, whenever it expresses a
+normative requirement, permission, recommendation, or prohibition. It MUST NOT
+express normative meaning through alternative keywords or lowercase variants of
+the listed terms.
+
+The note does not require a document to contain normative requirements or to use
+every listed term. A purely descriptive document MAY contain the note without
+adding an artificial requirement.
+
+**Template** (the link path is relative to the document carrying the note):
+
+```md
+> [!IMPORTANT]
+> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
+> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
+> [GENERAL_CONVENTIONS.md](<path-to-docs>/GENERAL_CONVENTIONS.md#normative-language).
+> This document MUST NOT use alternative words or lowercase variants as
+> normative keywords.
+```
+
+A family of documents MAY define its own equivalent note that lists only the
+terms it uses — for example, specifications use the EARS block defined in
+[Specifications](./SPEC_CONVENTIONS.md#specification-specmd) — as long as it
+cites RFC 2119 and RFC 8174 near the top.
+
+### Convention documents
+
+A convention document is a document whose purpose is to define rules and that
+carries the convention note below near the top, right after the
+normative-language note and separated from it by a `---` line. The note points
+here instead of restating these rules.
+
+The rules of a convention document are mandatory: the codebase and agents MUST
+follow them. You MUST NOT introduce ad-hoc exceptions. Changing a rule requires
+a deliberate decision in a pull request that edits the convention document
+defining it.
+
+Rules MUST be defined only in dedicated convention documents. Code comments,
+commit messages, pull request descriptions, and any other content MUST NOT
+introduce new rules; they MAY only reference or apply existing ones.
+
+Rules explicitly scoped to a particular document type or context MUST take
+precedence over more general rules wherever they conflict, and only within that
+scope. All non-conflicting general rules MUST remain in effect. Such overrides
+do not require changing the document that defines the general rule, but MUST
+themselves be defined in a convention document.
+
+**Template** (the link path is relative to the document carrying the note; a
+`---` line separates notes):
+
+```md
+---
+
+> [!IMPORTANT]
+> This is a convention document, as defined in
+> [GENERAL_CONVENTIONS.md](<path-to-docs>/GENERAL_CONVENTIONS.md#convention-documents):
+> its rules are mandatory and non-negotiable. Treat them like a constitution: a
+> rule changes only through a pull request that edits this document and MUST NOT
+> be bypassed by an ad-hoc exception in code.
+```
+
+### Markdown front-matter
+
+Every doc MUST have front-matter with `title`, `summary`, and `tags` — it makes
+docs easy to index for agents.
+
+This applies to docs, not to every `.md`. A file that is not a doc but uses
+`.md` and carries its own front-matter schema — for example `SKILL.md` — is out
+of scope.
+
+### Docs graph
+
+Repo-level docs form a connected graph rooted at [README.md](../README.md).
+Every repo-level doc other than README.md MUST be linked from at least one doc
+already in the graph, which is its parent, so no doc is reachable only by its
+file path. Every doc MUST link back to its parent. A link already in the body
+satisfies these rules; a separate `Related` section is OPTIONAL and MAY be used
+to consolidate outbound links in one place. A repo-level doc that provides
+closing navigation links MUST group them under a `## Related` heading instead of
+writing them as a closing sentence. A set of docs MAY define its own graph; when
+it does, that graph MUST be documented alongside the set. The graph MUST be read
+before navigating or linking across a set of docs.
+
+Every reference to a specific file MUST be a navigable link, not a bare name —
+so the reader can follow it. (Generic references, like "a module's `README.md`",
+are not links.)
+
+### Language-neutral docs
+
+Cross-domain docs (e.g. [`ARCHITECTURE.md`](./ARCHITECTURE.md), specs) describe
+the shape, not the implementation language: their normative prose MUST NOT use
+language-specific terms (e.g. "trait") or language-specific file names and
+extensions (e.g. `filesystem.rs`, `lib.rs`), and MUST refer to roles instead —
+"interface" for a trait, and the `lib` / `cli` / `mcp` entrypoints without an
+extension. Clearly identified examples MAY use language-specific terms, code
+symbols, file names, and extensions when they illustrate a language-neutral
+rule; they MUST NOT introduce a language-specific requirement.
+
+## Workspace Conventions
+
+### Std-first
+
+Code SHOULD prefer standard library over external libs, and SHOULD keep
+dependencies few and consolidated. Exceptions: official platform bindings,
+foundational runtimes/packages, big-tech, Linux Foundation and friends packages.
+Code SHOULD NOT add convenience wrappers on top of another lib, or a "wrapper of
+a wrapper".
+
+Example: terminal handling uses `std::io::IsTerminal` + minimal syscalls, not an
+external terminal lib/package.
+
+### Lib-first
+
+Real logic MUST live in the lib; the binary only consumes it. This keeps logic
+testable and reusable outside the CLI (another binary, another consumer, etc.).
+
+### Multi-platform
+
+Every domain MUST be designed for multiple platforms (Linux/Mac/Windows) from
+the start, not bolted on later. Platform-specific code MUST be isolated (e.g.
+`_macos.rs`, `_linux.rs`, `_windows.rs`), and shared logic MUST stay separate
+from platform-specific logic.
+
+### Tools declared in files, with version
+
+Build/tool requirements MUST be declared in dedicated, versioned files, not
+hardcoded in scripts or docs. See [`.msvc.json`](../.msvc.json): it declares
+what's needed to build on Windows (VC++ Tools components, Windows SDK version).
+
+### Ignored files
+
+[`.gitignore`](../.gitignore) denies everything by default and only allowlists
+what the repo needs (see the file's own header comment).
+[`.dockerignore`](../.dockerignore) is a symlink to it, so the same allowlist
+keeps the Docker build context clean — no dirty/leftover files sneak into the
+builder.
+
+### CI
+
+Everything that runs in CI (test, build, release) MUST be reproducible locally.
+Builds MUST run in Docker Bake for every platform except Mac, which Docker can't
+build for.
+
+### Agents
+
+Config exclusive to a single agent tool (Claude-only, Codex-only, etc.) MUST NOT
+be committed — it lives in the dev's own environment. What is portable across
+agents MAY be committed and, when it encodes a repo rule, SHOULD be: skills, and
+agent personas bound to this repo's standards — for example, a Rust reviewer
+that enforces [CODE_CONVENTIONS.md](./CODE_CONVENTIONS.md). A persona MUST be
+committed in a vendor-neutral form; only the tool-specific glue stays personal.
+
+### Pull requests
+
+A pull request description MUST follow the
+[pull request template](../.github/pull_request_template.md). Its `# Summary`
+MUST open with one short paragraph, without lists, stating what the pull request
+does and why; the itemized changes belong under `What does this pull request
+change?`. Every `<...>` placeholder in the template MUST be replaced with
+content; a placeholder MUST NOT remain in the description.
+
+### Naming
+
+#### Platform names
+
+In prose, docs, and diagrams, platform names MUST be written as `Linux`, `Mac`,
+and `Windows`; Apple's `macOS` styling MUST NOT be used.
+
+In code, each language MAY have its own convention for platform names, and that
+convention MUST take precedence over the rule above, only within that language's
+code.
+
+## Related
+
+- [README.md](../README.md): what Kraf is.
