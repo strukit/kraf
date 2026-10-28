@@ -224,8 +224,8 @@ Each requirement MUST declare two independent statuses:
 > - Mavin et al.,
 >   [Easy Approach to Requirements Syntax (EARS)](https://doi.org/10.1109/RE.2009.9)
 >   (IEEE RE'09).
-> - [Easy Approach to Requirements Syntax](https://en.wikipedia.org/wiki/Easy_Approach_to_Requirements_Syntax)
->   (Wikipedia).
+> - [Easy Approach to Requirements Syntax](https://en.wikipedia.org/w/index.php?title=Easy_Approach_to_Requirements_Syntax&oldid=1342972975)
+>   (Wikipedia, revision of 2026-03-11).
 
 Specifications MUST use EARS notation and the normative terms defined by RFC
 2119 and RFC 8174.
@@ -275,6 +275,12 @@ A requirement MUST use `IF … THEN` only for an unwanted trigger, and `WHEN` fo
 an expected trigger. In a complex requirement, `WHILE` clauses MUST come before
 the `WHEN` clause. A requirement with more than three preconditions SHOULD be
 split into simpler requirements.
+
+EARS has no "or" between preconditions. Repeating the same system response in
+requirements with distinct preconditions is expected and is not duplication.
+
+A review MUST read the acceptance files linked from a specification before
+reporting one of its requirements as incorrect.
 
 **Layout:**
 
