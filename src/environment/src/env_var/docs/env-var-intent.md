@@ -81,13 +81,13 @@ projection to its managed process.
 
 ## Documentation
 
-- [Readme](../README.md): module overview.
+- [Readme](../README.md): Module overview.
 - [Declarations](./env-var-declarations/env-var-declarations.spec.md):
-  declarations Specification.
-- [Resolution](./env-var-resolution/env-var-resolution.spec.md): resolution
+  Declarations Specification.
+- [Resolution](./env-var-resolution/env-var-resolution.spec.md): Resolution
   Specification.
-- [Projection](./env-var-projection/env-var-projection.spec.md): projection
+- [Projection](./env-var-projection/env-var-projection.spec.md): Projection
   Specification.
-- [Host mappings](./env-var-host/env-var-host.spec.md): host mappings
+- [Host mappings](./env-var-host/env-var-host.spec.md): Host mappings
   Specification.
-- [Access](./env-var-access/env-var-access.spec.md): access Specification.
+- [Access](./env-var-access/env-var-access.spec.md): Access Specification.
