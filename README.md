@@ -41,15 +41,15 @@ toolchains a project already uses rather than replacing them.
 
 ## Related
 
-- [AGENTS](./AGENTS.md): AI agent instructions.
-- [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md) — repo-wide
+- [AGENTS.md](./AGENTS.md): AI agent instructions.
+- [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md): repo-wide
   conventions: convention documents and rule precedence, docs, workspace,
   naming.
-- [ARCHITECTURE.md](./docs/ARCHITECTURE.md) — cross-domain architecture: system
+- [ARCHITECTURE.md](./docs/ARCHITECTURE.md): cross-domain architecture: system
   context, containers, modules, ports and adapters, dependency rule, decisions.
-- [CODE_CONVENTIONS.md](./docs/CODE_CONVENTIONS.md) — code conventions: modules
+- [CODE_CONVENTIONS.md](./docs/CODE_CONVENTIONS.md): code conventions: modules
   and tests.
-- [SPEC_CONVENTIONS.md](./docs/SPEC_CONVENTIONS.md) — spec conventions: layout,
+- [SPEC_CONVENTIONS.md](./docs/SPEC_CONVENTIONS.md): spec conventions: layout,
   identifiers, intent, specification, acceptance, ADR.
 
 ## Modules

@@ -7,9 +7,9 @@ tags: [environment, env-var, resolution, projection]
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
 > RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
-> [GENERAL_CONVENTIONS.md](../../../../docs/GENERAL_CONVENTIONS.md#normative-language). This
-> document MUST NOT use alternative words or lowercase variants as normative
-> keywords.
+> [GENERAL_CONVENTIONS.md](../../../../docs/GENERAL_CONVENTIONS.md#normative-language).
+> This document MUST NOT use alternative words or lowercase variants as
+> normative keywords.
 
 This module defines and resolves Kraf's declarative model for environment
 variables: their sources (host, organization, user, project, and session),

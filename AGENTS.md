@@ -7,18 +7,18 @@ tags: [agents, instructions, repository, coding-conventions]
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
 > RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
-> [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md#normative-language). This
-> document MUST NOT use alternative words or lowercase variants as normative
-> keywords.
+> [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md#normative-language).
+> This document MUST NOT use alternative words or lowercase variants as
+> normative keywords.
 
 ---
 
 > [!IMPORTANT]
 > This is a convention document, as defined in
-> [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md#convention-documents): its
-> rules are mandatory and non-negotiable. Treat them like a constitution: a rule
-> changes only through a pull request that edits this document and MUST NOT be
-> bypassed by an ad-hoc exception in code.
+> [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md#convention-documents):
+> its rules are mandatory and non-negotiable. Treat them like a constitution: a
+> rule changes only through a pull request that edits this document and MUST NOT
+> be bypassed by an ad-hoc exception in code.
 
 This document is the entry point for every agent task in this repository. Before
 starting any task, agents MUST start here and follow the documentation links to
@@ -55,10 +55,10 @@ follow its requirements.
 Agents MUST NOT leave the working root for any operation, including reading,
 writing, executing commands, or navigating files.
 
-An explicit user instruction MAY authorize an operation outside the working
-root for the task at hand only. Before its first operation outside the working
-root, an agent MUST ask the user for confirmation, even when the user has
-provided that authorization.
+An explicit user instruction MAY authorize an operation outside the working root
+for the task at hand only. Before its first operation outside the working root,
+an agent MUST ask the user for confirmation, even when the user has provided
+that authorization.
 
 ## Navigation
 
@@ -71,8 +71,8 @@ open and read the file before continuing. It MUST resolve relative paths from
 the directory of the document containing the link.
 
 A link MAY resolve to any file inside the working root, including one above the
-document containing the link. When a link resolves outside the working root,
-the agent MUST NOT read the file, MUST notify the user, naming the link and the
+document containing the link. When a link resolves outside the working root, the
+agent MUST NOT read the file, MUST notify the user, naming the link and the
 document that contains it, and MUST ignore the link and continue the task
 without that file.
 
@@ -87,13 +87,13 @@ and MUST NOT assume its contents.
 
 ## Related
 
-- [README.md](./README.md) — what Kraf is.
-- [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md) — repo-wide
+- [README.md](./README.md): what Kraf is.
+- [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md): repo-wide
   conventions: convention documents and rule precedence, docs, workspace,
   naming.
-- [ARCHITECTURE.md](./docs/ARCHITECTURE.md) — cross-domain architecture: system
+- [ARCHITECTURE.md](./docs/ARCHITECTURE.md): cross-domain architecture: system
   context, containers, modules, ports and adapters, dependency rule, decisions.
-- [CODE_CONVENTIONS.md](./docs/CODE_CONVENTIONS.md) — code conventions: modules
+- [CODE_CONVENTIONS.md](./docs/CODE_CONVENTIONS.md): code conventions: modules
   and tests.
-- [SPEC_CONVENTIONS.md](./docs/SPEC_CONVENTIONS.md) — spec conventions: layout,
+- [SPEC_CONVENTIONS.md](./docs/SPEC_CONVENTIONS.md): spec conventions: layout,
   identifiers, intent, specification, acceptance, ADR.

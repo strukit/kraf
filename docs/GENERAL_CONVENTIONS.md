@@ -193,10 +193,10 @@ committed in a vendor-neutral form; only the tool-specific glue stays personal.
 
 A pull request description MUST follow the
 [pull request template](../.github/pull_request_template.md). Its `# Summary`
-MUST open with one short paragraph, without lists, stating what the pull
-request does and why; the itemized changes belong under
-`What does this pull request change?`. Every `<...>` placeholder in the template
-MUST be replaced with content; a placeholder MUST NOT remain in the description.
+MUST open with one short paragraph, without lists, stating what the pull request
+does and why; the itemized changes belong under `What does this pull request
+change?`. Every `<...>` placeholder in the template MUST be replaced with
+content; a placeholder MUST NOT remain in the description.
 
 ### Naming
 

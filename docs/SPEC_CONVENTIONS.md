@@ -160,8 +160,8 @@ they relate. MAY use subsections (###).>
 An intent explains why a feature exists, the problem it addresses, its
 boundaries, and its non-goals. It is not normative.
 
-An intent MUST NOT carry the normative-language note and MUST NOT use
-normative keywords.
+An intent MUST NOT carry the normative-language note and MUST NOT use normative
+keywords.
 
 **Layout**:
 
