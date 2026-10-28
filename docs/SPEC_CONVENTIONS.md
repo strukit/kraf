@@ -117,8 +117,9 @@ Repo-level documents follow the
 ### Readme (*/README.md)
 
 Every module/feature folder MUST have a `README.md` that orients a reader before
-they open its `docs/`. Unlike the root `README.md`, a module `README.md` MUST
-have [markdown front-matter](./GENERAL_CONVENTIONS.md#markdown-front-matter).
+they open its `docs/`. Unlike the [root `README.md`](../README.md), a module
+`README.md` MUST have
+[markdown front-matter](./GENERAL_CONVENTIONS.md#markdown-front-matter).
 
 **Layout**:
 
@@ -153,6 +154,7 @@ they relate. MAY use subsections (###).>
   this module.
 - [<Area>](./docs/<feature>-<area>/<feature>-<area>.spec.md): <area>
   requirements and acceptance scenarios.
+- [README.md](<path-to-root>/README.md): what Kraf is.
 ```
 
 ### Intent (*-intent.md)

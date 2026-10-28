@@ -14,16 +14,16 @@ tags: [environment, env-var, specification, spec, access, security]
 
 ## Requirements
 
-### ENV-VAR_ACCESS-REQ-0002
+### ENV-VAR_ACCESS-REQ-0001
 
 Name: Declared value access
 
 **Links:**
 
 - [Intent](../env-var-intent.md): module intent.
+- [ENV-VAR_ACCESS-ACC-0001](./env-var-access.acceptance.md#env-var_access-acc-0001)
 - [ENV-VAR_ACCESS-ACC-0002](./env-var-access.acceptance.md#env-var_access-acc-0002)
 - [ENV-VAR_ACCESS-ACC-0003](./env-var-access.acceptance.md#env-var_access-acc-0003)
-- [ENV-VAR_ACCESS-ACC-0006](./env-var-access.acceptance.md#env-var_access-acc-0006)
 
 **Status**:
 

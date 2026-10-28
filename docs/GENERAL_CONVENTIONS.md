@@ -53,9 +53,9 @@ adding an artificial requirement.
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
 > RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
-> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#normative-language). This
-> document MUST NOT use alternative words or lowercase variants as normative
-> keywords.
+> [GENERAL_CONVENTIONS.md](<path-to-docs>/GENERAL_CONVENTIONS.md#normative-language).
+> This document MUST NOT use alternative words or lowercase variants as
+> normative keywords.
 ```
 
 A family of documents MAY define its own equivalent note that lists only the
@@ -93,10 +93,10 @@ themselves be defined in a convention document.
 
 > [!IMPORTANT]
 > This is a convention document, as defined in
-> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#convention-documents): its
-> rules are mandatory and non-negotiable. Treat them like a constitution: a rule
-> changes only through a pull request that edits this document and MUST NOT be
-> bypassed by an ad-hoc exception in code.
+> [GENERAL_CONVENTIONS.md](<path-to-docs>/GENERAL_CONVENTIONS.md#convention-documents):
+> its rules are mandatory and non-negotiable. Treat them like a constitution: a
+> rule changes only through a pull request that edits this document and MUST NOT
+> be bypassed by an ad-hoc exception in code.
 ```
 
 ### Markdown front-matter

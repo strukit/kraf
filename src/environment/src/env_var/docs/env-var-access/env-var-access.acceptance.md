@@ -11,13 +11,13 @@ tags: [environment, env-var, acceptance, access, security, gherkin]
 > This document MUST NOT use alternative words or lowercase variants as
 > normative keywords.
 
-## ENV-VAR_ACCESS-ACC-0002
+## ENV-VAR_ACCESS-ACC-0001
 
 Name: Dependent declaration provides a resolved value
 
 **Links:**
 
-- [ENV-VAR_ACCESS-REQ-0002](./env-var-access.spec.md#env-var_access-req-0002)
+- [ENV-VAR_ACCESS-REQ-0001](./env-var-access.spec.md#env-var_access-req-0001)
 
 **Status**:
 
@@ -27,9 +27,9 @@ Name: Dependent declaration provides a resolved value
 ```gherkin
 Feature: ENV-VAR_ACCESS-FEAT-0001 — Environment variable access
 
-  Rule: ENV-VAR_ACCESS-REQ-0002 — Declared value access
+  Rule: ENV-VAR_ACCESS-REQ-0001 — Declared value access
 
-    Scenario: ENV-VAR_ACCESS-ACC-0002 — Dependent declaration provides a resolved value
+    Scenario: ENV-VAR_ACCESS-ACC-0001 — Dependent declaration provides a resolved value
       Given a plugin declares "EXAMPLE_KEY" as a dependency
       And "EXAMPLE_KEY" has a resolved value
       When the plugin requests the value of "EXAMPLE_KEY"
@@ -38,13 +38,13 @@ Feature: ENV-VAR_ACCESS-FEAT-0001 — Environment variable access
 
 ---
 
-## ENV-VAR_ACCESS-ACC-0003
+## ENV-VAR_ACCESS-ACC-0002
 
 Name: Undeclared value request is rejected
 
 **Links:**
 
-- [ENV-VAR_ACCESS-REQ-0002](./env-var-access.spec.md#env-var_access-req-0002)
+- [ENV-VAR_ACCESS-REQ-0001](./env-var-access.spec.md#env-var_access-req-0001)
 
 **Status**:
 
@@ -54,9 +54,9 @@ Name: Undeclared value request is rejected
 ```gherkin
 Feature: ENV-VAR_ACCESS-FEAT-0001 — Environment variable access
 
-  Rule: ENV-VAR_ACCESS-REQ-0002 — Declared value access
+  Rule: ENV-VAR_ACCESS-REQ-0001 — Declared value access
 
-    Scenario: ENV-VAR_ACCESS-ACC-0003 — Undeclared value request is rejected
+    Scenario: ENV-VAR_ACCESS-ACC-0002 — Undeclared value request is rejected
       Given a plugin neither owns "EXAMPLE_KEY" nor declares it as a dependency
       When the plugin requests the value of "EXAMPLE_KEY"
       Then the software rejects the request
@@ -64,13 +64,13 @@ Feature: ENV-VAR_ACCESS-FEAT-0001 — Environment variable access
 
 ---
 
-## ENV-VAR_ACCESS-ACC-0006
+## ENV-VAR_ACCESS-ACC-0003
 
 Name: Owned declaration provides a resolved value
 
 **Links:**
 
-- [ENV-VAR_ACCESS-REQ-0002](./env-var-access.spec.md#env-var_access-req-0002)
+- [ENV-VAR_ACCESS-REQ-0001](./env-var-access.spec.md#env-var_access-req-0001)
 
 **Status**:
 
@@ -80,9 +80,9 @@ Name: Owned declaration provides a resolved value
 ```gherkin
 Feature: ENV-VAR_ACCESS-FEAT-0001 — Environment variable access
 
-  Rule: ENV-VAR_ACCESS-REQ-0002 — Declared value access
+  Rule: ENV-VAR_ACCESS-REQ-0001 — Declared value access
 
-    Scenario: ENV-VAR_ACCESS-ACC-0006 — Owned declaration provides a resolved value
+    Scenario: ENV-VAR_ACCESS-ACC-0003 — Owned declaration provides a resolved value
       Given a plugin owns "EXAMPLE_KEY"
       And "EXAMPLE_KEY" has a resolved value
       When the plugin requests the value of "EXAMPLE_KEY"

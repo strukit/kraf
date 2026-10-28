@@ -25,10 +25,9 @@ starting any task, agents MUST start here and follow the documentation links to
 documents relevant to the task.
 
 Agents MUST act only on rules defined in convention documents and on skills and
-agents that apply them. They MUST NOT raise, flag, or fix a preference that no
-convention document, skill, or agent defines, such as choosing one approach,
-name, or style over another, and MUST NOT take on work that deterministic
-tooling performs.
+agents that apply them. They MUST NOT raise, flag, or fix a concern that no
+convention document defines, such as choosing one approach, name, or style over
+another, and MUST NOT take on work that deterministic tooling performs.
 
 Agents MUST report a correctness defect they find, such as code that produces a
 wrong result, fails, or contradicts its spec, even when no convention document
@@ -51,6 +50,12 @@ Skills MAY inform a task but MUST NOT override a rule. When a skill conflicts
 with a rule, the agent MUST follow the rule and MUST notify the user of the
 conflict, stating that, if the content is pertinent, it needs to be committed to
 a convention document to take effect.
+
+A skill or agent MAY state preferences, such as formatting, layout, or naming
+choices, that agents follow when they create or edit content under it. A
+preference is not a rule: it MUST NOT override a convention document, and
+agents MUST NOT report a deviation from it as a defect, including in a code
+review.
 
 A skill file (`SKILL.md`) MUST carry the normative-language note defined in
 [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md#normative-language) and

@@ -84,3 +84,4 @@ keys. Not every resolved value is projected to a child process.
   requirements and acceptance scenarios.
 - [Access](./docs/env-var-access/env-var-access.spec.md): access requirements
   and acceptance scenarios.
+- [README.md](../../../../README.md): what Kraf is.
