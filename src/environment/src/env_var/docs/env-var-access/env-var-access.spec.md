@@ -51,14 +51,13 @@ Name: Declared value access
 - Implementation status: Unknown
 
 ```text
-WHEN A module or plugin requests a resolved value,
+WHEN a module or plugin requests a resolved value for a declaration it owns or
+declares as a dependency,
+THE SOFTWARE SHALL provide the resolved value.
 
-THE SOFTWARE SHALL provide it only through a declaration that the requester
-owns or declares as a dependency.
-
-IF The requester neither owns the declaration nor declares it as a dependency,
-
-THEN THE SOFTWARE SHALL reject the request.
+WHEN a module or plugin requests a resolved value for a declaration it neither
+owns nor declares as a dependency,
+THE SOFTWARE SHALL reject the request.
 ```
 
 ---
