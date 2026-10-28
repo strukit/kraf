@@ -50,6 +50,16 @@ A skill file (`SKILL.md`) MUST carry the normative-language note defined in
 [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md#normative-language) and
 follow its requirements.
 
+## Workspace boundary
+
+Agents MUST NOT leave the working root for any operation, including reading,
+writing, executing commands, or navigating files.
+
+An explicit user instruction MAY authorize an operation outside the working
+root for the task at hand only. Before its first operation outside the working
+root, an agent MUST ask the user for confirmation, even when the user has
+provided that authorization.
+
 ## Navigation
 
 Following local Markdown links is how agents MUST navigate this repository. It
@@ -60,12 +70,11 @@ When an agent encounters a link to a local file relevant to the task, it MUST
 open and read the file before continuing. It MUST resolve relative paths from
 the directory of the document containing the link.
 
-Agents MUST NOT leave the working root, the repository or workspace directory
-the task runs in. A link MAY resolve to any file inside the working root,
-including one above the document containing the link. When a link resolves
-outside the working root, the agent MUST NOT read the file, MUST notify the
-user, naming the link and the document that contains it, and MUST continue the
-task without that file.
+A link MAY resolve to any file inside the working root, including one above the
+document containing the link. When a link resolves outside the working root,
+the agent MUST NOT read the file, MUST notify the user, naming the link and the
+document that contains it, and MUST ignore the link and continue the task
+without that file.
 
 Agents MUST NOT use content search (such as grep or ripgrep) as a substitute for
 following those links, unless the user explicitly requests it.
