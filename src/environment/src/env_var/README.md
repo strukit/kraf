@@ -82,3 +82,5 @@ keys. Not every resolved value is projected to a child process.
   requirements and acceptance scenarios.
 - [Host mappings](./docs/env-var-host/env-var-host.spec.md): platform mapping
   requirements and acceptance scenarios.
+- [Access](./docs/env-var-access/env-var-access.spec.md): access requirements
+  and acceptance scenarios.

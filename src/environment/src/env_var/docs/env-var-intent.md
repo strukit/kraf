@@ -90,3 +90,4 @@ projection to its managed process.
   Specification.
 - [Host mappings](./env-var-host/env-var-host.spec.md): host mappings
   Specification.
+- [Access](./env-var-access/env-var-access.spec.md): access Specification.
