@@ -6,32 +6,19 @@ tags: [monorepo, conventions, documentation, agents]
 
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
->
-> This document MUST use these terms, in uppercase, when expressing normative
-> requirements, permissions, recommendations, or prohibitions. It MUST NOT use
-> alternative words or lowercase variants as normative keywords.
+> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
+> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#normative-language). This
+> document MUST NOT use alternative words or lowercase variants as normative
+> keywords.
 
 ---
 
 > [!IMPORTANT]
-> These are the Kraf codebase's **invariants** — mandatory rules that the
-> codebase MUST follow. You MUST NOT introduce ad-hoc exceptions. Changing an
-> invariant requires a deliberate decision in a pull request that edits this
-> file.
->
-> A convention document is a document whose purpose is to define rules and that
-> carries the invariants note near the top.
->
-> Rules MUST be defined only in dedicated convention documents. Code comments,
-> commit messages, pull request descriptions, and any other content MUST NOT
-> introduce new rules; they MAY only reference or apply existing ones.
->
-> Rules explicitly scoped to a particular document type or context MUST take
-> precedence over these general rules wherever they conflict, and only within
-> that scope. All non-conflicting general rules MUST remain in effect. Such
-> overrides do not require changing this file, but MUST themselves be defined in
-> a convention document.
+> This is a convention document, as defined in
+> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#convention-documents): its
+> rules are mandatory and non-negotiable. Treat them like a constitution: a rule
+> changes only through a pull request that edits this document and MUST NOT be
+> bypassed by an ad-hoc exception in code.
 
 ## Overview
 
@@ -60,16 +47,15 @@ The note does not require a document to contain normative requirements or to use
 every listed term. A purely descriptive document MAY contain the note without
 adding an artificial requirement.
 
-**Template:**
+**Template** (the link path is relative to the document carrying the note):
 
 ```md
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
->
-> This document MUST use these terms, in uppercase, when expressing normative
-> requirements, permissions, recommendations, or prohibitions. It MUST NOT use
-> alternative words or lowercase variants as normative keywords.
+> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
+> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#normative-language). This
+> document MUST NOT use alternative words or lowercase variants as normative
+> keywords.
 ```
 
 A family of documents MAY define its own equivalent note that lists only the
@@ -77,8 +63,41 @@ terms it uses — for example, specifications use the EARS block defined in
 [Specifications](./SPEC_CONVENTIONS.md#specification-specmd) — as long as it
 cites RFC 2119 and RFC 8174 near the top.
 
-Agent instruction files (for example `AGENTS.md` or `SKILL.md`) MUST follow
-these requirements.
+### Convention documents
+
+A convention document is a document whose purpose is to define rules and that
+carries the convention note below near the top, right after the
+normative-language note and separated from it by a `---` line. The note points
+here instead of restating these rules.
+
+The rules of a convention document are mandatory: the codebase and agents MUST
+follow them. You MUST NOT introduce ad-hoc exceptions. Changing a rule requires
+a deliberate decision in a pull request that edits the convention document
+defining it.
+
+Rules MUST be defined only in dedicated convention documents. Code comments,
+commit messages, pull request descriptions, and any other content MUST NOT
+introduce new rules; they MAY only reference or apply existing ones.
+
+Rules explicitly scoped to a particular document type or context MUST take
+precedence over more general rules wherever they conflict, and only within that
+scope. All non-conflicting general rules MUST remain in effect. Such overrides
+do not require changing the document that defines the general rule, but MUST
+themselves be defined in a convention document.
+
+**Template** (the link path is relative to the document carrying the note; a
+`---` line separates notes):
+
+```md
+---
+
+> [!IMPORTANT]
+> This is a convention document, as defined in
+> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#convention-documents): its
+> rules are mandatory and non-negotiable. Treat them like a constitution: a rule
+> changes only through a pull request that edits this document and MUST NOT be
+> bypassed by an ad-hoc exception in code.
+```
 
 ### Markdown front-matter
 
@@ -95,9 +114,11 @@ Repo-level docs form a connected graph rooted at [README.md](../README.md):
 every doc MUST link to every parent doc it references, so no doc is reachable
 only by its file path. A link already in the body satisfies this rule; a
 separate `Related` section is OPTIONAL and MAY be used to consolidate outbound
-links in one place. A set of docs MAY define its own graph; when it does, that
-graph MUST be documented alongside the set. Always read the graph before
-navigating or linking across a set of docs.
+links in one place. A repo-level doc that provides closing navigation links MUST
+group them under a `## Related` heading instead of writing them as a closing
+sentence. A set of docs MAY define its own graph; when it does, that graph MUST
+be documented alongside the set. The graph MUST be read before navigating or
+linking across a set of docs.
 
 Every reference to a specific file MUST be a navigable link, not a bare name —
 so the reader can follow it. (Generic references, like "a module's `README.md`",
@@ -156,8 +177,8 @@ builder.
 ### CI
 
 Everything that runs in CI (test, build, release) MUST be reproducible locally.
-We use Docker Bake for that — build in it for every platform, except Mac, which
-Docker can't build for.
+Builds MUST run in Docker Bake for every platform except Mac, which Docker can't
+build for.
 
 ### Agents
 

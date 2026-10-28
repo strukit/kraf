@@ -4,14 +4,6 @@ summary: Why Kraf resolves and projects environment variables through a declarat
 tags: [environment, env-var, intent, security, projection]
 ---
 
-> [!IMPORTANT]
-> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
->
-> This document MUST use these terms, in uppercase, when expressing normative
-> requirements, permissions, recommendations, or prohibitions. It MUST NOT use
-> alternative words or lowercase variants as normative keywords.
-
 ## Problem
 
 Development environments inherit a large, implicit set of environment variables
@@ -25,8 +17,8 @@ allows undeclared host state to reach managed processes by accident.
 
 ## Intent
 
-This module resolves environment variables through one declarative model
-and produce an explicit projection for each managed process.
+This module resolves environment variables through one declarative model and
+produce an explicit projection for each managed process.
 
 The model makes it possible to:
 
@@ -47,18 +39,19 @@ plugin source code or immutable plugin metadata distributed with the plugin. A
 declaration identifies an allowed variable and its behavior; it does not contain
 the final runtime value.
 
-Dynamic sources MAY provide values for existing declarations. They MUST NOT
-create new declarations, request undeclared host values, or expand the set of
-variables that a process can receive.
+Dynamic sources provide values for existing declarations. They do not create
+new declarations, request undeclared host values, or expand the set of variables
+that a process can receive.
 
 #### Security access
 
-Only the environment module MAY read raw environment values from the host.
+The environment module is the only one that reads raw environment values from
+the host.
 
-Other modules and plugins MAY obtain a resolved value only through a declaration
-they own or explicitly declare as a dependency. This module MUST NOT expose an
-operation that enumerates all host environment variables, nor arbitrary
-string-based host lookups outside this module.
+Other modules and plugins obtain a resolved value only through a declaration
+they own or explicitly declare as a dependency. This module exposes no operation
+that enumerates all host environment variables, and no arbitrary string-based
+host lookup outside this module.
 
 #### Explicit projection
 

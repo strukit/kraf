@@ -6,19 +6,19 @@ tags: [specification, requirements, acceptance, ears, documentation]
 
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
->
-> This document MUST use these terms, in uppercase, when expressing normative
-> requirements, permissions, recommendations, or prohibitions. It MUST NOT use
-> alternative words or lowercase variants as normative keywords.
+> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
+> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#normative-language). This
+> document MUST NOT use alternative words or lowercase variants as normative
+> keywords.
 
 ---
 
 > [!IMPORTANT]
-> These are the Kraf codebase's **invariants** — mandatory rules that the
-> codebase MUST follow. You MUST NOT introduce ad-hoc exceptions. Changing an
-> invariant requires a deliberate decision in a pull request that edits this
-> file.
+> This is a convention document, as defined in
+> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#convention-documents): its
+> rules are mandatory and non-negotiable. Treat them like a constitution: a rule
+> changes only through a pull request that edits this document and MUST NOT be
+> bypassed by an ad-hoc exception in code.
 
 ## Summary
 
@@ -34,9 +34,9 @@ they do not waive those standards unless an exception is stated explicitly.
 
 A minimal, illustrative application of this convention:
 
-- [Example intent](./example/example-intent.md)
-- [Example area specification](./example/example.spec.md)
-- [Example area acceptance](./example/example.acceptance.md)
+- [INTENT](./example/example-intent.md)
+- [SPECIFICATION](./example/example.spec.md)
+- [ACCEPTANCE](./example/example.acceptance.md)
 
 ## Docs layout
 
@@ -93,8 +93,8 @@ full-text search.
 
 - A **Readme** MUST link forward to its **Intent** and to each
   **Specification**.
-- An **Intent** MUST link back to its **Readme** and forward to every
-  **Specification** it introduces and every **ADR** that shapes it.
+- An **Intent** MUST link back to the document that links to it and forward to
+  every **Specification** it introduces and every **ADR** that shapes it.
 - A **Specification** MUST link back to its **Intent** and forward to its
   matching **Acceptance** scenarios. A requirement MAY also link to the **ADR**
   that decided its behavior.
@@ -108,9 +108,9 @@ full-text search.
 
 No document is reachable only by knowing its file path.
 
-Repo-level documents that provide closing navigation links MUST group them under
-a `## Related` heading instead of writing them as a closing sentence. Feature
-documents MUST use the relationship sections defined by their type.
+Feature documents MUST use the relationship sections defined by their type.
+Repo-level documents follow the
+[Docs graph](./GENERAL_CONVENTIONS.md#docs-graph) rule.
 
 ## Docs types
 
@@ -131,11 +131,10 @@ tags: [<tag1>, <tag2>, ...]
 
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
->
-> This document MUST use these terms, in uppercase, when expressing normative
-> requirements, permissions, recommendations, or prohibitions. It MUST NOT use
-> alternative words or lowercase variants as normative keywords.
+> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
+> [GENERAL_CONVENTIONS.md](<path-to-docs>/GENERAL_CONVENTIONS.md#normative-language).
+> This document MUST NOT use alternative words or lowercase variants as
+> normative keywords.
 
 <One or two paragraphs: what the module does and the concepts it introduces.>
 
@@ -146,7 +145,7 @@ tags: [<tag1>, <tag2>, ...]
 ## Overview
 
 <Free-form, detailed description of the module: its model, concepts, and how
-they relate. May use subsections (###).>
+they relate. MAY use subsections (###).>
 
 ## Documentation
 
@@ -161,6 +160,9 @@ they relate. May use subsections (###).>
 An intent explains why a feature exists, the problem it addresses, its
 boundaries, and its non-goals. It is not normative.
 
+An intent MUST NOT carry the normative-language note and MUST NOT use
+normative keywords.
+
 **Layout**:
 
 ```md
@@ -169,14 +171,6 @@ title: <Feature name> intent
 summary: <One-line summary of why the feature exists.>
 tags: [<tag1>, <tag2>, ...]
 ---
-
-> [!IMPORTANT]
-> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
->
-> This document MUST use these terms, in uppercase, when expressing normative
-> requirements, permissions, recommendations, or prohibitions. It MUST NOT use
-> alternative words or lowercase variants as normative keywords.
 
 ## Problem
 
@@ -279,7 +273,7 @@ An acceptance document defines observable scenarios derived from requirements.
 Scenarios MUST use embedded Gherkin and MUST link back to the requirement they
 verify.
 
-Each acceptance scenario MUST declare its own acceptance and verification
+Each acceptance scenario MUST declare its own doc status and verification
 status. Implementation status belongs to the requirement, not to each scenario.
 
 A requirement MAY have multiple acceptance scenarios. An acceptance scenario
@@ -320,11 +314,10 @@ tags: [<feature>, <area>, acceptance, gherkin]
 
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
->
-> This document MUST use these terms, in uppercase, when expressing normative
-> requirements, permissions, recommendations, or prohibitions. It MUST NOT use
-> alternative words or lowercase variants as normative keywords.
+> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
+> [GENERAL_CONVENTIONS.md](<path-to-docs>/GENERAL_CONVENTIONS.md#normative-language).
+> This document MUST NOT use alternative words or lowercase variants as
+> normative keywords.
 
 ## <FEATURE>_<AREA>-ACC-0001
 
@@ -396,6 +389,13 @@ summary: <One-line summary of the decision.>
 tags: [<feature>, adr, decision]
 ---
 
+> [!IMPORTANT]
+> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
+> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
+> [GENERAL_CONVENTIONS.md](<path-to-docs>/GENERAL_CONVENTIONS.md#normative-language).
+> This document MUST NOT use alternative words or lowercase variants as
+> normative keywords.
+
 ## <FEATURE>-ADR-0001
 
 Name: <Decision title>
@@ -428,4 +428,7 @@ Name: <Decision title>
 ## Related
 
 - [README.md](../README.md): what Kraf is.
-- [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md): repo conventions.
+- Examples:
+  - [INTENT](./example/example-intent.md)
+  - [SPECIFICATION](./example/example.spec.md)
+  - [ACCEPTANCE](./example/example.acceptance.md)

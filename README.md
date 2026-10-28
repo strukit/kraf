@@ -13,9 +13,9 @@ test needs only the pieces that test touches, not a full system. A full
 development environment and a single agent tool come from the same project
 files.
 
-Kraf's guiding rule: **materialize only what the workload proves it needs.**
-
 ## Vision
+
+> **Materialize only what the workload proves it needs.**
 
 Today Kraf materializes environments as a local shell; CI, containers, browsers,
 and airgapped agents come later. The targets change; what Kraf reads from the
@@ -41,6 +41,18 @@ toolchains a project already uses rather than replacing them.
 
 ## Related
 
-- [AGENTS.md](./AGENTS.md): AI agent instructions.
-- [Architecture](./docs/ARCHITECTURE.md): architecture.
-- [Documentation](./docs/README.md): repository documentation index.
+- [AGENTS](./AGENTS.md): AI agent instructions.
+- [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md) — repo-wide
+  conventions: convention documents and rule precedence, docs, workspace,
+  naming.
+- [ARCHITECTURE.md](./docs/ARCHITECTURE.md) — cross-domain architecture: system
+  context, containers, modules, ports and adapters, dependency rule, decisions.
+- [CODE_CONVENTIONS.md](./docs/CODE_CONVENTIONS.md) — code conventions: modules
+  and tests.
+- [SPEC_CONVENTIONS.md](./docs/SPEC_CONVENTIONS.md) — spec conventions: layout,
+  identifiers, intent, specification, acceptance, ADR.
+
+## Modules
+
+- [Environment variables](./src/environment/src/env_var/README.md): declarative
+  model, resolution, and projection of environment variables.

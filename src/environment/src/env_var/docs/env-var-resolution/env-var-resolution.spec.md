@@ -141,11 +141,9 @@ available,
 THE SOFTWARE SHALL leave the tilde unchanged and evaluate a dollar
 placeholder when one is present.
 
-A dollar placeholder is the first dollar sign followed by one or more ASCII
-letters, digits, or underscores.
-
-The software SHALL replace the first occurrence of that placeholder with the
-collected value whose key matches its name, including an empty value.
+The software SHALL replace the first dollar placeholder, a dollar sign followed
+by one or more ASCII letters, digits, or underscores, with the collected value
+whose key matches its name, including an empty value.
 
 WHEN A dollar sign has no valid placeholder name or a dollar placeholder
 has no collected value,

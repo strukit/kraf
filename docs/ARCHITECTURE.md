@@ -6,20 +6,19 @@ tags: [architecture, c4, ports-and-adapters, modules]
 
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
->
-> This document MUST use these terms, in uppercase, when expressing normative
-> requirements, permissions, recommendations, or prohibitions. It MUST NOT use
-> alternative words or lowercase variants as normative keywords.
+> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
+> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#normative-language). This
+> document MUST NOT use alternative words or lowercase variants as normative
+> keywords.
 
 ---
 
 > [!IMPORTANT]
-> These are the Kraf codebase's **invariants** — non-negotiable rules that the
-> codebase MUST follow. Treat them like a constitution: you MUST NOT break an
-> invariant, you **amend** it. Changing one is a deliberate decision made in a
-> pull request that edits this file — it MUST NOT be an ad-hoc exception slipped
-> into passing code.
+> This is a convention document, as defined in
+> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#convention-documents): its
+> rules are mandatory and non-negotiable. Treat them like a constitution: a rule
+> changes only through a pull request that edits this document and MUST NOT be
+> bypassed by an ad-hoc exception in code.
 
 ## Overview
 
@@ -33,11 +32,11 @@ humans — call to inspect and operate on a project, exposing it as an IDE
 runtime: an isolated environment today, and its files, diagnostics, and language
 tooling next. The tools are organized into features, each owning its
 capabilities and their contracts, and reached through entrypoints — CLI, MCP, or
-an embeddable library. A Kraf `read_file`, for example, returns a file's
-content with a digest for conditional re-reads (a later read passing the digest
-gets "not changed" instead of the bytes again) and metadata like line count and
-MIME type, where a raw file read returns only bytes. It interoperates with
-existing editors and toolchains instead of competing with them.
+an embeddable library. A Kraf `read_file`, for example, returns a file's content
+with a digest for conditional re-reads (a later read passing the digest gets
+"not changed" instead of the bytes again) and metadata like line count and MIME
+type, where a raw file read returns only bytes. It interoperates with existing
+editors and toolchains instead of competing with them.
 
 This document covers only what crosses module boundaries: the system context,
 how modules relate, and the rules for how they depend on each other. Feature
@@ -292,4 +291,3 @@ modules.
 ## Related
 
 - [README.md](../README.md): what Kraf is.
-- [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md): repo conventions.
