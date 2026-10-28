@@ -115,11 +115,11 @@ Every repo-level doc other than README.md MUST be linked from at least one doc
 already in the graph, which is its parent, so no doc is reachable only by its
 file path. Every doc MUST link back to its parent. A link already in the body
 satisfies these rules; a separate `Related` section is OPTIONAL and MAY be used
-to consolidate outbound links in one place. A repo-level doc that provides closing navigation links MUST
-group them under a `## Related` heading instead of writing them as a closing
-sentence. A set of docs MAY define its own graph; when it does, that graph MUST
-be documented alongside the set. The graph MUST be read before navigating or
-linking across a set of docs.
+to consolidate outbound links in one place. A repo-level doc that provides
+closing navigation links MUST group them under a `## Related` heading instead of
+writing them as a closing sentence. A set of docs MAY define its own graph; when
+it does, that graph MUST be documented alongside the set. The graph MUST be read
+before navigating or linking across a set of docs.
 
 Every reference to a specific file MUST be a navigable link, not a bare name —
 so the reader can follow it. (Generic references, like "a module's `README.md`",
@@ -146,8 +146,8 @@ foundational runtimes/packages, big-tech, Linux Foundation and friends packages.
 Code SHOULD NOT add convenience wrappers on top of another lib, or a "wrapper of
 a wrapper".
 
-Example: terminal handling uses `std::io::IsTerminal` + minimal syscalls, not
-lib/package like crossterm/portable-pty.
+Example: terminal handling uses `std::io::IsTerminal` + minimal syscalls, not an
+external terminal lib/package.
 
 ### Lib-first
 

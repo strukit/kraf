@@ -44,6 +44,7 @@ Name: Declared value access
 - [Intent](../env-var-intent.md): module intent.
 - [ENV-VAR_ACCESS-ACC-0002](./env-var-access.acceptance.md#env-var_access-acc-0002)
 - [ENV-VAR_ACCESS-ACC-0003](./env-var-access.acceptance.md#env-var_access-acc-0003)
+- [ENV-VAR_ACCESS-ACC-0006](./env-var-access.acceptance.md#env-var_access-acc-0006)
 
 **Status**:
 
@@ -55,9 +56,9 @@ WHEN a module or plugin requests a resolved value for a declaration it owns or
 declares as a dependency,
 THE SOFTWARE SHALL provide the resolved value.
 
-WHEN a module or plugin requests a resolved value for a declaration it neither
+IF a module or plugin requests a resolved value for a declaration it neither
 owns nor declares as a dependency,
-THE SOFTWARE SHALL reject the request.
+THEN THE SOFTWARE SHALL reject the request.
 ```
 
 ---

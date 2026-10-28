@@ -96,9 +96,9 @@ The software SHALL NOT deduplicate path entries during merge resolution.
 WHEN no import alias provides a non-empty path value,
 THE SOFTWARE SHALL resolve the declaration fallback.
 
-WHEN joining the collected paths cannot produce a valid string for the
-current platform,
-THE SOFTWARE SHALL resolve the declaration to an empty string.
+IF joining the collected paths cannot produce a valid string for the current
+platform,
+THEN THE SOFTWARE SHALL resolve the declaration to an empty string.
 ```
 
 ---
@@ -139,9 +139,9 @@ The software SHALL evaluate only the first dollar sign and, when it is followed
 by one or more ASCII letters, digits, or underscores, replace that placeholder
 with the collected value whose key matches its name, including an empty value.
 
-WHEN a dollar sign has no valid placeholder name or a dollar placeholder
-has no collected value,
-THE SOFTWARE SHALL preserve it literally.
+IF a dollar sign has no valid placeholder name or a dollar placeholder has no
+collected value,
+THEN THE SOFTWARE SHALL preserve it literally.
 ```
 
 ---

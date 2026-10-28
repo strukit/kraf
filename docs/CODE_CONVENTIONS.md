@@ -25,7 +25,7 @@ tags: [code-standards, mandatory-rules, conventions, rust]
 `mod.rs` MUST only declare/re-export submodules (`pub mod ...`); it MUST NOT
 hold types, logic, or implementation. If a folder-module needs its own core
 type/logic file, it MUST be named after the folder with a suffix (e.g.
-`env_var/env_var_core.rs`, not `env_var/env_var.rs`) — a submodule can't share
+`foo/foo_core.rs`, not `foo/foo.rs`) — a submodule can't share
 its parent's exact name (`clippy::module_inception`), and the suffix keeps it
 consistent with the folder's other files.
 

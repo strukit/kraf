@@ -40,7 +40,7 @@ Feature: ENV-VAR_ACCESS-FEAT-0001 — Environment variable access
 
 ## ENV-VAR_ACCESS-ACC-0002
 
-Name: Owned or dependent declaration provides a resolved value
+Name: Dependent declaration provides a resolved value
 
 **Links:**
 
@@ -56,7 +56,7 @@ Feature: ENV-VAR_ACCESS-FEAT-0001 — Environment variable access
 
   Rule: ENV-VAR_ACCESS-REQ-0002 — Declared value access
 
-    Scenario: ENV-VAR_ACCESS-ACC-0002 — Owned or dependent declaration provides a resolved value
+    Scenario: ENV-VAR_ACCESS-ACC-0002 — Dependent declaration provides a resolved value
       Given a plugin declares "EXAMPLE_KEY" as a dependency
       And "EXAMPLE_KEY" has a resolved value
       When the plugin requests the value of "EXAMPLE_KEY"
@@ -139,4 +139,31 @@ Feature: ENV-VAR_ACCESS-FEAT-0001 — Environment variable access
       Given the operations the environment module exposes to other modules
       When they are inspected
       Then none of them looks up a host variable by an arbitrary string key
+```
+
+---
+
+## ENV-VAR_ACCESS-ACC-0006
+
+Name: Owned declaration provides a resolved value
+
+**Links:**
+
+- [ENV-VAR_ACCESS-REQ-0002](./env-var-access.spec.md#env-var_access-req-0002)
+
+**Status**:
+
+- Doc status: Draft
+- Verification status: Unknown
+
+```gherkin
+Feature: ENV-VAR_ACCESS-FEAT-0001 — Environment variable access
+
+  Rule: ENV-VAR_ACCESS-REQ-0002 — Declared value access
+
+    Scenario: ENV-VAR_ACCESS-ACC-0006 — Owned declaration provides a resolved value
+      Given a plugin owns "EXAMPLE_KEY"
+      And "EXAMPLE_KEY" has a resolved value
+      When the plugin requests the value of "EXAMPLE_KEY"
+      Then the software provides the resolved value
 ```
