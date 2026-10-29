@@ -172,11 +172,6 @@ can lack a requirement, an ADR, code, or any other document that specifies or
 details it. This is expected and MUST NOT be treated as an error, a defect, or a
 problem.
 
-A review MUST NOT report or list parts of an intent that lack a requirement, an
-ADR, code, or any other document that specifies or details them, and MUST NOT
-block a pull request because of them, unless the user explicitly asks to see
-what the intent describes that is not yet specified or implemented.
-
 **Layout**:
 
 ```md

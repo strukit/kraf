@@ -49,12 +49,17 @@ A canonical definition of a variable in Kraf. A declaration specifies:
 - fallback;
 - keys eligible for projection to a child process.
 
+A declaration names the source of its own canonical value:
+
 - **`Host`:** the declaration resolves from its import aliases, which can
   include its canonical key, or from its fallback; the canonical key is not read
   on its own.
 - **`Provided`:** Kraf generates the canonical value, such as a session value.
   The host value of the same key can be read, but it is not the value that is
   resolved or projected.
+
+Collected values are the values read from the host plus the values Kraf
+provides.
 
 ### Resolution
 

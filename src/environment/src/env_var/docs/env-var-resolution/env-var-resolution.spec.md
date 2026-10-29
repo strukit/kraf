@@ -31,7 +31,7 @@ Name: Declared import dependency collection
 - Implementation status: Implemented
 
 ```text
-THE SOFTWARE SHALL collect the import aliases of every active declaration.
+THE SOFTWARE SHALL collect the import aliases of every declaration.
 
 WHEN the software collects import dependencies for a declaration whose fallback
 has a first dollar sign followed by a placeholder name of one or more ASCII
@@ -253,7 +253,7 @@ Name: Resolved output order
 - Implementation status: Implemented
 
 ```text
-THE SOFTWARE SHALL emit resolved declarations in active mapping order.
+THE SOFTWARE SHALL emit resolved declarations in declaration order.
 
 THE SOFTWARE SHALL emit, for each declaration, the canonical key first, followed
 by its export aliases in declaration order, all with the same resolved value.

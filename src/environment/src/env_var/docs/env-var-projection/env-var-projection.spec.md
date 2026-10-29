@@ -30,8 +30,8 @@ Name: Explicit export authorization
 - Implementation status: Implemented
 
 ```text
-THE SOFTWARE SHALL project only keys declared as export aliases by the active
-mappings.
+THE SOFTWARE SHALL project only keys declared as export aliases by the
+declarations.
 ```
 
 ---
