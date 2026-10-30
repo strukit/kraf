@@ -11,42 +11,36 @@ use kraf::environment::env_var::env_var_host_macos::MACOS_MAPPINGS as PLATFORM_M
 use kraf::environment::env_var::env_var_host_windows::WINDOWS_MAPPINGS as PLATFORM_MAPPINGS;
 
 fn main() {
-    let workdir = HostProcess.get_current_dir();
-    let homedir = HostProcess.get_temp_dir_random();
+    let workdir = HostProcess
+        .get_current_dir()
+        .expect("[kraf] error: $WORKDIR is required, failed to resolve (internal)");
+    let home = HostProcess
+        .get_temp_dir_random()
+        .expect("[kraf] error: $HOME is required, failed to resolve (internal)");
 
     println!("[kraf] trap init");
 
-    let mut collected = env_var_collect(PLATFORM_MAPPINGS, &HostProcess);
+    let mut collected = vec![
+        EnvVar {
+            key: "WORKDIR",
+            value: Some(workdir.clone()),
+        },
+        EnvVar {
+            key: "HOME",
+            value: Some(home.clone()),
+        },
+    ];
 
-    collected.push(EnvVar {
-        key: "WORKDIR",
-        value: workdir.clone(),
-    });
-
-    collected.push(EnvVar {
-        key: "HOME",
-        value: homedir,
-    });
+    collected.extend(env_var_collect(PLATFORM_MAPPINGS, &HostProcess));
 
     let resolved = resolve(PLATFORM_MAPPINGS, &collected);
-
-    let workdir = resolved
-        .iter()
-        .find(|env_var| env_var.key == "WORKDIR")
-        .and_then(|env_var| env_var.value.clone())
-        .expect("[kraf] error: $WORKDIR is required, failed to resolve (internal)");
 
     let terminal = resolved
         .iter()
         .find(|env_var| env_var.key == "TERMINAL")
         .and_then(|env_var| env_var.value.clone())
+        .filter(|value| !value.is_empty())
         .expect("[kraf] error: $TERMINAL is required, failed to resolve (internal)");
-
-    let home = resolved
-        .iter()
-        .find(|env_var| env_var.key == "HOME")
-        .and_then(|env_var| env_var.value.clone())
-        .expect("[kraf] error: $HOME is required, failed to resolve (internal)");
 
     println!("[kraf]   HOME={home}");
     println!("[kraf]   WORKDIR={workdir}");

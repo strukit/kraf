@@ -31,10 +31,18 @@ Name: Declared import dependency collection
 - Implementation status: Implemented
 
 ```text
-The software SHALL collect only import aliases and the first valid dollar
-variable reference in a declaration fallback.
+THE SOFTWARE SHALL collect the import aliases of every declaration of the
+current platform.
 
-The software SHALL deduplicate and lexicographically sort collected import and
+WHEN the software collects import dependencies for a declaration whose fallback
+has a first dollar sign followed by a placeholder name of one or more ASCII
+letters, digits, or underscores,
+THE SOFTWARE SHALL collect that placeholder name.
+
+THE SOFTWARE SHALL NOT collect import dependencies other than these import
+aliases and placeholder names.
+
+THE SOFTWARE SHALL deduplicate and lexicographically sort collected import and
 export keys.
 ```
 
@@ -57,11 +65,17 @@ Name: First-found resolution
 - Implementation status: Implemented
 
 ```text
-The software SHALL resolve a declaration using first-found import mode to the
-first available import alias in declaration order. A collected value is
-available when it is present, including when its value is empty.
+WHILE a declaration uses first-found import mode,
+WHILE an import alias of the declaration has a collected value, including an
+empty value,
+WHEN the software resolves the declaration,
+THE SOFTWARE SHALL resolve the declaration to the collected value of the first
+such import alias in declaration order.
 
-WHEN no import alias provides a value,
+WHILE a declaration uses first-found import mode,
+WHILE the declaration has one or more import aliases,
+WHILE no import alias of the declaration has a collected value,
+WHEN the software resolves the declaration,
 THE SOFTWARE SHALL resolve the declaration fallback.
 ```
 
@@ -83,22 +97,39 @@ Name: Path merge resolution
 **Status**:
 
 - Doc status: Draft
-- Implementation status: Implemented
+- Implementation status: Partially Implemented
 
 ```text
-The software SHALL resolve a declaration using merge import mode by ignoring
-empty imported values, splitting each remaining value into paths using the
-current platform semantics, and joining the resulting paths in declaration order
-using the current platform path separator.
+WHILE a declaration uses merge import mode,
+IF the software resolves the declaration and an import alias of the declaration
+is not valid Unicode,
+THEN THE SOFTWARE SHALL resolve the declaration to an empty string, without
+splitting or joining any path, and log a warning that names the declaration.
 
-The software SHALL NOT deduplicate path entries during merge resolution.
+WHILE a declaration uses merge import mode,
+IF the software resolves the declaration and an import alias of the declaration
+has a non-empty collected value that is not valid Unicode,
+THEN THE SOFTWARE SHALL resolve the declaration to an empty string, without
+splitting or joining any path, and log a warning that names the declaration.
 
-WHEN no import alias provides a non-empty path value,
+WHILE a declaration uses merge import mode,
+WHILE an import alias of the declaration has a non-empty collected value,
+WHILE every import alias of the declaration and every non-empty collected value
+of its import aliases is valid Unicode,
+WHEN the software resolves the declaration,
+THE SOFTWARE SHALL ignore empty imported values, split each remaining value into
+paths using the current platform semantics, and join the resulting paths in
+declaration order using the current platform path separator.
+
+WHILE a declaration uses merge import mode,
+WHEN the software resolves the declaration,
+THE SOFTWARE SHALL NOT deduplicate path entries.
+
+WHILE a declaration uses merge import mode,
+WHILE every import alias of the declaration is valid Unicode,
+WHILE no import alias of the declaration has a non-empty collected value,
+WHEN the software resolves the declaration,
 THE SOFTWARE SHALL resolve the declaration fallback.
-
-IF joining the collected paths cannot produce a valid string for the current
-platform,
-THEN THE SOFTWARE SHALL resolve the declaration to an empty string.
 ```
 
 ---
@@ -116,6 +147,7 @@ Name: Placeholder expansion
 - [ENV-VAR_RESOLUTION-ACC-0016](./env-var-resolution.acceptance.md#env-var_resolution-acc-0016)
 - [ENV-VAR_RESOLUTION-ACC-0017](./env-var-resolution.acceptance.md#env-var_resolution-acc-0017)
 - [ENV-VAR_RESOLUTION-ACC-0018](./env-var-resolution.acceptance.md#env-var_resolution-acc-0018)
+- [ENV-VAR_RESOLUTION-ACC-0026](./env-var-resolution.acceptance.md#env-var_resolution-acc-0026)
 
 **Status**:
 
@@ -123,25 +155,55 @@ Name: Placeholder expansion
 - Implementation status: Implemented
 
 ```text
-WHEN a fallback contains a tilde and a non-empty collected `HOME` value is
-available,
-THE SOFTWARE SHALL replace the first tilde with that value.
+WHILE a non-empty provided `HOME` value is available,
+WHEN the software expands a fallback that contains a tilde,
+THE SOFTWARE SHALL replace the first tilde with that value without evaluating
+any dollar placeholder.
 
-WHEN a non-empty collected `HOME` value is available,
-THE SOFTWARE SHALL give tilde expansion precedence over dollar expansion.
+WHILE no non-empty provided `HOME` value is available,
+IF the software expands a fallback that contains a tilde,
+THEN THE SOFTWARE SHALL leave the tilde unchanged.
 
-WHEN a fallback contains a tilde but no non-empty collected `HOME` value is
-available,
-THE SOFTWARE SHALL leave the tilde unchanged and evaluate a dollar
-placeholder when one is present.
+THE SOFTWARE SHALL evaluate only the first dollar sign of a fallback.
 
-The software SHALL evaluate only the first dollar sign and, when it is followed
-by one or more ASCII letters, digits, or underscores, replace that placeholder
-with the collected value whose key matches its name, including an empty value.
+WHILE a non-empty provided `HOME` value is available,
+WHEN the software expands a fallback that contains no tilde and whose first
+dollar sign is followed by the placeholder name `HOME`,
+THE SOFTWARE SHALL replace that placeholder with the provided `HOME` value.
 
-IF a dollar sign has no valid placeholder name or a dollar placeholder has no
-collected value,
-THEN THE SOFTWARE SHALL preserve it literally.
+WHILE an empty provided `HOME` value is available,
+WHEN the software expands a fallback whose first dollar sign is followed by the
+placeholder name `HOME`,
+THE SOFTWARE SHALL replace that placeholder with the empty value.
+
+WHILE no provided `HOME` value is available,
+IF the software expands a fallback whose first dollar sign is followed by the
+placeholder name `HOME`,
+THEN THE SOFTWARE SHALL leave the dollar sign and the placeholder name
+unchanged.
+
+WHILE a non-empty provided `HOME` value is available,
+WHEN the software expands a fallback that contains no tilde and whose first
+dollar sign is followed by a placeholder name of one or more ASCII letters,
+digits, or underscores, other than `HOME`, that matches the key of a collected
+value, including an empty value,
+THE SOFTWARE SHALL replace that placeholder with the collected value.
+
+WHILE no non-empty provided `HOME` value is available,
+WHEN the software expands a fallback whose first dollar sign is followed by a
+placeholder name of one or more ASCII letters, digits, or underscores, other
+than `HOME`, that matches the key of a collected value, including an empty
+value,
+THE SOFTWARE SHALL replace that placeholder with the collected value.
+
+WHEN the software expands a fallback whose first dollar sign is followed by a
+placeholder name of one or more ASCII letters, digits, or underscores, other
+than `HOME`, that matches no collected value,
+THE SOFTWARE SHALL leave the dollar sign and the placeholder name unchanged.
+
+IF the software expands a fallback whose first dollar sign is not followed by
+one or more ASCII letters, digits, or underscores,
+THEN THE SOFTWARE SHALL leave the dollar sign unchanged.
 ```
 
 ---
@@ -165,17 +227,27 @@ Name: Source precedence and absence
 - Implementation status: Implemented
 
 ```text
-WHEN a declaration without import aliases and with source `Provided` has a
-collected canonical value, including an empty value,
+WHILE a declaration has no import aliases,
+WHILE the declaration has source `Provided`,
+WHILE the canonical key of the declaration has a collected value, including an
+empty value,
+WHEN the software resolves the declaration,
 THE SOFTWARE SHALL resolve the declaration to that value.
 
-WHEN that provided canonical value is absent,
+WHILE a declaration has no import aliases,
+WHILE the declaration has source `Provided`,
+WHILE the canonical key of the declaration has no collected value,
+WHEN the software resolves the declaration,
 THE SOFTWARE SHALL resolve the declaration fallback.
 
-The software SHALL resolve a declaration without import aliases and with source
-`Host` to its fallback without reading a collected value for its canonical key.
+WHILE a declaration has no import aliases,
+WHILE the declaration has source `Host`,
+WHEN the software resolves the declaration,
+THE SOFTWARE SHALL resolve the declaration to its fallback without reading a
+collected value for its canonical key.
 
-WHEN the selected source and fallback provide no value,
+WHILE the selected source and the fallback of a declaration provide no value,
+WHEN the software resolves the declaration,
 THE SOFTWARE SHALL resolve the declaration to an empty string.
 ```
 
@@ -197,10 +269,16 @@ Name: Pass-through resolution
 - Implementation status: Implemented
 
 ```text
-The software SHALL resolve a declaration using pass-through import mode to the
-first available import alias in declaration order without applying a fallback.
+WHILE a declaration uses pass-through import mode,
+WHILE an import alias of the declaration has a collected value, including an
+empty value,
+WHEN the software resolves the declaration,
+THE SOFTWARE SHALL resolve the declaration to the collected value of the first
+such import alias in declaration order without applying a fallback.
 
-WHEN no import alias provides a value,
+WHILE a declaration uses pass-through import mode,
+WHILE no import alias of the declaration has a collected value,
+WHEN the software resolves the declaration,
 THE SOFTWARE SHALL resolve the declaration to an empty string.
 ```
 
@@ -221,8 +299,9 @@ Name: Resolved output order
 - Implementation status: Implemented
 
 ```text
-The software SHALL emit resolved declarations in active mapping order.
+THE SOFTWARE SHALL emit resolved declarations in the order they appear in the
+current platform mapping.
 
-The software SHALL emit, for each declaration, the canonical key first, followed
+THE SOFTWARE SHALL emit, for each declaration, the canonical key first, followed
 by its export aliases in declaration order, all with the same resolved value.
 ```

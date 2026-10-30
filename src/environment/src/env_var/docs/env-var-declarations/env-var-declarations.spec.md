@@ -27,21 +27,21 @@ Name: Static declaration
 **Status**:
 
 - Doc status: Draft
-- Implementation status: Not implemented
+- Implementation status: Not Implemented
 
 ```text
-The software SHALL resolve and project only environment-variable declarations
+THE SOFTWARE SHALL resolve and project only environment-variable declarations
 that are built into the software or packaged as immutable metadata with a
 plugin.
 
-The software MAY accept values for known declarations from runtime
+THE SOFTWARE MAY accept values for known declarations from runtime
 configuration.
 
-The software SHALL NOT accept declarations, import aliases, export aliases, or
+THE SOFTWARE SHALL NOT accept declarations, import aliases, export aliases, or
 source eligibility from runtime configuration.
 
-WHEN runtime configuration provides a value for an unknown declaration,
-THE SOFTWARE SHALL reject the configuration.
+IF runtime configuration provides a value for an unknown declaration,
+THEN THE SOFTWARE SHALL reject the configuration.
 ```
 
 ---
@@ -58,13 +58,13 @@ Name: Canonical key uniqueness
 **Status**:
 
 - Doc status: Draft
-- Implementation status: Partially implemented
+- Implementation status: Partially Implemented
 
 ```text
-The software SHALL accept at most one declaration for each canonical key.
+THE SOFTWARE SHALL accept at most one declaration for each canonical key.
 
-WHEN a declaration set contains duplicate canonical keys,
-THE SOFTWARE SHALL reject the declaration set.
+IF the software loads a declaration set that contains duplicate canonical keys,
+THEN THE SOFTWARE SHALL reject the declaration set.
 ```
 
 ---
@@ -83,15 +83,18 @@ Name: Mapping mode validity
 **Status**:
 
 - Doc status: Draft
-- Implementation status: Partially implemented
+- Implementation status: Partially Implemented
 
 ```text
-The software SHALL accept a declaration using merge import mode only when it
-declares at least two import aliases.
+IF the software loads a declaration using merge import mode that declares fewer
+than two import aliases,
+THEN THE SOFTWARE SHALL reject the declaration.
 
-The software SHALL accept a declaration using pass-through import mode only when
-its canonical key is its only import alias.
+IF the software loads a declaration using pass-through import mode that does
+not declare its canonical key as its only import alias,
+THEN THE SOFTWARE SHALL reject the declaration.
 
-The software SHALL NOT accept a declaration using pass-through import mode that
-declares a fallback.
+IF the software loads a declaration using pass-through import mode that
+declares a fallback,
+THEN THE SOFTWARE SHALL reject the declaration.
 ```

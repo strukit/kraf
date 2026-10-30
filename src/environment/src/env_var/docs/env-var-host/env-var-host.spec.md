@@ -31,7 +31,7 @@ Name: Supported-platform mapping completeness
 - Implementation status: Implemented
 
 ```text
-The software SHALL declare every shared canonical environment-variable key in
+THE SOFTWARE SHALL declare every shared canonical environment-variable key in
 every supported platform mapping.
 ```
 
@@ -45,6 +45,7 @@ Name: Session-owned directory sources
 
 - [Intent](../env-var-intent.md): module intent.
 - [ENV-VAR_HOST-ACC-0004](./env-var-host.acceptance.md#env-var_host-acc-0004)
+- [ENV-VAR_HOST-ACC-0005](./env-var-host.acceptance.md#env-var_host-acc-0005)
 
 **Status**:
 
@@ -52,6 +53,9 @@ Name: Session-owned directory sources
 - Implementation status: Implemented
 
 ```text
-The software SHALL resolve the WORKDIR and HOME declaration families from
-provided values rather than from values imported from the host.
+THE SOFTWARE SHALL declare the WORKDIR and HOME declaration families with the
+`Provided` source.
+
+IF the software cannot provide a WORKDIR or HOME value,
+THEN THE SOFTWARE SHALL stop with an error that names the missing key.
 ```

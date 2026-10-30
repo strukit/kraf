@@ -112,3 +112,34 @@ Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
       When the mapping declares WORKDIR or a HOME family key
       Then the declaration source is provided
 ```
+
+---
+
+## ENV-VAR_HOST-ACC-0005
+
+Name: Missing work-directory or home value stops the software
+
+**Links:**
+
+- [ENV-VAR_HOST-REQ-0002](./env-var-host.spec.md#env-var_host-req-0002)
+
+**Status**:
+
+- Doc status: Draft
+- Verification status: Unknown
+
+```gherkin
+Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
+
+  Rule: ENV-VAR_HOST-REQ-0002 — Session-owned directory sources
+
+    Scenario Outline: ENV-VAR_HOST-ACC-0005 — Missing work-directory or home value stops the software
+      Given the software cannot provide a "<key>" value
+      When the software starts
+      Then the software stops with an error that names "<key>"
+
+      Examples:
+        | key     |
+        | WORKDIR |
+        | HOME    |
+```

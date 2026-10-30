@@ -160,10 +160,17 @@ they relate. MAY use subsections (###).>
 ### Intent (*-intent.md)
 
 An intent explains why a feature exists, the problem it addresses, its
-boundaries, and its non-goals. It is not normative.
+boundaries, and its non-goals. It is not normative: what it describes is not
+required to be implemented, specified, or accepted, now or later. A principle
+becomes normative only through a requirement or an ADR that covers it.
 
 An intent MUST NOT carry the normative-language note and MUST NOT use normative
 keywords.
+
+An intent is an idea that still needs refinement. An intent, or any part of one,
+can lack a requirement, an ADR, code, or any other document that specifies or
+details it. This is expected and MUST NOT be treated as an error, a defect, or a
+problem.
 
 **Layout**:
 
@@ -205,10 +212,18 @@ acceptance scenarios.
 Each requirement MUST declare two independent statuses:
 
 - **Doc status:** `Draft`, `Accepted`, or `Superseded`.
-- **Implementation status:** `Not implemented`, `Partially implemented`,
+- **Implementation status:** `Not Implemented`, `Partially Implemented`,
   `Implemented` or `Unknown`
 
 **Language:**
+
+The rules below summarize the EARS sources. An agent MAY consult the sources
+lazily: only when the rules below leave a doubt about EARS unresolved.
+
+Sources:
+
+- [EARS](https://en.wikipedia.org/w/index.php?title=Easy_Approach_to_Requirements_Syntax&oldid=1342972975)
+  (Wikipedia, revision of 2026-03-11).
 
 Specifications MUST use EARS notation and the normative terms defined by RFC
 2119 and RFC 8174.
@@ -218,17 +233,53 @@ Specifications MUST use EARS notation and the normative terms defined by RFC
   explicit justification to deviate from.
 - **MAY** defines optional behavior.
 
+An EARS requirement is made of, in this order: zero or more preconditions, zero
+or one trigger, the system name, and one or more system responses. In this repo,
+the system name is `THE SOFTWARE`. A precondition or a trigger MUST be stated
+only in its keyword clause, never inside the system response.
+
 A requirement MUST use the EARS pattern that matches the behavior:
 
+| Pattern           | Keyword         | Use when                                                                                         |
+| ----------------- | --------------- | ------------------------------------------------------------------------------------------------ |
+| Ubiquitous        | (none)          | The behavior is always active.                                                                   |
+| Event-driven      | `WHEN`          | The behavior responds to an expected trigger.                                                    |
+| State-driven      | `WHILE`         | The behavior is active while a precondition holds.                                               |
+| Optional feature  | `WHERE`         | The behavior applies only where a feature is included.                                           |
+| Unwanted behavior | `IF`/`THEN`     | The behavior responds to an unwanted trigger: an error, a failure, or invalid input.             |
+| Complex           | Any combination | The behavior needs more than one keyword clause, such as a trigger that applies only in a state. |
+
 ```text
-The software SHALL <behavior>.
+THE SOFTWARE SHALL <system response>.
 
-WHEN <event>,
-THE SOFTWARE SHALL <behavior>.
+WHEN <trigger>,
+THE SOFTWARE SHALL <system response>.
 
-IF <condition>,
-THEN THE SOFTWARE SHALL <behavior>.
+WHILE <precondition>,
+THE SOFTWARE SHALL <system response>.
+
+WHERE <feature is included>,
+THE SOFTWARE SHALL <system response>.
+
+IF <trigger>,
+THEN THE SOFTWARE SHALL <system response>.
+
+WHILE <precondition>,
+WHEN <trigger>,
+THE SOFTWARE SHALL <system response>.
 ```
+
+A requirement MUST use `IF … THEN` only for an unwanted trigger, and `WHEN` for
+an expected trigger. In a complex requirement, the `WHERE` clause MUST come
+first, the `WHILE` clauses next, and the `WHEN` clause or the `IF … THEN` clause
+last. A requirement with more than three preconditions SHOULD be split into
+simpler requirements.
+
+EARS has no "or" between preconditions. Repeating the same system response in
+requirements with distinct preconditions is expected and is not duplication.
+
+A review MUST read the acceptance files linked from a specification before
+reporting one of its requirements as incorrect.
 
 **Layout:**
 
@@ -261,11 +312,11 @@ Name: <Requirement name>
 **Status**:
 
 - Doc status: Draft
-- Implementation status: Not implemented
+- Implementation status: Not Implemented
 
 ```text
-WHEN <event>,
-THE SOFTWARE SHALL <behavior>.
+WHEN <trigger>,
+THE SOFTWARE SHALL <system response>.
 ```
 ````
 
@@ -289,6 +340,14 @@ Each acceptance MUST declare two independent statuses:
 - **Verification status:** `Not Meets`, `Partially Meets`, `Meets` or `Unknown`
 
 **Language:**
+
+The rules below summarize the Gherkin sources. An agent MAY consult the sources
+lazily: only when the rules below leave a doubt about Gherkin unresolved.
+
+Sources:
+
+- [Gherkin](https://github.com/cucumber/website/blob/9bca7375458301f81aaa2f7857587dd141688fab/docs/gherkin/reference.md)
+  (Cucumber, commit `9bca737` of 2025-01-26).
 
 Acceptance scenarios MUST use Gherkin. A `Feature` groups scenarios for one
 area, a `Rule` scopes scenarios to the requirement they verify, and a `Scenario`

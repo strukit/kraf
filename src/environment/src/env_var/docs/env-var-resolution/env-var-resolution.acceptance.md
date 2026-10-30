@@ -191,7 +191,7 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
   Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
 
     Scenario: ENV-VAR_RESOLUTION-ACC-0007 — Tilde fallback expands from resolved home
-      Given "HOME" resolves to "/workspace"
+      Given "HOME" has the provided value "/workspace"
       And a declaration fallback is "~/.cache"
       When the software resolves the declaration
       Then the declaration resolves to "/workspace/.cache"
@@ -201,7 +201,7 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ## ENV-VAR_RESOLUTION-ACC-0008
 
-Name: Dollar fallback expands from a collected value
+Name: Dollar fallback expands from the provided HOME value
 
 **Links:**
 
@@ -217,8 +217,8 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
   Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0008 — Dollar fallback expands from a collected value
-      Given "HOME" has the collected value "/workspace"
+    Scenario: ENV-VAR_RESOLUTION-ACC-0008 — Dollar fallback expands from the provided HOME value
+      Given "HOME" has the provided value "/workspace"
       And a declaration fallback is "$HOME/.cache"
       When the software resolves the declaration
       Then the declaration resolves to "/workspace/.cache"
@@ -439,7 +439,7 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
   Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
 
     Scenario: ENV-VAR_RESOLUTION-ACC-0016 — Tilde expansion takes precedence and replaces only the first tilde
-      Given "HOME" has the collected value "/workspace"
+      Given "HOME" has the provided value "/workspace"
       And a declaration fallback is "~/$HOME/~"
       When the software resolves the declaration
       Then the declaration resolves to "/workspace/$HOME/~"
@@ -498,7 +498,7 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
   Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
 
     Scenario: ENV-VAR_RESOLUTION-ACC-0018 — Dollar expansion replaces only the first placeholder
-      Given "HOME" has the collected value "/workspace"
+      Given "HOME" has the provided value "/workspace"
       And a declaration fallback is "$HOME/$HOME"
       When the software resolves the declaration
       Then the declaration resolves to "/workspace/$HOME"
@@ -562,7 +562,7 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ## ENV-VAR_RESOLUTION-ACC-0021
 
-Name: Unjoinable merged paths resolve to an empty value
+Name: Non-Unicode merge value resolves to an empty value
 
 **Links:**
 
@@ -578,10 +578,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
   Rule: ENV-VAR_RESOLUTION-REQ-0003 — Path merge resolution
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0021 — Unjoinable merged paths resolve to an empty value
-      Given a merge declaration has paths that cannot be joined for the current platform
+    Scenario: ENV-VAR_RESOLUTION-ACC-0021 — Non-Unicode merge value resolves to an empty value
+      Given a merge declaration imports "BIN_A" before "BIN_B"
+      And "BIN_A" has a non-empty collected value that is not valid Unicode
+      And "BIN_B" has the collected value "/usr/bin"
       When the software resolves the declaration
       Then the declaration resolves to ""
+      And a warning that names the declaration is logged
 ```
 
 ---
@@ -688,7 +691,34 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
   Rule: ENV-VAR_RESOLUTION-REQ-0001 — Declared import dependency collection
 
     Scenario: ENV-VAR_RESOLUTION-ACC-0025 — Collected keys are deduplicated and sorted
-      Given active mappings declare the import aliases "SHELL", "EDITOR", and "SHELL"
+      Given declarations of the current platform declare the import aliases "SHELL", "EDITOR", and "SHELL"
       When the software collects import dependencies
       Then the collected import keys are "EDITOR" and "SHELL" in that order
+```
+
+---
+
+## ENV-VAR_RESOLUTION-ACC-0026
+
+Name: Tilde remains literal without a provided home
+
+**Links:**
+
+- [ENV-VAR_RESOLUTION-REQ-0004](./env-var-resolution.spec.md#env-var_resolution-req-0004)
+
+**Status**:
+
+- Doc status: Draft
+- Verification status: Unknown
+
+```gherkin
+Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+
+  Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
+
+    Scenario: ENV-VAR_RESOLUTION-ACC-0026 — Tilde remains literal without a provided home
+      Given no "HOME" value is provided
+      And a declaration fallback is "~/.tmp"
+      When the software resolves the declaration
+      Then the declaration resolves to "~/.tmp"
 ```
