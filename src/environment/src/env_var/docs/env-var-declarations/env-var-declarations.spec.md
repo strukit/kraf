@@ -27,7 +27,7 @@ Name: Static declaration
 **Status**:
 
 - Doc status: Draft
-- Implementation status: Not implemented
+- Implementation status: Not Implemented
 
 ```text
 THE SOFTWARE SHALL resolve and project only environment-variable declarations
@@ -58,7 +58,7 @@ Name: Canonical key uniqueness
 **Status**:
 
 - Doc status: Draft
-- Implementation status: Partially implemented
+- Implementation status: Partially Implemented
 
 ```text
 THE SOFTWARE SHALL accept at most one declaration for each canonical key.
@@ -83,7 +83,7 @@ Name: Mapping mode validity
 **Status**:
 
 - Doc status: Draft
-- Implementation status: Partially implemented
+- Implementation status: Partially Implemented
 
 ```text
 IF the software loads a declaration using merge import mode that declares fewer

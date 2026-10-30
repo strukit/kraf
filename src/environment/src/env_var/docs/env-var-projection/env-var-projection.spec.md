@@ -31,7 +31,7 @@ Name: Explicit export authorization
 
 ```text
 THE SOFTWARE SHALL project only keys declared as export aliases by the
-declarations.
+declarations of the current platform.
 ```
 
 ---

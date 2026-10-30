@@ -52,6 +52,6 @@ Name: Session-owned directory sources
 - Implementation status: Implemented
 
 ```text
-THE SOFTWARE SHALL resolve the WORKDIR and HOME declaration families from
-provided values rather than from values imported from the host.
+THE SOFTWARE SHALL declare the WORKDIR and HOME declaration families with the
+`Provided` source.
 ```

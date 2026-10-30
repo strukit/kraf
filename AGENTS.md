@@ -78,6 +78,8 @@ The rule applies to the agent's direct operations only. Files that a tool reads
 or writes on its own when the agent invokes it are not operations by the agent
 and are outside the scope of this rule.
 
+Reading or writing the agent's own memory is outside the scope of this rule.
+
 An explicit user instruction MAY authorize an operation outside the working root
 for the task at hand only. Before its first operation outside the working root,
 an agent MUST ask the user for confirmation, even when the user has provided
@@ -110,8 +112,16 @@ and MUST NOT assume its contents.
 
 ### HTTP links
 
-An agent SHOULD follow an HTTP link only when the task needs its content, and
-MAY skip it otherwise.
+An agent MUST NOT follow an HTTP link unless the task needs content of the link
+that the agent does not know in enough depth from its training.
+
+Before following an HTTP link, the agent MUST look up the exact URL of the link
+in its own memory. When an entry saved under that URL covers what the task
+needs, the agent MUST use it instead of following the link.
+
+After following an HTTP link, the agent MUST save the content the task needed to
+its own memory under the exact URL of the link, so that later tasks find it by
+that URL and do not follow the link again.
 
 When an agent follows an HTTP link, it SHOULD request the raw-text form of the
 page when the site provides one, for example:

@@ -16,17 +16,18 @@ fn main() {
 
     println!("[kraf] trap init");
 
-    let mut collected = env_var_collect(PLATFORM_MAPPINGS, &HostProcess);
+    let mut collected = vec![
+        EnvVar {
+            key: "WORKDIR",
+            value: workdir.clone(),
+        },
+        EnvVar {
+            key: "HOME",
+            value: homedir,
+        },
+    ];
 
-    collected.push(EnvVar {
-        key: "WORKDIR",
-        value: workdir.clone(),
-    });
-
-    collected.push(EnvVar {
-        key: "HOME",
-        value: homedir,
-    });
+    collected.extend(env_var_collect(PLATFORM_MAPPINGS, &HostProcess));
 
     let resolved = resolve(PLATFORM_MAPPINGS, &collected);
 

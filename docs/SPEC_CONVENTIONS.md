@@ -212,7 +212,7 @@ acceptance scenarios.
 Each requirement MUST declare two independent statuses:
 
 - **Doc status:** `Draft`, `Accepted`, or `Superseded`.
-- **Implementation status:** `Not implemented`, `Partially implemented`,
+- **Implementation status:** `Not Implemented`, `Partially Implemented`,
   `Implemented` or `Unknown`
 
 **Language:**
@@ -312,7 +312,7 @@ Name: <Requirement name>
 **Status**:
 
 - Doc status: Draft
-- Implementation status: Not implemented
+- Implementation status: Not Implemented
 
 ```text
 WHEN <trigger>,

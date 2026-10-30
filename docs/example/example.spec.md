@@ -26,7 +26,7 @@ Name: Explicit configuration
 **Status**:
 
 - Doc status: Draft
-- Implementation status: Not implemented
+- Implementation status: Not Implemented
 
 ```text
 IF configuration provides an unknown key,
