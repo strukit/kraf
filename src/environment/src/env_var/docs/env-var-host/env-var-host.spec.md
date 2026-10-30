@@ -45,6 +45,7 @@ Name: Session-owned directory sources
 
 - [Intent](../env-var-intent.md): module intent.
 - [ENV-VAR_HOST-ACC-0004](./env-var-host.acceptance.md#env-var_host-acc-0004)
+- [ENV-VAR_HOST-ACC-0005](./env-var-host.acceptance.md#env-var_host-acc-0005)
 
 **Status**:
 
@@ -54,4 +55,7 @@ Name: Session-owned directory sources
 ```text
 THE SOFTWARE SHALL declare the WORKDIR and HOME declaration families with the
 `Provided` source.
+
+IF the software cannot provide a WORKDIR or HOME value,
+THEN THE SOFTWARE SHALL stop with an error that names the missing key.
 ```

@@ -154,39 +154,20 @@ Name: Placeholder expansion
 - Implementation status: Implemented
 
 ```text
-WHILE a non-empty provided `HOME` value is available,
 WHEN the software expands a fallback that contains a tilde,
-THE SOFTWARE SHALL replace the first tilde with that value without evaluating
-any dollar placeholder.
-
-WHILE no non-empty provided `HOME` value is available,
-WHEN the software expands a fallback that contains a tilde,
-THE SOFTWARE SHALL leave the tilde unchanged.
+THE SOFTWARE SHALL replace the first tilde with the provided `HOME` value
+without evaluating any dollar placeholder.
 
 THE SOFTWARE SHALL evaluate only the first dollar sign of a fallback.
 
-WHILE a non-empty provided `HOME` value is available,
 WHEN the software expands a fallback that contains no tilde and whose first
 dollar sign is followed by the placeholder name `HOME`,
 THE SOFTWARE SHALL replace that placeholder with the provided `HOME` value.
 
-WHILE no non-empty provided `HOME` value is available,
-WHEN the software expands a fallback whose first dollar sign is followed by the
-placeholder name `HOME`,
-THE SOFTWARE SHALL replace that placeholder with the provided `HOME` value.
-
-WHILE a non-empty provided `HOME` value is available,
 WHEN the software expands a fallback that contains no tilde and whose first
 dollar sign is followed by a placeholder name of one or more ASCII letters,
 digits, or underscores, other than `HOME`, that matches the key of a collected
 value, including an empty value,
-THE SOFTWARE SHALL replace that placeholder with the collected value.
-
-WHILE no non-empty provided `HOME` value is available,
-WHEN the software expands a fallback whose first dollar sign is followed by a
-placeholder name of one or more ASCII letters, digits, or underscores, other
-than `HOME`, that matches the key of a collected value, including an empty
-value,
 THE SOFTWARE SHALL replace that placeholder with the collected value.
 
 WHEN the software expands a fallback whose first dollar sign is followed by a
