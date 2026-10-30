@@ -15,10 +15,17 @@ variable "ARTIFACT_PATH" {
   default = "dist"
 }
 
+variable "BUILDKIT_SYNTAX" {
+  default = "docker/dockerfile:1"
+}
+
 target "_common" {
   context    = "."
   policy     = [{reset = true }]
   load       = false
+  args       = {
+    BUILDKIT_SYNTAX = BUILDKIT_SYNTAX
+  }
 }
 
 target "setup" {
