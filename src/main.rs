@@ -39,6 +39,7 @@ fn main() {
         .iter()
         .find(|env_var| env_var.key == "TERMINAL")
         .and_then(|env_var| env_var.value.clone())
+        .filter(|value| !value.is_empty())
         .expect("[kraf] error: $TERMINAL is required, failed to resolve (internal)");
 
     println!("[kraf]   HOME={home}");

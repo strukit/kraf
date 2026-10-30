@@ -42,6 +42,9 @@ own preference or judgment.
 A review MUST NOT report or list missing content unless a convention document
 requires that content.
 
+Code behavior that no specification defines is a correctness defect. A review
+MUST report it, even though the missing requirement is missing content.
+
 When the user explicitly requests a deep review, the review MUST cover
 everything in its scope, including missing content.
 

@@ -695,3 +695,30 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
       When the software collects import dependencies
       Then the collected import keys are "EDITOR" and "SHELL" in that order
 ```
+
+---
+
+## ENV-VAR_RESOLUTION-ACC-0026
+
+Name: Tilde remains literal without a provided home
+
+**Links:**
+
+- [ENV-VAR_RESOLUTION-REQ-0004](./env-var-resolution.spec.md#env-var_resolution-req-0004)
+
+**Status**:
+
+- Doc status: Draft
+- Verification status: Unknown
+
+```gherkin
+Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+
+  Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
+
+    Scenario: ENV-VAR_RESOLUTION-ACC-0026 — Tilde remains literal without a provided home
+      Given no "HOME" value is provided
+      And a declaration fallback is "~/.tmp"
+      When the software resolves the declaration
+      Then the declaration resolves to "~/.tmp"
+```

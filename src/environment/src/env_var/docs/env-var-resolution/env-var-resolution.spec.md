@@ -147,6 +147,7 @@ Name: Placeholder expansion
 - [ENV-VAR_RESOLUTION-ACC-0016](./env-var-resolution.acceptance.md#env-var_resolution-acc-0016)
 - [ENV-VAR_RESOLUTION-ACC-0017](./env-var-resolution.acceptance.md#env-var_resolution-acc-0017)
 - [ENV-VAR_RESOLUTION-ACC-0018](./env-var-resolution.acceptance.md#env-var_resolution-acc-0018)
+- [ENV-VAR_RESOLUTION-ACC-0026](./env-var-resolution.acceptance.md#env-var_resolution-acc-0026)
 
 **Status**:
 
@@ -154,20 +155,45 @@ Name: Placeholder expansion
 - Implementation status: Implemented
 
 ```text
+WHILE a non-empty provided `HOME` value is available,
 WHEN the software expands a fallback that contains a tilde,
-THE SOFTWARE SHALL replace the first tilde with the provided `HOME` value
-without evaluating any dollar placeholder.
+THE SOFTWARE SHALL replace the first tilde with that value without evaluating
+any dollar placeholder.
+
+WHILE no non-empty provided `HOME` value is available,
+IF the software expands a fallback that contains a tilde,
+THEN THE SOFTWARE SHALL leave the tilde unchanged.
 
 THE SOFTWARE SHALL evaluate only the first dollar sign of a fallback.
 
+WHILE a non-empty provided `HOME` value is available,
 WHEN the software expands a fallback that contains no tilde and whose first
 dollar sign is followed by the placeholder name `HOME`,
 THE SOFTWARE SHALL replace that placeholder with the provided `HOME` value.
 
+WHILE an empty provided `HOME` value is available,
+WHEN the software expands a fallback whose first dollar sign is followed by the
+placeholder name `HOME`,
+THE SOFTWARE SHALL replace that placeholder with the empty value.
+
+WHILE no provided `HOME` value is available,
+IF the software expands a fallback whose first dollar sign is followed by the
+placeholder name `HOME`,
+THEN THE SOFTWARE SHALL leave the dollar sign and the placeholder name
+unchanged.
+
+WHILE a non-empty provided `HOME` value is available,
 WHEN the software expands a fallback that contains no tilde and whose first
 dollar sign is followed by a placeholder name of one or more ASCII letters,
 digits, or underscores, other than `HOME`, that matches the key of a collected
 value, including an empty value,
+THE SOFTWARE SHALL replace that placeholder with the collected value.
+
+WHILE no non-empty provided `HOME` value is available,
+WHEN the software expands a fallback whose first dollar sign is followed by a
+placeholder name of one or more ASCII letters, digits, or underscores, other
+than `HOME`, that matches the key of a collected value, including an empty
+value,
 THE SOFTWARE SHALL replace that placeholder with the collected value.
 
 WHEN the software expands a fallback whose first dollar sign is followed by a
