@@ -14,25 +14,31 @@ runs:
   using: composite
 
   steps:
+    - name: Checkout
+      uses: actions/checkout@v7.0.1
+
+    - name: Start BuildKit daemon
+      shell: bash
+      run: docker compose up --detach --wait buildkitd
+
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v4
+      uses: docker/setup-buildx-action@v4.4.1
       with:
         cache-binary: false
         use: true
-        driver-opts: image=moby/buildkit:v0.34.0
+        driver: remote
+        endpoint: docker-container://kraf-buildkitd
 
     - name: Bake target:(${{ inputs.target }})
-      uses: docker/bake-action@v7
+      uses: docker/bake-action@v7.5.0
       with:
-        source: https://github.com/${{ github.repository }}.git#${{ github.sha }}
+        source: .
         targets: ${{ inputs.target }}
       env:
-        BUILDX_BAKE_GIT_AUTH_TOKEN: ${{ github.token }}
-        
         ARTIFACT_PATH: ${{inputs.artifact-path}}
 
     - name: Update artifacts
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@v7.0.2
       with:
         name: ${{ inputs.target }}-artifact-pr-${{ github.event.pull_request.number }}
         path: ${{ inputs.artifact-path }}

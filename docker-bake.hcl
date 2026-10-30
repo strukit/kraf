@@ -15,10 +15,17 @@ variable "ARTIFACT_PATH" {
   default = "dist"
 }
 
+variable "BUILDKIT_SYNTAX" {
+  default = "docker/dockerfile:1"
+}
+
 target "_common" {
   context    = "."
   policy     = [{reset = true }]
   load       = false
+  args       = {
+    BUILDKIT_SYNTAX = BUILDKIT_SYNTAX
+  }
 }
 
 target "setup" {
@@ -47,7 +54,7 @@ target "linux" {
   name        = "build-linux-${arch}"
   inherits    = ["_common"]
   dockerfile  = "Dockerfile"
-  target      = "build"
+  target      = "builder"
   contexts    = { "setup-environment" = "target:setup-linux-${arch}" }
   output      = ["type=local,dest=${ARTIFACT_PATH},platform-split=true,src=${resolve_workspace()}/dist/release"]
 
@@ -69,9 +76,9 @@ target "windows" {
   name        = "build-windows-${arch}"
   inherits    = ["_common"]
   dockerfile  = "Dockerfile"
-  target      = "build"
+  target      = "builder"
   contexts    = { "setup-environment" = "target:setup-windows-${arch}" }
-  output      = ["type=local,dest=dist,platform-split=true,src=${resolve_workspace()}/dist/release"]
+  output      = ["type=local,dest=${ARTIFACT_PATH},platform-split=true,src=${resolve_workspace()}/dist/release"]
 
   matrix = {
     arch     = ["amd64", "arm64"]
