@@ -2,11 +2,14 @@
 title: AGENTS
 summary: Entry point for agent instructions and the repository conventions they MUST follow.
 tags: [agents, instructions, repository, coding-conventions]
+applies_to: [all, agents]
 ---
 
 Before anything else, you MUST read
 [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md). You MUST NOT continue
-with this document, or with any other action, until you have read it.
+with this document, or with any other action, until you have read it. After it,
+you MUST read [README.md](./README.md), which introduces Kraf and lists its
+modules.
 
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
@@ -134,6 +137,18 @@ When an agent encounters a link to a local file relevant to the task, it MUST
 open and read the file before continuing. It MUST resolve relative paths from
 the directory of the document containing the link.
 
+Links that form a listing, such as a `## Related` section or a list of modules,
+are an index, not a reading list: reading them is OPTIONAL. An agent MUST open a
+file linked from a listing only when the task needs its content, and MUST NOT
+open it only because it is listed. An entry MAY state when the task needs the
+file. The only files an agent MUST always read are
+[GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md) and
+[README.md](./README.md).
+
+A link inside an example, a code block, or a template illustrates a format and
+is not navigation. An agent MUST NOT follow it unless the task needs the linked
+file for a reason other than the example.
+
 A link MAY resolve to any file inside the working root, including one above the
 document containing the link. When a link resolves outside the working root, the
 agent MUST NOT read the file, MUST notify the user, naming the link and the
@@ -189,9 +204,3 @@ page when the site provides one. For example:
 - [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md): repo-wide
   conventions: convention documents and rule precedence, docs, workspace,
   naming.
-- [ARCHITECTURE.md](./docs/ARCHITECTURE.md): cross-domain architecture: system
-  context, containers, modules, ports and adapters, dependency rule, decisions.
-- [CODE_CONVENTIONS.md](./docs/CODE_CONVENTIONS.md): code conventions: modules
-  and tests.
-- [SPEC_CONVENTIONS.md](./docs/SPEC_CONVENTIONS.md): spec conventions: layout,
-  identifiers, intent, specification, acceptance, ADR.

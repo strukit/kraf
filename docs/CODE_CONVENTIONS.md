@@ -2,6 +2,7 @@
 title: CODE CONVENTIONS
 summary: Non-negotiable code rules for the Kraf codebase — rules you amend, not break.
 tags: [code-standards, mandatory-rules, conventions, rust]
+applies_to: [code]
 ---
 
 > [!IMPORTANT]

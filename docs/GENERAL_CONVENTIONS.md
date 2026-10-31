@@ -2,6 +2,7 @@
 title: GENERAL CONVENTIONS
 summary: Repo-wide conventions for organizing, coding, and documenting the Kraf monorepo.
 tags: [monorepo, conventions, documentation, agents]
+applies_to: [all]
 ---
 
 > [!IMPORTANT]
@@ -106,6 +107,19 @@ themselves be defined in a convention document.
 
 Every doc MUST have front-matter with `title`, `summary`, and `tags` — it makes
 docs easy to index for agents.
+
+A doc MAY also define `applies_to` in its front-matter: a list of the kinds of
+task that need the doc. A convention document MUST define it. The listed values
+are:
+
+- `all`: every task.
+- `code`: a task that creates, edits, or reviews code or tests.
+- `spec`: a task that creates, edits, or reviews a spec, an intent, an
+  acceptance, or an ADR.
+- `agents`: a task that creates, edits, or reviews agent instructions, skills,
+  or agent personas.
+
+An agent uses `applies_to` to decide whether the task needs the doc.
 
 This applies to docs, not to every `.md`. A file that is not a doc but uses
 `.md` and carries its own front-matter schema — for example `SKILL.md` — is out
@@ -222,3 +236,12 @@ code.
 ## Related
 
 - [README.md](../README.md): what Kraf is.
+- [ARCHITECTURE.md](./ARCHITECTURE.md): cross-domain architecture: system
+  context, containers, modules, ports and adapters, dependency rule, decisions.
+  Read when the task touches the structure of the system, such as modules, ports
+  and adapters, or the dependencies between them.
+- [CODE_CONVENTIONS.md](./CODE_CONVENTIONS.md): code conventions: modules and
+  tests. Read when the task creates, edits, or reviews code or tests.
+- [SPEC_CONVENTIONS.md](./SPEC_CONVENTIONS.md): spec conventions: layout,
+  identifiers, intent, specification, acceptance, ADR. Read when the task
+  creates, edits, or reviews a spec, an intent, an acceptance, or an ADR.
