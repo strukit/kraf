@@ -94,8 +94,6 @@ themselves be defined in a convention document.
 `---` line separates notes):
 
 ```md
----
-
 > [!IMPORTANT]
 > This is a convention document, as defined in
 > [GENERAL_CONVENTIONS.md](<path-to-docs>/GENERAL_CONVENTIONS.md#convention-documents):
@@ -130,10 +128,11 @@ Every reference to a specific file MUST be a navigable link, not a bare name —
 so the reader can follow it. (Generic references, like "a module's `README.md`",
 are not links.)
 
-### HTTP links
+### Markdown links
 
-An HTTP link SHOULD use a URL whose content does not change, such as a pinned
-revision or a fixed commit, when the site provides one.
+A Markdown link to an HTTP URL MUST point to the page in its form for human
+viewing, not to its raw-text form. It SHOULD use a URL whose content does not
+change, such as a pinned revision or a fixed commit, when the site provides one.
 
 ### Language-neutral docs
 

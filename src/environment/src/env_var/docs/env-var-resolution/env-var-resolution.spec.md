@@ -135,9 +135,10 @@ available,
 THE SOFTWARE SHALL leave the tilde unchanged and evaluate a dollar
 placeholder when one is present.
 
-THE SOFTWARE SHALL evaluate only the first dollar sign and, when it is followed
-by one or more ASCII letters, digits, or underscores, replace that placeholder
-with the collected value whose key matches its name, including an empty value.
+WHEN the first dollar sign of a fallback is followed by one or more ASCII
+letters, digits, or underscores,
+THE SOFTWARE SHALL replace that placeholder with the collected value whose key
+matches its name, including an empty value, and evaluate no other dollar sign.
 
 IF a dollar sign has no valid placeholder name or a dollar placeholder has no
 collected value,

@@ -4,6 +4,10 @@ summary: Entry point for agent instructions and the repository conventions they 
 tags: [agents, instructions, repository, coding-conventions]
 ---
 
+Before anything else, you MUST read
+[GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md). You MUST NOT continue
+with this document, or with any other action, until you have read it.
+
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
 > RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
@@ -27,7 +31,7 @@ documents relevant to the task.
 Agents MUST act only on rules defined in convention documents and on skills and
 agents that apply them. They MUST NOT raise, flag, or fix a concern that no
 convention document defines, such as choosing one approach, name, or style over
-another, and MUST NOT take on work that deterministic tooling performs.
+another.
 
 Agents MUST report a correctness defect they find, such as code that produces a
 wrong result, fails, or contradicts its spec, even when no convention document
@@ -36,6 +40,17 @@ defines it.
 The only exception is an explicit user instruction, which applies to the task at
 hand only and does not change the rule. Agents MUST NOT override a rule on their
 own preference or judgment.
+
+## Deterministic tools
+
+Agents MUST NOT perform or verify by their own means work that a deterministic
+tool declared in this repository already performs, such as formatting, line
+width, or linting, for example by counting characters. When the work needs to be
+verified, the agent MUST use the declared tool and SHOULD run it only at the end
+of the task. When no such tool is declared for the work, the work remains with
+the agent only if a convention document requires it. Otherwise, the agent MUST
+NOT do it, such as wrapping lines at a width that no declared tool or convention
+document defines.
 
 ## Reviews
 
@@ -71,6 +86,25 @@ A skill file (`SKILL.md`) MUST carry the normative-language note defined in
 [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md#normative-language) and
 follow its requirements.
 
+## User instructions
+
+An explicit user instruction is one the user gives in the task itself. An
+instruction the agent loads from a standing source, such as a personal
+instruction file or memory, is not explicit, even when it is the user's own. An
+explicit user instruction MUST be respected, as defined above.
+
+A standing instruction can conflict with a rule, for example an instruction not
+to read external links when a rule allows following them. When an agent finds
+such a conflict, it MUST notify the user, briefly stating that the conflict
+exists and which instruction or rule is involved, and it MUST continue the task
+following the rule. When the conflict is with memory, the notice also states
+what the Memory section requires. The agent MUST NOT suppress the conflict
+silently.
+
+When following the rule would cause a severe effect, such as one that is hard to
+reverse or that reaches outside the working root, the agent MUST stop and ask
+the user before continuing.
+
 ## Workspace boundary
 
 Agents MUST NOT leave the working root for any operation they perform directly,
@@ -94,6 +128,8 @@ Following local Markdown links is how agents MUST navigate this repository. It
 keeps the agent's context limited to documents relevant to the task, instead of
 unrelated content pulled in by other means.
 
+### Local links
+
 When an agent encounters a link to a local file relevant to the task, it MUST
 open and read the file before continuing. It MUST resolve relative paths from
 the directory of the document containing the link.
@@ -115,19 +151,30 @@ and MUST NOT assume its contents.
 
 ### HTTP links
 
-An agent MUST NOT follow an HTTP link unless the task needs content of the link
-that the agent does not know in enough depth from its training.
+This section applies only to Markdown links to an HTTP URL. Any other HTTP URL,
+such as one written as plain text, is outside it.
 
-Before following an HTTP link, the agent MUST look up the exact URL of the link
-in its own memory. When an entry saved under that URL covers what the task
-needs, the agent MUST use it instead of following the link.
+An agent MUST NOT follow a Markdown link to an HTTP URL unless the task needs
+content of the link that the agent does not know in enough depth from its
+training.
 
-After following an HTTP link, the agent MUST save the content the task needed to
-its own memory under the exact URL of the link, so that later tasks find it by
-that URL and do not follow the link again.
+Before following such a link, the agent MAY look for content previously saved
+from its exact URL, in its own memory or wherever it can best find it. Memory
+MAY be used, but it MUST NOT override the convention documents, and the linked
+page remains the source of truth. How a document writes such a link is defined
+in [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md#markdown-links).
 
-When an agent follows an HTTP link, it SHOULD request the raw-text form of the
-page when the site provides one, for example:
+When the link is pinned to a revision or a commit and the saved content records
+the same URL, the saved content is equivalent to the linked page, and the agent
+MAY use it instead of following the link. Otherwise, the saved content MAY be
+outdated, and the agent SHOULD confirm the saved content against the linked
+page, or against empirical evidence such as dates, before relying on it.
+
+After following such a link, the agent MAY save the content the task needed,
+wherever it can best keep it, under the exact URL of the link.
+
+When an agent follows such a link, it SHOULD request the raw-text form of the
+page when the site provides one. For example:
 
 - `https://www.rfc-editor.org/rfc/<rfc_id>` becomes
   `https://www.rfc-editor.org/rfc/<rfc_id>.txt`.
