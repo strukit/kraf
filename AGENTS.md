@@ -8,8 +8,7 @@ applies_to: [all, agents]
 Before anything else, you MUST read
 [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md). You MUST NOT continue
 with this document, or with any other action, until you have read it. After it,
-you MUST read [README.md](./README.md), which introduces Kraf and lists its
-modules.
+you MUST read [README.md](./README.md).
 
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
@@ -137,13 +136,10 @@ When an agent encounters a link to a local file relevant to the task, it MUST
 open and read the file before continuing. It MUST resolve relative paths from
 the directory of the document containing the link.
 
-Links that form a listing, such as a `## Related` section or a list of modules,
-are an index, not a reading list: reading them is OPTIONAL. An agent MUST open a
-file linked from a listing only when the task needs its content, and MUST NOT
-open it only because it is listed. An entry MAY state when the task needs the
-file. The only files an agent MUST always read are
-[GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md) and
-[README.md](./README.md).
+Links that form a listing, likes sections or a list of anything, are an index,
+not a reading list: reading them is OPTIONAL. An agent MUST open a file linked
+from a listing only when the task needs its content, and MUST NOT open it only
+because it is listed. An entry MAY state when the task needs the file.
 
 A link inside an example, a code block, or a template illustrates a format and
 is not navigation. An agent MUST NOT follow it unless the task needs the linked
@@ -155,8 +151,8 @@ agent MUST NOT read the file, MUST notify the user, naming the link and the
 document that contains it, and MUST ignore the link and continue the task
 without that file.
 
-Agents MUST NOT use content search (such as grep or ripgrep) as a substitute for
-following those links, unless the user explicitly requests it.
+Agents MUST NOT use content search (such as grep, ripgrep or cat) as a
+substitute for following those links, unless the user explicitly requests it.
 
 If the destination also contains local links needed for the task, the agent MUST
 follow them and SHOULD NOT reread files already consulted.
@@ -176,8 +172,7 @@ training.
 Before following such a link, the agent MAY look for content previously saved
 from its exact URL, in its own memory or wherever it can best find it. Memory
 MAY be used, but it MUST NOT override the convention documents, and the linked
-page remains the source of truth. How a document writes such a link is defined
-in [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md#markdown-links).
+page remains the source of truth.
 
 When the link is pinned to a revision or a commit and the saved content records
 the same URL, the saved content is equivalent to the linked page, and the agent
@@ -200,7 +195,7 @@ page when the site provides one. For example:
 
 ## Related
 
-- [README.md](./README.md): what Kraf is.
+- [README.md](./README.md): what Kraf is and more.
 - [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md): repo-wide
   conventions: convention documents and rule precedence, docs, workspace,
   naming.
