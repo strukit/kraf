@@ -65,6 +65,22 @@ MUST report it, even though the missing requirement is missing content.
 When the user explicitly requests a deep review, the review MUST cover
 everything in its scope, including missing content.
 
+A review MUST classify each change in its scope as meaning-preserving or
+meaning-changing. A meaning-preserving change keeps the behavior and meaning of
+what it touches, such as letter case, punctuation, a typo fix, a rename, or a
+substitution by an equivalent construct.
+
+For a meaning-preserving change, the review MUST verify only that the change
+preserves meaning. It MUST NOT re-evaluate the touched content against code,
+specifications, or acceptance, and MUST NOT require fixing a defect the change
+did not introduce.
+
+For a meaning-changing change, the review MUST evaluate the new meaning against
+what depends on it, such as linked acceptance, implementing code, and callers.
+
+A defect that predates the change and that the review finds incidentally MUST be
+reported as pre-existing and MUST NOT block the change.
+
 ## Memory
 
 Memory MAY inform a task but MUST NOT override a rule. When it conflicts with a
