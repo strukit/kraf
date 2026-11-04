@@ -10,8 +10,8 @@ and why.>
 
 ## How to test?
 
-- <CI, when the pull request changes files that CI runs on; otherwise, the agent
-  or skill that verifies the change, such as a code review.>
+- <CI, for changes to files that CI runs on, and agent review, for changes that
+  CI does not verify, such as documentation.>
 
 ## Other Notes and Links
 
