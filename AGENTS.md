@@ -32,9 +32,9 @@ documents the task needs.
 
 Rules and recommendations are different things. A rule is a requirement that a
 convention document defines, including a skill or agent defined in this
-repository, and it binds. A recommendation comes from a skill or agent defined outside this
-repository, as defined in Skills; it is not a rule, it does not bind, and it
-MUST NOT override a rule.
+repository, and it binds. A recommendation comes from a skill or agent defined
+outside this repository, as defined in Skills; it is not a rule, it does not
+bind, and it MUST NOT override a rule.
 
 Agents MUST follow the rules. They MAY act on a recommendation from a skill or
 agent that the task uses. They MUST NOT raise, flag, or fix a concern that
@@ -81,24 +81,29 @@ When this repository declares a tool for a purpose, an agent MUST use that tool
 for that purpose. When the list states that a declared tool is invoked by
 another declared tool, an agent SHOULD NOT invoke it directly and SHOULD use the
 tool that invokes it. A tool is declared only when it is listed in
-[Tools](./README.md#tools).
-A pull request that adds or removes a tool's configuration MUST update that
-list. An agent SHOULD build with cargo rather than Docker Bake, unless the task
-needs a clean, containerized build.
+[TOOLS.md](./docs/TOOLS.md). A pull request that adds or removes a tool's
+configuration MUST update that list. An agent SHOULD build with cargo rather
+than Docker Bake, unless the task needs a clean, containerized build.
 
 When an agent writes content, it MAY ignore conventions that a declared tool
-applies or checks, such as formatting, spelling, or lint rules, and it MUST run
-those tools on the files it changed once it finishes writing.
+applies or checks, such as formatting, spelling, or lint rules. Once it finishes
+writing, it MUST run those tools on the files it changed, according to the
+capabilities that [TOOLS.md](./docs/TOOLS.md) states for each tool:
+
+- For a tool with autofix, the agent MUST run the tool's fix. It MAY skip the
+  check.
+- For any other tool, the agent MUST run the check first, then fix each problem
+  the check reports, with the tool's fix when the tool can fix it and by its own
+  means otherwise, and then MUST run the check again to confirm that no problem
+  remains.
 
 A review MUST NOT run a declared tool and MUST NOT ask anyone to run one. When
-an agent writes content in the same session as a review, such
-as applying a fix, that writing is not part of the review, and the rules above
-for writing content apply to it.
+an agent writes content in the same session as a review, such as applying a fix,
+that writing is not part of the review, and the rules above for writing content
+apply to it.
 
 When a tool is not available, the agent MUST inform the user and continue the
-task. When a tool it runs reports a problem in content the task changed, the
-agent MUST fix it. When the tool can fix the problem, the agent MUST fix it with
-the tool; otherwise, it MUST fix it by its own means.
+task.
 
 An agent MUST NOT do work unless the user explicitly requests it, a convention
 document or a skill or agent that the task uses requires, recommends, or permits
@@ -110,9 +115,9 @@ without it.
 > [!IMPORTANT]
 > Golden rule: a review MUST NOT review anything outside its scope. This rule
 > MUST take precedence over every other review rule, including the duty to
-> report a correctness defect. Content that the change relies on but does not modify,
-> such as a configuration file, a tool, or the environment the review runs in,
-> is outside the scope, even when the change makes it more relevant.
+> report a correctness defect. Content that the change relies on but does not
+> modify, such as a configuration file, a tool, or the environment the review
+> runs in, is outside the scope, even when the change makes it more relevant.
 
 The scope of a review is the change under review, the references to anything the
 change renames, and, for a meaning-changing change, the content that depends on
@@ -161,8 +166,8 @@ or agent that the task uses expects it.
 When an agent writes or updates a pull request description, it MUST follow
 [the pull request template](./.github/pull_request_template.md) and fill in each
 of its sections. Every `<...>` placeholder in the template MUST be replaced with
-content; its text is a recommendation, not a rule. A placeholder MUST NOT remain in the
-description.
+content; its text is a recommendation, not a rule. A placeholder MUST NOT remain
+in the description.
 
 Each item MUST state briefly, in the agent's own words, what changed and, when
 it is not evident, why. An item MUST NOT copy or restate in detail the text of

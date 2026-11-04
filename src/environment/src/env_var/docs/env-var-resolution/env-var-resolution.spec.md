@@ -58,8 +58,8 @@ Name: First-found resolution
 
 ```text
 THE SOFTWARE SHALL resolve a declaration using first-found import mode to the
-first import alias, in declaration order, that has a collected value, including
-an empty value.
+first available import alias in declaration order. A collected value is
+available when it is present, including when its value is empty.
 
 WHEN no import alias provides a value,
 THE SOFTWARE SHALL resolve the declaration fallback.
@@ -135,12 +135,9 @@ available,
 THE SOFTWARE SHALL leave the tilde unchanged and evaluate a dollar
 placeholder when one is present.
 
-THE SOFTWARE SHALL evaluate only the first dollar sign of a fallback.
-
-WHEN the first dollar sign of a fallback is followed by one or more ASCII
-letters, digits, or underscores,
-THE SOFTWARE SHALL replace that placeholder with the collected value whose key
-matches its name, including an empty value.
+THE SOFTWARE SHALL evaluate only the first dollar sign and, when it is followed
+by one or more ASCII letters, digits, or underscores, replace that placeholder
+with the collected value whose key matches its name, including an empty value.
 
 IF a dollar sign has no valid placeholder name or a dollar placeholder has no
 collected value,

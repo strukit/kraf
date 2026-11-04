@@ -39,31 +39,6 @@ agent CLI, a browser, or code that embeds them as a library (C or WASM), all
 calling the same runtime. Kraf aims to interoperate with the editors and
 toolchains a project already uses rather than replacing them.
 
-## Tools
-
-Each entry links to the tool's configuration and states its purpose.
-
-### Formatting and linting
-
-- [dprint](./.dprint.jsonc): formats Markdown, JSON, TOML, Dockerfiles, and Rust
-  code, the latter through rustfmt.
-- [rustfmt](./rustfmt.toml): formats Rust code (invoked by dprint).
-- [cspell](./cspell.jsonc): checks spelling.
-
-### Toolchain
-
-- [rustup](./rust-toolchain.toml): installs the pinned Rust toolchain and its
-  components, including cargo, clippy, and rustfmt.
-- [Visual Studio Build Tools](./.msvc.json) (Windows only): installs the VC++
-  Tools components and the Windows SDK needed to build on Windows.
-
-### Build
-
-- [cargo](./.cargo/config.toml): builds, tests, and lints Rust code, the latter
-  through clippy. It is the tool for everyday builds.
-- [Docker Bake](./docker-bake.hcl): builds release artifacts in containers, as
-  CI does, for a clean, containerized build.
-
 ## Modules
 
 - [Environment variables](./src/environment/src/env_var/README.md): declarative
@@ -81,3 +56,5 @@ Each entry links to the tool's configuration and states its purpose.
   and tests.
 - [SPEC_CONVENTIONS.md](./docs/SPEC_CONVENTIONS.md): spec conventions: layout,
   identifiers, intent, specification, acceptance, ADR.
+- [TOOLS.md](./docs/TOOLS.md): tools declared in this repository, with their
+  configuration and purpose.

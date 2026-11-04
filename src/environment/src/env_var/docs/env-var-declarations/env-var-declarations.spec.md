@@ -86,14 +86,12 @@ Name: Mapping mode validity
 - Implementation status: Partially Implemented
 
 ```text
-IF a declaration uses merge import mode and declares fewer than two import
-aliases,
-THEN THE SOFTWARE SHALL reject the declaration.
+THE SOFTWARE SHALL accept a declaration using merge import mode only when it
+declares at least two import aliases.
 
-IF a declaration uses pass-through import mode and its canonical key is not its
-only import alias,
-THEN THE SOFTWARE SHALL reject the declaration.
+THE SOFTWARE SHALL accept a declaration using pass-through import mode only when
+its canonical key is its only import alias.
 
-IF a declaration uses pass-through import mode and declares a fallback,
-THEN THE SOFTWARE SHALL reject the declaration.
+THE SOFTWARE SHALL NOT accept a declaration using pass-through import mode that
+declares a fallback.
 ```
