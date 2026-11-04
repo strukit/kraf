@@ -95,8 +95,6 @@ is declared.
 - When the list states that a declared tool is invoked by another declared tool,
   using the invoking tool counts as using the invoked one. An agent SHOULD use
   the invoking tool and SHOULD NOT invoke the invoked tool directly.
-- An agent SHOULD build with cargo rather than Docker Bake, unless the task
-  needs a clean, containerized build.
 - When a tool is not available, the agent MUST inform the user and continue the
   task.
 
