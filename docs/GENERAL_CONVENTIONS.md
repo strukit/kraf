@@ -117,8 +117,10 @@ Every doc MUST have front-matter with `title`, `summary`, and `tags` — it make
 docs easy to index for agents.
 
 A doc MAY also define `applies_to` in its front-matter: a list of the kinds of
-task that need the doc. A convention document MUST define it. Its values MUST
-be taken from the following list:
+task that need the doc. A convention document MUST define it, unless the file
+carries its own front-matter schema, such as `SKILL.md`: such a file MUST NOT
+define `applies_to`, because the tools that read it expect only its own schema.
+Its values MUST be taken from the following list:
 
 - `all`: every task.
 - `code`: a task that creates, edits, or reviews code or tests.
