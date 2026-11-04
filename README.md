@@ -39,11 +39,6 @@ agent CLI, a browser, or code that embeds them as a library (C or WASM), all
 calling the same runtime. Kraf aims to interoperate with the editors and
 toolchains a project already uses rather than replacing them.
 
-## Modules
-
-- [Environment variables](./src/environment/src/env_var/README.md): declarative
-  model, resolution, and projection of environment variables.
-
 ## Tools configured in this repository
 
 Each entry links to the tool's configuration and states its purpose.
@@ -55,6 +50,11 @@ Each entry links to the tool's configuration and states its purpose.
   through clippy. It is the tool for everyday builds.
 - [Docker Bake](./docker-bake.hcl): builds release artifacts in containers, as
   CI does, for a clean, containerized build.
+
+## Modules
+
+- [Environment variables](./src/environment/src/env_var/README.md): declarative
+  model, resolution, and projection of environment variables.
 
 ## Related
 
