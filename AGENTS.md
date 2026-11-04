@@ -89,9 +89,11 @@ configuration MUST update that list. An agent SHOULD build with cargo rather
 than Docker Bake, unless the task needs a clean, containerized build.
 
 When an agent writes content, it MAY ignore conventions that a declared tool
-applies or checks, such as formatting, spelling, or lint rules. Once it finishes
-writing, it MUST run those tools on the files it changed, according to the
-capabilities that [TOOLS.md](./docs/TOOLS.md) states for each tool:
+with autofix applies, such as formatting rules. It MUST follow, while writing,
+the conventions that any other declared tool checks, such as spelling or lint
+rules. Once it finishes writing, it MUST run the declared tools on the files it
+changed, according to the capabilities that [TOOLS.md](./docs/TOOLS.md) states
+for each tool:
 
 - For a tool with autofix, the agent MUST run the tool's fix. It MAY skip the
   check.
