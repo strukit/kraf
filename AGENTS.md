@@ -72,9 +72,7 @@ task performs, or the task cannot be completed without it.
 
 When a tool modifies files that this repository tracks, the agent MUST NOT let
 it modify a tracked file unless the task changes that file, the tool updates it
-as a consequence of the task's changes, or the user explicitly requests it. If a
-tool modifies a tracked file that none of these cases allows, the agent MUST
-restore that file before completing the task.
+as a consequence of the task's changes, or the user explicitly requests it.
 
 ## Reviews
 
