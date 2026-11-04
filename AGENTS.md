@@ -68,7 +68,7 @@ shell.
 
 When this repository declares a tool for a purpose, an agent MUST use that tool
 for that purpose. A tool is declared only when it is listed in
-[Tools declared in this repository](./README.md#tools-declared-in-this-repository).
+[Tools configured in this repository](./README.md#tools-configured-in-this-repository).
 A pull request that adds or removes a tool's configuration MUST update that
 list. An agent SHOULD build with cargo rather than Docker Bake, unless the task
 needs a clean, containerized build.
