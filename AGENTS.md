@@ -122,11 +122,10 @@ without it.
 ## Reviews
 
 > [!IMPORTANT]
-> Golden rule: a review MUST NOT review anything outside its scope. This rule
-> MUST take precedence over every other review rule, including the duty to
-> report a correctness defect. Content that the change relies on but does not
-> modify, such as a configuration file, a tool, or the environment the review
-> runs in, is outside the scope, even when the change makes it more relevant.
+> Golden rule: a review MUST apply the rules of this document literally, as
+> written. It MUST NOT extend a rule beyond its text, narrow it, or replace it
+> with its own reading of the rule's intent. This rule MUST take precedence over
+> every other review rule.
 
 A prompt from a skill, command, or agent defined outside this repository that
 instructs a review, such as a minimum or maximum number of findings, skipping
@@ -136,8 +135,12 @@ defined in User instructions.
 
 The scope of a review is the change under review, the references to anything the
 change renames, and, for a meaning-changing change, the content that depends on
-it. A review MUST NOT validate or report content outside that scope, including a
-defect that predates the change.
+it. A review MUST NOT review, validate, or report content outside that scope,
+including a defect that predates the change. Content that the change relies on
+but does not modify, such as a configuration file, a tool, or the environment
+the review runs in, is outside the scope, even when the change makes it more
+relevant. This scope rule MUST take precedence over every other review rule
+except the golden rule, including the duty to report a correctness defect.
 
 A review MUST determine, for each change in its scope, whether it is
 meaning-preserving or meaning-changing, and MUST apply the rules below
@@ -198,9 +201,9 @@ The review MUST also confirm that it applied the normative-language check to
 every change in its scope, as defined in Normative language.
 
 A review report MUST state, for each finding, its source and the rule or defect
-it cites. It MUST also list each candidate that the checklist dropped, with the
-checklist item it failed. A review that reports no findings MUST still state
-that it applied the checklist.
+it cites. It MUST also list each candidate that the checklist dropped for a
+reason other than being outside the scope, with the checklist item it failed. A
+review that reports no findings MUST still state that it applied the checklist.
 
 ## Pull requests
 
