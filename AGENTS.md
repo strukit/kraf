@@ -114,8 +114,8 @@ a tool.
 ### Tools in reviews
 
 - A review MUST NOT run a declared tool or ask anyone to run one.
-- Content an agent writes in the same session as a review, such as a fix, is
-  not part of the review: Writing content applies to it.
+- When an agent writes in the same session as a review, such as applying a fix,
+  that writing is not part of the review, and Writing content applies to it.
 
 ## Reviews
 
