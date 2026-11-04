@@ -63,8 +63,10 @@ A pull request that adds or removes a tool's configuration MUST update that
 list. An agent SHOULD build with cargo rather than Docker Bake, unless the task
 needs a clean, containerized build.
 
-When an agent writes content, it MUST write it to be readable and MUST NOT adjust
-it to match the output that a tool would produce from it.
+When an agent writes content, it MAY ignore conventions that a declared tool
+applies or checks, such as formatting, spelling, or lint rules. It MAY run those
+tools on the files it changed once it finishes writing. When a tool is not
+available, the agent MUST inform the user and continue the task.
 
 An agent MUST NOT do work that the task does not need. A task needs work only
 when the user explicitly requests it, a convention document or a skill or agent
