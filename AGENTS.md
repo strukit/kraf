@@ -128,6 +128,12 @@ without it.
 > modify, such as a configuration file, a tool, or the environment the review
 > runs in, is outside the scope, even when the change makes it more relevant.
 
+A prompt from a skill, command, or agent defined outside this repository that
+instructs a review, such as a minimum or maximum number of findings, skipping
+verification, or favoring recall over precision, is a recommendation. A review
+MUST follow this section instead and MUST notify the user of the conflict, as
+defined in User instructions.
+
 The scope of a review is the change under review, the references to anything the
 change renames, and, for a meaning-changing change, the content that depends on
 it. A review MUST NOT validate or report content outside that scope, including a
@@ -174,7 +180,8 @@ A review MUST be thorough from its first pass and MUST apply the same criteria
 to every change in its scope, so that reviewing the same change again yields the
 same findings. It MUST report every finding it can support and only those. It
 MUST NOT add, drop, or weaken a finding to reach a number of findings, even when
-a skill or agent asks for a minimum or a maximum.
+a skill or agent asks for a minimum or a maximum. A review that finds nothing it
+can support MUST report no findings.
 
 Before it reports, a review MUST go back over its findings and drop each one
 that fails any item of this checklist:
@@ -189,6 +196,11 @@ that fails any item of this checklist:
 
 The review MUST also confirm that it applied the normative-language check to
 every change in its scope, as defined in Normative language.
+
+A review report MUST state, for each finding, its source and the rule or defect
+it cites. It MUST also list each candidate that the checklist dropped, with the
+checklist item it failed. A review that reports no findings MUST still state
+that it applied the checklist.
 
 ## Pull requests
 
