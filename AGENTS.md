@@ -68,10 +68,10 @@ applies or checks, such as formatting, spelling, or lint rules. It MAY run those
 tools on the files it changed once it finishes writing. When a tool is not
 available, the agent MUST inform the user and continue the task.
 
-An agent MUST NOT do work that the task does not need. A task needs work only
-when the user explicitly requests it, a convention document or a skill or agent
-that the task uses requires, recommends, or permits it as part of the work the
-task performs, or the task cannot be completed without it.
+An agent MUST NOT do work unless the user explicitly requests it, a convention
+document or a skill or agent that the task uses requires, recommends, or permits
+it as part of the work the task performs, or the task cannot be completed
+without it.
 
 ## Reviews
 
