@@ -40,6 +40,10 @@ Agents MUST report a correctness defect they find, such as code that produces a
 wrong result, fails, or contradicts its spec, even when no convention document
 defines it.
 
+When an agent raises a concern, it MUST cite its source: the rule that defines
+it, the skill or agent that recommends it, or, for a correctness defect, the
+wrong result, failure, or contradiction it found.
+
 Besides the exceptions this document defines, an explicit user instruction MAY
 set aside a rule for the task at hand only, and does not change the rule. Agents
 MUST NOT override a rule on their own preference or judgment.
