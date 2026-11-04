@@ -154,6 +154,12 @@ When an agent encounters a link to a local file relevant to the task, it MUST
 open and read the file before continuing. It MUST resolve relative paths from
 the directory of the document containing the link.
 
+To follow a link to a whole file, an agent MUST use its native file-reading
+tool. To follow a link to a section of a file, such as `file.md#section`, an
+agent MUST use its native file-reading tool when that tool can read the section.
+Otherwise, it MAY use any other means to locate and read the section in the
+linked file.
+
 Links that form a listing, likes sections or a list of anything, are an index,
 not a reading list: reading them is OPTIONAL. An agent MUST open a file linked
 from a listing only when the task needs its content, and MUST NOT open it only
@@ -169,8 +175,11 @@ agent MUST NOT read the file, MUST notify the user, naming the link and the
 document that contains it, and MUST ignore the link and continue the task
 without that file.
 
-Agents MUST NOT use content search (such as grep, ripgrep or cat) as a
+Agents MUST NOT search file contents (such as with grep or ripgrep) as a
 substitute for following those links, unless the user explicitly requests it.
+Reading a file, and listing or filtering file names, are not content search.
+When no link leads to content the task needs, an agent MAY locate it by file
+name.
 
 If the destination also contains local links needed for the task, the agent MUST
 follow them and SHOULD NOT reread files already consulted.
