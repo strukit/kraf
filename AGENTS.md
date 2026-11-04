@@ -32,9 +32,11 @@ documents the task needs.
 
 Rules and recommendations are different things. A rule is a requirement that a
 convention document defines, including a skill or agent defined in this
-repository, and it binds. A recommendation comes from a skill or agent defined
-outside this repository, as defined in Skills; it is not a rule, it does not
-bind, and it MUST NOT override a rule.
+repository. A rule binds with the force of its normative keyword, as RFC 2119
+defines it: a SHOULD or RECOMMENDED rule, for example, allows a deviation for a
+valid reason. A recommendation comes from a skill or agent defined outside this
+repository, as defined in Skills; it is not a rule, it does not bind, and it
+MUST NOT override a rule.
 
 Agents MUST follow the rules. They MAY act on a recommendation from a skill or
 agent that the task uses. They MUST NOT raise, flag, or fix a concern that
@@ -79,8 +81,9 @@ shell.
 
 When this repository declares a tool for a purpose, an agent MUST use that tool
 for that purpose. When the list states that a declared tool is invoked by
-another declared tool, an agent SHOULD NOT invoke it directly and SHOULD use the
-tool that invokes it. A tool is declared only when it is listed in
+another declared tool, using the invoking tool counts as using the invoked one,
+and an agent SHOULD NOT invoke the invoked tool directly and SHOULD use the tool
+that invokes it. A tool is declared only when it is listed in
 [TOOLS.md](./docs/TOOLS.md). A pull request that adds or removes a tool's
 configuration MUST update that list. An agent SHOULD build with cargo rather
 than Docker Bake, unless the task needs a clean, containerized build.
@@ -166,8 +169,8 @@ or agent that the task uses expects it.
 When an agent writes or updates a pull request description, it MUST follow
 [the pull request template](./.github/pull_request_template.md) and fill in each
 of its sections. Every `<...>` placeholder in the template MUST be replaced with
-content; its text is a recommendation, not a rule. A placeholder MUST NOT remain
-in the description.
+content; its text describes what the section usually contains. A placeholder
+MUST NOT remain in the description.
 
 Each item MUST state briefly, in the agent's own words, what changed and, when
 it is not evident, why. An item MUST NOT copy or restate in detail the text of
