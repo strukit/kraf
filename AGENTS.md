@@ -231,6 +231,12 @@ every change in its scope.
 - A description MUST NOT ask a reviewer to run a declared tool, such as in its
   `How to test?` section, as defined in Tools in reviews.
 
+## Commits
+
+- A commit message MUST NOT carry a line that credits an agent, a model, or the
+  tool that runs it as an author, or that links to an agent session, such as a
+  `Co-Authored-By` trailer naming an agent or a session URL trailer.
+
 ## Memory
 
 - Memory MAY inform a task but MUST NOT override a rule. A conflict between them
