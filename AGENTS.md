@@ -60,13 +60,6 @@ A review MUST NOT validate or report content outside the scope of the change
 under review, including a defect that predates the change. Within reviews, this
 takes precedence over the duty to report a correctness defect.
 
-A review MUST NOT report or list missing content unless a convention document
-requires that content.
-
-Within that scope, code behavior that no specification defines is a correctness
-defect, even when an intent describes it. A review MUST report it, even though
-the missing requirement is missing content.
-
 A review MUST determine, for each change in its scope, whether it is
 meaning-preserving or meaning-changing, and MUST apply the rules below
 accordingly. A meaning-preserving change keeps the behavior and meaning of what
@@ -75,11 +68,20 @@ substitution by an equivalent construct. A review MAY omit this classification
 from its report.
 
 For a meaning-preserving change, the review MUST verify only that the change
-preserves meaning. It MUST NOT re-evaluate the touched content against code,
-specifications, or acceptance.
+preserves meaning. It MUST NOT re-evaluate the touched content against anything
+else.
 
 For a meaning-changing change, the review MUST evaluate the new meaning against
-what depends on it, such as linked acceptance, implementing code, and callers.
+the content that depends on it.
+
+A review MUST state the source of each finding. A finding from a correctness
+defect or a convention document is blocking. A finding from a skill or agent
+that the task uses is blocking when that skill or agent declares it blocking,
+and non-blocking otherwise. An explicit user instruction MAY change whether a
+finding is blocking, for the task at hand only.
+
+A review MUST NOT report or list missing content unless a convention document
+requires it or a skill or agent that the task uses expects it.
 
 ## Memory
 
@@ -97,8 +99,8 @@ a convention document to take effect.
 
 A skill or agent MAY state preferences, such as formatting, layout, or naming
 choices, that agents follow when they create or edit content under it. A
-preference is not a rule: it MUST NOT override a convention document, and agents
-MUST NOT report a deviation from it as a defect, including in a code review.
+preference is not a rule: it MUST NOT override a convention document. A review
+reports a deviation from it as defined in Reviews.
 
 A skill file (`SKILL.md`) MUST carry the normative-language note defined in
 [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md#normative-language) and
