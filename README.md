@@ -46,7 +46,9 @@ Each entry links to the tool's configuration and states its purpose.
 - [dprint](./.dprint.jsonc): formats Markdown, JSON, TOML, Dockerfiles, and Rust
   code, the latter through rustfmt.
 - [cspell](./cspell.jsonc): checks spelling.
-- [cargo](./rust-toolchain.toml): builds, tests, and lints Rust code, the latter
+- [rustup](./rust-toolchain.toml): installs the pinned Rust toolchain and its
+  components, including cargo, clippy, and rustfmt.
+- [cargo](./.cargo/config.toml): builds, tests, and lints Rust code, the latter
   through clippy. It is the tool for everyday builds.
 - [Docker Bake](./docker-bake.hcl): builds release artifacts in containers, as
   CI does, for a clean, containerized build.
