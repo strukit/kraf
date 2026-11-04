@@ -2,6 +2,7 @@
 title: Specification and documentation conventions
 summary: Conventions for documenting feature intent, requirements, and acceptance scenarios.
 tags: [specification, requirements, acceptance, ears, documentation]
+applies_to: [spec]
 ---
 
 > [!IMPORTANT]
@@ -160,10 +161,17 @@ they relate. MAY use subsections (###).>
 ### Intent (*-intent.md)
 
 An intent explains why a feature exists, the problem it addresses, its
-boundaries, and its non-goals. It is not normative.
+boundaries, and its non-goals. It is not normative: implementing, specifying, or
+accepting what it describes is OPTIONAL, now or later. A principle becomes
+normative only through a requirement or an ADR that covers it.
 
 An intent MUST NOT carry the normative-language note and MUST NOT use normative
 keywords.
+
+An intent is an idea that still needs refinement. An intent, or any part of one,
+can lack a requirement, an ADR, code, or any other document that specifies or
+details it. This is expected and MUST NOT be treated as an error, a defect, or a
+problem.
 
 **Layout**:
 
@@ -205,10 +213,18 @@ acceptance scenarios.
 Each requirement MUST declare two independent statuses:
 
 - **Doc status:** `Draft`, `Accepted`, or `Superseded`.
-- **Implementation status:** `Not implemented`, `Partially implemented`,
+- **Implementation status:** `Not Implemented`, `Partially Implemented`,
   `Implemented` or `Unknown`
 
 **Language:**
+
+The rules below summarize the EARS sources. An agent MAY consult the sources
+lazily: only when the rules below leave a doubt about EARS unresolved.
+
+Sources:
+
+- [EARS](https://en.wikipedia.org/w/index.php?title=Easy_Approach_to_Requirements_Syntax&oldid=1342972975)
+  (Wikipedia, revision of 2026-03-11).
 
 Specifications MUST use EARS notation and the normative terms defined by RFC
 2119 and RFC 8174.
@@ -218,16 +234,39 @@ Specifications MUST use EARS notation and the normative terms defined by RFC
   explicit justification to deviate from.
 - **MAY** defines optional behavior.
 
+An EARS requirement is made of, in this order: zero or more preconditions, zero
+or one trigger, the system name, and one or more system responses. A
+requirement MUST use `THE SOFTWARE` as the system name.
+
 A requirement MUST use the EARS pattern that matches the behavior:
 
+| Pattern           | Keyword         | Use when                                                                                  |
+| ----------------- | --------------- | ----------------------------------------------------------------------------------------- |
+| Ubiquitous        | (none)          | The behavior is always active.                                                            |
+| Event-driven      | `WHEN`          | The behavior responds to a triggering event.                                              |
+| State-driven      | `WHILE`         | The behavior is active while a precondition holds.                                        |
+| Optional feature  | `WHERE`         | The behavior applies only where a feature is included.                                    |
+| Unwanted behavior | `IF`/`THEN`     | The behavior responds to an undesired situation, such as a fault, a failure, or an error. |
+| Complex           | Any combination | The behavior uses more than one EARS keyword.                                             |
+
 ```text
-The software SHALL <behavior>.
+THE SOFTWARE SHALL <system response>.
 
-WHEN <event>,
-THE SOFTWARE SHALL <behavior>.
+WHEN <trigger>,
+THE SOFTWARE SHALL <system response>.
 
-IF <condition>,
-THEN THE SOFTWARE SHALL <behavior>.
+WHILE <precondition>,
+THE SOFTWARE SHALL <system response>.
+
+WHERE <feature is included>,
+THE SOFTWARE SHALL <system response>.
+
+IF <trigger>,
+THEN THE SOFTWARE SHALL <system response>.
+
+WHILE <precondition>,
+WHEN <trigger>,
+THE SOFTWARE SHALL <system response>.
 ```
 
 **Layout:**
@@ -261,11 +300,11 @@ Name: <Requirement name>
 **Status**:
 
 - Doc status: Draft
-- Implementation status: Not implemented
+- Implementation status: Not Implemented
 
 ```text
-WHEN <event>,
-THE SOFTWARE SHALL <behavior>.
+WHEN <trigger>,
+THE SOFTWARE SHALL <system response>.
 ```
 ````
 
@@ -289,6 +328,14 @@ Each acceptance MUST declare two independent statuses:
 - **Verification status:** `Not Meets`, `Partially Meets`, `Meets` or `Unknown`
 
 **Language:**
+
+The rules below summarize the Gherkin sources. An agent MAY consult the sources
+lazily: only when the rules below leave a doubt about Gherkin unresolved.
+
+Sources:
+
+- [Gherkin](https://github.com/cucumber/website/blob/9bca7375458301f81aaa2f7857587dd141688fab/docs/gherkin/reference.md)
+  (Cucumber, commit `9bca737` of 2025-01-26).
 
 Acceptance scenarios MUST use Gherkin. A `Feature` groups scenarios for one
 area, a `Rule` scopes scenarios to the requirement they verify, and a `Scenario`
@@ -426,6 +473,19 @@ Name: <Decision title>
 
 <What becomes easier, harder, or required because of this decision.>
 ```
+
+## Review
+
+A review MUST read the acceptance files linked from a specification before
+reporting one of its requirements as incorrect.
+
+When a change removes a requirement or alters the behavior that a requirement
+defines, the review MUST compare the old and new requirement's scope, including
+its conditions and triggers, and MUST identify the cases covered by one wording
+but not the other. It MUST evaluate those cases against the linked acceptance
+scenarios and the code that implements the requirement. A review MUST report, as
+a correctness defect, a change that leaves existing code behavior without a
+requirement that defines it.
 
 ## Related
 

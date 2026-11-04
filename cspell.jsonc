@@ -1,7 +1,7 @@
 {
   "language": "en",
   "dictionaries": ["cpp", "filetypes", "go", "powershell", "softwareTerms", "misc"],
-  "ignorePaths": ["cspell.json"],
+  "ignorePaths": ["cspell.jsonc"],
   "words": [
     "ltsc",
     "containerfile",

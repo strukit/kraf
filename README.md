@@ -56,3 +56,5 @@ toolchains a project already uses rather than replacing them.
   and tests.
 - [SPEC_CONVENTIONS.md](./docs/SPEC_CONVENTIONS.md): spec conventions: layout,
   identifiers, intent, specification, acceptance, ADR.
+- [TOOLS.md](./docs/TOOLS.md): tools declared in this repository, with their
+  configuration and purpose.
