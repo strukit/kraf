@@ -263,11 +263,11 @@ THE SOFTWARE SHALL <system response>.
 
 **Differences from the source:**
 
-The differences below are deliberate decisions of this repo, not deviations from
-EARS. A review MUST NOT report them.
+The differences below are deliberate decisions of this repo. A review MUST NOT
+report them.
 
 - **SHALL NOT and RFC terms:** the source uses only SHALL. Specifications also
-  use SHALL NOT for prohibitions, and cite RFC 2119 and RFC 8174 because
+  MAY use SHALL NOT for prohibitions, and cite RFC 2119 and RFC 8174 because
   [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#normative-language) makes
   every document cite them.
 - **System name:** the source leaves `<system name>` free. Specifications fix it
@@ -276,11 +276,10 @@ EARS. A review MUST NOT report them.
   every requirement, such as formulas, decision tables, or constraints that are
   not conditional behavior. Specifications use EARS for all their requirements.
 - **Pattern choice:** the source describes the patterns without making the
-  choice mandatory. This repo makes the matching pattern mandatory, so each
-  behavior has one form.
-- **Presentation:** uppercase `THE`, a line break after each keyword clause, a
-  closing period, and the fenced `text` block are layout choices that the source
-  does not define.
+  choice mandatory. This repo makes the matching pattern mandatory.
+- **Presentation:** a line break after each keyword clause, uppercase `THE` in
+  every pattern (the source uses it only in the ubiquitous template), and the
+  fenced `text` block are layout choices that the source does not define.
 
 **Layout:**
 
