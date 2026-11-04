@@ -79,10 +79,10 @@ those tools on the files it changed once it finishes writing. A review only
 reads and MUST NOT run a declared tool. When an agent writes content in the same
 session as a review, such as applying a fix, that writing is not part of the
 review, and the rules above for writing content apply to it. When a tool is not
-available, the agent MUST inform
-the user and continue the task. When a tool it runs reports a problem in content
-the task changed, the agent MUST fix it. When the tool can fix the problem, the
-agent MUST fix it with the tool; otherwise, it MUST fix it by its own means.
+available, the agent MUST inform the user and continue the task. When a tool it
+runs reports a problem in content the task changed, the agent MUST fix it. When
+the tool can fix the problem, the agent MUST fix it with the tool; otherwise, it
+MUST fix it by its own means.
 
 An agent MUST NOT do work unless the user explicitly requests it, a convention
 document or a skill or agent that the task uses requires, recommends, or permits
