@@ -92,11 +92,17 @@ without it.
 
 ## Reviews
 
+> [!IMPORTANT]
+> Golden rule: a review MUST NOT review anything outside its scope. This rule
+> takes precedence over every other review rule, including the duty to report a
+> correctness defect. Content that the change relies on but does not modify,
+> such as a configuration file, a tool, or the environment the review runs in,
+> is outside the scope, even when the change makes it more relevant.
+
 The scope of a review is the change under review, the references to anything the
 change renames, and, for a meaning-changing change, the content that depends on
 it. A review MUST NOT validate or report content outside that scope, including a
-defect that predates the change. Within reviews, this rule MUST take precedence
-over the duty to report a correctness defect.
+defect that predates the change.
 
 A review MUST determine, for each change in its scope, whether it is
 meaning-preserving or meaning-changing, and MUST apply the rules below
