@@ -223,6 +223,8 @@ every change in its scope.
 - A pull request description that an agent writes or updates MUST follow
   [the pull request template](./.github/pull_request_template.md) and fill in
   each of its sections.
+- A description MUST NOT contain content outside the sections that the template
+  defines, such as a "generated with" footer or a link to an agent session.
 - Every `<...>` placeholder MUST be replaced with content; its text describes
   what the section usually contains. A placeholder MUST NOT remain.
 - Each item MUST state briefly, in the agent's own words, what changed and, when
@@ -231,12 +233,11 @@ every change in its scope.
 - A description MUST NOT ask a reviewer to run a declared tool, such as in its
   `How to test?` section, as defined in Tools in reviews.
 
-## Attribution
+## Commits
 
-- A commit message or a pull request description MUST NOT carry a line that
-  credits an agent, a model, or the tool that runs it as an author, or that
-  links to an agent session, such as a `Co-Authored-By` trailer naming an
-  agent, a "generated with" footer, or a session URL.
+- A commit message MUST NOT carry a line that credits an agent, a model, or the
+  tool that runs it as an author, or that links to an agent session, such as a
+  `Co-Authored-By` trailer naming an agent or a session URL trailer.
 
 ## Memory
 
