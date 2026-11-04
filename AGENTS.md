@@ -171,9 +171,9 @@ reaches it from outside the review, such as from CI or from a run that the user
 requests. A correctness defect includes a rule that contradicts itself or
 another rule. A finding from a skill or agent defined outside this repository is
 a recommendation and is non-blocking. When that skill or agent declares the
-finding blocking or required, the review MUST mark it as strongly recommended
-and name the skill or agent. An explicit user instruction MAY change whether a
-finding is blocking, for the task at hand only.
+finding blocking, or declares that it MUST be fixed, the review MUST mark it as
+a strong recommendation and name the skill or agent. An explicit user
+instruction MAY change whether a finding is blocking, for the task at hand only.
 
 A review MUST NOT report or list missing content unless a convention document
 requires that content, including by defining its absence as a defect, or a skill
@@ -201,9 +201,10 @@ The review MUST also confirm that it applied the normative-language check to
 every change in its scope, as defined in Normative language.
 
 A review report MUST state, for each finding, its source and the rule or defect
-it cites. It MUST also list each candidate that the checklist dropped for a
-reason other than being outside the scope, with the checklist item it failed. A
-review that reports no findings MUST still state that it applied the checklist.
+it cites. It MUST NOT report or list the candidates that the checklist dropped.
+It MUST keep each of them, with the checklist item it failed, in the context of
+its session, and not in its report. A review that reports no findings MUST still
+state that it applied the checklist.
 
 ## Pull requests
 
