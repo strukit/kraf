@@ -133,7 +133,10 @@ Its values MUST be taken from the following list:
 - `agents`: a task that creates, edits, or reviews agent instructions, skills,
   or agent personas.
 
-An agent MAY use `applies_to` to decide whether the task needs the doc.
+An agent MAY use `applies_to` to decide whether the task needs the doc. When a
+rule that applies to the task requires the agent to read or apply a doc or a
+section of it, the task needs that content, whatever the doc's `applies_to`
+states.
 
 This applies to docs, not to every `.md`. A file that is not a doc but uses
 `.md` and carries its own front-matter schema — for example `SKILL.md` — is out
