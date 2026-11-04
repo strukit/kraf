@@ -208,8 +208,8 @@ checklist:
   reached the review from outside it.
 - It does not repeat another finding.
 
-The review MUST also confirm that it applied the normative-language check to
-every change in its scope.
+The review MUST also confirm that it applied the normative-language check to the
+content in its scope, for every change in its scope.
 
 ### Report
 
