@@ -72,6 +72,12 @@ else.
 For a meaning-changing change, the review MUST evaluate the new meaning against
 the content that depends on it.
 
+When a meaning-changing change rewrites a normative requirement, the review
+MUST compare the old and new requirement's scope, including its conditions and
+triggers. It MUST identify cases covered by one wording but not the other and
+evaluate those cases against the intended behavior and dependent content, such
+as linked acceptance scenarios.
+
 A review MUST state the source of each finding. A finding from a correctness
 defect or a convention document is blocking. A finding from a skill or agent
 that the task uses is blocking when that skill or agent declares it blocking,
