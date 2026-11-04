@@ -54,6 +54,16 @@ Besides the exceptions this document defines, an explicit user instruction MAY
 set aside a rule for the task at hand only, and does not change the rule. Agents
 MUST NOT override a rule on their own preference or judgment.
 
+## Normative language
+
+When an agent writes or edits a document that carries the normative-language
+note, it MUST verify that the content it writes follows the
+[normative-language rules](./docs/GENERAL_CONVENTIONS.md#normative-language).
+
+A review MUST verify that the content in its scope follows those rules, for
+every change in its scope, and MUST report each deviation as a finding with
+those rules as its source.
+
 ## Tools
 
 A tool is anything the agent can invoke, other than one whose purpose is to
@@ -73,14 +83,12 @@ A pull request that adds or removes a tool's configuration MUST update that
 list. An agent SHOULD build with cargo rather than Docker Bake, unless the task
 needs a clean, containerized build.
 
-A declared tool that applies or checks conventions, such as formatting,
-spelling, or lint rules, is part of writing content, not of a review. When an
-agent writes content, it MAY ignore the conventions that such a tool applies or
-checks, and it MUST run the tool on the files it changed once it finishes
-writing.
+When an agent writes content, it MAY ignore conventions that a declared tool
+applies or checks, such as formatting, spelling, or lint rules, and it MUST run
+those tools on the files it changed once it finishes writing.
 
-A review only reads: it MUST NOT run a declared tool, and it MUST NOT ask anyone
-to run one. When an agent writes content in the same session as a review, such
+A review MUST NOT run a declared tool and MUST NOT ask anyone to run one. When
+an agent writes content in the same session as a review, such
 as applying a fix, that writing is not part of the review, and the rules above
 for writing content apply to it.
 
@@ -117,8 +125,9 @@ convention document requires other content to use is meaning-changing. A review
 MAY omit this classification from its report.
 
 For a meaning-preserving change, the review MUST verify only that the change
-preserves meaning and that references to anything it renames still resolve. It
-MUST NOT re-evaluate the touched content against anything else.
+preserves meaning and that references to anything it renames still resolve, and
+apply the normative-language check defined in Normative language. It MUST NOT
+re-evaluate the touched content against anything else.
 
 For a meaning-changing change, the review MUST evaluate the new meaning against
 the content that depends on it.
@@ -131,7 +140,7 @@ A review MUST state the source of each finding: a correctness defect, a
 convention document, a tool declared in this repository, or a skill or agent
 defined outside this repository. A finding is blocking when its source is a
 correctness defect, a convention document, or a failure of a tool declared in
-this repository. Since a review does not run declared tools, such a failure
+this repository. Since a review MUST NOT run declared tools, such a failure
 reaches it from outside the review, such as from CI or from a run that the user
 requests. A correctness defect includes a rule that contradicts itself or
 another rule. A finding from a skill or agent defined outside this repository is
@@ -158,7 +167,7 @@ the content it changes, such as the wording of a rule; the diff carries that
 text.
 
 A pull request description MUST NOT ask a reviewer to run a declared tool, such
-as in its `How to test?` section, because a review does not run one, as defined
+as in its `How to test?` section, because a review MUST NOT run one, as defined
 in Tools.
 
 ## Memory
