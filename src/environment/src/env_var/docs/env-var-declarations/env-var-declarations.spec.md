@@ -21,6 +21,8 @@ Name: Static declaration
 - [Intent](../env-var-intent.md): module intent.
 - [ENV-VAR_DECLARATIONS-ACC-0001](./env-var-declarations.acceptance.md#env-var_declarations-acc-0001)
 - [ENV-VAR_DECLARATIONS-ACC-0002](./env-var-declarations.acceptance.md#env-var_declarations-acc-0002)
+- [ENV-VAR_RESOLUTION-REQ-0005](../env-var-resolution/env-var-resolution.spec.md#env-var_resolution-req-0005):
+  source precedence and absence.
 
 **Status**:
 
@@ -32,8 +34,9 @@ THE SOFTWARE SHALL resolve and project only environment-variable declarations
 that are built into the software or packaged as immutable metadata with a
 plugin.
 
-THE SOFTWARE SHALL accept values for known declarations from runtime
-configuration.
+WHEN runtime configuration provides a value for a known declaration with source
+`Provided`,
+THE SOFTWARE SHALL accept the configuration.
 
 THE SOFTWARE SHALL NOT accept declarations, import aliases, export aliases, or
 source eligibility from runtime configuration.

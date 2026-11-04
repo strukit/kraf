@@ -98,7 +98,8 @@ full-text search.
   every **Specification** it introduces and every **ADR** that shapes it.
 - A **Specification** MUST link back to its **Intent** and forward to its
   matching **Acceptance** scenarios. A requirement MAY also link to the **ADR**
-  that decided its behavior.
+  that decided its behavior. A requirement MUST link to each other requirement
+  whose behavior it depends on or constrains, and the latter MUST link back.
 - An **Acceptance** document MUST link back to the **Specification** requirement
   it verifies.
 - An **ADR** MUST link back to its **Intent** in its `Links` section. If it
@@ -263,8 +264,7 @@ THE SOFTWARE SHALL <system response>.
 
 **Differences from the source:**
 
-The differences below are deliberate decisions of this repo. A review MUST NOT
-report them.
+The differences below are deliberate decisions of this repo.
 
 - **SHALL NOT and RFC terms:** the source uses only SHALL. Specifications also
   MAY use SHALL NOT for prohibitions, and cite RFC 2119 and RFC 8174 because
@@ -306,6 +306,8 @@ Name: <Requirement name>
 
 - [<FEATURE>_<AREA>-ACC-0001](./<feature>-<area>.acceptance.md#<feature>_<area>-acc-0001)
 - [Intent](../<feature>-intent.md)
+- [<FEATURE>_<AREA>-REQ-0002](./<feature>-<area>.spec.md#<feature>_<area>-req-0002):
+  related requirement.
 
 **Status**:
 
@@ -483,16 +485,26 @@ Name: <Decision title>
 
 ## Review
 
-A review MUST read the acceptance files linked from a specification before
-reporting one of its requirements as incorrect.
-
-When a change removes a requirement or alters the behavior that a requirement
-defines, the review MUST compare the old and new requirement's scope, including
-its conditions and triggers, and MUST identify the cases covered by one wording
-but not the other. It MUST evaluate those cases against the linked acceptance
-scenarios and the code that implements the requirement. A review MUST report, as
-a correctness defect, a change that leaves existing code behavior without a
-requirement that defines it.
+- A review MUST read the documents linked from a requirement before reporting
+  the requirement as incorrect.
+- When a change alters the meaning of a requirement, a review MUST follow the
+  requirement's links and evaluate the new meaning against each linked document,
+  including the linked requirements and the code that implements it.
+- When a change removes a requirement or alters the behavior that it defines, a
+  review MUST compare the old and new scope, including conditions and triggers,
+  and MUST identify the cases covered by one wording but not the other. It MUST
+  evaluate those cases as the previous rule states.
+- A review MUST report, as a correctness defect, a change that leaves existing
+  code behavior without a requirement that defines it, and a contradiction
+  between a requirement and a document linked from it.
+- When a change adds or removes a requirement, a review MUST verify that its
+  identifier is unique and that every link to and from it resolves.
+- When a change touches a document that a requirement links to, a review MUST
+  follow the link back to the requirement and verify that both still agree.
+- When a change alters a rule of the EARS notation, a review MUST compare it
+  with the cited source revision and MUST report what goes beyond it.
+- A review MUST NOT report as a defect a difference that the *Differences from
+  the source* list of the [Specification](#specification-specmd) section states.
 
 ## Related
 

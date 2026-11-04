@@ -156,6 +156,8 @@ Name: Source precedence and absence
 - [ENV-VAR_RESOLUTION-ACC-0013](./env-var-resolution.acceptance.md#env-var_resolution-acc-0013)
 - [ENV-VAR_RESOLUTION-ACC-0022](./env-var-resolution.acceptance.md#env-var_resolution-acc-0022)
 - [ENV-VAR_RESOLUTION-ACC-0023](./env-var-resolution.acceptance.md#env-var_resolution-acc-0023)
+- [ENV-VAR_DECLARATIONS-REQ-0001](../env-var-declarations/env-var-declarations.spec.md#env-var_declarations-req-0001):
+  static declaration.
 
 **Status**:
 
