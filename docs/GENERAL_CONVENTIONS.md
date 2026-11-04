@@ -245,11 +245,11 @@ code.
 - [README.md](../README.md): what Kraf is.
 - [ARCHITECTURE.md](./ARCHITECTURE.md): cross-domain architecture: system
   context, containers, modules, ports and adapters, dependency rule, decisions.
-  Read when the task touches the structure of the system, such as modules, ports
-  and adapters, or the dependencies between them.
+  Needed when the task touches the structure of the system, such as modules,
+  ports and adapters, or the dependencies between them.
 - [CODE_CONVENTIONS.md](./CODE_CONVENTIONS.md): code conventions: modules and
-  tests. Read when the task creates, edits, or reviews code or tests.
+  tests. Needed when the task creates, edits, or reviews code or tests.
 - [SPEC_CONVENTIONS.md](./SPEC_CONVENTIONS.md): spec conventions: layout,
-  identifiers, intent, specification, acceptance, ADR. Read when the task
+  identifiers, intent, specification, acceptance, ADR. Needed when the task
   creates, edits, or reviews a module README, a spec, an intent, an acceptance,
   or an ADR.
