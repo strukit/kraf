@@ -42,9 +42,8 @@ the folder's other files.
 
 ## Review
 
-In a feature that has a specification, a review MUST report, as a correctness
-defect, a change that leaves existing code behavior without a requirement that
-defines it.
+In a feature that has a specification, a review MUST also apply
+[the review rules in SPEC_CONVENTIONS.md](./SPEC_CONVENTIONS.md#review).
 
 ## Related
 
