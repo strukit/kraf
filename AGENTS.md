@@ -91,8 +91,6 @@ loading through a tool search.
 - An agent MUST use its native tools instead of shell commands that do the same
   work, and a provided tool instead of reaching the same service through the
   shell.
-- To read from a remote service, such as a GitHub repository, an agent MUST use
-  the tool provided for that service.
 - An agent MUST use a declared tool for the purpose it is declared for.
 - When the list states that a declared tool is invoked by another, using the
   invoking tool counts as using the invoked one. An agent SHOULD use the
