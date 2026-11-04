@@ -73,16 +73,20 @@ A pull request that adds or removes a tool's configuration MUST update that
 list. An agent SHOULD build with cargo rather than Docker Bake, unless the task
 needs a clean, containerized build.
 
-When an agent writes content, it MAY ignore conventions that a declared tool
-applies or checks, such as formatting, spelling, or lint rules. It MUST run
-those tools on the files it changed once it finishes writing. A review only
-reads and MUST NOT run a declared tool. When an agent writes content in the same
-session as a review, such as applying a fix, that writing is not part of the
-review, and the rules above for writing content apply to it. When a tool is not
-available, the agent MUST inform the user and continue the task. When a tool it
-runs reports a problem in content the task changed, the agent MUST fix it. When
-the tool can fix the problem, the agent MUST fix it with the tool; otherwise, it
-MUST fix it by its own means.
+A declared tool that applies or checks conventions, such as formatting,
+spelling, or lint rules, is part of writing content, not of a review. When an agent writes content, it MAY ignore the conventions that such a
+tool applies or checks, and it MUST run the tool on the files it changed once it
+finishes writing.
+
+A review only reads: it MUST NOT run a declared tool, and it MUST NOT ask anyone
+to run one. When an agent writes content in the same session as a review, such
+as applying a fix, that writing is not part of the review, and the rules above
+for writing content apply to it.
+
+When a tool is not available, the agent MUST inform the user and continue the
+task. When a tool it runs reports a problem in content the task changed, the
+agent MUST fix it. When the tool can fix the problem, the agent MUST fix it with
+the tool; otherwise, it MUST fix it by its own means.
 
 An agent MUST NOT do work unless the user explicitly requests it, a convention
 document or a skill or agent that the task uses requires, recommends, or permits
@@ -145,6 +149,10 @@ Each item MUST state briefly, in the agent's own words, what changed and, when
 it is not evident, why. An item MUST NOT copy or restate in detail the text of
 the content it changes, such as the wording of a rule; the diff carries that
 text.
+
+A pull request description MUST NOT ask a reviewer to run a declared tool, such
+as in its `How to test?` section, because a review does not run one, as defined
+in Tools.
 
 ## Memory
 
