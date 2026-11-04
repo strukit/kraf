@@ -95,8 +95,9 @@ scope. All non-conflicting general rules MUST remain in effect. Such overrides
 do not require changing the document that defines the general rule, but MUST
 themselves be defined in a convention document.
 
-**Template** (the link path is relative to the document carrying the note; a
-`---` line separates notes):
+**Template** (the link path is relative to the document carrying the note; the
+`---` line that separates it from the normative-language note is not part of the
+template):
 
 ```md
 > [!IMPORTANT]
@@ -118,8 +119,8 @@ are:
 
 - `all`: every task.
 - `code`: a task that creates, edits, or reviews code or tests.
-- `spec`: a task that creates, edits, or reviews a spec, an intent, an
-  acceptance, or an ADR.
+- `spec`: a task that creates, edits, or reviews a module README, a spec, an
+  intent, an acceptance, or an ADR.
 - `agents`: a task that creates, edits, or reviews agent instructions, skills,
   or agent personas.
 
@@ -248,4 +249,5 @@ code.
   tests. Read when the task creates, edits, or reviews code or tests.
 - [SPEC_CONVENTIONS.md](./SPEC_CONVENTIONS.md): spec conventions: layout,
   identifiers, intent, specification, acceptance, ADR. Read when the task
-  creates, edits, or reviews a spec, an intent, an acceptance, or an ADR.
+  creates, edits, or reviews a module README, a spec, an intent, an acceptance,
+  or an ADR.
