@@ -141,6 +141,8 @@ it renames, and, for a meaning-changing change, the content that depends on it.
 - Content that the change relies on but does not modify, such as a
   configuration file, a tool, or the review environment, is outside the scope,
   even when the change makes it more relevant.
+- Content that the pull request description leaves for a later pull request is
+  outside the scope.
 - This rule MUST take precedence over every other review rule except the golden
   rule, including the duty to report a correctness defect.
 
@@ -157,12 +159,11 @@ name that a convention document requires other content to use.
   the rules below accordingly. It MAY omit the classification from its report.
 - Meaning-preserving: the review MUST verify only that meaning is preserved
   and that references to anything renamed still resolve, and apply the
-  normative-language check defined in Normative language. It MUST NOT re-evaluate the touched content
-  against anything else.
+  normative-language check defined in Normative language. It MUST NOT
+  re-evaluate the touched content against anything else.
 - Meaning-changing: the review MUST evaluate the new meaning against the content
   that depends on it. For a convention document, that content includes what the
-  change makes noncompliant, except what the pull request description leaves for
-  a later pull request.
+  change makes noncompliant.
 
 ### Findings
 
