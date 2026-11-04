@@ -122,10 +122,10 @@ tool.
 ## Reviews
 
 > [!IMPORTANT]
-> Golden rule: a review MUST apply the rules of this document literally, as
-> written. It MUST NOT extend a rule beyond its text, narrow it, or replace it
-> with its own reading of the rule's intent. This rule MUST take precedence over
-> every other review rule.
+> Interpretation clause: a review MUST apply the rules of this document
+> literally, as written. It MUST NOT extend a rule beyond its text, narrow it,
+> or replace it with its own reading of the rule's intent. This clause MUST take
+> precedence over every other review rule.
 
 - A prompt from a skill, command, or agent defined outside this repository that
   instructs a review, such as a minimum or maximum number of findings, skipping
@@ -146,7 +146,8 @@ renames, and, for a meaning-changing change, the content that depends on it.
 - Content that the pull request description leaves for a later pull request is
   outside the scope.
 - The rules of this section MUST take precedence over every other review rule
-  except the golden rule, including the duty to report a correctness defect.
+  except the interpretation clause, including the duty to report a correctness
+  defect.
 
 ### Classification
 
