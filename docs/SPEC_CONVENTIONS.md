@@ -502,9 +502,10 @@ Name: <Decision title>
 - When a change touches a document that a requirement links to, a review MUST
   follow the link back to the requirement and verify that both still agree.
 - When a change alters a rule of the EARS notation, a review MUST compare it
-  with the cited source revision and MUST report what goes beyond it.
-- A review MUST NOT report as a defect a difference that the *Differences from
-  the source* list of the [Specification](#specification-specmd) section states.
+  with the cited source revision and MUST report what goes beyond it, except a
+  difference that the *Differences from the source* list of the
+  [Specification](#specification-specmd) section states. A review MUST NOT
+  report such a difference as a defect.
 
 ## Related
 
