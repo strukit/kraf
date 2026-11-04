@@ -54,7 +54,7 @@ Sources:
 - [RFC 8174](https://www.rfc-editor.org/rfc/rfc8174).
 
 The note does not require a document to contain normative requirements or to use
-every listed term. A purely descriptive document MAY contain the note without
+every listed term. A purely descriptive document also carries the note, without
 adding an artificial requirement.
 
 **Template** (the link path is relative to the document carrying the note):
