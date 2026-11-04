@@ -46,9 +46,10 @@ MUST NOT override a rule on their own preference or judgment.
 
 ## Tools
 
-A tool is any program or service the agent can invoke, other than one that runs
-an agent or a language model: its native tools, tools provided to it, programs
-installed in the user's environment, and tools declared in this repository.
+A tool is anything the agent can invoke, other than one whose purpose is to
+delegate work to an agent or a language model: its native tools, tools provided
+to it, such as MCP tools, programs installed in the user's environment, and
+tools declared in this repository.
 
 An agent MUST NOT perform or verify by its own means work that an available tool
 performs. It MUST use its native tools instead of shell commands that do the
