@@ -45,6 +45,7 @@ Each entry links to the tool's configuration and states its purpose.
 
 - [dprint](./.dprint.jsonc): formats Markdown, JSON, TOML, Dockerfiles, and Rust
   code, the latter through rustfmt.
+- [rustfmt](./rustfmt.toml): formats Rust code (also invoked by dprint).
 - [cspell](./cspell.jsonc): checks spelling.
 - [rustup](./rust-toolchain.toml): installs the pinned Rust toolchain and its
   components, including cargo, clippy, and rustfmt.
@@ -52,6 +53,11 @@ Each entry links to the tool's configuration and states its purpose.
   through clippy. It is the tool for everyday builds.
 - [Docker Bake](./docker-bake.hcl): builds release artifacts in containers, as
   CI does, for a clean, containerized build.
+
+### Windows
+
+- [Visual Studio Build Tools](./.msvc.json): installs the VC++ Tools components
+  and the Windows SDK needed to build on Windows.
 
 ## Modules
 

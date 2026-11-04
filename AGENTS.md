@@ -73,17 +73,21 @@ A pull request that adds or removes a tool's configuration MUST update that
 list. An agent SHOULD build with cargo rather than Docker Bake, unless the task
 needs a clean, containerized build.
 
-When an agent writes content, it MAY ignore conventions that a declared tool
-applies or checks, such as formatting, spelling, or lint rules. It MUST run
-those tools on the files it changed once it finishes writing. A review MAY run a
-declared tool but is not required to; when it verifies what a declared tool
-checks, it MUST use that tool for the check. When an agent writes content in the
-same session as a review, such as applying a fix, that writing is not part of
-the review, and the rules above for writing content apply to it. When a tool is
-not available, the agent MUST inform the user and continue the task. When a tool
-it runs reports a problem in content the task changed, the agent MUST fix it.
-When the tool can fix the problem, the agent MUST fix it with the tool;
-otherwise, it MUST fix it by its own means.
+A declared tool that applies or checks conventions, such as formatting,
+spelling, or lint rules, is part of writing content, not of a review. When an
+agent writes content, it MAY ignore the conventions that such a tool applies or
+checks, and it MUST run the tool on the files it changed once it finishes
+writing.
+
+A review only reads: it MUST NOT run a declared tool, and it MUST NOT ask anyone
+to run one. When an agent writes content in the same session as a review, such
+as applying a fix, that writing is not part of the review, and the rules above
+for writing content apply to it.
+
+When a tool is not available, the agent MUST inform the user and continue the
+task. When a tool it runs reports a problem in content the task changed, the
+agent MUST fix it. When the tool can fix the problem, the agent MUST fix it with
+the tool; otherwise, it MUST fix it by its own means.
 
 An agent MUST NOT do work unless the user explicitly requests it, a convention
 document or a skill or agent that the task uses requires, recommends, or permits
@@ -127,7 +131,9 @@ A review MUST state the source of each finding: a correctness defect, a
 convention document, a tool declared in this repository, or a skill or agent
 defined outside this repository. A finding is blocking when its source is a
 correctness defect, a convention document, or a failure of a tool declared in
-this repository. A correctness defect includes a rule that contradicts itself or
+this repository. Since a review does not run declared tools, such a failure
+reaches it from outside the review, such as from CI or from a run that the user
+requests. A correctness defect includes a rule that contradicts itself or
 another rule. A finding from a skill or agent defined outside this repository is
 a recommendation and is non-blocking. When that skill or agent declares the
 finding blocking or required, the review MUST mark it as strongly recommended
@@ -150,6 +156,10 @@ Each item MUST state briefly, in the agent's own words, what changed and, when
 it is not evident, why. An item MUST NOT copy or restate in detail the text of
 the content it changes, such as the wording of a rule; the diff carries that
 text.
+
+A pull request description MUST NOT ask a reviewer to run a declared tool, such
+as in its `How to test?` section, because a review does not run one, as defined
+in Tools.
 
 ## Memory
 
