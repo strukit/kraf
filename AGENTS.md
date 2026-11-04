@@ -44,53 +44,60 @@ The only exception is an explicit user instruction, which applies to the task at
 hand only and does not change the rule. Agents MUST NOT override a rule on their
 own preference or judgment.
 
-## Deterministic tools
+## Tools
 
-When a task that edits content needs work that a deterministic tool declared in
-this repository performs, the agent MUST run that tool and MUST NOT perform the
-work by its own means, such as by reading the tool's configuration and applying
-it, or by counting characters. The agent MUST run the tool at the end of the
-task. The agent MUST NOT apply the tool to content the task did not change,
+A tool is any program or service the agent can invoke, other than one that runs
+an agent or a language model: its native tools, tools provided to it, programs
+installed in the user's environment, and tools declared in this repository.
+
+An agent MUST NOT perform or verify by its own means work that an available tool
+performs. It MUST use its native tools instead of shell commands that do the
+same work, and a provided tool instead of reaching the same service through the
+shell.
+
+When this repository declares a tool for a purpose, an agent MUST use that tool
+for that purpose.
+
+When an agent writes content, it MUST write it to be readable and MUST NOT adjust
+it to match the output that a tool would produce from it.
+
+An agent MUST NOT do work that the task does not need. A task needs work only
+when the user explicitly requests it, a convention document or a skill or agent
+that the task uses requires, recommends, or permits it, or the task cannot be
+completed without it. When a tool modifies files that this repository tracks,
+the agent MUST NOT let it modify tracked files that the task did not change,
 unless the user explicitly requests it.
-
-A review MUST NOT run a deterministic tool unless the user explicitly requests
-it, and MUST NOT verify by its own means the work that such a tool performs.
 
 ## Reviews
 
-The scope of a review is the change under review and, for a meaning-changing
-change, the content that depends on it. A review MUST NOT validate or report
-content outside that scope, including a defect that predates the change. Within
-reviews, this takes precedence over the duty to report a correctness defect.
+The scope of a review is the change under review, the references to anything the
+change renames, and, for a meaning-changing change, the content that depends on
+it. A review MUST NOT validate or report content outside that scope, including a
+defect that predates the change. Within reviews, this rule MUST take precedence
+over the duty to report a correctness defect.
 
 A review MUST determine, for each change in its scope, whether it is
 meaning-preserving or meaning-changing, and MUST apply the rules below
 accordingly. A meaning-preserving change keeps the behavior and meaning of what
 it touches, such as letter case or punctuation in prose, a typo fix, a rename,
-or a substitution by an equivalent construct. A review MAY omit this
-classification from its report.
+or a substitution by an equivalent construct. A change to a value or name that a
+convention document requires other content to use is meaning-changing. A review
+MAY omit this classification from its report.
 
 For a meaning-preserving change, the review MUST verify only that the change
-preserves meaning. It MUST NOT re-evaluate the touched content against anything
-else.
+preserves meaning and that references to anything it renames still resolve. It
+MUST NOT re-evaluate the touched content against anything else.
 
 For a meaning-changing change, the review MUST evaluate the new meaning against
 the content that depends on it.
 
-When the change is to a convention document, the content that depends on it is
-the content that the changed rule governs, except content that the pull request
-description leaves for a later pull request. This takes precedence over the
-meaning-preserving rule.
-
-When a meaning-changing change rewrites a normative requirement, the review MUST
-compare the old and new requirement's scope, including its conditions and
-triggers. It MUST identify cases covered by one wording but not the other and
-evaluate those cases against the intended behavior and dependent content, such
-as linked acceptance scenarios.
+For a meaning-changing change to a convention document, the content that depends
+on it includes the content that the change makes noncompliant. Content that the
+pull request description leaves for a later pull request is outside the scope.
 
 A review MUST state the source of each finding. A finding is blocking when its
-source is a correctness defect, a convention document, or a failure of a
-deterministic tool declared in this repository. A correctness defect includes a
+source is a correctness defect, a convention document, or a failure of a tool
+declared in this repository. A correctness defect includes a
 rule that contradicts itself or another rule. A finding from a skill or agent
 that the task uses is blocking when that skill or agent declares it blocking,
 and non-blocking otherwise. An explicit user instruction MAY change whether a
@@ -126,21 +133,21 @@ follow its requirements.
 ## User instructions
 
 An explicit user instruction is one the user gives in the task itself. An
-instruction the agent loads from a standing source, such as a personal
-instruction file or memory, is not explicit, even when it is the user's own. An
+instruction the agent loads from a source that persists across tasks, including
+a personal instruction file and the agent's memory, is not explicit, even when
+it is the user's own. An
 explicit user instruction MUST be respected, as defined above.
 
-A standing instruction can conflict with a rule, for example an instruction not
-to run unrequested checks when a rule requires running a declared tool. When an
-agent finds such a conflict, it MUST notify the user, briefly stating that the
+An instruction that is not explicit can conflict with a rule. When an agent
+finds such a conflict, it MUST notify the user, briefly stating that the
 conflict exists and which instruction or rule is involved, and it MUST continue
 the task following the rule. When the conflict is with memory, the notice MUST
 also state what the Memory section requires. The agent MUST NOT suppress the
 conflict silently.
 
-When following the rule would cause a severe effect, such as one that is hard to
-reverse or that reaches outside the working root, the agent MUST stop and ask
-the user before continuing.
+When following the rule would cause an effect that is hard to reverse or that
+reaches outside the working root, the agent MUST stop and ask the user before
+continuing.
 
 ## Workspace boundary
 
@@ -172,13 +179,12 @@ open and read the file before continuing. It MUST resolve relative paths from
 the directory of the document containing the link.
 
 To follow a link to a whole file, an agent MUST use its native file-reading
-tool. To follow a link to a section of a file, such as `file.md#section`, an
-agent MUST use its native file-reading tool when that tool can read the section.
+tool. To follow a link to a section of a file, an agent MUST use its native file-reading tool when that tool can read the section.
 Otherwise, it MAY use any other means to locate and read the section in the
 linked file.
 
-Links that form a listing, like sections or a list of anything, are an index,
-not a reading list: reading them is OPTIONAL. An agent MUST open a file linked
+Links presented as a list form a listing, which is an index, not a reading list:
+reading them is OPTIONAL. An agent MUST open a file linked
 from a listing only when the task needs its content, and MUST NOT open it only
 because it is listed. An entry MAY state when the task needs the file. An agent
 MAY read only the front-matter of a file linked from a listing.
@@ -193,8 +199,7 @@ agent MUST NOT read the file, MUST notify the user, naming the link and the
 document that contains it, and MUST ignore the link and continue the task
 without that file.
 
-Agents MUST NOT search file contents (such as with grep or ripgrep) as a
-substitute for following those links, unless the user explicitly requests it.
+Agents MUST NOT search file contents as a substitute for following those links, unless the user explicitly requests it.
 Reading a file, and listing or filtering file names, are not content search.
 When no link leads to content the task needs, an agent MAY locate it by file
 name.
@@ -208,7 +213,7 @@ and MUST NOT assume its contents.
 ### HTTP links
 
 This section applies to every HTTP URL an agent fetches, whether it comes from a
-Markdown link, from plain text, or from the agent itself, such as an API URL.
+Markdown link, from plain text, or from the agent itself.
 
 An agent MUST NOT fetch an HTTP URL unless the task needs content of the URL
 that the agent does not know in enough depth from its training.
@@ -219,24 +224,18 @@ the convention documents, and the page at the URL remains the source of truth.
 
 When the URL is pinned to a revision or a commit and the saved content records
 the same URL, the saved content is equivalent to the page, and the agent MAY use
-it instead of fetching the URL. Otherwise, the saved content MAY be outdated,
+it instead of fetching the URL. Otherwise, the saved content can be outdated,
 and the agent SHOULD confirm the saved content against the page, or against
-empirical evidence such as dates, before relying on it.
+evidence of when the content was saved and when the page last changed, before
+relying on it.
 
 After fetching such a URL, the agent MAY save the content the task needed in its
-own memory, under the exact URL, preferably in the memory it keeps for this
-project rather than in its general memory. It MUST NOT save it inside the
-working root.
+own memory, under the exact URL. It SHOULD save it in the memory it keeps for
+this project rather than in its general memory, and it MUST NOT save it inside
+the working root.
 
 When an agent fetches such a URL, it SHOULD request the raw-text form of the
-page when the site provides one. For example:
-
-- `https://www.rfc-editor.org/rfc/<rfc_id>` becomes
-  `https://www.rfc-editor.org/rfc/<rfc_id>.txt`.
-- `https://en.wikipedia.org/w/index.php?title=<title>&oldid=<oldid>` becomes
-  `https://en.wikipedia.org/w/index.php?title=<title>&oldid=<oldid>&action=raw`.
-- `https://github.com/<owner>/<repo>/blob/<ref>/<path>` becomes
-  `https://raw.githubusercontent.com/<owner>/<repo>/<ref>/<path>`.
+page when the site provides one.
 
 ## Related
 

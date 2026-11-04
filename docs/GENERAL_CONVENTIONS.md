@@ -81,9 +81,12 @@ follow them. You MUST NOT introduce ad-hoc exceptions. Changing a rule requires
 a deliberate decision in a pull request that edits the convention document
 defining it.
 
-A pull request that changes a rule MUST bring the content that the rule governs
-into compliance, unless its description lists the content it leaves for a later
-pull request.
+A pull request that changes a convention document MUST bring into compliance the
+content that the change makes noncompliant, unless its description lists the
+content it leaves for a later pull request.
+
+A convention document MAY have a `## Review` section with the review rules
+specific to its domain.
 
 Rules MUST be defined only in dedicated convention documents. Code comments,
 commit messages, pull request descriptions, and any other content MUST NOT
@@ -150,8 +153,8 @@ are not links.)
 ### Markdown links
 
 A Markdown link to an HTTP URL MUST point to the page in its form for human
-viewing, not to its raw-text form. It SHOULD use a URL whose content does not
-change, such as a pinned revision or a fixed commit, when the site provides one.
+viewing, not to its raw-text form. It SHOULD use a URL pinned to a revision or a
+commit when the site provides one.
 
 ### Language-neutral docs
 

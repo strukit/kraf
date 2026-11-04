@@ -40,10 +40,12 @@ the folder's other files.
   const/fixture MAY be used when inlining it would make the test unnecessarily
   large or obscure its behavior.
 
-## Specifications
+## Review
 
-Within the scope of a review, code behavior that no specification defines is a
-correctness defect, even when an intent describes it.
+In a feature that has a specification, a review MUST report, as a correctness
+defect, a change that adds or changes code behavior that no specification
+defines, even when an intent describes that behavior. A review MUST NOT report existing code that no specification defines
+as a defect when the change does not alter its behavior.
 
 ## Related
 

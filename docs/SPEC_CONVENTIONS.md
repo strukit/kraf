@@ -269,9 +269,6 @@ WHEN <trigger>,
 THE SOFTWARE SHALL <system response>.
 ```
 
-A review MUST read the acceptance files linked from a specification before
-reporting one of its requirements as incorrect.
-
 **Layout:**
 
 ````md
@@ -476,6 +473,19 @@ Name: <Decision title>
 
 <What becomes easier, harder, or required because of this decision.>
 ```
+
+## Review
+
+A review MUST read the acceptance files linked from a specification before
+reporting one of its requirements as incorrect.
+
+When a change removes a requirement or alters the behavior that a requirement
+defines, the review MUST compare the old and new requirement's scope, including
+its conditions and triggers, and MUST identify the cases covered by one wording
+but not the other. It MUST evaluate those cases against the linked acceptance
+scenarios and the code that implements the requirement. A review MUST report, as
+a correctness defect, a change that leaves existing code behavior without a
+requirement that defines it.
 
 ## Related
 
