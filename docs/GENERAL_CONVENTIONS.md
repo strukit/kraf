@@ -44,6 +44,10 @@ normative requirement, permission, recommendation, or prohibition. It MUST NOT
 express normative meaning through alternative keywords or lowercase variants of
 the listed terms.
 
+As an exception, [AGENTS.md](../AGENTS.md) MAY place its opening reading-order
+rules before the note, so that they come before anything else. Those rules
+follow the note like the rest of the document.
+
 Sources:
 
 - [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
