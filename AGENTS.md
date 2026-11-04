@@ -33,7 +33,8 @@ documents relevant to the task.
 Agents MUST act only on rules defined in convention documents and on skills and
 agents that apply them. They MUST NOT raise, flag, or fix a concern that no
 convention document defines, such as choosing one approach, name, or style over
-another.
+another, except as a finding of a skill or agent that the task uses, as defined
+in Reviews.
 
 Agents MUST report a correctness defect they find, such as code that produces a
 wrong result, fails, or contradicts its spec, even when no convention document
@@ -56,16 +57,17 @@ document defines.
 
 ## Reviews
 
-A review MUST NOT validate or report content outside the scope of the change
-under review, including a defect that predates the change. Within reviews, this
-takes precedence over the duty to report a correctness defect.
+The scope of a review is the change under review and, for a meaning-changing
+change, the content that depends on it. A review MUST NOT validate or report
+content outside that scope, including a defect that predates the change. Within
+reviews, this takes precedence over the duty to report a correctness defect.
 
 A review MUST determine, for each change in its scope, whether it is
 meaning-preserving or meaning-changing, and MUST apply the rules below
 accordingly. A meaning-preserving change keeps the behavior and meaning of what
-it touches, such as letter case, punctuation, a typo fix, a rename, or a
-substitution by an equivalent construct. A review MAY omit this classification
-from its report.
+it touches, such as letter case or punctuation in prose, a typo fix, a rename,
+or a substitution by an equivalent construct. A review MAY omit this
+classification from its report.
 
 For a meaning-preserving change, the review MUST verify only that the change
 preserves meaning. It MUST NOT re-evaluate the touched content against anything

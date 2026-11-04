@@ -173,9 +173,6 @@ can lack a requirement, an ADR, code, or any other document that specifies or
 details it. This is expected and MUST NOT be treated as an error, a defect, or a
 problem.
 
-Within the scope of a review, code behavior that no specification defines is a
-correctness defect, even when an intent describes it.
-
 **Layout**:
 
 ```md

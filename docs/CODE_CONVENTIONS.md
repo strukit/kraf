@@ -40,6 +40,11 @@ the folder's other files.
   const/fixture MAY be used when inlining it would make the test unnecessarily
   large or obscure its behavior.
 
+## Specifications
+
+Within the scope of a review, code behavior that no specification defines is a
+correctness defect, even when an intent describes it.
+
 ## Related
 
 - [README.md](../README.md): what Kraf is.
