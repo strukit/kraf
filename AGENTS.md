@@ -77,6 +77,11 @@ request that adds or removes a tool's configuration MUST update this list.
 - [dprint](./.dprint.jsonc): formats Markdown, JSON, TOML, Dockerfiles, and Rust
   code, the latter through rustfmt.
 - [cspell](./cspell.jsonc): checks spelling.
+- [cargo](./rust-toolchain.toml): builds, tests, and lints Rust code, the latter
+  through clippy.
+- [Docker Bake](./docker-bake.hcl): builds release artifacts in containers, as
+  CI does. An agent SHOULD build with cargo instead, unless the task needs a
+  clean, containerized build.
 
 ## Reviews
 
