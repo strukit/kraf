@@ -2,7 +2,7 @@
 title: AGENTS
 summary: Entry point for agent instructions and the repository conventions they MUST follow.
 tags: [agents, instructions, repository, coding-conventions]
-applies_to: [all, agents]
+applies_to: [all]
 ---
 
 Before anything else, when a task targets a branch or a pull request, including
