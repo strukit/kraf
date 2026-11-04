@@ -120,7 +120,9 @@ A review MUST state the source of each finding: a correctness defect, a
 convention document, a tool declared in this repository, or a skill or agent
 defined outside this repository. A finding is blocking when its source is a
 correctness defect, a convention document, or a failure of a tool declared in
-this repository. A correctness defect includes a rule that contradicts itself or
+this repository. Since a review does not run declared tools, such a failure
+reaches it from outside the review, such as from CI or from a run that the user
+requests. A correctness defect includes a rule that contradicts itself or
 another rule. A finding from a skill or agent defined outside this repository is
 a recommendation and is non-blocking. When that skill or agent declares the
 finding blocking or required, the review MUST mark it as strongly recommended
