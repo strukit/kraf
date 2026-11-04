@@ -68,12 +68,12 @@ list. An agent SHOULD build with cargo rather than Docker Bake, unless the task
 needs a clean, containerized build.
 
 When an agent writes content, it MAY ignore conventions that a declared tool
-applies or checks, such as formatting, spelling, or lint rules. It MAY run those
-tools on the files it changed once it finishes writing. When a tool is not
-available, the agent MUST inform the user and continue the task. When a tool it
-runs reports a problem in content the task changed, the agent MUST fix it. When
-the tool can fix the problem, the agent MUST fix it with the tool; otherwise, it
-MUST fix it by its own means.
+applies or checks, such as formatting, spelling, or lint rules. It MUST run
+those tools on the files it changed once it finishes writing. A review MAY run
+them but is not required to. When a tool is not available, the agent MUST inform
+the user and continue the task. When a tool it runs reports a problem in content
+the task changed, the agent MUST fix it. When the tool can fix the problem, the
+agent MUST fix it with the tool; otherwise, it MUST fix it by its own means.
 
 An agent MUST NOT do work unless the user explicitly requests it, a convention
 document or a skill or agent that the task uses requires, recommends, or permits
@@ -154,8 +154,8 @@ review MAY report a deviation from it, as defined in Reviews.
 An explicit user instruction is one the user gives in the task itself. An
 instruction the agent loads from a source that persists across tasks, including
 a personal instruction file and the agent's memory, is not explicit, even when
-it is the user's own. An
-explicit user instruction MUST be respected, as defined above.
+it is the user's own. An explicit user instruction MUST be respected, as defined
+above.
 
 An instruction that is not explicit can conflict with a rule. When an agent
 finds such a conflict, it MUST notify the user, briefly stating that the
@@ -194,20 +194,20 @@ unrelated content pulled in by other means.
 ### Local links
 
 When an agent encounters a link to a local file whose content the task needs, it
-MUST open and read the file before continuing. It MUST resolve relative paths from
-the directory of the document containing the link.
+MUST open and read the file before continuing. It MUST resolve relative paths
+from the directory of the document containing the link.
 
 To follow a link to a whole file, an agent MUST use its native file-reading
-tool. To follow a link to a section of a file, an agent MUST use its native file-reading tool when that tool can read the section.
-Otherwise, it MAY use any other means to locate and read the section in the
-linked file.
+tool. To follow a link to a section of a file, an agent MUST use its native
+file-reading tool when that tool can read the section. Otherwise, it MAY use any
+other means to locate and read the section in the linked file.
 
 Links presented as a list form a listing, which is an index, not a reading list:
-reading them is OPTIONAL. An agent MUST open a file linked
-from a listing only when the task needs its content, and MUST NOT open it only
-because it is listed. An entry MAY state when the task needs the file. As an
-exception, an agent MAY read only the front-matter of a file linked from a
-listing to determine whether the task needs its content.
+reading them is OPTIONAL. An agent MUST open a file linked from a listing only
+when the task needs its content, and MUST NOT open it only because it is listed.
+An entry MAY state when the task needs the file. As an exception, an agent MAY
+read only the front-matter of a file linked from a listing to determine whether
+the task needs its content.
 
 A link inside an example, a code block, or a template illustrates a format and
 is not navigation. An agent MUST NOT follow it unless the task needs the linked
@@ -219,10 +219,10 @@ agent MUST NOT read the file, MUST notify the user, naming the link and the
 document that contains it, and MUST ignore the link and continue the task
 without that file.
 
-Agents MUST NOT search file contents as a substitute for following those links, unless the user explicitly requests it.
-Reading a file, and listing or filtering file names, are not content search.
-When no link leads to content the task needs, an agent MAY locate it by file
-name.
+Agents MUST NOT search file contents as a substitute for following those links,
+unless the user explicitly requests it. Reading a file, and listing or filtering
+file names, are not content search. When no link leads to content the task
+needs, an agent MAY locate it by file name.
 
 If the destination also contains local links needed for the task, the agent MUST
 follow them and SHOULD NOT reread files already consulted.
