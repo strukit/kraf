@@ -6,9 +6,7 @@ tags: [environment, env-var, specification, spec, resolution]
 
 > [!IMPORTANT]
 > Requirements in this specification use EARS notation. **SHALL** and **SHALL
-> NOT** define mandatory behavior; **SHOULD** and **SHOULD NOT** define expected
-> behavior that requires an explicit justification to deviate from; **MAY**
-> defines optional behavior.
+> NOT** define mandatory behavior.
 >
 > These terms follow RFC 2119 and RFC 8174.
 

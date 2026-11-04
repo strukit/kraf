@@ -218,21 +218,13 @@ Each requirement MUST declare two independent statuses:
 
 **Language:**
 
-The rules below summarize the EARS sources. An agent MAY consult the sources
-lazily: only when the rules below leave a doubt about EARS unresolved.
-
 Sources:
 
 - [EARS](https://en.wikipedia.org/w/index.php?title=Easy_Approach_to_Requirements_Syntax&oldid=1342972975)
   (Wikipedia, revision of 2026-03-11).
 
-Specifications MUST use EARS notation and the normative terms defined by RFC
-2119 and RFC 8174.
-
-- **SHALL** and **SHALL NOT** define mandatory behavior.
-- **SHOULD** and **SHOULD NOT** define expected behavior that requires an
-  explicit justification to deviate from.
-- **MAY** defines optional behavior.
+Specifications MUST use EARS notation. **SHALL** and **SHALL NOT** define
+mandatory behavior, as RFC 2119 and RFC 8174 define them.
 
 An EARS requirement is made of, in this order: zero or more preconditions, zero
 or one trigger, the system name, and one or more system responses. A
@@ -247,7 +239,7 @@ A requirement MUST use the EARS pattern that matches the behavior:
 | State-driven      | `WHILE`         | The behavior is active while a precondition holds.                                        |
 | Optional feature  | `WHERE`         | The behavior applies only where a feature is included.                                    |
 | Unwanted behavior | `IF`/`THEN`     | The behavior responds to an undesired situation, such as a fault, a failure, or an error. |
-| Complex           | Any combination | The behavior uses more than one EARS keyword.                                             |
+| Complex           | More than one   | The behavior uses more than one EARS keyword.                                             |
 
 ```text
 THE SOFTWARE SHALL <system response>.
@@ -269,6 +261,27 @@ WHEN <trigger>,
 THE SOFTWARE SHALL <system response>.
 ```
 
+**Differences from the source:**
+
+The differences below are deliberate decisions of this repo, not deviations from
+EARS. A review MUST NOT report them.
+
+- **SHALL NOT and RFC terms:** the source uses only SHALL. Specifications also
+  use SHALL NOT for prohibitions, and cite RFC 2119 and RFC 8174 because
+  [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#normative-language) makes
+  every document cite them.
+- **System name:** the source leaves `<system name>` free. Specifications fix it
+  as `THE SOFTWARE`, so every requirement names the system the same way.
+- **EARS for every requirement:** the source notes that EARS does not suit
+  every requirement, such as formulas, decision tables, or constraints that are
+  not conditional behavior. Specifications use EARS for all their requirements.
+- **Pattern choice:** the source describes the patterns without making the
+  choice mandatory. This repo makes the matching pattern mandatory, so each
+  behavior has one form.
+- **Presentation:** uppercase `THE`, a line break after each keyword clause, a
+  closing period, and the fenced `text` block are layout choices that the source
+  does not define.
+
 **Layout:**
 
 ````md
@@ -280,9 +293,7 @@ tags: [<feature>, <area>, specification, spec]
 
 > [!IMPORTANT]
 > Requirements in this specification use EARS notation. **SHALL** and **SHALL
-> NOT** define mandatory behavior; **SHOULD** and **SHOULD NOT** define expected
-> behavior that requires an explicit justification to deviate from; **MAY**
-> defines optional behavior.
+> NOT** define mandatory behavior.
 >
 > These terms follow RFC 2119 and RFC 8174.
 
