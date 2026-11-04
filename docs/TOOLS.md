@@ -36,7 +36,7 @@ Each entry states the tool's purpose and, when they apply:
   - Config: [rustfmt.toml](../rustfmt.toml).
   - Capabilities: check, autofix.
   - Version: [rust-toolchain.toml](../rust-toolchain.toml).
-- clippy: lints Rust code (invoked by cargo).
+- clippy: lints Rust code (invoked by cargo and by rust-analyzer).
   - Config: [Cargo.toml](../Cargo.toml).
   - Capabilities: check, partial autofix.
   - Version: [rust-toolchain.toml](../rust-toolchain.toml).
