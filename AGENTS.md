@@ -133,6 +133,15 @@ A review MUST NOT report or list missing content unless a convention document
 requires that content, including by defining its absence as a defect, or a skill
 or agent that the task uses expects it.
 
+## Pull requests
+
+When an agent writes or updates a pull request description, it MUST follow
+[the pull request template](./.github/pull_request_template.md) and fill in each
+of its sections. Each item MUST state briefly, in the agent's own words, what
+changed and, when it is not evident, why. An item MUST NOT copy or restate in
+detail the text of the content it changes, such as the wording of a rule; the
+diff carries that text.
+
 ## Memory
 
 Memory MAY inform a task but MUST NOT override a rule. When it conflicts with a
