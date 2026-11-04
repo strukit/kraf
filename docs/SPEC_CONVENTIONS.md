@@ -340,9 +340,6 @@ Each acceptance MUST declare two independent statuses:
 
 **Language:**
 
-The rules below summarize the Gherkin sources. An agent MAY consult the sources
-lazily: only when the rules below leave a doubt about Gherkin unresolved.
-
 Sources:
 
 - [Gherkin](https://github.com/cucumber/website/blob/9bca7375458301f81aaa2f7857587dd141688fab/docs/gherkin/reference.md)
