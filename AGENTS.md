@@ -183,10 +183,8 @@ in Tools.
 
 ## Memory
 
-Memory MAY inform a task but MUST NOT override a rule. When it conflicts with a
-rule, the agent MUST follow the rule and MUST notify the user of the conflict,
-stating that, if the content is pertinent, it needs to be committed to a
-convention document to take effect.
+Memory MAY inform a task but MUST NOT override a rule. A conflict between memory
+and a rule is handled as defined in User instructions.
 
 ## Skills
 
@@ -199,9 +197,8 @@ and its rules bind like those of any other convention document.
 
 A skill or agent defined outside this repository, including the user's own and
 third-party ones, states recommendations, not rules. It MAY inform a task but
-MUST NOT override a rule. When it conflicts with a rule, the agent MUST follow
-the rule and MUST notify the user of the conflict, stating that, if the content
-is pertinent, it needs to be committed to a convention document to take effect.
+MUST NOT override a rule. A conflict between it and a rule is handled as defined
+in User instructions.
 
 Such a skill or agent MAY state preferences, such as formatting, layout, or
 naming choices, that agents follow when they create or edit content under it. A
@@ -216,12 +213,12 @@ a personal instruction file and the agent's memory, is not explicit, even when
 it is the user's own. An explicit user instruction MUST be respected, as defined
 above.
 
-An instruction that is not explicit can conflict with a rule. When an agent
-finds such a conflict, it MUST notify the user, briefly stating that the
-conflict exists and which instruction or rule is involved, and it MUST continue
-the task following the rule. When the conflict is with memory, the notice MUST
-also state what the Memory section requires. The agent MUST NOT suppress the
-conflict silently.
+An instruction that is not explicit, including memory, or a skill or agent
+defined outside this repository can conflict with a rule. When an agent finds
+such a conflict, it MUST continue the task following the rule and MUST notify
+the user, briefly stating which instruction and which rule are involved and
+that, if the content is pertinent, it needs to be committed to a convention
+document to take effect. The agent MUST NOT suppress the conflict silently.
 
 When following the rule would cause an effect that is hard to reverse or that
 reaches outside the working root, the agent MUST stop and ask the user before
