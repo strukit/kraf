@@ -166,6 +166,26 @@ A review MUST NOT report or list missing content unless a convention document
 requires that content, including by defining its absence as a defect, or a skill
 or agent that the task uses expects it.
 
+A review MUST be thorough from its first pass and MUST apply the same criteria
+to every change in its scope, so that reviewing the same change again yields the
+same findings. It MUST report every finding it can support and only those. It
+MUST NOT add, drop, or weaken a finding to reach a number of findings, even when
+a skill or agent asks for a minimum or a maximum.
+
+Before it reports, a review MUST go back over its findings and drop each one
+that fails any item of this checklist:
+
+- It is within the scope of the review.
+- It states its source, and the source applies: the rule it cites exists and
+  covers the content, or the defect it describes occurs with the content as
+  written.
+- It does not report what a declared tool checks, unless a failure of that tool
+  reached the review from outside it.
+- It does not repeat another finding.
+
+The review MUST also confirm that it applied the normative-language check to
+every change in its scope, as defined in Normative language.
+
 ## Pull requests
 
 When an agent writes or updates a pull request description, it MUST follow
