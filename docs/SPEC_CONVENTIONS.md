@@ -161,9 +161,9 @@ they relate. MAY use subsections (###).>
 ### Intent (*-intent.md)
 
 An intent explains why a feature exists, the problem it addresses, its
-boundaries, and its non-goals. It is not normative: what it describes is not
-required to be implemented, specified, or accepted, now or later. A principle
-becomes normative only through a requirement or an ADR that covers it.
+boundaries, and its non-goals. It is not normative: implementing, specifying, or
+accepting what it describes is OPTIONAL, now or later. A principle becomes
+normative only through a requirement or an ADR that covers it.
 
 An intent MUST NOT carry the normative-language note and MUST NOT use normative
 keywords.

@@ -46,10 +46,15 @@ own preference or judgment.
 
 ## Deterministic tools
 
-When a task needs work that a deterministic tool declared in this repository
-performs, the agent MUST run that tool and MUST NOT perform or verify the work
-by its own means, such as by reading the tool's configuration and applying it,
-or by counting characters. The agent MUST run the tool at the end of the task.
+When a task that edits content needs work that a deterministic tool declared in
+this repository performs, the agent MUST run that tool and MUST NOT perform the
+work by its own means, such as by reading the tool's configuration and applying
+it, or by counting characters. The agent MUST run the tool at the end of the
+task. The agent MUST NOT apply the tool to content the task did not change,
+unless the user explicitly requests it.
+
+A review MUST NOT run a deterministic tool unless the user explicitly requests
+it, and MUST NOT verify by its own means the work that such a tool performs.
 
 ## Reviews
 
@@ -72,20 +77,28 @@ else.
 For a meaning-changing change, the review MUST evaluate the new meaning against
 the content that depends on it.
 
-When a meaning-changing change rewrites a normative requirement, the review
-MUST compare the old and new requirement's scope, including its conditions and
+When the change is to a convention document, the content that depends on it is
+the content that the changed rule governs, except content that the pull request
+description leaves for a later pull request. This takes precedence over the
+meaning-preserving rule.
+
+When a meaning-changing change rewrites a normative requirement, the review MUST
+compare the old and new requirement's scope, including its conditions and
 triggers. It MUST identify cases covered by one wording but not the other and
 evaluate those cases against the intended behavior and dependent content, such
 as linked acceptance scenarios.
 
-A review MUST state the source of each finding. A finding from a correctness
-defect or a convention document is blocking. A finding from a skill or agent
+A review MUST state the source of each finding. A finding is blocking when its
+source is a correctness defect, a convention document, or a failure of a
+deterministic tool declared in this repository. A correctness defect includes a
+rule that contradicts itself or another rule. A finding from a skill or agent
 that the task uses is blocking when that skill or agent declares it blocking,
 and non-blocking otherwise. An explicit user instruction MAY change whether a
 finding is blocking, for the task at hand only.
 
 A review MUST NOT report or list missing content unless a convention document
-requires it or a skill or agent that the task uses expects it.
+requires that content, including by defining its absence as a defect, or a skill
+or agent that the task uses expects it.
 
 ## Memory
 
@@ -104,7 +117,7 @@ a convention document to take effect.
 A skill or agent MAY state preferences, such as formatting, layout, or naming
 choices, that agents follow when they create or edit content under it. A
 preference is not a rule: it MUST NOT override a convention document. A review
-reports a deviation from it as defined in Reviews.
+MAY report a deviation from it, as defined in Reviews.
 
 A skill file (`SKILL.md`) MUST carry the normative-language note defined in
 [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md#normative-language) and
@@ -118,12 +131,12 @@ instruction file or memory, is not explicit, even when it is the user's own. An
 explicit user instruction MUST be respected, as defined above.
 
 A standing instruction can conflict with a rule, for example an instruction not
-to read external links when a rule allows following them. When an agent finds
-such a conflict, it MUST notify the user, briefly stating that the conflict
-exists and which instruction or rule is involved, and it MUST continue the task
-following the rule. When the conflict is with memory, the notice also states
-what the Memory section requires. The agent MUST NOT suppress the conflict
-silently.
+to run unrequested checks when a rule requires running a declared tool. When an
+agent finds such a conflict, it MUST notify the user, briefly stating that the
+conflict exists and which instruction or rule is involved, and it MUST continue
+the task following the rule. When the conflict is with memory, the notice MUST
+also state what the Memory section requires. The agent MUST NOT suppress the
+conflict silently.
 
 When following the rule would cause a severe effect, such as one that is hard to
 reverse or that reaches outside the working root, the agent MUST stop and ask
@@ -167,7 +180,8 @@ linked file.
 Links that form a listing, like sections or a list of anything, are an index,
 not a reading list: reading them is OPTIONAL. An agent MUST open a file linked
 from a listing only when the task needs its content, and MUST NOT open it only
-because it is listed. An entry MAY state when the task needs the file.
+because it is listed. An entry MAY state when the task needs the file. An agent
+MAY read only the front-matter of a file linked from a listing.
 
 A link inside an example, a code block, or a template illustrates a format and
 is not navigation. An agent MUST NOT follow it unless the task needs the linked
@@ -193,30 +207,28 @@ and MUST NOT assume its contents.
 
 ### HTTP links
 
-This section applies only to Markdown links to an HTTP URL. Any other HTTP URL,
-such as one written as plain text, is outside it.
+This section applies to every HTTP URL an agent fetches, whether it comes from a
+Markdown link, from plain text, or from the agent itself, such as an API URL.
 
-An agent MUST NOT follow a Markdown link to an HTTP URL unless the task needs
-content of the link that the agent does not know in enough depth from its
-training.
+An agent MUST NOT fetch an HTTP URL unless the task needs content of the URL
+that the agent does not know in enough depth from its training.
 
-Before following such a link, the agent MAY look for content previously saved
-from its exact URL in its own memory. Memory MAY be used, but it MUST NOT
-override the convention documents, and the linked page remains the source of
-truth.
+Before fetching such a URL, the agent MAY look for content previously saved from
+that exact URL in its own memory. Memory MAY be used, but it MUST NOT override
+the convention documents, and the page at the URL remains the source of truth.
 
-When the link is pinned to a revision or a commit and the saved content records
-the same URL, the saved content is equivalent to the linked page, and the agent
-MAY use it instead of following the link. Otherwise, the saved content MAY be
-outdated, and the agent SHOULD confirm the saved content against the linked
-page, or against empirical evidence such as dates, before relying on it.
+When the URL is pinned to a revision or a commit and the saved content records
+the same URL, the saved content is equivalent to the page, and the agent MAY use
+it instead of fetching the URL. Otherwise, the saved content MAY be outdated,
+and the agent SHOULD confirm the saved content against the page, or against
+empirical evidence such as dates, before relying on it.
 
-After following such a link, the agent MAY save the content the task needed in
-its own memory, under the exact URL of the link, preferably in the memory it
-keeps for this project rather than in its general memory. It MUST NOT save it
-inside the working root.
+After fetching such a URL, the agent MAY save the content the task needed in its
+own memory, under the exact URL, preferably in the memory it keeps for this
+project rather than in its general memory. It MUST NOT save it inside the
+working root.
 
-When an agent follows such a link, it SHOULD request the raw-text form of the
+When an agent fetches such a URL, it SHOULD request the raw-text form of the
 page when the site provides one. For example:
 
 - `https://www.rfc-editor.org/rfc/<rfc_id>` becomes

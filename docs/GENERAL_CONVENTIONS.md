@@ -81,6 +81,10 @@ follow them. You MUST NOT introduce ad-hoc exceptions. Changing a rule requires
 a deliberate decision in a pull request that edits the convention document
 defining it.
 
+A pull request that changes a rule MUST bring the content that the rule governs
+into compliance, unless its description lists the content it leaves for a later
+pull request.
+
 Rules MUST be defined only in dedicated convention documents. Code comments,
 commit messages, pull request descriptions, and any other content MUST NOT
 introduce new rules; they MAY only reference or apply existing ones.
@@ -119,7 +123,7 @@ are:
 - `agents`: a task that creates, edits, or reviews agent instructions, skills,
   or agent personas.
 
-An agent uses `applies_to` to decide whether the task needs the doc.
+An agent MAY use `applies_to` to decide whether the task needs the doc.
 
 This applies to docs, not to every `.md`. A file that is not a doc but uses
 `.md` and carries its own front-matter schema — for example `SKILL.md` — is out
