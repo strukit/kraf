@@ -87,7 +87,7 @@ When this repository declares a tool for a purpose, an agent MUST use that tool
 for that purpose. When the list states that a declared tool is invoked by
 another declared tool, an agent SHOULD NOT invoke it directly and SHOULD use the
 tool that invokes it. A tool is declared only when it is listed in
-[Tools configured in this repository](./README.md#tools-configured-in-this-repository).
+[Tools](./README.md#tools).
 A pull request that adds or removes a tool's configuration MUST update that
 list. An agent SHOULD build with cargo rather than Docker Bake, unless the task
 needs a clean, containerized build.

@@ -39,7 +39,7 @@ agent CLI, a browser, or code that embeds them as a library (C or WASM), all
 calling the same runtime. Kraf aims to interoperate with the editors and
 toolchains a project already uses rather than replacing them.
 
-## Tools configured in this repository
+## Tools
 
 Each entry links to the tool's configuration and states its purpose.
 
@@ -54,6 +54,8 @@ Each entry links to the tool's configuration and states its purpose.
 
 - [rustup](./rust-toolchain.toml): installs the pinned Rust toolchain and its
   components, including cargo, clippy, and rustfmt.
+- [Visual Studio Build Tools](./.msvc.json) (Windows only): installs the VC++
+  Tools components and the Windows SDK needed to build on Windows.
 
 ### Build
 
@@ -61,11 +63,6 @@ Each entry links to the tool's configuration and states its purpose.
   through clippy. It is the tool for everyday builds.
 - [Docker Bake](./docker-bake.hcl): builds release artifacts in containers, as
   CI does, for a clean, containerized build.
-
-#### Windows
-
-- [Visual Studio Build Tools](./.msvc.json): installs the VC++ Tools components
-  and the Windows SDK needed to build on Windows.
 
 ## Modules
 
