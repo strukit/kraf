@@ -5,16 +5,10 @@ tags: [agents, instructions, repository, coding-conventions]
 applies_to: [all]
 ---
 
-Before anything else, when a task targets a branch or a pull request, including
-a review, you MUST read this document from that branch, the head of the pull
-request, not from the default branch or the base branch. If the copy of this
-document you loaded comes from another branch, you MUST discard it and read the
-copy from the target branch.
-
-After that, you MUST read
-[GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md). Except for the rule
-above, you MUST NOT continue with this document, or with any other action, until
-you have read it. After it, you MUST read [README.md](./README.md).
+Before anything else, you MUST read
+[GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md). You MUST NOT continue
+with this document, or with any other action, until you have read it. After it,
+you MUST read [README.md](./README.md).
 
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
@@ -48,12 +42,12 @@ neither a rule nor such a recommendation defines, such as choosing one approach,
 name, or style over another.
 
 Agents MUST report a correctness defect they find, such as code that produces a
-wrong result, fails, or contradicts its spec, even when no convention document
-defines it.
+wrong result or contradicts its spec, even when no convention document defines
+it.
 
 When an agent raises a concern, it MUST cite its source: the rule that defines
 it, the skill or agent that recommends it, or, for a correctness defect, the
-wrong result, failure, or contradiction it found.
+wrong result or contradiction it found.
 
 Besides the exceptions this document defines, an explicit user instruction MAY
 set aside a rule for the task at hand only, and does not change the rule. Agents
