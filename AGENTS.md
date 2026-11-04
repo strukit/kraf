@@ -56,14 +56,16 @@ document defines.
 
 ## Reviews
 
+A review MUST NOT validate or report content outside the scope of the change
+under review, including a defect that predates the change. Within reviews, this
+takes precedence over the duty to report a correctness defect.
+
 A review MUST NOT report or list missing content unless a convention document
 requires that content.
 
-Code behavior that no specification defines is a correctness defect. A review
-MUST report it, even though the missing requirement is missing content.
-
-When the user explicitly requests a deep review, the review MUST cover
-everything in its scope, including missing content.
+Within that scope, code behavior that no specification defines is a correctness
+defect, even when an intent describes it. A review MUST report it, even though
+the missing requirement is missing content.
 
 A review MUST determine, for each change in its scope, whether it is
 meaning-preserving or meaning-changing, and MUST apply the rules below
@@ -74,14 +76,10 @@ from its report.
 
 For a meaning-preserving change, the review MUST verify only that the change
 preserves meaning. It MUST NOT re-evaluate the touched content against code,
-specifications, or acceptance, and MUST NOT require fixing a defect the change
-did not introduce.
+specifications, or acceptance.
 
 For a meaning-changing change, the review MUST evaluate the new meaning against
 what depends on it, such as linked acceptance, implementing code, and callers.
-
-A defect that predates the change and that the review finds incidentally MUST be
-reported as pre-existing and MUST NOT block the change.
 
 ## Memory
 
