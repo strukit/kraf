@@ -121,7 +121,10 @@ loading through a tool search.
 
 ### Tools in reviews
 
-- A review MUST NOT run a declared tool or ask anyone to run one.
+- A review MAY run a declared tool when it has a plausible reason, such as
+  verifying a finding.
+- A review MUST NOT run a declared tool only to check what that tool is expected
+  to check on its own, such as through CI or a hook.
 - When an agent writes in the same session as a review, such as applying a fix,
   that writing is not part of the review, and Writing content applies to it.
 
@@ -200,7 +203,8 @@ when it is a rename.
 - A correctness defect includes a rule that contradicts itself or another rule.
 - A finding is blocking when its source is a correctness defect, a convention
   document, or a failure of a declared tool. Such a failure reaches the review
-  from outside it, such as from CI or a run the user requests.
+  from a run of the tool, such as in CI, one the user requests, or one the
+  review makes as permitted in Tools in reviews.
 - A finding from a skill or agent defined outside this repository is a
   non-blocking recommendation. When that skill or agent declares it blocking, or
   declares that it MUST be fixed, the review MUST mark it as a strong
@@ -227,7 +231,7 @@ checklist:
 - It states its source, and the source applies: the cited rule exists and covers
   the content, or the described defect occurs with the content as written.
 - It does not report what a declared tool checks, unless a failure of that tool
-  reached the review from outside it.
+  reached the review as defined in Findings.
 - It does not repeat another finding.
 
 The review MUST also confirm that it applied the normative-language check to the
@@ -256,8 +260,9 @@ content in its scope, for every change in its scope.
 - Each item MUST state briefly, in the agent's own words, what changed and, when
   not evident, why. It MUST NOT copy or restate in detail the changed content,
   such as the wording of a rule; the diff carries that text.
-- A description MUST NOT ask a reviewer to run a declared tool, such as in its
-  `How to test?` section, as defined in Tools in reviews.
+- A description MUST NOT ask a reviewer to run a declared tool only to check
+  what that tool is expected to check on its own, such as in its `How to test?`
+  section, as defined in Tools in reviews.
 
 ## Commits
 
