@@ -17,6 +17,8 @@ applies_to: [all]
 Each entry states the tool's purpose and, when they apply:
 
 - Config: the file that configures the tool.
+- Run: how an agent runs the tool, when it is not through the tool's own
+  command.
 - Capabilities: what the tool does with the content it checks.
   - check: reports problems.
   - autofix: fixes every problem it reports.
@@ -42,15 +44,14 @@ Each entry states the tool's purpose and, when they apply:
   - Config: [cspell.jsonc](../cspell.jsonc).
   - Capabilities: check.
   - Version: not pinned.
-- EditorConfig: helps editors and IDEs keep the line ending of every file as LF.
-  It has no command to run; editors and IDEs read it.
-  - Config: [.editorconfig](../.editorconfig).
 
 ### Language server
 
 - rust-analyzer: provides language-server features for Rust code, such as
-  diagnostics, with checks run through clippy.
+  diagnostics. Its checks run `cargo lint`, an alias for clippy defined in
+  [.cargo/config.toml](../.cargo/config.toml).
   - Config: [rust-analyzer.toml](../rust-analyzer.toml).
+  - Run: through an LSP tool, when one is available to the agent.
   - Capabilities: check, partial autofix.
   - Version: [rust-toolchain.toml](../rust-toolchain.toml).
 

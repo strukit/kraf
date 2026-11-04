@@ -85,15 +85,18 @@ another declared tool, using the invoking tool counts as using the invoked one,
 and an agent SHOULD NOT invoke the invoked tool directly and SHOULD use the tool
 that invokes it. A tool is declared only when it is listed in
 [TOOLS.md](./docs/TOOLS.md). A pull request that adds or removes a tool's
-configuration MUST update that list. An agent SHOULD build with cargo rather
-than Docker Bake, unless the task needs a clean, containerized build.
+configuration MUST update that list. A file that only editors or IDEs read, such
+as [.editorconfig](./.editorconfig), configures no tool that an agent can
+invoke: it is not a tool's configuration and MUST NOT be listed. An agent SHOULD
+build with cargo rather than Docker Bake, unless the task needs a clean,
+containerized build.
 
 When an agent writes content, it MAY ignore conventions that a declared tool
 with autofix applies, such as formatting rules. It MUST follow, while writing,
 the conventions that any other declared tool checks, such as spelling or lint
-rules. Once it finishes writing, it MUST run the declared tools on the files it
-changed, according to the capabilities that [TOOLS.md](./docs/TOOLS.md) states
-for each tool:
+rules. Once it finishes writing, it MUST run, on the files it changed, the
+declared tools for which [TOOLS.md](./docs/TOOLS.md) states capabilities, in the
+way it states under Run, if any, and according to those capabilities:
 
 - For a tool with autofix, the agent MUST run the tool's fix. It MAY skip the
   check.
