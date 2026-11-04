@@ -215,8 +215,8 @@ builder.
 ### CI
 
 Everything that runs in CI (test, build, release) MUST be reproducible locally.
-Builds MUST run in Docker Bake for every platform except Mac, which Docker can't
-build for.
+CI builds MUST run in Docker Bake for every platform except Mac, which Docker
+can't build for. This rule does not apply to local builds.
 
 ### Agents
 
