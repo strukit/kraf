@@ -186,8 +186,9 @@ linked file.
 Links presented as a list form a listing, which is an index, not a reading list:
 reading them is OPTIONAL. An agent MUST open a file linked
 from a listing only when the task needs its content, and MUST NOT open it only
-because it is listed. An entry MAY state when the task needs the file. An agent
-MAY read only the front-matter of a file linked from a listing.
+because it is listed. An entry MAY state when the task needs the file. As an
+exception, an agent MAY read only the front-matter of a file linked from a
+listing to determine whether the task needs its content.
 
 A link inside an example, a code block, or a template illustrates a format and
 is not navigation. An agent MUST NOT follow it unless the task needs the linked
