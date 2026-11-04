@@ -56,7 +56,7 @@ same work, and a provided tool instead of reaching the same service through the
 shell.
 
 When this repository declares a tool for a purpose, an agent MUST use that tool
-for that purpose.
+for that purpose. Running a tool in CI does not declare it.
 
 When an agent writes content, it MUST write it to be readable and MUST NOT adjust
 it to match the output that a tool would produce from it.
