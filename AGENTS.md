@@ -56,9 +56,11 @@ MUST NOT override a rule on their own preference or judgment.
 
 ## Normative language
 
-When an agent writes or edits a document that carries the normative-language
-note, it MUST verify that the content it writes follows the
-[normative-language rules](./docs/GENERAL_CONVENTIONS.md#normative-language).
+When an agent writes or edits a document, it MUST verify that the content it
+writes follows the normative-language rules that apply to that document: those
+of [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md#normative-language)
+and, for a specification or an intent, those of
+[SPEC_CONVENTIONS.md](./docs/SPEC_CONVENTIONS.md).
 
 A review MUST verify that the content in its scope follows those rules, for
 every change in its scope, and MUST report each deviation as a finding with
@@ -106,8 +108,8 @@ without it.
 
 > [!IMPORTANT]
 > Golden rule: a review MUST NOT review anything outside its scope. This rule
-> takes precedence over every other review rule, including the duty to report a
-> correctness defect. Content that the change relies on but does not modify,
+> MUST take precedence over every other review rule, including the duty to
+> report a correctness defect. Content that the change relies on but does not modify,
 > such as a configuration file, a tool, or the environment the review runs in,
 > is outside the scope, even when the change makes it more relevant.
 

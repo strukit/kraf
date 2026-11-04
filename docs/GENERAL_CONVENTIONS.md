@@ -45,8 +45,8 @@ express normative meaning through alternative keywords or lowercase variants of
 the listed terms.
 
 As an exception, [AGENTS.md](../AGENTS.md) MAY place its opening reading-order
-rules before the note, so that they come before anything else. Those rules
-follow the note like the rest of the document.
+rules before the note, so that they come before anything else. The note governs
+the keywords in those rules like those in the rest of the document.
 
 Sources:
 
@@ -135,8 +135,8 @@ Its values MUST be taken from the following list:
 
 An agent MAY use `applies_to` to decide whether the task needs the doc. When a
 rule that applies to the task requires the agent to read or apply a doc or a
-section of it, the task needs that content, whatever the doc's `applies_to`
-states.
+section of it, the agent MUST read that content, whatever the doc's
+`applies_to` states.
 
 This applies to docs, not to every `.md`. A file that is not a doc but uses
 `.md` and carries its own front-matter schema — for example `SKILL.md` — is out
