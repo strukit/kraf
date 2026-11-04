@@ -81,11 +81,18 @@ tool.
 
 ### Choosing a tool
 
+**Available tool**: a tool the agent can invoke, including one that requires
+loading through a tool search.
+
+- Before performing work through the shell or by its own means, an agent MUST
+  search the tools available to it, including those that require loading.
 - An agent MUST NOT perform or verify by its own means work that an available
   tool performs.
 - An agent MUST use its native tools instead of shell commands that do the same
   work, and a provided tool instead of reaching the same service through the
   shell.
+- To read from a remote service, such as a GitHub repository, an agent MUST use
+  the tool provided for that service.
 - An agent MUST use a declared tool for the purpose it is declared for.
 - When the list states that a declared tool is invoked by another, using the
   invoking tool counts as using the invoked one. An agent SHOULD use the
@@ -119,6 +126,23 @@ tool.
 - A review MUST NOT run a declared tool or ask anyone to run one.
 - When an agent writes in the same session as a review, such as applying a fix,
   that writing is not part of the review, and Writing content applies to it.
+
+## Delegation
+
+**Delegation**: an agent hands work to another agent, such as a sub-agent.
+
+- The delegate MUST read this document from the revision that the work targets,
+  such as the head of a pull request under review, even when it differs from the
+  revision of the delegating agent.
+- The delegate MUST resolve the links of this document within that revision, as
+  defined in Navigation.
+- The delegating agent MUST NOT pass its own copy of this document, or of the
+  documents it links to, to the delegate.
+- The delegating prompt MUST name the revision that the work targets and MUST
+  instruct the delegate to read this document and follow it.
+- The delegating prompt MUST NOT instruct an action that precedes the reading
+  this document requires.
+- The delegating prompt MUST NOT restate or reorder the rules of this document.
 
 ## Reviews
 
