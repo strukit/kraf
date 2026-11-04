@@ -2,6 +2,7 @@
 title: CODE CONVENTIONS
 summary: Non-negotiable code rules for the Kraf codebase — rules you amend, not break.
 tags: [code-standards, mandatory-rules, conventions, rust]
+applies_to: [code]
 ---
 
 > [!IMPORTANT]
@@ -25,9 +26,9 @@ tags: [code-standards, mandatory-rules, conventions, rust]
 `mod.rs` MUST only declare/re-export submodules (`pub mod ...`); it MUST NOT
 hold types, logic, or implementation. If a folder-module needs its own core
 type/logic file, it MUST be named after the folder with a suffix (e.g.
-`foo/foo_core.rs`, not `foo/foo.rs`) — a submodule can't share
-its parent's exact name (`clippy::module_inception`), and the suffix keeps it
-consistent with the folder's other files.
+`foo/foo_core.rs`, not `foo/foo.rs`) — a submodule can't share its parent's
+exact name (`clippy::module_inception`), and the suffix keeps it consistent with
+the folder's other files.
 
 ## Tests
 
@@ -38,6 +39,11 @@ consistent with the folder's other files.
   reader can see what it uses without navigating elsewhere. A shared
   const/fixture MAY be used when inlining it would make the test unnecessarily
   large or obscure its behavior.
+
+## Review
+
+In a feature that has a specification, a review MUST also apply
+[the review rules in SPEC_CONVENTIONS.md](./SPEC_CONVENTIONS.md#review).
 
 ## Related
 

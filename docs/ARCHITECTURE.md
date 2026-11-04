@@ -2,6 +2,7 @@
 title: Architecture
 summary: Cross-domain map of Kraf's system context, modules, and how they depend on each other.
 tags: [architecture, c4, ports-and-adapters, modules]
+applies_to: [code, spec]
 ---
 
 > [!IMPORTANT]

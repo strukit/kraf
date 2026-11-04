@@ -2,6 +2,7 @@
 title: GENERAL CONVENTIONS
 summary: Repo-wide conventions for organizing, coding, and documenting the Kraf monorepo.
 tags: [monorepo, conventions, documentation, agents]
+applies_to: [all]
 ---
 
 > [!IMPORTANT]
@@ -43,9 +44,18 @@ normative requirement, permission, recommendation, or prohibition. It MUST NOT
 express normative meaning through alternative keywords or lowercase variants of
 the listed terms.
 
+As an exception, [AGENTS.md](../AGENTS.md) MAY place its opening reading-order
+rules before the note, so that they come before anything else. The note governs
+the keywords in those rules like those in the rest of the document.
+
+Sources:
+
+- [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+- [RFC 8174](https://www.rfc-editor.org/rfc/rfc8174).
+
 The note does not require a document to contain normative requirements or to use
-every listed term. A purely descriptive document MAY contain the note without
-adding an artificial requirement.
+every listed term. The rule above includes a purely descriptive document, which
+carries the note without adding an artificial requirement.
 
 **Template** (the link path is relative to the document carrying the note):
 
@@ -75,6 +85,13 @@ follow them. You MUST NOT introduce ad-hoc exceptions. Changing a rule requires
 a deliberate decision in a pull request that edits the convention document
 defining it.
 
+A pull request that changes a convention document MUST bring into compliance the
+content that the change makes noncompliant, unless its description lists the
+content it leaves for a later pull request.
+
+A convention document MAY have a `## Review` section with the review rules
+specific to its domain.
+
 Rules MUST be defined only in dedicated convention documents. Code comments,
 commit messages, pull request descriptions, and any other content MUST NOT
 introduce new rules; they MAY only reference or apply existing ones.
@@ -85,12 +102,11 @@ scope. All non-conflicting general rules MUST remain in effect. Such overrides
 do not require changing the document that defines the general rule, but MUST
 themselves be defined in a convention document.
 
-**Template** (the link path is relative to the document carrying the note; a
-`---` line separates notes):
+**Template** (the link path is relative to the document carrying the note; the
+`---` line that separates it from the normative-language note is not part of the
+template):
 
 ```md
----
-
 > [!IMPORTANT]
 > This is a convention document, as defined in
 > [GENERAL_CONVENTIONS.md](<path-to-docs>/GENERAL_CONVENTIONS.md#convention-documents):
@@ -104,9 +120,26 @@ themselves be defined in a convention document.
 Every doc MUST have front-matter with `title`, `summary`, and `tags` — it makes
 docs easy to index for agents.
 
-This applies to docs, not to every `.md`. A file that is not a doc but uses
-`.md` and carries its own front-matter schema — for example `SKILL.md` — is out
-of scope.
+A doc MAY also define `applies_to` in its front-matter: a list of the kinds of
+task that need the doc. A convention document MUST define it. Its values MUST be
+taken from the following list:
+
+- `all`: every task.
+- `code`: a task that creates, edits, or reviews code or tests.
+- `spec`: a task that creates, edits, or reviews a module README, a spec, an
+  intent, an acceptance, or an ADR.
+- `agents`: a task that creates, edits, or reviews agent instructions, skills,
+  or agent personas.
+
+An agent MAY use `applies_to` to decide whether the task needs the doc. When a
+rule that applies to the task requires the agent to read or apply a doc or a
+section of it, the agent MUST read that content, whatever the doc's `applies_to`
+states.
+
+This section applies to docs, not to every `.md`. A file that carries its own
+front-matter schema, such as `SKILL.md`, is out of its scope, even when it is a
+convention document. Such a file MUST NOT define `applies_to`, because the tools
+that read it expect only its own schema.
 
 ### Docs graph
 
@@ -124,6 +157,12 @@ before navigating or linking across a set of docs.
 Every reference to a specific file MUST be a navigable link, not a bare name —
 so the reader can follow it. (Generic references, like "a module's `README.md`",
 are not links.)
+
+### Markdown links
+
+A Markdown link to an HTTP URL MUST point to the page in its form for human
+viewing, not to its raw-text form. It SHOULD use a URL pinned to a revision or a
+commit when the site provides one.
 
 ### Language-neutral docs
 
@@ -178,8 +217,8 @@ builder.
 ### CI
 
 Everything that runs in CI (test, build, release) MUST be reproducible locally.
-Builds MUST run in Docker Bake for every platform except Mac, which Docker can't
-build for.
+CI builds MUST run in Docker Bake for every platform except Mac, which Docker
+can't build for. This rule does not apply to local builds.
 
 ### Agents
 
@@ -189,15 +228,6 @@ agents MAY be committed and, when it encodes a repo rule, SHOULD be: skills, and
 agent personas bound to this repo's standards — for example, a Rust reviewer
 that enforces [CODE_CONVENTIONS.md](./CODE_CONVENTIONS.md). A persona MUST be
 committed in a vendor-neutral form; only the tool-specific glue stays personal.
-
-### Pull requests
-
-A pull request description MUST follow the
-[pull request template](../.github/pull_request_template.md). Its `# Summary`
-MUST open with one short paragraph, without lists, stating what the pull request
-does and why; the itemized changes belong under `What does this pull request
-change?`. Every `<...>` placeholder in the template MUST be replaced with
-content; a placeholder MUST NOT remain in the description.
 
 ### Naming
 
@@ -213,3 +243,13 @@ code.
 ## Related
 
 - [README.md](../README.md): what Kraf is.
+- [ARCHITECTURE.md](./ARCHITECTURE.md): cross-domain architecture: system
+  context, containers, modules, ports and adapters, dependency rule, decisions.
+  Needed when the task touches the structure of the system, such as modules,
+  ports and adapters, or the dependencies between them.
+- [CODE_CONVENTIONS.md](./CODE_CONVENTIONS.md): code conventions: modules and
+  tests. Needed when the task creates, edits, or reviews code or tests.
+- [SPEC_CONVENTIONS.md](./SPEC_CONVENTIONS.md): spec conventions: layout,
+  identifiers, intent, specification, acceptance, ADR. Needed when the task
+  creates, edits, or reviews a module README, a spec, an intent, an acceptance,
+  or an ADR.
