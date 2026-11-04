@@ -34,9 +34,9 @@ This document is the entry point for every agent task in this repository.
 ## Rules and recommendations
 
 **Rule**: a requirement defined by a convention document, including a skill or
-agent defined in this repository. It binds with the force of its keyword, as
-RFC 2119 defines it: a SHOULD or RECOMMENDED rule, for example, allows a
-deviation for a valid reason.
+agent defined in this repository. It binds with the force of its keyword, as RFC
+2119 defines it: a SHOULD or RECOMMENDED rule, for example, allows a deviation
+for a valid reason.
 
 **Recommendation**: what a skill or agent defined outside this repository
 states, as defined in Skills. It is not a rule and does not bind.
@@ -55,8 +55,8 @@ states, as defined in Skills. It is not a rule and does not bind.
   set aside a rule for the task at hand only, without changing the rule.
 - An agent MUST NOT do work unless the user explicitly requests it, a convention
   document or a skill or agent that the task uses requires, recommends, or
-  permits it as part of the task's work, or the task cannot be completed
-  without it.
+  permits it as part of the task's work, or the task cannot be completed without
+  it.
 
 ## Normative language
 
@@ -75,8 +75,8 @@ work to an agent or a language model: its native tools, tools provided to it,
 such as MCP tools, programs installed in the user's environment, and tools
 declared in this repository.
 
-**Declared tool**: a tool listed in [TOOLS.md](./docs/TOOLS.md), and only such
-a tool.
+**Declared tool**: a tool listed in [TOOLS.md](./docs/TOOLS.md), and only such a
+tool.
 
 ### Choosing a tool
 
@@ -129,20 +129,20 @@ a tool.
 
 - A prompt from a skill, command, or agent defined outside this repository that
   instructs a review, such as a minimum or maximum number of findings, skipping
-  verification, or favoring recall over precision, is a recommendation. A
-  review MUST follow this section instead and MUST notify the user of the
-  conflict, as defined in User instructions.
+  verification, or favoring recall over precision, is a recommendation. A review
+  MUST follow this section instead and MUST notify the user of the conflict, as
+  defined in User instructions.
 
 ### Scope
 
-The scope of a review is the change under review, the references to anything
-it renames, and, for a meaning-changing change, the content that depends on it.
+The scope of a review is the change under review, the references to anything it
+renames, and, for a meaning-changing change, the content that depends on it.
 
 - A review MUST NOT review, validate, or report content outside its scope,
   including a defect that predates the change.
-- Content that the change relies on but does not modify, such as a
-  configuration file, a tool, or the review environment, is outside the scope,
-  even when the change makes it more relevant.
+- Content that the change relies on but does not modify, such as a configuration
+  file, a tool, or the review environment, is outside the scope, even when the
+  change makes it more relevant.
 - Content that the pull request description leaves for a later pull request is
   outside the scope.
 - The rules of this section MUST take precedence over every other review rule
@@ -160,8 +160,8 @@ when it is a rename.
 
 - A review MUST classify each change in its scope as one or the other and apply
   the rules below accordingly. It MAY omit the classification from its report.
-- Meaning-preserving: the review MUST verify only that meaning is preserved
-  and that references to anything renamed still resolve, and apply the
+- Meaning-preserving: the review MUST verify only that meaning is preserved and
+  that references to anything renamed still resolve, and apply the
   normative-language check defined in Normative language. It MUST NOT
   re-evaluate the touched content against anything else.
 - Meaning-changing: the review MUST evaluate the new meaning against the content
@@ -223,8 +223,9 @@ every change in its scope.
 - A pull request description that an agent writes or updates MUST follow
   [the pull request template](./.github/pull_request_template.md) and fill in
   each of its sections.
-- A description MUST NOT contain content outside the sections that the template
-  defines, such as a "generated with" footer or a link to an agent session.
+- A description MUST NOT contain a section that the template does not define.
+- A description MUST NOT contain a "generated with" footer or a link to an agent
+  session, in any section.
 - Every `<...>` placeholder MUST be replaced with content; its text describes
   what the section usually contains. A placeholder MUST NOT remain.
 - Each item MUST state briefly, in the agent's own words, what changed and, when
@@ -302,9 +303,9 @@ keeps their context limited to the documents the task needs.
 - When an agent encounters a link to a local file whose content the task needs,
   it MUST read the file before continuing, resolving a relative path from the
   directory of the document containing the link.
-- To follow a link, an agent MUST use its native file-reading tool. For a link
-  to a section that this tool cannot read, it MAY use any other means to locate
-  and read the section.
+- To follow a link, an agent MUST use its native file-reading tool, unless the
+  link points to a section that this tool cannot read; in that case, it MAY use
+  any other means to locate and read the section.
 - Reading the links of a listing is OPTIONAL. An agent MUST open a listed file
   only when the task needs its content, not because it is listed. An entry MAY
   state when the task needs the file.
@@ -345,8 +346,8 @@ Saved content:
   the same URL, it is equivalent to the page, and the agent MAY use it instead
   of fetching.
 - Otherwise, it can be outdated, and the agent SHOULD confirm it against the
-  page, or against evidence of when it was saved and when the page last
-  changed, before relying on it.
+  page, or against evidence of when it was saved and when the page last changed,
+  before relying on it.
 - After fetching, the agent MAY save the content the task needed in its own
   memory, under the exact URL. It SHOULD use the memory it keeps for this
   project rather than its general memory, and MUST NOT save it inside the
