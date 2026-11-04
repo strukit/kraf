@@ -56,7 +56,8 @@ same work, and a provided tool instead of reaching the same service through the
 shell.
 
 When this repository declares a tool for a purpose, an agent MUST use that tool
-for that purpose. Running a tool in CI does not declare it.
+for that purpose. A tool is declared only when it is listed in
+[Declared tools](#declared-tools).
 
 When an agent writes content, it MUST write it to be readable and MUST NOT adjust
 it to match the output that a tool would produce from it.
@@ -67,6 +68,15 @@ that the task uses requires, recommends, or permits it as part of the work the
 task performs, or the task cannot be completed without it. When a tool modifies files that this repository tracks,
 the agent MUST NOT let it modify tracked files that the task did not change,
 unless the user explicitly requests it.
+
+### Declared tools
+
+Each entry links to the tool's configuration and states its purpose. A pull
+request that adds or removes a tool's configuration MUST update this list.
+
+- [dprint](./.dprint.jsonc): formats Markdown, JSON, TOML, Dockerfiles, and Rust
+  code, the latter through rustfmt.
+- [cspell](./cspell.jsonc): checks spelling.
 
 ## Reviews
 
