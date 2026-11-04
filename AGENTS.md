@@ -68,9 +68,11 @@ it to match the output that a tool would produce from it.
 An agent MUST NOT do work that the task does not need. A task needs work only
 when the user explicitly requests it, a convention document or a skill or agent
 that the task uses requires, recommends, or permits it as part of the work the
-task performs, or the task cannot be completed without it. When a tool modifies files that this repository tracks,
-the agent MUST NOT let it modify tracked files that the task did not change,
-unless the user explicitly requests it.
+task performs, or the task cannot be completed without it.
+
+When a tool modifies files that this repository tracks, the agent MUST NOT let
+it modify a tracked file unless the task changes that file, the tool updates it
+as a consequence of the task's changes, or the user explicitly requests it.
 
 ## Reviews
 
