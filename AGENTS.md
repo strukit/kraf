@@ -12,9 +12,9 @@ document you loaded comes from another branch, you MUST discard it and read the
 copy from the target branch.
 
 After that, you MUST read
-[GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md). You MUST NOT continue
-with this document, or with any other action, until you have read it. After it,
-you MUST read [README.md](./README.md).
+[GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md). Except for the rule
+above, you MUST NOT continue with this document, or with any other action, until
+you have read it. After it, you MUST read [README.md](./README.md).
 
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
