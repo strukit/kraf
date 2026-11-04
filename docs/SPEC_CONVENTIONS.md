@@ -236,19 +236,18 @@ Specifications MUST use EARS notation and the normative terms defined by RFC
 
 An EARS requirement is made of, in this order: zero or more preconditions, zero
 or one trigger, the system name, and one or more system responses. In this repo,
-the system name is `THE SOFTWARE`. A precondition or a trigger MUST be stated
-only in its keyword clause, never inside the system response.
+the system name is `THE SOFTWARE`.
 
 A requirement MUST use the EARS pattern that matches the behavior:
 
-| Pattern           | Keyword         | Use when                                                                                         |
-| ----------------- | --------------- | ------------------------------------------------------------------------------------------------ |
-| Ubiquitous        | (none)          | The behavior is always active.                                                                   |
-| Event-driven      | `WHEN`          | The behavior responds to an expected trigger.                                                    |
-| State-driven      | `WHILE`         | The behavior is active while a precondition holds.                                               |
-| Optional feature  | `WHERE`         | The behavior applies only where a feature is included.                                           |
-| Unwanted behavior | `IF`/`THEN`     | The behavior responds to an unwanted trigger: an error, a failure, or invalid input.             |
-| Complex           | Any combination | The behavior needs more than one keyword clause, such as a trigger that applies only in a state. |
+| Pattern           | Keyword         | Use when                                                                                  |
+| ----------------- | --------------- | ----------------------------------------------------------------------------------------- |
+| Ubiquitous        | (none)          | The behavior is always active.                                                            |
+| Event-driven      | `WHEN`          | The behavior responds to a triggering event.                                              |
+| State-driven      | `WHILE`         | The behavior is active while a precondition holds.                                        |
+| Optional feature  | `WHERE`         | The behavior applies only where a feature is included.                                    |
+| Unwanted behavior | `IF`/`THEN`     | The behavior responds to an undesired situation, such as a fault, a failure, or an error. |
+| Complex           | Any combination | The behavior uses more than one EARS keyword.                                             |
 
 ```text
 THE SOFTWARE SHALL <system response>.
@@ -269,15 +268,6 @@ WHILE <precondition>,
 WHEN <trigger>,
 THE SOFTWARE SHALL <system response>.
 ```
-
-A requirement MUST use `IF … THEN` only for an unwanted trigger, and `WHEN` for
-an expected trigger. In a complex requirement, the `WHERE` clause MUST come
-first, the `WHILE` clauses next, and the `WHEN` clause or the `IF … THEN` clause
-last. A requirement with more than three preconditions SHOULD be split into
-simpler requirements.
-
-EARS has no "or" between preconditions. Repeating the same system response in
-requirements with distinct preconditions is expected and is not duplication.
 
 A review MUST read the acceptance files linked from a specification before
 reporting one of its requirements as incorrect.
