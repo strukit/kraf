@@ -235,8 +235,8 @@ Specifications MUST use EARS notation and the normative terms defined by RFC
 - **MAY** defines optional behavior.
 
 An EARS requirement is made of, in this order: zero or more preconditions, zero
-or one trigger, the system name, and one or more system responses. In this repo,
-the system name is `THE SOFTWARE`.
+or one trigger, the system name, and one or more system responses. A
+requirement MUST use `THE SOFTWARE` as the system name.
 
 A requirement MUST use the EARS pattern that matches the behavior:
 

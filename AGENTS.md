@@ -221,7 +221,8 @@ that the agent does not know in enough depth from its training.
 
 Before fetching such a URL, the agent MAY look for content previously saved from
 that exact URL in its own memory. Memory MAY be used, but it MUST NOT override
-the convention documents, and the page at the URL remains the source of truth.
+the convention documents, and when it differs from the page at the URL, the page
+MUST take precedence.
 
 When the URL is pinned to a revision or a commit and the saved content records
 the same URL, the saved content is equivalent to the page, and the agent MAY use
