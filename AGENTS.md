@@ -5,7 +5,14 @@ tags: [agents, instructions, repository, coding-conventions]
 applies_to: [all, agents]
 ---
 
-Before anything else, you MUST read
+Before anything else, when a task targets a branch or a pull request, including
+a review, you MUST read this document and every convention document from that
+branch, the head of the pull request, not from the default branch or the base
+branch. If the copy of this document you loaded comes from another branch, you
+MUST discard it and read the copy from the target branch. A review MUST NOT
+apply convention documents from any branch other than the one under review.
+
+After that, you MUST read
 [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md). You MUST NOT continue
 with this document, or with any other action, until you have read it. After it,
 you MUST read [README.md](./README.md).
