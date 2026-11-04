@@ -137,10 +137,16 @@ or agent that the task uses expects it.
 
 When an agent writes or updates a pull request description, it MUST follow
 [the pull request template](./.github/pull_request_template.md) and fill in each
-of its sections. Each item MUST state briefly, in the agent's own words, what
-changed and, when it is not evident, why. An item MUST NOT copy or restate in
-detail the text of the content it changes, such as the wording of a rule; the
-diff carries that text.
+of its sections. Its `# Summary` MUST open with one short paragraph, without
+lists, stating what the pull request does and why; the itemized changes belong
+under `What does this pull request change?`. Every `<...>` placeholder in the
+template MUST be replaced with content; a placeholder MUST NOT remain in the
+description.
+
+Each item MUST state briefly, in the agent's own words, what changed and, when
+it is not evident, why. An item MUST NOT copy or restate in detail the text of
+the content it changes, such as the wording of a rule; the diff carries that
+text.
 
 ## Memory
 
