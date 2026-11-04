@@ -94,9 +94,10 @@ containerized build.
 When an agent writes content, it MAY ignore conventions that a declared tool
 with autofix applies, such as formatting rules. It MUST follow, while writing,
 the conventions that any other declared tool checks, such as spelling or lint
-rules. Once it finishes writing, it MUST run, on the files it changed, the
-declared tools for which [TOOLS.md](./docs/TOOLS.md) states capabilities, in the
-way it states under Run, if any, and according to those capabilities:
+rules. Once it finishes writing, it MUST run each declared tool for which
+[TOOLS.md](./docs/TOOLS.md) states capabilities and that checks the files it
+changed, in the way TOOLS.md states under Run, if any, and according to those
+capabilities:
 
 - For a tool with autofix, the agent MUST run the tool's fix. It MAY skip the
   check.

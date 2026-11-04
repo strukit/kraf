@@ -70,8 +70,8 @@ Each entry states the tool's purpose and, when they apply:
 
 ### Build
 
-- cargo: builds, tests, and lints Rust code, the latter through clippy. It is
-  the tool for everyday builds.
+- cargo: builds, tests, and lints Rust code, the latter through clippy. Used for
+  everyday builds.
   - Config: [.cargo/config.toml](../.cargo/config.toml).
   - Version: [rust-toolchain.toml](../rust-toolchain.toml).
 - Docker Bake: builds release artifacts in containers, as CI does, for a clean,
