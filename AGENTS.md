@@ -100,9 +100,11 @@ a tool.
 
 ### Writing content
 
-- While writing, an agent MAY ignore conventions that a declared tool with
+- While writing, an agent SHOULD NOT apply conventions that a declared tool with
   autofix applies, such as formatting, and MUST follow those that any other
   declared tool checks, such as spelling or lint rules.
+- An agent MUST NOT check or fix by its own means the conventions that a
+  declared tool with autofix applies, even when the tool is not available.
 - Once it finishes writing, it MUST run each declared tool for which
   [TOOLS.md](./docs/TOOLS.md) states capabilities and that checks the changed
   files, as stated under Run, if any, and according to its capabilities:
