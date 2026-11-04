@@ -46,14 +46,10 @@ own preference or judgment.
 
 ## Deterministic tools
 
-Agents MUST NOT perform or verify by their own means work that a deterministic
-tool declared in this repository already performs, such as formatting, line
-width, or linting, for example by counting characters. When the work needs to be
-verified, the agent MUST use the declared tool and SHOULD run it only at the end
-of the task. When no such tool is declared for the work, the work remains with
-the agent only if a convention document requires it. Otherwise, the agent MUST
-NOT do it, such as wrapping lines at a width that no declared tool or convention
-document defines.
+When a task needs work that a deterministic tool declared in this repository
+performs, the agent MUST run that tool and MUST NOT perform or verify the work
+by its own means, such as by reading the tool's configuration and applying it,
+or by counting characters. The agent MUST run the tool at the end of the task.
 
 ## Reviews
 
@@ -162,7 +158,7 @@ agent MUST use its native file-reading tool when that tool can read the section.
 Otherwise, it MAY use any other means to locate and read the section in the
 linked file.
 
-Links that form a listing, likes sections or a list of anything, are an index,
+Links that form a listing, like sections or a list of anything, are an index,
 not a reading list: reading them is OPTIONAL. An agent MUST open a file linked
 from a listing only when the task needs its content, and MUST NOT open it only
 because it is listed. An entry MAY state when the task needs the file.
@@ -199,9 +195,9 @@ content of the link that the agent does not know in enough depth from its
 training.
 
 Before following such a link, the agent MAY look for content previously saved
-from its exact URL, in its own memory or wherever it can best find it. Memory
-MAY be used, but it MUST NOT override the convention documents, and the linked
-page remains the source of truth.
+from its exact URL in its own memory. Memory MAY be used, but it MUST NOT
+override the convention documents, and the linked page remains the source of
+truth.
 
 When the link is pinned to a revision or a commit and the saved content records
 the same URL, the saved content is equivalent to the linked page, and the agent
@@ -209,8 +205,10 @@ MAY use it instead of following the link. Otherwise, the saved content MAY be
 outdated, and the agent SHOULD confirm the saved content against the linked
 page, or against empirical evidence such as dates, before relying on it.
 
-After following such a link, the agent MAY save the content the task needed,
-wherever it can best keep it, under the exact URL of the link.
+After following such a link, the agent MAY save the content the task needed in
+its own memory, under the exact URL of the link, preferably in the memory it
+keeps for this project rather than in its general memory. It MUST NOT save it
+inside the working root.
 
 When an agent follows such a link, it SHOULD request the raw-text form of the
 page when the site provides one. For example:
