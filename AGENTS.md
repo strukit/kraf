@@ -165,7 +165,7 @@ or agent that the task uses expects it.
 When an agent writes or updates a pull request description, it MUST follow
 [the pull request template](./.github/pull_request_template.md) and fill in each
 of its sections. Every `<...>` placeholder in the template MUST be replaced with
-content that follows its instructions; a placeholder MUST NOT remain in the
+content; its text is a recommendation, not a rule. A placeholder MUST NOT remain in the
 description.
 
 Each item MUST state briefly, in the agent's own words, what changed and, when
