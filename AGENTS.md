@@ -36,11 +36,16 @@ This document is the entry point for every agent task in this repository. Before
 starting any task, agents MUST start here and follow the documentation links to
 documents the task needs.
 
-Agents MUST act only on rules defined in convention documents and on skills and
-agents that apply them. They MUST NOT raise, flag, or fix a concern that no
-convention document defines, such as choosing one approach, name, or style over
-another, except as a recommendation from a skill or agent defined outside this
-repository that the task uses, as defined in Skills.
+Rules and recommendations are different things. A rule is a requirement that a
+convention document defines, including a skill or agent defined in this
+repository, and it binds. A recommendation comes from a skill or agent defined outside this
+repository, as defined in Skills; it is not a rule, it does not bind, and it
+MUST NOT override a rule.
+
+Agents MUST follow the rules. They MAY act on a recommendation from a skill or
+agent that the task uses. They MUST NOT raise, flag, or fix a concern that
+neither a rule nor such a recommendation defines, such as choosing one approach,
+name, or style over another.
 
 Agents MUST report a correctness defect they find, such as code that produces a
 wrong result, fails, or contradicts its spec, even when no convention document
