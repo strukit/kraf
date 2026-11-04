@@ -75,8 +75,20 @@ Each entry states the tool's purpose and, when they apply:
   - Config: [.cargo/config.toml](../.cargo/config.toml).
   - Version: [rust-toolchain.toml](../rust-toolchain.toml).
 - Docker Bake: builds release artifacts in containers, as CI does, for a clean,
-  containerized build.
+  containerized build, on the BuildKit daemon that Docker Compose starts.
   - Config: [docker-bake.hcl](../docker-bake.hcl).
+  - Version: not pinned.
+- Docker Compose: starts the BuildKit daemon that Docker Bake uses as a remote
+  builder, in CI and locally.
+  - Config: [compose.yaml](../compose.yaml).
+  - Version: [compose.yaml](../compose.yaml) pins the BuildKit image; Docker
+    Compose is not pinned.
+
+### CI
+
+- gh actions-lock: locks the GitHub Actions that the workflows use to their
+  commits.
+  - Config: [actions.lock](../.github/workflows/actions.lock).
   - Version: not pinned.
 
 ## Related
