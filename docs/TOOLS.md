@@ -77,8 +77,7 @@ Each entry states the tool's purpose and, when they apply:
 - Docker Bake: builds release artifacts in containers, as CI does, for a clean,
   containerized build.
   - Config: [docker-bake.hcl](../docker-bake.hcl).
-  - Version: [action.yml](../.github/actions/bake/action.yml), for CI; not
-    pinned for local builds.
+  - Version: not pinned.
 
 ## Related
 
