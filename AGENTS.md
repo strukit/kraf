@@ -65,8 +65,9 @@ states, as defined in Skills. It is not a rule and does not bind.
   [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md#normative-language)
   and, for a specification or an intent, those of
   [SPEC_CONVENTIONS.md](./docs/SPEC_CONVENTIONS.md).
-- A review MUST verify that every change in its scope follows those rules, and
-  MUST report each deviation as a finding citing them.
+- A review MUST verify that the content in its scope follows those rules, for
+  every change in its scope, and MUST report each deviation as a finding citing
+  them.
 
 ## Tools
 
@@ -227,8 +228,9 @@ every change in its scope.
 - A description MUST NOT contain a section that the template does not define.
 - A description MUST NOT contain a "generated with" footer or a link to an agent
   session, in any section.
-- Every `<...>` placeholder MUST be replaced with content; its text describes
-  what the section usually contains. A placeholder MUST NOT remain.
+- In a description that an agent writes or updates, every `<...>` placeholder
+  MUST be replaced with content; its text describes what the section usually
+  contains. A placeholder MUST NOT remain in it.
 - Each item MUST state briefly, in the agent's own words, what changed and, when
   not evident, why. It MUST NOT copy or restate in detail the changed content,
   such as the wording of a rule; the diff carries that text.
