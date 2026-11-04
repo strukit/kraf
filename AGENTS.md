@@ -75,8 +75,11 @@ needs a clean, containerized build.
 
 When an agent writes content, it MAY ignore conventions that a declared tool
 applies or checks, such as formatting, spelling, or lint rules. It MUST run
-those tools on the files it changed once it finishes writing. A review MUST NOT
-run a declared tool. When a tool is not available, the agent MUST inform
+those tools on the files it changed once it finishes writing. A review only
+reads and MUST NOT run a declared tool. When an agent writes content in the same
+session as a review, such as applying a fix, that writing is not part of the
+review, and the rules above for writing content apply to it. When a tool is not
+available, the agent MUST inform
 the user and continue the task. When a tool it runs reports a problem in content
 the task changed, the agent MUST fix it. When the tool can fix the problem, the
 agent MUST fix it with the tool; otherwise, it MUST fix it by its own means.
