@@ -28,7 +28,7 @@ you MUST read [README.md](./README.md).
 
 This document is the entry point for every agent task in this repository. Before
 starting any task, agents MUST start here and follow the documentation links to
-documents relevant to the task.
+documents the task needs.
 
 Agents MUST act only on rules defined in convention documents and on skills and
 agents that apply them. They MUST NOT raise, flag, or fix a concern that no
@@ -181,13 +181,13 @@ that authorization.
 ## Navigation
 
 Following local Markdown links is how agents MUST navigate this repository. It
-keeps the agent's context limited to documents relevant to the task, instead of
+keeps the agent's context limited to documents the task needs, instead of
 unrelated content pulled in by other means.
 
 ### Local links
 
-When an agent encounters a link to a local file relevant to the task, it MUST
-open and read the file before continuing. It MUST resolve relative paths from
+When an agent encounters a link to a local file whose content the task needs, it
+MUST open and read the file before continuing. It MUST resolve relative paths from
 the directory of the document containing the link.
 
 To follow a link to a whole file, an agent MUST use its native file-reading
