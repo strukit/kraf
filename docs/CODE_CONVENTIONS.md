@@ -43,9 +43,8 @@ the folder's other files.
 ## Review
 
 In a feature that has a specification, a review MUST report, as a correctness
-defect, a change that adds or changes code behavior that no specification
-defines, even when an intent describes that behavior. A review MUST NOT report existing code that no specification defines
-as a defect when the change does not alter its behavior.
+defect, a change that leaves existing code behavior without a requirement that
+defines it.
 
 ## Related
 
