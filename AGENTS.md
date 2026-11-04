@@ -143,8 +143,8 @@ it renames, and, for a meaning-changing change, the content that depends on it.
   even when the change makes it more relevant.
 - Content that the pull request description leaves for a later pull request is
   outside the scope.
-- This rule MUST take precedence over every other review rule except the golden
-  rule, including the duty to report a correctness defect.
+- The rules of this section MUST take precedence over every other review rule
+  except the golden rule, including the duty to report a correctness defect.
 
 ### Classification
 
@@ -152,8 +152,9 @@ it renames, and, for a meaning-changing change, the content that depends on it.
 what it touches, such as letter case or punctuation in prose, a typo fix, a
 rename, or a substitution by an equivalent construct.
 
-**Meaning-changing change**: any other change, including a change to a value or
-name that a convention document requires other content to use.
+**Meaning-changing change**: any other change. A change to a value or name that
+a convention document requires other content to use is meaning-changing, even
+when it is a rename.
 
 - A review MUST classify each change in its scope as one or the other and apply
   the rules below accordingly. It MAY omit the classification from its report.
