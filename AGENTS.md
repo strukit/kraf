@@ -33,16 +33,16 @@ documents relevant to the task.
 Agents MUST act only on rules defined in convention documents and on skills and
 agents that apply them. They MUST NOT raise, flag, or fix a concern that no
 convention document defines, such as choosing one approach, name, or style over
-another, except as a finding of a skill or agent that the task uses, as defined
-in Reviews.
+another, except as a recommendation from a skill or agent defined outside this
+repository that the task uses, as defined in Skills.
 
 Agents MUST report a correctness defect they find, such as code that produces a
 wrong result, fails, or contradicts its spec, even when no convention document
 defines it.
 
-The only exception is an explicit user instruction, which applies to the task at
-hand only and does not change the rule. Agents MUST NOT override a rule on their
-own preference or judgment.
+Besides the exceptions this document defines, an explicit user instruction MAY
+set aside a rule for the task at hand only, and does not change the rule. Agents
+MUST NOT override a rule on their own preference or judgment.
 
 ## Tools
 
@@ -95,12 +95,15 @@ For a meaning-changing change to a convention document, the content that depends
 on it includes the content that the change makes noncompliant. Content that the
 pull request description leaves for a later pull request is outside the scope.
 
-A review MUST state the source of each finding. A finding is blocking when its
-source is a correctness defect, a convention document, or a failure of a tool
-declared in this repository. A correctness defect includes a
-rule that contradicts itself or another rule. A finding from a skill or agent
-that the task uses is blocking when that skill or agent declares it blocking,
-and non-blocking otherwise. An explicit user instruction MAY change whether a
+A review MUST state the source of each finding: a correctness defect, a
+convention document, a tool declared in this repository, or a skill or agent
+defined outside this repository. A finding is blocking when its source is a
+correctness defect, a convention document, or a failure of a tool declared in
+this repository. A correctness defect includes a rule that contradicts itself or
+another rule. A finding from a skill or agent defined outside this repository is
+a recommendation and is non-blocking. When that skill or agent declares the
+finding blocking or required, the review MUST mark it as strongly recommended
+and name the skill or agent. An explicit user instruction MAY change whether a
 finding is blocking, for the task at hand only.
 
 A review MUST NOT report or list missing content unless a convention document
@@ -116,19 +119,23 @@ convention document to take effect.
 
 ## Skills
 
-Skills MAY inform a task but MUST NOT override a rule. When a skill conflicts
-with a rule, the agent MUST follow the rule and MUST notify the user of the
-conflict, stating that, if the content is pertinent, it needs to be committed to
-a convention document to take effect.
-
-A skill or agent MAY state preferences, such as formatting, layout, or naming
-choices, that agents follow when they create or edit content under it. A
-preference is not a rule: it MUST NOT override a convention document. A review
-MAY report a deviation from it, as defined in Reviews.
-
-A skill file (`SKILL.md`) MUST carry the normative-language note defined in
+A skill or agent defined in this repository is a convention document: its file
+MUST carry the normative-language note defined in
 [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md#normative-language) and
-follow its requirements.
+the convention note defined in
+[GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md#convention-documents),
+and its rules bind like those of any other convention document.
+
+A skill or agent defined outside this repository, including the user's own and
+third-party ones, states recommendations, not rules. It MAY inform a task but
+MUST NOT override a rule. When it conflicts with a rule, the agent MUST follow
+the rule and MUST notify the user of the conflict, stating that, if the content
+is pertinent, it needs to be committed to a convention document to take effect.
+
+Such a skill or agent MAY state preferences, such as formatting, layout, or
+naming choices, that agents follow when they create or edit content under it. A
+preference is a recommendation: it MUST NOT override a convention document. A
+review MAY report a deviation from it, as defined in Reviews.
 
 ## User instructions
 
