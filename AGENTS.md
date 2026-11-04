@@ -65,10 +65,12 @@ MUST report it, even though the missing requirement is missing content.
 When the user explicitly requests a deep review, the review MUST cover
 everything in its scope, including missing content.
 
-A review MUST classify each change in its scope as meaning-preserving or
-meaning-changing. A meaning-preserving change keeps the behavior and meaning of
-what it touches, such as letter case, punctuation, a typo fix, a rename, or a
-substitution by an equivalent construct.
+A review MUST determine, for each change in its scope, whether it is
+meaning-preserving or meaning-changing, and MUST apply the rules below
+accordingly. A meaning-preserving change keeps the behavior and meaning of what
+it touches, such as letter case, punctuation, a typo fix, a rename, or a
+substitution by an equivalent construct. A review MAY omit this classification
+from its report.
 
 For a meaning-preserving change, the review MUST verify only that the change
 preserves meaning. It MUST NOT re-evaluate the touched content against code,
