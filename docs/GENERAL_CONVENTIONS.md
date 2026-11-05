@@ -154,6 +154,13 @@ writing them as a closing sentence. A set of docs MAY define its own graph; when
 it does, that graph MUST be documented alongside the set. The graph MUST be read
 before navigating or linking across a set of docs.
 
+- An agent MUST reach a doc by following a link from a doc it has already read.
+- An agent MUST NOT read a doc that it reached only by its file path or file
+  name.
+- When an agent finds a doc that no link reaches, it MUST NOT read it and MUST
+  report it to the user as a defect of the graph.
+- A review MUST report, as a defect, a doc in its scope that no link reaches.
+
 Every reference to a specific file MUST be a navigable link, not a bare name —
 so the reader can follow it. (Generic references, like "a module's `README.md`",
 are not links.)

@@ -6,9 +6,7 @@ tags: [environment, env-var, specification, spec, declaration]
 
 > [!IMPORTANT]
 > Requirements in this specification use EARS notation. **SHALL** and **SHALL
-> NOT** define mandatory behavior; **SHOULD** and **SHOULD NOT** define expected
-> behavior that requires an explicit justification to deviate from; **MAY**
-> defines optional behavior.
+> NOT** define mandatory behavior.
 >
 > These terms follow RFC 2119 and RFC 8174.
 
@@ -27,15 +25,16 @@ Name: Static declaration
 **Status**:
 
 - Doc status: Draft
-- Implementation status: Not Implemented
+- Implementation status: Partially Implemented
 
 ```text
 THE SOFTWARE SHALL resolve and project only environment-variable declarations
 that are built into the software or packaged as immutable metadata with a
 plugin.
 
-THE SOFTWARE MAY accept values for known declarations from runtime
-configuration.
+WHEN runtime configuration provides only values, and only for known
+declarations,
+THE SOFTWARE SHALL accept the configuration.
 
 THE SOFTWARE SHALL NOT accept declarations, import aliases, export aliases, or
 source eligibility from runtime configuration.

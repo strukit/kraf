@@ -58,7 +58,7 @@ Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
 
     Scenario: ENV-VAR_DECLARATIONS-ACC-0002 — Known runtime declaration accepts a value
       Given a declaration exists for "EXAMPLE_KEY"
-      When runtime configuration provides a value for "EXAMPLE_KEY"
+      When runtime configuration provides only a value for "EXAMPLE_KEY"
       Then the software accepts the configuration
 ```
 

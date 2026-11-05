@@ -87,27 +87,41 @@ ENV-VAR_DECLARATIONS-ACC-0001
 
 ## Docs graph
 
-Every document MUST link to the documents adjacent to it, so the full set forms
-a navigable graph instead of files nobody points into. This lets graph-based
-retrieval (graph RAG) walk from any document to related context without a
-full-text search.
+Feature documents and their links form a graph. The graph exists for graph-based
+retrieval (graph RAG): a reader or an agent reaches each document, and the
+context related to it, by following links, without searching file contents or
+file names.
+
+**Required links:**
+
+Each link connects a document to one it derives from or one that verifies it.
 
 - A **Readme** MUST link forward to its **Intent** and to each
-  **Specification**.
+  **Specification**: the module's entry point leads to its documentation.
 - An **Intent** MUST link back to the document that links to it and forward to
-  every **Specification** it introduces and every **ADR** that shapes it.
+  every **Specification** it introduces and every **ADR** that shapes it: a
+  feature's purpose leads to what specifies and decides it.
 - A **Specification** MUST link back to its **Intent** and forward to its
-  matching **Acceptance** scenarios. A requirement MAY also link to the **ADR**
-  that decided its behavior.
+  matching **Acceptance** scenarios: a requirement leads to why it exists and
+  how it is verified. A requirement MAY also link to the **ADR** that decided
+  its behavior.
 - An **Acceptance** document MUST link back to the **Specification** requirement
-  it verifies.
+  it verifies: a scenario leads to the behavior it checks.
 - An **ADR** MUST link back to its **Intent** in its `Links` section. If it
   supersedes another **ADR**, it MUST link to that ADR in the same section. If
-  it is superseded, its `Doc status` MUST link to the superseding **ADR**. An
-  ADR MUST NOT link to requirements — so an accepted ADR remains unchanged when
-  requirements change.
+  it is superseded, its `Doc status` MUST link to the superseding **ADR**.
 
-No document is reachable only by knowing its file path.
+**Forbidden links:**
+
+- A requirement MUST NOT link to another requirement: no criterion yet defines
+  when one requirement depends on another precisely enough to apply
+  consistently.
+- An **ADR** MUST NOT link to requirements: an accepted ADR remains unchanged
+  when requirements change.
+
+An agent reaches a feature document as the
+[Docs graph](./GENERAL_CONVENTIONS.md#docs-graph) rule of GENERAL_CONVENTIONS.md
+defines for every doc.
 
 Feature documents MUST use the relationship sections defined by their type.
 Repo-level documents follow the
@@ -218,36 +232,28 @@ Each requirement MUST declare two independent statuses:
 
 **Language:**
 
-The rules below summarize the EARS sources. An agent MAY consult the sources
-lazily: only when the rules below leave a doubt about EARS unresolved.
-
 Sources:
 
 - [EARS](https://en.wikipedia.org/w/index.php?title=Easy_Approach_to_Requirements_Syntax&oldid=1342972975)
   (Wikipedia, revision of 2026-03-11).
 
-Specifications MUST use EARS notation and the normative terms defined by RFC
-2119 and RFC 8174.
-
-- **SHALL** and **SHALL NOT** define mandatory behavior.
-- **SHOULD** and **SHOULD NOT** define expected behavior that requires an
-  explicit justification to deviate from.
-- **MAY** defines optional behavior.
+Specifications MUST use EARS notation. **SHALL** and **SHALL NOT** define
+mandatory behavior, as RFC 2119 and RFC 8174 define them.
 
 An EARS requirement is made of, in this order: zero or more preconditions, zero
-or one trigger, the system name, and one or more system responses. A
-requirement MUST use `THE SOFTWARE` as the system name.
+or one trigger, the system name, and one or more system responses. A requirement
+MUST use `THE SOFTWARE` as the system name.
 
 A requirement MUST use the EARS pattern that matches the behavior:
 
-| Pattern           | Keyword         | Use when                                                                                  |
-| ----------------- | --------------- | ----------------------------------------------------------------------------------------- |
-| Ubiquitous        | (none)          | The behavior is always active.                                                            |
-| Event-driven      | `WHEN`          | The behavior responds to a triggering event.                                              |
-| State-driven      | `WHILE`         | The behavior is active while a precondition holds.                                        |
-| Optional feature  | `WHERE`         | The behavior applies only where a feature is included.                                    |
-| Unwanted behavior | `IF`/`THEN`     | The behavior responds to an undesired situation, such as a fault, a failure, or an error. |
-| Complex           | Any combination | The behavior uses more than one EARS keyword.                                             |
+| Pattern           | Keyword       | Use when                                                                                  |
+| ----------------- | ------------- | ----------------------------------------------------------------------------------------- |
+| Ubiquitous        | (none)        | The behavior is always active.                                                            |
+| Event-driven      | `WHEN`        | The behavior responds to a triggering event.                                              |
+| State-driven      | `WHILE`       | The behavior is active while a precondition holds.                                        |
+| Optional feature  | `WHERE`       | The behavior applies only where a feature is included.                                    |
+| Unwanted behavior | `IF`/`THEN`   | The behavior responds to an undesired situation, such as a fault, a failure, or an error. |
+| Complex           | More than one | The behavior uses more than one EARS keyword.                                             |
 
 ```text
 THE SOFTWARE SHALL <system response>.
@@ -269,6 +275,25 @@ WHEN <trigger>,
 THE SOFTWARE SHALL <system response>.
 ```
 
+**Differences from the source:**
+
+The differences below are deliberate decisions of this repo.
+
+- **SHALL NOT and RFC terms:** the source uses only SHALL. Specifications also
+  MAY use SHALL NOT for prohibitions, and cite RFC 2119 and RFC 8174 because
+  [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#normative-language) makes
+  every document cite them.
+- **System name:** the source leaves `<system name>` free. Specifications fix it
+  as `THE SOFTWARE`, so every requirement names the system the same way.
+- **EARS for every requirement:** the source notes that EARS does not suit every
+  requirement, such as formulas, decision tables, or constraints that are not
+  conditional behavior. Specifications use EARS for all their requirements.
+- **Pattern choice:** the source describes the patterns without making the
+  choice mandatory. This repo makes the matching pattern mandatory.
+- **Presentation:** a line break after each keyword clause, uppercase `THE` in
+  every pattern (the source uses it only in the ubiquitous template), and the
+  fenced `text` block are layout choices that the source does not define.
+
 **Layout:**
 
 ````md
@@ -280,9 +305,7 @@ tags: [<feature>, <area>, specification, spec]
 
 > [!IMPORTANT]
 > Requirements in this specification use EARS notation. **SHALL** and **SHALL
-> NOT** define mandatory behavior; **SHOULD** and **SHOULD NOT** define expected
-> behavior that requires an explicit justification to deviate from; **MAY**
-> defines optional behavior.
+> NOT** define mandatory behavior.
 >
 > These terms follow RFC 2119 and RFC 8174.
 
@@ -328,9 +351,6 @@ Each acceptance MUST declare two independent statuses:
 - **Verification status:** `Not Meets`, `Partially Meets`, `Meets` or `Unknown`
 
 **Language:**
-
-The rules below summarize the Gherkin sources. An agent MAY consult the sources
-lazily: only when the rules below leave a doubt about Gherkin unresolved.
 
 Sources:
 
@@ -476,16 +496,30 @@ Name: <Decision title>
 
 ## Review
 
-A review MUST read the acceptance files linked from a specification before
-reporting one of its requirements as incorrect.
-
-When a change removes a requirement or alters the behavior that a requirement
-defines, the review MUST compare the old and new requirement's scope, including
-its conditions and triggers, and MUST identify the cases covered by one wording
-but not the other. It MUST evaluate those cases against the linked acceptance
-scenarios and the code that implements the requirement. A review MUST report, as
-a correctness defect, a change that leaves existing code behavior without a
-requirement that defines it.
+- A review MUST read the documents linked from a requirement before reporting
+  the requirement as incorrect.
+- When a change alters the meaning of a requirement, a review MUST follow the
+  requirement's links and evaluate the new meaning against each linked document
+  and the code that implements it.
+- When a change removes a requirement or alters the behavior that it defines, a
+  review MUST compare the old and new scope, including conditions and triggers,
+  and MUST identify the cases covered by one wording but not the other. It MUST
+  evaluate those cases against each document linked from the old or the new
+  requirement and the code that implements it.
+- A review MUST report, as a correctness defect, a change that leaves existing
+  code behavior without a requirement that defines it, and a contradiction
+  between a requirement and a document linked from it.
+- When a change adds a requirement, a review MUST verify that its identifier is
+  unique and that every link to and from it resolves.
+- When a change removes a requirement, a review MUST verify that no link to it
+  remains.- When a change touches a document that a requirement links to, a
+  review MUST follow the link back to the requirement and verify that both still
+  agree.
+- When a change alters a rule of the EARS notation, a review MUST compare it
+  with the cited source revision and MUST report what goes beyond it, except a
+  difference that the _Differences from the source_ list of the
+  [Specification](#specification-specmd) section states. A review MUST NOT
+  report such a difference as a defect.
 
 ## Related
 
