@@ -40,7 +40,7 @@ Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
 
 ## ENV-VAR_DECLARATIONS-ACC-0002
 
-Name: Known provided declaration accepts a runtime value
+Name: Known runtime declaration accepts a value
 
 **Links:**
 
@@ -56,9 +56,9 @@ Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
 
   Rule: ENV-VAR_DECLARATIONS-REQ-0001 — Static declaration
 
-    Scenario: ENV-VAR_DECLARATIONS-ACC-0002 — Known provided declaration accepts a runtime value
-      Given a declaration with source `Provided` exists for "EXAMPLE_KEY"
-      When runtime configuration provides a value for "EXAMPLE_KEY"
+    Scenario: ENV-VAR_DECLARATIONS-ACC-0002 — Known runtime declaration accepts a value
+      Given a declaration exists for "EXAMPLE_KEY"
+      When runtime configuration provides only a value for "EXAMPLE_KEY"
       Then the software accepts the configuration
 ```
 
