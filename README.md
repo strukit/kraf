@@ -58,3 +58,7 @@ toolchains a project already uses rather than replacing them.
   identifiers, intent, specification, acceptance, ADR.
 - [TOOLS.md](./docs/TOOLS.md): tools declared in this repository, with their
   configuration and purpose.
+- [spec-intake](./.agents/skills/spec-intake/SKILL.md): skill that interviews
+  the user about a change request and publishes the outcome as an issue.
+- [spec-author](./.agents/skills/spec-author/SKILL.md): skill that authors
+  intent, specification, acceptance, and ADR documents from an approved issue.
