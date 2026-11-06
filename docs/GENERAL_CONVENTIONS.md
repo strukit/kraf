@@ -1,255 +1,558 @@
 ---
 title: GENERAL CONVENTIONS
-summary: Repo-wide conventions for organizing, coding, and documenting the Kraf monorepo.
-tags: [monorepo, conventions, documentation, agents]
-applies_to: [all]
+description: "Repository conventions: how documents are written, how a convention works, and how the workspace is organized."
+tags: [conventions, documentation, agents]
+type: ["convention"]
+include: ["**/*"]
 ---
 
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
-> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#normative-language). This
-> document MUST NOT use alternative words or lowercase variants as normative
-> keywords.
-
----
+> RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
+> This document MUST NOT use alternative words or lowercase variants as
+> normative keywords. See
+> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#doc-normative-language).
 
 > [!IMPORTANT]
-> This is a convention document, as defined in
-> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#convention-documents): its
-> rules are mandatory and non-negotiable. Treat them like a constitution: a rule
-> changes only through a pull request that edits this document and MUST NOT be
-> bypassed by an ad-hoc exception in code.
+> This is a convention document: its rules are mandatory and non-negotiable.
+> Treat them like a constitution: a rule changes only through a pull request
+> that edits this document and MUST NOT be bypassed by an ad-hoc exception in
+> code. See
+> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#convention-documents).
 
 ## Overview
 
-Kraf is a monorepo. It started in Rust, but the organization is **not by
-language** — it's by **feature/domain**. Each domain is its own folder
-(folder-per-feature); if a domain needs another language later, it lives right
-next to the rest instead of becoming a separate per-language workspace. Language
-is an implementation detail of each feature, not the repo's organizing axis.
+This document describes the conventions this repository adopts. Docs Conventions
+apply to every document: its metadata, its normative language, how documents
+link to each other, and how they stay independent of any implementation
+language. Rule Conventions define how a convention works: what a convention
+document is, how a convention is laid out and scoped, and how its rules are
+worded. General Conventions apply to the workspace: dependencies, platforms,
+tools, ignored files, CI, agents, and naming.
 
 ## Docs Conventions
 
-> The root [`README.md`](../README.md) does not require front-matter or the
-> normative-language note because it introduces the repository rather than
-> defining conventions.
+```yaml
+scope:
+  include: ["**/*.md"]
+  exclude: [".github/**"]
+```
 
-### Normative language
+### Doc metadata
 
-Every document MUST carry, near the top, the note below (the Template) declaring
-that its normative keywords follow RFC 2119 and RFC 8174. A document carrying
-the note MUST use the listed terms, in uppercase, whenever it expresses a
-normative requirement, permission, recommendation, or prohibition. It MUST NOT
-express normative meaning through alternative keywords or lowercase variants of
-the listed terms.
+This convention defines the metadata that every document declares at its top, so
+that an agent can index it and decide whether the task needs it.
 
-As an exception, [AGENTS.md](../AGENTS.md) MAY place its opening reading-order
-rules before the note, so that they come before anything else. The note governs
-the keywords in those rules like those in the rest of the document.
+```md
+---
+title: <title>
+description: <one-line description>
+tags: [<tag>, ...]
+type: [<type>, ...]
+include: [<type | glob>, ...]
+exclude: [<type | glob>, ...] # optional
+---
+```
 
-Sources:
+#### Terms
 
-- [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
-- [RFC 8174](https://www.rfc-editor.org/rfc/rfc8174).
+- **`type`**: what the document is, with the values of the table below.
+- **`include`** and **`exclude`**: the files whose tasks need the document,
+  given as types or file patterns.
 
-The note does not require a document to contain normative requirements or to use
-every listed term. The rule above includes a purely descriptive document, which
-carries the note without adding an artificial requirement.
+| Value        | Document                                             |
+| ------------ | ---------------------------------------------------- |
+| `convention` | a convention document                                |
+| `spec`       | an intent, a specification, an acceptance, or an ADR |
+| `guide`      | a descriptive document, such as an architecture      |
 
-**Template** (the link path is relative to the document carrying the note):
+#### Rules
+
+- Every document MUST start with the metadata of the template above, with every
+  field that the template does not mark as optional.
+- The metadata MUST be a valid YAML block.
+- `type` MUST list one or more types that state what the document is.
+- Each value of `type` MUST be taken from the table in Terms.
+- Each item of `include` and `exclude` MUST be a type or a file pattern. An item
+  equal to a value of the table in Terms MUST be read as a type, and any other
+  item MUST be read as a file pattern.
+- An item that is a type MUST match every document that has that type in its
+  `type` field.
+- An item that is a file pattern MUST be read as defined in
+  [Convention scope](#convention-scope).
+- An agent MAY use `include` and `exclude` to decide whether the task needs a
+  document: the task needs it when it creates, edits, or reviews a file that
+  matches `include` and does not match `exclude`.
+- When a rule that applies to the task requires the agent to read or apply a
+  document or a section of it, the agent MUST read that content, whatever the
+  document's `include` and `exclude` state.
+
+#### Best practices
+
+- To check the metadata, a review SHOULD verify that it is valid YAML, that each
+  field that the template does not mark as optional is present, and that `type`
+  lists at least one type.
+
+### Doc normative language
+
+```yaml
+scope:
+  exclude: ["README.md"]
+```
+
+This convention defines how any document words a requirement, with the key words
+of [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) and
+[RFC 8174](https://www.rfc-editor.org/rfc/rfc8174). A normative keyword gives a
+sentence its force; it does not make the document a convention document.
 
 ```md
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
-> [GENERAL_CONVENTIONS.md](<path-to-docs>/GENERAL_CONVENTIONS.md#normative-language).
+> RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
 > This document MUST NOT use alternative words or lowercase variants as
-> normative keywords.
+> normative keywords. See
+> [GENERAL_CONVENTIONS.md](<relative-link-to-docs>/GENERAL_CONVENTIONS.md#doc-normative-language).
 ```
 
-A family of documents MAY define its own equivalent note that lists only the
-terms it uses — for example, specifications use the EARS block defined in
-[Specifications](./SPEC_CONVENTIONS.md#specification-specmd) — as long as it
-cites RFC 2119 and RFC 8174 near the top.
+#### Terms
+
+- **Normative keyword**: one of the key words that the note of the template
+  above lists, in uppercase.
+- **Level**: the force of a normative keyword, with the values of the table
+  below. The keyword alone gives the level of the sentence that uses it; no part
+  of a document declares a level.
+
+| Level       | Normative keywords                               |
+| ----------- | ------------------------------------------------ |
+| Required    | MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT       |
+| Recommended | SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED |
+| Optional    | MAY, OPTIONAL                                    |
+
+#### Rules
+
+- Every document MUST carry the note of the template above near the top.
+- A document MAY carry the note without containing normative requirements or
+  using every normative keyword, and a purely descriptive document MUST carry it
+  too.
+- A family of documents MAY define an equivalent note that lists only the
+  normative keywords it uses, if it cites RFC 2119 and RFC 8174 near the top.
+- A document carrying the note MUST express every normative requirement,
+  permission, recommendation, or prohibition with normative keywords, and MUST
+  NOT use alternative words or lowercase variants for normative meaning.
+
+#### Best practices
+
+- To check the note, a review SHOULD compare it with the template, ignoring line
+  breaks and the path of the link.
+
+### Doc graph
+
+This convention defines how documents link to each other: a tree based on
+folders makes every document reachable, and other links stay free on top of it.
+How to write each link is defined in [Doc links](#doc-links).
+
+#### Terms
+
+- **Doc graph**: the documents and the links between them.
+- **Index**: the entry document of a folder, which lists the documents in it.
+- **Root**: the index of the repository root.
+- **Parent**: for a document that is not an index, the index of its own folder
+  or, when that folder has none, of the nearest ancestor folder that has one.
+  For an index, the index of the nearest ancestor folder that has one.
+- **Tree-linked**: a document whose Related section links to its parent and
+  whose parent links to it in its own Related section.
+
+#### Rules
+
+- The index of a folder MUST be its `README.md` file, because code hosting
+  platforms display that file by default as the entry of the folder.
+- The repository root MUST have an index.
+- Every document MUST have a Related section.
+- Every document other than the root MUST be tree-linked, even when those links
+  already appear in the content, so that the reader can reach it from the root
+  and go back.
+- The links of a Related section MUST point to documents, not to sections of
+  other documents.
+- Each link of a Related section MUST be followed by the `description` from the
+  metadata of its target, or its equivalent field, with the same text.
+- A Related section MAY link to other documents. A link that appears in the
+  content MAY be left out of it.
+- The closing navigation links of a document MUST be in its Related section, not
+  in a closing sentence.
+
+#### Best practices
+
+- To check the graph, a review SHOULD confirm, for each document that the
+  change:
+  - adds: that it is tree-linked;
+  - removes: that no document links to it;
+  - moves: the checks of "adds" at the new path and of "removes" at the old
+    path, and that the links of the document itself still resolve.
+
+  It SHOULD report each failure.
+
+### Doc links
+
+This convention defines how links are written, so that humans, agents,
+platforms, and IDEs can follow them.
+
+#### Rules
+
+- Every reference to a specific file MUST be a navigable link, not a bare name.
+  A generic reference, such as "a module's `README.md`", MAY be written without
+  a link.
+- A link MUST be written in the form `[text](target)`.
+- A link to a file in the repository MUST use the path relative to the document
+  that contains it.
+- A link to an HTTP URL MUST point to the page's form for human viewing, not its
+  raw-text form.
+- A link to an HTTP URL MUST use a fixed URL, whose content does not change (for
+  example, a URL with a revision, a commit, a hash, or a date, or the permalink
+  of an article), when the site provides one. When it does not, the link MUST
+  use the URL of a copy of the page kept by a public, trusted web archiving
+  service that keeps permanent copies.
+
+### Doc language neutrality
+
+This convention defines how documents stay independent of the implementation
+language.
+
+#### Rules
+
+- The normative text of a document MUST NOT use language-specific terms, such as
+  "trait", or language-specific file names and extensions, such as `lib.rs`,
+  unless the document is about a specific language.
+- That text MUST refer to roles instead, unless the document is about a specific
+  language: "interface" for a trait, and the `lib`, `cli`, and `mcp` entrypoints
+  without an extension.
+- Clearly identified examples MAY use language-specific terms, code symbols,
+  file names, and extensions to illustrate a language-neutral rule.
+- An example MUST NOT introduce a language-specific requirement.
+- Data and configuration formats, such as YAML and JSON, MAY be named when a
+  rule depends on them.
+
+## Rule Conventions
 
 ### Convention documents
 
-A convention document is a document whose purpose is to define rules and that
-carries the convention note below near the top, right after the
-normative-language note and separated from it by a `---` line. The note points
-here instead of restating these rules.
-
-The rules of a convention document are mandatory: the codebase and agents MUST
-follow them. You MUST NOT introduce ad-hoc exceptions. Changing a rule requires
-a deliberate decision in a pull request that edits the convention document
-defining it.
-
-A pull request that changes a convention document MUST bring into compliance the
-content that the change makes noncompliant, unless its description lists the
-content it leaves for a later pull request.
-
-A convention document MAY have a `## Review` section with the review rules
-specific to its domain.
-
-Rules MUST be defined only in dedicated convention documents. Code comments,
-commit messages, pull request descriptions, and any other content MUST NOT
-introduce new rules; they MAY only reference or apply existing ones.
-
-Rules explicitly scoped to a particular document type or context MUST take
-precedence over more general rules wherever they conflict, and only within that
-scope. All non-conflicting general rules MUST remain in effect. Such overrides
-do not require changing the document that defines the general rule, but MUST
-themselves be defined in a convention document.
-
-**Template** (the link path is relative to the document carrying the note; the
-`---` line that separates it from the normative-language note is not part of the
-template):
+This convention defines what a convention document is, how its rules bind and
+change, and which rule prevails in a conflict.
 
 ```md
 > [!IMPORTANT]
-> This is a convention document, as defined in
-> [GENERAL_CONVENTIONS.md](<path-to-docs>/GENERAL_CONVENTIONS.md#convention-documents):
-> its rules are mandatory and non-negotiable. Treat them like a constitution: a
-> rule changes only through a pull request that edits this document and MUST NOT
-> be bypassed by an ad-hoc exception in code.
+> This is a convention document: its rules are mandatory and non-negotiable.
+> Treat them like a constitution: a rule changes only through a pull request
+> that edits this document and MUST NOT be bypassed by an ad-hoc exception in
+> code. See
+> [GENERAL_CONVENTIONS.md](<relative-link-to-docs>/GENERAL_CONVENTIONS.md#convention-documents).
 ```
 
-### Markdown front-matter
+#### Terms
 
-Every doc MUST have front-matter with `title`, `summary`, and `tags` — it makes
-docs easy to index for agents.
+- **Convention document**: a document whose purpose is to define rules.
+- **Convention**: a section of a convention document that groups related rules,
+  with its own scope, terms, and rules.
 
-A doc MAY also define `applies_to` in its front-matter: a list of the kinds of
-task that need the doc. A convention document MUST define it. Its values MUST be
-taken from the following list:
+#### Rules
 
-- `all`: every task.
-- `code`: a task that creates, edits, or reviews code or tests.
-- `spec`: a task that creates, edits, or reviews a module README, a spec, an
-  intent, an acceptance, or an ADR.
-- `agents`: a task that creates, edits, or reviews agent instructions, skills,
-  or agent personas.
+- A convention document MUST carry the note of the template above near the top,
+  right after the normative-language note, separated from it only by a blank
+  line.
+- The rules of a convention document are mandatory: the codebase and agents MUST
+  follow them.
+- Ad-hoc exceptions MUST NOT be introduced. A rule MUST change only through a
+  pull request that edits the convention document defining it.
+- A pull request that changes a convention document MUST bring into compliance
+  the content that the change makes noncompliant, unless its description lists
+  what it leaves for a later pull request.
+- Rules MUST be defined only in convention documents. A document that is not a
+  convention document MUST NOT introduce rules and MAY only reference or apply
+  existing ones.
 
-An agent MAY use `applies_to` to decide whether the task needs the doc. When a
-rule that applies to the task requires the agent to read or apply a doc or a
-section of it, the agent MUST read that content, whatever the doc's `applies_to`
-states.
+#### Best practices
 
-This section applies to docs, not to every `.md`. A file that carries its own
-front-matter schema, such as `SKILL.md`, is out of its scope, even when it is a
-convention document. Such a file MUST NOT define `applies_to`, because the tools
-that read it expect only its own schema.
+- To check the note, a review SHOULD compare it with the template, ignoring line
+  breaks and the path of the link.
+- When a change rewrites a rule without intending to change its meaning, a
+  review SHOULD compare the old and new wording for conditions, scope, subject,
+  keyword, pronoun referents, and terms that other documents use for the rule.
 
-### Docs graph
+#### Convention precedence
 
-Repo-level docs form a connected graph rooted at [README.md](../README.md).
-Every repo-level doc other than README.md MUST be linked from at least one doc
-already in the graph, which is its parent, so no doc is reachable only by its
-file path. Every doc MUST link back to its parent. A link already in the body
-satisfies these rules; a separate `Related` section is OPTIONAL and MAY be used
-to consolidate outbound links in one place. A repo-level doc that provides
-closing navigation links MUST group them under a `## Related` heading instead of
-writing them as a closing sentence. A set of docs MAY define its own graph; when
-it does, that graph MUST be documented alongside the set. The graph MUST be read
-before navigating or linking across a set of docs.
+This convention defines which rule prevails when two rules conflict.
 
-Every reference to a specific file MUST be a navigable link, not a bare name —
-so the reader can follow it. (Generic references, like "a module's `README.md`",
-are not links.)
+##### Rules
 
-### Markdown links
+- A rule explicitly scoped to a document type or context MUST take precedence
+  over a more general rule wherever they conflict, only within that scope.
+- Non-conflicting general rules MUST remain in effect.
+- Such an override MUST be defined in a convention document, and MAY leave
+  unchanged the document that defines the general rule.
+- A rule that prevails over another MUST cite the convention of the rule it
+  overrides.
 
-A Markdown link to an HTTP URL MUST point to the page in its form for human
-viewing, not to its raw-text form. It SHOULD use a URL pinned to a revision or a
-commit when the site provides one.
+### Convention layout
 
-### Language-neutral docs
+```yaml
+scope:
+  include: ["convention"]
+```
 
-Cross-domain docs (e.g. [`ARCHITECTURE.md`](./ARCHITECTURE.md), specs) describe
-the shape, not the implementation language: their normative prose MUST NOT use
-language-specific terms (e.g. "trait") or language-specific file names and
-extensions (e.g. `filesystem.rs`, `lib.rs`), and MUST refer to roles instead —
-"interface" for a trait, and the `lib` / `cli` / `mcp` entrypoints without an
-extension. Clearly identified examples MAY use language-specific terms, code
-symbols, file names, and extensions when they illustrate a language-neutral
-rule; they MUST NOT introduce a language-specific requirement.
+This section defines the order and format of the content of a convention.
 
-## Workspace Conventions
+````md
+### <Title>
+
+<Scope block, optional>
+
+<Summary, optional>
+
+```md
+<Template, optional>
+```
+
+#### Terms (optional)
+
+- **<Term>**: <meaning>.
+
+#### Rules (optional)
+
+- <Rule>.
+
+#### Examples (optional)
+
+- <Example>.
+
+#### Best practices (optional)
+
+- <Guidance at the Recommended level>.
+````
+
+#### Rules
+
+- Each convention MUST follow the template above, in the same order and format,
+  except for the absolute level of its headings, and MAY omit the parts marked
+  as optional.
+- The heading levels of the template above MUST be read as relative: the
+  convention heading MUST take the level of the convention in its document, and
+  Terms, Rules, Examples, and Best practices MUST be headings one level below
+  the convention heading.
+- A convention within another MUST come after all the parts of the one that
+  contains it and MUST follow the same template.
+- A group of rules with its own name MUST be a convention, not a label.
+- Each item of Rules MUST use only normative keywords of the Required and
+  Optional levels, as defined in
+  [Doc normative language](#doc-normative-language).
+- Each item of Best practices MUST use only normative keywords of the
+  Recommended level, as defined in
+  [Doc normative language](#doc-normative-language).
+
+### Convention scope
+
+This section defines how a convention declares the files its rules apply to.
+
+```yaml
+scope:
+  include: ["<type | glob>", ...] # optional
+  exclude: ["<type | glob>", ...] # optional
+```
+
+#### Terms
+
+- **Convention scope**: the files that the rules of a convention apply to.
+- **Scope block**: the template above, as a YAML code block right below a
+  convention heading.
+
+#### Rules
+
+- A scope block MUST be valid YAML, with the `scope` key and, under it, only
+  `include` and `exclude`, each with a list of quoted items.
+- A scope block MUST have `include`, `exclude`, or both.
+- Each item of `include` and `exclude` of a scope block MUST be read as defined
+  in [Doc metadata](#doc-metadata).
+- A file pattern MUST be read relative to the repository root, where `*` matches
+  any characters except `/` and `**` matches any number of directories,
+  including none.
+- The convention scope of a convention MUST be that of the nearest convention
+  that contains it, narrowed to what matches `include`, when present, and
+  without what matches `exclude`.
+- The scope block of a convention that no convention with a scope contains MUST
+  have `include`.
+- A convention without a scope block MUST take the convention scope of the
+  nearest convention that contains it.
+- The rules of a convention MUST be applied only to the files in its convention
+  scope, and that scope MUST NOT be derived from any other source, such as
+  `.gitignore`.
+- When neither a convention nor a convention that contains it has a scope block,
+  its rules MUST be applied as their text scopes them.
+
+#### Best practices
+
+- To check the convention scope of a convention, a review SHOULD start from the
+  outermost convention with a scope block and apply each scope block down to the
+  convention, in order.
+
+### Convention language
+
+This convention defines how a convention document words its rules.
+
+#### Rules
+
+- In a convention document, each rule MUST be a list item, and each sentence of
+  a list item MUST use a normative keyword. A reason or an example MAY qualify
+  that sentence.
+- Notes, templates, items of Terms and of Examples, and lists that only
+  enumerate values, sources, or links, such as a Related section, MAY contain
+  sentences without a normative keyword.
+- In a convention document, prose outside list items MAY introduce a convention,
+  define a term, or give an example, and MUST NOT state a rule.
+- In a convention document, a definition MUST be written as `**Term**:
+  meaning.`, before the rules that use the term.
+
+#### Best practices
+
+- To check items, a review SHOULD read each one sentence by sentence and report
+  each sentence without a normative keyword, except where a rule exempts it.
+- To check prose, a review SHOULD report each paragraph outside list items that
+  states a rule.
+- To check a definition, a review SHOULD report it when a rule uses the term
+  before it.
+
+## General Conventions
 
 ### Std-first
 
-Code SHOULD prefer standard library over external libs, and SHOULD keep
-dependencies few and consolidated. Exceptions: official platform bindings,
-foundational runtimes/packages, big-tech, Linux Foundation and friends packages.
-Code SHOULD NOT add convenience wrappers on top of another lib, or a "wrapper of
-a wrapper".
+This convention defines how code chooses its dependencies.
 
-Example: terminal handling uses `std::io::IsTerminal` + minimal syscalls, not an
-external terminal lib/package.
+#### Rules
+
+- Code MAY depend on official platform bindings, foundational runtimes and
+  packages, and packages from big-tech companies, the Linux Foundation, and
+  similar organizations.
+
+#### Examples
+
+- Terminal handling uses `std::io::IsTerminal` and minimal syscalls, not an
+  external terminal library.
+
+#### Best practices
+
+- Code SHOULD prefer the standard library over external libraries, except the
+  official platform bindings, foundational runtimes and packages, and packages
+  from big-tech companies, the Linux Foundation, and similar organizations that
+  Rules permits, and SHOULD keep dependencies few and consolidated.
+- Code SHOULD NOT add a convenience wrapper on top of another library, or a
+  wrapper of a wrapper.
 
 ### Lib-first
 
-Real logic MUST live in the lib; the binary only consumes it. This keeps logic
-testable and reusable outside the CLI (another binary, another consumer, etc.).
+This convention defines where the logic of a program lives.
+
+#### Rules
+
+- Real logic MUST live in the lib, and the binary MUST only consume it, so that
+  the logic stays testable and reusable outside the CLI, such as by another
+  binary or another consumer.
 
 ### Multi-platform
 
-Every domain MUST be designed for multiple platforms (Linux/Mac/Windows) from
-the start, not bolted on later. Platform-specific code MUST be isolated (e.g.
-`_macos.rs`, `_linux.rs`, `_windows.rs`), and shared logic MUST stay separate
-from platform-specific logic.
+This convention defines how a domain supports more than one platform.
 
-### Tools declared in files, with version
+#### Rules
 
-Build/tool requirements MUST be declared in dedicated, versioned files, not
-hardcoded in scripts or docs. See [`.msvc.json`](../.msvc.json): it declares
-what's needed to build on Windows (VC++ Tools components, Windows SDK version).
+- Every domain MUST be designed for Linux, Mac, and Windows from the start, not
+  added later.
+- Platform-specific code MUST be isolated, and shared logic MUST stay separate
+  from platform-specific logic.
+
+#### Examples
+
+- Platform-specific code isolated in files such as `_macos.rs`, `_linux.rs`, and
+  `_windows.rs`.
+
+### Declared tool requirements
+
+This convention defines where build and tool requirements are declared.
+
+#### Rules
+
+- Build and tool requirements MUST be declared in dedicated, versioned files,
+  not hardcoded in scripts or docs.
+
+#### Examples
+
+- [`.msvc.json`](../.msvc.json) declares what is needed to build on Windows: the
+  VC++ Tools components and the Windows SDK version.
 
 ### Ignored files
 
-[`.gitignore`](../.gitignore) denies everything by default and only allowlists
-what the repo needs (see the file's own header comment).
-[`.dockerignore`](../.dockerignore) is a symlink to it, so the same allowlist
-keeps the Docker build context clean — no dirty/leftover files sneak into the
-builder.
+This convention defines which files the repository and the Docker build context
+ignore.
+
+#### Rules
+
+- [`.gitignore`](../.gitignore) MUST deny everything by default and allowlist
+  only what the repository needs, as its header comment explains.
+- [`.dockerignore`](../.dockerignore) MUST be a symlink to
+  [`.gitignore`](../.gitignore), so that the same allowlist keeps leftover files
+  out of the Docker build context.
 
 ### CI
 
-Everything that runs in CI (test, build, release) MUST be reproducible locally.
-CI builds MUST run in Docker Bake for every platform except Mac, which Docker
-can't build for. This rule does not apply to local builds.
+This convention defines how CI runs.
+
+#### Rules
+
+- Everything that runs in CI, such as tests, builds, and releases, MUST be
+  reproducible locally.
+- CI builds MUST run in Docker Bake for every platform except Mac, which Docker
+  cannot build for. Local builds MAY run outside Docker Bake.
 
 ### Agents
 
-Config exclusive to a single agent tool (Claude-only, Codex-only, etc.) MUST NOT
-be committed — it lives in the dev's own environment. What is portable across
-agents MAY be committed and, when it encodes a repo rule, SHOULD be: skills, and
-agent personas bound to this repo's standards — for example, a Rust reviewer
-that enforces [CODE_CONVENTIONS.md](./CODE_CONVENTIONS.md). A persona MUST be
-committed in a vendor-neutral form; only the tool-specific glue stays personal.
+This convention defines which agent configuration the repository commits.
+
+#### Rules
+
+- Configuration exclusive to a single agent tool, such as Claude-only or
+  Codex-only configuration, MUST NOT be committed.
+- Configuration portable across agents MAY be committed.
+- A persona MUST be committed in a vendor-neutral form, and only its
+  tool-specific glue MUST stay in the developer's own environment.
+
+#### Best practices
+
+- Configuration portable across agents SHOULD be committed when it encodes a
+  repository rule, such as skills and agent personas bound to the standards of
+  this repository, like a Rust reviewer that enforces
+  [CODE_CONVENTIONS.md](./CODE_CONVENTIONS.md).
 
 ### Naming
 
 #### Platform names
 
-In prose, docs, and diagrams, platform names MUST be written as `Linux`, `Mac`,
-and `Windows`; Apple's `macOS` styling MUST NOT be used.
+This convention defines how platform names are written.
 
-In code, each language MAY have its own convention for platform names, and that
-convention MUST take precedence over the rule above, only within that language's
-code.
+##### Rules
+
+- In prose, docs, and diagrams, platform names MUST be written as `Linux`,
+  `Mac`, and `Windows`, and the `macOS` styling MUST NOT be used.
+- In code, each language MAY have its own convention for platform names, and
+  that convention MUST take precedence over the previous rule of Platform names,
+  only within the code of that language.
 
 ## Related
 
-- [README.md](../README.md): what Kraf is.
-- [ARCHITECTURE.md](./ARCHITECTURE.md): cross-domain architecture: system
-  context, containers, modules, ports and adapters, dependency rule, decisions.
-  Needed when the task touches the structure of the system, such as modules,
-  ports and adapters, or the dependencies between them.
-- [CODE_CONVENTIONS.md](./CODE_CONVENTIONS.md): code conventions: modules and
-  tests. Needed when the task creates, edits, or reviews code or tests.
-- [SPEC_CONVENTIONS.md](./SPEC_CONVENTIONS.md): spec conventions: layout,
-  identifiers, intent, specification, acceptance, ADR. Needed when the task
+- [README.md](../README.md): What Kraf is, its vision, and the index of the
+  repository's documents.
+- [ARCHITECTURE.md](./ARCHITECTURE.md): Cross-domain map of Kraf's system
+  context, modules, and how they depend on each other. Needed when the task
+  touches the structure of the system, such as modules, ports and adapters, or
+  the dependencies between them.
+- [CODE_CONVENTIONS.md](./CODE_CONVENTIONS.md): Non-negotiable code rules for
+  the Kraf codebase — rules you amend, not break. Needed when the task creates,
+  edits, or reviews code or tests.
+- [SPEC_CONVENTIONS.md](./SPEC_CONVENTIONS.md): Conventions for documenting
+  feature intent, requirements, and acceptance scenarios. Needed when the task
   creates, edits, or reviews a module README, a spec, an intent, an acceptance,
   or an ADR.

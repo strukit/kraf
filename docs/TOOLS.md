@@ -1,16 +1,17 @@
 ---
 title: Tools
-summary: Tools declared in this repository, with their purpose, configuration, capabilities, and version.
+description: Tools declared in this repository, with their purpose, configuration, capabilities, and version.
 tags: [tools, tooling, formatting, linting, toolchain, build]
-applies_to: [all]
+type: ["guide"]
+include: ["**/*"]
 ---
 
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
-> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#normative-language). This
-> document MUST NOT use alternative words or lowercase variants as normative
-> keywords.
+> RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
+> This document MUST NOT use alternative words or lowercase variants as
+> normative keywords. See
+> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#doc-normative-language).
 
 ## Tools
 
@@ -81,5 +82,7 @@ Each entry states the tool's purpose and, when they apply:
 
 ## Related
 
-- [README.md](../README.md): what Kraf is.
-- [AGENTS.md](../AGENTS.md): how agents use the tools declared here.
+- [README.md](../README.md): What Kraf is, its vision, and the index of the
+  repository's documents.
+- [AGENTS.md](../AGENTS.md): Entry point for agent instructions and the
+  repository conventions they MUST follow.
