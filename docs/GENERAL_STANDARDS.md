@@ -4,17 +4,17 @@ tags: [standards, repository-standards, document-layout, document-metadata, norm
 type: ["standard"]
 include: ["**/*"]
 ---
+
 # General Standards
 
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
 > RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
-> See
-> [REPOSITORY_CONVENTIONS.md](#normative-language).
+> See [REPOSITORY_CONVENTIONS.md](#normative-language).
 
 > [!IMPORTANT]
-> This is a standard document. It works like a constitution. Its rules MUST
-> NOT be bypassed by ad-hoc exceptions. See
+> This is a standard document. It works like a constitution. Its rules MUST NOT
+> be bypassed by ad-hoc exceptions. See
 > [DOC_CONVENTIONS.md](./DOC_CONVENTIONS.md#convention-documents).
 
 ## Overview
@@ -53,6 +53,7 @@ This standard defines the order of the parts of a general document.
 <section content>
 
 ## Links
+
 <links>
 ```
 
@@ -84,12 +85,14 @@ scope: [<type | glob>, ...]
 #### Terms
 
 - **`type`**: what the document is, with the values of the table below.
-- **`scope`**: the files whose tasks need the document, given as types or file patterns.
+- **`scope`**: the files whose tasks need the document, given as types or file
+  patterns.
 
 #### Rules
 
-- Every document MUST start with the metadata of the [template](#document-metadata---template) above, with every
-  field that the template does not mark as optional.
+- Every document MUST start with the metadata of the
+  [template](#document-metadata---template) above, with every field that the
+  template does not mark as optional.
 - The metadata MUST be a valid YAML block.
 - `type` MUST list one or more types that state what the document is.
 - Each value of `type` MUST be taken from the table in Terms.
@@ -204,13 +207,13 @@ language.
 
 ## Link Rules and Link Navigation (Document Graph)
 
-This standard defines how links are written and how they connect documents
-into a navigable graph.
+This standard defines how links are written and how they connect documents into
+a navigable graph.
 
 ### Link Rules
 
-This standard defines how links are written, so that humans, agents,
-platforms, and IDEs can follow them.
+This standard defines how links are written, so that humans, agents, platforms,
+and IDEs can follow them.
 
 #### Rules
 
@@ -230,9 +233,9 @@ platforms, and IDEs can follow them.
 
 ### Link Navigation (Document Graph)
 
-This standard defines how documents link to each other: a tree based on
-folders makes every document reachable, and other links stay free on top of it.
-How to write each link is defined in [Link Rules](#link-rules).
+This standard defines how documents link to each other: a tree based on folders
+makes every document reachable, and other links stay free on top of it. How to
+write each link is defined in [Link Rules](#link-rules).
 
 #### Terms
 

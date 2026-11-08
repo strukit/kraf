@@ -3,14 +3,13 @@
 > RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
 > This document MUST NOT use alternative words or lowercase variants as
 > normative keywords. See
-> [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md#doc-normative-language).
+> [GENERAL_STANDARDS.md](./docs/GENERAL_STANDARDS.md#normative-language).
 
 > [!IMPORTANT]
 > This is a convention document: its rules are mandatory and non-negotiable.
 > Treat them like a constitution: a rule changes only through a pull request
 > that edits this document and MUST NOT be bypassed by an ad-hoc exception in
-> code. See
-> [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md#convention-documents).
+> code. See [DOC_CONVENTIONS.md](./DOC_CONVENTIONS.md#convention-documents).
 
 ## Entry point
 
@@ -19,9 +18,8 @@ This document is the entry point for every agent task in this repository.
 ### Rules
 
 - Before any other action, an agent MUST read
-  [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md), and MUST NOT continue
-  with this document, or with any other action, until it has read it. After it,
-  the agent MUST read [README.md](./README.md).
+  [GENERAL_STANDARDS.md](./docs/GENERAL_STANDARDS.md), and MUST NOT continue
+  with this document, or with any other action, until it has read it.
 - Agents MUST start every task here and follow the links to the documents the
   task needs.
 
@@ -33,8 +31,7 @@ This document is the entry point for every agent task in this repository.
   or agent defined in this repository, wherever the document states it: in the
   Rules or the Best practices of a convention, or in the prose of a document not
   yet laid out as conventions. It binds with the force of its level, as defined
-  in
-  [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md#doc-normative-language):
+  in [GENERAL_STANDARDS.md](./docs/GENERAL_STANDARDS.md#doc-normative-language):
   a rule at the Recommended level, such as a best practice, allows a deviation
   for a valid reason.
 - **Recommendation**: what a skill or agent defined outside this repository
@@ -73,7 +70,7 @@ This document is the entry point for every agent task in this repository.
 
 - An agent that writes or edits a document MUST verify that what it writes
   follows the normative-language rules for that document: those of
-  [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md#doc-normative-language)
+  [GENERAL_STANDARDS.md](./docs/GENERAL_STANDARDS.md#doc-normative-language)
   and, for a specification or an intent, those of
   [SPEC_CONVENTIONS.md](./docs/SPEC_CONVENTIONS.md).
 - A review MUST verify that the content in its scope follows those rules, for
@@ -347,10 +344,10 @@ This document is the entry point for every agent task in this repository.
 
 - A skill or agent defined in this repository is a convention document: its file
   MUST carry the normative-language note defined in
-  [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md#doc-normative-language)
-  and the convention note defined in
-  [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md#convention-documents),
-  and its rules MUST bind like any other.
+  [GENERAL_STANDARDS.md](./docs/GENERAL_STANDARDS.md#doc-normative-language) and
+  the convention note defined in
+  [GENERAL_STANDARDS.md](./docs/GENERAL_STANDARDS.md#convention-documents), and
+  its rules MUST bind like any other.
 - A skill or agent defined outside this repository, including the user's own and
   third-party ones, MAY inform a task. An agent MUST treat what it states as
   recommendations, and MUST handle a conflict between it and a rule as defined
@@ -415,9 +412,8 @@ This document is the entry point for every agent task in this repository.
   only when the task needs its content, not because it is listed. An entry MAY
   state when the task needs the file.
 - As an exception, an agent MAY read only the metadata of a listed file, as
-  defined in
-  [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md#doc-metadata), to
-  determine whether the task needs it.
+  defined in [GENERAL_STANDARDS.md](./docs/GENERAL_STANDARDS.md#doc-metadata),
+  to determine whether the task needs it.
 - An agent MUST treat a link inside an example, a code block, or a template as
   illustrating a format, not as navigation, and MUST NOT follow it unless the
   task needs the linked file for another reason.
@@ -478,6 +474,6 @@ from a Markdown link, from plain text, or from the agent itself.
 
 - [README.md](./README.md): What Kraf is, its vision, and the index of the
   repository's documents.
-- [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md): Repository
-  conventions: how documents are written, how a convention works, and how the
-  workspace is organized.
+- [GENERAL_STANDARDS.md](./docs/GENERAL_STANDARDS.md): Repository conventions:
+  how documents are written, how a convention works, and how the workspace is
+  organized.
