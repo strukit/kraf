@@ -15,7 +15,7 @@ include: ["**/*"]
 > [!IMPORTANT]
 > This is a standard document. It works like a constitution. Its rules MUST NOT
 > be bypassed by ad-hoc exceptions. See
-> [DOC_CONVENTIONS.md](./DOC_CONVENTIONS.md#convention-documents).
+> [DOC_STANDARDS.md](./DOC_STANDARDS.md#convention-documents).
 
 ## Overview
 

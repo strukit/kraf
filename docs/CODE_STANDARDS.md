@@ -199,5 +199,5 @@ This convention defines how platform names are written.
 - [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md): General standards for this
   repository, document layout and metadata, normative language, the document
   graph, links, navigation, and language neutrality.
-- [DOC_STANDARDS.md](./DOC_STANDARDS.md): Conventions for convention-section
-  layout, precedence, scope, and language.
+- [DOC_STANDARDS.md](./DOC_STANDARDS.md): Conventions for document layout,
+  metadata, precedence, scope, and normative language.
