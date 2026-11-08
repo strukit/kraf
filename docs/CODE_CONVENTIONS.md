@@ -1,16 +1,18 @@
 ---
 title: CODE CONVENTIONS
-summary: Non-negotiable code rules for the Kraf codebase — rules you amend, not break.
-tags: [code-standards, mandatory-rules, conventions, rust]
-applies_to: [code]
+description: "Code conventions for dependencies, program structure, platforms, tooling, CI, agent configuration, and review."
+tags: [conventions, code, dependencies, platforms, tooling, ci]
+type: ["convention"]
+include: ["**/*"]
 ---
 
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
-> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#normative-language). This
-> document MUST NOT use alternative words or lowercase variants as normative
-> keywords.
+> RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
+> This document
+> MUST NOT use alternative words or lowercase variants as normative keywords.
+> See
+> [REPOSITORY_CONVENTIONS.md](./REPOSITORY_CONVENTIONS.md#normative-language).
 
 ---
 
@@ -21,30 +23,175 @@ applies_to: [code]
 > changes only through a pull request that edits this document and MUST NOT be
 > bypassed by an ad-hoc exception in code.
 
-## Rust modules
+## Rust Modules
 
-`mod.rs` MUST only declare/re-export submodules (`pub mod ...`); it MUST NOT
-hold types, logic, or implementation. If a folder-module needs its own core
-type/logic file, it MUST be named after the folder with a suffix (e.g.
-`foo/foo_core.rs`, not `foo/foo.rs`) — a submodule can't share its parent's
-exact name (`clippy::module_inception`), and the suffix keeps it consistent with
-the folder's other files.
+```yaml
+scope:
+  include: ["**/*.rs"]
+```
+
+This convention defines the structure of Rust folder modules.
+
+### Rules
+
+- A Rust `mod.rs` file MUST only declare or re-export submodules, such as with
+  `pub mod ...`, and MUST NOT hold types, logic, or implementation.
+- When a folder-module needs its own core type or logic file, that file MUST be
+  named after the folder with a suffix, such as `foo/foo_core.rs`; a submodule
+  MUST NOT share its parent's exact name because that causes
+  `clippy::module_inception`.
 
 ## Tests
 
-- Tests SHOULD be small and direct — no over-engineering.
-- Tests MAY repeat content instead of extracting a shared helper/const just to
-  avoid repetition between tests.
-- Tests SHOULD be self-contained: small setup SHOULD live inside the test so the
-  reader can see what it uses without navigating elsewhere. A shared
-  const/fixture MAY be used when inlining it would make the test unnecessarily
-  large or obscure its behavior.
+This convention defines the preferred size and structure of tests.
+
+### Rules
+
+- Tests MAY repeat content instead of extracting a shared helper or constant
+  solely to avoid repetition between tests.
+- A shared constant or fixture MAY be used when inlining it would make the test
+  unnecessarily large or obscure its behavior.
+
+### Best practices
+
+- Tests SHOULD be small and direct, without over-engineering.
+- Tests SHOULD be self-contained: small setup SHOULD live inside the test so
+  readers can see what it uses without navigating elsewhere.
 
 ## Review
 
-In a feature that has a specification, a review MUST also apply
-[the review rules in SPEC_CONVENTIONS.md](./SPEC_CONVENTIONS.md#review).
+This convention defines an additional review requirement for features with a
+specification.
 
-## Related
+### Rules
 
-- [README.md](../README.md): what Kraf is.
+- In a feature that has a specification, a review MUST also apply
+  [the review rules in SPEC_CONVENTIONS.md](./SPEC_CONVENTIONS.md#review).
+
+## Dependencies
+
+This convention defines how code chooses its dependencies.
+
+### Rules
+
+- Code MAY depend on official platform bindings, foundational runtimes and
+  packages, and packages from big-tech companies, the Linux Foundation, and
+  similar organizations.
+
+### Examples
+
+- Terminal handling uses `std::io::IsTerminal` and minimal syscalls, not an
+  external terminal library.
+
+### Best practices
+
+- Code SHOULD prefer the standard library over external libraries, except the
+  categories stated in Rules, and SHOULD keep dependencies few and consolidated.
+- Code SHOULD NOT add a convenience wrapper on top of another library, or a
+  wrapper of a wrapper.
+
+## Program Structure
+
+This convention defines where program logic lives.
+
+### Rules
+
+- Real logic MUST live in the lib, and the binary MUST only consume it, so that
+  the logic stays testable and reusable outside the CLI, such as by another
+  binary or another consumer.
+
+## Multi-platform Support
+
+This convention defines how a domain supports more than one platform.
+
+### Rules
+
+- Every domain MUST be designed for Linux, Mac, and Windows from the start, not
+  added later.
+- Platform-specific code MUST be isolated, and shared logic MUST stay separate
+  from platform-specific logic.
+
+### Examples
+
+- Platform-specific code is isolated in files such as `_macos.rs`, `_linux.rs`,
+  and `_windows.rs`.
+
+## Declared Tool Requirements
+
+This convention defines where build and tool requirements are declared.
+
+### Rules
+
+- Build and tool requirements MUST be declared in dedicated, versioned files,
+  not hardcoded in scripts or docs.
+
+### Examples
+
+- [`.msvc.json`](../.msvc.json) declares what is needed to build on Windows: the
+  VC++ Tools components and the Windows SDK version.
+
+## Ignored Files
+
+This convention defines which files the repository and the Docker build context
+ignore.
+
+### Rules
+
+- [`.gitignore`](../.gitignore) MUST deny everything by default and allowlist
+  only what the repository needs, as its header comment explains.
+- [`.dockerignore`](../.dockerignore) MUST be a symlink to
+  [`.gitignore`](../.gitignore), so that the same allowlist keeps leftover files
+  out of the Docker build context.
+
+## CI
+
+This convention defines the reproducibility and build environment of CI.
+
+### Rules
+
+- Everything that runs in CI, such as tests, builds, and releases, MUST be
+  reproducible locally.
+- CI builds MUST run in Docker Bake for every platform except Mac, which Docker
+  cannot build for. Local builds MAY run outside Docker Bake.
+
+## Agent Configuration
+
+This convention defines which agent configuration the repository commits.
+
+### Rules
+
+- Configuration exclusive to a single agent tool, such as Claude-only or
+  Codex-only configuration, MUST NOT be committed.
+- Configuration portable across agents MAY be committed.
+- A persona MUST be committed in a vendor-neutral form, and only its
+  tool-specific glue MUST stay in the developer's own environment.
+
+### Best practices
+
+- Configuration portable across agents SHOULD be committed when it encodes a
+  repository rule, such as skills and agent personas bound to this repository's
+  standards, like a Rust reviewer that enforces
+  [CODE_CONVENTIONS.md](./CODE_CONVENTIONS.md).
+
+## Platform Names
+
+This convention defines how platform names are written.
+
+### Rules
+
+- In prose, docs, and diagrams, platform names MUST be written as `Linux`,
+  `Mac`, and `Windows`, and the `macOS` styling MUST NOT be used.
+- In code, each language MAY have its own convention for platform names, and
+  that convention MUST take precedence over the preceding rule, only within the
+  code of that language.
+
+## Links
+
+- [README.md](../README.md): What Kraf is, its vision, and the index of the
+  repository's documents.
+- [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md): Repository conventions for
+  document metadata, convention documents, convention scope, and convention
+  language.
+- [REPOSITORY_CONVENTIONS.md](./REPOSITORY_CONVENTIONS.md): Repository
+  conventions for normative language, the document graph, links, navigation, and
+  implementation-language neutrality.
