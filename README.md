@@ -56,15 +56,17 @@ toolchains a project already uses rather than replacing them.
 
 - [AGENTS.md](./AGENTS.md): Entry point for agent instructions and the
   repository conventions they MUST follow.
-- [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md): Repository
-  conventions: how documents are written, how a convention works, and how the
-  workspace is organized.
+- [GENERAL_STANDARDS.md](./docs/GENERAL_STANDARDS.md): General standards for
+  repository, document layout and metadata, normative language, the document
+  graph, links, and language neutrality.
+- [DOC_STANDARDS.md](./docs/DOC_STANDARDS.md): Conventions for document layout,
+  metadata, precedence, scope, and normative language.
+- [SPEC_CONVENTIONS.md](./docs/SPEC_CONVENTIONS.md): Conventions for documenting
+  feature intent, requirements, and acceptance scenarios.
 - [ARCHITECTURE.md](./docs/ARCHITECTURE.md): Cross-domain map of Kraf's system
   context, modules, and how they depend on each other.
 - [CODE_CONVENTIONS.md](./docs/CODE_CONVENTIONS.md): Non-negotiable code rules
   for the Kraf codebase — rules you amend, not break.
-- [SPEC_CONVENTIONS.md](./docs/SPEC_CONVENTIONS.md): Conventions for documenting
-  feature intent, requirements, and acceptance scenarios.
 - [TOOLS.md](./docs/TOOLS.md): Tools declared in this repository, with their
   purpose, configuration, capabilities, and version.
 - [Environment variables](./src/environment/src/env_var/README.md): Declarative
