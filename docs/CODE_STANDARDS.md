@@ -1,27 +1,31 @@
 ---
-title: CODE CONVENTIONS
+title: CODE STANDARDS
 description: "Code conventions for dependencies, program structure, platforms, tooling, CI, agent configuration, and review."
 tags: [conventions, code, dependencies, platforms, tooling, ci]
 type: ["convention"]
-include: ["**/*"]
+scope: ["**/*"]
 ---
+
+# Code Standards
 
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
 > RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
-> This document
-> MUST NOT use alternative words or lowercase variants as normative keywords.
-> See
-> [REPOSITORY_CONVENTIONS.md](./REPOSITORY_CONVENTIONS.md#normative-language).
-
----
+> This document MUST NOT use alternative words or lowercase variants as
+> normative keywords. See
+> [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md#normative-language).
 
 > [!IMPORTANT]
-> This is a convention document, as defined in
-> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#convention-documents): its
-> rules are mandatory and non-negotiable. Treat them like a constitution: a rule
-> changes only through a pull request that edits this document and MUST NOT be
-> bypassed by an ad-hoc exception in code.
+> This is a convention document: its rules are mandatory and non-negotiable.
+> Treat them like a constitution: a rule changes only through a pull request
+> that edits this document and MUST NOT be bypassed by an ad-hoc exception in
+> code. See [DOC_STANDARDS.md](./DOC_STANDARDS.md#convention-documents).
+
+## Overview
+
+This document defines the code conventions of the repository: dependencies,
+program structure, platforms, declared tool requirements, ignored files, CI,
+agent configuration, and review.
 
 ## Rust Modules
 
@@ -163,15 +167,18 @@ This convention defines which agent configuration the repository commits.
 - Configuration exclusive to a single agent tool, such as Claude-only or
   Codex-only configuration, MUST NOT be committed.
 - Configuration portable across agents MAY be committed.
-- A persona MUST be committed in a vendor-neutral form, and only its
-  tool-specific glue MUST stay in the developer's own environment.
+- A persona MAY be committed. If it is committed, it MUST be in a vendor-neutral
+  form, and only its tool-specific glue MUST stay in the developer's own
+  environment.
+- An agent-related document that is committed MUST be vendor-neutral, and MUST
+  NOT name a specific agent tool or model.
 
 ### Best practices
 
 - Configuration portable across agents SHOULD be committed when it encodes a
   repository rule, such as skills and agent personas bound to this repository's
   standards, like a Rust reviewer that enforces
-  [CODE_CONVENTIONS.md](./CODE_CONVENTIONS.md).
+  [CODE_STANDARDS.md](./CODE_STANDARDS.md).
 
 ## Platform Names
 
@@ -189,9 +196,8 @@ This convention defines how platform names are written.
 
 - [README.md](../README.md): What Kraf is, its vision, and the index of the
   repository's documents.
-- [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md): Repository conventions for
-  document metadata, convention documents, convention scope, and convention
-  language.
-- [REPOSITORY_CONVENTIONS.md](./REPOSITORY_CONVENTIONS.md): Repository
-  conventions for normative language, the document graph, links, navigation, and
-  implementation-language neutrality.
+- [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md): General standards for this
+  repository, document layout and metadata, normative language, the document
+  graph, links, navigation, and language neutrality.
+- [DOC_STANDARDS.md](./DOC_STANDARDS.md): Conventions for convention-section
+  layout, precedence, scope, and language.
