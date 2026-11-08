@@ -170,6 +170,9 @@ How to write each link is defined in [Link Rules](#link-rules).
   content MAY be left out of it.
 - The closing navigation links of a document MUST be in its Links Related section,
   not in a closing sentence.
+- A set of documents MAY define its own graph of links. When it does, the graph
+  MUST be documented in the index of the set and MUST link to the nearest index,
+  so that the reader can leave the set.
 
 #### Best practices
 
