@@ -7,7 +7,7 @@ tags: [environment, env-var, resolution, projection]
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
 > RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
-> [GENERAL_CONVENTIONS.md](../../../../docs/GENERAL_CONVENTIONS.md#normative-language).
+> [GENERAL_CONVENTIONS.md](../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
 > This document MUST NOT use alternative words or lowercase variants as
 > normative keywords.
 

@@ -23,8 +23,9 @@ precedence and scope of conventions, and the language used to express them. It
 applies the repository-wide rules in
 [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md) and does not replace them.
 
-[SPEC_CONVENTIONS.md](./SPEC_CONVENTIONS.md) defines the more specific
-conventions for feature intent, requirements, acceptance scenarios, and ADRs.
+[SPEC_CONVENTIONS.md](../spec-standards/SPEC_STANDARDS.md) defines the more
+specific conventions for feature intent, requirements, acceptance scenarios, and
+ADRs.
 
 ## Document layout
 
@@ -126,9 +127,9 @@ This convention defines which rule prevails when two rules conflict.
 - Non-conflicting general rules MUST remain in effect.
 - An override MUST be defined in a standard document and MUST cite the
   convention of the rule it overrides.
-- [SPEC_CONVENTIONS.md](./SPEC_CONVENTIONS.md) MUST be treated as the more
-  specific convention for specification document types. It MAY override this
-  document only within that scope, and only when it states the override
+- [SPEC_CONVENTIONS.md](../spec-standards/SPEC_STANDARDS.md) MUST be treated as
+  the more specific convention for specification document types. It MAY override
+  this document only within that scope, and only when it states the override
   explicitly. Non-conflicting rules in this document MUST remain in effect.
 
 ## Convention scope
@@ -193,5 +194,5 @@ This convention defines how a standard document words its rules.
 - [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md): General standards for this
   repository, document layout and metadata, normative language, the document
   graph, links, navigation, and language neutrality.
-- [SPEC_CONVENTIONS.md](./SPEC_CONVENTIONS.md): Conventions for documenting
-  feature intent, requirements, and acceptance scenarios.
+- [SPEC_CONVENTIONS.md](../spec-standards/SPEC_STANDARDS.md): Conventions for
+  documenting feature intent, requirements, and acceptance scenarios.

@@ -183,6 +183,12 @@ interpreting normative requirements.
   written without a normative keyword.
 - A link without a normative keyword before its verb MUST be treated as a plain
   reference, with no normative force.
+- A document that is not a standard document MAY use normative keywords to fix
+  the behavior of the agent that reads it (e.g. to use sudo). Using normative
+  keywords in such a document does not make it a standard document. Such a
+  direction MUST NOT be treated as a rule of this repository, and MUST NOT be
+  reported as a violation of the rules of this repository, but MAY be reported
+  as a warning, an info, or an alert, when needed or when requested.
 
 ### Language Neutrality
 

@@ -56,13 +56,13 @@ toolchains a project already uses rather than replacing them.
 
 - [AGENTS.md](./AGENTS.md): Entry point for agent instructions and the
   repository conventions they MUST follow.
-- [GENERAL_STANDARDS.md](./docs/GENERAL_STANDARDS.md): General standards for
-  this repository, document layout and metadata, normative language, the
-  document graph, links, navigation, and language neutrality.
-- [DOC_STANDARDS.md](./docs/DOC_STANDARDS.md): Standards for document layout,
-  metadata, precedence, scope, and normative language.
-- [SPEC_CONVENTIONS.md](./docs/SPEC_CONVENTIONS.md): Conventions for documenting
-  feature intent, requirements, and acceptance scenarios.
+- [GENERAL_STANDARDS.md](./docs/standards/GENERAL_STANDARDS.md): General
+  standards for this repository, document layout and metadata, normative
+  language, the document graph, links, navigation, and language neutrality.
+- [DOC_STANDARDS.md](./docs/standards/DOC_STANDARDS.md): Standards for document
+  layout, metadata, precedence, scope, and normative language.
+- [SPEC_CONVENTIONS.md](./docs/spec-standards/SPEC_STANDARDS.md): Conventions
+  for documenting feature intent, requirements, and acceptance scenarios.
 - [ARCHITECTURE.md](./docs/ARCHITECTURE.md): Cross-domain map of Kraf's system
   context, modules, and how they depend on each other.
 - [CODE_STANDARDS.md](./docs/CODE_STANDARDS.md): Code conventions for

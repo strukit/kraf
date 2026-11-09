@@ -8,18 +8,18 @@ applies_to: [spec]
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
 > RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
-> [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md#normative-language). This
-> document MUST NOT use alternative words or lowercase variants as normative
-> keywords.
+> [GENERAL_STANDARDS.md](../standards/GENERAL_STANDARDS.md#normative-language).
+> This document MUST NOT use alternative words or lowercase variants as
+> normative keywords.
 
 ---
 
 > [!IMPORTANT]
 > This is a standard document, as defined in
-> [DOC_STANDARDS.md](./DOC_STANDARDS.md#standard-documents): its rules are
-> mandatory and non-negotiable. Treat them like a constitution: a rule changes
-> only through a pull request that edits this document and MUST NOT be bypassed
-> by an ad-hoc exception in code.
+> [DOC_STANDARDS.md](../standards/DOC_STANDARDS.md#standard-documents): its
+> rules are mandatory and non-negotiable. Treat them like a constitution: a rule
+> changes only through a pull request that edits this document and MUST NOT be
+> bypassed by an ad-hoc exception in code.
 
 ## Summary
 
@@ -28,8 +28,9 @@ requirements, and acceptance scenarios.
 
 It defines the documentation protocol, not the behavior of a specific feature.
 These type-specific rules MUST be applied in addition to the repo-wide
-documentation standards in [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md); they
-do not waive those standards unless an exception is stated explicitly.
+documentation standards in
+[GENERAL_STANDARDS.md](../standards/GENERAL_STANDARDS.md); they do not waive
+those standards unless an exception is stated explicitly.
 
 ### Example
 
@@ -45,11 +46,11 @@ Documentation MUST live with the feature it describes; it MUST NOT be in root
 `/docs`.
 
 > The feature-doc layout MUST NOT be applied to the
-> [illustrative files in the root `docs/` example set](#example). They
+> [illustrative files in the `spec-standards/example/` set](#example). They
 > demonstrate the documentation conventions; they are not feature documentation
 > and do not need a feature folder with a nested `docs/` directory. Repo-wide
-> standards in [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md) still apply unless
-> they state an exception.
+> standards in [GENERAL_STANDARDS.md](../standards/GENERAL_STANDARDS.md) still
+> apply unless they state an exception.
 
 ```text
 <feature>/
@@ -111,16 +112,17 @@ No document is reachable only by knowing its file path.
 
 Feature documents MUST use the relationship sections defined by their type.
 Repo-level documents follow the
-[Docs graph](./GENERAL_STANDARDS.md#link-navigation-document-graph) rule.
+[Docs graph](../standards/GENERAL_STANDARDS.md#link-navigation-document-graph)
+rule.
 
 ## Docs types
 
 ### Readme (*/README.md)
 
 Every module/feature folder MUST have a `README.md` that orients a reader before
-they open its `docs/`. Unlike the [root `README.md`](../README.md), a module
+they open its `docs/`. Unlike the [root `README.md`](../../README.md), a module
 `README.md` MUST have
-[document metadata](./GENERAL_STANDARDS.md#document-metadata).
+[document metadata](../standards/GENERAL_STANDARDS.md#document-metadata).
 
 **Layout**:
 
@@ -489,7 +491,7 @@ requirement that defines it.
 
 ## Links
 
-- [README.md](../README.md): What Kraf is, its vision, and the index of the
+- [README.md](../../README.md): What Kraf is, its vision, and the index of the
   repository's documents.
 - Examples:
   - [INTENT](./example/example-intent.md)
