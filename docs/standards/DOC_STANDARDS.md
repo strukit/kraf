@@ -1,93 +1,33 @@
 ---
-description: Standards for document layout, metadata, precedence, scope, and normative language.
-tags: [standards, documentation, document-layout, document-metadata, precedence, scope, normative-language]
+description: Standards for standard documents: what they are, their layout, precedence between rules, and how they word their rules.
+tags: [standards, documentation, standard-documents, precedence, rule-language]
 type: ["standard"]
-scope: ["type:standard"]
+scope: ["type:standard", "!type:root"]
 ---
 
-> [!IMPORTANT]
+> [!NOTE]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
 > RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
 > See [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md#normative-language).
 
+</br>
+
 > [!IMPORTANT]
-> This is a standard document. It works like a constitution. Its rules are
-> mandatory and non-negotiable. A rule MUST change only through a pull request
-> that edits the standard document defining it and MUST NOT be bypassed by an
-> ad-hoc exception. See [Standard documents](#standard-documents).
+> This is a standard document. It works like a constitution. Its rules MUST NOT
+> be bypassed by ad-hoc exceptions. See
+> [DOC_STANDARDS.md](#standard-documents).
 
 ## Overview
 
-This document defines standards for documents: their layout and metadata, the
-precedence and scope of rules, and the language used to express them. It
-applies the repository-wide rules in
-[GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md) and does not replace them.
+This document defines standards for standard documents: what they are, how
+their rules bind and change, which rule prevails in a conflict, and how they
+word their rules. The layout and metadata of documents follow
+[GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md), which this document applies and
+does not replace.
 
 [SPEC_STANDARDS.md](./SPEC_STANDARDS.md) defines the more
 specific standards for feature intent, requirements, acceptance scenarios, and
 ADRs.
-
-## Document layout
-
-This section defines the order of the parts of a general document.
-
-```md
----
-<metadata yaml>
----
-
-# Title
-
-<notes, if any>
-
-## Overview
-
-<overview text>
-
-## <Document-specific section title>
-
-<section content>
-
-## <Other document-specific section titles, if any>
-
-<section content>
-
-## Links
-
-<links>
-```
-
-#### Rules
-
-- Every document MUST follow the order of the template above.
-- A document MAY omit notes when none apply.
-- Every document MUST have a `Links` section, as required by
-  [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md#link-navigation-document-graph).
-
-## Document metadata
-
-This section defines the metadata that every document declares so that an
-agent can index it and decide whether a task needs it.
-
-#### Terms
-
-- **`type`**: what the document is.
-- **`scope`**: the files whose tasks need the document, given as types or file
-  patterns.
-
-#### Rules
-
-- Every document MUST start with the metadata of the template in
-  [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md#document-metadata---template),
-  with every required field present.
-- The metadata MUST be a valid YAML block.
-- `type` MUST list one or more types that state what the document is.
-- Each item of `scope` MUST be a type written as `type:<name>`, or a file
-  pattern.
-- An item of `scope` written as `type:<name>` MUST match every document whose
-  `type` field contains `<name>`.
-- A file-pattern item of `scope` MUST be read as defined by
-  [File patterns](./GENERAL_STANDARDS.md#file-patterns).
 
 ## Standard documents
 
@@ -101,8 +41,6 @@ change, and which rule prevails in a conflict.
 
 #### Rules
 
-- A standard document MUST carry the standard note near the top, after the
-  normative-language note, separated from it only by a blank line.
 - The rules of a standard document MUST be followed by the codebase and agents
   within that document's scope.
 - Ad-hoc exceptions MUST NOT be introduced.
@@ -114,6 +52,18 @@ change, and which rule prevails in a conflict.
 - Rules MUST be defined only in standard documents. A document that is not a
   standard document MUST NOT introduce rules and MAY only reference or apply
   existing ones.
+
+### Standard document layout
+
+This section defines how a standard document groups its terms and rules.
+
+#### Rules
+
+- A section of a standard document, at any heading level, that defines rules
+  MUST group them under a heading titled `Rules`.
+- A section of a standard document, at any heading level, that defines terms
+  MUST group them under a heading titled `Terms`, before its `Rules` heading.
+- A section MAY omit the `Terms` heading when it defines no term.
 
 ### Precedence
 
@@ -149,7 +99,7 @@ This section defines how a standard document words its rules.
 
 ## Links
 
-- [README.md](./README.md): Index of the standards that govern this repository.
+- [README.md](./README.md): Index of the standards that govern this repository, to help people and agents navigate it on their own through the document graph.
 - [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md): General standards for this
   repository, document layout and metadata, normative language, the document
   graph, links, navigation, and language neutrality.

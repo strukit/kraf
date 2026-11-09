@@ -1,3 +1,8 @@
+---
+description: What Kraf is and its vision, entry for humans.
+type: ["root"]
+---
+
 # Kraf
 
 Kraf is a neutral layer for humans and autonomous agents that provides a

@@ -3,24 +3,21 @@ title: Specification and documentation standards
 description: Standards for documenting feature intent, requirements, and acceptance scenarios.
 tags: [specification, requirements, acceptance, ears, documentation]
 type: ["standard"]
-scope: ["spec"]
+scope: ["type:intent", "type:spec", "type:acceptance", "type:adr"]
 ---
 
-> [!IMPORTANT]
+> [!NOTE]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
-> [GENERAL_STANDARDS.md](../standards/GENERAL_STANDARDS.md#normative-language).
-> This document MUST NOT use alternative words or lowercase variants as
-> normative keywords.
+> RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
+> See
+> [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md#normative-language).
 
----
+</br>
 
 > [!IMPORTANT]
-> This is a standard document, as defined in
-> [DOC_STANDARDS.md](../standards/DOC_STANDARDS.md#standard-documents): its
-> rules are mandatory and non-negotiable. Treat them like a constitution: a rule
-> changes only through a pull request that edits this document and MUST NOT be
-> bypassed by an ad-hoc exception in code.
+> This is a standard document. It works like a constitution. Its rules MUST NOT
+> be bypassed by ad-hoc exceptions. See
+> [DOC_STANDARDS.md](./DOC_STANDARDS.md#standard-documents).
 
 ## Summary
 
@@ -33,25 +30,10 @@ documentation standards in
 [GENERAL_STANDARDS.md](../standards/GENERAL_STANDARDS.md); they do not waive
 those standards unless an exception is stated explicitly.
 
-### Example
-
-A minimal, illustrative application of this section:
-
-- [INTENT](./example/example-intent.md)
-- [SPECIFICATION](./example/example.spec.md)
-- [ACCEPTANCE](./example/example.acceptance.md)
-
 ## Docs layout
 
 Documentation MUST live with the feature it describes; it MUST NOT be in root
 `/docs`.
-
-> The feature-doc layout MUST NOT be applied to the
-> [illustrative files in the `spec-standards/example/` set](#example). They
-> demonstrate the documentation standards; they are not feature documentation
-> and do not need a feature folder with a nested `docs/` directory. Repo-wide
-> standards in [GENERAL_STANDARDS.md](../standards/GENERAL_STANDARDS.md) still
-> apply unless they state an exception.
 
 ```text
 <feature>/
@@ -129,16 +111,17 @@ they open its `docs/`. A module `README.md` MUST have
 ```md
 ---
 title: <Feature name>
-summary: <One-line summary of what the module does.>
+description: <One-line summary of what the module does.>
 tags: [<tag1>, <tag2>, ...]
+type: ["readme"]
+scope: ["<path-to-feature>/**/*"]
 ---
 
-> [!IMPORTANT]
+> [!NOTE]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
+> RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
+> See
 > [GENERAL_STANDARDS.md](<path-to-docs>/GENERAL_STANDARDS.md#normative-language).
-> This document MUST NOT use alternative words or lowercase variants as
-> normative keywords.
 
 <One or two paragraphs: what the module does and the concepts it introduces.>
 
@@ -151,13 +134,13 @@ tags: [<tag1>, <tag2>, ...]
 <Free-form, detailed description of the module: its model, concepts, and how
 they relate. MAY use subsections (###).>
 
-## Documentation
+## Links
 
 - [Intent](./docs/<feature>-intent.md): purpose, boundaries, and evolution of
   this module.
 - [<Area>](./docs/<feature>-<area>/<feature>-<area>.spec.md): <area>
   requirements and acceptance scenarios.
-- [README.md](<path-to-root>/README.md): what Kraf is.
+- [README.md](<path-to-nearest-index>): <description of the nearest index>.
 ```
 
 ### Intent (*-intent.md)
@@ -167,8 +150,10 @@ boundaries, and its non-goals. It is not normative: implementing, specifying, or
 accepting what it describes is OPTIONAL, now or later. A principle becomes
 normative only through a requirement or an ADR that covers it.
 
-An intent MUST NOT carry the normative-language note and MUST NOT use normative
-keywords.
+- An intent MUST NOT carry the normative-language note and MUST NOT use
+  normative keywords. This overrides, only for an intent, the rule of
+  [Normative Language](../standards/GENERAL_STANDARDS.md#normative-language)
+  that every document MUST carry the note.
 
 An intent is an idea that still needs refinement. An intent, or any part of one,
 can lack a requirement, an ADR, code, or any other document that specifies or
@@ -180,8 +165,10 @@ problem.
 ```md
 ---
 title: <Feature name> intent
-summary: <One-line summary of why the feature exists.>
+description: <One-line summary of why the feature exists.>
 tags: [<tag1>, <tag2>, ...]
+type: ["intent"]
+scope: ["<path-to-feature>/**/*"]
 ---
 
 ## Problem
@@ -196,7 +183,7 @@ tags: [<tag1>, <tag2>, ...]
 
 <What this feature does not own; where responsibility moves elsewhere.>
 
-## Documentation
+## Links
 
 - [Readme](../README.md): module overview.
 - [<Area>](./<feature>-<area>/<feature>-<area>.spec.md): <area> Specification.
@@ -276,8 +263,10 @@ THE SOFTWARE SHALL <system response>.
 ````md
 ---
 title: <Area> - SPEC
-summary: <One-line summary of the requirements.>
+description: <One-line summary of the requirements.>
 tags: [<feature>, <area>, specification, spec]
+type: ["spec"]
+scope: ["<path-to-feature>/**/*"]
 ---
 
 > [!IMPORTANT]
@@ -308,6 +297,11 @@ Name: <Requirement name>
 WHEN <trigger>,
 THE SOFTWARE SHALL <system response>.
 ```
+
+## Links
+
+- [Intent](../<feature>-intent.md): <description of the intent>.
+- [README.md](<path-to-nearest-index>): <description of the nearest index>.
 ````
 
 ### Acceptance (*.acceptance.md)
@@ -359,16 +353,17 @@ Feature: <name>
 ````md
 ---
 title: <Area> - Acceptance
-summary: <One-line summary of the acceptance scenarios.>
+description: <One-line summary of the acceptance scenarios.>
 tags: [<feature>, <area>, acceptance, gherkin]
+type: ["acceptance"]
+scope: ["<path-to-feature>/**/*"]
 ---
 
-> [!IMPORTANT]
+> [!NOTE]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
+> RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
+> See
 > [GENERAL_STANDARDS.md](<path-to-docs>/GENERAL_STANDARDS.md#normative-language).
-> This document MUST NOT use alternative words or lowercase variants as
-> normative keywords.
 
 ## <FEATURE>_<AREA>-ACC-0001
 
@@ -393,6 +388,11 @@ Feature: <FEATURE>_<AREA>-FEAT-0001 — <Feature description>
       When <action>
       Then <expected outcome>
 ```
+
+## Links
+
+- [Specification](./<feature>-<area>.spec.md): <description of the specification>.
+- [README.md](<path-to-nearest-index>): <description of the nearest index>.
 ````
 
 ### ADR (*-adr-*.md)
@@ -436,16 +436,17 @@ For example:
 ```md
 ---
 title: <FEATURE>-ADR-0001 - <Decision title>
-summary: <One-line summary of the decision.>
+description: <One-line summary of the decision.>
 tags: [<feature>, adr, decision]
+type: ["adr"]
+scope: ["<path-to-feature>/**/*"]
 ---
 
-> [!IMPORTANT]
+> [!NOTE]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
+> RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
+> See
 > [GENERAL_STANDARDS.md](<path-to-docs>/GENERAL_STANDARDS.md#normative-language).
-> This document MUST NOT use alternative words or lowercase variants as
-> normative keywords.
 
 ## <FEATURE>-ADR-0001
 
@@ -474,6 +475,11 @@ Name: <Decision title>
 ## Consequences
 
 <What becomes easier, harder, or required because of this decision.>
+
+## Links
+
+- [Intent](../<feature>-intent.md): <description of the intent>.
+- [README.md](<path-to-nearest-index>): <description of the nearest index>.
 ```
 
 ## Review
@@ -491,8 +497,4 @@ requirement that defines it.
 
 ## Links
 
-- [README.md](./README.md): Index of the standards that govern this repository.
-- Examples:
-  - [INTENT](./example/example-intent.md)
-  - [SPECIFICATION](./example/example.spec.md)
-  - [ACCEPTANCE](./example/example.acceptance.md)
+- [README.md](./README.md): Index of the standards that govern this repository, to help people and agents navigate it on their own through the document graph.

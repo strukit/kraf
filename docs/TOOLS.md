@@ -1,17 +1,22 @@
 ---
-title: Tools
 description: Tools declared in this repository, with their purpose, configuration, capabilities, and version.
 tags: [tools, tooling, formatting, linting, toolchain, build]
 type: ["guide"]
-include: ["**/*"]
+scope: ["**/*"]
 ---
 
-> [!IMPORTANT]
+# Tools
+
+> [!NOTE]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
 > RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
-> This document MUST NOT use alternative words or lowercase variants as
-> normative keywords. See
+> See
 > [GENERAL_STANDARDS.md](./standards/GENERAL_STANDARDS.md#normative-language).
+
+## Overview
+
+This document lists the tools declared in this repository, with their purpose,
+configuration, capabilities, and version.
 
 ## Tools
 
@@ -80,7 +85,7 @@ Each entry states the tool's purpose and, when they apply:
   - Config: [docker-bake.hcl](../docker-bake.hcl).
   - Version: not pinned.
 
-## Related
+## Links
 
 - [INDEX.md](../INDEX.md): Index of the repository's documents, modules and other files.
 - [AGENTS.md](../AGENTS.md): Entry point for agent instructions and the

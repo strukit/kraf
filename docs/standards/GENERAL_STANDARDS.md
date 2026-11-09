@@ -2,15 +2,17 @@
 description: General standards for this repository, document layout and metadata, normative language, the document graph, links, navigation, and language neutrality.
 tags: [standards, repository-standards, document-layout, document-metadata, normative-language, document-graph, links, navigation, language-neutrality]
 type: ["standard"]
-scope: ["**/*", "!./.github/*", "!./AGENTS.md", "!./README.md", "!./INDEX.md"]
+scope: ["**/*", "!./.github/*"]
 ---
 
 # General Standards
 
-> [!IMPORTANT]
+> [!NOTE]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
 > RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
 > See [GENERAL_STANDARDS.md](#normative-language).
+
+</br>
 
 > [!IMPORTANT]
 > This is a standard document. It works like a constitution. Its rules MUST NOT
@@ -60,7 +62,7 @@ This standard defines the order of the parts of a general document.
 #### Rules
 
 - Every document MUST follow the order of the template above.
-- A document MAY omit other notes when none apply.
+- A document MAY omit notes when none apply.
 
 ### Document Metadata
 
@@ -87,6 +89,8 @@ scope: [<type | glob>, ...]
 - **`type`**: what the document is.
 - **`scope`**: the files whose tasks need the document, given as types or file
   patterns.
+- **Section metadata**: a YAML block placed directly below a section heading
+  that declares metadata for that section only.
 
 #### Rules
 
@@ -101,8 +105,17 @@ scope: [<type | glob>, ...]
   contains `<name>`.
 - An item that is a file pattern MUST be read as defined in
   [File patterns](#file-patterns).
+- An item written as `!type:<name>` MUST exclude every document whose `type`
+  field contains `<name>` from the files matched by the other items of the same
+  `scope`.
+- The `AGENTS.md`, `README.md`, and `INDEX.md` files of the repository root MUST
+  list `root` in `type`.
 - A file that has its own schema (e.g. `SKILL.md` or `AGENTS.md`) MUST be
   outside this standard, even when it is a standard document.
+- Section metadata MAY be declared in any section of any document.
+- A section without section metadata MUST inherit the metadata of its document.
+- A `scope` in section metadata MUST be read as defined for a document and MUST
+  apply only to that section.
 
 ### File Patterns
 
@@ -138,18 +151,8 @@ Normative keywords express three levels of force:
 | Recommended | recommends or discourages an action           | SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED |
 | Optional    | grants permission or makes an action optional | MAY, OPTIONAL                                    |
 
-The standard note and its template provide a consistent reference for
+The normative-language note and its template provide a consistent reference for
 interpreting normative requirements.
-
-#### Normative Language - Note Template
-
-```md
-> [!IMPORTANT]
-> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
-> See
-> [GENERAL_STANDARDS.md](<relative-link-to-docs>/GENERAL_STANDARDS.md#normative-language).
-```
 
 #### Terms
 
@@ -161,7 +164,11 @@ interpreting normative requirements.
   OPTIONAL, in uppercase, with the meaning that
   [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) and
   [RFC 8174](https://www.rfc-editor.org/rfc/rfc8174) give them. The
-  [note template](#normative-language---note-template) lists the same key words.
+  [note template](#normative-language-note---template) lists the same key
+  words.
+- **Normative-language note**: the note that states that the normative keywords
+  follow RFC 2119 and RFC 8174. It follows the
+  [note template](#normative-language-note---template).
 - **Explicit instruction**: a sentence that expresses normative force with a
   normative keyword (e.g. "Reviews MUST report each deviation with its
   source.").
@@ -180,12 +187,6 @@ interpreting normative requirements.
 
 #### Rules
 
-- Every document MUST carry the note of the template above, exactly as written.
-- A document MAY carry the note without containing normative requirements or
-  using every normative keyword, and a purely descriptive document MUST carry it
-  too.
-- A family of documents MAY define an equivalent note that lists only the
-  normative keywords it uses, if it cites RFC 2119 and RFC 8174 near the top.
 - A document carrying the note MUST express every normative requirement,
   permission, recommendation, or prohibition with normative keywords, and MUST
   NOT use alternative words or lowercase variants for normative meaning.
@@ -204,6 +205,64 @@ interpreting normative requirements.
   direction MUST NOT be treated as a rule of this repository, and MUST NOT be
   reported as a violation of the rules of this repository, but MAY be reported
   as a warning, an info, or an alert, when needed or when requested.
+
+### Normative-Language Note
+
+```yaml
+scope: ["**/*", "!type:root", "!type:index"]
+```
+
+This standard defines the note that states that the normative keywords follow
+RFC 2119 and RFC 8174.
+
+#### Normative-Language Note - Template
+
+```md
+> [!NOTE]
+> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
+> RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
+> See
+> [GENERAL_STANDARDS.md](<relative-link-to-docs>/GENERAL_STANDARDS.md#normative-language).
+```
+
+#### Rules
+
+- Every document MUST carry the note of the template above, exactly as written.
+- A document MAY carry the note without containing normative requirements or
+  using every normative keyword, and a purely descriptive document MUST carry it
+  too.
+- A family of documents MAY define an equivalent note that lists only the
+  normative keywords it uses, if it cites RFC 2119 and RFC 8174 near the top.
+
+### Standard Note
+
+```yaml
+scope: ["**/*", "!type:root"]
+```
+
+This standard defines the note that marks a document as a standard document.
+
+#### Standard Note - Template
+
+```md
+> [!IMPORTANT]
+> This is a standard document. It works like a constitution. Its rules MUST NOT
+> be bypassed by ad-hoc exceptions. See
+> [DOC_STANDARDS.md](<relative-link-to-docs>/DOC_STANDARDS.md#standard-documents).
+```
+
+#### Terms
+
+- **Standard note**: the note that marks a document as a standard document. It
+  follows the [template](#standard-note---template) above.
+
+#### Rules
+
+- Every standard document MUST carry the note of the template above, exactly as
+  written, near the top, after the normative-language note.
+- The standard note MUST be separated from the normative-language note by a line
+  containing `</br>`, between two blank lines, so that code formatters do not
+  merge the two notes.
 
 ### Language Neutrality
 
@@ -299,6 +358,7 @@ write each link is defined in [Link Rules](#link-rules).
 ## Links
 
 - [INDEX.md](../../INDEX.md): Index of the repository's documents, modules and other files.
-- [README.md](./README.md): Index of the standards that govern this repository.
-- [DOC_STANDARDS.md](./DOC_STANDARDS.md): Standards for document layout,
-  metadata, precedence, scope, and normative language.
+- [README.md](./README.md): Index of the standards that govern this repository, to help people and agents navigate it on their own through the document graph.
+- [DOC_STANDARDS.md](./DOC_STANDARDS.md): Standards for standard documents:
+  what they are, their layout, precedence between rules, and how they word
+  their rules.

@@ -3,23 +3,23 @@ title: CODE STANDARDS
 description: "Code standards for dependencies, program structure, platforms, tooling, CI, agent configuration, and review."
 tags: [standards, code, dependencies, platforms, tooling, ci]
 type: ["standard"]
-scope: ["code"]
+scope: ["type:code"]
 ---
 
 # Code Standards
 
-> [!IMPORTANT]
+> [!NOTE]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
 > RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
-> This document MUST NOT use alternative words or lowercase variants as
-> normative keywords. See
+> See
 > [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md#normative-language).
 
+</br>
+
 > [!IMPORTANT]
-> This is a standard document: its rules are mandatory and non-negotiable. Treat
-> them like a constitution: a rule changes only through a pull request that
-> edits this document and MUST NOT be bypassed by an ad-hoc exception in code.
-> See [DOC_STANDARDS.md](./DOC_STANDARDS.md#standard-documents).
+> This is a standard document. It works like a constitution. Its rules MUST NOT
+> be bypassed by ad-hoc exceptions. See
+> [DOC_STANDARDS.md](./DOC_STANDARDS.md#standard-documents).
 
 ## Overview
 
@@ -194,9 +194,10 @@ This section defines how platform names are written.
 
 ## Links
 
-- [README.md](./README.md): Index of the standards that govern this repository.
+- [README.md](./README.md): Index of the standards that govern this repository, to help people and agents navigate it on their own through the document graph.
 - [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md): General standards for this
   repository, document layout and metadata, normative language, the document
   graph, links, navigation, and language neutrality.
-- [DOC_STANDARDS.md](./DOC_STANDARDS.md): Standards for document layout,
-  metadata, precedence, scope, and normative language.
+- [DOC_STANDARDS.md](./DOC_STANDARDS.md): Standards for standard documents:
+  what they are, their layout, precedence between rules, and how they word
+  their rules.

@@ -2,9 +2,9 @@
 title: AGENTS
 summary: Entry point for agent instructions and the repository conventions they MUST follow.
 tags: [agents, instructions, repository, coding-conventions]
-applies_to: [all]
+type: ["standard", "root"]
 ---
-
+ 
 Before anything else, you MUST read
 [GENERAL_STANDARDS.md](./docs/standards/GENERAL_STANDARDS.md). You MUST NOT continue
 with this document, or with any other action, until you have read it. After it,
@@ -17,15 +17,6 @@ you MUST read [README.md](./README.md).
 > This document MUST NOT use alternative words or lowercase variants as
 > normative keywords.
 
----
-
-> [!IMPORTANT]
-> This is a convention document, as defined in
-> [DOC_STANDARDS.md](./docs/standards/DOC_STANDARDS.md#standard-documents):
-> its rules are mandatory and non-negotiable. Treat them like a constitution: a
-> rule changes only through a pull request that edits this document and MUST NOT
-> be bypassed by an ad-hoc exception in code.
-
 This document is the entry point for every agent task in this repository.
 
 - Agents MUST start every task here and follow the links to the documents the
@@ -33,7 +24,7 @@ This document is the entry point for every agent task in this repository.
 
 ## Rules and recommendations
 
-**Rule**: a requirement defined by a convention document, including a skill or
+**Rule**: a requirement defined by a standard document, including a skill or
 agent defined in this repository. It binds with the force of its keyword, as RFC
 2119 defines it: a SHOULD or RECOMMENDED rule, for example, allows a deviation
 for a valid reason.
@@ -53,7 +44,7 @@ states, as defined in Skills. It is not a rule and does not bind.
   agent, or, for a correctness defect, the wrong result or contradiction found.
 - Besides the exceptions this document defines, an explicit user instruction MAY
   set aside a rule for the task at hand only, without changing the rule.
-- An agent MUST NOT do work unless the user explicitly requests it, a convention
+- An agent MUST NOT do work unless the user explicitly requests it, a standard
   document or a skill or agent that the task uses requires, recommends, or
   permits it as part of the task's work, or the task cannot be completed without
   it.
@@ -182,7 +173,7 @@ what it touches, such as letter case or punctuation in prose, a typo fix, a
 rename, or a substitution by an equivalent construct.
 
 **Meaning-changing change**: any other change. A change to a value or name that
-a convention document requires other content to use is meaning-changing, even
+a standard document requires other content to use is meaning-changing, even
 when it is a rename.
 
 - A review MUST classify each change in its scope as one or the other and apply
@@ -192,16 +183,16 @@ when it is a rename.
   normative-language check defined in Normative language. It MUST NOT
   re-evaluate the touched content against anything else.
 - Meaning-changing: the review MUST evaluate the new meaning against the content
-  that depends on it. For a convention document, that content includes what the
+  that depends on it. For a standard document, that content includes what the
   change makes noncompliant.
 
 ### Findings
 
 - A review MUST state the source of each finding: a correctness defect, a
-  convention document, a tool declared in this repository, or a skill or agent
+  standard document, a tool declared in this repository, or a skill or agent
   defined outside this repository.
 - A correctness defect includes a rule that contradicts itself or another rule.
-- A finding is blocking when its source is a correctness defect, a convention
+- A finding is blocking when its source is a correctness defect, a standard
   document, or a failure of a declared tool. Such a failure reaches the review
   from a run of the tool, such as in CI, one the user requests, or one the
   review makes as permitted in Tools in reviews.
@@ -211,7 +202,7 @@ when it is a rename.
   recommendation and name the skill or agent.
 - An explicit user instruction MAY change whether a finding is blocking, for the
   task at hand only.
-- A review MUST NOT report or list missing content unless a convention document
+- A review MUST NOT report or list missing content unless a standard document
   requires it, including by defining its absence as a defect, or a skill or
   agent that the task uses expects it.
 - A review MUST be thorough from its first pass and apply the same criteria to
@@ -277,10 +268,10 @@ content in its scope, for every change in its scope.
 
 ## Skills
 
-- A skill or agent defined in this repository is a convention document: its file
+- A skill or agent defined in this repository is a standard document: its file
   MUST carry the normative-language note defined in
   [GENERAL_STANDARDS.md](./docs/standards/GENERAL_STANDARDS.md#normative-language) and
-  the convention note defined in
+  the standard note defined in
   [DOC_STANDARDS.md](./docs/standards/DOC_STANDARDS.md#standard-documents),
   and its rules bind like any other.
 - A skill or agent defined outside this repository, including the user's own and
@@ -304,7 +295,7 @@ user's own.
   - It MUST continue the task following the rule.
   - It MUST notify the user, briefly stating which instruction and which rule
     are involved and that, if the content is pertinent, it needs to be committed
-    to a convention document to take effect.
+    to a standard document to take effect.
   - It MUST NOT suppress the conflict silently.
 - When following the rule would cause an effect that is hard to reverse or that
   reaches outside the working root, the agent MUST stop and ask the user before
@@ -388,5 +379,5 @@ Saved content:
 - [README.md](./README.md): what Kraf is and more.
 - [INDEX.md](./INDEX.md): Index of the repository's documents, modules and other files.
 - [GENERAL_STANDARDS.md](./docs/standards/GENERAL_STANDARDS.md): repo-wide
-  conventions: convention documents and rule precedence, docs, workspace,
+  conventions: standard documents and rule precedence, docs, workspace,
   naming
