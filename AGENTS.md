@@ -1,15 +1,13 @@
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
 > RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
-> This document MUST NOT use alternative words or lowercase variants as
-> normative keywords. See
-> [GENERAL_STANDARDS.md](./docs/GENERAL_STANDARDS.md#normative-language).
+> See [GENERAL_STANDARDS.md](./docs/GENERAL_STANDARDS.md#normative-language).
 
 > [!IMPORTANT]
-> This is a convention document: its rules are mandatory and non-negotiable.
-> Treat them like a constitution: a rule changes only through a pull request
-> that edits this document and MUST NOT be bypassed by an ad-hoc exception in
-> code. See [DOC_CONVENTIONS.md](./DOC_CONVENTIONS.md#convention-documents).
+> This is a standard document: its rules are mandatory and non-negotiable. Treat
+> them like a constitution: a rule changes only through a pull request that
+> edits this document and MUST NOT be bypassed by an ad-hoc exception in code.
+> See [DOC_STANDARDS.md](./docs/DOC_STANDARDS.md#standard-documents).
 
 ## Entry point
 
@@ -27,13 +25,13 @@ This document is the entry point for every agent task in this repository.
 
 ### Terms
 
-- **Rule**: any requirement defined by a convention document, including a skill
-  or agent defined in this repository, wherever the document states it: in the
+- **Rule**: any requirement defined by a standard document, including a skill or
+  agent defined in this repository, wherever the document states it: in the
   Rules or the Best practices of a convention, or in the prose of a document not
   yet laid out as conventions. It binds with the force of its level, as defined
-  in [GENERAL_STANDARDS.md](./docs/GENERAL_STANDARDS.md#doc-normative-language):
-  a rule at the Recommended level, such as a best practice, allows a deviation
-  for a valid reason.
+  in [GENERAL_STANDARDS.md](./docs/GENERAL_STANDARDS.md#normative-language): a
+  rule at the Recommended level, such as a best practice, allows a deviation for
+  a valid reason.
 - **Recommendation**: what a skill or agent defined outside this repository
   states, as defined in Skills. It is not a rule and does not bind.
 - **Correctness defect**: content that produces a wrong result or contradicts
@@ -70,8 +68,8 @@ This document is the entry point for every agent task in this repository.
 
 - An agent that writes or edits a document MUST verify that what it writes
   follows the normative-language rules for that document: those of
-  [GENERAL_STANDARDS.md](./docs/GENERAL_STANDARDS.md#doc-normative-language)
-  and, for a specification or an intent, those of
+  [GENERAL_STANDARDS.md](./docs/GENERAL_STANDARDS.md#normative-language) and,
+  for a specification or an intent, those of
   [SPEC_CONVENTIONS.md](./docs/SPEC_CONVENTIONS.md).
 - A review MUST verify that the content in its scope follows those rules, for
   every change in its scope, and MUST report each deviation as a finding citing
@@ -228,7 +226,7 @@ This document is the entry point for every agent task in this repository.
   what it touches, such as letter case or punctuation in prose, a typo fix, a
   rename, or a substitution by an equivalent construct.
 - **Meaning-changing change**: any other change. A change to a value or name
-  that a convention document requires other content to use is meaning-changing,
+  that a standard document requires other content to use is meaning-changing,
   even when it is a rename.
 
 #### Rules
@@ -240,7 +238,7 @@ This document is the entry point for every agent task in this repository.
   normative-language check defined in Normative language. It MUST NOT
   re-evaluate the touched content against anything else.
 - Meaning-changing: the review MUST evaluate the new meaning against the content
-  that depends on it. For a convention document, the review MUST include in that
+  that depends on it. For a standard document, the review MUST include in that
   content what the change makes noncompliant.
 
 ### Findings
@@ -248,14 +246,14 @@ This document is the entry point for every agent task in this repository.
 #### Terms
 
 - **Blocking finding**: a finding whose source is a correctness defect, a
-  convention document, or a failure of a declared tool. A failure of a declared
+  standard document, or a failure of a declared tool. A failure of a declared
   tool reaches the review from a run of the tool, such as in CI, one the user
   requests, or one the review makes as permitted in Tools in reviews.
 
 #### Rules
 
 - A review MUST state the source of each finding: a correctness defect, a
-  convention document, a tool declared in this repository, or a skill or agent
+  standard document, a tool declared in this repository, or a skill or agent
   defined outside this repository.
 - A review MUST NOT report as a finding a deviation from a rule at the
   Recommended level when the deviation has a valid reason.
@@ -265,7 +263,7 @@ This document is the entry point for every agent task in this repository.
   strong recommendation and name the skill or agent.
 - An explicit user instruction MAY change whether a finding is blocking, for the
   task at hand only.
-- A review MUST NOT report or list missing content unless a convention document
+- A review MUST NOT report or list missing content unless a standard document
   requires it, including by defining its absence as a defect, or a skill or
   agent that the task uses expects it.
 - A review MUST be thorough from its first pass and apply the same criteria to
@@ -342,12 +340,12 @@ This document is the entry point for every agent task in this repository.
 
 ### Rules
 
-- A skill or agent defined in this repository is a convention document: its file
+- A skill or agent defined in this repository is a standard document: its file
   MUST carry the normative-language note defined in
-  [GENERAL_STANDARDS.md](./docs/GENERAL_STANDARDS.md#doc-normative-language) and
-  the convention note defined in
-  [GENERAL_STANDARDS.md](./docs/GENERAL_STANDARDS.md#convention-documents), and
-  its rules MUST bind like any other.
+  [GENERAL_STANDARDS.md](./docs/GENERAL_STANDARDS.md#normative-language) and the
+  standard note defined in
+  [DOC_STANDARDS.md](./docs/DOC_STANDARDS.md#standard-documents), and its rules
+  MUST bind like any other.
 - A skill or agent defined outside this repository, including the user's own and
   third-party ones, MAY inform a task. An agent MUST treat what it states as
   recommendations, and MUST handle a conflict between it and a rule as defined
@@ -368,7 +366,7 @@ This document is the entry point for every agent task in this repository.
   - It MUST continue the task following the rule.
   - It MUST notify the user, briefly stating which instruction and which rule
     are involved and that, if the content is pertinent, it needs to be committed
-    to a convention document to take effect.
+    to a standard document to take effect.
   - It MUST NOT suppress the conflict silently.
 - When following the rule would cause an effect that is hard to reverse or that
   reaches outside the working root, the agent MUST stop and ask the user before
@@ -412,8 +410,9 @@ This document is the entry point for every agent task in this repository.
   only when the task needs its content, not because it is listed. An entry MAY
   state when the task needs the file.
 - As an exception, an agent MAY read only the metadata of a listed file, as
-  defined in [GENERAL_STANDARDS.md](./docs/GENERAL_STANDARDS.md#doc-metadata),
-  to determine whether the task needs it.
+  defined in
+  [GENERAL_STANDARDS.md](./docs/GENERAL_STANDARDS.md#document-metadata), to
+  determine whether the task needs it.
 - An agent MUST treat a link inside an example, a code block, or a template as
   illustrating a format, not as navigation, and MUST NOT follow it unless the
   task needs the linked file for another reason.
@@ -470,10 +469,12 @@ from a Markdown link, from plain text, or from the agent itself.
 - When it saves fetched content, the agent SHOULD use the memory it keeps for
   this project rather than its general memory.
 
-## Related
+## Links
 
 - [README.md](./README.md): What Kraf is, its vision, and the index of the
   repository's documents.
-- [GENERAL_STANDARDS.md](./docs/GENERAL_STANDARDS.md): Repository conventions:
-  how documents are written, how a convention works, and how the workspace is
-  organized.
+- [GENERAL_STANDARDS.md](./docs/GENERAL_STANDARDS.md): General standards for
+  this repository, document layout and metadata, normative language, the
+  document graph, links, navigation, and language neutrality.
+- [DOC_STANDARDS.md](./docs/DOC_STANDARDS.md): Standards for document layout,
+  metadata, precedence, scope, and normative language.

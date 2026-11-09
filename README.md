@@ -52,14 +52,14 @@ toolchains a project already uses rather than replacing them.
 - [Environment variables](./src/environment/src/env_var/README.md): declarative
   model, resolution, and projection of environment variables.
 
-## Related
+## Links
 
 - [AGENTS.md](./AGENTS.md): Entry point for agent instructions and the
   repository conventions they MUST follow.
 - [GENERAL_STANDARDS.md](./docs/GENERAL_STANDARDS.md): General standards for
-  repository, document layout and metadata, normative language, the document
-  graph, links, and language neutrality.
-- [DOC_STANDARDS.md](./docs/DOC_STANDARDS.md): Conventions for document layout,
+  this repository, document layout and metadata, normative language, the
+  document graph, links, navigation, and language neutrality.
+- [DOC_STANDARDS.md](./docs/DOC_STANDARDS.md): Standards for document layout,
   metadata, precedence, scope, and normative language.
 - [SPEC_CONVENTIONS.md](./docs/SPEC_CONVENTIONS.md): Conventions for documenting
   feature intent, requirements, and acceptance scenarios.
@@ -71,9 +71,3 @@ toolchains a project already uses rather than replacing them.
   purpose, configuration, capabilities, and version.
 - [Environment variables](./src/environment/src/env_var/README.md): Declarative
   model, resolution, and projection of environment variables in Kraf.
-- [example-intent.md](./docs/example/example-intent.md): Illustrative intent
-  statement used to demonstrate the specification format.
-- [example.spec.md](./docs/example/example.spec.md): Illustrative specification
-  used to demonstrate the requirement format.
-- [example.acceptance.md](./docs/example/example.acceptance.md): Illustrative
-  acceptance scenario used to demonstrate the acceptance format.

@@ -10,12 +10,12 @@ include: ["**/*"]
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
 > RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
-> See [REPOSITORY_CONVENTIONS.md](#normative-language).
+> See [GENERAL_STANDARDS.md](#normative-language).
 
 > [!IMPORTANT]
 > This is a standard document. It works like a constitution. Its rules MUST NOT
 > be bypassed by ad-hoc exceptions. See
-> [DOC_STANDARDS.md](./DOC_STANDARDS.md#convention-documents).
+> [DOC_STANDARDS.md](./DOC_STANDARDS.md#standard-documents).
 
 ## Overview
 
@@ -84,7 +84,7 @@ scope: [<type | glob>, ...]
 
 #### Terms
 
-- **`type`**: what the document is, with the values of the table below.
+- **`type`**: what the document is.
 - **`scope`**: the files whose tasks need the document, given as types or file
   patterns.
 
@@ -95,12 +95,13 @@ scope: [<type | glob>, ...]
   template does not mark as optional.
 - The metadata MUST be a valid YAML block.
 - `type` MUST list one or more types that state what the document is.
-- Each value of `type` MUST be taken from the table in Terms.
 - Each item of `scope` MUST be a type or a file pattern.
 - An item that is a type MUST match every document that has that type in its
   `type` field.
 - An item that is a file pattern MUST be read as defined in
-  [Convention scope](./DOC_CONVENTIONS.md#convention-scope).
+  [Convention scope](./DOC_STANDARDS.md#convention-scope).
+- A file that has its own schema (e.g. `SKILL.md` or `AGENTS.md`) MUST be
+  outside this standard, even when it is a standard document.
 
 ## Language Standards
 
@@ -132,14 +133,14 @@ interpreting normative requirements.
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
 > RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
 > See
-> [REPOSITORY_CONVENTIONS.md](<relative-link-to-docs>/REPOSITORY_CONVENTIONS.md#normative-language).
+> [GENERAL_STANDARDS.md](<relative-link-to-docs>/GENERAL_STANDARDS.md#normative-language).
 ```
 
 #### Terms
 
 - **Standard document**: a document whose purpose is to define rules and that
   works like a constitution. See
-  [Convention documents](./DOC_CONVENTIONS.md#convention-documents).
+  [Standard documents](./DOC_STANDARDS.md#standard-documents).
 - **Normative keyword**: one of the key words MUST, MUST NOT, REQUIRED, SHALL,
   SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED, MAY, and
   OPTIONAL, in uppercase, with the meaning that
@@ -164,7 +165,7 @@ interpreting normative requirements.
 
 #### Rules
 
-- Every document MUST carry the note of the template above near the top.
+- Every document MUST carry the note of the template above, exactly as written.
 - A document MAY carry the note without containing normative requirements or
   using every normative keyword, and a purely descriptive document MUST carry it
   too.
@@ -252,6 +253,12 @@ write each link is defined in [Link Rules](#link-rules).
 
 - The index of a folder MUST be its `README.md` file, because code hosting
   platforms display that file by default as the entry of the folder.
+- A folder without a `README.md` file MUST use the index of its nearest ancestor
+  folder.
+- A set of documents defined by a standard document MAY use that standard
+  document as its index.
+- A standard document that is the index of a set MUST link every document of the
+  set in its Links section.
 - The repository root MUST have an index.
 - Every document MUST have a Links section.
 - Every document other than the root MUST be tree-linked, even when those links
@@ -273,5 +280,5 @@ write each link is defined in [Link Rules](#link-rules).
 
 - [README.md](../README.md): What Kraf is, its vision, and the index of the
   repository's documents.
-- [DOC_CONVENTIONS.md](./DOC_CONVENTIONS.md): Conventions for convention-section
-  layout, precedence, scope, and language.
+- [DOC_STANDARDS.md](./DOC_STANDARDS.md): Standards for document layout,
+  metadata, precedence, scope, and normative language.
