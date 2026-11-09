@@ -2,7 +2,7 @@
 title: CODE STANDARDS
 description: "Code conventions for dependencies, program structure, platforms, tooling, CI, agent configuration, and review."
 tags: [conventions, code, dependencies, platforms, tooling, ci]
-type: ["convention"]
+type: ["standard"]
 scope: ["**/*"]
 ---
 
@@ -16,10 +16,10 @@ scope: ["**/*"]
 > [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md#normative-language).
 
 > [!IMPORTANT]
-> This is a convention document: its rules are mandatory and non-negotiable.
-> Treat them like a constitution: a rule changes only through a pull request
-> that edits this document and MUST NOT be bypassed by an ad-hoc exception in
-> code. See [DOC_STANDARDS.md](./DOC_STANDARDS.md#convention-documents).
+> This is a standard document: its rules are mandatory and non-negotiable. Treat
+> them like a constitution: a rule changes only through a pull request that
+> edits this document and MUST NOT be bypassed by an ad-hoc exception in code.
+> See [DOC_STANDARDS.md](./DOC_STANDARDS.md#standard-documents).
 
 ## Overview
 

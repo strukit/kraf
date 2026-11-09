@@ -49,8 +49,8 @@ toolchains a project already uses rather than replacing them.
 
 ## Modules
 
-- [Environment variables](./src/environment/src/env_var/README.md): declarative
-  model, resolution, and projection of environment variables.
+- [Environment variables](./src/environment/src/env_var/README.md): Declarative
+  model, resolution, and projection of environment variables in Kraf.
 
 ## Links
 
@@ -65,8 +65,9 @@ toolchains a project already uses rather than replacing them.
   feature intent, requirements, and acceptance scenarios.
 - [ARCHITECTURE.md](./docs/ARCHITECTURE.md): Cross-domain map of Kraf's system
   context, modules, and how they depend on each other.
-- [CODE_CONVENTIONS.md](./docs/CODE_CONVENTIONS.md): Non-negotiable code rules
-  for the Kraf codebase — rules you amend, not break.
+- [CODE_STANDARDS.md](./docs/CODE_STANDARDS.md): Code conventions for
+  dependencies, program structure, platforms, tooling, CI, agent configuration,
+  and review.
 - [TOOLS.md](./docs/TOOLS.md): Tools declared in this repository, with their
   purpose, configuration, capabilities, and version.
 - [Environment variables](./src/environment/src/env_var/README.md): Declarative
