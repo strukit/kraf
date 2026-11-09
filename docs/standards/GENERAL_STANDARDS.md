@@ -2,7 +2,7 @@
 description: General standards for this repository, document layout and metadata, normative language, the document graph, links, navigation, and language neutrality.
 tags: [standards, repository-standards, document-layout, document-metadata, normative-language, document-graph, links, navigation, language-neutrality]
 type: ["standard"]
-include: ["**/*"]
+scope: ["**/*", "!./.github/*", "!./AGENTS.md", "!./README.md", "!./INDEX.md"]
 ---
 
 # General Standards
@@ -36,7 +36,7 @@ This standard defines the order of the parts of a general document.
 <metadata yaml>
 ---
 
-# Title
+# <title>
 
 <notes, if any>
 
@@ -44,11 +44,11 @@ This standard defines the order of the parts of a general document.
 
 <overview text>
 
-## <Document-specific section title>
+## <specific section title>
 
 <section content>
 
-## <Other document-specific section titles, if any>
+## <other specific section titles, if any>
 
 <section content>
 
@@ -65,7 +65,7 @@ This standard defines the order of the parts of a general document.
 ### Document Metadata
 
 ```yaml
-scope: ["**/*.md", "!./.github/*"]
+scope: ["**/*.md"]
 ```
 
 This standard defines the metadata that every document declares at its top, so
@@ -75,7 +75,7 @@ that an agent can index it and decide whether the task needs it.
 
 ```md
 ---
-description: <one-or-two-lines description>
+description: <one line description>
 tags: [<tag>, ...]
 type: [<type>, ...]
 scope: [<type | glob>, ...]
@@ -95,13 +95,28 @@ scope: [<type | glob>, ...]
   template does not mark as optional.
 - The metadata MUST be a valid YAML block.
 - `type` MUST list one or more types that state what the document is.
-- Each item of `scope` MUST be a type or a file pattern.
-- An item that is a type MUST match every document that has that type in its
-  `type` field.
+- Each item of `scope` MUST be a type written as `type:<name>`, or a file
+  pattern.
+- An item written as `type:<name>` MUST match every document whose `type` field
+  contains `<name>`.
 - An item that is a file pattern MUST be read as defined in
-  [Convention scope](./DOC_STANDARDS.md#convention-scope).
+  [File patterns](#file-patterns).
 - A file that has its own schema (e.g. `SKILL.md` or `AGENTS.md`) MUST be
   outside this standard, even when it is a standard document.
+
+### File Patterns
+
+This standard defines how a file pattern in `scope` selects files.
+
+#### Rules
+
+- A file pattern MUST be read relative to the repository root.
+- A leading `./` MUST denote the repository root and MUST NOT change the meaning
+  of the pattern.
+- `*` MUST match any characters except `/`.
+- `**` MUST match any number of directories, including none.
+- A file pattern that starts with `!` MUST exclude the files it matches from the
+  files matched by the other items of the same `scope`.
 
 ## Language Standards
 
@@ -203,8 +218,8 @@ language.
 - That text MUST refer to roles instead, unless the document is about a specific
   language or technology: the `lib`, `cli`, and `mcp` entrypoints without an
   extension (e.g. "interface" for a trait).
-- Within a convention's scope, terms for languages, platforms, technologies,
-  tools, and files MAY be used when they define the convention's subject. This
+- Within a document's scope, terms for languages, platforms, technologies,
+  tools, and files MAY be used when they define the subject of that document. This
   permission MUST override [Language Neutrality](#language-neutrality) only
   within that scope.
 - An example MAY use language-specific terms, code symbols, file names, and
@@ -257,14 +272,13 @@ write each link is defined in [Link Rules](#link-rules).
 
 #### Rules
 
-- The index of a folder MUST be its `README.md` file, because code hosting
-  platforms display that file by default as the entry of the folder.
+- The index of a folder other than the repository root MUST be its `README.md`
+  file, because code hosting platforms display that file by default as the entry
+  of the folder.
+- The index of the repository root MUST be its `INDEX.md` file. No other file
+  MUST be named `INDEX.md`.
 - A folder without a `README.md` file MUST use the index of its nearest ancestor
   folder.
-- A set of documents defined by a standard document MAY use that standard
-  document as its index.
-- A standard document that is the index of a set MUST link every document of the
-  set in its Links section.
 - The repository root MUST have an index.
 - Every document MUST have a Links section.
 - Every document other than the root MUST be tree-linked, even when those links
@@ -284,7 +298,7 @@ write each link is defined in [Link Rules](#link-rules).
 
 ## Links
 
-- [README.md](../README.md): What Kraf is, its vision, and the index of the
-  repository's documents.
+- [INDEX.md](../../INDEX.md): Index of the repository's documents, modules and other files.
+- [README.md](./README.md): Index of the standards that govern this repository.
 - [DOC_STANDARDS.md](./DOC_STANDARDS.md): Standards for document layout,
   metadata, precedence, scope, and normative language.

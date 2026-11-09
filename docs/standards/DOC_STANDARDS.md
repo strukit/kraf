@@ -2,7 +2,7 @@
 description: Standards for document layout, metadata, precedence, scope, and normative language.
 tags: [standards, documentation, document-layout, document-metadata, precedence, scope, normative-language]
 type: ["standard"]
-scope: ["**/*.md"]
+scope: ["type:standard"]
 ---
 
 > [!IMPORTANT]
@@ -19,17 +19,17 @@ scope: ["**/*.md"]
 ## Overview
 
 This document defines standards for documents: their layout and metadata, the
-precedence and scope of conventions, and the language used to express them. It
+precedence and scope of rules, and the language used to express them. It
 applies the repository-wide rules in
 [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md) and does not replace them.
 
-[SPEC_CONVENTIONS.md](../spec-standards/SPEC_STANDARDS.md) defines the more
-specific conventions for feature intent, requirements, acceptance scenarios, and
+[SPEC_STANDARDS.md](./SPEC_STANDARDS.md) defines the more
+specific standards for feature intent, requirements, acceptance scenarios, and
 ADRs.
 
 ## Document layout
 
-This convention defines the order of the parts of a general document.
+This section defines the order of the parts of a general document.
 
 ```md
 ---
@@ -66,7 +66,7 @@ This convention defines the order of the parts of a general document.
 
 ## Document metadata
 
-This convention defines the metadata that every document declares so that an
+This section defines the metadata that every document declares so that an
 agent can index it and decide whether a task needs it.
 
 #### Terms
@@ -82,23 +82,22 @@ agent can index it and decide whether a task needs it.
   with every required field present.
 - The metadata MUST be a valid YAML block.
 - `type` MUST list one or more types that state what the document is.
-- Each item of `scope` MUST be a type or a file pattern.
-- An item of `scope` that is a type MUST match every document whose `type`
-  contains that type.
+- Each item of `scope` MUST be a type written as `type:<name>`, or a file
+  pattern.
+- An item of `scope` written as `type:<name>` MUST match every document whose
+  `type` field contains `<name>`.
 - A file-pattern item of `scope` MUST be read as defined by
-  [Convention scope](#convention-scope).
+  [File patterns](./GENERAL_STANDARDS.md#file-patterns).
 
 ## Standard documents
 
-This convention defines what a standard document is, how its rules bind and
+This section defines what a standard document is, how its rules bind and
 change, and which rule prevails in a conflict.
 
 #### Terms
 
 - **Standard document**: a document whose purpose is to define rules and that
   works like a constitution.
-- **Convention**: a section of a standard document that groups related rules,
-  with its own scope, terms, and rules.
 
 #### Rules
 
@@ -116,9 +115,9 @@ change, and which rule prevails in a conflict.
   standard document MUST NOT introduce rules and MAY only reference or apply
   existing ones.
 
-### Convention precedence
+### Precedence
 
-This convention defines which rule prevails when two rules conflict.
+This section defines which rule prevails when two rules conflict.
 
 #### Rules
 
@@ -126,54 +125,15 @@ This convention defines which rule prevails when two rules conflict.
   over a more general rule wherever they conflict, only within that scope.
 - Non-conflicting general rules MUST remain in effect.
 - An override MUST be defined in a standard document and MUST cite the
-  convention of the rule it overrides.
-- [SPEC_CONVENTIONS.md](../spec-standards/SPEC_STANDARDS.md) MUST be treated as
-  the more specific convention for specification document types. It MAY override
-  this document only within that scope, and only when it states the override
-  explicitly. Non-conflicting rules in this document MUST remain in effect.
+  rule it overrides.
+- [SPEC_STANDARDS.md](./SPEC_STANDARDS.md) MUST be treated as the more specific
+  standard for specification document types. It MAY override this document only
+  within that scope, and only when it states the override explicitly.
+  Non-conflicting rules in this document MUST remain in effect.
 
-## Convention scope
+## Rule language
 
-This convention defines how a convention declares the files its rules apply to.
-
-```yaml
-scope:
-  include: ["<type | glob>", ...] # optional
-  exclude: ["<type | glob>", ...] # optional
-```
-
-#### Terms
-
-- **Convention scope**: the files that the rules of a convention apply to.
-- **Scope block**: the template above as a YAML code block immediately below a
-  convention heading.
-
-#### Rules
-
-- A scope block MUST be valid YAML with the `scope` key and, under it, only
-  `include` and `exclude`, each with a list of quoted items.
-- A scope block MUST have `include`, `exclude`, or both.
-- Each item of `include` and `exclude` MUST be read as defined in
-  [Document metadata](./GENERAL_STANDARDS.md#document-metadata).
-- A file pattern MUST be read relative to the repository root, where `*` matches
-  any characters except `/` and `**` matches any number of directories,
-  including none.
-- The convention scope of a convention MUST be that of the nearest convention
-  that contains it, narrowed to what matches `include`, when present, and
-  without what matches `exclude`.
-- The scope block of a convention that no convention with a scope contains MUST
-  have `include`.
-- A convention without a scope block MUST take the convention scope of the
-  nearest convention that contains it.
-- The rules of a convention MUST be applied only to files in its convention
-  scope, and that scope MUST NOT be derived from another source, such as
-  [`.gitignore`](../.gitignore).
-- When neither a convention nor a convention that contains it has a scope block,
-  its rules MUST be applied as their text scopes them.
-
-## Convention language
-
-This convention defines how a standard document words its rules.
+This section defines how a standard document words its rules.
 
 #### Rules
 
@@ -182,17 +142,16 @@ This convention defines how a standard document words its rules.
   that sentence.
 - Notes, templates, items of Terms and Examples, and lists that only enumerate
   values, sources, or links MAY contain sentences without a normative keyword.
-- Prose outside list items MAY introduce a convention, define a term, or give an
+- Prose outside list items MAY introduce a section, define a term, or give an
   example, and MUST NOT state a rule.
 - A definition MUST be written as `**Term**: meaning.`, before the rules that
   use the term.
 
 ## Links
 
-- [README.md](../README.md): What Kraf is, its vision, and the index of the
-  repository's documents.
+- [README.md](./README.md): Index of the standards that govern this repository.
 - [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md): General standards for this
   repository, document layout and metadata, normative language, the document
   graph, links, navigation, and language neutrality.
-- [SPEC_CONVENTIONS.md](../spec-standards/SPEC_STANDARDS.md): Conventions for
-  documenting feature intent, requirements, and acceptance scenarios.
+- [SPEC_STANDARDS.md](./SPEC_STANDARDS.md): Standards for documenting feature
+  intent, requirements, and acceptance scenarios.

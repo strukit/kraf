@@ -1,29 +1,23 @@
 ---
-description: Index of the standards that govern this repository.
+description: index of the standards that govern this repository
 tags: [standards, index, documentation]
-type: ["guide"]
-scope: ["**/*"]
+type: 
+  - index
+scope: 
+  - ["**/*"]
 ---
 
-> [!IMPORTANT]
-> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
-> See [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md#normative-language).
-
-## Overview
-
-Index of the standards that govern this repository.
+# Standards Module - Index
 
 ## Links
 
-- [README.md](../../README.md): What Kraf is, its vision, and the index of the
-  repository's documents.
+- [INDEX.md](../../INDEX.md): Index of the repository's documents, modules and other files.
 - [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md): General standards for this
   repository, document layout and metadata, normative language, the document
   graph, links, navigation, and language neutrality.
 - [DOC_STANDARDS.md](./DOC_STANDARDS.md): Standards for document layout,
   metadata, precedence, scope, and normative language.
-- [CODE_STANDARDS.md](./CODE_STANDARDS.md): Code conventions for dependencies,
+- [CODE_STANDARDS.md](./CODE_STANDARDS.md): Code standards for dependencies,
   program structure, platforms, tooling, CI, agent configuration, and review.
-- [SPEC_STANDARDS.md](./SPEC_STANDARDS.md): Conventions for documenting feature
+- [SPEC_STANDARDS.md](./SPEC_STANDARDS.md): Standards for documenting feature
   intent, requirements, and acceptance scenarios.

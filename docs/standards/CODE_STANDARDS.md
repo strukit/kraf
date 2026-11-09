@@ -1,9 +1,9 @@
 ---
 title: CODE STANDARDS
-description: "Code conventions for dependencies, program structure, platforms, tooling, CI, agent configuration, and review."
-tags: [conventions, code, dependencies, platforms, tooling, ci]
+description: "Code standards for dependencies, program structure, platforms, tooling, CI, agent configuration, and review."
+tags: [standards, code, dependencies, platforms, tooling, ci]
 type: ["standard"]
-scope: ["**/*"]
+scope: ["code"]
 ---
 
 # Code Standards
@@ -23,7 +23,7 @@ scope: ["**/*"]
 
 ## Overview
 
-This document defines the code conventions of the repository: dependencies,
+This document defines the code standards of the repository: dependencies,
 program structure, platforms, declared tool requirements, ignored files, CI,
 agent configuration, and review.
 
@@ -34,7 +34,7 @@ scope:
   include: ["**/*.rs"]
 ```
 
-This convention defines the structure of Rust folder modules.
+This section defines the structure of Rust folder modules.
 
 ### Rules
 
@@ -47,7 +47,7 @@ This convention defines the structure of Rust folder modules.
 
 ## Tests
 
-This convention defines the preferred size and structure of tests.
+This section defines the preferred size and structure of tests.
 
 ### Rules
 
@@ -64,17 +64,17 @@ This convention defines the preferred size and structure of tests.
 
 ## Review
 
-This convention defines an additional review requirement for features with a
+This section defines an additional review requirement for features with a
 specification.
 
 ### Rules
 
 - In a feature that has a specification, a review MUST also apply
-  [the review rules in SPEC_CONVENTIONS.md](./SPEC_CONVENTIONS.md#review).
+  [the review rules in SPEC_STANDARDS.md](./SPEC_STANDARDS.md#review).
 
 ## Dependencies
 
-This convention defines how code chooses its dependencies.
+This section defines how code chooses its dependencies.
 
 ### Rules
 
@@ -96,7 +96,7 @@ This convention defines how code chooses its dependencies.
 
 ## Program Structure
 
-This convention defines where program logic lives.
+This section defines where program logic lives.
 
 ### Rules
 
@@ -106,7 +106,7 @@ This convention defines where program logic lives.
 
 ## Multi-platform Support
 
-This convention defines how a domain supports more than one platform.
+This section defines how a domain supports more than one platform.
 
 ### Rules
 
@@ -122,7 +122,7 @@ This convention defines how a domain supports more than one platform.
 
 ## Declared Tool Requirements
 
-This convention defines where build and tool requirements are declared.
+This section defines where build and tool requirements are declared.
 
 ### Rules
 
@@ -131,25 +131,25 @@ This convention defines where build and tool requirements are declared.
 
 ### Examples
 
-- [`.msvc.json`](../.msvc.json) declares what is needed to build on Windows: the
-  VC++ Tools components and the Windows SDK version.
+- [`.msvc.json`](../../.msvc.json) declares what is needed to build on Windows:
+  the VC++ Tools components and the Windows SDK version.
 
 ## Ignored Files
 
-This convention defines which files the repository and the Docker build context
+This section defines which files the repository and the Docker build context
 ignore.
 
 ### Rules
 
-- [`.gitignore`](../.gitignore) MUST deny everything by default and allowlist
+- [`.gitignore`](../../.gitignore) MUST deny everything by default and allowlist
   only what the repository needs, as its header comment explains.
-- [`.dockerignore`](../.dockerignore) MUST be a symlink to
-  [`.gitignore`](../.gitignore), so that the same allowlist keeps leftover files
-  out of the Docker build context.
+- [`.dockerignore`](../../.dockerignore) MUST be a symlink to
+  [`.gitignore`](../../.gitignore), so that the same allowlist keeps leftover
+  files out of the Docker build context.
 
 ## CI
 
-This convention defines the reproducibility and build environment of CI.
+This section defines the reproducibility and build environment of CI.
 
 ### Rules
 
@@ -160,7 +160,7 @@ This convention defines the reproducibility and build environment of CI.
 
 ## Agent Configuration
 
-This convention defines which agent configuration the repository commits.
+This section defines which agent configuration the repository commits.
 
 ### Rules
 
@@ -182,22 +182,21 @@ This convention defines which agent configuration the repository commits.
 
 ## Platform Names
 
-This convention defines how platform names are written.
+This section defines how platform names are written.
 
 ### Rules
 
 - In prose, docs, and diagrams, platform names MUST be written as `Linux`,
   `Mac`, and `Windows`, and the `macOS` styling MUST NOT be used.
-- In code, each language MAY have its own convention for platform names, and
-  that convention MUST take precedence over the preceding rule, only within the
+- In code, each language MAY have its own standard for platform names, and
+  that standard MUST take precedence over the preceding rule, only within the
   code of that language.
 
 ## Links
 
-- [README.md](../README.md): What Kraf is, its vision, and the index of the
-  repository's documents.
+- [README.md](./README.md): Index of the standards that govern this repository.
 - [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md): General standards for this
   repository, document layout and metadata, normative language, the document
   graph, links, navigation, and language neutrality.
-- [DOC_STANDARDS.md](./DOC_STANDARDS.md): Conventions for document layout,
+- [DOC_STANDARDS.md](./DOC_STANDARDS.md): Standards for document layout,
   metadata, precedence, scope, and normative language.

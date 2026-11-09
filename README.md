@@ -1,11 +1,3 @@
----
-title: Kraf
-description: What Kraf is, its vision, and the index of the repository's documents.
-tags: [kraf, overview, vision, index]
-type: ["guide"]
-include: ["**/*"]
----
-
 # Kraf
 
 Kraf is a neutral layer for humans and autonomous agents that provides a
@@ -47,28 +39,6 @@ agent CLI, a browser, or code that embeds them as a library (C or WASM), all
 calling the same runtime. Kraf aims to interoperate with the editors and
 toolchains a project already uses rather than replacing them.
 
-## Modules
-
-- [Environment variables](./src/environment/src/env_var/README.md): Declarative
-  model, resolution, and projection of environment variables in Kraf.
-
 ## Links
 
-- [AGENTS.md](./AGENTS.md): Entry point for agent instructions and the
-  repository conventions they MUST follow.
-- [GENERAL_STANDARDS.md](./docs/standards/GENERAL_STANDARDS.md): General
-  standards for this repository, document layout and metadata, normative
-  language, the document graph, links, navigation, and language neutrality.
-- [DOC_STANDARDS.md](./docs/standards/DOC_STANDARDS.md): Standards for document
-  layout, metadata, precedence, scope, and normative language.
-- [SPEC_CONVENTIONS.md](./docs/spec-standards/SPEC_STANDARDS.md): Conventions
-  for documenting feature intent, requirements, and acceptance scenarios.
-- [ARCHITECTURE.md](./docs/ARCHITECTURE.md): Cross-domain map of Kraf's system
-  context, modules, and how they depend on each other.
-- [CODE_STANDARDS.md](./docs/CODE_STANDARDS.md): Code conventions for
-  dependencies, program structure, platforms, tooling, CI, agent configuration,
-  and review.
-- [TOOLS.md](./docs/TOOLS.md): Tools declared in this repository, with their
-  purpose, configuration, capabilities, and version.
-- [Environment variables](./src/environment/src/env_var/README.md): Declarative
-  model, resolution, and projection of environment variables in Kraf.
+- [INDEX.md](./INDEX.md): Index of the repository's documents, modules and other files.

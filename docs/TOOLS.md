@@ -11,7 +11,7 @@ include: ["**/*"]
 > RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
 > This document MUST NOT use alternative words or lowercase variants as
 > normative keywords. See
-> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#doc-normative-language).
+> [GENERAL_STANDARDS.md](./standards/GENERAL_STANDARDS.md#normative-language).
 
 ## Tools
 
@@ -82,7 +82,6 @@ Each entry states the tool's purpose and, when they apply:
 
 ## Related
 
-- [README.md](../README.md): What Kraf is, its vision, and the index of the
-  repository's documents.
+- [INDEX.md](../INDEX.md): Index of the repository's documents, modules and other files.
 - [AGENTS.md](../AGENTS.md): Entry point for agent instructions and the
-  repository conventions they MUST follow.
+  repository standards they MUST follow.

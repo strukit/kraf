@@ -8,16 +8,16 @@ applies_to: [code, spec]
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
 > RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
-> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#normative-language). This
-> document MUST NOT use alternative words or lowercase variants as normative
-> keywords.
+> [GENERAL_STANDARDS.md](./standards/GENERAL_STANDARDS.md#normative-language).
+> This document MUST NOT use alternative words or lowercase variants as
+> normative keywords.
 
 ---
 
 > [!IMPORTANT]
-> This is a convention document, as defined in
-> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#convention-documents): its
-> rules are mandatory and non-negotiable. Treat them like a constitution: a rule
+> This is a standard document, as defined in
+> [DOC_STANDARDS.md](./standards/DOC_STANDARDS.md#standard-documents): its rules
+> are mandatory and non-negotiable. Treat them like a constitution: a rule
 > changes only through a pull request that edits this document and MUST NOT be
 > bypassed by an ad-hoc exception in code.
 
@@ -291,4 +291,4 @@ modules.
 
 ## Related
 
-- [README.md](../README.md): what Kraf is.
+- [INDEX.md](../INDEX.md): Index of the repository's documents, modules and other files.

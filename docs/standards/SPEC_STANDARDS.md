@@ -1,8 +1,9 @@
 ---
-title: Specification and documentation conventions
-summary: Conventions for documenting feature intent, requirements, and acceptance scenarios.
+title: Specification and documentation standards
+description: Standards for documenting feature intent, requirements, and acceptance scenarios.
 tags: [specification, requirements, acceptance, ears, documentation]
-applies_to: [spec]
+type: ["standard"]
+scope: ["spec"]
 ---
 
 > [!IMPORTANT]
@@ -34,7 +35,7 @@ those standards unless an exception is stated explicitly.
 
 ### Example
 
-A minimal, illustrative application of this convention:
+A minimal, illustrative application of this section:
 
 - [INTENT](./example/example-intent.md)
 - [SPECIFICATION](./example/example.spec.md)
@@ -47,7 +48,7 @@ Documentation MUST live with the feature it describes; it MUST NOT be in root
 
 > The feature-doc layout MUST NOT be applied to the
 > [illustrative files in the `spec-standards/example/` set](#example). They
-> demonstrate the documentation conventions; they are not feature documentation
+> demonstrate the documentation standards; they are not feature documentation
 > and do not need a feature folder with a nested `docs/` directory. Repo-wide
 > standards in [GENERAL_STANDARDS.md](../standards/GENERAL_STANDARDS.md) still
 > apply unless they state an exception.
@@ -120,8 +121,7 @@ rule.
 ### Readme (*/README.md)
 
 Every module/feature folder MUST have a `README.md` that orients a reader before
-they open its `docs/`. Unlike the [root `README.md`](../../README.md), a module
-`README.md` MUST have
+they open its `docs/`. A module `README.md` MUST have
 [document metadata](../standards/GENERAL_STANDARDS.md#document-metadata).
 
 **Layout**:
@@ -491,8 +491,7 @@ requirement that defines it.
 
 ## Links
 
-- [README.md](../../README.md): What Kraf is, its vision, and the index of the
-  repository's documents.
+- [README.md](./README.md): Index of the standards that govern this repository.
 - Examples:
   - [INTENT](./example/example-intent.md)
   - [SPECIFICATION](./example/example.spec.md)
