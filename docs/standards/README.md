@@ -1,10 +1,8 @@
 ---
 description: index of the standards that govern this repository
 tags: [standards, index, documentation]
-type: 
-  - index
-scope: 
-  - ["**/*"]
+type: ["index"]
+scope: ["**/*"]
 ---
 
 # Standards Module - Index
