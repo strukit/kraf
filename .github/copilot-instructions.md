@@ -26,17 +26,35 @@ Each finding MUST follow one of these forms, in this order:
 Every report MUST use the template below, whether it is posted explicitly or
 implicitly, including any report that is sent under a request to send it.
 
-- **ID**: <number, from the review tool>
-- **Issue**: <header, title, or phrase that identifies the issue>
-- **Issue Level**: <blocking | recommendation>
-- **Detail**: `<issue detail here>`
-- **Issue Location**: <file:line:column>
-- **Issuer**: <tool name>, <harness>, <model>, <effort>
-- **Raw**:
+#### Issue <number, from the review tool>: <title that identifies the issue> [<blocking | recommendation>]
 
-  ```md
-  <original issue note>
-  ```
+- **Severity**: <High | Medium | Low>
+- **Category**: <category>
+- **Environment**:
+  - Skill: <skill name>
+  - Versão: <version>
+  - Harness: <harness>
+  - Modelo: <model>
+  - Esforço: <effort>
+- **File**: `<path relative to the repository>`
+- **Lines**: <start-end>
+
+### Problem
+
+<what the issue is and why it matters>
+
+**Regra quebrada:** <the rule text, quoted, with its file and section, or "nenhuma regra explícita" when the issue is a correctness defect>
+
+### Correção
+
+**Atual** and **Sugestão** in a diff block:
+
+```diff
+- <current line>
++ <suggested line>
+```
+
+A field that the source does not inform MUST be written as `não informado`. This applies to Severity, Category, and every Environment field. Environment MUST be filled for every reviewer, not only for GitHub Copilot.
 
 The fields MUST keep the order above and MUST NOT change their names.
 
