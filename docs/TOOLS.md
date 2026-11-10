@@ -87,7 +87,6 @@ Each entry states the tool's purpose and, when they apply:
 
 ## Links
 
-- [INDEX.md](../INDEX.md): Index of the repository's documents, modules and
-  other files.
+- [INDEX.md](../INDEX.md): Index of the repository's documents.
 - [AGENTS.md](../AGENTS.md): Entry point for agent instructions and the
   repository standards they MUST follow.
