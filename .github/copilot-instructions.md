@@ -23,6 +23,8 @@ Each finding MUST follow one of these forms, in this order:
    specification, with the file and the starting line.
 3. As a last resort, use the template below.
 
+Every report that is posted explicitly MUST use the template below.
+
 - **ID**: <number, from the review tool>
 - **Issue**: <header, title, or phrase that identifies the issue>
 - **Issue Level**: <blocking | recommendation>
