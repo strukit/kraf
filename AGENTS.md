@@ -139,19 +139,13 @@ steps is one that an available tool performs alone.
 
 **Delegation**: an agent hands work to another agent, such as a sub-agent.
 
-- The delegate MUST read this document from the revision that the work targets,
-  such as the head of a pull request under review, even when it differs from the
-  revision of the delegating agent.
-- The delegate MUST resolve the links of this document within that revision, as
-  defined in Navigation.
-- The delegating agent MUST NOT pass its own copy of this document, or of the
-  documents it links to, to the delegate.
-- The delegating prompt MUST name the revision that the work targets and MUST
-  instruct the delegate to read this document and follow it.
-- The delegating prompt MUST NOT instruct an action that precedes the reading
-  this document requires.
-- The delegating prompt MUST NOT restate or reorder the rules of this document.
-
+- A delegating prompt MUST explicitly identify which permissions and authority have
+  been delegated by the caller. Any permission not explicitly delegated MUST be
+  treated as unavailable.
+- A delegating prompt MUST preserve the authority and intent of the original instructions.
+  It MUST NOT restate, reinterpret, summarize, reorder, or replace them in a way
+  that changes their meaning or precedence.
+  
 ## Reviews
 
 > [!IMPORTANT]
