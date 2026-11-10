@@ -17,7 +17,8 @@ Before anything else:
 
 - Agents MUST start every task here and follow the links to the documents the
   task needs.
-- You MUST start read [INDEX.md](./INDEX.md) to know about main map of codebase
+- Agents MUST read [INDEX.md](./INDEX.md) first, to learn the main map of the
+  codebase.
 
 ## Rules and recommendations
 
@@ -145,6 +146,21 @@ steps is one that an available tool performs alone.
 - A delegating prompt MUST preserve the authority and intent of the original instructions.
   It MUST NOT restate, reinterpret, summarize, reorder, or replace them in a way
   that changes their meaning or precedence.
+- **Caller**: the user, or the agent, that hands the work to the delegating agent.
+- A delegating prompt MUST give the delegate the work context that identifies the
+  state under review or modification: the repository, the pull request or task
+  reference when applicable, and, when applicable, the base revision, target
+  revision, branch, and commit hashes.
+- A delegating prompt MUST mark each instruction that comes from the caller as a
+  caller-provided instruction. A caller-provided instruction MUST NOT be treated as
+  an implicit or inferred permission.
+- A delegating prompt MUST instruct the delegate to read
+  [AGENTS.md](./AGENTS.md) and to follow its [Navigation](#navigation) before any
+  delegated work, with the working tree at the target revision. The delegate MUST
+  NOT skip that process.
+- The delegating agent MUST NOT replace the delegate's navigation by handing it a
+  manually assembled set of documents or instructions that bypasses
+  [Navigation](#navigation).
   
 ## Reviews
 
