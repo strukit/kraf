@@ -81,8 +81,10 @@ reading, filtering, transforming, and counting, and whose entire result no
 available tool produces in one call, is not the same work, even when one of its
 steps is one that an available tool performs alone.
 
-- Before performing work through the shell or by its own means, an agent MUST
-  search the tools available to it, including those that require loading.
+- Before executing a task, and before performing work through the shell or by
+  its own means, an agent MUST search the tools available to it, including those
+  that require loading, for the work that the task needs, and MUST load only
+  those tools. An agent MUST NOT search or load tools unrelated to the task.
 - An agent MUST NOT perform or verify by its own means work that an available
   tool performs.
 - In a review, an agent MUST use native tools instead of shell commands, custom
