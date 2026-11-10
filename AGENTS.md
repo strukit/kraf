@@ -12,9 +12,10 @@ type: ["standard", "root"]
 > This document MUST NOT use alternative words or lowercase variants as
 > normative keywords.
 
-This document is the entry point for every agent task in this repository.
-Before anything else:
+This document is the entry point for every agent task in this repository. Before
+anything else:
 
+- Agents MUST read this whole document when they open it, not only a part of it.
 - Agents MUST start every task here and follow the links to the documents the
   task needs.
 - Agents MUST read [INDEX.md](./INDEX.md) first, to learn the main map of the
@@ -84,9 +85,14 @@ steps is one that an available tool performs alone.
   search the tools available to it, including those that require loading.
 - An agent MUST NOT perform or verify by its own means work that an available
   tool performs.
-- An agent MUST use its native tools instead of shell commands that do the same
-  work, and a provided tool instead of reaching the same service through the
-  shell.
+- In a review, an agent MUST use native tools instead of shell commands, custom
+  scripts, or other custom means that do the same work, unless a declared tool
+  is declared for that work, in which case the declared tool MUST be used. A
+  provided tool instead of reaching the same service through the shell or a
+  custom means.
+- When an agent uses a shell command for the same work because the native option
+  is unavailable or cannot do it, it MUST state in its reply which native option
+  was unavailable or could not do the work, and the command it ran.
 - A shell command that performs only a step that an available tool performs
   alone MUST NOT be used (e.g. `cat` of a file to show its content, or `sed` to
   edit a file).
@@ -95,10 +101,11 @@ steps is one that an available tool performs alone.
   changing the means does not change the work.
 - An agent MAY use the shell for an operation that is not the same work,
   including its read steps (e.g. a pipeline that reads a file, keeps the lines
-  that contain a word, and keeps the first five of them). When it does, it MUST
-  state in its reply the command and that no available tool produces the entire
-  result. It MUST NOT build such an operation only to avoid using a tool for a
-  step.
+  that contain a word, and keeps the first five of them, or reads a large file
+  and filters it, where a native read would load all of it into context). When
+  it does, it MUST state in its reply the command and that no available tool
+  produces the entire result. It MUST NOT build such an operation only to avoid
+  using a tool for a step.
 - An agent MUST use a declared tool for the purpose it is declared for.
 - When the list states that a declared tool is invoked by another, using the
   invoking tool counts as using the invoked one. An agent SHOULD use the
@@ -119,6 +126,11 @@ steps is one that an available tool performs alone.
   declared tool checks, such as spelling or lint rules.
 - An agent MUST NOT check or fix by its own means the conventions that a
   declared tool with autofix applies, even when the tool is not available.
+- When writing, an agent MUST use the declared tool for the work it is declared
+  for. Native tools and anything that works as a custom script or a shell script
+  do not replace it. If it cannot use the declared tool, or would deviate from
+  it, the agent MUST inform the user and MUST NOT deviate unless the user
+  explicitly instructs it.
 - Once it finishes writing, it MUST run each declared tool for which
   [TOOLS.md](./docs/TOOLS.md) states capabilities and that checks the changed
   files, as stated under Run, if any, and according to its capabilities:
@@ -140,28 +152,29 @@ steps is one that an available tool performs alone.
 
 **Delegation**: an agent hands work to another agent, such as a sub-agent.
 
-- A delegating prompt MUST explicitly identify which permissions and authority have
-  been delegated by the caller. Any permission not explicitly delegated MUST be
-  treated as unavailable.
-- A delegating prompt MUST preserve the authority and intent of the original instructions.
-  It MUST NOT restate, reinterpret, summarize, reorder, or replace them in a way
-  that changes their meaning or precedence.
-- **Caller**: the user, or the agent, that hands the work to the delegating agent.
-- A delegating prompt MUST give the delegate the work context that identifies the
-  state under review or modification: the repository, the pull request or task
-  reference when applicable, and, when applicable, the base revision, target
-  revision, branch, and commit hashes.
+- A delegating prompt MUST explicitly identify which permissions and authority
+  have been delegated by the caller. Any permission not explicitly delegated
+  MUST be treated as unavailable.
+- A delegating prompt MUST preserve the authority and intent of the original
+  instructions. It MUST NOT restate, reinterpret, summarize, reorder, or replace
+  them in a way that changes their meaning or precedence.
+- **Caller**: the user, or the agent, that hands the work to the delegating
+  agent.
+- A delegating prompt MUST give the delegate the work context that identifies
+  the state under review or modification: the repository, the pull request or
+  task reference when applicable, and, when applicable, the base revision,
+  target revision, branch, and commit hashes.
 - A delegating prompt MUST mark each instruction that comes from the caller as a
-  caller-provided instruction. A caller-provided instruction MUST NOT be treated as
-  an implicit or inferred permission.
+  caller-provided instruction. A caller-provided instruction MUST NOT be treated
+  as an implicit or inferred permission.
 - A delegating prompt MUST instruct the delegate to read
-  [AGENTS.md](./AGENTS.md) and to follow its [Navigation](#navigation) before any
-  delegated work, with the working tree at the target revision. The delegate MUST
-  NOT skip that process.
-- The delegating agent MUST NOT replace the delegate's navigation by handing it a
-  manually assembled set of documents or instructions that bypasses
+  [AGENTS.md](./AGENTS.md) and to follow its [Navigation](#navigation) before
+  any delegated work, with the working tree at the target revision. The delegate
+  MUST NOT skip that process.
+- The delegating agent MUST NOT replace the delegate's navigation by handing it
+  a manually assembled set of documents or instructions that bypasses
   [Navigation](#navigation).
-  
+
 ## Reviews
 
 > [!IMPORTANT]
@@ -256,6 +269,14 @@ content in its scope, for every change in its scope.
 
 ### Report
 
+- A review report MUST NOT contain personal data about the user, under any
+  authorization.
+- A path in a review report MUST be relative to the repository working
+  directory. Before writing a path, the agent MUST resolve it against that
+  directory, and MUST NOT write an absolute path from the user's machine.
+- A finding that shows a defect in code MUST describe its proof in pseudocode or
+  in plain words. A report MUST NOT contain ready-to-run code, exploit code, or
+  a ready-to-use payload.
 - A review report MUST state, for each finding, its source and the rule or
   defect it cites.
 - It MUST NOT report or list the dropped candidates. It MUST keep each of them,
@@ -263,6 +284,38 @@ content in its scope, for every change in its scope.
 - A review that reports no findings MUST still state that it applied the
   checklist.
 
+Template of the report:
+
+````markdown
+## Findings
+
+1. ID: <id>
+   - Recommendation: <blocking | strong recommendation, must be fixed |
+     recommendation>
+   - Name: <name>
+   - Detail: <detail, with the line of the origin>
+   - Source: <repository rule, declared tool, built-in skill, external skill, or
+     correctness defect>
+   - File: <path relative to the repository>
+   <details>
+   <summary>
+
+   #<id>
+
+   ```text
+   <raw finding>
+   ```
+````
+
+   </summary>
+
+   </details>
+
+## Files read
+
+- <path>
+
+```
 ## Pull requests
 
 - A pull request description that an agent writes or updates MUST follow
@@ -369,6 +422,11 @@ keeps their context limited to the documents the task needs.
 - Agents MUST NOT search file contents as a substitute for following links,
   unless the user explicitly requests it. Reading a file and listing or
   filtering file names are not content search.
+- A document is also reached by the `type` and `scope` fields of its front matter.
+  Locating a document by those fields counts as following a link, when the task
+  requires it, such as reviewing the documents that depend on a standard. An agent
+  MUST read only the front matter for that, and MUST NOT use other content to locate
+  documents.
 - When no link leads to content the task needs, an agent MAY locate it by file
   name.
 - An agent MUST follow the local links the task needs in a destination file too,
@@ -407,3 +465,4 @@ Saved content:
   files.
 - [GENERAL_STANDARDS.md](./docs/standards/GENERAL_STANDARDS.md): repo-wide
   conventions: standard documents and rule precedence, docs, workspace, naming
+```
