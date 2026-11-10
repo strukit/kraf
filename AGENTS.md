@@ -4,11 +4,6 @@ summary: Entry point for agent instructions and the repository conventions they 
 tags: [agents, instructions, repository, coding-conventions]
 type: ["standard", "root"]
 ---
- 
-Before anything else, you MUST read
-[GENERAL_STANDARDS.md](./docs/standards/GENERAL_STANDARDS.md). You MUST NOT continue
-with this document, or with any other action, until you have read it. After it,
-you MUST read [README.md](./README.md).
 
 > [!IMPORTANT]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
@@ -18,9 +13,11 @@ you MUST read [README.md](./README.md).
 > normative keywords.
 
 This document is the entry point for every agent task in this repository.
+Before anything else:
 
 - Agents MUST start every task here and follow the links to the documents the
   task needs.
+- You MUST start read [INDEX.md](./INDEX.md) to know about main map of codebase
 
 ## Rules and recommendations
 
@@ -75,6 +72,13 @@ tool.
 **Available tool**: a tool the agent can invoke, including one that requires
 loading through a tool search.
 
+**Same work**: an operation whose entire result an available tool produces in
+one call, such as showing the content of a file, searching the content of files,
+listing files, or editing a file. An operation that composes steps, such as
+reading, filtering, transforming, and counting, and whose entire result no
+available tool produces in one call, is not the same work, even when one of its
+steps is one that an available tool performs alone.
+
 - Before performing work through the shell or by its own means, an agent MUST
   search the tools available to it, including those that require loading.
 - An agent MUST NOT perform or verify by its own means work that an available
@@ -82,6 +86,18 @@ loading through a tool search.
 - An agent MUST use its native tools instead of shell commands that do the same
   work, and a provided tool instead of reaching the same service through the
   shell.
+- A shell command that performs only a step that an available tool performs
+  alone MUST NOT be used (e.g. `cat` of a file to show its content, or `sed` to
+  edit a file).
+- An agent MUST NOT replace a shell command that does the same work with another
+  program, script, or language that does it (e.g. `awk`, a Python script):
+  changing the means does not change the work.
+- An agent MAY use the shell for an operation that is not the same work,
+  including its read steps (e.g. a pipeline that reads a file, keeps the lines
+  that contain a word, and keeps the first five of them). When it does, it MUST
+  state in its reply the command and that no available tool produces the entire
+  result. It MUST NOT build such an operation only to avoid using a tool for a
+  step.
 - An agent MUST use a declared tool for the purpose it is declared for.
 - When the list states that a declared tool is invoked by another, using the
   invoking tool counts as using the invoked one. An agent SHOULD use the
@@ -173,8 +189,8 @@ what it touches, such as letter case or punctuation in prose, a typo fix, a
 rename, or a substitution by an equivalent construct.
 
 **Meaning-changing change**: any other change. A change to a value or name that
-a standard document requires other content to use is meaning-changing, even
-when it is a rename.
+a standard document requires other content to use is meaning-changing, even when
+it is a rename.
 
 - A review MUST classify each change in its scope as one or the other and apply
   the rules below accordingly. It MAY omit the classification from its report.
@@ -270,10 +286,10 @@ content in its scope, for every change in its scope.
 
 - A skill or agent defined in this repository is a standard document: its file
   MUST carry the normative-language note defined in
-  [GENERAL_STANDARDS.md](./docs/standards/GENERAL_STANDARDS.md#normative-language) and
-  the standard note defined in
-  [DOC_STANDARDS.md](./docs/standards/DOC_STANDARDS.md#standard-documents),
-  and its rules bind like any other.
+  [GENERAL_STANDARDS.md](./docs/standards/GENERAL_STANDARDS.md#normative-language)
+  and the standard note defined in
+  [DOC_STANDARDS.md](./docs/standards/DOC_STANDARDS.md#standard-documents), and
+  its rules bind like any other.
 - A skill or agent defined outside this repository, including the user's own and
   third-party ones, states recommendations. It MAY inform a task. A conflict
   between it and a rule is handled as defined in User instructions.
@@ -377,7 +393,7 @@ Saved content:
 ## Links
 
 - [README.md](./README.md): what Kraf is and more.
-- [INDEX.md](./INDEX.md): Index of the repository's documents, modules and other files.
+- [INDEX.md](./INDEX.md): Index of the repository's documents, modules and other
+  files.
 - [GENERAL_STANDARDS.md](./docs/standards/GENERAL_STANDARDS.md): repo-wide
-  conventions: standard documents and rule precedence, docs, workspace,
-  naming
+  conventions: standard documents and rule precedence, docs, workspace, naming
