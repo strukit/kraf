@@ -9,8 +9,19 @@ Cada achado MUST seguir uma destas formas, nesta ordem:
    linha inicial do código.
 2. Descrever um defeito de correção, isto é, um resultado errado ou uma
    contradição com a especificação, com o arquivo e a linha inicial.
-3. Como último recurso, usar o modelo exato da seção Report do AGENTS.md, com
-   arquivo relativo, linha inicial e fonte.
+3. Como último recurso, usar o modelo abaixo. Ele MUST começar com a linha
+   `Origem:`, que marca de onde o modelo foi tirado e MUST ser copiada sem
+   alteração.
+
+```text
+Origem: .github/copilot-instructions.md, modelo v1
+ID: <id>
+Recommendation: <blocking | recommendation>
+Name: <nome>
+Detail: <detalhe, com a linha inicial>
+Source: <regra do AGENTS.md, ferramenta declarada, skill externa ou defeito de correção>
+File: <caminho relativo ao repositório>
+```
 
 Comentário que não siga nenhuma destas formas MUST NOT ser publicado.
 
