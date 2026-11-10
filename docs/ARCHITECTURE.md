@@ -290,4 +290,5 @@ modules.
 
 ## Links
 
-- [INDEX.md](../INDEX.md): Index of the repository's documents, modules and other files.
+- [INDEX.md](../INDEX.md): Index of the repository's documents, modules and
+  other files.

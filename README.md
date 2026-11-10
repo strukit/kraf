@@ -46,4 +46,5 @@ toolchains a project already uses rather than replacing them.
 
 ## Links
 
-- [INDEX.md](./INDEX.md): Index of the repository's documents, modules and other files.
+- [INDEX.md](./INDEX.md): Index of the repository's documents, modules and other
+  files.

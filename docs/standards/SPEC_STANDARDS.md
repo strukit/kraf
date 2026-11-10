@@ -9,8 +9,7 @@ scope: ["type:intent", "type:spec", "type:acceptance", "type:adr"]
 > [!NOTE]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
 > RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
-> See
-> [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md#normative-language).
+> See [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md#normative-language).
 
 </br>
 
@@ -140,7 +139,7 @@ they relate. MAY use subsections (###).>
   this module.
 - [<Area>](./docs/<feature>-<area>/<feature>-<area>.spec.md): <area>
   requirements and acceptance scenarios.
-- [README.md](<path-to-nearest-index>): <description of the nearest index>.
+- [README.md](path-to-nearest-index): <description of the nearest index>.
 ```
 
 ### Intent (*-intent.md)
@@ -301,7 +300,7 @@ THE SOFTWARE SHALL <system response>.
 ## Links
 
 - [Intent](../<feature>-intent.md): <description of the intent>.
-- [README.md](<path-to-nearest-index>): <description of the nearest index>.
+- [README.md](path-to-nearest-index): <description of the nearest index>.
 ````
 
 ### Acceptance (*.acceptance.md)
@@ -391,8 +390,9 @@ Feature: <FEATURE>_<AREA>-FEAT-0001 — <Feature description>
 
 ## Links
 
-- [Specification](./<feature>-<area>.spec.md): <description of the specification>.
-- [README.md](<path-to-nearest-index>): <description of the nearest index>.
+- [Specification](./<feature>-<area>.spec.md):
+  <description of the specification>.
+- [README.md](path-to-nearest-index): <description of the nearest index>.
 ````
 
 ### ADR (*-adr-*.md)
@@ -479,7 +479,7 @@ Name: <Decision title>
 ## Links
 
 - [Intent](../<feature>-intent.md): <description of the intent>.
-- [README.md](<path-to-nearest-index>): <description of the nearest index>.
+- [README.md](path-to-nearest-index): <description of the nearest index>.
 ```
 
 ## Review
@@ -497,4 +497,5 @@ requirement that defines it.
 
 ## Links
 
-- [README.md](./README.md): Index of the standards that govern this repository, to help people and agents navigate it on their own through the document graph.
+- [README.md](./README.md): Index of the standards that govern this repository,
+  to help people and agents navigate it on their own through the document graph.

@@ -11,8 +11,7 @@ scope: ["type:code"]
 > [!NOTE]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
 > RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
-> See
-> [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md#normative-language).
+> See [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md#normative-language).
 
 </br>
 
@@ -188,16 +187,17 @@ This section defines how platform names are written.
 
 - In prose, docs, and diagrams, platform names MUST be written as `Linux`,
   `Mac`, and `Windows`, and the `macOS` styling MUST NOT be used.
-- In code, each language MAY have its own standard for platform names, and
-  that standard MUST take precedence over the preceding rule, only within the
-  code of that language.
+- In code, each language MAY have its own standard for platform names, and that
+  standard MUST take precedence over the preceding rule, only within the code of
+  that language.
 
 ## Links
 
-- [README.md](./README.md): Index of the standards that govern this repository, to help people and agents navigate it on their own through the document graph.
+- [README.md](./README.md): Index of the standards that govern this repository,
+  to help people and agents navigate it on their own through the document graph.
 - [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md): General standards for this
   repository, document layout and metadata, normative language, the document
   graph, links, navigation, and language neutrality.
-- [DOC_STANDARDS.md](./DOC_STANDARDS.md): Standards for standard documents:
-  what they are, their layout, precedence between rules, and how they word
-  their rules.
+- [DOC_STANDARDS.md](./DOC_STANDARDS.md): Standards for standard documents: what
+  they are, their layout, precedence between rules, and how they word their
+  rules.

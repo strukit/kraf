@@ -164,8 +164,7 @@ interpreting normative requirements.
   OPTIONAL, in uppercase, with the meaning that
   [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) and
   [RFC 8174](https://www.rfc-editor.org/rfc/rfc8174) give them. The
-  [note template](#normative-language-note---template) lists the same key
-  words.
+  [note template](#normative-language-note---template) lists the same key words.
 - **Normative-language note**: the note that states that the normative keywords
   follow RFC 2119 and RFC 8174. It follows the
   [note template](#normative-language-note---template).
@@ -278,8 +277,8 @@ language.
   language or technology: the `lib`, `cli`, and `mcp` entrypoints without an
   extension (e.g. "interface" for a trait).
 - Within a document's scope, terms for languages, platforms, technologies,
-  tools, and files MAY be used when they define the subject of that document. This
-  permission MUST override [Language Neutrality](#language-neutrality) only
+  tools, and files MAY be used when they define the subject of that document.
+  This permission MUST override [Language Neutrality](#language-neutrality) only
   within that scope.
 - An example MAY use language-specific terms, code symbols, file names, and
   extensions to illustrate a language-neutral rule.
@@ -357,8 +356,10 @@ write each link is defined in [Link Rules](#link-rules).
 
 ## Links
 
-- [INDEX.md](../../INDEX.md): Index of the repository's documents, modules and other files.
-- [README.md](./README.md): Index of the standards that govern this repository, to help people and agents navigate it on their own through the document graph.
-- [DOC_STANDARDS.md](./DOC_STANDARDS.md): Standards for standard documents:
-  what they are, their layout, precedence between rules, and how they word
-  their rules.
+- [INDEX.md](../../INDEX.md): Index of the repository's documents, modules and
+  other files.
+- [README.md](./README.md): Index of the standards that govern this repository,
+  to help people and agents navigate it on their own through the document graph.
+- [DOC_STANDARDS.md](./DOC_STANDARDS.md): Standards for standard documents: what
+  they are, their layout, precedence between rules, and how they word their
+  rules.

@@ -17,13 +17,14 @@ navigate the repository on their own through its document graph.
 
 ## Links
 
-- [INDEX.md](../../INDEX.md): Index of the repository's documents, modules and other files.
+- [INDEX.md](../../INDEX.md): Index of the repository's documents, modules and
+  other files.
 - [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md): General standards for this
   repository, document layout and metadata, normative language, the document
   graph, links, navigation, and language neutrality.
-- [DOC_STANDARDS.md](./DOC_STANDARDS.md): Standards for standard documents:
-  what they are, their layout, precedence between rules, and how they word
-  their rules.
+- [DOC_STANDARDS.md](./DOC_STANDARDS.md): Standards for standard documents: what
+  they are, their layout, precedence between rules, and how they word their
+  rules.
 - [CODE_STANDARDS.md](./CODE_STANDARDS.md): Code standards for dependencies,
   program structure, platforms, tooling, CI, agent configuration, and review.
 - [SPEC_STANDARDS.md](./SPEC_STANDARDS.md): Standards for documenting feature

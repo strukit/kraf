@@ -14,25 +14,23 @@ scope: ["type:standard", "!type:root"]
 
 > [!IMPORTANT]
 > This is a standard document. It works like a constitution. Its rules MUST NOT
-> be bypassed by ad-hoc exceptions. See
-> [DOC_STANDARDS.md](#standard-documents).
+> be bypassed by ad-hoc exceptions. See [DOC_STANDARDS.md](#standard-documents).
 
 ## Overview
 
-This document defines standards for standard documents: what they are, how
-their rules bind and change, which rule prevails in a conflict, and how they
-word their rules. The layout and metadata of documents follow
+This document defines standards for standard documents: what they are, how their
+rules bind and change, which rule prevails in a conflict, and how they word
+their rules. The layout and metadata of documents follow
 [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md), which this document applies and
 does not replace.
 
-[SPEC_STANDARDS.md](./SPEC_STANDARDS.md) defines the more
-specific standards for feature intent, requirements, acceptance scenarios, and
-ADRs.
+[SPEC_STANDARDS.md](./SPEC_STANDARDS.md) defines the more specific standards for
+feature intent, requirements, acceptance scenarios, and ADRs.
 
 ## Standard documents
 
-This section defines what a standard document is, how its rules bind and
-change, and which rule prevails in a conflict.
+This section defines what a standard document is, how its rules bind and change,
+and which rule prevails in a conflict.
 
 #### Terms
 
@@ -74,8 +72,8 @@ This section defines which rule prevails when two rules conflict.
 - A rule explicitly scoped to a document type or context MUST take precedence
   over a more general rule wherever they conflict, only within that scope.
 - Non-conflicting general rules MUST remain in effect.
-- An override MUST be defined in a standard document and MUST cite the
-  rule it overrides.
+- An override MUST be defined in a standard document and MUST cite the rule it
+  overrides.
 - [SPEC_STANDARDS.md](./SPEC_STANDARDS.md) MUST be treated as the more specific
   standard for specification document types. It MAY override this document only
   within that scope, and only when it states the override explicitly.
@@ -99,7 +97,8 @@ This section defines how a standard document words its rules.
 
 ## Links
 
-- [README.md](./README.md): Index of the standards that govern this repository, to help people and agents navigate it on their own through the document graph.
+- [README.md](./README.md): Index of the standards that govern this repository,
+  to help people and agents navigate it on their own through the document graph.
 - [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md): General standards for this
   repository, document layout and metadata, normative language, the document
   graph, links, navigation, and language neutrality.
