@@ -60,24 +60,6 @@ The fields MUST keep the order above and MUST NOT change their names.
 
 A comment that does not follow one of these forms MUST NOT be published.
 
-## Additional rules
-
-- The AGENTS.md rules MUST be applied literally, without extending them or
-  replacing them with the reviewer's own reading.
-- A finding MUST NOT report what a tool declared in [TOOLS.md](../docs/TOOLS.md)
-  already checks on its own.
-- A finding MUST NOT report content outside the scope of the change.
-- The project memory MAY be consulted, as the Reviews section of AGENTS.md
-  defines, but it MUST NOT be used as the criterion that decides whether
-  something is an error. A finding MUST be sustainable from the repository's
-  documentation or from a correctness defect.
-- When a memory bears on the change, the review MUST finish from the repository
-  documentation alone. Then it MUST cite the memory and ask the user at the end.
-- If a scenario that a memory points to cannot be sustained from the
-  documentation, the review MUST say so in its description, state that it
-  depends on the memory and needs deeper validation, and MUST NOT report it as
-  an error.
-
 ## Links
 
 - [AGENTS.md](../AGENTS.md): Entry point for agent instructions and the
