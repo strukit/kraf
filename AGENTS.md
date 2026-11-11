@@ -212,6 +212,11 @@ renames, and, for a meaning-changing change, the content that depends on it.
 - Content that the change relies on but does not modify, such as a configuration
   file, a tool, or the review environment, is outside the scope, even when the
   change makes it more relevant.
+- A review MUST find each reference to anything the change renames or removes,
+  by the search that Navigation permits for that purpose, and MUST evaluate each
+  reference found.
+- A review of a change to a standard document MUST read that document in full,
+  not only the parts that changed.
 - Content that the pull request description leaves for a later pull request is
   outside the scope.
 - The rules of this section MUST take precedence over every other review rule
@@ -235,8 +240,9 @@ it is a rename.
   normative-language check defined in Normative language. It MUST NOT
   re-evaluate the touched content against anything else.
 - Meaning-changing: the review MUST evaluate the new meaning against the content
-  that depends on it. For a standard document, that content includes what the
-  change makes noncompliant.
+  that depends on it. For a standard document, that content is each file that
+  its `scope` field matches, as defined in its front matter, and it includes what
+  the change makes noncompliant.
 
 ### Findings
 
@@ -434,6 +440,10 @@ keeps their context limited to the documents the task needs.
 - Agents MUST NOT search file contents as a substitute for following links,
   unless the user explicitly requests it. Reading a file and listing or
   filtering file names are not content search.
+- A review MAY search file contents for the name of anything the change renames
+  or removes, to find the references that its Scope requires. This is the only
+  content search that a review MAY make, and it MUST NOT be used to find other
+  content.
 - A document is also reached by the `type` and `scope` fields of its front
   matter. Locating a document by those fields counts as following a link, when
   the task requires it, such as reviewing the documents that depend on a
