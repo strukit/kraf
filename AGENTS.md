@@ -444,6 +444,13 @@ keeps their context limited to the documents the task needs.
   or removes, to find the references that its Scope requires. This is the only
   content search that a review MAY make, and it MUST NOT be used to find other
   content.
+- An index is identified first by its name and location, as the
+  [Docs graph](./docs/standards/GENERAL_STANDARDS.md#link-navigation-document-graph)
+  rules define: the `README.md` of a folder is an index, and `INDEX.md` is an
+  index only at the root. An agent MUST then read the front matter of an index to
+  confirm its `type` and `scope`: a folder `README.md` that is an index declares
+  both `readme` and `index` in `type`, and the root `INDEX.md` declares `root`. A document without front matter, or with a
+  different `type`, is a finding; it does not make the document not an index.
 - A document is also reached by the `type` and `scope` fields of its front
   matter. Locating a document by those fields counts as following a link, when
   the task requires it, such as reviewing the documents that depend on a

@@ -112,7 +112,7 @@ they open its `docs/`. A module `README.md` MUST have
 title: <Feature name>
 description: <One-line summary of what the module does.>
 tags: [<tag1>, <tag2>, ...]
-type: ["readme"]
+type: ["readme", "index"]
 scope: ["<path-to-feature>/**/*"]
 ---
 
