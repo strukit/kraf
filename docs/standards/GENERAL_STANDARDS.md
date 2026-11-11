@@ -338,7 +338,8 @@ write each link is defined in [Link Rules](#link-rules).
   file, because code hosting platforms display that file by default as the entry
   of the folder.
 - The index of the repository root MUST be its `INDEX.md` file. No other file
-  MUST be named `INDEX.md`.- A folder without a `README.md` file MUST use the index of its nearest ancestor
+  MUST be named `INDEX.md`.
+- A folder without a `README.md` file MUST use the index of its nearest ancestor
   folder.
 - The repository root MUST have an index.
 - Every document MUST have a Links section.

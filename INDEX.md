@@ -16,9 +16,9 @@ files.
 - [README.md](./README.md): What Kraf is and its vision, entry for humans.
 - [AGENTS.md](./AGENTS.md): Agent instructions and the repository standards they
   MUST follow.
-- [docs/standards/README.md](./docs/standards/README.md): Index of the standards that govern
-  this repository, to help people and agents navigate it on their own through
-  the document graph.
+- [docs/standards/README.md](./docs/standards/README.md): Index of the standards
+  that govern this repository, to help people and agents navigate it on their
+  own through the document graph.
 - [ARCHITECTURE.md](./docs/ARCHITECTURE.md): Cross-domain map of Kraf's system
   context, modules, and how they depend on each other.
 - [TOOLS.md](./docs/TOOLS.md): Tools declared in this repository, with their

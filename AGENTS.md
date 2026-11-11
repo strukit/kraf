@@ -241,8 +241,8 @@ it is a rename.
   re-evaluate the touched content against anything else.
 - Meaning-changing: the review MUST evaluate the new meaning against the content
   that depends on it. For a standard document, that content is each file that
-  its `scope` field matches, as defined in its front matter, and it includes what
-  the change makes noncompliant.
+  its `scope` field matches, as defined in its front matter, and it includes
+  what the change makes noncompliant.
 
 ### Findings
 
@@ -447,10 +447,11 @@ keeps their context limited to the documents the task needs.
 - An index is identified first by its name and location, as the
   [Docs graph](./docs/standards/GENERAL_STANDARDS.md#link-navigation-document-graph)
   rules define: the `README.md` of a folder is an index, and `INDEX.md` is an
-  index only at the root. An agent MUST then read the front matter of an index to
-  confirm its `type` and `scope`: a folder `README.md` that is an index declares
-  both `readme` and `index` in `type`, and the root `INDEX.md` declares `root`. A document without front matter, or with a
-  different `type`, is a finding; it does not make the document not an index.
+  index only at the root. An agent MUST then read the front matter of an index
+  to confirm its `type` and `scope`: a folder `README.md` that is an index
+  declares both `readme` and `index` in `type`, and the root `INDEX.md` declares
+  `root`. A document without front matter, or with a different `type`, is a
+  finding; it does not make the document not an index.
 - During traversal, an agent MUST read the full content of a document whose
   `type` is only `index`.
 - During traversal, for a document whose `type` lists `index` and another type,

@@ -11,9 +11,9 @@
 
 When a reviewer reviews a pull request in this repository, it MUST read
 [AGENTS.md](../AGENTS.md) in full before any other document, then follow it,
-starting with the traversal of [INDEX.md](../INDEX.md) that its opening
-section defines. The reviewer MUST NOT skip any section of AGENTS.md, including
-the Reviews, Findings, and Report sections.
+starting with the traversal of [INDEX.md](../INDEX.md) that its opening section
+defines. The reviewer MUST NOT skip any section of AGENTS.md, including the
+Reviews, Findings, and Report sections.
 
 ## Finding forms
 
@@ -46,7 +46,8 @@ implicitly, including any report that is sent under a request to send it.
 
 <what the issue is and why it matters>
 
-**Regra quebrada:** <the rule text, quoted, with its file and section, or "nenhuma regra explícita" when the issue is a correctness defect>
+**Regra quebrada:** <the rule text, quoted, with its file and section, or
+"nenhuma regra explícita" when the issue is a correctness defect>
 
 ### Correção
 
@@ -57,7 +58,9 @@ implicitly, including any report that is sent under a request to send it.
 + <suggested line>
 ```
 
-A field that the source does not inform MUST be written as `não informado`. This applies to Severity, Category, and every Environment field. Environment MUST be filled for every reviewer, not only for GitHub Copilot.
+A field that the source does not inform MUST be written as `não informado`. This
+applies to Severity, Category, and every Environment field. Environment MUST be
+filled for every reviewer, not only for GitHub Copilot.
 
 The fields MUST keep the order above and MUST NOT change their names.
 
