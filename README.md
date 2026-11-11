@@ -1,6 +1,8 @@
 ---
 description: What Kraf is and its vision, entry for humans.
+tags: [kraf, vision, overview]
 type: ["root"]
+scope: ["type:root"]
 ---
 
 # Kraf

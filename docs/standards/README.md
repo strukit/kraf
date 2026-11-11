@@ -1,7 +1,7 @@
 ---
 description: Index of the standards that govern this repository, to help people and agents navigate it on their own through the document graph.
 tags: [standards, index, documentation]
-type: ["index"]
+type: ["readme", "index"]
 scope: ["**/*"]
 ---
 

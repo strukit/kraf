@@ -229,8 +229,8 @@ RFC 2119 and RFC 8174.
 
 #### Rules
 
-- Every document in the scope above MUST carry the note of the template above,
-  exactly as written.
+- Every document matched by the `scope` of this section MUST carry the note of
+  the template above, exactly as written.
 - A document MAY carry the note without containing normative requirements or
   using every normative keyword, and a purely descriptive document MUST carry it
   too.
@@ -338,8 +338,7 @@ write each link is defined in [Link Rules](#link-rules).
   file, because code hosting platforms display that file by default as the entry
   of the folder.
 - The index of the repository root MUST be its `INDEX.md` file. No other file
-  MUST be named `INDEX.md`.
-- A folder without a `README.md` file MUST use the index of its nearest ancestor
+  MUST be named `INDEX.md`.- A folder without a `README.md` file MUST use the index of its nearest ancestor
   folder.
 - The repository root MUST have an index.
 - Every document MUST have a Links section.

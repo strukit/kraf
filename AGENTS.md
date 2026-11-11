@@ -451,6 +451,19 @@ keeps their context limited to the documents the task needs.
   confirm its `type` and `scope`: a folder `README.md` that is an index declares
   both `readme` and `index` in `type`, and the root `INDEX.md` declares `root`. A document without front matter, or with a
   different `type`, is a finding; it does not make the document not an index.
+- During traversal, an agent MUST read the full content of a document whose
+  `type` is only `index`.
+- During traversal, for a document whose `type` lists `index` and another type,
+  an agent MUST read its front matter and its Links section, from the Links
+  heading to the next level-2 heading or to the end of the file, whichever comes
+  first.
+- During traversal, for any other document, an agent MUST read only its front
+  matter.
+- The traversal rules above apply only while the agent is traversing the
+  document graph.
+- Outside traversal, an agent MAY read a document in any way, including in full.
+- Outside traversal, an agent SHOULD read the front matter first to decide
+  whether to continue reading.
 - A document is also reached by the `type` and `scope` fields of its front
   matter. Locating a document by those fields counts as following a link, when
   the task requires it, such as reviewing the documents that depend on a
