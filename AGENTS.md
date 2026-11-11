@@ -23,7 +23,9 @@ anything else:
   starts, and MUST follow the links that lead to other index documents, going
   down the tree until no further index can be reached, then backtracking to
   follow another branch. While traversing, agents MUST NOT open any document
-  that is not an index.
+  that is not an index. Agents MUST finish the traversal before continuing with
+  the file or task at hand; only then do they open the documents that the task
+  needs.
 - Agents MUST start every task here and follow the links to the documents the
   task needs.
 

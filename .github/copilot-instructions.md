@@ -9,8 +9,11 @@
 
 ## Overview
 
-When a reviewer reviews a pull request in this repository, it MUST follow
-[AGENTS.md](../AGENTS.md), mainly its Reviews, Findings, and Report sections.
+When a reviewer reviews a pull request in this repository, it MUST read
+[AGENTS.md](../AGENTS.md) in full before any other document, then follow it,
+starting with the traversal of [INDEX.md](../INDEX.md) that its opening
+section defines. The reviewer MUST NOT skip any section of AGENTS.md, including
+the Reviews, Findings, and Report sections.
 
 ## Finding forms
 
