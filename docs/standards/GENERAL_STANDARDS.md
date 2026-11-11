@@ -2,7 +2,7 @@
 description: General standards for this repository, document layout and metadata, normative language, the document graph, links, navigation, and language neutrality.
 tags: [standards, repository-standards, document-layout, document-metadata, normative-language, document-graph, links, navigation, language-neutrality]
 type: ["standard"]
-scope: ["**/*", "!./.github/*"]
+scope: ["**/*", "type:standard", "!./.github/*"]
 ---
 
 # General Standards
@@ -101,6 +101,9 @@ scope: [<type | glob>, ...]
 - `type` MUST list one or more types that state what the document is.
 - Each item of `scope` MUST be a type written as `type:<name>`, or a file
   pattern.
+- A document's `scope` MUST state every file that the document governs,
+  including the document itself when its own content is governed by it. A
+  document governs itself when its `scope` names its own `type`.
 - An item written as `type:<name>` MUST match every document whose `type` field
   contains `<name>`.
 - An item that is a file pattern MUST be read as defined in
@@ -226,7 +229,8 @@ RFC 2119 and RFC 8174.
 
 #### Rules
 
-- Every document MUST carry the note of the template above, exactly as written.
+- Every document in the scope above MUST carry the note of the template above,
+  exactly as written.
 - A document MAY carry the note without containing normative requirements or
   using every normative keyword, and a purely descriptive document MUST carry it
   too.
