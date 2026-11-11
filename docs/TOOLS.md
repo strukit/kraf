@@ -36,6 +36,7 @@ Each entry states the tool's purpose and, when they apply:
 - dprint: formats files, Rust code through rustfmt.
   - Config: [.dprint.jsonc](../.dprint.jsonc).
   - Capabilities: check, autofix.
+  - Autofix: whole file only, no line or range.
   - Version: [.dprint.jsonc](../.dprint.jsonc) pins the plugins; the dprint CLI
     is not pinned.
 - rustfmt: formats Rust code (invoked by dprint).
