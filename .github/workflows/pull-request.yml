@@ -2,8 +2,11 @@ name: Pull Request
 
 on:
   pull_request:
-    paths-ignore:
-      - "**/*.md"
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
 
 permissions:
   contents: read
@@ -15,6 +18,7 @@ concurrency:
 jobs:
   build-amd:
     name: Quality Gates - Linux (amd64)
+    if: ${{ github.event.pull_request.draft == false }}
     runs-on: ubuntu-26.04
     steps:
       - uses: $/.github/actions/bake
@@ -23,6 +27,7 @@ jobs:
 
   build-arm:
     name:  Quality Gates - Linux (arm64)
+    if: ${{ github.event.pull_request.draft == false }}
     runs-on: ubuntu-26.04-arm
     steps:
       - uses: $/.github/actions/bake
