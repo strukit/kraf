@@ -1,25 +1,24 @@
 ---
-title: Architecture
-summary: Cross-domain map of Kraf's system context, modules, and how they depend on each other.
+description: Cross-domain map of Kraf's system context, modules, and how they depend on each other.
 tags: [architecture, c4, ports-and-adapters, modules]
-applies_to: [code, spec]
+type: ["standard"]
+scope: ["src/**/*"]
 ---
 
-> [!IMPORTANT]
+# Architecture
+
+> [!NOTE]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
-> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#normative-language). This
-> document MUST NOT use alternative words or lowercase variants as normative
-> keywords.
+> RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
+> See
+> [GENERAL_STANDARDS.md](./standards/GENERAL_STANDARDS.md#normative-language).
 
----
+</br>
 
 > [!IMPORTANT]
-> This is a convention document, as defined in
-> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#convention-documents): its
-> rules are mandatory and non-negotiable. Treat them like a constitution: a rule
-> changes only through a pull request that edits this document and MUST NOT be
-> bypassed by an ad-hoc exception in code.
+> This is a standard document. It works like a constitution. Its rules MUST NOT
+> be bypassed by ad-hoc exceptions. See
+> [DOC_STANDARDS.md](./standards/DOC_STANDARDS.md#standard-documents).
 
 ## Overview
 
@@ -289,6 +288,7 @@ modules.
   testable in isolation.
 - The materialization target is a Runner (OS or WASM worker), not a fixed OS.
 
-## Related
+## Links
 
-- [README.md](../README.md): what Kraf is.
+- [README.md](../README.md): What Kraf is and its vision, and the index of the
+  repository's documents, modules and other files.

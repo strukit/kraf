@@ -1,16 +1,22 @@
 ---
-title: Tools
-summary: Tools declared in this repository, with their purpose, configuration, capabilities, and version.
+description: Tools declared in this repository, with their purpose, configuration, capabilities, and version.
 tags: [tools, tooling, formatting, linting, toolchain, build]
-applies_to: [all]
+type: ["guide"]
+scope: ["**/*"]
 ---
 
-> [!IMPORTANT]
+# Tools
+
+> [!NOTE]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
-> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#normative-language). This
-> document MUST NOT use alternative words or lowercase variants as normative
-> keywords.
+> RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
+> See
+> [GENERAL_STANDARDS.md](./standards/GENERAL_STANDARDS.md#normative-language).
+
+## Overview
+
+This document lists the tools declared in this repository, with their purpose,
+configuration, capabilities, and version.
 
 ## Tools
 
@@ -30,6 +36,7 @@ Each entry states the tool's purpose and, when they apply:
 - dprint: formats files, Rust code through rustfmt.
   - Config: [.dprint.jsonc](../.dprint.jsonc).
   - Capabilities: check, autofix.
+  - Autofix: whole file only, no line or range.
   - Version: [.dprint.jsonc](../.dprint.jsonc) pins the plugins; the dprint CLI
     is not pinned.
 - rustfmt: formats Rust code (invoked by dprint).
@@ -79,7 +86,9 @@ Each entry states the tool's purpose and, when they apply:
   - Config: [docker-bake.hcl](../docker-bake.hcl).
   - Version: not pinned.
 
-## Related
+## Links
 
-- [README.md](../README.md): what Kraf is.
-- [AGENTS.md](../AGENTS.md): how agents use the tools declared here.
+- [README.md](../README.md): What Kraf is and its vision, and the index of the
+  repository's documents, modules and other files.
+- [AGENTS.md](../AGENTS.md): Entry point for agent instructions and the
+  repository standards they MUST follow.
