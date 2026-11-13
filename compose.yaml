@@ -1,0 +1,4 @@
+services:
+  buildkitd:
+    image: ${BUILDKIT_IMAGE:-moby/buildkit:v0.35.0}
+    privileged: true

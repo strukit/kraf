@@ -16,15 +16,15 @@ RUN cargo fetch --locked
 
 COPY .. .
 
-FROM setup-workspace AS build
+FROM setup-workspace AS builder
 
 RUN cargo build --release
 
-FROM build AS tester
+FROM builder AS tester
 
 RUN cargo test --workspace
 
-FROM build AS linter
+FROM builder AS linter
 
 RUN cargo fmt --check
 RUN cargo lint
