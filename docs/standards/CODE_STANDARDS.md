@@ -66,7 +66,7 @@ This section defines the preferred size and structure of tests.
 - A shared constant or fixture MAY be used when inlining it would make the test
   unnecessarily large or obscure its behavior.
 
-### Best practices
+### Rules
 
 - Tests SHOULD be small and direct, without over-engineering.
 - Tests SHOULD be self-contained: small setup SHOULD live inside the test so
@@ -91,18 +91,15 @@ This section defines how code chooses its dependencies.
 - Code MAY depend on official platform bindings, foundational runtimes and
   packages, and packages from big-tech companies, the Linux Foundation, and
   similar organizations.
+- Code SHOULD prefer the standard library over external libraries, except the
+  categories stated in Rules, and SHOULD keep dependencies few and consolidated.
+- Code SHOULD NOT add a convenience wrapper on top of another library, or a
+  wrapper of a wrapper.
 
 ### Examples
 
 - Terminal handling uses `std::io::IsTerminal` and minimal syscalls, not an
   external terminal library.
-
-### Best practices
-
-- Code SHOULD prefer the standard library over external libraries, except the
-  categories stated in Rules, and SHOULD keep dependencies few and consolidated.
-- Code SHOULD NOT add a convenience wrapper on top of another library, or a
-  wrapper of a wrapper.
 
 ## Program Structure
 
@@ -182,9 +179,6 @@ This section defines which agent configuration the repository commits.
   environment.
 - An agent-related document that is committed MUST be vendor-neutral, and MUST
   NOT name a specific agent tool or model.
-
-### Best practices
-
 - Configuration portable across agents SHOULD be committed when it encodes a
   repository rule, such as skills and agent personas bound to this repository's
   standards, like a Rust reviewer that enforces

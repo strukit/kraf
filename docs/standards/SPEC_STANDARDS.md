@@ -3,7 +3,7 @@ title: Specification and documentation standards
 description: Standards for documenting feature intent, requirements, and acceptance scenarios.
 tags: [specification, requirements, acceptance, ears, documentation]
 type: ["standard"]
-scope: ["type:intent", "type:spec", "type:acceptance", "type:adr"]
+scope: ["type:readme", "type:intent", "type:spec", "type:acceptance", "type:adr"]
 ---
 
 > [!NOTE]
@@ -18,7 +18,7 @@ scope: ["type:intent", "type:spec", "type:acceptance", "type:adr"]
 > be bypassed by ad-hoc exceptions. See
 > [DOC_STANDARDS.md](./DOC_STANDARDS.md#standard-documents).
 
-## Summary
+## Overview
 
 This document defines how this repo records feature intent, behavioral
 requirements, and acceptance scenarios.

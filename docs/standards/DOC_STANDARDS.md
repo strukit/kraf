@@ -5,6 +5,8 @@ type: ["standard"]
 scope: ["type:standard", "!type:root"]
 ---
 
+# Document Standards
+
 > [!NOTE]
 > The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
 > RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174.
