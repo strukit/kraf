@@ -16,7 +16,7 @@ variable "ARTIFACT_PATH" {
 }
 
 variable "BUILDKIT_SYNTAX" {
-  default = "docker/dockerfile:1.29.0"
+  default = "docker/dockerfile-upstream:1.29.0"
 }
 
 target "_common" {

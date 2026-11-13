@@ -30,8 +30,10 @@ Each entry states the tool's purpose and, when they apply:
 - dprint: formats files, Rust code through rustfmt.
   - Config: [.dprint.jsonc](../.dprint.jsonc).
   - Capabilities: check, autofix.
-  - Version: [.dprint.jsonc](../.dprint.jsonc) pins the plugins; the dprint CLI
-    is not pinned.
+  - Version: [tools.toml](../tools.toml) pins the CLI; [.dprint.jsonc](../.dprint.jsonc)
+    pins the plugins.
+  - Download: [dprint 0.64.3 releases](https://github.com/dprint/dprint/releases/expanded_assets/0.64.3).
+  - Source: [dprint 0.64.3 on GitHub](https://github.com/dprint/dprint/tree/0.64.3).
 - rustfmt: formats Rust code (invoked by dprint).
   - Config: [rustfmt.toml](../rustfmt.toml).
   - Capabilities: check, autofix.
@@ -74,15 +76,28 @@ Each entry states the tool's purpose and, when they apply:
   everyday builds.
   - Config: [.cargo/config.toml](../.cargo/config.toml).
   - Version: [rust-toolchain.toml](../rust-toolchain.toml).
-- Docker Bake: builds release artifacts in containers, as CI does, for a clean,
-  containerized build, on the BuildKit daemon that Docker Compose starts.
+- Docker Buildx (Bake): builds release artifacts in containers, as CI does, for
+  a clean, containerized build, on the BuildKit daemon that Docker Compose
+  starts. Bake is the Buildx subcommand that reads the build definition.
   - Config: [docker-bake.hcl](../docker-bake.hcl).
-  - Version: not pinned.
-- Docker Compose: starts the BuildKit daemon that Docker Bake uses as a remote
-  builder, in CI and locally.
+  - Version: [tools.toml](../tools.toml).
+  - Download: [Buildx v0.39.0 releases](https://github.com/docker/buildx/releases/expanded_assets/v0.39.0).
+  - Source: [Buildx v0.39.0 on GitHub](https://github.com/docker/buildx/tree/v0.39.0).
+- Docker Compose: starts the BuildKit daemon service, in CI and locally.
   - Config: [compose.yaml](../compose.yaml).
-  - Version: [tools.toml](../tools.toml) pins Docker Compose; [compose.yaml](../compose.yaml)
-    pins the BuildKit image.
+  - Version: [tools.toml](../tools.toml) pins Docker Compose.
+  - Download: [Compose v5.7.1 releases](https://github.com/docker/compose/releases/expanded_assets/v5.7.1).
+  - Source: [Compose v5.7.1 on GitHub](https://github.com/docker/compose/tree/v5.7.1).
+- BuildKit: provides the daemon that Docker Buildx uses as a remote builder.
+  - Config: [compose.yaml](../compose.yaml).
+  - Version: [tools.toml](../tools.toml) pins the image selected by [compose.yaml](../compose.yaml).
+  - Download: [BuildKit v0.35.0 image](https://hub.docker.com/r/moby/buildkit/tags?name=v0.35.0).
+  - Source: [BuildKit v0.35.0 on GitHub](https://github.com/moby/buildkit/tree/v0.35.0).
+- Dockerfile frontend: provides the Dockerfile syntax used by Bake.
+  - Config: [docker-bake.hcl](../docker-bake.hcl).
+  - Version: [tools.toml](../tools.toml).
+  - Download: [Dockerfile frontend 1.29.0 image](https://hub.docker.com/r/docker/dockerfile-upstream/tags?name=1.29.0).
+  - Source: [Dockerfile frontend 1.29.0 in BuildKit](https://github.com/moby/buildkit/tree/dockerfile/1.29.0/frontend/dockerfile).
 
 ### CI
 

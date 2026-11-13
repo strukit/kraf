@@ -1,6 +1,12 @@
 [docker-compose]
 version = "5.7.1"
 
+[docker-buildx]
+version = "v0.39.0"
+
+[buildkit]
+version = "v0.35.0"
+
 [dockerfile-frontend]
 version = "1.29.0"
 

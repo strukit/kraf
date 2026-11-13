@@ -32,6 +32,7 @@ runs:
       with:
         cache-binary: false
         use: true
+        version: v0.39.0
         driver: remote
         endpoint: ${{ env.BUILDKIT_ENDPOINT }}
 
