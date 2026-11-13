@@ -297,8 +297,8 @@ keeps their context limited to the documents the task needs.
   [Scope](./REVIEW.md#scope) permits. Reading a file and listing or filtering
   file names are not content search.
 - An agent MAY search file contents to find the references that
-  [Link Rules](./docs/standards/GENERAL_STANDARDS.md#link-rules) requires it to
-  update. This search MUST NOT be used to find other content.
+  [Scope](./REVIEW.md#scope) requires a change to update. This search MUST NOT
+  be used to find other content.
 - An index is identified first by its name and location, as the
   [Docs graph](./docs/standards/GENERAL_STANDARDS.md#link-navigation-document-graph)
   rules define: the `README.md` of a folder is an index, and `INDEX.md` is an

@@ -44,6 +44,22 @@ This section defines the structure of Rust folder modules.
   MUST NOT share its parent's exact name because that causes
   `clippy::module_inception`.
 
+## Comments
+
+```yaml
+scope: ["**/*.rs"]
+```
+
+This section defines which document standards apply to comments in code.
+
+### Rules
+
+- A comment in code MUST follow
+  [Normative Language](./GENERAL_STANDARDS.md#normative-language),
+  [Language Neutrality](./GENERAL_STANDARDS.md#language-neutrality), and
+  [Link Rules](./GENERAL_STANDARDS.md#link-rules), as a document does.
+- These standards MUST apply only to the comments of a file, not to its code.
+
 ## Tests
 
 This section defines the preferred size and structure of tests.

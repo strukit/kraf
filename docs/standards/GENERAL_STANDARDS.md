@@ -2,7 +2,7 @@
 description: General standards for this repository, document layout and metadata, normative language, the document graph, links, navigation, and language neutrality.
 tags: [standards, repository-standards, document-layout, document-metadata, normative-language, document-graph, links, navigation, language-neutrality]
 type: ["standard"]
-scope: ["**/*", "type:standard", "!./.github/*"]
+scope: ["**/*.md", "type:standard", "!./.github/*"]
 ---
 
 # General Standards
@@ -92,6 +92,11 @@ scope: [<type | glob>, ...]
   patterns.
 - **Section metadata**: a YAML block placed directly below a section heading
   that declares metadata for that section only.
+- **Code file**: a file that is inferred, from its extension, name, or content,
+  to hold program code, or the configuration of a tool used for coding, such as
+  an editor, version control, a linter, a formatter, a package manager, a test
+  tool, a container, or CI (e.g. `lib.rs`, `Cargo.toml`, `Dockerfile`, or
+  `.gitignore`).
 
 #### Rules
 
@@ -107,6 +112,8 @@ scope: [<type | glob>, ...]
   document governs itself when its `scope` names its own `type`.
 - An item written as `type:<name>` MUST match every document whose `type` field
   contains `<name>`.
+- An item written as `type:code` MUST also match every code file, even when it
+  has no metadata.
 - An item that is a file pattern MUST be read as defined in
   [File patterns](#file-patterns).
 - An item written as `!type:<name>` MUST exclude every document whose `type`
@@ -214,7 +221,7 @@ for interpreting normative requirements.
 ### Normative-Language Note
 
 ```yaml
-scope: ["**/*", "!type:root", "!type:index"]
+scope: ["**/*.md", "!type:root", "!type:index"]
 ```
 
 This standard defines the note that states that the normative keywords follow
@@ -243,7 +250,7 @@ RFC 2119 and RFC 8174.
 ### Standard Note
 
 ```yaml
-scope: ["**/*", "!type:root"]
+scope: ["**/*.md", "!type:root"]
 ```
 
 This standard defines the note that marks a document as a standard document.
@@ -323,8 +330,6 @@ and IDEs can follow them.
   `README.md`, and `INDEX.md` files of the repository root, to which a rule
   applies) is a definition, not a reference to a specific file, and MUST be
   written without a link.
-- A change that removes or renames a file, a section, or a heading MUST update
-  every reference to it.
 - A link MUST be written in the form `[text](target)`, where `target` is the
   path relative to the document that contains it, for a file in the repository,
   or the URL, for an HTTP link.

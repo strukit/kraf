@@ -86,6 +86,9 @@ This section defines what a review covers.
   content.
 - A review MUST find each reference to anything the change renames or removes,
   by that search, and MUST evaluate each reference found.
+- A change that removes or renames a file, a section, or a heading MUST update
+  every reference to it, in any file. A review MUST report each reference that
+  the change does not update.
 - A review of a change to a standard document MUST read that document in full,
   not only the parts that changed.
 - A review MUST treat content that the pull request description leaves for a
