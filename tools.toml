@@ -1,0 +1,5 @@
+[docker-compose]
+version = "5.7.1"
+
+[gh-actions-lock]
+version = "0.4.1"

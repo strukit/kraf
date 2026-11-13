@@ -16,10 +16,16 @@ runs:
   steps:
     - name: Checkout
       uses: actions/checkout@v7.0.1
+      with:
+        persist-credentials: false
 
     - name: Start BuildKit daemon
       shell: bash
-      run: docker compose up --detach --wait buildkitd
+      run: |
+        docker compose up --detach --wait buildkitd
+        container="$(docker compose ps -q buildkitd)"
+        name="$(docker inspect --format '{{.Name}}' "$container")"
+        echo "BUILDKIT_ENDPOINT=docker-container://${name#/}" >> "$GITHUB_ENV"
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v4.4.1
@@ -27,7 +33,7 @@ runs:
         cache-binary: false
         use: true
         driver: remote
-        endpoint: docker-container://kraf-buildkitd
+        endpoint: ${{ env.BUILDKIT_ENDPOINT }}
 
     - name: Bake target:(${{ inputs.target }})
       uses: docker/bake-action@v7.5.0
@@ -42,4 +48,3 @@ runs:
       with:
         name: ${{ inputs.target }}-artifact-pr-${{ github.event.pull_request.number }}
         path: ${{ inputs.artifact-path }}
-

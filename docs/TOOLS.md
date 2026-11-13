@@ -81,15 +81,15 @@ Each entry states the tool's purpose and, when they apply:
 - Docker Compose: starts the BuildKit daemon that Docker Bake uses as a remote
   builder, in CI and locally.
   - Config: [compose.yaml](../compose.yaml).
-  - Version: [compose.yaml](../compose.yaml) pins the BuildKit image; Docker
-    Compose is not pinned.
+  - Version: [tools.toml](../tools.toml) pins Docker Compose; [compose.yaml](../compose.yaml)
+    pins the BuildKit image.
 
 ### CI
 
 - gh actions-lock: locks the GitHub Actions that the workflows use to their
   commits.
   - Config: [actions.lock](../.github/workflows/actions.lock).
-  - Version: not pinned.
+  - Version: [tools.toml](../tools.toml).
 
 ## Related
 
