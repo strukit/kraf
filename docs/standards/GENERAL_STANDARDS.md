@@ -300,6 +300,11 @@ language.
   extensions to illustrate a language-neutral rule.
 - Data and configuration formats, such as YAML and JSON, MAY be named when a
   rule depends on them.
+- In prose, docs, and diagrams, platform names MUST be written as `Linux`,
+  `Mac`, and `Windows`, and the `macOS` styling MUST NOT be used.
+- In code, each language MAY have its own standard for platform names, and that
+  standard MUST take precedence over the preceding rule, only within the code of
+  that language.
 
 ## Link Rules and Link Navigation (Document Graph)
 

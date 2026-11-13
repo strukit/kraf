@@ -299,6 +299,15 @@ keeps their context limited to the documents the task needs.
 - An agent MAY search file contents to find the references that
   [Scope](./REVIEW.md#scope) requires a change to update. This search MUST NOT
   be used to find other content.
+- An agent MAY search file contents when the task cannot be completed by
+  following links, provided the search MUST be limited to the scope where it
+  makes sense (type of file, folder, or when appropriate, the entire repository,
+  decided by the nature of what is searched, not exploratory), MUST target
+  specific content (a pattern, type, or defined string, not generic), and MUST
+  be attempted only after having tried to reach the content via links. This
+  exception MUST apply only to resolve that specific mini-task. After it is
+  resolved, the agent MUST return to the principle of following links for the
+  rest of the work.
 - An index is identified first by its name and location, as the
   [Docs graph](./docs/standards/GENERAL_STANDARDS.md#link-navigation-document-graph)
   rules define: the `README.md` of a folder is an index, and `INDEX.md` is an

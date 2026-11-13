@@ -29,8 +29,7 @@ agent configuration, and review.
 ## Rust Modules
 
 ```yaml
-scope:
-  include: ["**/*.rs"]
+scope:  ["**/*.rs"]
 ```
 
 This section defines the structure of Rust folder modules.
@@ -45,10 +44,6 @@ This section defines the structure of Rust folder modules.
   `clippy::module_inception`.
 
 ## Comments
-
-```yaml
-scope: ["**/*.rs"]
-```
 
 This section defines which document standards apply to comments in code.
 
@@ -194,18 +189,6 @@ This section defines which agent configuration the repository commits.
   repository rule, such as skills and agent personas bound to this repository's
   standards, like a Rust reviewer that enforces
   [CODE_STANDARDS.md](./CODE_STANDARDS.md).
-
-## Platform Names
-
-This section defines how platform names are written.
-
-### Rules
-
-- In prose, docs, and diagrams, platform names MUST be written as `Linux`,
-  `Mac`, and `Windows`, and the `macOS` styling MUST NOT be used.
-- In code, each language MAY have its own standard for platform names, and that
-  standard MUST take precedence over the preceding rule, only within the code of
-  that language.
 
 ## Links
 

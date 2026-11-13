@@ -229,21 +229,26 @@ report, and the content of both.
 ### Finding template
 
 ````md
-#### <title that identifies the issue> [<blocking | strong recommendation, must be fixed | recommendation>]
+---
+id: <finding-id>
+ruleId: <qualified-rule-identifier>
+level: error | warning | note
+fingerprint: sha256:<hash>
 
-```yaml
-source: <repository rule | declared tool | built-in skill | external skill or agent | correctness defect>
 location:
   file: <path relative to the repository root, starting with ./>
-  lines: <line | line-start:line-end>
-review:
-  severity: <the severity that the source gives>
-  skill: <skill name>
-  version: <version>
-  harness: <harness>
-  model: <model>
-  effort: <effort>
-```
+  line: <line number>
+  columns:
+    start: <column>
+    end: <column>
+
+source:
+  type: repository-rule | declared-tool | correctness-defect | skill | agent
+  document: <document-name>
+  section: <section-name>
+---
+
+#### <title that identifies the issue> [<blocking | strong recommendation, must be fixed | recommendation>]
 
 **Problem:** <what the issue is and why it matters>
 
@@ -261,24 +266,37 @@ or agent, what it reports>
 
 ### Report template
 
-````md
+```md
+---
+repository: <repository-url>
+
+branch:
+  head: <branch-name>
+  base: <target-branch>
+
+commit:
+  head: <sha-full>
+  base: <sha-full>
+
+reviewer:
+  human:
+    email: <email>
+
+  agent:
+    skills: [<skill-name>, ...]
+    model: <model>
+    harness: <harness>
+    effort: <effort>
+    timestamp: <ISO-8601-datetime>
+    session-id: <session-id>
+---
+
+# Review Report
+
 ## Findings
 
-<each finding, in the finding template, followed by its raw finding:>
-
-<details>
-<summary>Raw finding</summary>
-
-```text
-<raw finding>
+<each finding, in the finding template, with front matter and content>
 ```
-
-</details>
-
-## Files read
-
-- <path>
-````
 
 ### Rules
 
