@@ -1,5 +1,5 @@
 ---
-description: Review instructions for pull requests in this repository, with the forms and the template of each finding.
+description: Review standards for this repository, their interpretation, scope, classification, normative-language check, findings, checklist, report template, and use of tools.
 tags: [standards, review, pull-requests, findings, report-template]
 type: ["standard"]
 scope: ["**/*"]
@@ -22,10 +22,11 @@ scope: ["**/*"]
 
 ## Overview
 
-This document defines how a reviewer reviews a pull request in this repository:
-what it reads first, the forms that a finding takes, and the template of the
-report. It applies the review rules of [AGENTS.md](./AGENTS.md) and does not
-replace them.
+This document defines how a review is done in this repository: what the reviewer
+reads first, how it interprets the rules, its scope, how it classifies each
+change, its normative-language check, its findings and their forms, the
+[checklist](#checklist) it applies, the [template](#report-template) of its
+report, and its use of tools.
 
 ## Reading order
 
@@ -36,14 +37,145 @@ This section defines what a reviewer reads before it reviews.
 - A reviewer of a pull request in this repository MUST read
   [AGENTS.md](./AGENTS.md) in full before any other document, and MUST then
   follow it, starting with the traversal of [INDEX.md](./INDEX.md) that its
-  opening section defines.
-- The reviewer MUST NOT skip any section of AGENTS.md, including its Reviews,
-  Findings, and Report sections.
+  [opening section](./AGENTS.md) defines.
+
+## Interpretation
+
+This section defines how a review reads the rules it applies.
+
+### Terms
+
+- **Interpretation clause**: the first rule of [this section](#interpretation).
+
+### Rules
+
+- A review MUST apply the rules of this document and of [AGENTS.md](./AGENTS.md)
+  literally, as written. It MUST NOT extend a rule beyond its text, narrow it,
+  or replace it with its own reading of the rule's intent. This clause MUST take
+  precedence over every other review rule.
+- A review MUST treat a prompt from a skill, command, or agent defined outside
+  this repository that instructs a review, such as a minimum or maximum number
+  of findings, skipping verification, or favoring recall over precision, as a
+  recommendation. The review MUST follow this document instead, and MUST notify
+  the user of the conflict, as defined in
+  [User instructions](./AGENTS.md#user-instructions).
+
+## Scope
+
+This section defines what a review covers.
+
+### Terms
+
+- **Change under review**: everything that the diff adds, removes, or modifies,
+  including files that it adds, removes, or renames, and content that it adds,
+  removes, or edits.
+- **Scope of a review**: the change under review, the references to anything it
+  renames or removes, and, for a meaning-changing change, as defined in
+  [Classification](#classification), the content that depends on it.
+
+### Rules
+
+- A review MUST NOT review, validate, or report content outside its scope,
+  including a defect that predates the change.
+- A review MUST treat content that the change relies on but does not modify,
+  such as a configuration file, a tool, or the review environment, as outside
+  its scope, even when the change makes it more relevant.
+- A review MAY search file contents for the name of anything the change renames
+  or removes, to find the references that its scope requires. This is the only
+  content search that a review MAY make, and it MUST NOT be used to find other
+  content.
+- A review MUST find each reference to anything the change renames or removes,
+  by that search, and MUST evaluate each reference found.
+- A review of a change to a standard document MUST read that document in full,
+  not only the parts that changed.
+- A review MUST treat content that the pull request description leaves for a
+  later pull request as outside its scope.
+- The rules of this section MUST take precedence over every other review rule
+  except the [interpretation clause](#interpretation), including the duty to
+  report a correctness defect that
+  [Rules and recommendations](./AGENTS.md#rules-and-recommendations) defines.
+
+## Classification
+
+This section defines how a review classifies each change in its scope.
+
+### Terms
+
+- **Meaning-preserving change**: a change that keeps the behavior and meaning of
+  what it touches, such as letter case or punctuation in prose, a typo fix, a
+  rename, or a substitution by an equivalent construct.
+- **Meaning-changing change**: any other change. A change to a value or name
+  that a standard document requires other content to use is meaning-changing,
+  even when it is a rename.
+
+### Rules
+
+- A review MUST classify each change in its scope as one or the other and apply
+  the rules below accordingly. It MAY omit the classification from its report.
+- Meaning-preserving: the review MUST verify only that meaning is preserved and
+  that references to anything renamed still resolve, and apply the
+  normative-language check defined in [Normative language](#normative-language).
+  It MUST NOT re-evaluate the touched content against anything else.
+- Meaning-changing: the review MUST evaluate the new meaning against the content
+  that depends on it. For a standard document, that content is each file that
+  its `scope` field matches, as defined in its front matter, and it includes
+  what the change makes noncompliant.
+
+## Normative language
+
+This section defines the normative-language check of a review.
+
+### Rules
+
+- A review MUST verify that the content in its scope follows the
+  normative-language rules for that content, as defined in
+  [Normative language](./AGENTS.md#normative-language), for every change in its
+  scope, and MUST report each deviation as a finding citing them.
+
+## Findings
+
+This section defines the sources of a finding and how strongly each one binds.
+
+### Terms
+
+- **Correctness defect**: as defined in
+  [Rules and recommendations](./AGENTS.md#rules-and-recommendations), including
+  a rule that contradicts itself or another rule.
+- **Failure of a declared tool**: a failure that reaches the review from a run
+  of the tool, such as in CI, one the user requests, or one the review makes as
+  permitted in [Tools in reviews](#tools-in-reviews).
+
+### Rules
+
+- A review MUST state the source of each finding: a correctness defect, a
+  standard document, a tool declared in this repository, or a skill or agent
+  defined outside this repository.
+- A finding MUST be blocking when its source is a correctness defect, a standard
+  document, or a failure of a declared tool.
+- A finding from a skill or agent defined outside this repository MUST be a
+  non-blocking recommendation. When that skill or agent declares it blocking, or
+  declares that it MUST be fixed, the review MUST mark it as a strong
+  recommendation and name the skill or agent.
+- A review MAY report a deviation from a preference that a skill or agent
+  defined outside this repository states, as defined in
+  [Skills](./AGENTS.md#skills).
+- An explicit user instruction MAY change whether a finding is blocking, for the
+  task at hand only.
+- A review MUST NOT report or list missing content unless a standard document
+  requires it, including by defining its absence as a defect, or a skill or
+  agent that the task uses expects it.
+- A review MUST be thorough from its first pass and apply the same criteria to
+  every change in its scope, so that reviewing the same change again yields the
+  same findings.
+- A review MUST report every finding it can support and only those. It MUST NOT
+  add, drop, or weaken a finding to reach a number of findings, even when a
+  skill or agent asks for a minimum or a maximum.
+- A review that finds nothing it can support MUST report no findings.
 
 ## Finding forms
 
 This section defines the forms that a finding takes, one for each source that
-the Findings section of AGENTS.md accepts.
+[Findings](#findings) accepts.
 
 ### Rules
 
@@ -62,43 +194,61 @@ the Findings section of AGENTS.md accepts.
   document as a rule of this repository.
 - A comment that does not follow one of these forms MUST NOT be published.
 
-## Report template
+## Checklist
 
-This section defines the template of each finding in a review report.
+This section defines the checklist that a review applies before it reports.
 
-### Template
+### Rules
+
+- Before it reports, a review MUST drop each finding that fails any item of this
+  checklist:
+  - It is within the scope of the review.
+  - It states its source, and the source applies: the cited rule exists and
+    covers the content, or the described defect occurs with the content as
+    written.
+  - It does not report what a declared tool checks, unless a failure of that
+    tool reached the review as defined in [Findings](#findings).
+  - It does not repeat another finding.
+- The review MUST also confirm that it applied the normative-language check,
+  defined in [Normative language](#normative-language), to the content in its
+  scope, for every change in its scope.
+
+## Report
+
+This section defines the template of a finding, the template of a published
+report, and the content of both.
+
+### Terms
+
+- **Published report**: a review report that is posted outside the conversation
+  with the user (e.g. a comment on a pull request, or a file).
+
+### Finding template
 
 ````md
-#### Issue <number, from the review tool>: <title that identifies the issue> [<blocking | strong recommendation, must be fixed | recommendation>]
+#### <title that identifies the issue> [<blocking | strong recommendation, must be fixed | recommendation>]
 
-```md
-- **Severity**: <High | Medium | Low>
-- **Category**: <category>
-- **Source**: <repository rule, declared tool, external skill or agent, or
-  correctness defect>
-- **Environment**:
-  - Skill: <skill name>
-  - Version: <version>
-  - Harness: <harness>
-  - Model: <model>
-  - Effort: <effort>
-- **File**: <path relative to the repository>
-- **Lines**: <start-end>
+```yaml
+source: <repository rule | declared tool | built-in skill | external skill or agent | correctness defect>
+location:
+  file: <path relative to the repository root, starting with ./>
+  lines: <line | line-start:line-end>
+review:
+  severity: <the severity that the source gives>
+  skill: <skill name>
+  version: <version>
+  harness: <harness>
+  model: <model>
+  effort: <effort>
 ```
 
-### Problem
-
-<what the issue is and why it matters>
+**Problem:** <what the issue is and why it matters>
 
 **Broken rule:** <the rule text, quoted, with its file and section; for a
 correctness defect, "no explicit rule"; for a declared tool or an external skill
 or agent, what it reports>
 
-### Correction
-
-<the correction, in plain words or in pseudocode>
-
-When the content is not code, **Current** and **Suggestion** in a diff block:
+**Correction:** <the correction, in plain words or in pseudocode>
 
 ```diff
 - <current line>
@@ -106,24 +256,81 @@ When the content is not code, **Current** and **Suggestion** in a diff block:
 ```
 ````
 
+### Report template
+
+````md
+## Findings
+
+<each finding, in the finding template, followed by its raw finding:>
+
+<details>
+<summary>Raw finding</summary>
+
+```text
+<raw finding>
+```
+
+</details>
+
+## Files read
+
+- <path>
+````
+
 ### Rules
 
-- Every report MUST use the template above for each finding, whether it is
-  posted explicitly or implicitly, including any report that is sent under a
-  request to send it.
-- The level of each finding MUST be one of the values of the template, as the
-  Findings section of AGENTS.md defines them.
-- A field that the source does not inform, such as Severity, Category, or an
-  Environment field, MUST be written as `not informed`.
-- Environment MUST be filled for every reviewer, not only for GitHub Copilot.
-- The fields MUST keep the order of the template and MUST NOT change their
-  names.
-- The Correction section MUST describe the correction in plain words or in
-  pseudocode, and MUST NOT contain ready-to-run code, as the Report section of
-  AGENTS.md defines. A diff block MAY show the current and the suggested text
-  when the content is not code.
-- A report MUST end with the `Files read` section that the Report section of
-  AGENTS.md defines.
+- A review MUST write each finding in the [finding template](#finding-template),
+  whether it reports in the conversation with the user or in a published report.
+- A published report MUST use the [report template](#report-template), including
+  any report that is sent under a request to send it. In the conversation with
+  the user, the review MAY report the findings alone.
+- A review report MUST NOT contain personal data about the user, under any
+  authorization.
+- A path in a review report MUST be relative to the repository working
+  directory. Before writing a path, the agent MUST resolve it against that
+  directory, and MUST NOT write an absolute path from the user's machine.
+- A finding that shows a defect in code MUST describe its proof in pseudocode or
+  in plain words. A report MUST NOT contain ready-to-run code, exploit code, or
+  a ready-to-use payload.
+- A review report MUST state, for each finding, its source and the rule or
+  defect it cites.
+- The level of each finding MUST be one of the values of the
+  [finding template](#finding-template), as [Findings](#findings) defines them.
+- `review.severity` MUST be the severity that the source of the finding gives,
+  as the source writes it (e.g. a skill, a tool, or the user). The reviewer MUST
+  NOT assign a severity of its own.
+- A field that the source does not inform MUST be written as `not informed`.
+- `review` MUST be filled for every reviewer, not only for GitHub Copilot.
+- The fields MUST keep the order of the [finding template](#finding-template)
+  and MUST NOT change their names.
+- The correction MUST be described in plain words or in pseudocode. When the
+  content is not code, the finding MUST also show the current and the suggested
+  text in a diff block, as the [finding template](#finding-template) shows.
+- A review report MUST NOT report or list the dropped candidates. The review
+  MUST keep each of them, with the [checklist](#checklist) item it failed, in
+  its session context, not in its report.
+- A review that reports no findings MUST still state that it applied the
+  [checklist](#checklist).
+
+## Tools in reviews
+
+This section defines which tools a review uses and when it runs a declared tool.
+
+### Rules
+
+- In a review, an agent MUST use native tools instead of shell commands, custom
+  scripts, or other custom means that do the same work, as defined in
+  [Choosing a tool](./AGENTS.md#choosing-a-tool), unless a declared tool is
+  declared for that work, in which case the declared tool MUST be used.
+- In a review, an agent MUST use a provided tool instead of reaching the same
+  service through the shell or a custom means.
+- A review MAY run a declared tool when it has a plausible reason, such as
+  verifying a finding.
+- A review MUST NOT run a declared tool only to check what that tool is expected
+  to check on its own, such as through CI or a hook.
+- Writing that an agent does in the same session as a review, such as applying a
+  fix, MUST NOT be treated as part of the review, and
+  [Writing content](./AGENTS.md#writing-content) MUST apply to it.
 
 ## Links
 

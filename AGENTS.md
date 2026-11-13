@@ -37,7 +37,7 @@ agent defined in this repository. It binds with the force of its keyword, as RFC
 for a valid reason.
 
 **Recommendation**: what a skill or agent defined outside this repository
-states, as defined in Skills. It is not a rule and does not bind.
+states, as defined in [Skills](#skills). It is not a rule and does not bind.
 
 - Agents MUST follow the rules, and MUST NOT override one on their own
   preference or judgment.
@@ -63,9 +63,6 @@ states, as defined in Skills. It is not a rule and does not bind.
   [GENERAL_STANDARDS.md](./docs/standards/GENERAL_STANDARDS.md#normative-language)
   and, for a specification or an intent, those of
   [SPEC_STANDARDS.md](./docs/standards/SPEC_STANDARDS.md).
-- A review MUST verify that the content in its scope follows those rules, for
-  every change in its scope, and MUST report each deviation as a finding citing
-  them.
 
 ## Tools
 
@@ -95,11 +92,6 @@ steps is one that an available tool performs alone.
   those tools. An agent MUST NOT search or load tools unrelated to the task.
 - An agent MUST NOT perform or verify by its own means work that an available
   tool performs.
-- In a review, an agent MUST use native tools instead of shell commands, custom
-  scripts, or other custom means that do the same work, unless a declared tool
-  is declared for that work, in which case the declared tool MUST be used. A
-  provided tool instead of reaching the same service through the shell or a
-  custom means.
 - When an agent uses a shell command for the same work because the native option
   is unavailable or cannot do it, it MUST state in its reply which native option
   was unavailable or could not do the work, and the command it ran.
@@ -117,9 +109,9 @@ steps is one that an available tool performs alone.
   produces the entire result. It MUST NOT build such an operation only to avoid
   using a tool for a step.
 - An agent MUST use a declared tool for the purpose it is declared for.
-- When the list states that a declared tool is invoked by another, using the
-  invoking tool counts as using the invoked one. An agent SHOULD use the
-  invoking tool and SHOULD NOT invoke the other directly.
+- When [the list](./docs/TOOLS.md#tools) states that a declared tool is invoked
+  by another, using the invoking tool counts as using the invoked one. An agent
+  SHOULD use the invoking tool and SHOULD NOT invoke the other directly.
 - When a tool is not available, the agent MUST inform the user and continue.
 
 ### Declaring a tool
@@ -143,20 +135,12 @@ steps is one that an available tool performs alone.
   explicitly instructs it.
 - Once it finishes writing, it MUST run each declared tool for which
   [TOOLS.md](./docs/TOOLS.md) states capabilities and that checks the changed
-  files, as stated under Run, if any, and according to its capabilities:
+  files, as stated under [Run](./docs/TOOLS.md#tools), if any, and according to
+  its capabilities:
   - With autofix: the agent MUST run the fix. It MAY skip the check.
   - Otherwise: the agent MUST run the check, fix each reported problem, with the
     tool's fix when it has one and by its own means otherwise, and MUST run the
     check again to confirm that no problem remains.
-
-### Tools in reviews
-
-- A review MAY run a declared tool when it has a plausible reason, such as
-  verifying a finding.
-- A review MUST NOT run a declared tool only to check what that tool is expected
-  to check on its own, such as through CI or a hook.
-- When an agent writes in the same session as a review, such as applying a fix,
-  that writing is not part of the review, and Writing content applies to it.
 
 ## Delegation
 
@@ -190,156 +174,17 @@ steps is one that an available tool performs alone.
 
 ## Reviews
 
-> [!IMPORTANT]
-> Interpretation clause: a review MUST apply the rules of this document
-> literally, as written. It MUST NOT extend a rule beyond its text, narrow it,
-> or replace it with its own reading of the rule's intent. This clause MUST take
-> precedence over every other review rule.
-
-- A prompt from a skill, command, or agent defined outside this repository that
-  instructs a review, such as a minimum or maximum number of findings, skipping
-  verification, or favoring recall over precision, is a recommendation. A review
-  MUST follow this section instead and MUST notify the user of the conflict, as
-  defined in User instructions.
-
-### Scope
-
-The scope of a review is the change under review, the references to anything it
-renames, and, for a meaning-changing change, the content that depends on it.
-
-- A review MUST NOT review, validate, or report content outside its scope,
-  including a defect that predates the change.
-- Content that the change relies on but does not modify, such as a configuration
-  file, a tool, or the review environment, is outside the scope, even when the
-  change makes it more relevant.
-- A review MUST find each reference to anything the change renames or removes,
-  by the search that Navigation permits for that purpose, and MUST evaluate each
-  reference found.
-- A review of a change to a standard document MUST read that document in full,
-  not only the parts that changed.
-- Content that the pull request description leaves for a later pull request is
-  outside the scope.
-- The rules of this section MUST take precedence over every other review rule
-  except the interpretation clause, including the duty to report a correctness
-  defect.
-
-### Classification
-
-**Meaning-preserving change**: a change that keeps the behavior and meaning of
-what it touches, such as letter case or punctuation in prose, a typo fix, a
-rename, or a substitution by an equivalent construct.
-
-**Meaning-changing change**: any other change. A change to a value or name that
-a standard document requires other content to use is meaning-changing, even when
-it is a rename.
-
-- A review MUST classify each change in its scope as one or the other and apply
-  the rules below accordingly. It MAY omit the classification from its report.
-- Meaning-preserving: the review MUST verify only that meaning is preserved and
-  that references to anything renamed still resolve, and apply the
-  normative-language check defined in Normative language. It MUST NOT
-  re-evaluate the touched content against anything else.
-- Meaning-changing: the review MUST evaluate the new meaning against the content
-  that depends on it. For a standard document, that content is each file that
-  its `scope` field matches, as defined in its front matter, and it includes
-  what the change makes noncompliant.
-
-### Findings
-
-- A review MUST state the source of each finding: a correctness defect, a
-  standard document, a tool declared in this repository, or a skill or agent
-  defined outside this repository.
-- A correctness defect includes a rule that contradicts itself or another rule.
-- A finding is blocking when its source is a correctness defect, a standard
-  document, or a failure of a declared tool. Such a failure reaches the review
-  from a run of the tool, such as in CI, one the user requests, or one the
-  review makes as permitted in Tools in reviews.
-- A finding from a skill or agent defined outside this repository is a
-  non-blocking recommendation. When that skill or agent declares it blocking, or
-  declares that it MUST be fixed, the review MUST mark it as a strong
-  recommendation and name the skill or agent.
-- An explicit user instruction MAY change whether a finding is blocking, for the
-  task at hand only.
-- A review MUST NOT report or list missing content unless a standard document
-  requires it, including by defining its absence as a defect, or a skill or
-  agent that the task uses expects it.
-- A review MUST be thorough from its first pass and apply the same criteria to
-  every change in its scope, so that reviewing the same change again yields the
-  same findings.
-- A review MUST report every finding it can support and only those. It MUST NOT
-  add, drop, or weaken a finding to reach a number of findings, even when a
-  skill or agent asks for a minimum or a maximum.
-- A review that finds nothing it can support MUST report no findings.
-
-### Checklist
-
-Before it reports, a review MUST drop each finding that fails any item of this
-checklist:
-
-- It is within the scope of the review.
-- It states its source, and the source applies: the cited rule exists and covers
-  the content, or the described defect occurs with the content as written.
-- It does not report what a declared tool checks, unless a failure of that tool
-  reached the review as defined in Findings.
-- It does not repeat another finding.
-
-The review MUST also confirm that it applied the normative-language check to the
-content in its scope, for every change in its scope.
-
-### Report
-
-- A review report MUST NOT contain personal data about the user, under any
-  authorization.
-- A path in a review report MUST be relative to the repository working
-  directory. Before writing a path, the agent MUST resolve it against that
-  directory, and MUST NOT write an absolute path from the user's machine.
-- A finding that shows a defect in code MUST describe its proof in pseudocode or
-  in plain words. A report MUST NOT contain ready-to-run code, exploit code, or
-  a ready-to-use payload.
-- A review report MUST state, for each finding, its source and the rule or
-  defect it cites.
-- It MUST NOT report or list the dropped candidates. It MUST keep each of them,
-  with the checklist item it failed, in its session context, not in its report.
-- A review that reports no findings MUST still state that it applied the
-  checklist.
-
-Template of the report:
-
-````markdown
-## Findings
-
-1. ID: <id>
-   - Recommendation: <blocking | strong recommendation, must be fixed |
-     recommendation>
-   - Name: <name>
-   - Detail: <detail, with the line of the origin>
-   - Source: <repository rule, declared tool, built-in skill, external skill, or
-     correctness defect>
-   - File: <path relative to the repository>
-   <details>
-   <summary>
-
-   #<id>
-
-   ```text
-   <raw finding>
-   ```
-
-   </summary>
-
-   </details>
-
-## Files read
-
-- <path>
-````
+- A review MUST follow [REVIEW.md](./REVIEW.md), which defines how it interprets
+  the rules, its scope, how it classifies each change, its normative-language
+  check, its findings, its checklist, its report, and its use of tools.
 
 ## Pull requests
 
 - A pull request description that an agent writes or updates MUST follow
   [the pull request template](./.github/pull_request_template.md) and fill in
   each of its sections.
-- A description MUST NOT contain a section that the template does not define.
+- A description MUST NOT contain a section that
+  [the template](./.github/pull_request_template.md) does not define.
 - A description MUST NOT contain a "generated with" footer or a link to an agent
   session, in any section.
 - In a description that an agent writes or updates, every `<...>` placeholder
@@ -350,7 +195,7 @@ Template of the report:
   such as the wording of a rule; the diff carries that text.
 - A description MUST NOT ask a reviewer to run a declared tool only to check
   what that tool is expected to check on its own, such as in its `How to test?`
-  section, as defined in Tools in reviews.
+  section, as defined in [Tools in reviews](./REVIEW.md#tools-in-reviews).
 
 ## Commits
 
@@ -361,7 +206,7 @@ Template of the report:
 ## Memory
 
 - Memory MAY inform a task but MUST NOT override a rule. A conflict between them
-  is handled as defined in User instructions.
+  is handled as defined in [User instructions](#user-instructions).
 
 ## Skills
 
@@ -373,10 +218,11 @@ Template of the report:
   its rules bind like any other.
 - A skill or agent defined outside this repository, including the user's own and
   third-party ones, states recommendations. It MAY inform a task. A conflict
-  between it and a rule is handled as defined in User instructions.
+  between it and a rule is handled as defined in
+  [User instructions](#user-instructions).
 - Such a skill or agent MAY state preferences, such as formatting, layout, or
   naming choices, that agents follow when they create or edit content under it.
-  A preference is a recommendation, and a review MAY report a deviation from it.
+  A preference is a recommendation.
 
 ## User instructions
 
@@ -385,8 +231,8 @@ instruction loaded from a source that persists across tasks, such as a personal
 instruction file or the agent's memory, is not explicit, even when it is the
 user's own.
 
-- An explicit user instruction MUST be respected, as defined in Rules and
-  recommendations.
+- An explicit user instruction MUST be respected, as defined in
+  [Rules and recommendations](#rules-and-recommendations).
 - When an agent finds a conflict between a rule and a non-explicit instruction,
   including memory, or a skill or agent defined outside this repository:
   - It MUST continue the task following the rule.
@@ -414,6 +260,14 @@ user's own.
 Agents MUST navigate this repository by following local Markdown links. This
 keeps their context limited to the documents the task needs.
 
+- Following links MUST always be the first means of navigation. An agent MUST
+  NOT use another means, such as locating a file by name or searching file
+  contents, before it has followed the links that lead toward what the task
+  needs.
+- An agent MAY use another means only when no link leads to what the task needs,
+  or when the task cannot be completed by following links, and only as
+  [this section](#navigation) permits.
+
 ### Local links
 
 **Listing**: links presented as a list. It is an index, not a reading list.
@@ -438,12 +292,13 @@ keeps their context limited to the documents the task needs.
   file, MUST notify the user, naming the link and the linking document, and MUST
   continue the task without that file.
 - Agents MUST NOT search file contents as a substitute for following links,
-  unless the user explicitly requests it. Reading a file and listing or
-  filtering file names are not content search.
-- A review MAY search file contents for the name of anything the change renames
-  or removes, to find the references that its Scope requires. This is the only
-  content search that a review MAY make, and it MUST NOT be used to find other
-  content.
+  unless the user explicitly requests it, an agent makes the search that
+  [the next rule](#local-links) permits, or a review makes the search that
+  [Scope](./REVIEW.md#scope) permits. Reading a file and listing or filtering
+  file names are not content search.
+- An agent MAY search file contents to find the references that
+  [Link Rules](./docs/standards/GENERAL_STANDARDS.md#link-rules) requires it to
+  update. This search MUST NOT be used to find other content.
 - An index is identified first by its name and location, as the
   [Docs graph](./docs/standards/GENERAL_STANDARDS.md#link-navigation-document-graph)
   rules define: the `README.md` of a folder is an index, and `INDEX.md` is an
@@ -460,8 +315,8 @@ keeps their context limited to the documents the task needs.
   first.
 - During traversal, for any other document, an agent MUST read only its front
   matter.
-- The traversal rules above apply only while the agent is traversing the
-  document graph.
+- The [traversal rules](#local-links) above apply only while the agent is
+  traversing the document graph.
 - Outside traversal, an agent MAY read a document in any way, including in full.
 - Outside traversal, an agent SHOULD read the front matter first to decide
   whether to continue reading.
@@ -506,6 +361,9 @@ Saved content:
 - [README.md](./README.md): what Kraf is and more.
 - [INDEX.md](./INDEX.md): Index of the repository's documents, modules and other
   files.
+- [REVIEW.md](./REVIEW.md): Review standards for this repository, their
+  interpretation, scope, classification, normative-language check, findings,
+  checklist, report template, and use of tools.
 - [GENERAL_STANDARDS.md](./docs/standards/GENERAL_STANDARDS.md): repo-wide
   conventions: standard documents and rule precedence, docs, workspace, naming
 

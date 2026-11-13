@@ -16,8 +16,9 @@ files.
 - [README.md](./README.md): What Kraf is and its vision, entry for humans.
 - [AGENTS.md](./AGENTS.md): Agent instructions and the repository standards they
   MUST follow.
-- [REVIEW.md](./REVIEW.md): Review instructions for pull requests in this
-  repository, with the forms and the template of each finding.
+- [REVIEW.md](./REVIEW.md): Review standards for this repository, their
+  interpretation, scope, classification, normative-language check, findings,
+  checklist, report template, and use of tools.
 - [docs/standards/README.md](./docs/standards/README.md): Index of the standards
   that govern this repository, to help people and agents navigate it on their
   own through the document graph.

@@ -61,7 +61,8 @@ This standard defines the order of the parts of a general document.
 
 #### Rules
 
-- Every document MUST follow the order of the template above.
+- Every document MUST follow the order of the [template](#document-layout)
+  above.
 - A document MAY omit notes when none apply.
 
 ### Document Metadata
@@ -154,8 +155,9 @@ Normative keywords express three levels of force:
 | Recommended | recommends or discourages an action           | SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED |
 | Optional    | grants permission or makes an action optional | MAY, OPTIONAL                                    |
 
-The normative-language note and its template provide a consistent reference for
-interpreting normative requirements.
+The [normative-language note](#normative-language-note) and its
+[template](#normative-language-note---template) provide a consistent reference
+for interpreting normative requirements.
 
 #### Terms
 
@@ -189,9 +191,10 @@ interpreting normative requirements.
 
 #### Rules
 
-- A document carrying the note MUST express every normative requirement,
-  permission, recommendation, or prohibition with normative keywords, and MUST
-  NOT use alternative words or lowercase variants for normative meaning.
+- A document carrying the [note](#normative-language-note) MUST express every
+  normative requirement, permission, recommendation, or prohibition with
+  normative keywords, and MUST NOT use alternative words or lowercase variants
+  for normative meaning.
 - An example MAY use normative keywords of any level, because it illustrates an
   idea and its text is not normative.
 - When a document intends the reader to read or consult something, it MUST state
@@ -230,10 +233,10 @@ RFC 2119 and RFC 8174.
 #### Rules
 
 - Every document matched by the `scope` of this section MUST carry the note of
-  the template above, exactly as written.
-- A document MAY carry the note without containing normative requirements or
-  using every normative keyword, and a purely descriptive document MUST carry it
-  too.
+  the [template](#normative-language-note---template) above, exactly as written.
+- A document MAY carry the [note](#normative-language-note) without containing
+  normative requirements or using every normative keyword, and a purely
+  descriptive document MUST carry it too.
 - A family of documents MAY define an equivalent note that lists only the
   normative keywords it uses, if it cites RFC 2119 and RFC 8174 near the top.
 
@@ -261,11 +264,13 @@ This standard defines the note that marks a document as a standard document.
 
 #### Rules
 
-- Every standard document MUST carry the note of the template above, exactly as
-  written, near the top, after the normative-language note.
-- The standard note MUST be separated from the normative-language note by a line
-  containing `</br>`, between two blank lines, so that code formatters do not
-  merge the two notes.
+- Every standard document MUST carry the note of the
+  [template](#standard-note---template) above, exactly as written, near the top,
+  after the [normative-language note](#normative-language-note).
+- The [standard note](#standard-note) MUST be separated from the
+  [normative-language note](#normative-language-note) by a line containing
+  `</br>`, between two blank lines, so that code formatters do not merge the two
+  notes.
 
 ### Language Neutrality
 
@@ -301,12 +306,28 @@ and IDEs can follow them.
 
 #### Rules
 
-- Every reference to a specific file MUST be a navigable link, not a bare name.
-  A generic reference, such as "a module's `README.md`", MAY be written without
-  a link.
-- A link MUST be written in the form `[text](target)`.
-- A link to a file in the repository MUST use the path relative to the document
-  that contains it.
+- Every reference to a specific file, or to a specific section of a document,
+  including a section of the same document, MUST be a navigable link, not a bare
+  name. A generic reference (e.g. "a module's `README.md`") MAY be written
+  without a link.
+- A reference to a specific part of a document that is not a section (e.g. "the
+  template above", a table, or a list) is a reference to the section that
+  contains it, and MUST be a link to that section.
+- The name of a single thing that a specific section defines (e.g. "the
+  interpretation clause", "the checklist", or "the standard note") is a
+  reference to that section, and MUST be a link to it. A term that names any
+  instance of what a section defines (e.g. "a finding" or "a review") is a
+  generic reference.
+- A file name that a standard defines, requires, or uses to identify a role
+  (e.g. `INDEX.md` as the name of the root index, or the `AGENTS.md`,
+  `README.md`, and `INDEX.md` files of the repository root, to which a rule
+  applies) is a definition, not a reference to a specific file, and MUST be
+  written without a link.
+- A change that removes or renames a file, a section, or a heading MUST update
+  every reference to it.
+- A link MUST be written in the form `[text](target)`, where `target` is the
+  path relative to the document that contains it, for a file in the repository,
+  or the URL, for an HTTP link.
 - A link to an HTTP URL MUST point to the page's form for human viewing, not its
   raw-text form.
 - A link to an HTTP URL MUST use a fixed URL, whose content does not change (for
