@@ -1,3 +1,10 @@
+---
+description: What Kraf is and its vision, and the index of the repository's documents, modules and other files.
+tags: [kraf, vision, overview, index]
+type: ["root", "readme", "index"]
+scope: ["type:root"]
+---
+
 # Kraf
 
 Kraf is a neutral layer for humans and autonomous agents that provides a
@@ -39,22 +46,22 @@ agent CLI, a browser, or code that embeds them as a library (C or WASM), all
 calling the same runtime. Kraf aims to interoperate with the editors and
 toolchains a project already uses rather than replacing them.
 
-## Modules
+## Links
 
-- [Environment variables](./src/environment/src/env_var/README.md): declarative
-  model, resolution, and projection of environment variables.
+- [AGENTS.md](./AGENTS.md): Agent instructions and the repository standards they
+  MUST follow.
+- [REVIEW.md](./REVIEW.md): Review standards for this repository, their
+  interpretation, scope, classification, normative-language check, findings,
+  checklist, report template, and use of tools.
+- [STANDARDS.md](./docs/standards/README.md): Index of the standards that govern
+  this repository, to help people and agents navigate it on their own through
+  the document graph.
+- [ARCHITECTURE.md](./docs/ARCHITECTURE.md): Cross-domain map of Kraf's system
+  context, modules, and how they depend on each other.
+- [TOOLS.md](./docs/TOOLS.md): Tools declared in this repository, with their
+  purpose, configuration, capabilities, and version.
 
-## Related
+### Modules
 
-- [AGENTS.md](./AGENTS.md): AI agent instructions.
-- [GENERAL_CONVENTIONS.md](./docs/GENERAL_CONVENTIONS.md): repo-wide
-  conventions: convention documents and rule precedence, docs, workspace,
-  naming.
-- [ARCHITECTURE.md](./docs/ARCHITECTURE.md): cross-domain architecture: system
-  context, containers, modules, ports and adapters, dependency rule, decisions.
-- [CODE_CONVENTIONS.md](./docs/CODE_CONVENTIONS.md): code conventions: modules
-  and tests.
-- [SPEC_CONVENTIONS.md](./docs/SPEC_CONVENTIONS.md): spec conventions: layout,
-  identifiers, intent, specification, acceptance, ADR.
-- [TOOLS.md](./docs/TOOLS.md): tools declared in this repository, with their
-  configuration and purpose.
+- [Environment variables](./src/environment/src/env_var/README.md): Declarative
+  model, resolution, and projection of environment variables in Kraf.
