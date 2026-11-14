@@ -162,10 +162,9 @@ language: <language-code>
 
 ### Normative Language
 
-This standard defines how any document words a requirement, with The keywords of
+This standard defines how any document words a requirement, with the keywords of
 [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) and
-[RFC 8174](https://www.rfc-editor.org/rfc/rfc8174). A normative keyword gives a
-sentence its force; it does not make the document a standard document.
+[RFC 8174](https://www.rfc-editor.org/rfc/rfc8174).
 
 Normative keywords express three levels of force:
 
@@ -188,11 +187,6 @@ Normative keywords express three levels of force:
   [AGENTS.md](../AGENTS.md#terms).
 - **[Implicit instruction](../AGENTS.md#terms)**: defined in
   [AGENTS.md](../AGENTS.md#terms).
-- **Descriptive sentence**: a sentence that states a fact or a behavior and
-  expresses no normative force (e.g. "The repository is organized by feature.").
-- **Unclassifiable sentence**: a sentence that does not make clear whether it is
-  an instruction or a description (e.g. "The agent reads the file before
-  committing.").
 - **Example**: an illustration of an idea that is explicitly marked as one. It
   is marked by any of these forms: a part of a sentence in parentheses that
   begins with `e.g.`; an item or paragraph under a heading titled `Example` or

@@ -81,6 +81,14 @@ This section defines which rule prevails when two rules conflict.
 
 This section defines how a standard document words its rules.
 
+#### Terms
+
+- **Descriptive sentence**: a sentence that states a fact or a behavior and
+  expresses no normative force (e.g. "The repository is organized by feature.").
+- **Unclassifiable sentence**: a sentence that does not make clear whether it is
+  an instruction or a description (e.g. "The agent reads the file before
+  committing.").
+
 #### Rules
 
 - In a standard document, each rule MUST be a list item, and each sentence of a
@@ -92,6 +100,8 @@ This section defines how a standard document words its rules.
   NOT state a rule.
 - A definition MUST be written as `**Term**: meaning.`, before the rules that
   use the term.
+- An unclassifiable sentence in a standard document MUST be rewritten as a rule
+  with a normative keyword or as a descriptive sentence.
 
 ## Links
 
