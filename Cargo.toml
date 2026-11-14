@@ -46,3 +46,11 @@ workspace = true
 [dependencies]
 kraf-core.workspace = true
 kraf-environment.workspace = true
+
+[profile.minimal]
+inherits = "release"
+opt-level = "z"
+lto = true
+codegen-units = 1
+strip = true
+panic = "abort"
