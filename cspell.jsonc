@@ -1,6 +1,13 @@
 {
   "language": "en",
-  "dictionaries": ["cpp", "filetypes", "go", "powershell", "softwareTerms", "misc"],
+  "dictionaries": ["cpp", "docker", "filetypes", "go", "powershell", "softwareTerms", "computing-acronyms", "misc", "mailmap"],
+  "dictionaryDefinitions": [
+    {
+      "name": "mailmap",
+      "path": "./.mailmap",
+      "addWords": true
+    }
+  ],
   "ignorePaths": ["cspell.jsonc"],
   "words": [
     "ltsc",
@@ -18,5 +25,16 @@
     "moby",
     "buildkit",
     "airgapped",
+    "microdnf",
+    "WASI",
+    "PATHEXT",
+    "NOCOLOR",
+    "Unjoinable",
+    "preresolved",
+    "servercore",
+    "norestart",
+    "Strukit",
+    "Alexsandro",
+    "Godoy",
   ],
 }
