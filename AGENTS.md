@@ -8,9 +8,8 @@ language: en
 
 # Agents
 
-This is a standard document. It is always loaded, and its rules apply to every
-task. A linked document applies only when a rule here requires reading it.
-
+- Agents MUST treat this document as a standard document, keep it loaded, and
+  apply its rules to every task.
 - Agents MUST follow the rules, with the force of their keywords.
 - Agents MUST follow a user instruction, even when it sets aside a rule.
 - Agents MUST NOT override a rule on a recommendation.
@@ -101,6 +100,11 @@ task. A linked document applies only when a rule here requires reading it.
   reminder.
 - **Recommendation**: any instruction that is neither a rule nor a user
   instruction. It does not bind.
+- **User memory**: memory that the user keeps in their environment, outside the
+  repository, such as a personal instruction file or a project memory.
+- **User preference**: a recommendation that states how the user wants agents to
+  work or to present content, such as the style of a note or the language of a
+  reply, which the user gave outside the task, such as in user memory.
 - **Tool**: anything the agent can invoke, except one whose purpose is to
   delegate work to another agent: its native tools, tools provided to it by a
   server or a plugin, programs installed in the user's environment, and
@@ -144,16 +148,20 @@ task. A linked document applies only when a rule here requires reading it.
 
 ### Memory
 
-- Agents MAY read and write their own memory, even outside the working root.
-- Agents MUST NOT keep memory inside the working root.
-- Agents MUST treat an instruction loaded from memory as a recommendation, even
-  when the user wrote it.
+- Agents MAY read and write their own memory in any task, even outside the
+  working root, without asking the user for confirmation.
+- Agents MAY read user memory in any task, even outside the working root,
+  without asking the user for confirmation, unless the user forbids it.
+- Agents MUST ask the user for confirmation before writing to user memory.
+- Agents MUST NOT keep their own memory inside the working root.
+- Agents MUST treat an instruction loaded from their own memory or from user
+  memory as a user preference.
 
 ### Permissions
 
 - Agents MUST ask the user for confirmation before an action that is hard to
-  reverse or that reaches outside the working root, other than their own memory,
-  unless a user instruction authorizes it.
+  reverse or that reaches outside the working root, other than their own memory
+  or reading user memory, unless a user instruction authorizes it.
 - Agents MUST state the scope of a permission when they ask the user for it: the
   task it applies to, and reading only, reading and changing, or everything the
   operation needs except dangerous actions.
@@ -217,6 +225,8 @@ task. A linked document applies only when a rule here requires reading it.
   changed when they finish the work that the task requests, before reporting it:
   - Agents MUST run the fix of a tool with autofix, and SHOULD NOT run its check
     after it.
+  - Agents MUST run the fix of a tool with partial autofix, then run its check,
+    fix each remaining problem, and run the check again until none remains.
   - Agents MUST run the check of any other tool, fix each reported problem, and
     run the check again until none remains.
 
@@ -237,6 +247,8 @@ task. A linked document applies only when a rule here requires reading it.
   sections of GENERAL_STANDARDS.md for that purpose.
 - Agents MUST NOT read a standard document again in the same session unless it
   changed.
+- Agents MUST treat a skill or an agent defined in this repository as a standard
+  document, and MUST follow its rules as rules of this repository.
 
 ### Agent delegation
 
@@ -291,8 +303,9 @@ task. A linked document applies only when a rule here requires reading it.
 - Agents MUST follow the language that the metadata of a document declares when
   the language of some content in it is unclear, and MUST ask the user when it
   declares none.
-- Agents MUST show content to the user in the language the user prefers, which
-  does not change the language in which they write it.
+- Agents MUST show content to the user in the language that a user instruction
+  or, when none states it, a user preference states, which does not change the
+  language in which they write it.
 
 ### System instructions
 
