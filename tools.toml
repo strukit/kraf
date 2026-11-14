@@ -1,8 +1,5 @@
 [metadata]
-description = "Tools declared in this repository"
-type = ["guide", "standard"]
-scope = ["**/*"]
-language = "en"
+description = "Tools in this repository"
 
 [formatter.dprint]
 name = "dprint"
@@ -70,7 +67,7 @@ version = "./rust-toolchain.toml"
 [builder.containers.docker-bake]
 name = "Docker Bake"
 category = "build-container"
-version = "v0.39.0"
+version = "0.39.0"
 repository = "https://github.com/docker/buildx"
 config = "./docker-bake.hcl"
 capabilities = ["check", "build"]
@@ -85,7 +82,7 @@ config = "./compose.yaml"
 [builder.containers.buildkit]
 name = "BuildKit"
 category = "build-container"
-version = "v0.35.0"
+version = "0.35.0"
 repository = "https://github.com/moby/buildkit"
 config = "./compose.yaml"
 

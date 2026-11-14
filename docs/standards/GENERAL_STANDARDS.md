@@ -40,6 +40,10 @@ neutrality.
 
 ## Document Structure
 
+```yaml
+scope: ["**/*.md", "!type:root"]
+```
+
 ### Templates
 
 #### Terms
@@ -57,10 +61,6 @@ neutrality.
   zero or more times.
 
 ### Document Layout
-
-```yaml
-scope: ["**/*.md", "!type:root"]
-```
 
 ```md
 ---
