@@ -78,6 +78,7 @@
 !/README.md
 !/AGENTS.md
 !/LICENSE
+!/.mailmap
 
 !/.agents
 !/.agents/**

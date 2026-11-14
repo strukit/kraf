@@ -38,9 +38,9 @@ their configurations are listed in [tools.toml](../tools.toml).
 
 - Agents MUST update [tools.toml](../tools.toml) in a pull request that adds or
   removes the configuration of a tool.
-- Agents MUST NOT list in [tools.toml](../tools.toml) a file read only by editors
-  or IDEs (e.g. `.editorconfig`), because it configures no tool an agent can
-  invoke.
+- Agents MUST NOT list in [tools.toml](../tools.toml) a file read only by
+  editors or IDEs (e.g. `.editorconfig`), because it configures no tool an agent
+  can invoke.
 
 ## Links
 

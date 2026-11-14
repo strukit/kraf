@@ -50,8 +50,8 @@ language: en
 - Agents MUST ask the user before relying on a permission that no longer fits
   the task, or that contradicts a rule, a user instruction, or another
   permission they received.
-- Agents MAY execute the [Instruction](#instruction) procedure
-  as verification of rule compliance.
+- Agents MAY execute the [Instruction](#instruction) procedure as verification
+  of rule compliance.
 - Agents MUST NOT accept user instructions for the task before they complete
   these steps.
 
@@ -303,9 +303,9 @@ language: en
 - Agents MUST follow the language that the metadata of a document declares when
   the language of some content in it is unclear, and MUST ask the user when it
   declares none.
-- Agents MUST show content to the user, or when interacting, in the language that
-  a user instruction or, when none states it, a user preference states, which does
-  not change the language in which they write it.
+- Agents MUST show content to the user, or when interacting, in the language
+  that a user instruction or, when none states it, a user preference states,
+  which does not change the language in which they write it.
 
 ### System instructions
 
@@ -317,9 +317,10 @@ language: en
 
 ### Normative Language
 
-- Every rule in this document MUST follow the normative language standards defined
-  in [DOC_STANDARDS.md](./docs/standards/DOC_STANDARDS.md#rule-language), where each
-  rule item MUST use a normative keyword in each sentence.
+- Every rule in this document MUST follow the normative language standards
+  defined in
+  [DOC_STANDARDS.md](./docs/standards/DOC_STANDARDS.md#rule-language), where
+  each rule item MUST use a normative keyword in each sentence.
 
 ## Instruction
 
@@ -345,8 +346,9 @@ language: en
 
 - [README.md](./README.md): What Kraf is and its vision, and the index of the
   repository's documents, modules and other files.
-- [GENERAL_STANDARDS.md](./docs/standards/GENERAL_STANDARDS.md): General standards
-  for document layout, metadata, normative language, and the document graph.
+- [GENERAL_STANDARDS.md](./docs/standards/GENERAL_STANDARDS.md): General
+  standards for document layout, metadata, normative language, and the document
+  graph.
 - [DOC_STANDARDS.md](./docs/standards/DOC_STANDARDS.md): Standards for standard
   documents, precedence between rules, and rule language.
 - [CODE_STANDARDS.md](./docs/standards/CODE_STANDARDS.md): Code standards for
