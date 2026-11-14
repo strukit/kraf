@@ -1,17 +1,109 @@
-[docker-compose]
-version = "5.7.1"
+# Tools declared in this repository, with their purpose, configuration, capabilities, and version.
+#
+# This file contains tool metadata organized by category (formatter, linter, toolchain, builder).
+# Each tool entry includes:
+# - name: Human-readable tool name
+# - version: Version number or path to version file (relative to repo root with ./)
+# - repository: GitHub repository URL (optional)
+# - config: Configuration file path (relative to repo root with ./)
+# - files: File types this tool handles
+# - capabilities: What the tool can do (check, autofix, partial-autofix)
+# - run_by: Other tools that invoke this tool
+#
+# How to use tools:
+# Agents MUST run `<tool> --help` before first invocation to discover available commands.
+# See TOOLS.md for rules about maintaining this file.
 
-[docker-buildx]
-version = "v0.39.0"
+[metadata]
+description = "Tools declared in this repository"
+type = ["guide", "standard"]
+scope = ["**/*"]
+language = "en"
 
-[buildkit]
-version = "v0.35.0"
-
-[dockerfile-frontend]
-version = "1.29.0"
-
-[dprint]
+# Formatting tools
+[formatter.dprint]
+name = "dprint"
 version = "0.64.3"
+repository = "https://github.com/dprint/dprint"
+config = "./.dprint.jsonc"
+files = ["json", "markdown", "toml", "rust", "other"]
+capabilities = ["check", "autofix"]
 
-[gh-actions-lock]
+[formatter.rustfmt]
+name = "rustfmt"
+run_by = ["dprint"]
+config = "./rustfmt.toml"
+files = ["rust"]
+capabilities = ["check", "autofix"]
+version = "./rust-toolchain.toml"
+
+# Linting tools
+[linter.clippy]
+name = "clippy"
+run_by = ["cargo", "rust-analyzer"]
+config = "./Cargo.toml"
+files = ["rust"]
+capabilities = ["check", "partial-autofix"]
+version = "./rust-toolchain.toml"
+
+[linter.cspell]
+name = "cspell"
+config = "./cspell.jsonc"
+files = ["any"]
+capabilities = ["check"]
+version = "not-pinned"
+
+[linter.rust-analyzer]
+name = "rust-analyzer"
+config = "./rust-analyzer.toml"
+files = ["rust"]
+capabilities = ["check", "partial-autofix"]
+version = "./rust-toolchain.toml"
+
+# Toolchain setup
+[toolchain.rustup]
+name = "rustup"
+config = "./rust-toolchain.toml"
+version = ["./Dockerfile.linux", "./Dockerfile.windows"]
+
+[toolchain.visual-studio-build-tools]
+name = "Visual Studio Build Tools"
+config = "./.msvc.json"
+version = "./.msvc.json"
+
+# Build tools
+[builder.local.cargo]
+name = "cargo"
+config = "./.cargo/config.toml"
+files = ["rust"]
+version = "./rust-toolchain.toml"
+
+[builder.containers.docker-bake]
+name = "Docker Bake"
+version = "v0.39.0"
+repository = "https://github.com/docker/buildx"
+config = "./docker-bake.hcl"
+capabilities = ["check"]
+
+[builder.containers.docker-compose]
+name = "Docker Compose"
+version = "5.7.1"
+repository = "https://github.com/docker/compose"
+config = "./compose.yaml"
+
+[builder.containers.buildkit]
+name = "BuildKit"
+version = "v0.35.0"
+repository = "https://github.com/moby/buildkit"
+config = "./compose.yaml"
+
+[builder.containers.dockerfile-frontend]
+name = "Dockerfile frontend"
+version = "1.29.0"
+repository = "https://github.com/moby/buildkit"
+config = "./docker-bake.hcl"
+
+[builder.ci.gh-actions-lock]
+name = "gh actions-lock"
 version = "0.4.1"
+config = "./.github/workflows/actions.lock"

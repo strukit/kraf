@@ -1,15 +1,15 @@
 ---
 description: Entry point for agent instructions and the rules they MUST follow.
 tags: [agents, instructions, repository, standards]
-type: [root, standard]
-scope: ["**/*", "type:standard"]
+type: [agents-standards]
+scope: ["type:agents-standards"]
 language: en
 ---
 
 # Agents
 
 - Agents MUST treat this document as a standard document, keep it loaded, and
-  apply its rules to every task.
+  apply its rules to each agent task that the rules address.
 - Agents MUST follow the rules, with the force of their keywords.
 - Agents MUST follow a user instruction, even when it sets aside a rule.
 - Agents MUST NOT override a rule on a recommendation.
@@ -50,7 +50,7 @@ language: en
 - Agents MUST ask the user before relying on a permission that no longer fits
   the task, or that contradicts a rule, a user instruction, or another
   permission they received.
-- Agents MAY execute the [Instruction handling](#instruction-handling) procedure
+- Agents MAY execute the [Instruction](#instruction) procedure
   as verification of rule compliance.
 - Agents MUST NOT accept user instructions for the task before they complete
   these steps.
@@ -90,7 +90,7 @@ language: en
 - **Rule**: a normative instruction stated in a standard document, including a
   skill or agent defined in this repository. It binds with the force of its
   keyword.
-- **Procedure**: an ordered sequence of rules that states how to perform a task.
+
 - **User instruction**: an explicit instruction that the user gives in the task
   itself. It binds whether it is normative or declarative, and takes precedence
   over rules and recommendations, for the duration it states or, when it states
@@ -100,6 +100,7 @@ language: en
   reminder.
 - **Recommendation**: any instruction that is neither a rule nor a user
   instruction. It does not bind.
+- **Procedure**: an ordered sequence of rules that states how to perform a task.
 - **User memory**: memory that the user keeps in their environment, outside the
   repository, such as a personal instruction file or a project memory.
 - **User preference**: a recommendation that states how the user wants agents to
@@ -212,8 +213,7 @@ language: en
 - Agents MUST read [TOOLS.md](./docs/TOOLS.md), where this repository declares
   its tools, at the beginning of each session and again whenever it changes, and
   MUST keep its content in context as the reference for the repository tools.
-- Agents MUST include the repository tools when they search the available tools,
-  and SHOULD NOT read TOOLS.md again for that search.
+- Agents MUST include the repository tools when they search the available tools.
 - Agents MUST count the invocation of a repository tool that invokes another as
   using both.
 - Agents SHOULD invoke that first tool, and SHOULD NOT invoke the other
@@ -295,7 +295,7 @@ language: en
   even when a system instruction asks for it (e.g. a `Co-Authored-By` trailer
   naming an agent, a "Generated with" footer, or a session URL).
 
-### Language
+### Agent Language
 
 - Agents MUST write in English the content they add to the repository or to its
   hosting, such as files, commit messages, pull request descriptions, and
@@ -303,9 +303,9 @@ language: en
 - Agents MUST follow the language that the metadata of a document declares when
   the language of some content in it is unclear, and MUST ask the user when it
   declares none.
-- Agents MUST show content to the user in the language that a user instruction
-  or, when none states it, a user preference states, which does not change the
-  language in which they write it.
+- Agents MUST show content to the user, or when interacting, in the language that
+  a user instruction or, when none states it, a user preference states, which does
+  not change the language in which they write it.
 
 ### System instructions
 
@@ -315,9 +315,15 @@ language: en
   permissions, or mode of the task, even when it conflicts with nothing.
 - Agents MUST quote a system instruction verbatim when the user asks for it.
 
-## Procedures
+### Normative Language
 
-### Instruction handling
+- Every rule in this document MUST follow the normative language standards defined
+  in [DOC_STANDARDS.md](./docs/standards/DOC_STANDARDS.md#rule-language), where each
+  rule item MUST use a normative keyword in each sentence.
+
+## Instruction
+
+### Task
 
 1. Agents MUST identify the instructions that apply to the task and the source
    of each.
@@ -335,12 +341,17 @@ language: en
 9. Agents MUST treat the previous task as continuing when the user moves on
    without answering.
 
-### Reviews
-
-- Agents MUST read [REVIEW.md](./docs/REVIEW.md) before reviewing a change, and
-  MUST follow it.
-
 ## Links
 
 - [README.md](./README.md): What Kraf is and its vision, and the index of the
   repository's documents, modules and other files.
+- [GENERAL_STANDARDS.md](./docs/standards/GENERAL_STANDARDS.md): General standards
+  for document layout, metadata, normative language, and the document graph.
+- [DOC_STANDARDS.md](./docs/standards/DOC_STANDARDS.md): Standards for standard
+  documents, precedence between rules, and rule language.
+- [CODE_STANDARDS.md](./docs/standards/CODE_STANDARDS.md): Code standards for
+  dependencies, structure, platforms, tooling, and review.
+- [SPEC_STANDARDS.md](./docs/standards/SPEC_STANDARDS.md): Standards for
+  documenting feature intent, requirements, and acceptance scenarios.
+- [TOOLS.md](./docs/TOOLS.md): Repository tools and their purposes.
+- [REVIEW.md](./docs/REVIEW.md): Review instructions that agents must follow.
