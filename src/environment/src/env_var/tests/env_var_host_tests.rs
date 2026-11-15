@@ -1,41 +1,37 @@
-use super::env_var_test_fixtures::ENV_VAR_MAPPING_FIXTURE;
+use super::env_var_test_fixtures::{ENV_VAR_MAPPING_FIXTURE, FakeProcess};
 use crate::env_var::env_var_core::{EnvVar, EnvVarHostMapping, EnvVarImportMode, EnvVarSource};
 use crate::env_var::env_var_host::{ENV_VAR_FROM_HOST, env_var_collect, env_var_process_apply};
 use crate::env_var::env_var_host_linux::LINUX_MAPPINGS;
 use crate::env_var::env_var_host_macos::MACOS_MAPPINGS;
 use crate::env_var::env_var_host_windows::WINDOWS_MAPPINGS;
 
-use kraf_core::{HostProcess, Process};
+use kraf_core::Process;
 use std::collections::HashSet;
 
 #[test]
 fn collect_picks_up_a_real_env_var_the_mapping_declares() {
-    // SAFETY: test-only and single-threaded
-    unsafe {
-        std::env::set_var("KRAF_COLLECT_TEST", "built-value");
-    }
+    let mut process = FakeProcess::default();
+    process.set_env_var("ENV_VAR_TEST_COLLECT", "built-value");
 
     let mappings = [EnvVarHostMapping {
         key: "MY_VAR",
         source: EnvVarSource::Host,
-        alias_import: &["KRAF_COLLECT_TEST"],
+        alias_import: &["ENV_VAR_TEST_COLLECT"],
         alias_import_mode: EnvVarImportMode::FirstFound,
         alias_export: &[],
         fallback: None,
     }];
 
-    let collected = env_var_collect(&mappings, &HostProcess);
+    let collected = env_var_collect(&mappings, &process);
 
-    let found = collected.iter().find(|var| var.key == "KRAF_COLLECT_TEST");
+    let found = collected
+        .iter()
+        .find(|var| var.key == "ENV_VAR_TEST_COLLECT");
 
     assert_eq!(
         found.and_then(|var| var.value.clone()),
         Some("built-value".to_string())
     );
-
-    unsafe {
-        std::env::remove_var("KRAF_COLLECT_TEST");
-    }
 }
 
 #[test]
@@ -104,60 +100,57 @@ fn apply_writes_empty_string_for_entries_with_no_value() {
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &["KRAF_TEST_APPLY_EMPTY"],
+        alias_export: &["ENV_VAR_TEST_APPLY_EMPTY"],
         fallback: None,
     }];
     let env_vars = [EnvVar {
-        key: "KRAF_TEST_APPLY_EMPTY",
+        key: "ENV_VAR_TEST_APPLY_EMPTY",
         value: None,
     }];
 
-    env_var_process_apply(&mappings, &env_vars, &mut HostProcess);
+    let mut process = FakeProcess::default();
+    env_var_process_apply(&mappings, &env_vars, &mut process);
 
     assert_eq!(
-        HostProcess.read_env_var("KRAF_TEST_APPLY_EMPTY"),
+        process.read_env_var("ENV_VAR_TEST_APPLY_EMPTY"),
         Some(String::new())
     );
-
-    // SAFETY: test-only and single-threaded
-    unsafe {
-        std::env::remove_var("KRAF_TEST_APPLY_EMPTY");
-    }
 }
 
+/// Applying a projection writes only the keys declared as export aliases.
+///
+/// Verifies:
+/// - [ENV-VAR_PROJECTION-ACC-0001](../docs/env-var-projection/env-var-projection.acceptance.md#env-var_projection-acc-0001)
+/// - [ENV-VAR_PROJECTION-ACC-0002](../docs/env-var-projection/env-var-projection.acceptance.md#env-var_projection-acc-0002)
 #[test]
 fn apply_writes_only_what_is_declared_exportable() {
     let mappings = [EnvVarHostMapping {
-        key: "HOME_TEMP",
+        key: "ENV_VAR_TEST_APPLY_CANONICAL",
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &["KRAF_TEST_APPLY_EXPORTABLE"],
+        alias_export: &["ENV_VAR_TEST_APPLY_EXPORTABLE"],
         fallback: None,
     }];
     let env_vars = [
         EnvVar {
-            key: "HOME_TEMP",
+            key: "ENV_VAR_TEST_APPLY_CANONICAL",
             value: Some("/tmp".to_string()),
         },
         EnvVar {
-            key: "KRAF_TEST_APPLY_EXPORTABLE",
+            key: "ENV_VAR_TEST_APPLY_EXPORTABLE",
             value: Some("/tmp".to_string()),
         },
     ];
 
-    env_var_process_apply(&mappings, &env_vars, &mut HostProcess);
+    let mut process = FakeProcess::default();
+    env_var_process_apply(&mappings, &env_vars, &mut process);
 
-    assert_eq!(HostProcess.read_env_var("HOME_TEMP"), None);
+    assert_eq!(process.read_env_var("ENV_VAR_TEST_APPLY_CANONICAL"), None);
     assert_eq!(
-        HostProcess.read_env_var("KRAF_TEST_APPLY_EXPORTABLE"),
+        process.read_env_var("ENV_VAR_TEST_APPLY_EXPORTABLE"),
         Some("/tmp".to_string())
     );
-
-    // SAFETY: test-only and single-threaded
-    unsafe {
-        std::env::remove_var("KRAF_TEST_APPLY_EXPORTABLE");
-    }
 }
 
 #[test]
