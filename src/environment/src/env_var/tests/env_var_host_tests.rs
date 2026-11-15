@@ -9,7 +9,7 @@ use kraf_core::Process;
 use std::collections::HashSet;
 
 #[test]
-fn collect_picks_up_a_real_env_var_the_mapping_declares() {
+fn collect_picks_up_a_declared_env_var() {
     let mut process = FakeProcess::default();
     process.set_env_var("ENV_VAR_TEST_COLLECT", "built-value");
 
