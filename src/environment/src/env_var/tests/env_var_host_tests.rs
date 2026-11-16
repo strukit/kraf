@@ -117,11 +117,6 @@ fn apply_writes_empty_string_for_entries_with_no_value() {
     );
 }
 
-/// Applying a projection writes only the keys declared as export aliases.
-///
-/// Verifies:
-/// - [ENV-VAR_PROJECTION-ACC-0001](../docs/env-var-projection/env-var-projection.acceptance.md#env-var_projection-acc-0001)
-/// - [ENV-VAR_PROJECTION-ACC-0002](../docs/env-var-projection/env-var-projection.acceptance.md#env-var_projection-acc-0002)
 #[test]
 fn apply_writes_only_what_is_declared_exportable() {
     let mappings = [EnvVarHostMapping {
