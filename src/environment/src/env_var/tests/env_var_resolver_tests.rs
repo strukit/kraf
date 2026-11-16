@@ -185,8 +185,14 @@ fn resolve_keeps_logname_in_sync_with_user() {
     let resolved_logname = result.iter().find(|env_var| env_var.key == "LOGNAME");
     let resolved_user = result.iter().find(|env_var| env_var.key == "USER");
 
-    assert_eq!(resolved_logname.and_then(|env_var| env_var.value.clone()), Some("alex".to_string()));
-    assert_eq!(resolved_user.and_then(|env_var| env_var.value.clone()), Some("alex".to_string()));
+    assert_eq!(
+        resolved_logname.and_then(|env_var| env_var.value.clone()),
+        Some("alex".to_string())
+    );
+    assert_eq!(
+        resolved_user.and_then(|env_var| env_var.value.clone()),
+        Some("alex".to_string())
+    );
 }
 
 #[test]
