@@ -118,7 +118,6 @@ they open its `docs/`. A module `README.md` MUST have
 
 ```md
 ---
-title: <Feature name>
 description: <One-line summary of what the module does.>
 tags: [<tag1>, <tag2>, ...]
 type: ["readme", "index"]
@@ -175,7 +174,6 @@ problem.
 
 ```md
 ---
-title: <Feature name> intent
 description: <One-line summary of why the feature exists.>
 tags: [<tag1>, <tag2>, ...]
 type: ["intent"]
@@ -273,7 +271,6 @@ THE SOFTWARE SHALL <system response>.
 
 ````md
 ---
-title: <Area> - SPEC
 description: <One-line summary of the requirements.>
 tags: [<feature>, <area>, specification, spec]
 type: ["spec"]
@@ -363,7 +360,6 @@ Feature: <name>
 
 ````md
 ---
-title: <Area> - Acceptance
 description: <One-line summary of the acceptance scenarios.>
 tags: [<feature>, <area>, acceptance, gherkin]
 type: ["acceptance"]
@@ -371,10 +367,12 @@ scope: ["<path-to-feature>/**/*"]
 ---
 
 > [!NOTE]
-> The keywords follow RFC 2119 and RFC 8174 across three levels of force:\
-> **Required:** MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT\
-> **Recommended:** SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED\
-> **Optional:** MAY, OPTIONAL\
+> The keywords follow RFC 2119 and RFC 8174 across three levels of force:
+>
+> - **Required:** MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT
+> - **Recommended:** SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED
+> - **Optional:** MAY, OPTIONAL
+>
 > See
 > [GENERAL_STANDARDS.md](<path-to-docs>/GENERAL_STANDARDS.md#normative-language).
 
@@ -449,7 +447,6 @@ For example:
 
 ```md
 ---
-title: <FEATURE>-ADR-0001 - <Decision title>
 description: <One-line summary of the decision.>
 tags: [<feature>, adr, decision]
 type: ["adr"]
@@ -457,10 +454,12 @@ scope: ["<path-to-feature>/**/*"]
 ---
 
 > [!NOTE]
-> The keywords follow RFC 2119 and RFC 8174 across three levels of force:\
-> **Required:** MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT\
-> **Recommended:** SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED\
-> **Optional:** MAY, OPTIONAL\
+> The keywords follow RFC 2119 and RFC 8174 across three levels of force:
+>
+> - **Required:** MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT
+> - **Recommended:** SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED
+> - **Optional:** MAY, OPTIONAL
+>
 > See
 > [GENERAL_STANDARDS.md](<path-to-docs>/GENERAL_STANDARDS.md#normative-language).
 

@@ -18,6 +18,11 @@ language: en
 > See
 > [GENERAL_STANDARDS.md](./docs/standards/GENERAL_STANDARDS.md#normative-language).
 
+## Overview
+
+This document is the entry point for agents in this repository. It defines the
+terms, rules, bootstrap, and procedures that agents follow in each task.
+
 - Agents MUST treat this document as a standard document, keep it loaded, and
   apply its rules to each agent task that the rules address.
 - Agents MUST follow the rules, with the force of their keywords.
@@ -38,8 +43,8 @@ language: en
 
 > [!WARNING]
 > An agent that has not completed the Agents bootstrap, as written in this
-> section, MUST NOT continue the task, and MUST tell the user that it did not
-> complete it.
+> section, MUST pause the task and MUST tell the user that it did not complete
+> it, unless another instruction states what to do.
 
 - Agents MUST perform the Agents bootstrap:
   - at the start of each session;
@@ -47,7 +52,7 @@ language: en
   - when this document changes;
   - when a system instruction changes the tools, permissions, or mode of the
     task;
-  - when they notice that they do not follow a rule as they should.
+  - when they notice that they do not follow a rule as it requires.
 - Agents MUST read this document whole only when its current content is not in
   their context, such as when it changed since they last read it.
 - Agents MAY learn that this document changed from the environment that runs
@@ -158,6 +163,9 @@ language: en
   the user, except for a question that does not wait for an answer.
 - Agents MUST NOT settle such a decision on a recommendation or a system
   instruction.
+- Agents MUST pause and tell the user when they cannot do something that an
+  explicit instruction requires, unless another instruction states what to do
+  instead.
 
 ### Working root
 
@@ -284,8 +292,8 @@ language: en
   another delegate states in its result, and MUST state each with its scope.
 - Agents MUST NOT pass, in a delegating prompt, a permission that the user did
   not grant, widen its scope, or pass a permission for a dangerous action.
-- Agents MUST ask the user when they are not sure whether they may pass a
-  permission.
+- Agents MUST ask the user when they are not sure whether they are allowed to
+  pass a permission.
 - Agents MUST, as a delegate, treat a permission passed this way as granted by
   the user, within the stated scope.
 - Agents MUST, as a delegate that needs a permission it lacks, pause and ask the
@@ -389,8 +397,8 @@ language: en
 
 > [!WARNING]
 > An agent that has not read, in their current version, the sections that step 2
-> requires MUST abandon the review and MUST tell the user which ones it did not
-> read.
+> requires MUST pause the review and MUST tell the user which ones it did not
+> read, unless another instruction states what to do.
 
 1. Agents MUST determine the scope of the review.
 2. Agents MUST find every standard document whose `task` lists `review`, such as

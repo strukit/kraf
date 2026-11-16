@@ -72,6 +72,8 @@ of failing candidates were applied to every change in the scope>
 - **Location**: [<file>:<line>:<column>](<link to the file at that line>)
 - **Source**: <defect | rule violation | repository tool failure |
   <name of an external skill or agent>>
+- **Original code**: <OPTIONAL, the code or category that the repository tool,
+  skill, or agent reports for the issue, e.g. `correctness`>
 - **Rule or defect**: <link to the rule that the content violates, or statement
   of the defect>
 - **Force**: <blocking finding | non-blocking recommendation | strong
@@ -91,6 +93,13 @@ of failing candidates were applied to every change in the scope>
   [review report template](#review-report---template), and each finding MUST
   follow the [finding template](#finding---template).
 - Each finding MUST be numbered in the order of the review report.
+- A finding whose source is a repository tool, or a skill or agent, MUST state,
+  in every place of the review where it appears, the code or category that the
+  tool, skill, or agent reports for it, and MAY omit the original code field
+  when the source reports none.
+- A review report MUST follow the templates of this document when it is posted,
+  and MUST NOT follow the format of the tool, skill, or agent that produced a
+  finding.
 - A finding MUST state its location as a Markdown link to the file at that line,
   relative to the root of the repository.
 - A finding posted to a pull request MUST instead link its location to the file
@@ -100,6 +109,13 @@ of failing candidates were applied to every change in the scope>
   review comment attached to the file and the line of its location, or to its
   range of lines, and MUST list in the report only the title of each finding, as
   a link to its inline comment.
+- A review posted to a pull request MUST read, before it posts a finding, every
+  review thread on the location of that finding, including resolved ones.
+- A finding whose issue an open thread already discusses MUST be posted as a
+  reply in that thread, with its justification against what the thread states.
+- A finding whose issue a resolved thread already discusses MUST be posted as a
+  new inline comment that links to that thread and justifies why its outcome
+  does not hold, and the review MUST NOT reopen the thread.
 - A review report posted to a pull request MUST use an available tool that posts
   inline review comments, when there is one, such as the review tools of the
   hosting service or its command-line client.
@@ -127,13 +143,14 @@ of failing candidates were applied to every change in the scope>
 ````
 
 ```md
-### Finding 02: A function name does not follow the external style guide
+### Finding 02: A loop skips the last element of the list
 
 - **Location**: [src/example.rs:10:8](src/example.rs#L10)
-- **Source**: example-style-skill
-- **Rule or defect**: naming recommendation of example-style-skill
+- **Source**: code-review skill
+- **Original code**: `correctness`
+- **Rule or defect**: the loop bound excludes the last index
 - **Force**: non-blocking recommendation
-- **Failure scenario**: a reader expects the name to follow the guide.
+- **Failure scenario**: a list of three items yields only the first two.
 ```
 
 ## Links
