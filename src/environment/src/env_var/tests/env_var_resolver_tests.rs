@@ -167,6 +167,29 @@ fn resolve_alias_keeps_tilde_when_home_is_missing() {
 }
 
 #[test]
+fn resolve_keeps_logname_in_sync_with_user() {
+    let env_var_mapping = EnvVarHostMapping {
+        key: "LOGNAME",
+        source: EnvVarSource::Host,
+        alias_import: &["LOGNAME", "USER"],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &["LOGNAME", "USER"],
+        fallback: None,
+    };
+    let env_var_collected = vec![EnvVar {
+        key: "USER",
+        value: Some("alex".to_string()),
+    }];
+
+    let result = resolve(&[env_var_mapping], &env_var_collected);
+    let resolved_logname = result.iter().find(|env_var| env_var.key == "LOGNAME");
+    let resolved_user = result.iter().find(|env_var| env_var.key == "USER");
+
+    assert_eq!(resolved_logname.and_then(|env_var| env_var.value.clone()), Some("alex".to_string()));
+    assert_eq!(resolved_user.and_then(|env_var| env_var.value.clone()), Some("alex".to_string()));
+}
+
+#[test]
 fn lookup_env_var_value_finds_value_by_key() {
     let env_var_collected = vec![EnvVar {
         key: "SHELL",

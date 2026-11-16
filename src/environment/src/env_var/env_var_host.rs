@@ -25,6 +25,11 @@ pub const USER_ENV_VAR: EnvVar = EnvVar {
     value: None,
 };
 
+pub const LOGNAME_ENV_VAR: EnvVar = EnvVar {
+    key: "LOGNAME",
+    value: None,
+};
+
 pub const USER_LANGUAGE_ENV_VAR: EnvVar = EnvVar {
     key: "USER_LANGUAGE",
     value: None,
@@ -143,6 +148,7 @@ pub const ENV_VAR_FROM_HOST: &[&str] = &[
     WORKDIR_ENV_VAR.key,
     PATH_ENV_VAR.key,
     USER_ENV_VAR.key,
+    LOGNAME_ENV_VAR.key,
     USER_LANGUAGE_ENV_VAR.key,
     USER_TIMEZONE_ENV_VAR.key,
     HOME_ENV_VAR.key,
