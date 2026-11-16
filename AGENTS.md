@@ -68,8 +68,8 @@ language: en
 - Agents MUST ask the user before relying on a permission that no longer fits
   the task, or that contradicts a rule, a user instruction, or another
   permission they received.
-- Agents MAY execute the [Instruction](#instruction) procedure as verification
-  of rule compliance.
+- Agents MAY execute the [Task](#task) procedure as verification of rule
+  compliance.
 - Agents MUST NOT accept user instructions for the task before they complete
   these steps.
 
@@ -363,7 +363,7 @@ language: en
   require.
 - Agents MUST NOT post the unverified and dropped candidates to a pull request.
 
-## Instruction
+## Procedures
 
 ### Task
 
