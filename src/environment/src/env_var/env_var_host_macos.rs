@@ -32,7 +32,7 @@ pub const MACOS_MAPPINGS: &[EnvVarHostMapping] = &[
     EnvVarHostMapping {
         key: USER_ENV_VAR.key,
         source: EnvVarSource::Host,
-        alias_import: &[USER_ENV_VAR.key, LOGNAME_ENV_VAR.key],
+        alias_import: &[USER_ENV_VAR.key],
         alias_import_mode: EnvVarImportMode::FirstFound,
         alias_export: &[USER_ENV_VAR.key],
         fallback: None,
@@ -42,7 +42,7 @@ pub const MACOS_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Host,
         alias_import: &[USER_ENV_VAR.key, LOGNAME_ENV_VAR.key],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[LOGNAME_ENV_VAR.key],
+        alias_export: &[USER_ENV_VAR.key],
         fallback: None,
     },
     EnvVarHostMapping {

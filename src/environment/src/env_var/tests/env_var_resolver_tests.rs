@@ -173,7 +173,7 @@ fn resolve_keeps_logname_in_sync_with_user() {
         source: EnvVarSource::Host,
         alias_import: &["USER", "LOGNAME"],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &["LOGNAME"],
+        alias_export: &["USER"],
         fallback: None,
     };
     let env_var_collected = vec![EnvVar {
@@ -202,7 +202,7 @@ fn resolve_keeps_conflicting_aliases_from_overwriting_user() {
         source: EnvVarSource::Host,
         alias_import: &["USER", "LOGNAME"],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &["LOGNAME"],
+        alias_export: &["USER"],
         fallback: None,
     };
     let env_var_collected = vec![
