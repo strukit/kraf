@@ -1,12 +1,22 @@
 {
   "language": "en",
-  "dictionaries": ["cpp", "docker", "filetypes", "go", "powershell", "softwareTerms", "computing-acronyms", "misc", "mailmap"],
+  "dictionaries": [
+    "cpp",
+    "docker",
+    "filetypes",
+    "go",
+    "powershell",
+    "softwareTerms",
+    "computing-acronyms",
+    "misc",
+    "mailmap",
+  ],
   "dictionaryDefinitions": [
     {
       "name": "mailmap",
       "path": "./.mailmap",
-      "addWords": true
-    }
+      "addWords": true,
+    },
   ],
   "ignorePaths": ["cspell.jsonc"],
   "words": [

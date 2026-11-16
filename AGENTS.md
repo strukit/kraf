@@ -52,47 +52,6 @@ terms, rules, bootstrap, and procedures that agents follow in each task.
   content, and styled as secondary, so that it does not draw attention away from
   the main content.
 
-## Agents bootstrap
-
-> [!WARNING]
-> An agent that has not completed the Agents bootstrap, as written in this
-> section, MUST pause the task and MUST tell the user that it did not complete
-> it, unless another instruction states what to do.
-
-### Rules
-
-- Agents MUST perform the Agents bootstrap:
-  - at the start of each session;
-  - when their context is compacted, summarized, or resumed;
-  - when this document changes;
-  - when a system instruction changes the tools, permissions, or mode of the
-    task;
-  - when they notice that they do not follow a rule as it requires.
-- Agents MUST read this document whole only when its current content is not in
-  their context, such as when it changed since they last read it.
-- Agents MAY learn that this document changed from the environment that runs
-  them or by other means.
-- Agents MUST reinterpret all rules of this document at each bootstrap, without
-  relying on prior interpretation.
-- Agents MUST verify that they still follow each rule of this document, and MUST
-  correct how they work for each rule they do not follow, before their next
-  operation.
-- Agents MUST read in full a linked document only when a rule of this document
-  explicitly requires them to read it and that rule applies to the task.
-- Agents MUST treat any other link as a plain reference.
-- Agents MUST identify, as a step of the bootstrap, the repository tools that
-  [TOOLS.md](./docs/TOOLS.md) declares, with the purpose of each, and MUST read
-  that document for it when its current content is not in their context.
-- Agents MUST verify, after the steps above, that the permissions they hold
-  still apply.
-- Agents MUST ask the user before relying on a permission that no longer fits
-  the task, or that contradicts a rule, a user instruction, or another
-  permission they received.
-- Agents MAY execute the [Task](#task) procedure as verification of rule
-  compliance.
-- Agents MUST NOT accept user instructions for the task before they complete
-  these steps.
-
 ## Terms
 
 - **Task**: a unit of work that the user requests. It has a beginning, when the
@@ -163,6 +122,47 @@ terms, rules, bootstrap, and procedures that agents follow in each task.
   or overwrite work that the agent did not do (e.g. a forced push, a hard reset,
   or deleting files).
 - **Delegation**: handing work to another agent, such as a subagent.
+
+## Agents bootstrap
+
+> [!WARNING]
+> An agent that has not completed the Agents bootstrap, as written in this
+> section, MUST pause the task and MUST tell the user that it did not complete
+> it, unless another instruction states what to do.
+
+### Rules
+
+- Agents MUST perform the Agents bootstrap:
+  - at the start of each session;
+  - when their context is compacted, summarized, or resumed;
+  - when this document changes;
+  - when a system instruction changes the tools, permissions, or mode of the
+    task;
+  - when they notice that they do not follow a rule as it requires.
+- Agents MUST read this document whole only when its current content is not in
+  their context, such as when it changed since they last read it.
+- Agents MAY learn that this document changed from the environment that runs
+  them or by other means.
+- Agents MUST reinterpret all rules of this document at each bootstrap, without
+  relying on prior interpretation.
+- Agents MUST verify that they still follow each rule of this document, and MUST
+  correct how they work for each rule they do not follow, before their next
+  operation.
+- Agents MUST read in full a linked document only when a rule of this document
+  explicitly requires them to read it and that rule applies to the task.
+- Agents MUST treat any other link as a plain reference.
+- Agents MUST identify, as a step of the bootstrap, the repository tools that
+  [TOOLS.md](./docs/TOOLS.md) declares, with the purpose of each, and MUST read
+  that document for it when its current content is not in their context.
+- Agents MUST verify, after the steps above, that the permissions they hold
+  still apply.
+- Agents MUST ask the user before relying on a permission that no longer fits
+  the task, or that contradicts a rule, a user instruction, or another
+  permission they received.
+- Agents MAY execute the [Task](#task) procedure as verification of rule
+  compliance.
+- Agents MUST NOT accept user instructions for the task before they complete
+  these steps.
 
 ## Rules
 

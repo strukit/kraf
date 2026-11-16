@@ -100,6 +100,9 @@ This section defines how a standard document words its rules.
   NOT state a rule.
 - A definition MUST be written as `**Term**: meaning.`, before the rules that
   use the term.
+- The rules of the `Overview` section of a standard document MAY use a term
+  before its definition, because they serve the reader as a quick instruction,
+  and this MUST be the only exception to the preceding rule.
 - An unclassifiable sentence in a standard document MUST be rewritten as a rule
   with a normative keyword or as a descriptive sentence.
 

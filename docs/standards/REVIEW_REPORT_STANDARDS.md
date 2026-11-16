@@ -42,6 +42,9 @@ follows, and how it presents its findings. What a report contains is defined in
   **[Dropped candidate](./REVIEW_STANDARDS.md#terms)**, and
   **[Force of a finding](./REVIEW_STANDARDS.md#terms)**: defined in
   [REVIEW_STANDARDS.md](./REVIEW_STANDARDS.md#terms).
+- **Reviewer block**: the YAML block that opens the
+  [review report template](#review-report---template), with the model, the
+  reasoning effort, and the agent that ran the review.
 
 ## Rules
 
@@ -50,20 +53,13 @@ follows, and how it presents its findings. What a report contains is defined in
 #### Review Report - Template
 
 ````md
-# Review report
-
-<details>
-<summary>Reviewer</summary>
-
 ```yaml
 model: <full identifier of the model: name, version, and date or revision>
-effort: <low | medium | high | xhigh | max | unknown>
+effort: <low | medium | high | extra-high | max | unknown>
 agent: <name of the harness or command-line client that ran the review>
 ```
 
-</details>
-
-<the change under review>
+# Review report
 
 ## Findings
 
@@ -103,10 +99,23 @@ of failing candidates were applied to every change in the scope>
 - A review report MUST follow the
   [review report template](#review-report---template), and each finding MUST
   follow the [finding template](#finding---template).
-- A review report MUST state, in the `Reviewer` block of the
-  [review report template](#review-report---template), the model, the reasoning
+- A review report MUST state, in its reviewer block, the model, the reasoning
   effort, and the agent that ran the review, and MUST write `unknown` for the
   effort when the agent cannot determine it.
+- A developer who uses an agent in this repository MUST accept that the review
+  reports it produces share the model, the reasoning effort, and the agent,
+  because sharing them encourages good practices and a fair environment.
+- A pull request whose review report, produced by an agent, lacks the reviewer
+  block MUST be closed.
+- The rule that requires the reviewer block MUST override the rule of
+  [Agent attribution](../../AGENTS.md#agent-attribution) that forbids a line
+  that credits an agent, a model, or the tool that runs it, and MUST override it
+  only for the reviewer block of a review report.
+- An agent that produces a review report for a pull request MUST inform the user
+  that the report shares the model, the reasoning effort, and the agent, and
+  that a pull request whose review report lacks the reviewer block is closed.
+- An agent MUST NOT omit that notice, unless the user has expressly instructed
+  it to stop giving it, and that user instruction MUST then prevail.
 - Each finding MUST be numbered in the order of the review report.
 - A finding whose source is a repository tool, or a skill or agent, MUST state,
   in every place of the review where it appears, the code or category that the

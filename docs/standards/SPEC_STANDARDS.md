@@ -44,8 +44,8 @@ documentation of a feature, not its architecture.
 
 ## Docs layout
 
-This section defines where feature documents live. The tree below shows the
-layout of a feature folder.
+This section defines where feature documents live. The tree of
+[Docs layout](#docs-layout) shows the layout of a feature folder.
 
 ```text
 <feature>/
