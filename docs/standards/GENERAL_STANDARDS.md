@@ -313,8 +313,7 @@ scope: ["type:standard", "!type:root"]
   link.
 - A link MUST be written in the form `[text](target)`, where `target` is the
   path relative to the document that contains it, for a file in the repository,
-  or the URL, for an HTTP link and `text` SHOULD be title of section or
-  document.
+  or the URL, for an HTTP link.
 - A link to an HTTP URL MUST point to the page's form for human viewing, not its
   raw-text form.
 - A link to an HTTP URL MUST use a fixed URL, whose content does not change
@@ -351,6 +350,9 @@ scope: ["type:standard", "!type:root"]
   documents.
 - Each link of a Links section MUST be followed by the `description` from the
   metadata of its target, or its equivalent field, with the same text.
+- The `text` of a link in a Links section MAY differ from the file name of its
+  target (e.g. `[STANDARDS.md](./README.md)`), and only its `description` MUST
+  match the metadata of the target.
 - A Links section MAY link to other documents. A link that appears in the
   content MAY be left out of Doc Graph
 - The closing navigation links of a document MUST be in its Links section, not

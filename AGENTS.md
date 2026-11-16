@@ -396,7 +396,10 @@ language: en
 2. Agents MUST find every standard document whose `task` lists `review`, such as
    [REVIEW_STANDARDS.md](./docs/standards/REVIEW_STANDARDS.md), and MUST read in
    full each of its sections whose `scope` matches a file in the scope of the
-   review, as [Standards](#standards) requires.
+   review, as [Standards](#standards) requires. Agents MUST keep, in their
+   session context, a list of the standard documents they found, to check that
+   they read every pertinent one, and MUST NOT put that list in the review
+   report.
 3. Agents MUST classify each change in the scope as behavior-preserving or
    behavior-changing.
 4. Agents MUST check, for each change in the scope, that its content follows the
@@ -406,7 +409,7 @@ language: en
    try to verify each remaining one against the content as written.
 6. Agents MUST report the findings and the unverified and dropped candidates as
    the standard documents found in step 2 require.
-7. Agents MUST state in the review report that they applied steps 3 to 5 to
+7. Agents MUST state in the review report that they applied steps 2 to 5 to
    every change in the scope.
 
 ## Links
