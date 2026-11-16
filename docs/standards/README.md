@@ -32,3 +32,5 @@ navigate the repository on their own through its document graph.
   intent, requirements, and acceptance scenarios.
 - [REVIEW_STANDARDS.md](./REVIEW_STANDARDS.md): Standards for what a valid
   review contains, its scope, its findings, and its report.
+- [REVIEW_REPORT_STANDARDS.md](./REVIEW_REPORT_STANDARDS.md): Standards for the
+  format of a review report, with its templates and examples.

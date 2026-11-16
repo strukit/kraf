@@ -118,105 +118,15 @@ that each finding meets, and the content of its report.
 
 ### Report
 
-#### Review Report - Template
-
-```md
-# Review report
-
-<the change under review>
-
-## Findings
-
-<finding>
-
-...
-
-<statement that the classification, the normative-language check, and the drop
-of failing candidates were applied to every change in the scope>
-
-<unverified and dropped candidates>
-```
-
-#### Finding - Template
-
-````md
-### <number>. <one-sentence statement of the issue>
-
-- **Location**: <file, line, and column>
-- **Source**: <defect | rule violation | repository tool failure |
-  <name of an external skill or agent>>
-- **Rule or defect**: <link to the rule that the content violates, or statement
-  of the defect>
-- **Force**: <blocking finding | non-blocking recommendation | strong
-  recommendation>
-- **Failure scenario**: <the content or input that leads to the wrong result>
-- **Suggestion**: <OPTIONAL, the change that fixes the finding, as a diff>
-
-```diff
-- <current content>
-+ <suggested content>
-```
-````
-
-#### Candidates - Template
-
-```text
-<file>:<line>:<column> <unverified | dropped>: <short reason>
-...
-```
-
-#### Rules
-
-- A review report MUST follow the
-  [review report template](#review-report---template), and each finding MUST
-  follow the [finding template](#finding---template).
 - A review report MUST contain every finding that meets the rules of this
   document, and only those.
 - The findings of a review report MUST NOT depend on a target number of
   findings.
 - A review of the same change under the same rules MUST yield the same findings.
-- A review report with no findings MUST replace `<finding>` with the line
-  `None.`
+- A review report MUST state, for each finding, its source and the rule or
+  defect it cites.
 - A review report MUST NOT list an unverified or a dropped candidate among its
   findings.
-- A review report MUST list its unverified and dropped candidates at its end, in
-  the [candidates template](#candidates---template), in at most five lines, for
-  the person who runs the review.
-- The unverified and dropped candidates MUST NOT be posted to a pull request.
-
-#### Examples
-
-````md
-### 1. A rule item has a sentence without a normative keyword
-
-- **Location**: docs/standards/EXAMPLE.md:42:3
-- **Source**: rule violation
-- **Rule or defect**: [Rule language](./DOC_STANDARDS.md#rule-language)
-- **Force**: blocking finding
-- **Failure scenario**: the sentence "The agent reads the file first." cannot be
-  classified as an instruction or a description.
-- **Suggestion**:
-
-```diff
-- - The agent reads the file first.
-+ - Agents MUST read the file first.
-```
-````
-
-```md
-### 2. A function name does not follow the external style guide
-
-- **Location**: src/example.rs:10:8
-- **Source**: example-style-skill
-- **Rule or defect**: naming recommendation of example-style-skill
-- **Force**: non-blocking recommendation
-- **Failure scenario**: a reader expects the name to follow the guide.
-```
-
-```text
-docs/EXAMPLE.md:12:1 unverified: could not run the tool that the finding cites
-src/example.rs:30:5 dropped: the defect predates the change
-```
 
 ## Links
 
