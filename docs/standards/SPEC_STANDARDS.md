@@ -2,7 +2,7 @@
 description: Standards for documenting feature intent, requirements, and acceptance scenarios.
 tags: [specification, requirements, acceptance, ears, documentation]
 type: ["standard"]
-scope: ["type:intent", "type:spec", "type:acceptance"]
+scope: ["module:*", "type:intent", "type:spec", "type:acceptance"]
 language: en
 ---
 

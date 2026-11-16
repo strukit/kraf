@@ -135,7 +135,7 @@ language: <language-code>
   [template](#document-metadata---template) above.
 - The metadata MUST be a valid YAML block.
 - Each item of `scope` MUST be a type written as `type:<name>`, a module written
-  as `module:<name>`, or a file pattern.
+  as `module:<name>` or `module:*`, or a file pattern.
 - A document that declares `task` MUST apply only to tasks of the kinds it
   lists, and a document that does not declare it MUST apply to a task of any
   kind.
@@ -151,6 +151,7 @@ language: <language-code>
 - A document other than an index MUST NOT list `module:<name>` in its `type`.
 - An item written as `module:<name>` MUST match every file of the module
   `<name>`.
+- An item written as `module:*` MUST match every file of every module.
 - An item written as `module:<name>` that no index declares MUST be reported as
   a defect.
 - An item that is a file pattern MUST be read as defined in
