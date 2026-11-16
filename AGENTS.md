@@ -359,8 +359,8 @@ language: en
 - Agents MUST NOT run a repository tool during a review only to check what that
   tool is expected to check on its own, such as through CI or a hook.
 - Agents MUST keep each unverified and dropped candidate, with the reason, in
-  their session context, and MUST list it only as the standards for reviews
-  require.
+  their session context, and MUST list it to the user at the end of the review,
+  outside the review report.
 - Agents MUST NOT post the unverified and dropped candidates to a pull request.
 
 ## Procedures
@@ -407,8 +407,9 @@ language: en
 5. Agents MUST collect the candidate findings, MUST drop each one that fails a
    rule of [REVIEW_STANDARDS.md](./docs/standards/REVIEW_STANDARDS.md), and MUST
    try to verify each remaining one against the content as written.
-6. Agents MUST report the findings and the unverified and dropped candidates as
-   the standard documents found in step 2 require.
+6. Agents MUST report the findings as the standard documents found in step 2
+   require, and MUST list the unverified and dropped candidates to the user,
+   outside the review report.
 7. Agents MUST state in the review report that they applied steps 2 to 5 to
    every change in the scope.
 
