@@ -258,8 +258,9 @@ language: en
 ### Standards
 
 - Agents MUST read in full, before the first operation of a task or a procedure,
-  each section of a standard document whose `scope` matches a file that the task
-  or procedure reads, creates, or changes, and MUST NOT read the other sections.
+  each section of a standard document that applies to the kind of the task, as
+  its `task` field defines, and whose `scope` matches a file that the task or
+  procedure reads, creates, or changes, and SHOULD NOT read the other sections.
 - Agents MUST do the same before the first operation on a file that the task or
   procedure comes to involve and that the standards already read do not cover.
 - Agents MUST find those standard documents through the
@@ -385,17 +386,18 @@ language: en
 
 ### Review
 
-This procedure applies when the task is a review of a change.
+- Agents MUST follow this procedure when the task is a review.
 
 > [!WARNING]
-> An agent that has not read REVIEW_STANDARDS.md in full, in its current
-> version, MUST abandon the review and MUST tell the user that it did not read
-> it.
+> An agent that has not read, in their current version, the sections that step 2
+> requires MUST abandon the review and MUST tell the user which ones it did not
+> read.
 
-1. Agents MUST read in full
-   [REVIEW_STANDARDS.md](./docs/standards/REVIEW_STANDARDS.md), in its current
-   version, before the first operation of a review.
-2. Agents MUST determine the scope of the review.
+1. Agents MUST determine the scope of the review.
+2. Agents MUST find every standard document whose `task` lists `review`, such as
+   [REVIEW_STANDARDS.md](./docs/standards/REVIEW_STANDARDS.md), and MUST read in
+   full each of its sections whose `scope` matches a file in the scope of the
+   review, as [Standards](#standards) requires.
 3. Agents MUST classify each change in the scope as behavior-preserving or
    behavior-changing.
 4. Agents MUST check, for each change in the scope, that its content follows the
@@ -426,7 +428,5 @@ This procedure applies when the task is a review of a change.
   documenting feature intent, requirements, and acceptance scenarios.
 - [TOOLS.md](./docs/TOOLS.md): Tools declared in this repository, with their
   purpose, configuration, capabilities, and version.
-- [REVIEW.md](./REVIEW.md): Entry point for reviewers, with the sections and
-  documents a review MUST read.
 - [REVIEW_STANDARDS.md](./docs/standards/REVIEW_STANDARDS.md): Standards for
   what a valid review contains, its scope, its findings, and its report.

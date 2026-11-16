@@ -1,6 +1,6 @@
 # Copilot instructions
 
 - Before any task, read in full [AGENTS.md](../AGENTS.md) and follow its rules.
-- Before a review of a change, read in full [REVIEW.md](../REVIEW.md), and every
-  document and section that it lists, and follow them. The review report MUST
-  follow the templates that REVIEW.md points to.
+- Before a review of a change, follow the Review procedure of
+  [AGENTS.md](../AGENTS.md), which requires reading the standards for reviews,
+  such as [REVIEW_STANDARDS.md](../docs/standards/REVIEW_STANDARDS.md).

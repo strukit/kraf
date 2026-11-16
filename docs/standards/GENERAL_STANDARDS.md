@@ -108,6 +108,7 @@ description: <one line description>
 tags: [<tag>, ...]
 type: [<type>, ...]
 scope: [<type:name | glob>, ...]
+task: [<kind of task>, ...] <OPTIONAL>
 language: <language-code>
 ---
 ```
@@ -117,6 +118,7 @@ language: <language-code>
 - **`type`**: one or more values that state what the document is.
 - **`scope`**: the files that the document applies to, given as types or file
   patterns.
+- **`task`**: the kinds of task that the document applies to (e.g. `review`).
 - **Section metadata**: a YAML block placed directly below a section heading
   that declares metadata for that section only.
 - **Code file**: a file that is inferred, from its extension, name, or content,
@@ -132,6 +134,11 @@ language: <language-code>
 - The metadata MUST be a valid YAML block.
 - Each item of `scope` MUST be a type written as `type:<name>`, or a file
   pattern.
+- A document that declares `task` MUST apply only to tasks of the kinds it
+  lists, and a document that does not declare it MUST apply to a task of any
+  kind.
+- Within a task that a document applies to, its `scope` MUST decide which of its
+  sections apply to the files that the task involves.
 - An item written as `type:<name>` MUST match every document whose `type` field
   lists `<name>` among its values, even when it lists other values too.
 - An item written as `type:code` MUST also match every code file, even when it

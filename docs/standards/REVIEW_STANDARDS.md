@@ -2,7 +2,8 @@
 description: Standards for what a valid review contains, its scope, its findings, and its report.
 tags: [review, code-review, findings, standards]
 type: ["standard"]
-scope: []
+scope: ["**/*"]
+task: ["review"]
 language: en
 ---
 
