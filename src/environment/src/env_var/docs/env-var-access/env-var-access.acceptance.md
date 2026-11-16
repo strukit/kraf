@@ -2,7 +2,7 @@
 description: Acceptance scenarios for how modules and plugins access environment values.
 tags: [environment, env-var, acceptance, access, security, gherkin]
 type: ["acceptance"]
-scope: ["src/environment/src/env_var/**/*"]
+scope: ["module:env-var"]
 language: en
 ---
 

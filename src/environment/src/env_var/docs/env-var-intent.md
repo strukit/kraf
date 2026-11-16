@@ -2,7 +2,7 @@
 description: Why Kraf resolves and projects environment variables through a declarative model.
 tags: [environment, env-var, intent, security, projection]
 type: ["intent"]
-scope: ["src/environment/src/env_var/**/*"]
+scope: ["module:env-var"]
 language: en
 ---
 
@@ -83,7 +83,7 @@ projection to its managed process.
 
 ## Links
 
-- [Readme](../README.md): Declarative model, resolution, and projection of
+- [README.md](../README.md): Declarative model, resolution, and projection of
   environment variables in Kraf.
 - [Declarations](./env-var-declarations/env-var-declarations.spec.md):
   Requirements for declaring environment variables.

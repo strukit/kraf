@@ -2,7 +2,7 @@
 description: Acceptance scenarios for declaring environment variables.
 tags: [environment, env-var, acceptance, declaration, gherkin]
 type: ["acceptance"]
-scope: ["src/environment/src/env_var/**/*"]
+scope: ["module:env-var"]
 language: en
 ---
 

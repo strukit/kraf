@@ -2,7 +2,7 @@
 description: Acceptance scenarios for platform-specific environment-variable mappings.
 tags: [environment, env-var, acceptance, host, platform, gherkin]
 type: ["acceptance"]
-scope: ["src/environment/src/env_var/**/*"]
+scope: ["module:env-var"]
 language: en
 ---
 

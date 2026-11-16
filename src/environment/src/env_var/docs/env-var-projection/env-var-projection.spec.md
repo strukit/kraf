@@ -2,7 +2,7 @@
 description: Requirements for projecting resolved environment variables to managed processes.
 tags: [environment, env-var, specification, spec, projection]
 type: ["spec"]
-scope: ["src/environment/src/env_var/**/*"]
+scope: ["module:env-var"]
 language: en
 ---
 
@@ -15,6 +15,8 @@ language: en
 >
 > See
 > [GENERAL_STANDARDS.md](../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
+
+</br>
 
 > [!IMPORTANT]
 > Requirements in this specification use EARS notation. **SHALL** and **SHALL

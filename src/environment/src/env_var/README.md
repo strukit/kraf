@@ -1,8 +1,8 @@
 ---
 description: Declarative model, resolution, and projection of environment variables in Kraf.
 tags: [environment, env-var, resolution, projection]
-type: ["readme", "index"]
-scope: ["src/environment/src/env_var/**/*"]
+type: ["readme", "index", "module:env-var"]
+scope: ["module:env-var"]
 language: en
 ---
 

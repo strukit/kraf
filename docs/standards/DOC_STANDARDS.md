@@ -37,7 +37,7 @@ their rules. The layout and metadata of documents follow
 does not replace.
 
 [SPEC_STANDARDS.md](./SPEC_STANDARDS.md) defines the more specific standards for
-feature intent, requirements, acceptance scenarios, and ADRs.
+feature intent, requirements, and acceptance scenarios.
 
 ## Standard documents
 

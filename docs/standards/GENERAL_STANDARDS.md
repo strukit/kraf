@@ -107,7 +107,7 @@ scope: ["**/*.md"]
 description: <one line description>
 tags: [<tag>, ...]
 type: [<type>, ...]
-scope: [<type:name | glob>, ...]
+scope: [<type:name | module:name | glob>, ...]
 task: [<kind of task>, ...] <OPTIONAL>
 language: <language-code>
 ---
@@ -116,8 +116,8 @@ language: <language-code>
 #### Terms
 
 - **`type`**: one or more values that state what the document is.
-- **`scope`**: the files that the document applies to, given as types or file
-  patterns.
+- **`scope`**: the files that the document applies to, given as types, modules,
+  or file patterns.
 - **`task`**: the kinds of task that the document applies to (e.g. `review`).
 - **Section metadata**: a YAML block placed directly below a section heading
   that declares metadata for that section only.
@@ -126,14 +126,16 @@ language: <language-code>
   an editor, version control, a linter, a formatter, a package manager, a test
   tool, a container, or CI (e.g. `lib.rs`, `Cargo.toml`, `Dockerfile`, or
   `.gitignore`).
+- **Module**: the folder of the index whose `type` lists `module:<name>`, with
+  every file in it and below it.
 
 #### Rules
 
 - Every document MUST start with metadata that follows the
   [template](#document-metadata---template) above.
 - The metadata MUST be a valid YAML block.
-- Each item of `scope` MUST be a type written as `type:<name>`, or a file
-  pattern.
+- Each item of `scope` MUST be a type written as `type:<name>`, a module written
+  as `module:<name>`, or a file pattern.
 - A document that declares `task` MUST apply only to tasks of the kinds it
   lists, and a document that does not declare it MUST apply to a task of any
   kind.
@@ -143,11 +145,19 @@ language: <language-code>
   lists `<name>` among its values, even when it lists other values too.
 - An item written as `type:code` MUST also match every code file, even when it
   has no metadata.
+- An index MAY declare a module by listing `module:<name>` in its `type`.
+- A `<name>` of a module MUST be written in lowercase kebab-case, and MUST be
+  declared by one index only.
+- A document other than an index MUST NOT list `module:<name>` in its `type`.
+- An item written as `module:<name>` MUST match every file of the module
+  `<name>`.
+- An item written as `module:<name>` that no index declares MUST be reported as
+  a defect.
 - An item that is a file pattern MUST be read as defined in
   [File patterns](#file-patterns).
-- An item that starts with `!`, followed by a type or a file pattern, MUST
-  exclude the files it matches from the files matched by the other items of the
-  same `scope`.
+- An item that starts with `!`, followed by a type, a module, or a file pattern,
+  MUST exclude the files it matches from the files matched by the other items of
+  the same `scope`.
 - Section metadata MAY be declared in any section of any document.
 - A section without section metadata MUST inherit the metadata of its nearest
   ancestor section that declares section metadata or, when none does, of its

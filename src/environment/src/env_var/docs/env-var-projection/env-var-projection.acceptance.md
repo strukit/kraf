@@ -2,7 +2,7 @@
 description: Acceptance scenarios for projecting environment variables.
 tags: [environment, env-var, acceptance, projection, gherkin]
 type: ["acceptance"]
-scope: ["src/environment/src/env_var/**/*"]
+scope: ["module:env-var"]
 language: en
 ---
 

@@ -2,7 +2,7 @@
 description: Acceptance scenarios for environment-variable resolution.
 tags: [environment, env-var, acceptance, resolution, gherkin]
 type: ["acceptance"]
-scope: ["src/environment/src/env_var/**/*"]
+scope: ["module:env-var"]
 language: en
 ---
 
