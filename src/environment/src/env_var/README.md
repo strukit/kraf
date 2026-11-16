@@ -6,15 +6,17 @@ scope: ["module:env-var"]
 language: en
 ---
 
-This module defines and resolves Kraf's declarative model for environment
-variables: their sources (host, organization, user, project, and session),
-aliases, and projections exported to Kraf-managed processes.
+# Environment Variables
 
 > **Note:** this document describes Kraf's environment-variable model, including
 > concepts and sources planned for its evolution. It does not imply that all of
 > these capabilities are already implemented.
 
 ## Overview
+
+This module defines and resolves Kraf's declarative model for environment
+variables: their sources (host, organization, user, project, and session),
+aliases, and projections exported to Kraf-managed processes.
 
 - [**Sources**](#sources): where environment-variable values, configuration, and
   restrictions come from.
