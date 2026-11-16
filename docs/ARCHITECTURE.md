@@ -15,7 +15,8 @@ language: en
 > - **Recommended:** SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED
 > - **Optional:** MAY, OPTIONAL
 >
-> See [GENERAL_STANDARDS.md](./GENERAL_STANDARDS.md#normative-language).
+> See
+> [GENERAL_STANDARDS.md](./standards/GENERAL_STANDARDS.md#normative-language).
 
 ## Overview
 
