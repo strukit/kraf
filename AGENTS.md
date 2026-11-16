@@ -8,6 +8,16 @@ language: en
 
 # Agents
 
+> [!NOTE]
+> The keywords follow RFC 2119 and RFC 8174 across three levels of force:
+>
+> - **Required:** MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT
+> - **Recommended:** SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED
+> - **Optional:** MAY, OPTIONAL
+>
+> See
+> [GENERAL_STANDARDS.md](./docs/standards/GENERAL_STANDARDS.md#normative-language).
+
 - Agents MUST treat this document as a standard document, keep it loaded, and
   apply its rules to each agent task that the rules address.
 - Agents MUST follow the rules, with the force of their keywords.
@@ -15,7 +25,7 @@ language: en
 - Agents MUST NOT override a rule on a recommendation.
 - Agents MUST NOT perform any operation — including file changes, commits, or
   other actions — without an explicit user instruction authorizing that specific
-  operation.
+  operation, unless a rule of this document requires that operation.
 - Agents MUST perform the [Agents bootstrap](#agents-bootstrap), and
   reinterpret, apply, and follow the rules of this document when a rule requires
   it, without asking the user and without a user instruction.
@@ -404,14 +414,19 @@ This procedure applies when the task is a review of a change.
 - [README.md](./README.md): What Kraf is and its vision, and the index of the
   repository's documents, modules and other files.
 - [GENERAL_STANDARDS.md](./docs/standards/GENERAL_STANDARDS.md): General
-  standards for document layout, metadata, normative language, and the document
-  graph.
+  standards for this repository, document layout and metadata, normative
+  language, the document graph, links, navigation, and language neutrality.
 - [DOC_STANDARDS.md](./docs/standards/DOC_STANDARDS.md): Standards for standard
-  documents, precedence between rules, and rule language.
+  documents: what they are, their layout, precedence between rules, and how they
+  word their rules.
 - [CODE_STANDARDS.md](./docs/standards/CODE_STANDARDS.md): Code standards for
-  dependencies, structure, platforms, tooling, and review.
+  dependencies, program structure, platforms, tooling, CI, agent configuration,
+  and review.
 - [SPEC_STANDARDS.md](./docs/standards/SPEC_STANDARDS.md): Standards for
   documenting feature intent, requirements, and acceptance scenarios.
-- [TOOLS.md](./docs/TOOLS.md): Repository tools and their purposes.
+- [TOOLS.md](./docs/TOOLS.md): Tools declared in this repository, with their
+  purpose, configuration, capabilities, and version.
+- [REVIEW.md](./REVIEW.md): Entry point for reviewers, with the sections and
+  documents a review MUST read.
 - [REVIEW_STANDARDS.md](./docs/standards/REVIEW_STANDARDS.md): Standards for
   what a valid review contains, its scope, its findings, and its report.
