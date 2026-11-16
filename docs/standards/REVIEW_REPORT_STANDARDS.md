@@ -49,8 +49,19 @@ follows, and how it presents its findings. What a report contains is defined in
 
 #### Review Report - Template
 
-```md
+````md
 # Review report
+
+<details>
+<summary>Reviewer</summary>
+
+```yaml
+model: <full identifier of the model: name, version, and date or revision>
+effort: <low | medium | high | xhigh | max | unknown>
+agent: <name of the harness or command-line client that ran the review>
+```
+
+</details>
 
 <the change under review>
 
@@ -62,7 +73,7 @@ follows, and how it presents its findings. What a report contains is defined in
 
 <statement that the classification, the normative-language check, and the drop
 of failing candidates were applied to every change in the scope>
-```
+````
 
 #### Finding - Template
 
@@ -92,6 +103,10 @@ of failing candidates were applied to every change in the scope>
 - A review report MUST follow the
   [review report template](#review-report---template), and each finding MUST
   follow the [finding template](#finding---template).
+- A review report MUST state, in the `Reviewer` block of the
+  [review report template](#review-report---template), the model, the reasoning
+  effort, and the agent that ran the review, and MUST write `unknown` for the
+  effort when the agent cannot determine it.
 - Each finding MUST be numbered in the order of the review report.
 - A finding whose source is a repository tool, or a skill or agent, MUST state,
   in every place of the review where it appears, the code or category that the
