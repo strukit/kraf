@@ -1,7 +1,7 @@
 ---
 description: Entry point for agent instructions and the rules they MUST follow.
 tags: [agents, instructions, repository, standards]
-type: [agents-standards]
+type: ["standard", "agents-standards"]
 scope: ["type:agents-standards"]
 language: en
 ---
@@ -18,10 +18,23 @@ language: en
 > See
 > [GENERAL_STANDARDS.md](./docs/standards/GENERAL_STANDARDS.md#normative-language).
 
+</br>
+
+> [!IMPORTANT]
+> This is a standard document:
+>
+> - Works like a constitution
+> - Rules and Instructions MUST be mandatory and normative
+> - Rules and Instructions MUST NOT be ignored
+>
+> See [DOC_STANDARDS.md](./docs/standards/DOC_STANDARDS.md#standard-documents).
+
 ## Overview
 
 This document is the entry point for agents in this repository. It defines the
 terms, rules, bootstrap, and procedures that agents follow in each task.
+
+### Rules
 
 - Agents MUST treat this document as a standard document, keep it loaded, and
   apply its rules to each agent task that the rules address.
@@ -45,6 +58,8 @@ terms, rules, bootstrap, and procedures that agents follow in each task.
 > An agent that has not completed the Agents bootstrap, as written in this
 > section, MUST pause the task and MUST tell the user that it did not complete
 > it, unless another instruction states what to do.
+
+### Rules
 
 - Agents MUST perform the Agents bootstrap:
   - at the start of each session;
@@ -375,6 +390,8 @@ terms, rules, bootstrap, and procedures that agents follow in each task.
 
 ### Task
 
+#### Rules
+
 1. Agents MUST identify the instructions that apply to the task and the source
    of each.
 2. Agents MUST classify each instruction as a user instruction, a rule, or a
@@ -392,6 +409,8 @@ terms, rules, bootstrap, and procedures that agents follow in each task.
    without answering.
 
 ### Review
+
+#### Rules
 
 - Agents MUST follow this procedure when the task is a review.
 
