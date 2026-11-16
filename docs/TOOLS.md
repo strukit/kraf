@@ -1,112 +1,265 @@
 ---
-title: Tools
-summary: Tools declared in this repository, with their purpose, configuration, capabilities, and version.
+description: Tools declared in this repository, with their purpose, configuration, capabilities, and version.
 tags: [tools, tooling, formatting, linting, toolchain, build]
-applies_to: [all]
+type: ["guide", "standard"]
+scope: ["**/*"]
+language: en
 ---
 
+# Tools
+
+> [!NOTE]
+> The keywords follow RFC 2119 and RFC 8174 across three levels of force:
+>
+> - **Required:** MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT
+> - **Recommended:** SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED
+> - **Optional:** MAY, OPTIONAL
+>
+> See
+> [GENERAL_STANDARDS.md](./standards/GENERAL_STANDARDS.md#normative-language).
+
+</br>
+
 > [!IMPORTANT]
-> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
-> [GENERAL_CONVENTIONS.md](./GENERAL_CONVENTIONS.md#normative-language). This
-> document MUST NOT use alternative words or lowercase variants as normative
-> keywords.
+> This is a standard document:
+>
+> - Works like a constitution
+> - Rules and Instructions MUST be mandatory and normative
+> - Rules and Instructions MUST NOT be ignored
+>
+> See [DOC_STANDARDS.md](./standards/DOC_STANDARDS.md#standard-documents).
+
+## Overview
+
+This document defines the rules for tools declared in this repository, and
+declares each tool, with its purpose, configuration, capabilities, and version.
+
+## Terms
+
+- **Check**: a run of a tool that reports problems and changes no file.
+- **Autofix**: a run of a tool that fixes, by itself, every problem that its
+  check would report, such as a formatter that rewrites the files. Its check
+  does not need to run again after it.
+- **Partial autofix**: a run of a tool that fixes most of the problems that its
+  check reports, and reports the ones it could not fix.
+- **Uncommitted files**: the files with uncommitted changes in the git working
+  tree, staged, unstaged, or untracked.
+- **Staged files**: the files whose changes are staged in git.
+- **Category**: the kind of work a tool does, declared in its `category` field
+  and used to group the [Tools](#tools) section:
+  - [**format**](#format): rewrites files to a consistent layout.
+  - [**lint**](#lint): reports problems in content, such as code, spelling, or
+    diagnostics.
+  - [**setup**](#setup): installs the toolchain and components that other tools
+    need.
+  - [**build**](#build): builds, tests, and lints code locally.
+  - [**build-container**](#build-container): builds in containers, as CI does,
+    or provides what those builds run on.
+  - [**ci**](#ci): maintains what the CI workflows use.
+
+## Rules
+
+- Agents MUST treat the changes that an autofix makes as part of the unit of
+  work, and MUST NOT report them to the user.
+- Agents MUST run the check of a tool with partial autofix in the same unit of
+  work as its fix, and MAY run it at any point after the fix.
+- Agents MUST verify, through the help of a tool, whether it can run only on the
+  uncommitted files or only on the staged files.
+- Agents SHOULD run a tool only on the uncommitted files when it can, instead of
+  naming each file that the unit of work changed.
+- Agents MAY stage files and run a tool only on the staged files when they will
+  commit only part of the changes.
+- Agents MUST make sure that each run of a tool covers the files that the unit
+  of work changed, and MAY let it cover other files with changes.
+- Agents MUST NOT run a tool on a file without changes.
+- Agents MUST update the [Tools](#tools) section in a pull request that adds or
+  removes the configuration of a tool.
+- Agents MUST NOT list in the [Tools](#tools) section a file read only by
+  editors or IDEs (e.g. `.editorconfig`), because it configures no tool an agent
+  can invoke.
 
 ## Tools
 
-Each entry states the tool's purpose and, when they apply:
+### Format
 
-- Config: the file that configures the tool.
-- Run: how an agent runs the tool, when it is not through the tool's own
-  command.
-- Capabilities: what the tool does with the content it checks.
-  - check: reports problems.
-  - autofix: fixes every problem it reports.
-  - partial autofix: fixes some of the problems it reports.
-- Version: the file that pins the tool's version.
+#### dprint
 
-### Formatting and linting
+Formats files, Rust code through rustfmt.
 
-- dprint: formats files, Rust code through rustfmt.
-  - Config: [.dprint.jsonc](../.dprint.jsonc).
-  - Capabilities: check, autofix.
-  - Version: [tools.toml](../tools.toml) pins the CLI; [.dprint.jsonc](../.dprint.jsonc)
-    pins the plugins.
-  - Download: [dprint 0.64.3 releases](https://github.com/dprint/dprint/releases/expanded_assets/0.64.3).
-  - Source: [dprint 0.64.3 on GitHub](https://github.com/dprint/dprint/tree/0.64.3).
-- rustfmt: formats Rust code (invoked by dprint).
-  - Config: [rustfmt.toml](../rustfmt.toml).
-  - Capabilities: check, autofix.
-  - Version: [rust-toolchain.toml](../rust-toolchain.toml).
-- clippy: lints Rust code (invoked by cargo and by rust-analyzer).
-  - Config: [Cargo.toml](../Cargo.toml).
-  - Capabilities: check, partial autofix.
-  - Version: [rust-toolchain.toml](../rust-toolchain.toml).
-- cspell: checks spelling.
-  - Config: [cspell.jsonc](../cspell.jsonc).
-  - Capabilities: check.
-  - Version: not pinned.
+```yaml
+name: dprint
+category: format
+version: ./tools.toml
+repository: https://github.com/dprint/dprint
+config: ./.dprint.jsonc
+files: [json, markdown, toml, rust, other]
+capabilities: [check, autofix]
+```
 
-### Language server
+#### rustfmt
 
-- rust-analyzer: provides language-server features for Rust code, such as
-  diagnostics. Its checks run `cargo lint`, an alias for clippy defined in
-  [.cargo/config.toml](../.cargo/config.toml).
-  - Config: [rust-analyzer.toml](../rust-analyzer.toml).
-  - Run: through an LSP tool, when one is available to the agent.
-  - Capabilities: check, partial autofix.
-  - Version: [rust-toolchain.toml](../rust-toolchain.toml).
+Formats Rust code, invoked by dprint.
 
-### Toolchain
+```yaml
+name: rustfmt
+category: format
+run_by: [dprint]
+config: ./rustfmt.toml
+files: [rust]
+capabilities: [check, autofix]
+version: ./rust-toolchain.toml
+```
 
-- rustup: installs the pinned Rust toolchain and its components, including
-  cargo, clippy, rustfmt, and rust-analyzer.
-  - Config: [rust-toolchain.toml](../rust-toolchain.toml).
-  - Version: [Dockerfile.linux](../Dockerfile.linux) and
-    [Dockerfile.windows](../Dockerfile.windows), for container builds.
-- Visual Studio Build Tools (Windows only): installs the VC++ Tools components
-  and the Windows SDK needed to build on Windows.
-  - Config: [.msvc.json](../.msvc.json).
-  - Version: [.msvc.json](../.msvc.json) pins the Windows SDK; the Build Tools
-    are not pinned.
+### Lint
+
+#### clippy
+
+Lints Rust code, invoked by cargo.
+
+```yaml
+name: clippy
+category: lint
+run_by: [cargo]
+config: ./Cargo.toml
+files: [rust]
+capabilities: [check, partial-autofix]
+version: ./rust-toolchain.toml
+```
+
+#### cspell
+
+Checks spelling.
+
+```yaml
+name: cspell
+category: lint
+config: ./cspell.jsonc
+files: [any]
+capabilities: [check]
+version: not-pinned
+```
+
+#### rust-analyzer
+
+Provides language-server features for Rust code, such as diagnostics.
+
+```yaml
+name: rust-analyzer
+category: lint
+config: ./rust-analyzer.toml
+files: [rust]
+capabilities: [check, partial-autofix]
+version: ./rust-toolchain.toml
+```
+
+### Setup
+
+#### rustup
+
+Installs the pinned Rust toolchain and its components, including cargo, clippy,
+rustfmt, and rust-analyzer.
+
+```yaml
+name: rustup
+category: setup
+config: ./rust-toolchain.toml
+version: [./Dockerfile.linux, ./Dockerfile.windows]
+```
+
+#### Visual Studio Build Tools
+
+Installs, on Windows only, the VC++ Tools components and the Windows SDK needed
+to build.
+
+```yaml
+name: Visual Studio Build Tools
+category: setup
+config: ./.msvc.json
+version: ./.msvc.json
+```
 
 ### Build
 
-- cargo: builds, tests, and lints Rust code, the latter through clippy. Used for
-  everyday builds.
-  - Config: [.cargo/config.toml](../.cargo/config.toml).
-  - Version: [rust-toolchain.toml](../rust-toolchain.toml).
-- Docker Buildx (Bake): builds release artifacts in containers, as CI does, for
-  a clean, containerized build, on the BuildKit daemon that Docker Compose
-  starts. Bake is the Buildx subcommand that reads the build definition.
-  - Config: [docker-bake.hcl](../docker-bake.hcl).
-  - Version: [tools.toml](../tools.toml).
-  - Download: [Buildx v0.39.0 releases](https://github.com/docker/buildx/releases/expanded_assets/v0.39.0).
-  - Source: [Buildx v0.39.0 on GitHub](https://github.com/docker/buildx/tree/v0.39.0).
-- Docker Compose: starts the BuildKit daemon service, in CI and locally.
-  - Config: [compose.yaml](../compose.yaml).
-  - Version: [tools.toml](../tools.toml) pins Docker Compose.
-  - Download: [Compose v5.7.1 releases](https://github.com/docker/compose/releases/expanded_assets/v5.7.1).
-  - Source: [Compose v5.7.1 on GitHub](https://github.com/docker/compose/tree/v5.7.1).
-- BuildKit: provides the daemon that Docker Buildx uses as a remote builder.
-  - Config: [compose.yaml](../compose.yaml).
-  - Version: [tools.toml](../tools.toml) pins the image selected by [compose.yaml](../compose.yaml).
-  - Download: [BuildKit v0.35.0 image](https://hub.docker.com/r/moby/buildkit/tags?name=v0.35.0).
-  - Source: [BuildKit v0.35.0 on GitHub](https://github.com/moby/buildkit/tree/v0.35.0).
-- Dockerfile frontend: provides the Dockerfile syntax used by Bake.
-  - Config: [docker-bake.hcl](../docker-bake.hcl).
-  - Version: [tools.toml](../tools.toml).
-  - Download: [Dockerfile frontend 1.29.0 image](https://hub.docker.com/r/docker/dockerfile-upstream/tags?name=1.29.0).
-  - Source: [Dockerfile frontend 1.29.0 in BuildKit](https://github.com/moby/buildkit/tree/dockerfile/1.29.0/frontend/dockerfile).
+#### cargo
+
+Builds, tests, and lints Rust code, the latter through clippy.
+
+```yaml
+name: cargo
+category: build
+config: ./.cargo/config.toml
+files: [rust]
+capabilities: [check]
+version: ./rust-toolchain.toml
+```
+
+### Build container
+
+#### Docker Bake
+
+Builds release artifacts in containers, as CI does.
+
+```yaml
+name: Docker Bake
+category: build-container
+version: ./.github/actions/bake/action.yml
+repository: https://github.com/docker/buildx
+config: ./docker-bake.hcl
+capabilities: [check, build]
+```
+
+#### Docker Compose
+
+Starts the BuildKit daemon service, in CI and locally.
+
+```yaml
+name: Docker Compose
+category: build-container
+version: ./tools.toml
+repository: https://github.com/docker/compose
+config: ./compose.yaml
+```
+
+#### BuildKit
+
+Provides the daemon that Docker Bake uses as a remote builder.
+
+```yaml
+name: BuildKit
+category: build-container
+version: ./compose.yaml
+repository: https://github.com/moby/buildkit
+config: ./compose.yaml
+```
+
+#### Dockerfile frontend
+
+Provides the Dockerfile syntax that Docker Bake uses.
+
+```yaml
+name: Dockerfile frontend
+category: build-container
+version: ./docker-bake.hcl
+repository: https://github.com/moby/buildkit
+config: ./docker-bake.hcl
+```
 
 ### CI
 
-- gh actions-lock: locks the GitHub Actions that the workflows use to their
-  commits.
-  - Config: [actions.lock](../.github/workflows/actions.lock).
-  - Version: [tools.toml](../tools.toml).
+#### gh actions-lock
 
-## Related
+Locks the GitHub Actions that the workflows use to their commits.
 
-- [README.md](../README.md): what Kraf is.
-- [AGENTS.md](../AGENTS.md): how agents use the tools declared here.
+```yaml
+name: gh actions-lock
+category: ci
+version: ./tools.toml
+config: ./.github/workflows/actions.lock
+```
+
+## Links
+
+- [README.md](../README.md): What Kraf is and its vision, and the index of the
+  repository's documents, modules and other files.
+- [AGENTS.md](../AGENTS.md): Entry point for agent instructions and the rules
+  they MUST follow.

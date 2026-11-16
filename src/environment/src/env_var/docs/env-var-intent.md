@@ -1,7 +1,9 @@
 ---
-title: Environment variables intent
-summary: Why Kraf resolves and projects environment variables through a declarative model.
+description: Why Kraf resolves and projects environment variables through a declarative model.
 tags: [environment, env-var, intent, security, projection]
+type: ["intent"]
+scope: ["module:env-var"]
+language: en
 ---
 
 ## Problem
@@ -79,15 +81,17 @@ Session creation and process launch belong to the trap module. The trap provides
 session-owned values, requests a resolved projection, and applies that
 projection to its managed process.
 
-## Documentation
+## Links
 
-- [Readme](../README.md): Module overview.
+- [README.md](../README.md): Declarative model, resolution, and projection of
+  environment variables in Kraf.
 - [Declarations](./env-var-declarations/env-var-declarations.spec.md):
-  Declarations Specification.
-- [Resolution](./env-var-resolution/env-var-resolution.spec.md): Resolution
-  Specification.
-- [Projection](./env-var-projection/env-var-projection.spec.md): Projection
-  Specification.
-- [Host mappings](./env-var-host/env-var-host.spec.md): Host mappings
-  Specification.
-- [Access](./env-var-access/env-var-access.spec.md): Access Specification.
+  Requirements for declaring environment variables.
+- [Resolution](./env-var-resolution/env-var-resolution.spec.md): Requirements
+  for resolving declared environment variables.
+- [Projection](./env-var-projection/env-var-projection.spec.md): Requirements
+  for projecting resolved environment variables to managed processes.
+- [Host](./env-var-host/env-var-host.spec.md): Requirements for
+  platform-specific environment-variable mappings.
+- [Access](./env-var-access/env-var-access.spec.md): Requirements for how
+  modules and plugins access resolved environment values.

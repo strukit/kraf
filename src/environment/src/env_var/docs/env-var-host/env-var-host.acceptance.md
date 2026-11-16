@@ -1,15 +1,20 @@
 ---
-title: Environment variables host mappings - Acceptance
-summary: Acceptance scenarios for platform-specific environment-variable mappings.
+description: Acceptance scenarios for platform-specific environment-variable mappings.
 tags: [environment, env-var, acceptance, host, platform, gherkin]
+type: ["acceptance"]
+scope: ["module:env-var"]
+language: en
 ---
 
-> [!IMPORTANT]
-> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
-> [GENERAL_CONVENTIONS.md](../../../../../../docs/GENERAL_CONVENTIONS.md#normative-language).
-> This document MUST NOT use alternative words or lowercase variants as
-> normative keywords.
+> [!NOTE]
+> The keywords follow RFC 2119 and RFC 8174 across three levels of force:
+>
+> - **Required:** MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT
+> - **Recommended:** SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED
+> - **Optional:** MAY, OPTIONAL
+>
+> See
+> [GENERAL_STANDARDS.md](../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
 
 ## ENV-VAR_HOST-ACC-0001
 
@@ -112,3 +117,10 @@ Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
       When the mapping declares WORKDIR or a HOME family key
       Then the declaration source is provided
 ```
+
+## Links
+
+- [Specification](./env-var-host.spec.md): Requirements for platform-specific
+  environment-variable mappings.
+- [README.md](../../README.md): Declarative model, resolution, and projection of
+  environment variables in Kraf.

@@ -1,8 +1,22 @@
 ---
-title: Environment variables host mappings - SPEC
-summary: Requirements for platform-specific environment-variable mappings.
+description: Requirements for platform-specific environment-variable mappings.
 tags: [environment, env-var, specification, spec, host, platform]
+type: ["spec"]
+scope: ["module:env-var"]
+language: en
 ---
+
+> [!NOTE]
+> The keywords follow RFC 2119 and RFC 8174 across three levels of force:
+>
+> - **Required:** MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT
+> - **Recommended:** SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED
+> - **Optional:** MAY, OPTIONAL
+>
+> See
+> [GENERAL_STANDARDS.md](../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
+
+</br>
 
 > [!IMPORTANT]
 > Requirements in this specification use EARS notation. **SHALL** and **SHALL
@@ -55,3 +69,12 @@ Name: Session-owned directory sources
 THE SOFTWARE SHALL resolve the WORKDIR and HOME declaration families from
 provided values rather than from values imported from the host.
 ```
+
+## Links
+
+- [Intent](../env-var-intent.md): Why Kraf resolves and projects environment
+  variables through a declarative model.
+- [Acceptance](./env-var-host.acceptance.md): Acceptance scenarios for
+  platform-specific environment-variable mappings.
+- [README.md](../../README.md): Declarative model, resolution, and projection of
+  environment variables in Kraf.

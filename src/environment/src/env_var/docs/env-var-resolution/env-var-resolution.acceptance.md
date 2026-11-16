@@ -1,15 +1,20 @@
 ---
-title: Environment variables resolution - Acceptance
-summary: Acceptance scenarios for environment-variable resolution.
+description: Acceptance scenarios for environment-variable resolution.
 tags: [environment, env-var, acceptance, resolution, gherkin]
+type: ["acceptance"]
+scope: ["module:env-var"]
+language: en
 ---
 
-> [!IMPORTANT]
-> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
-> [GENERAL_CONVENTIONS.md](../../../../../../docs/GENERAL_CONVENTIONS.md#normative-language).
-> This document MUST NOT use alternative words or lowercase variants as
-> normative keywords.
+> [!NOTE]
+> The keywords follow RFC 2119 and RFC 8174 across three levels of force:
+>
+> - **Required:** MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT
+> - **Recommended:** SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED
+> - **Optional:** MAY, OPTIONAL
+>
+> See
+> [GENERAL_STANDARDS.md](../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
 
 ## ENV-VAR_RESOLUTION-ACC-0001
 
@@ -692,3 +697,10 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
       When the software collects import dependencies
       Then the collected import keys are "EDITOR" and "SHELL" in that order
 ```
+
+## Links
+
+- [Specification](./env-var-resolution.spec.md): Requirements for resolving
+  declared environment variables.
+- [README.md](../../README.md): Declarative model, resolution, and projection of
+  environment variables in Kraf.

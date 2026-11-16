@@ -1,15 +1,20 @@
 ---
-title: Environment variables projection - Acceptance
-summary: Acceptance scenarios for projecting environment variables.
+description: Acceptance scenarios for projecting environment variables.
 tags: [environment, env-var, acceptance, projection, gherkin]
+type: ["acceptance"]
+scope: ["module:env-var"]
+language: en
 ---
 
-> [!IMPORTANT]
-> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
-> [GENERAL_CONVENTIONS.md](../../../../../../docs/GENERAL_CONVENTIONS.md#normative-language).
-> This document MUST NOT use alternative words or lowercase variants as
-> normative keywords.
+> [!NOTE]
+> The keywords follow RFC 2119 and RFC 8174 across three levels of force:
+>
+> - **Required:** MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT
+> - **Recommended:** SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED
+> - **Optional:** MAY, OPTIONAL
+>
+> See
+> [GENERAL_STANDARDS.md](../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
 
 ## ENV-VAR_PROJECTION-ACC-0001
 
@@ -89,3 +94,10 @@ Feature: ENV-VAR_PROJECTION-FEAT-0001 — Environment variable projection
       When the software resolves the declaration
       Then "TMPDIR" resolves to "/workspace/.tmp"
 ```
+
+## Links
+
+- [Specification](./env-var-projection.spec.md): Requirements for projecting
+  resolved environment variables to managed processes.
+- [README.md](../../README.md): Declarative model, resolution, and projection of
+  environment variables in Kraf.

@@ -1,15 +1,20 @@
 ---
-title: Environment variables access - Acceptance
-summary: Acceptance scenarios for how modules and plugins access environment values.
+description: Acceptance scenarios for how modules and plugins access environment values.
 tags: [environment, env-var, acceptance, access, security, gherkin]
+type: ["acceptance"]
+scope: ["module:env-var"]
+language: en
 ---
 
-> [!IMPORTANT]
-> The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
-> [GENERAL_CONVENTIONS.md](../../../../../../docs/GENERAL_CONVENTIONS.md#normative-language).
-> This document MUST NOT use alternative words or lowercase variants as
-> normative keywords.
+> [!NOTE]
+> The keywords follow RFC 2119 and RFC 8174 across three levels of force:
+>
+> - **Required:** MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT
+> - **Recommended:** SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED
+> - **Optional:** MAY, OPTIONAL
+>
+> See
+> [GENERAL_STANDARDS.md](../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
 
 ## ENV-VAR_ACCESS-ACC-0001
 
@@ -88,3 +93,10 @@ Feature: ENV-VAR_ACCESS-FEAT-0001 — Environment variable access
       When the plugin requests the value of "EXAMPLE_KEY"
       Then the software provides the resolved value
 ```
+
+## Links
+
+- [Specification](./env-var-access.spec.md): Requirements for how modules and
+  plugins access resolved environment values.
+- [README.md](../../README.md): Declarative model, resolution, and projection of
+  environment variables in Kraf.
