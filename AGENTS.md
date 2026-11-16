@@ -25,7 +25,7 @@ language: en
 - Agents MUST NOT override a rule on a recommendation.
 - Agents MUST NOT perform any operation — including file changes, commits, or
   other actions — without an explicit user instruction authorizing that specific
-  operation, unless a rule of this document requires that operation.
+  operation, unless a rule of this document requires or permits that operation.
 - Agents MUST perform the [Agents bootstrap](#agents-bootstrap), and
   reinterpret, apply, and follow the rules of this document when a rule requires
   it, without asking the user and without a user instruction.
