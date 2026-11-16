@@ -51,8 +51,6 @@ toolchains a project already uses rather than replacing them.
 
 - [AGENTS.md](./AGENTS.md): Entry point for agent instructions and the rules
   they MUST follow.
-- [REVIEW.md](./docs/REVIEW.md): Rules for reviewing a change, its scope,
-  classification, findings, checklist, and report.
 - [Standards Index](./docs/standards/README.md): Index of the standards that
   govern this repository, to help people and agents navigate it on their own
   through the document graph.

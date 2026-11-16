@@ -22,7 +22,7 @@ version = "./rust-toolchain.toml"
 [linter.clippy]
 name = "clippy"
 category = "lint"
-run_by = ["cargo", "rust-analyzer"]
+run_by = ["cargo"]
 config = "./Cargo.toml"
 files = ["rust"]
 capabilities = ["check", "partial-autofix"]

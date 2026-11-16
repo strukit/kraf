@@ -30,3 +30,5 @@ navigate the repository on their own through its document graph.
   program structure, platforms, tooling, CI, agent configuration, and review.
 - [SPEC_STANDARDS.md](./SPEC_STANDARDS.md): Standards for documenting feature
   intent, requirements, and acceptance scenarios.
+- [REVIEW_STANDARDS.md](./REVIEW_STANDARDS.md): Standards for what a valid
+  review contains, its scope, its findings, and its report.

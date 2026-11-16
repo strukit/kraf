@@ -26,6 +26,11 @@ language: en
 
 ## Agents bootstrap
 
+> [!WARNING]
+> An agent that has not completed the Agents bootstrap, as written in this
+> section, MUST NOT continue the task, and MUST tell the user that it did not
+> complete it.
+
 - Agents MUST perform the Agents bootstrap:
   - at the start of each session;
   - when their context is compacted, summarized, or resumed;
@@ -45,6 +50,9 @@ language: en
 - Agents MUST read in full a linked document only when a rule of this document
   explicitly requires them to read it and that rule applies to the task.
 - Agents MUST treat any other link as a plain reference.
+- Agents MUST identify, as a step of the bootstrap, the repository tools that
+  [TOOLS.md](./docs/TOOLS.md) declares, with the purpose of each, and MUST read
+  that document for it when its current content is not in their context.
 - Agents MUST verify, after the steps above, that the permissions they hold
   still apply.
 - Agents MUST ask the user before relying on a permission that no longer fits
@@ -65,6 +73,11 @@ language: en
   such as locating a section of a file and reading its content. A later step
   that uses a result already obtained, such as reading lines whose numbers the
   agent already knows, is a new operation.
+- **Unit of work**: a part of the task that ends when the agent moves on to the
+  next step, reports to the user, completes a set of instructions, or completes
+  a step of a plan. It can change files in several places, so running tools can
+  wait until it ends. A single change to a file, a read, or a script run that
+  does not complete such a part is not a unit of work.
 - **Session**: the run of an agent from its start until it ends or its context
   is reset, such as by a restart or by a summary that replaces the context.
 - **Working root**: the directory in which the task runs, such as a repository
@@ -211,8 +224,8 @@ language: en
 - Agents MUST use the repository tools for the purpose that the repository
   declares for each.
 - Agents MUST read [TOOLS.md](./docs/TOOLS.md), where this repository declares
-  its tools, at the beginning of each session and again whenever it changes, and
-  MUST keep its content in context as the reference for the repository tools.
+  its tools, during the Agents bootstrap and again whenever it changes, and MUST
+  keep its content in context as the reference for the repository tools.
 - Agents MUST include the repository tools when they search the available tools.
 - Agents MUST count the invocation of a repository tool that invokes another as
   using both.
@@ -221,11 +234,13 @@ language: en
 - Agents MUST read the help of a repository tool, such as through its `--help`
   option, before its first invocation in a session, and MUST invoke it as its
   help states.
-- Agents MUST run each repository tool that applies to the files that the task
-  changed when they finish the work that the task requests, before reporting it:
+- Agents MUST run each repository tool that applies to the files that a unit of
+  work changed when they finish that unit of work, and MUST NOT run it at a
+  point that does not end a unit of work:
   - Agents MUST run the fix of a tool with autofix, and SHOULD NOT run its check
     after it.
   - Agents MUST run the fix of a tool with partial autofix, then run its check,
+    which they MAY run at any point after the fix within the same unit of work,
     fix each remaining problem, and run the check again until none remains.
   - Agents MUST run the check of any other tool, fix each reported problem, and
     run the check again until none remains.
@@ -322,6 +337,22 @@ language: en
   [DOC_STANDARDS.md](./docs/standards/DOC_STANDARDS.md#rule-language), where
   each rule item MUST use a normative keyword in each sentence.
 
+### Review
+
+- Agents MUST apply the rules of
+  [REVIEW_STANDARDS.md](./docs/standards/REVIEW_STANDARDS.md) literally, as
+  written, when they review a change, and MUST NOT extend a rule beyond its
+  text, narrow it, or replace it with their own reading of its intent.
+- Agents MAY run a repository tool during a review when they have a plausible
+  reason, such as verifying a finding.
+- Agents MUST NOT run a repository tool during a review only to check what that
+  tool is expected to check on its own, such as through CI or a hook.
+- Agents MUST keep each unverified and dropped candidate, with the reason, in
+  their session context, and MUST list it only as the
+  [Report](./docs/standards/REVIEW_STANDARDS.md#report) section of
+  REVIEW_STANDARDS.md requires.
+- Agents MUST NOT post the unverified and dropped candidates to a pull request.
+
 ## Instruction
 
 ### Task
@@ -342,6 +373,32 @@ language: en
 9. Agents MUST treat the previous task as continuing when the user moves on
    without answering.
 
+### Review
+
+This procedure applies when the task is a review of a change.
+
+> [!WARNING]
+> An agent that has not read REVIEW_STANDARDS.md in full, in its current
+> version, MUST abandon the review and MUST tell the user that it did not read
+> it.
+
+1. Agents MUST read in full
+   [REVIEW_STANDARDS.md](./docs/standards/REVIEW_STANDARDS.md), in its current
+   version, before the first operation of a review.
+2. Agents MUST determine the scope of the review.
+3. Agents MUST classify each change in the scope as behavior-preserving or
+   behavior-changing.
+4. Agents MUST check, for each change in the scope, that its content follows the
+   normative-language rules that apply to its document.
+5. Agents MUST collect the candidate findings, MUST drop each one that fails a
+   rule of [REVIEW_STANDARDS.md](./docs/standards/REVIEW_STANDARDS.md), and MUST
+   try to verify each remaining one against the content as written.
+6. Agents MUST report the findings and the unverified and dropped candidates as
+   the [Report](./docs/standards/REVIEW_STANDARDS.md#report) section of that
+   document requires.
+7. Agents MUST state in the review report that they applied steps 3 to 5 to
+   every change in the scope.
+
 ## Links
 
 - [README.md](./README.md): What Kraf is and its vision, and the index of the
@@ -356,4 +413,5 @@ language: en
 - [SPEC_STANDARDS.md](./docs/standards/SPEC_STANDARDS.md): Standards for
   documenting feature intent, requirements, and acceptance scenarios.
 - [TOOLS.md](./docs/TOOLS.md): Repository tools and their purposes.
-- [REVIEW.md](./docs/REVIEW.md): Review instructions that agents must follow.
+- [REVIEW_STANDARDS.md](./docs/standards/REVIEW_STANDARDS.md): Standards for
+  what a valid review contains, its scope, its findings, and its report.

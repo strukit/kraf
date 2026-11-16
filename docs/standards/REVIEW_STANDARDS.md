@@ -2,7 +2,7 @@
 description: Standards for what a valid review contains, its scope, its findings, and its report.
 tags: [review, code-review, findings, standards]
 type: ["standard"]
-scope: ["**/*"]
+scope: []
 language: en
 ---
 
@@ -46,7 +46,22 @@ that each finding meets, and the content of its report.
 - **Rule violation**: content that does not follow a rule that applies to it.
 - **Scope of a review**: the change under review, the references to anything it
   renames, and, for a behavior-changing change, the content that depends on it.
-- **Finding**: an issue that a review report states.
+- **Finding**: an issue that a review report states, whose source the review
+  confirmed against the content as written.
+- **Unverified candidate**: a candidate finding that meets the rules of
+  [Scope](#scope) and [Findings](#findings), except that the review did not
+  confirm whether its source applies, because it could not or did not verify it.
+- **Dropped candidate**: a candidate finding that the review confirmed does not
+  meet a rule of [Scope](#scope) or [Findings](#findings).
+- **Force of a finding**: whether a finding blocks the change: a blocking
+  finding, a non-blocking recommendation, or a strong recommendation.
+- **Blocking finding**: a finding that blocks the change until it is fixed.
+- **Non-blocking recommendation**: a finding whose source is a skill or agent
+  defined outside this repository, and that does not block the change.
+- **Strong recommendation**: a finding whose source is a skill or agent defined
+  outside this repository that declares it blocking or declares that it MUST be
+  fixed. It can block the change until the team or the human reviewers evaluate
+  it.
 - **Source of a finding**: what a finding cites: a defect, a rule violation, a
   failure of a repository tool, or a skill or agent defined outside this
   repository.
@@ -90,25 +105,117 @@ that each finding meets, and the content of its report.
   that tool reached the review (e.g. from CI, from a run the user requests, or
   from a run made during the review).
 - A finding MUST NOT repeat another finding.
-- A finding MUST be blocking when its source is a defect, a rule violation, or a
-  failure of a repository tool.
+- A finding MUST be a blocking finding when its source is a defect, a rule
+  violation, or a failure of a repository tool.
 - A finding whose source is a skill or agent defined outside this repository
-  MUST be a non-blocking recommendation. When that skill or agent declares it
-  blocking, or declares that it MUST be fixed, the finding MUST be a strong
-  recommendation that names the skill or agent.
+  MUST meet the other rules of this document, and, when it meets them, MUST be
+  reported.
+- Such a finding MUST be a non-blocking recommendation, unless it is a strong
+  recommendation, which MUST name the skill or agent.
+- A strong recommendation MAY block the change, and the team or the human
+  reviewers of the change MUST then decide whether it stands.
 
 ### Report
 
+#### Review Report - Template
+
+```md
+# Review report
+
+<the change under review>
+
+## Findings
+
+<finding>
+
+...
+
+<statement that the classification, the normative-language check, and the drop
+of failing candidates were applied to every change in the scope>
+
+<unverified and dropped candidates>
+```
+
+#### Finding - Template
+
+````md
+### <number>. <one-sentence statement of the issue>
+
+- **Location**: <file, line, and column>
+- **Source**: <defect | rule violation | repository tool failure |
+  <name of an external skill or agent>>
+- **Rule or defect**: <link to the rule that the content violates, or statement
+  of the defect>
+- **Force**: <blocking finding | non-blocking recommendation | strong
+  recommendation>
+- **Failure scenario**: <the content or input that leads to the wrong result>
+- **Suggestion**: <OPTIONAL, the change that fixes the finding, as a diff>
+
+```diff
+- <current content>
++ <suggested content>
+```
+````
+
+#### Candidates - Template
+
+```text
+<file>:<line>:<column> <unverified | dropped>: <short reason>
+...
+```
+
+#### Rules
+
+- A review report MUST follow the
+  [review report template](#review-report---template), and each finding MUST
+  follow the [finding template](#finding---template).
 - A review report MUST contain every finding that meets the rules of this
   document, and only those.
 - The findings of a review report MUST NOT depend on a target number of
   findings.
 - A review of the same change under the same rules MUST yield the same findings.
-- A review report MUST state, for each finding, its source and the rule or
-  defect it cites.
-- A review report MUST NOT list a candidate finding that fails the rules of this
-  document.
-- A review report with no findings MUST state that it has none.
+- A review report with no findings MUST replace `<finding>` with the line
+  `None.`
+- A review report MUST NOT list an unverified or a dropped candidate among its
+  findings.
+- A review report MUST list its unverified and dropped candidates at its end, in
+  the [candidates template](#candidates---template), in at most five lines, for
+  the person who runs the review.
+- The unverified and dropped candidates MUST NOT be posted to a pull request.
+
+#### Examples
+
+````md
+### 1. A rule item has a sentence without a normative keyword
+
+- **Location**: docs/standards/EXAMPLE.md:42:3
+- **Source**: rule violation
+- **Rule or defect**: [Rule language](./DOC_STANDARDS.md#rule-language)
+- **Force**: blocking finding
+- **Failure scenario**: the sentence "The agent reads the file first." cannot be
+  classified as an instruction or a description.
+- **Suggestion**:
+
+```diff
+- - The agent reads the file first.
++ - Agents MUST read the file first.
+```
+````
+
+```md
+### 2. A function name does not follow the external style guide
+
+- **Location**: src/example.rs:10:8
+- **Source**: example-style-skill
+- **Rule or defect**: naming recommendation of example-style-skill
+- **Force**: non-blocking recommendation
+- **Failure scenario**: a reader expects the name to follow the guide.
+```
+
+```text
+docs/EXAMPLE.md:12:1 unverified: could not run the tool that the finding cites
+src/example.rs:30:5 dropped: the defect predates the change
+```
 
 ## Links
 
