@@ -142,3 +142,5 @@ that each finding meets, and the content of its report.
   rules.
 - [SPEC_STANDARDS.md](./SPEC_STANDARDS.md): Standards for documenting feature
   intent, requirements, and acceptance scenarios.
+- [REVIEW_REPORT_STANDARDS.md](./REVIEW_REPORT_STANDARDS.md): Standards for the
+  format of a review report, with its templates and examples.

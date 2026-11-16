@@ -104,8 +104,7 @@ No document is reachable only by knowing its file path.
 
 Feature documents MUST use the relationship sections defined by their type.
 Repo-level documents follow the
-[Docs graph](../standards/GENERAL_STANDARDS.md#link-navigation-document-graph)
-rule.
+[Docs graph](../standards/GENERAL_STANDARDS.md#link-navigation) rule.
 
 ## Docs types
 

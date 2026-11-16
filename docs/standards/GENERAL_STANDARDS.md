@@ -185,15 +185,15 @@ Normative keywords express three levels of force:
 
 - **Standard document**: a document whose `type` lists `standard`. See
   [Standard documents](./DOC_STANDARDS.md#standard-documents).
-- **[Normative keyword](../AGENTS.md#terms)**: defined in
-  [AGENTS.md](../AGENTS.md#terms).
+- **[Normative keyword](../../AGENTS.md#terms)**: defined in
+  [AGENTS.md](../../AGENTS.md#terms).
 - **Normative-language note**: the note that states that the normative keywords
   follow RFC 2119 and RFC 8174. It follows the
   [note template](#normative-language-note---template).
-- **[Explicit instruction](../AGENTS.md#terms)**: defined in
-  [AGENTS.md](../AGENTS.md#terms).
-- **[Implicit instruction](../AGENTS.md#terms)**: defined in
-  [AGENTS.md](../AGENTS.md#terms).
+- **[Explicit instruction](../../AGENTS.md#terms)**: defined in
+  [AGENTS.md](../../AGENTS.md#terms).
+- **[Implicit instruction](../../AGENTS.md#terms)**: defined in
+  [AGENTS.md](../../AGENTS.md#terms).
 - **Example**: an illustration of an idea that is explicitly marked as one. It
   is marked by any of these forms: a part of a sentence in parentheses that
   begins with `e.g.`; an item or paragraph under a heading titled `Example` or

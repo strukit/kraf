@@ -428,3 +428,5 @@ language: en
   purpose, configuration, capabilities, and version.
 - [REVIEW_STANDARDS.md](./docs/standards/REVIEW_STANDARDS.md): Standards for
   what a valid review contains, its scope, its findings, and its report.
+- [REVIEW_REPORT_STANDARDS.md](./docs/standards/REVIEW_REPORT_STANDARDS.md):
+  Standards for the format of a review report, with its templates and examples.
