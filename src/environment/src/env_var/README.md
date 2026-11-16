@@ -1,15 +1,10 @@
 ---
-title: Environment variables
-summary: Declarative model, resolution, and projection of environment variables in Kraf.
+description: Declarative model, resolution, and projection of environment variables in Kraf.
 tags: [environment, env-var, resolution, projection]
+type: ["readme", "index"]
+scope: ["src/environment/src/env_var/**/*"]
+language: en
 ---
-
-> [!IMPORTANT]
-> The keywords MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
-> RECOMMENDED, MAY, and OPTIONAL follow RFC 2119 and RFC 8174, as defined in
-> [GENERAL_CONVENTIONS.md](../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
-> This document MUST NOT use alternative words or lowercase variants as
-> normative keywords.
 
 This module defines and resolves Kraf's declarative model for environment
 variables: their sources (host, organization, user, project, and session),
@@ -70,18 +65,30 @@ process.
 A declaration can produce one internal canonical key and zero or more export
 keys. Not every resolved value is projected to a child process.
 
-## Documentation
+## Links
 
-- [Intent](./docs/env-var-intent.md): purpose, boundaries, and evolution of this
-  module.
-- [Declarations](./docs/env-var-declarations/env-var-declarations.spec.md):
-  declaration requirements and acceptance scenarios.
-- [Resolution](./docs/env-var-resolution/env-var-resolution.spec.md): resolution
-  requirements and acceptance scenarios.
-- [Projection](./docs/env-var-projection/env-var-projection.spec.md): projection
-  requirements and acceptance scenarios.
-- [Host mappings](./docs/env-var-host/env-var-host.spec.md): platform mapping
-  requirements and acceptance scenarios.
-- [Access](./docs/env-var-access/env-var-access.spec.md): access requirements
-  and acceptance scenarios.
-- [README.md](../../../../README.md): what Kraf is.
+- [Intent](./docs/env-var-intent.md): Why Kraf resolves and projects environment
+  variables through a declarative model.
+- [Declarations specification](./docs/env-var-declarations/env-var-declarations.spec.md):
+  Requirements for declaring environment variables.
+- [Declarations acceptance](./docs/env-var-declarations/env-var-declarations.acceptance.md):
+  Acceptance scenarios for declaring environment variables.
+- [Resolution specification](./docs/env-var-resolution/env-var-resolution.spec.md):
+  Requirements for resolving declared environment variables.
+- [Resolution acceptance](./docs/env-var-resolution/env-var-resolution.acceptance.md):
+  Acceptance scenarios for environment-variable resolution.
+- [Projection specification](./docs/env-var-projection/env-var-projection.spec.md):
+  Requirements for projecting resolved environment variables to managed
+  processes.
+- [Projection acceptance](./docs/env-var-projection/env-var-projection.acceptance.md):
+  Acceptance scenarios for projecting environment variables.
+- [Host specification](./docs/env-var-host/env-var-host.spec.md): Requirements
+  for platform-specific environment-variable mappings.
+- [Host acceptance](./docs/env-var-host/env-var-host.acceptance.md): Acceptance
+  scenarios for platform-specific environment-variable mappings.
+- [Access specification](./docs/env-var-access/env-var-access.spec.md):
+  Requirements for how modules and plugins access resolved environment values.
+- [Access acceptance](./docs/env-var-access/env-var-access.acceptance.md):
+  Acceptance scenarios for how modules and plugins access environment values.
+- [README.md](../../../../README.md): What Kraf is and its vision, and the index
+  of the repository's documents, modules and other files.

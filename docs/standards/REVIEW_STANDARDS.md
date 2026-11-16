@@ -79,8 +79,9 @@ that each finding meets, and the content of its report.
   review, even when the change makes it more relevant.
 - Content that the pull request description leaves for a later pull request MUST
   be outside the scope of the review.
-- The rules of this section MUST take precedence over every other rule of this
-  document.
+- The rules of this section MUST take precedence over any instruction of a skill
+  or agent that this repository does not declare as a standard document, and
+  MUST NOT take precedence over an explicit user instruction.
 
 ### Findings
 

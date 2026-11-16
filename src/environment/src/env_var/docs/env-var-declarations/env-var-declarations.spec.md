@@ -1,8 +1,20 @@
 ---
-title: Environment variables declaration - SPEC
-summary: Requirements for declaring environment variables.
+description: Requirements for declaring environment variables.
 tags: [environment, env-var, specification, spec, declaration]
+type: ["spec"]
+scope: ["src/environment/src/env_var/**/*"]
+language: en
 ---
+
+> [!NOTE]
+> The keywords follow RFC 2119 and RFC 8174 across three levels of force:
+>
+> - **Required:** MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT
+> - **Recommended:** SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED
+> - **Optional:** MAY, OPTIONAL
+>
+> See
+> [GENERAL_STANDARDS.md](../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
 
 > [!IMPORTANT]
 > Requirements in this specification use EARS notation. **SHALL** and **SHALL
@@ -95,3 +107,12 @@ its canonical key is its only import alias.
 THE SOFTWARE SHALL NOT accept a declaration using pass-through import mode that
 declares a fallback.
 ```
+
+## Links
+
+- [Intent](../env-var-intent.md): Why Kraf resolves and projects environment
+  variables through a declarative model.
+- [Acceptance](./env-var-declarations.acceptance.md): Acceptance scenarios for
+  declaring environment variables.
+- [README.md](../../README.md): Declarative model, resolution, and projection of
+  environment variables in Kraf.

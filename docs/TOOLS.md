@@ -89,7 +89,7 @@ Formats files, Rust code through rustfmt.
 ```yaml
 name: dprint
 category: format
-version: 0.64.3
+version: ./tools.toml
 repository: https://github.com/dprint/dprint
 config: ./.dprint.jsonc
 files: [json, markdown, toml, rust, other]
@@ -202,7 +202,7 @@ Builds release artifacts in containers, as CI does.
 ```yaml
 name: Docker Bake
 category: build-container
-version: 0.39.0
+version: ./.github/actions/bake/action.yml
 repository: https://github.com/docker/buildx
 config: ./docker-bake.hcl
 capabilities: [check, build]
@@ -215,7 +215,7 @@ Starts the BuildKit daemon service, in CI and locally.
 ```yaml
 name: Docker Compose
 category: build-container
-version: 5.7.1
+version: ./tools.toml
 repository: https://github.com/docker/compose
 config: ./compose.yaml
 ```
@@ -227,7 +227,7 @@ Provides the daemon that Docker Bake uses as a remote builder.
 ```yaml
 name: BuildKit
 category: build-container
-version: 0.35.0
+version: ./compose.yaml
 repository: https://github.com/moby/buildkit
 config: ./compose.yaml
 ```
@@ -239,7 +239,7 @@ Provides the Dockerfile syntax that Docker Bake uses.
 ```yaml
 name: Dockerfile frontend
 category: build-container
-version: 1.29.0
+version: ./docker-bake.hcl
 repository: https://github.com/moby/buildkit
 config: ./docker-bake.hcl
 ```
@@ -253,7 +253,7 @@ Locks the GitHub Actions that the workflows use to their commits.
 ```yaml
 name: gh actions-lock
 category: ci
-version: 0.4.1
+version: ./tools.toml
 config: ./.github/workflows/actions.lock
 ```
 

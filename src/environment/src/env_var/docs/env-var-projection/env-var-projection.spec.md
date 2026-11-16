@@ -1,8 +1,20 @@
 ---
-title: Environment variables projection - SPEC
-summary: Requirements for projecting resolved environment variables to managed processes.
+description: Requirements for projecting resolved environment variables to managed processes.
 tags: [environment, env-var, specification, spec, projection]
+type: ["spec"]
+scope: ["src/environment/src/env_var/**/*"]
+language: en
 ---
+
+> [!NOTE]
+> The keywords follow RFC 2119 and RFC 8174 across three levels of force:
+>
+> - **Required:** MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT
+> - **Recommended:** SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED
+> - **Optional:** MAY, OPTIONAL
+>
+> See
+> [GENERAL_STANDARDS.md](../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
 
 > [!IMPORTANT]
 > Requirements in this specification use EARS notation. **SHALL** and **SHALL
@@ -54,3 +66,12 @@ Name: Export value symmetry
 THE SOFTWARE SHALL assign the declaration's resolved value to every export alias
 the declaration produces.
 ```
+
+## Links
+
+- [Intent](../env-var-intent.md): Why Kraf resolves and projects environment
+  variables through a declarative model.
+- [Acceptance](./env-var-projection.acceptance.md): Acceptance scenarios for
+  projecting environment variables.
+- [README.md](../../README.md): Declarative model, resolution, and projection of
+  environment variables in Kraf.

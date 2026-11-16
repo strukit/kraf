@@ -354,7 +354,7 @@ scope: ["type:standard", "!type:root"]
   target (e.g. `[STANDARDS.md](./README.md)`), and only its `description` MUST
   match the metadata of the target.
 - A Links section MAY link to other documents. A link that appears in the
-  content MAY be left out of Doc Graph
+  content MAY be left out of the [Document Graph](#document-graph)
 - The closing navigation links of a document MUST be in its Links section, not
   in a closing sentence.
 
