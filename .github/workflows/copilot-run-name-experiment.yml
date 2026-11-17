@@ -1,0 +1,19 @@
+name: Copilot Run Name Experiment
+run-name: PR #${{ github.event.pull_request.number || github.run_number }}
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-run-name:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This run name should include the pull request number."
