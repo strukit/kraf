@@ -1,19 +1,18 @@
-name: Copilot Run Name Experiment
+name: Copilot Setup Steps
 run-name: 'PR #${{ github.event.pull_request.number || github.run_number }}'
 
 on:
-  pull_request:
-    types:
-      - opened
-      - reopened
-      - synchronize
   workflow_dispatch:
 
-permissions:
-  contents: read
-
 jobs:
-  verify-run-name:
+  copilot-setup-steps:
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
     steps:
-      - run: echo "This run name should include the pull request number."
+      - name: Checkout do repositório
+        uses: actions/checkout@v6
+
+      - name: Exemplo de preparação
+        run: echo "Instale aqui as ferramentas e dependências do projeto"
