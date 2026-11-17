@@ -1,5 +1,5 @@
 name: Copilot Run Name Experiment
-run-name: PR #${{ github.event.pull_request.number || github.run_number }}
+run-name: 'PR #${{ github.event.pull_request.number || github.run_number }}'
 
 on:
   pull_request:
