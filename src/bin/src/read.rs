@@ -31,7 +31,7 @@ fn main() {
 }
 
 fn parse_options(args: Vec<String>) -> Options {
-    let mut algorithm = DigestAlgorithm::detect();
+    let mut algorithm = DigestAlgorithm::default_algorithm();
     let mut positional = Vec::new();
     let mut args = args.into_iter();
 
@@ -58,7 +58,7 @@ fn parse_options(args: Vec<String>) -> Options {
 
 fn parse_algorithm(name: &str) -> DigestAlgorithm {
     match name {
-        "auto" => DigestAlgorithm::detect(),
+        "auto" => DigestAlgorithm::default_algorithm(),
         "sha2" => DigestAlgorithm::Sha2,
         "sha3" => DigestAlgorithm::Sha3,
         "none" => DigestAlgorithm::None,

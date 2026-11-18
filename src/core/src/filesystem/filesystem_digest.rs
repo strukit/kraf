@@ -10,13 +10,9 @@ pub enum DigestAlgorithm {
 }
 
 impl DigestAlgorithm {
-    // SHA3 when the CPU accelerates it, SHA2 otherwise.
-    pub fn detect() -> Self {
-        if has_sha3_hardware() {
-            Self::Sha3
-        } else {
-            Self::Sha2
-        }
+    // SHA2 is the default: it is the fastest measured on the CI runners.
+    pub fn default_algorithm() -> Self {
+        Self::Sha2
     }
 
     fn prefix(self) -> &'static str {
@@ -25,18 +21,6 @@ impl DigestAlgorithm {
             Self::Sha3 => "sha3-256",
             Self::None => "none",
         }
-    }
-}
-
-fn has_sha3_hardware() -> bool {
-    #[cfg(target_arch = "aarch64")]
-    {
-        std::arch::is_aarch64_feature_detected!("sha3")
-    }
-
-    #[cfg(not(target_arch = "aarch64"))]
-    {
-        false
     }
 }
 

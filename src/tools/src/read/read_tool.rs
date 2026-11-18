@@ -74,10 +74,15 @@ pub fn read(
 
     let mut bytes = Vec::new();
 
-    let digest = match read_stream(provider, uri, DigestAlgorithm::detect(), &mut |chunk| {
-        bytes.extend_from_slice(chunk);
-        Ok(())
-    }) {
+    let digest = match read_stream(
+        provider,
+        uri,
+        DigestAlgorithm::default_algorithm(),
+        &mut |chunk| {
+            bytes.extend_from_slice(chunk);
+            Ok(())
+        },
+    ) {
         Ok(digest) => digest,
         Err(error) => {
             return TransportResponse {
