@@ -8,7 +8,15 @@ language: en
 
 # kraf
 
-Vendor-neutral development environment layer for humans and autonomous agents.
+> [!NOTE]
+> The keywords follow RFC 2119 and RFC 8174 across three levels of force:
+>
+> - **Required:** MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT
+> - **Recommended:** SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED
+> - **Optional:** MAY, OPTIONAL
+>
+> See
+> [GENERAL_STANDARDS.md](../../docs/standards/GENERAL_STANDARDS.md#normative-language).
 
 ## Overview
 

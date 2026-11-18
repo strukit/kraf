@@ -1,14 +1,22 @@
 ---
 description: Cross-platform environment variable resolution and mapping in Kraf.
 tags: [kraf, environment, env-var, resolution]
-type: ["readme"]
+type: ["readme", "index"]
 scope: ["src/environment/**/*"]
 language: en
 ---
 
 # kraf-environment
 
-Cross-platform environment variable resolution and mapping.
+> [!NOTE]
+> The keywords follow RFC 2119 and RFC 8174 across three levels of force:
+>
+> - **Required:** MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT
+> - **Recommended:** SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED
+> - **Optional:** MAY, OPTIONAL
+>
+> See
+> [GENERAL_STANDARDS.md](../../docs/standards/GENERAL_STANDARDS.md#normative-language).
 
 ## Overview
 
