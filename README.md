@@ -61,9 +61,11 @@ toolchains a project already uses rather than replacing them.
 
 ### Modules
 
-- [Environment](./src/environment/README.md): Cross-platform environment
-  variable resolution and mapping in Kraf.
 - [Core](./src/core/README.md): Core process execution primitives for host and
   child process management in Kraf.
 - [Library](./src/lib/README.md): Library crate of Kraf, the vendor-neutral
   development environment layer, built on kraf-core and kraf-environment.
+- [Environment](./src/environment/README.md): Cross-platform environment
+  variable resolution and mapping in Kraf.
+- [CLI](./src/bin/README.md): Command-line interface for the kraf development
+  environment layer.
