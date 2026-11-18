@@ -1,6 +1,6 @@
-use kraf::tools::mcp_test::ReadTool;
-use rmcp::transport::stdio;
+use kraf_tools::mcp_test::ReadTool;
 use rmcp::ServiceExt;
+use rmcp::transport::stdio;
 
 #[tokio::main(flavor = "current_thread")]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {

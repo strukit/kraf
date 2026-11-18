@@ -21,3 +21,4 @@ workspace = true
 [dependencies]
 kraf-core.workspace = true
 kraf-environment.workspace = true
+kraf-tools.workspace = true

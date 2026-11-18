@@ -75,6 +75,10 @@
 !/src/**/Cargo.toml
 !/src/**/*.md
 
+!/scripts/
+!/scripts/**/
+!/scripts/**/*.sh
+
 !/README.md
 !/AGENTS.md
 

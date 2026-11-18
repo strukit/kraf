@@ -17,8 +17,8 @@ impl Uri {
         &self.raw
     }
 
-    pub fn to_file_path(&self) -> Result<PathBuf, ()> {
-        Url::parse(&self.raw).map_err(|_| ())?.to_file_path()
+    pub fn to_file_path(&self) -> Option<PathBuf> {
+        Url::parse(&self.raw).ok()?.to_file_path().ok()
     }
 
     pub fn scheme(&self) -> String {

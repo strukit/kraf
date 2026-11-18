@@ -29,7 +29,7 @@ pub struct ReadTool;
 impl ReadTool {
     #[tool(
         description = "Read a file through kraf's read tool. Returns a JSON object with \
-                        `status` (HTTP-style code), `digest` (sha256 of the content, for \
+                        `status` (HTTP-style code), `digest` (sha256 or sha3-256 hash of the content, named by its prefix, for \
                         change detection), `line_count`, and `content`."
     )]
     fn read(&self, Parameters(ReadArgs { uri }): Parameters<ReadArgs>) -> String {

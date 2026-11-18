@@ -1,6 +1,49 @@
 use super::ReadRequest;
-use kraf_core::filesystem::FileSystemService;
+use kraf_core::KrafError;
+use kraf_core::Uri;
+use kraf_core::filesystem::{DigestAlgorithm, FileSystemProvider, FileSystemService, Hasher};
 use kraf_core::transport::{TransportHeaders, TransportResponse, TransportResponseStatus};
+
+pub fn read_stream(
+    provider: &dyn FileSystemProvider,
+    uri: &Uri,
+    algorithm: DigestAlgorithm,
+    sink: &mut dyn FnMut(&[u8]) -> Result<(), KrafError>,
+) -> Result<String, KrafError> {
+    let mut hasher = Hasher::new(algorithm);
+
+    provider.read_chunks(uri, &mut |chunk| {
+        hasher.update(chunk);
+        sink(chunk)
+    })?;
+
+    Ok(hasher.finish())
+}
+
+pub fn read_lines(
+    provider: &dyn FileSystemProvider,
+    uri: &Uri,
+    algorithm: DigestAlgorithm,
+    start: usize,
+    end: usize,
+    sink: &mut dyn FnMut(&[u8]) -> Result<(), KrafError>,
+) -> Result<String, KrafError> {
+    let mut line = 1;
+
+    read_stream(provider, uri, algorithm, &mut |chunk| {
+        for segment in chunk.split_inclusive(|byte| *byte == b'\n') {
+            if line >= start && line <= end {
+                sink(segment)?;
+            }
+
+            if segment.ends_with(b"\n") {
+                line += 1;
+            }
+        }
+
+        Ok(())
+    })
+}
 
 pub fn read(
     service: &FileSystemService,
@@ -29,8 +72,13 @@ pub fn read(
         }
     };
 
-    let bytes = match provider.read_file(uri) {
-        Ok(bytes) => bytes,
+    let mut bytes = Vec::new();
+
+    let digest = match read_stream(provider, uri, DigestAlgorithm::detect(), &mut |chunk| {
+        bytes.extend_from_slice(chunk);
+        Ok(())
+    }) {
+        Ok(digest) => digest,
         Err(error) => {
             return TransportResponse {
                 content: error.message,
@@ -46,18 +94,6 @@ pub fn read(
         Err(error) => {
             return TransportResponse {
                 content: error.to_string(),
-                content_type: "text/plain".to_string(),
-                status: TransportResponseStatus::InternalServerError,
-                headers: None,
-            };
-        }
-    };
-
-    let digest = match provider.digest(uri) {
-        Ok(digest) => digest,
-        Err(error) => {
-            return TransportResponse {
-                content: error.message,
                 content_type: "text/plain".to_string(),
                 status: TransportResponseStatus::InternalServerError,
                 headers: None,

@@ -6,7 +6,7 @@ pub fn expand_tilde_var(env_var_value: &str, home_value: &str) -> String {
     env_var_value.replacen('~', home_value, 1)
 }
 
-fn extract_dollar_var_key(value: &str) -> Option<&str> {
+pub fn extract_dollar_var_key(value: &str) -> Option<&str> {
     let after_dollar = &value[value.find('$')? + 1..];
     let end = after_dollar
         .find(|c: char| !c.is_ascii_alphanumeric() && c != '_')

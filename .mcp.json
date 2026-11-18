@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "kraf": {
+      "type": "stdio",
+      "command": ".dist/cargo/debug/kraf-mcp",
+      "enabled_tools": ["read"],
+      "args": [],
+      "env": {}
+    }
+  }
+}

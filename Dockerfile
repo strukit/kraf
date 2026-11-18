@@ -28,3 +28,11 @@ FROM builder AS linter
 
 RUN cargo fmt --check
 RUN cargo lint
+
+FROM builder AS benchmark
+
+ENV KRAF_READ=.dist/cargo/release/kraf-read
+
+RUN microdnf install -y time \
+    && microdnf clean all \
+    && sh scripts/bench-read.sh

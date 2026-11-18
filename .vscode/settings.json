@@ -32,5 +32,13 @@
   "rust-analyzer.diagnostics.previewRustcOutput": true,
   "rust-analyzer.diagnostics.useRustcErrorCode": true,
   "rust-analyzer.cargo.targetDir": true,
-  "rust-analyzer.check.command": "lint"
+  "rust-analyzer.check.command": "lint",
+  "chat.mcp.serverSampling": {
+    "kraf-repository/.mcp.json: kraf": {
+      "allowedModels": [
+        "copilot/auto",
+        "copilotcli/auto"
+      ]
+    }
+  }
 }

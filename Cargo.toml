@@ -13,6 +13,7 @@ repository = "https://github.com/strukit/kraf"
 
 [workspace.dependencies]
 kraf-core = { path = "src/core", version = "0.0.1" }
+kraf-lib = { path = "src/lib", version = "0.0.1" }
 kraf-environment = { path = "src/environment", version = "0.0.1" }
 kraf-tools = { path = "src/tools", version = "0.0.1" }
 

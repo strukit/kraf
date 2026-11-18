@@ -141,10 +141,30 @@ target "lint" {
   }
 }
 
+# docker buildx bake bench-linux-amd64
+# docker buildx bake bench-linux-arm64
+target "bench" {
+  name        = "bench-linux-${arch}"
+  inherits    = ["_common"]
+  dockerfile  = "Dockerfile"
+  target      = "benchmark"
+  contexts    = { "setup-environment" = "target:setup-linux-${arch}" }
+
+  matrix = {
+    arch = ["amd64", "arm64"]
+  }
+
+  platforms = ["linux/${arch}"]
+
+  args = {
+    WORKSPACE = resolve_workspace()
+  }
+}
+
 group "linux-amd64" {
-  targets = [ "build-linux-amd64", "lint-linux-amd64", "test-unit-linux-amd64" ]
+  targets = [ "build-linux-amd64", "lint-linux-amd64", "test-unit-linux-amd64", "bench-linux-amd64" ]
 }
 
 group "linux-arm64" {
-  targets = [ "build-linux-arm64", "lint-linux-arm64", "test-unit-linux-arm64" ]
+  targets = [ "build-linux-arm64", "lint-linux-arm64", "test-unit-linux-arm64", "bench-linux-arm64" ]
 }
