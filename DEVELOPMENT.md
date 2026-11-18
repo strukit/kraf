@@ -26,8 +26,7 @@ are arranged that way, and how to find on your own what applies to your change.
 
 ## Where to start
 
-Read in this order, and stop when you have what you need:
-
+You MUST read in this order, and you MAY stop when you have what you need:
 1. [README.md](./README.md): what Kraf is, and the index of everything else.
 2. [TOOLS.md](./docs/TOOLS.md): the tools the repository uses.
    [What you need](#what-you-need) says which of them to install.
