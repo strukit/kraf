@@ -51,9 +51,9 @@ toolchains a project already uses rather than replacing them.
 
 - [AGENTS.md](./AGENTS.md): Entry point for agent instructions and the rules
   they MUST follow.
-- [Standards Index](./docs/standards/README.md): Index of the standards that
-  govern this repository, to help people and agents navigate it on their own
-  through the document graph.
+- [STANDARDS](./docs/standards/README.md): Index of the standards that govern
+  this repository, to help people and agents navigate it on their own through
+  the document graph.
 - [ARCHITECTURE.md](./docs/ARCHITECTURE.md): Cross-domain map of Kraf's system
   context, modules, and how they depend on each other.
 - [TOOLS.md](./docs/TOOLS.md): Tools declared in this repository, with their
@@ -61,5 +61,11 @@ toolchains a project already uses rather than replacing them.
 
 ### Modules
 
-- [Environment variables](./src/environment/src/env_var/README.md): Declarative
-  model, resolution, and projection of environment variables in Kraf.
+- [Core](./src/core/README.md): Core process execution primitives for host and
+  child process management in Kraf.
+- [Library](./src/lib/README.md): Library crate of Kraf, the vendor-neutral
+  development environment layer, built on kraf-core and kraf-environment.
+- [Environment](./src/environment/README.md): Cross-platform environment
+  variable resolution and mapping in Kraf.
+- [CLI](./src/bin/README.md): Command-line interface for the kraf development
+  environment layer.

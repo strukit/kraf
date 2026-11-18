@@ -92,5 +92,5 @@ keys. Not every resolved value is projected to a child process.
   Requirements for how modules and plugins access resolved environment values.
 - [Access acceptance](./docs/env-var-access/env-var-access.acceptance.md):
   Acceptance scenarios for how modules and plugins access environment values.
-- [README.md](../../../../README.md): What Kraf is and its vision, and the index
-  of the repository's documents, modules and other files.
+- [README.md](../../README.md): Cross-platform environment variable resolution
+  and mapping in Kraf.

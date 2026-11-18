@@ -18,8 +18,9 @@
 
 !/.gitattributes
 
+!/.mailmap
+
 !/.worktrees/
-!/.worktrees/.keep
 
 !/.github/
 !/.github/**
@@ -49,7 +50,6 @@
 !/Cargo.lock
 
 !/.config/
-!/.config/.keep
 !/.config/*.json
 !/.config/*.jsonc
 !/.config/*.toml
@@ -77,11 +77,14 @@
 
 !/README.md
 !/AGENTS.md
-!/LICENSE
-!/.mailmap
 
-!/.agents
-!/.agents/**
-!/.agents/**/*
+!/LICENSE
+
+!/.agents/
+!/.agents/.tmp/
+/.agents/.tmp/*
+!/.agents/.tmp/.keep
+
+!**/.keep
 
 **/.DS_Store

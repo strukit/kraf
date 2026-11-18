@@ -3,10 +3,13 @@ name = "kraf-environment"
 version.workspace = true
 categories = ["development-tools", "os"]
 edition.workspace = true
+include.workspace = true
 keywords = ["environment", "variables", "platform", "cross-platform"]
-license = "MIT"
-readme = "../../README.md"
-repository = "https://github.com/strukit/kraf"
+
+license-file = "../../LICENSE"
+publish.workspace = true
+readme = "README.md"
+repository.workspace = true
 description = "Cross-platform environment variable resolution and mapping"
 
 [lints]

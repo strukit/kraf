@@ -84,7 +84,7 @@ declares each tool, with its purpose, configuration, capabilities, and version.
 
 #### dprint
 
-Formats files, Rust code through rustfmt.
+Formats JSON, Markdown, TOML, and Dockerfile files.
 
 ```yaml
 name: dprint
@@ -92,18 +92,18 @@ category: format
 version: ./tools.toml
 repository: https://github.com/dprint/dprint
 config: ./.dprint.jsonc
-files: [json, markdown, toml, rust, other]
+files: [json, markdown, toml, dockerfile]
 capabilities: [check, autofix]
 ```
 
 #### rustfmt
 
-Formats Rust code, invoked by dprint.
+Formats Rust code, invoked by rust-analyzer in the editor and by `cargo fmt`.
 
 ```yaml
 name: rustfmt
 category: format
-run_by: [dprint]
+run_by: [rust-analyzer, cargo]
 config: ./rustfmt.toml
 files: [rust]
 capabilities: [check, autofix]
@@ -186,10 +186,10 @@ Builds, tests, and lints Rust code, the latter through clippy.
 
 ```yaml
 name: cargo
-category: build
+category: [build]
 config: ./.cargo/config.toml
 files: [rust]
-capabilities: [check]
+capabilities: [check,test,partial-autofix]
 version: ./rust-toolchain.toml
 ```
 

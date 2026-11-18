@@ -348,9 +348,12 @@ scope: ["type:standard", "!type:root"]
 
 #### Rules
 
-- The index of a folder, including the repository root, MUST be its `README.md`
-  file, because code hosting platforms display that file by default as the entry
-  of the folder.
+- A folder MUST have at most one index, and when it has one, the index MUST be
+  its `README.md` file, because code hosting platforms display that file by
+  default as the entry of the folder.
+- A `README.md` file MUST be an index only when it lists the documents of its
+  own folder. A `README.md` file that lists none of them MUST NOT be an index,
+  and MUST NOT list `index` in `type`.
 - Every index MUST list `readme` and `index` in `type`.
 - The repository root MUST have an index.
 - Every document MUST have a Links section.

@@ -7,6 +7,9 @@ enforce = true
 [rustfmt.rangeFormatting]
 enable = true
 
+[cargo]
+targetDir = true
+
 [check]
 command = "lint"
 
