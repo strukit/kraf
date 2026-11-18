@@ -5,7 +5,6 @@ categories = ["command-line-utilities"]
 edition.workspace = true
 include.workspace = true
 keywords = ["development", "environment", "agents", "portable", "vendor-neutral"]
-license.workspace = true
 license-file = "../../LICENSE"
 publish.workspace = true
 repository.workspace = true

@@ -4,7 +4,7 @@ members = ["src/*"]
 default-members = ["src/*"]
 
 [workspace.package]
-version = "0.0.0"
+version = "0.0.1"
 edition = "2024"
 include = ["/src/**", "!**/tests/**", "!**/docs/**", "!**/README.md"]
 license = "MIT"
@@ -12,8 +12,8 @@ publish = false
 repository = "https://github.com/strukit/kraf"
 
 [workspace.dependencies]
-kraf-core = { path = "src/core", version = "0.0.0" }
-kraf-environment = { path = "src/environment", version = "0.0.0" }
+kraf-core = { path = "src/core", version = "0.0.1" }
+kraf-environment = { path = "src/environment", version = "0.0.1" }
 
 [workspace.lints.clippy]
 correctness = "deny"
