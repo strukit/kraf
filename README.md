@@ -63,3 +63,10 @@ toolchains a project already uses rather than replacing them.
 
 - [Environment variables](./src/environment/src/env_var/README.md): Declarative
   model, resolution, and projection of environment variables in Kraf.
+- [Core crate](./src/core/README.md): Core process execution primitives for host
+  and child process management in Kraf.
+- [Environment crate](./src/environment/README.md): Cross-platform environment
+  variable resolution and mapping in Kraf.
+- [Library crate](./src/lib/README.md): Library crate of Kraf, the
+  vendor-neutral development environment layer, built on kraf-core and
+  kraf-environment.

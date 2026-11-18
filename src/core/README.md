@@ -10,8 +10,12 @@ language: en
 
 Core process execution primitives for host and child process management.
 
-Part of the [kraf](https://github.com/strukit/kraf) project.
+## Overview
 
-## Source
+`kraf-core` provides the process execution primitives that `kraf-environment`
+and `kraf-lib` build on.
 
-Development happens in the [kraf repository](https://github.com/strukit/kraf).
+## Links
+
+- [README.md](../../README.md): What Kraf is and its vision, and the index of
+  the repository's documents, modules and other files.

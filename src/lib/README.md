@@ -10,10 +10,17 @@ language: en
 
 Vendor-neutral development environment layer for humans and autonomous agents.
 
+## Overview
+
 This crate provides the `kraf-lib` library. It builds on
-[`kraf-core`](https://crates.io/crates/kraf-core) and
-[`kraf-environment`](https://crates.io/crates/kraf-environment).
+[`kraf-core`](../core/README.md) and
+[`kraf-environment`](../environment/README.md).
 
-## Source
+## Links
 
-Development happens in the [kraf repository](https://github.com/strukit/kraf).
+- [kraf-core](../core/README.md): Core process execution primitives for host and
+  child process management in Kraf.
+- [kraf-environment](../environment/README.md): Cross-platform environment
+  variable resolution and mapping in Kraf.
+- [README.md](../../README.md): What Kraf is and its vision, and the index of
+  the repository's documents, modules and other files.

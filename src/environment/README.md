@@ -10,8 +10,14 @@ language: en
 
 Cross-platform environment variable resolution and mapping.
 
-Part of the [kraf](https://github.com/strukit/kraf) project.
+## Overview
 
-## Source
+`kraf-environment` resolves and maps environment variables across platforms. It
+builds on [`kraf-core`](../core/README.md) and is used by `kraf-lib`.
 
-Development happens in the [kraf repository](https://github.com/strukit/kraf).
+## Links
+
+- [kraf-core](../core/README.md): Core process execution primitives for host and
+  child process management in Kraf.
+- [README.md](../../README.md): What Kraf is and its vision, and the index of
+  the repository's documents, modules and other files.

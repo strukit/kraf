@@ -80,5 +80,11 @@
 
 !/LICENSE
 
-!**/.tmp
+!/.agents/
+!/.agents/.tmp/
+/.agents/.tmp/*
+!/.agents/.tmp/.keep
+
 !**/.keep
+
+**/.DS_Store

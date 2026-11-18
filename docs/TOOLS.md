@@ -145,7 +145,7 @@ Provides language-server features for Rust code, such as diagnostics.
 
 ```yaml
 name: rust-analyzer
-category: lsp
+category: lint
 config: ./rust-analyzer.toml
 files: [rust]
 capabilities: [check, partial-autofix]
