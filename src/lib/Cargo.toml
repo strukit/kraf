@@ -12,6 +12,9 @@ readme = "README.md"
 repository.workspace = true
 description = "Vendor-neutral development environment layer for humans and autonomous agents"
 
+[lib]
+path = "./src/lib.rs"
+
 [lints]
 workspace = true
 
