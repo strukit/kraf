@@ -1,17 +1,19 @@
 [workspace]
 resolver = "3"
-members = [
-  "src/core",
-  "src/environment",
-]
+members = ["src/*"]
+default-members = ["src/*"]
 
 [workspace.package]
-version = "0.0.1"
+version = "0.0.0"
 edition = "2024"
+include = ["/src/**", "/LICENSE", "!**/tests/**", "!**/docs/**", "!**/README.md"]
+license = "MIT"
+publish = false
+repository = "https://github.com/strukit/kraf"
 
 [workspace.dependencies]
-kraf-core = { path = "src/core", version = "0.0.1" }
-kraf-environment = { path = "src/environment", version = "0.0.1" }
+kraf-core = { path = "src/core", version = "0.0.0" }
+kraf-environment = { path = "src/environment", version = "0.0.0" }
 
 [workspace.lints.clippy]
 correctness = "deny"
@@ -21,28 +23,3 @@ perf = "warn"
 complexity = "warn"
 pedantic = "warn"
 cargo = "warn"
-
-[package]
-name = "kraf"
-version.workspace = true
-categories = ["command-line-utilities", "development-tools"]
-edition.workspace = true
-keywords = ["development", "environment", "agents", "portable", "vendor-neutral"]
-license = "MIT"
-readme = "README.md"
-repository = "https://github.com/strukit/kraf"
-description = "Vendor-neutral development environment layer for humans and autonomous agents"
-
-[lib]
-path = "src/lib.rs"
-
-[[bin]]
-name = "kraf"
-path = "src/main.rs"
-
-[lints]
-workspace = true
-
-[dependencies]
-kraf-core.workspace = true
-kraf-environment.workspace = true

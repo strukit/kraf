@@ -1,11 +1,15 @@
 {
-  "editor.defaultFormatter": "dprint.dprint",
   "editor.formatOnSave": true,
+
+  "editor.defaultFormatter": "dprint.dprint",
 
   "[json]": {
     "editor.defaultFormatter": "dprint.dprint"
   },
   "[jsonc]": {
+    "editor.defaultFormatter": "dprint.dprint"
+  },
+  "[yaml]": {
     "editor.defaultFormatter": "dprint.dprint"
   },
   "[markdown]": {
@@ -17,6 +21,7 @@
   "[dockerfile]": {
     "editor.defaultFormatter": "dprint.dprint"
   },
+
   "[rust]": {
     "editor.defaultFormatter": "rust-lang.rust-analyzer"
   },
@@ -26,5 +31,6 @@
   "rust-analyzer.showSyntaxTree": true,
   "rust-analyzer.diagnostics.previewRustcOutput": true,
   "rust-analyzer.diagnostics.useRustcErrorCode": true,
+  "rust-analyzer.cargo.targetDir": true,
   "rust-analyzer.check.command": "lint"
 }

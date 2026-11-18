@@ -4,7 +4,7 @@ version = 4
 
 [[package]]
 name = "kraf"
-version = "0.0.1"
+version = "0.0.0"
 dependencies = [
  "kraf-core",
  "kraf-environment",
@@ -12,11 +12,19 @@ dependencies = [
 
 [[package]]
 name = "kraf-core"
-version = "0.0.1"
+version = "0.0.0"
 
 [[package]]
 name = "kraf-environment"
-version = "0.0.1"
+version = "0.0.0"
 dependencies = [
  "kraf-core",
+]
+
+[[package]]
+name = "kraf-lib"
+version = "0.0.0"
+dependencies = [
+ "kraf-core",
+ "kraf-environment",
 ]

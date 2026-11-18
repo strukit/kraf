@@ -1,0 +1,22 @@
+[package]
+name = "kraf"
+version.workspace = true
+categories = ["command-line-utilities"]
+edition.workspace = true
+include.workspace = true
+keywords = ["development", "environment", "agents", "portable", "vendor-neutral"]
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+description = "Command-line interface for the kraf development environment layer"
+
+[[bin]]
+name = "kraf"
+path = "src/main.rs"
+
+[lints]
+workspace = true
+
+[dependencies]
+kraf-core.workspace = true
+kraf-environment.workspace = true

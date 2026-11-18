@@ -16,10 +16,14 @@
 !**/.ignore
 !**/.gitignore
 
+!**/
+!**/.keep
+
 !/.gitattributes
 
+!/.mailmap
+
 !/.worktrees/
-!/.worktrees/.keep
 
 !/.github/
 !/.github/**
@@ -49,7 +53,6 @@
 !/Cargo.lock
 
 !/.config/
-!/.config/.keep
 !/.config/*.json
 !/.config/*.jsonc
 !/.config/*.toml
@@ -77,11 +80,14 @@
 
 !/README.md
 !/AGENTS.md
-!/LICENSE
-!/.mailmap
 
-!/.agents
+!/LICENSE
+
+!/.agents/
 !/.agents/**
 !/.agents/**/*
+
+/.agents/.tmp/*
+!/.agents/.tmp/.keep
 
 **/.DS_Store

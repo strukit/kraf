@@ -56,7 +56,7 @@ target "linux" {
   dockerfile  = "Dockerfile"
   target      = "builder"
   contexts    = { "setup-environment" = "target:setup-linux-${arch}" }
-  output      = ["type=local,dest=${ARTIFACT_PATH},platform-split=true,src=${resolve_workspace()}/dist/release"]
+  output      = ["type=local,dest=${ARTIFACT_PATH},platform-split=true,src=${resolve_workspace()}/.dist/cargo/release"]
 
   matrix = {
     arch     = ["amd64", "arm64"]
@@ -78,7 +78,7 @@ target "windows" {
   dockerfile  = "Dockerfile"
   target      = "builder"
   contexts    = { "setup-environment" = "target:setup-windows-${arch}" }
-  output      = ["type=local,dest=${ARTIFACT_PATH},platform-split=true,src=${resolve_workspace()}/dist/release"]
+  output      = ["type=local,dest=${ARTIFACT_PATH},platform-split=true,src=${resolve_workspace()}/.dist/cargo/release"]
 
   matrix = {
     arch     = ["amd64", "arm64"]
