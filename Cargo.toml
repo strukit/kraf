@@ -6,7 +6,7 @@ default-members = ["src/*"]
 [workspace.package]
 version = "0.0.0"
 edition = "2024"
-include = ["/src/**", "/LICENSE", "!**/tests/**", "!**/docs/**", "!**/README.md"]
+include = ["/src/**", "!**/tests/**", "!**/docs/**", "!**/README.md"]
 license = "MIT"
 publish = false
 repository = "https://github.com/strukit/kraf"
