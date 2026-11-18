@@ -16,9 +16,6 @@
 !**/.ignore
 !**/.gitignore
 
-!**/
-!**/.keep
-
 !/.gitattributes
 
 !/.mailmap
@@ -83,11 +80,5 @@
 
 !/LICENSE
 
-!/.agents/
-!/.agents/**
-!/.agents/**/*
-
-/.agents/.tmp/*
-!/.agents/.tmp/.keep
-
-**/.DS_Store
+!**/.tmp
+!**/.keep
