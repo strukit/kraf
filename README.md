@@ -61,5 +61,5 @@ toolchains a project already uses rather than replacing them.
 
 ### Modules
 
-- [Environment variables](./src/environment/src/env_var/README.md): Declarative
-  model, resolution, and projection of environment variables in Kraf.
+- [Environment](./src/environment/README.md): Cross-platform environment
+  variable resolution and mapping in Kraf.
