@@ -58,6 +58,9 @@ toolchains a project already uses rather than replacing them.
   context, modules, and how they depend on each other.
 - [TOOLS.md](./docs/TOOLS.md): Tools declared in this repository, with their
   purpose, configuration, capabilities, and version.
+- [DEVELOPMENT.md](./DEVELOPMENT.md): Where a person new to Kraf starts, how the
+  repository's documents and configuration connect, why, and how to find what
+  applies to a change.
 
 ### Modules
 
