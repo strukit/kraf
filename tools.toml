@@ -1,0 +1,4 @@
+[versions]
+dprint = "0.64.3"
+docker-compose = "5.7.1"
+gh-actions-lock = "0.4.1"

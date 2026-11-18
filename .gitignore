@@ -18,8 +18,9 @@
 
 !/.gitattributes
 
+!/.mailmap
+
 !/.worktrees/
-!/.worktrees/.keep
 
 !/.github/
 !/.github/**
@@ -30,6 +31,7 @@
 !/*.hcl
 !/*.yaml
 !/*.yml
+!.editorconfig
 
 !**/.dockerignore
 !**/*.dockerignore
@@ -48,7 +50,6 @@
 !/Cargo.lock
 
 !/.config/
-!/.config/.keep
 !/.config/*.json
 !/.config/*.jsonc
 !/.config/*.toml
@@ -76,9 +77,14 @@
 
 !/README.md
 !/AGENTS.md
-!/BUILDING.md
+
 !/LICENSE
 
-!/.agents
-!/.agents/**
-!/.agents/**/*
+!/.agents/
+!/.agents/.tmp/
+/.agents/.tmp/*
+!/.agents/.tmp/.keep
+
+!**/.keep
+
+**/.DS_Store

@@ -1,27 +1,71 @@
+---
+description: What Kraf is and its vision, and the index of the repository's documents, modules and other files.
+tags: [kraf, vision, overview, index]
+type: ["root", "readme", "index"]
+scope: ["type:root"]
+language: en
+---
+
 # Kraf
 
-Kraf is a neutral layer for humans and autonomous agents, designed to provide a
+Kraf is a neutral layer for humans and autonomous agents that provides a
 consistent way to work with software projects across tools, environments, and
-vendors — without vendor lock-in. The goal is to start a development environment
-with the least possible friction, and fast.
+vendors, without vendor lock-in. Rather than replacing the tools, configuration
+files, or workflows a project already uses, Kraf reads them to work out what the
+project needs, then sets up only what a workload requires, wherever it runs.
 
-## Summary
+It provides development environments fast and with the least possible friction,
+and it gives agents tools that run on only what each task needs. Reading a file
+needs no operating system or container and can run in a browser; debugging a
+test needs only the pieces that test touches, not a full system. A full
+development environment and a single agent tool come from the same project
+files.
 
-Kraf explores a portable, vendor-neutral foundation for developer and agent
-environments. Rather than replacing the tools, configuration files, or workflows
-a project already uses, Kraf resolves them into an environment plan, then
-materializes it wherever it's needed — a local shell today; CI, containers, or
-an airgapped agent later. Materialization targets change; the resolved plan
-doesn't.
+## Vision
 
-Kraf's guiding rule: **materialize only what the workload proves it needs.**
+> **Materialize only what the workload proves it needs.**
 
-The project is currently under active development. Its first working slice is
-environment variable resolution and isolation — an isolated `HOME` and working
-directory per run, real system state passed through deliberately rather than by
-accident — materialized into a shell you can use today.
+Today Kraf materializes environments as a local shell; CI, containers, browsers,
+and airgapped agents come later. The targets change; what Kraf reads from the
+project stays the same.
 
-## Contributing
+Kraf's larger aim is to expose a project as a headless IDE runtime for agents:
+not an editor, and not a closed platform, but a layer beneath or beside them. It
+will surface a project's files, diagnostics, and language tooling (LSP, task
+runners, debugger, tests) as tools that replace or complement an agent's own
+built-in primitives. Each tool materializes only what its task needs: it runs
+inside an isolated environment when the task calls for one, or with only the
+pieces the task touches, even in a browser.
 
-See [BUILDING.md](./BUILDING.md) for coding rules and conventions, and
-[AGENTS.md](./AGENTS.md) for AI agent instructions.
+Agents often work on several branches at once. Kraf will give each branch or
+worktree its own environment, derived from the environment of the branch it came
+from rather than built from scratch, so parallel work starts fast and branches
+run side by side without competing for resources such as ports.
+
+These tools are reachable through whatever host fits the workload, such as an
+agent CLI, a browser, or code that embeds them as a library (C or WASM), all
+calling the same runtime. Kraf aims to interoperate with the editors and
+toolchains a project already uses rather than replacing them.
+
+## Links
+
+- [AGENTS.md](./AGENTS.md): Entry point for agent instructions and the rules
+  they MUST follow.
+- [STANDARDS](./docs/standards/README.md): Index of the standards that govern
+  this repository, to help people and agents navigate it on their own through
+  the document graph.
+- [ARCHITECTURE.md](./docs/ARCHITECTURE.md): Cross-domain map of Kraf's system
+  context, modules, and how they depend on each other.
+- [TOOLS.md](./docs/TOOLS.md): Tools declared in this repository, with their
+  purpose, configuration, capabilities, and version.
+
+### Modules
+
+- [Core](./src/core/README.md): Core process execution primitives for host and
+  child process management in Kraf.
+- [Library](./src/lib/README.md): Library crate of Kraf, the vendor-neutral
+  development environment layer, built on kraf-core and kraf-environment.
+- [Environment](./src/environment/README.md): Cross-platform environment
+  variable resolution and mapping in Kraf.
+- [CLI](./src/bin/README.md): Command-line interface for the kraf development
+  environment layer.

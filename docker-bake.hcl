@@ -12,13 +12,20 @@ function "resolve_workspace" {
 }
 
 variable "ARTIFACT_PATH" {
-  default = ".dist"
+  default = "dist"
+}
+
+variable "BUILDKIT_SYNTAX" {
+  default = "docker/dockerfile-upstream:1.29.0"
 }
 
 target "_common" {
   context    = "."
   policy     = [{reset = true }]
   load       = false
+  args       = {
+    BUILDKIT_SYNTAX = BUILDKIT_SYNTAX
+  }
 }
 
 target "setup" {
@@ -47,9 +54,9 @@ target "linux" {
   name        = "build-linux-${arch}"
   inherits    = ["_common"]
   dockerfile  = "Dockerfile"
-  target      = "builder-artifacts"
+  target      = "builder"
   contexts    = { "setup-environment" = "target:setup-linux-${arch}" }
-  output      = ["type=local,dest=${ARTIFACT_PATH},platform-split=true"]
+  output      = ["type=local,dest=${ARTIFACT_PATH},platform-split=true,src=${resolve_workspace()}/.dist/cargo/release"]
 
   matrix = {
     arch     = ["amd64", "arm64"]
@@ -69,9 +76,9 @@ target "windows" {
   name        = "build-windows-${arch}"
   inherits    = ["_common"]
   dockerfile  = "Dockerfile"
-  target      = "builder-artifacts"
+  target      = "builder"
   contexts    = { "setup-environment" = "target:setup-windows-${arch}" }
-  output      = ["type=local,dest=.dist,platform-split=true"]
+  output      = ["type=local,dest=${ARTIFACT_PATH},platform-split=true,src=${resolve_workspace()}/.dist/cargo/release"]
 
   matrix = {
     arch     = ["amd64", "arm64"]
@@ -82,8 +89,7 @@ target "windows" {
 
 
   args = {
-    WORKSPACE  = resolve_workspace()
-    BINARY_EXT = ".exe"
+    WORKSPACE = resolve_workspace()
   }
 }
 

@@ -3,8 +3,9 @@ include = [
 ]
 
 [build]
-target-dir = ".dist/"
-build-dir = ".cache/target"
+target-dir = ".dist/cargo"
+build-dir = ".cache/cargo"
 
 [alias]
 lint = "clippy"
+format = "fmt"
