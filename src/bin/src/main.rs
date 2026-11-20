@@ -1,14 +1,17 @@
+// EXPERIMENTAL: this code is a work in progress and MUST NOT be verified.
+// Do not review it or treat it as a reference for correct behavior.
+
+use kraf_core::environment::env_var::env_var_core::EnvVar;
+use kraf_core::environment::env_var::env_var_host::{env_var_collect, env_var_process_apply};
+use kraf_core::environment::env_var::env_var_resolver::resolve;
 use kraf_core::{ChildProcess, HostProcess, Process};
-use kraf_environment::env_var::env_var_core::EnvVar;
-use kraf_environment::env_var::env_var_host::{env_var_collect, env_var_process_apply};
-use kraf_environment::env_var::env_var_resolver::resolve;
 
 #[cfg(target_os = "linux")]
-use kraf_environment::env_var::env_var_host_linux::LINUX_MAPPINGS as PLATFORM_MAPPINGS;
+use kraf_core::environment::env_var::env_var_host_linux::LINUX_MAPPINGS as PLATFORM_MAPPINGS;
 #[cfg(target_os = "macos")]
-use kraf_environment::env_var::env_var_host_macos::MACOS_MAPPINGS as PLATFORM_MAPPINGS;
+use kraf_core::environment::env_var::env_var_host_macos::MACOS_MAPPINGS as PLATFORM_MAPPINGS;
 #[cfg(target_os = "windows")]
-use kraf_environment::env_var::env_var_host_windows::WINDOWS_MAPPINGS as PLATFORM_MAPPINGS;
+use kraf_core::environment::env_var::env_var_host_windows::WINDOWS_MAPPINGS as PLATFORM_MAPPINGS;
 
 fn main() {
     let workdir = HostProcess.get_current_dir();
