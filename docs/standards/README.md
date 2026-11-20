@@ -27,7 +27,8 @@ navigate the repository on their own through its document graph.
   they are, their layout, precedence between rules, and how they word their
   rules.
 - [CODE_STANDARDS.md](./CODE_STANDARDS.md): Code standards for dependencies,
-  program structure, platforms, tooling, CI, agent configuration, and review.
+  program structure, languages, platforms, tooling, CI, agent configuration, and
+  review.
 - [SPEC_STANDARDS.md](./SPEC_STANDARDS.md): Standards for documenting feature
   intent, requirements, and acceptance scenarios.
 - [REVIEW_STANDARDS.md](./REVIEW_STANDARDS.md): Standards for what a valid

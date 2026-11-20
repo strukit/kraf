@@ -1,7 +1,7 @@
 [workspace]
 resolver = "3"
-members = ["src/*"]
-default-members = ["src/*"]
+members = ["src/bin", "src/core"]
+default-members = ["src/core", "src/bin"]
 
 [workspace.package]
 version = "0.0.1"
@@ -13,7 +13,6 @@ repository = "https://github.com/strukit/kraf"
 
 [workspace.dependencies]
 kraf-core = { path = "src/core", version = "0.0.1" }
-kraf-environment = { path = "src/environment", version = "0.0.1" }
 
 [workspace.lints.clippy]
 correctness = "deny"

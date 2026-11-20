@@ -451,8 +451,8 @@ terms, rules, bootstrap, and procedures that agents follow in each task.
   documents: what they are, their layout, precedence between rules, and how they
   word their rules.
 - [CODE_STANDARDS.md](./docs/standards/CODE_STANDARDS.md): Code standards for
-  dependencies, program structure, platforms, tooling, CI, agent configuration,
-  and review.
+  dependencies, program structure, languages, platforms, tooling, CI, agent
+  configuration, and review.
 - [SPEC_STANDARDS.md](./docs/standards/SPEC_STANDARDS.md): Standards for
   documenting feature intent, requirements, and acceptance scenarios.
 - [TOOLS.md](./docs/TOOLS.md): Tools declared in this repository, with their
