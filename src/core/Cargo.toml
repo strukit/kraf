@@ -14,7 +14,5 @@ description = "Core process execution primitives for host and child process mana
 [lints]
 workspace = true
 
-[dependencies]
-
 [lib]
 path = "./src/lib.rs"

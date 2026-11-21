@@ -1,5 +1,21 @@
-use super::env_var_core::{EnvVar, EnvVarHostMapping};
-use super::env_var_resolver::env_var_resolve_keys;
+use crate::environment::env_var::env_var_core::{EnvVar, EnvVarHostMapping};
+use crate::environment::env_var::env_var_resolver::env_var_resolve_keys;
+
+#[path = "env_var_host_linux.rs"]
+pub mod env_var_host_linux;
+
+#[path = "env_var_host_mac.rs"]
+pub mod env_var_host_mac;
+
+#[path = "env_var_host_windows.rs"]
+pub mod env_var_host_windows;
+
+#[cfg(host = "linux")]
+pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = env_var_host_linux::HOST_ENV_VAR_MAPPINGS;
+#[cfg(host = "mac")]
+pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = env_var_host_mac::HOST_ENV_VAR_MAPPINGS;
+#[cfg(host = "windows")]
+pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = env_var_host_windows::HOST_ENV_VAR_MAPPINGS;
 
 use crate::Process;
 
@@ -143,7 +159,7 @@ pub const PLATFORM_KERNEL_VERSION_ENV_VAR: EnvVar = EnvVar {
     value: None,
 };
 
-pub const ENV_VAR_FROM_HOST: &[&str] = &[
+pub const ENV_VAR_HOST_KEYS: &[&str] = &[
     HOSTNAME_ENV_VAR.key,
     WORKDIR_ENV_VAR.key,
     PATH_ENV_VAR.key,

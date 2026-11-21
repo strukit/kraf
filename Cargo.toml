@@ -7,7 +7,6 @@ default-members = ["src/core", "src/bin"]
 version = "0.0.1"
 edition = "2024"
 include = ["/src/**", "!**/tests/**", "!**/docs/**", "!**/README.md"]
-license = "MIT"
 publish = false
 repository = "https://github.com/strukit/kraf"
 

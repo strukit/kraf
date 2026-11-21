@@ -2,18 +2,20 @@ use crate::environment::env_var::env_var_core::{
     EnvVar, EnvVarHostMapping, EnvVarImportMode, EnvVarSource,
 };
 
-use super::env_var_test_fixtures::{ENV_VAR_MAPPING_FIXTURE, env_var_collected_fixture};
 use crate::environment::env_var::env_var_resolver::{
     env_var_resolve_keys, expand_dollar_var, expand_tilde_var, lookup_env_var_value, resolve,
     resolve_alias,
+};
+use crate::environment::env_var::tests::env_var_test_fixtures::{
+    ENV_VAR_MAPPING_FIXTURE, env_var_collected_fixture,
 };
 
 #[test]
 fn resolve_keys_are_empty_when_no_mappings_declare_any() {
     let keys = env_var_resolve_keys(&[]);
 
-    assert!(keys.env_vars_keys_import.is_empty());
-    assert!(keys.env_vars_keys_export.is_empty());
+    assert_eq!(keys.env_vars_keys_import, Vec::<&str>::new());
+    assert_eq!(keys.env_vars_keys_export, Vec::<&str>::new());
 }
 
 #[test]

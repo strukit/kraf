@@ -1,4 +1,4 @@
-use super::Process;
+use crate::process::Process;
 
 pub struct HostProcess;
 
@@ -33,7 +33,7 @@ impl Process for HostProcess {
 
         let dir = std::env::temp_dir().join(format!("kraf-{}-{nonce}", std::process::id()));
 
-        std::fs::create_dir_all(&dir).ok()?;
+        std::fs::create_dir(&dir).ok()?;
 
         Some(dir.to_string_lossy().into_owned())
     }
