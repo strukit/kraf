@@ -20,8 +20,8 @@ language: en
 
 ## Overview
 
-`kraf-core` provides the process execution primitives that `kraf-environment`
-and `kraf-lib` build on.
+`kraf-core` provides the process execution primitives, and the `environment`
+module builds on them to resolve and map environment variables across platforms.
 
 ## Links
 

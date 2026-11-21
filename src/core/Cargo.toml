@@ -5,7 +5,6 @@ categories = ["development-tools"]
 edition.workspace = true
 include.workspace = true
 keywords = ["process", "execution", "host", "child"]
-
 license-file = "../../LICENSE"
 publish.workspace = true
 readme = "README.md"

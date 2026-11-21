@@ -1,8 +1,8 @@
 ---
-description: "Code standards for dependencies, program structure, platforms, tooling, CI, agent configuration, and review."
-tags: [standards, code, dependencies, platforms, tooling, ci]
+description: "Code standards for dependencies, program structure, languages, platforms, tooling, CI, agent configuration, and review."
+tags: [standards, code, languages, tools, dependencies, platforms, tooling, ci]
 type: ["standard"]
-scope: ["type:code"]
+scope: ["type:code", "**/*.rs", "**/Cargo.toml"]
 language: en
 ---
 

@@ -20,8 +20,8 @@ language: en
 
 ## Overview
 
-This crate provides the `kraf` command. It builds on `kraf-core` and
-`kraf-environment`.
+This crate provides the `kraf` command. It builds on `kraf-core`, including its
+`environment` module.
 
 ## Links
 

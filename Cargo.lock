@@ -7,24 +7,8 @@ name = "kraf"
 version = "0.0.1"
 dependencies = [
  "kraf-core",
- "kraf-environment",
 ]
 
 [[package]]
 name = "kraf-core"
 version = "0.0.1"
-
-[[package]]
-name = "kraf-environment"
-version = "0.0.1"
-dependencies = [
- "kraf-core",
-]
-
-[[package]]
-name = "kraf-lib"
-version = "0.0.1"
-dependencies = [
- "kraf-core",
- "kraf-environment",
-]

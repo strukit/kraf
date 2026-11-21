@@ -79,8 +79,8 @@ flowchart TD
 
 ## Containers
 
-Zooming into Kraf: actors reach it through its inbound adapters — `kraf-cli`,
-the `kraf-mcp` server, and the `kraf-lib` embeddable library — all backed by the
+Zooming into Kraf: actors reach it through its inbound adapters — `kraf`, the
+`kraf-mcp` server, and the `kraf-lib` embeddable library — all backed by the
 **kraf-host**, which loads the needed features, routes each call to them, and
 materializes the runtime onto the Runner. The entrypoint an actor picks is
 orthogonal to the host behind it.
@@ -92,7 +92,7 @@ flowchart TD
     host["External Host<br/>(C ABI · WASI)"]
 
     subgraph kraf["Kraf"]
-        cli["CLI · kraf-cli<br/>shell · single tools"]
+        cli["CLI · kraf<br/>shell · single tools"]
         mcp["MCP · kraf-mcp<br/>tools over MCP"]
         lib["LIB · kraf-lib<br/>C ABI · WASI"]
         engine["ENGINE · kraf-host<br/> discovers · loads · routes"]
@@ -111,12 +111,16 @@ flowchart TD
     engine -->|materializes| runner
 ```
 
-- CLI (`kraf-cli`): interactive shell and single-tool invocations.
-- MCP (`kraf-mcp`): exposes the same tools over MCP.
-- LIB (`kraf-lib`): linked by an External Host to call tools in-process (C ABI ·
-  WASI).
-- ENGINE (`kraf-host`): discovers and loads features, routes calls to them, and
-  materializes the runtime onto the Runner.
+- CLI (`kraf`, in `src/bin`): interactive shell and single-tool invocations.
+- MCP (`kraf-mcp`, planned): exposes the same tools over MCP.
+- LIB (`kraf-lib`, planned): linked by an External Host to call tools in-process
+  (C ABI · WASI).
+- ENGINE (`kraf-host`, planned): discovers and loads features, routes calls to
+  them, and materializes the runtime onto the Runner.
+
+The crate names in this section describe the target design. In the current
+workspace, the CLI is the `kraf` crate and `kraf-core` provides the process and
+environment primitives; `kraf-mcp`, `kraf-lib` and `kraf-host` do not exist yet.
 
 The local actors (developer, agent) can reach any inbound adapter; the external
 host reaches Kraf through the embeddable lib. How a feature exposes itself and

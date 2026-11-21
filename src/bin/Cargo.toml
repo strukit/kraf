@@ -19,4 +19,3 @@ workspace = true
 
 [dependencies]
 kraf-core.workspace = true
-kraf-environment.workspace = true
