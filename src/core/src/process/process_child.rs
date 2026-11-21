@@ -1,4 +1,4 @@
-use super::Process;
+use crate::process::Process;
 
 pub struct ChildProcess {
     command: std::process::Command,

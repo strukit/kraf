@@ -1,9 +1,18 @@
-use super::env_var_core::{EnvVarHostMapping, EnvVarImportMode, EnvVarSource};
-#[allow(clippy::wildcard_imports)]
-use super::env_var_host::*;
+use crate::environment::env_var::env_var_core::{
+    EnvVarHostMapping, EnvVarImportMode, EnvVarSource,
+};
 
-#[cfg(any(target_os = "macos", test))]
-pub const MACOS_MAPPINGS: &[EnvVarHostMapping] = &[
+use crate::environment::env_var::env_var_host::{
+    HOME_CACHE_ENV_VAR, HOME_CONFIG_ENV_VAR, HOME_DATA_BIN_ENV_VAR, HOME_DATA_ENV_VAR,
+    HOME_ENV_VAR, HOME_SESSION_ENV_VAR, HOME_STATE_ENV_VAR, HOME_TEMP_ENV_VAR, HOSTNAME_ENV_VAR,
+    LOGNAME_ENV_VAR, PATH_ENV_VAR, PLATFORM_ARCH_ENV_VAR, PLATFORM_ENV_VAR,
+    PLATFORM_FAMILY_ENV_VAR, PLATFORM_KERNEL_ENV_VAR, PLATFORM_KERNEL_VERSION_ENV_VAR,
+    PLATFORM_VERSION_ENV_VAR, TERMINAL_COLOR_ENV_VAR, TERMINAL_ENV_VAR, TERMINAL_NOCOLOR_ENV_VAR,
+    TERMINAL_PROGRAM_ENV_VAR, TERMINAL_PROGRAM_VERSION_ENV_VAR, TERMINAL_TYPE_ENV_VAR,
+    USER_ENV_VAR, USER_LANGUAGE_ENV_VAR, USER_TIMEZONE_ENV_VAR, WORKDIR_ENV_VAR,
+};
+
+pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
     EnvVarHostMapping {
         key: HOSTNAME_ENV_VAR.key,
         source: EnvVarSource::Host,

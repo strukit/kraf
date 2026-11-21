@@ -1,13 +1,17 @@
-use super::env_var_test_fixtures::{ENV_VAR_MAPPING_FIXTURE, FakeProcess};
 use crate::environment::env_var::env_var_core::{
     EnvVar, EnvVarHostMapping, EnvVarImportMode, EnvVarSource,
 };
 use crate::environment::env_var::env_var_host::{
-    ENV_VAR_FROM_HOST, env_var_collect, env_var_process_apply,
+    ENV_VAR_HOST_KEYS, env_var_collect, env_var_host_linux, env_var_host_mac, env_var_host_windows,
+    env_var_process_apply,
 };
-use crate::environment::env_var::env_var_host_linux::LINUX_MAPPINGS;
-use crate::environment::env_var::env_var_host_macos::MACOS_MAPPINGS;
-use crate::environment::env_var::env_var_host_windows::WINDOWS_MAPPINGS;
+use crate::environment::env_var::tests::env_var_test_fixtures::{
+    ENV_VAR_MAPPING_FIXTURE, FakeProcess,
+};
+
+pub const LINUX_MAPPINGS: &[EnvVarHostMapping] = env_var_host_linux::HOST_ENV_VAR_MAPPINGS;
+pub const MACOS_MAPPINGS: &[EnvVarHostMapping] = env_var_host_mac::HOST_ENV_VAR_MAPPINGS;
+pub const WINDOWS_MAPPINGS: &[EnvVarHostMapping] = env_var_host_windows::HOST_ENV_VAR_MAPPINGS;
 
 use crate::Process;
 use std::collections::HashSet;
@@ -63,10 +67,10 @@ fn mappings_include_all_known_keys() {
     fn assert_includes_all_known_keys(mappings: &[EnvVarHostMapping], name: &str) {
         let mapping_keys: HashSet<&str> = mappings.iter().map(|mapping| mapping.key).collect();
 
-        for known_key in ENV_VAR_FROM_HOST {
+        for known_key in ENV_VAR_HOST_KEYS {
             assert!(
                 mapping_keys.contains(known_key),
-                "{name} is missing known key '{known_key}' from env_var_host.rs (ENV_VAR_FROM_HOST)"
+                "{name} is missing known key '{known_key}' from env_var_host.rs (ENV_VAR_HOST_KEYS)"
             );
         }
     }

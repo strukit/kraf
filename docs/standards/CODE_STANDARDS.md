@@ -51,6 +51,21 @@ This section defines the structure of Rust folder modules.
   MUST NOT share its parent's exact name because that causes
   `clippy::module_inception`.
 
+## Rust Platform Selection
+
+```yaml
+scope:  ["**/*.rs"]
+```
+
+This section defines how Rust code selects code for a platform.
+
+### Rules
+
+- Rust source code MUST select platform-specific code with `#[cfg(host =
+  "...")]`, and MUST NOT read the `CARGO_CFG_TARGET_*` environment variables.
+- The `CARGO_CFG_TARGET_*` environment variables MUST only be read in
+  `build.rs`, which emits the `host` cfg.
+
 ## Comments
 
 This section defines which document standards apply to comments in code.

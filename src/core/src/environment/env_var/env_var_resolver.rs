@@ -1,5 +1,7 @@
-use super::env_var_core::{EnvVar, EnvVarHostMapping, EnvVarImportMode, EnvVarSource};
-use super::env_var_host::HOME_ENV_VAR;
+use crate::environment::env_var::env_var_core::{
+    EnvVar, EnvVarHostMapping, EnvVarImportMode, EnvVarSource,
+};
+use crate::environment::env_var::env_var_host::HOME_ENV_VAR;
 
 #[must_use]
 pub fn expand_tilde_var(env_var_value: &str, home_value: &str) -> String {
