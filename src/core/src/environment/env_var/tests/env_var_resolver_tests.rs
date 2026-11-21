@@ -283,10 +283,10 @@ fn resolve_handles_every_mapping_case_at_once() {
     let env_var_collected = env_var_collected_fixture("/workspace");
     let result = resolve(ENV_VAR_MAPPING_FIXTURE, &env_var_collected);
 
-    #[cfg(target_os = "windows")]
+    #[cfg(host = "windows")]
     let path_expected = "/workspace/.local/bin;/usr/bin:/bin";
 
-    #[cfg(not(target_os = "windows"))]
+    #[cfg(not(host = "windows"))]
     let path_expected = "/workspace/.local/bin:/usr/bin:/bin";
 
     let expected: &[(&str, &str)] = &[
@@ -341,10 +341,10 @@ fn resolve_alias_merges_multiple_paths_with_colon_separator() {
 
     let result = resolve_alias(&env_var_mapping, &env_var_collected);
 
-    #[cfg(target_os = "windows")]
+    #[cfg(host = "windows")]
     let expected = "/custom/bin;/usr/bin".to_string();
 
-    #[cfg(not(target_os = "windows"))]
+    #[cfg(not(host = "windows"))]
     let expected = "/custom/bin:/usr/bin".to_string();
 
     assert_eq!(result, expected);
