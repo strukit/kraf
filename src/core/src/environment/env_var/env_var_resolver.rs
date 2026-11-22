@@ -18,12 +18,12 @@ fn extract_dollar_var_key(value: &str) -> Option<&str> {
 }
 
 #[must_use]
-pub fn expand_dollar_var(env_var_key_raw: &str, env_var_collected: &[EnvVar]) -> String {
+pub fn expand_dollar_var(env_var_key_raw: &str, env_var_provided: &[EnvVar]) -> String {
     let Some(env_var_key) = extract_dollar_var_key(env_var_key_raw) else {
         return env_var_key_raw.to_string();
     };
 
-    let Some(env_var_value) = lookup_env_var_value(env_var_key, env_var_collected) else {
+    let Some(env_var_value) = lookup_env_var_value(env_var_key, env_var_provided) else {
         return env_var_key_raw.to_string();
     };
 
