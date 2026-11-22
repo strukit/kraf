@@ -21,7 +21,8 @@ language: en
 ## Overview
 
 This crate provides the `kraf` command. It builds on `kraf-core`, including its
-`environment` module.
+`environment` module, and holds the experimental `process` module that starts
+the child process.
 
 ## Links
 

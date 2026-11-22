@@ -1,6 +1,8 @@
 // EXPERIMENTAL: this code is a work in progress and MUST NOT be verified.
 // Do not review it or treat it as a reference for correct behavior.
 
+mod process;
+
 use kraf_core::environment::env_var::env_var_core::EnvVar;
 use kraf_core::environment::env_var::env_var_host::{
     HOME_ENV_VAR, HOST_ENV_VAR_MAPPINGS, HOST_HOME_ENV_VAR, HostEnvVarReader, WORKDIR_ENV_VAR,
@@ -8,7 +10,7 @@ use kraf_core::environment::env_var::env_var_host::{
 };
 use kraf_core::environment::env_var::env_var_projector::{apply, project};
 use kraf_core::environment::env_var::env_var_resolver::resolve;
-use kraf_core::{ChildProcess, HostProcess, Process};
+use process::{ChildProcess, HostProcess, Process};
 
 fn main() {
     println!("[kraf] trap init");

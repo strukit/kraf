@@ -1,6 +1,6 @@
 ---
-description: Core process execution primitives for host and child process management in Kraf.
-tags: [kraf, core, process, execution]
+description: Core library of Kraf, with cross-platform environment variable resolution and projection.
+tags: [kraf, core, environment]
 type: ["readme"]
 scope: ["src/core/**/*"]
 language: en
@@ -20,8 +20,8 @@ language: en
 
 ## Overview
 
-`kraf-core` provides the process execution primitives, and the `environment`
-module builds on them to resolve and map environment variables across platforms.
+`kraf-core` provides the `environment` module, which resolves and maps
+environment variables across platforms.
 
 ## Links
 

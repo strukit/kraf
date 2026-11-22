@@ -64,8 +64,8 @@ toolchains a project already uses rather than replacing them.
 
 ### Modules
 
-- [Core](./src/core/README.md): Core process execution primitives for host and
-  child process management in Kraf.
+- [Core](./src/core/README.md): Core library of Kraf, with cross-platform
+  environment variable resolution and projection.
 - [Environment](./src/core/src/environment/README.md): Cross-platform
   environment variable resolution and mapping in Kraf, part of kraf-core.
 - [CLI](./src/bin/README.md): Command-line interface for the kraf development
