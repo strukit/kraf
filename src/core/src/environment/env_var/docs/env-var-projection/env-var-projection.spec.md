@@ -106,7 +106,7 @@ Name: Empty values are not projected
 **Status**:
 
 - Doc status: Draft
-- Implementation status: Not Implemented
+- Implementation status: Implemented
 
 ```text
 IF a declaration resolves to an empty value or has no resolved value,

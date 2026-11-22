@@ -154,7 +154,27 @@ fn apply_writes_every_projected_entry() {
 }
 
 #[test]
-fn apply_writes_empty_string_for_entries_with_no_value() {
+fn project_skips_declaration_with_empty_value() {
+    let mapping = EnvVarHostMapping {
+        key: "USER_TIMEZONE",
+        source: EnvVarSource::Host,
+        alias_import: &["USER_TIMEZONE", "TZ"],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &["TZ"],
+        fallback: None,
+    };
+    let env_var_resolved = [EnvVar {
+        key: "USER_TIMEZONE",
+        value: Some(String::new()),
+    }];
+
+    let result = project(&[mapping], &env_var_resolved);
+
+    assert!(result.env_vars().is_empty());
+}
+
+#[test]
+fn apply_writes_nothing_for_declaration_without_resolved_value() {
     let mapping = EnvVarHostMapping {
         key: "HOME_TEMP",
         source: EnvVarSource::Provided,
@@ -167,5 +187,5 @@ fn apply_writes_empty_string_for_entries_with_no_value() {
     let mut writer = FakeEnvVarWriter::default();
     apply(&project(&[mapping], &[]), &mut writer);
 
-    assert_eq!(writer.env.get("TMPDIR"), Some(&String::new()));
+    assert_eq!(writer.env.get("TMPDIR"), None);
 }

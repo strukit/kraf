@@ -134,7 +134,7 @@ Name: Placeholder expansion
 **Status**:
 
 - Doc status: Draft
-- Implementation status: Partially Implemented
+- Implementation status: Implemented
 
 ```text
 WHEN a fallback contains a tilde and a non-empty provided `HOME_DIR` value is
