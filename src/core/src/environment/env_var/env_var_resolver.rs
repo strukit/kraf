@@ -39,7 +39,7 @@ pub fn lookup_env_var_value(env_var_key: &str, env_var_collected: &[EnvVar]) -> 
 }
 
 /// Provided values under their canonical keys and under the export aliases of
-/// their declarations, so that `$HOME` and `$HOME_DIR` name the same value.
+/// their declarations, so that a placeholder names the same value by either.
 fn provided_with_export_aliases(
     env_var_mappings: &[EnvVarHostMapping],
     env_var_provided: &[EnvVar],
