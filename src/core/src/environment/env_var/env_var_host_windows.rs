@@ -27,16 +27,18 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &["WORKDIR", "CD"],
+        alias_export: &["CD"],
         fallback: None,
     },
     EnvVarHostMapping {
         key: HOME_PATH_ENV_VAR.key,
         source: EnvVarSource::Provided,
-        alias_import: &[HOME_DATA_BIN_ENV_VAR.key, "PATH"],
-        alias_import_mode: EnvVarImportMode::Merge,
+        alias_import: &[],
+        alias_import_mode: EnvVarImportMode::FirstFound,
         alias_export: &["PATH"],
-        fallback: None,
+        fallback: Some(
+            r"~\.local\bin;C:\Windows\System32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\",
+        ),
     },
     EnvVarHostMapping {
         key: HOST_PATH_ENV_VAR.key,

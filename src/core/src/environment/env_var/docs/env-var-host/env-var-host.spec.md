@@ -142,9 +142,8 @@ THE SOFTWARE SHALL declare, in every supported platform mapping, the
 
 THE SOFTWARE SHALL NOT export the `HOST_PATH` declaration to a managed process.
 
-WHERE the Linux or Mac mappings are included,
-THE SOFTWARE SHALL resolve the `HOME_PATH` declaration from its fallback, without
-importing the `PATH` of the host.
+THE SOFTWARE SHALL resolve the `HOME_PATH` declaration, in every supported
+platform mapping, from its fallback, without importing the `PATH` of the host.
 
 THE SOFTWARE SHALL NOT give the `HOST_DATA` and `HOST_CONFIG` declarations a
 fallback, so that a value the host does not define is not projected.

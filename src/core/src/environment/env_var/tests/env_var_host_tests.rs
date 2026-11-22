@@ -256,3 +256,22 @@ fn host_data_and_config_have_no_fallback() {
     assert_no_fallback(LINUX_MAPPINGS, "LINUX_MAPPINGS");
     assert_no_fallback(WINDOWS_MAPPINGS, "WINDOWS_MAPPINGS");
 }
+
+#[test]
+fn home_path_does_not_import_the_host_path() {
+    fn assert_home_path_is_isolated(mappings: &[EnvVarHostMapping], name: &str) {
+        let home_path = mappings
+            .iter()
+            .find(|mapping| mapping.key == "HOME_PATH")
+            .unwrap_or_else(|| panic!("{name}: missing HOME_PATH mapping"));
+
+        assert!(
+            home_path.alias_import.is_empty() && home_path.fallback.is_some(),
+            "{name}: HOME_PATH imports from the host or has no fallback"
+        );
+    }
+
+    assert_home_path_is_isolated(MACOS_MAPPINGS, "MACOS_MAPPINGS");
+    assert_home_path_is_isolated(LINUX_MAPPINGS, "LINUX_MAPPINGS");
+    assert_home_path_is_isolated(WINDOWS_MAPPINGS, "WINDOWS_MAPPINGS");
+}

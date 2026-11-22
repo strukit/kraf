@@ -194,7 +194,7 @@ Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
   Rule: ENV-VAR_HOST-REQ-0005 — Host path lists and isolated session path
 
     Scenario: ENV-VAR_HOST-ACC-0007 — Session path does not import the host path
-      Given the Linux or Mac mappings
+      Given a supported platform mapping
       And the host "PATH" is "/opt/tools/bin:/usr/bin"
       When the software resolves "HOME_PATH"
       Then "HOME_PATH" does not contain "/opt/tools/bin"
