@@ -36,14 +36,17 @@ The model makes it possible to:
 
 Environment declarations are static capabilities.
 
-Declarations are embedded in source code. Plugin declarations are embedded in
-plugin source code or immutable plugin metadata distributed with the plugin. A
-declaration identifies an allowed variable and its behavior; it does not contain
-the final runtime value.
+A declaration is static when it is known before a session starts. Declarations
+come from source code, from immutable metadata distributed with a plugin, or
+from configuration files loaded at startup, such as the user's configuration. A
+configuration file on disk is static: it is loaded once, before resolution, and
+it can be read and reviewed like code. A declaration identifies an allowed
+variable and its behavior; it does not contain the final runtime value.
 
-Dynamic sources provide values for existing declarations. They do not create new
-declarations, request undeclared host values, or expand the set of variables
-that a process can receive.
+A dynamic source is one that acts while a session is running, such as a plugin
+during its execution. Dynamic sources provide values for existing declarations.
+They do not create new declarations, request undeclared host values, or expand
+the set of variables that a process can receive.
 
 #### Security access
 

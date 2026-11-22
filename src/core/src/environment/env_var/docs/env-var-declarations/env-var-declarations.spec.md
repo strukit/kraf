@@ -37,6 +37,8 @@ Name: Static declaration
 - [Intent](../env-var-intent.md): module intent.
 - [ENV-VAR_DECLARATIONS-ACC-0001](./env-var-declarations.acceptance.md#env-var_declarations-acc-0001)
 - [ENV-VAR_DECLARATIONS-ACC-0002](./env-var-declarations.acceptance.md#env-var_declarations-acc-0002)
+- [ENV-VAR_DECLARATIONS-ACC-0007](./env-var-declarations.acceptance.md#env-var_declarations-acc-0007)
+- [ENV-VAR_DECLARATIONS-ACC-0008](./env-var-declarations.acceptance.md#env-var_declarations-acc-0008)
 
 **Status**:
 
@@ -44,17 +46,21 @@ Name: Static declaration
 - Implementation status: Not Implemented
 
 ```text
-THE SOFTWARE SHALL resolve and project only environment-variable declarations
-that are built into the software or packaged as immutable metadata with a
-plugin.
+THE SOFTWARE SHALL determine the complete set of declarations before resolution
+starts, from source code, immutable plugin metadata, or configuration files
+loaded at startup.
 
-THE SOFTWARE MAY accept values for known declarations from runtime
-configuration.
+THE SOFTWARE MAY accept values for known declarations from configuration files
+loaded at startup and from dynamic sources while a session is running.
 
-THE SOFTWARE SHALL NOT accept declarations, import aliases, export aliases, or
-source eligibility from runtime configuration.
+WHILE a session is running,
+THE SOFTWARE SHALL NOT accept new declarations, import aliases, export aliases,
+or source eligibility.
 
-IF runtime configuration provides a value for an unknown declaration,
+IF a plugin requests a new declaration while a session is running,
+THEN THE SOFTWARE SHALL reject the request.
+
+IF a configuration file provides a value for an unknown declaration,
 THEN THE SOFTWARE SHALL reject the configuration.
 ```
 
