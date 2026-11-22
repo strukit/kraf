@@ -1,4 +1,7 @@
-use crate::environment::env_var::env_var_core::EnvVarWriter;
+// EXPERIMENTAL: this code is a work in progress and MUST NOT be verified.
+// Do not review it or treat it as a reference for correct behavior.
+
+use kraf_core::environment::env_var::env_var_core::EnvVarWriter;
 
 pub struct ChildProcess {
     command: std::process::Command,

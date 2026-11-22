@@ -119,8 +119,9 @@ flowchart TD
   them, and materializes the runtime onto the Runner.
 
 The crate names in this section describe the target design. In the current
-workspace, the CLI is the `kraf` crate and `kraf-core` provides the process and
-environment primitives; `kraf-mcp`, `kraf-lib` and `kraf-host` do not exist yet.
+workspace, the CLI is the `kraf` crate, which holds the experimental process
+primitives, and `kraf-core` provides the environment primitives; `kraf-mcp`,
+`kraf-lib` and `kraf-host` do not exist yet.
 
 The local actors (developer, agent) can reach any inbound adapter; the external
 host reaches Kraf through the embeddable lib. How a feature exposes itself and

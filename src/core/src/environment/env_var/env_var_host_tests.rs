@@ -1,18 +1,28 @@
 use crate::environment::env_var::env_var_core::{
-    EnvVarHostMapping, EnvVarImportMode, EnvVarSource,
+    EnvVarHostMapping, EnvVarImportMode, EnvVarReader, EnvVarSource,
 };
 use crate::environment::env_var::env_var_host::{
     ENV_VAR_HOST_KEYS, env_var_collect, env_var_host_linux, env_var_host_mac, env_var_host_windows,
-};
-use crate::environment::env_var::tests::env_var_test_fixtures::{
-    ENV_VAR_MAPPING_FIXTURE, FakeEnvVarReader,
 };
 
 pub const LINUX_MAPPINGS: &[EnvVarHostMapping] = env_var_host_linux::HOST_ENV_VAR_MAPPINGS;
 pub const MACOS_MAPPINGS: &[EnvVarHostMapping] = env_var_host_mac::HOST_ENV_VAR_MAPPINGS;
 pub const WINDOWS_MAPPINGS: &[EnvVarHostMapping] = env_var_host_windows::HOST_ENV_VAR_MAPPINGS;
 
-use std::collections::HashSet;
+use std::collections::{HashMap, HashSet};
+
+/// In-memory reader whose environment is isolated from the real one of the
+/// test process, so that tests neither read nor change it.
+#[derive(Default)]
+struct FakeEnvVarReader {
+    env: HashMap<String, String>,
+}
+
+impl EnvVarReader for FakeEnvVarReader {
+    fn read(&self, key: &str) -> Option<String> {
+        self.env.get(key).cloned()
+    }
+}
 
 #[test]
 fn collect_picks_up_a_declared_env_var() {
@@ -60,7 +70,6 @@ fn mappings_have_unique_keys() {
     assert_unique_env_var_mapping(MACOS_MAPPINGS);
     assert_unique_env_var_mapping(LINUX_MAPPINGS);
     assert_unique_env_var_mapping(WINDOWS_MAPPINGS);
-    assert_unique_env_var_mapping(ENV_VAR_MAPPING_FIXTURE);
 }
 
 #[test]
@@ -99,7 +108,6 @@ fn mappings_merge_mode_has_multiple_aliases() {
     assert_merge_mode_has_multiple_aliases(MACOS_MAPPINGS);
     assert_merge_mode_has_multiple_aliases(LINUX_MAPPINGS);
     assert_merge_mode_has_multiple_aliases(WINDOWS_MAPPINGS);
-    assert_merge_mode_has_multiple_aliases(ENV_VAR_MAPPING_FIXTURE);
 }
 
 #[test]

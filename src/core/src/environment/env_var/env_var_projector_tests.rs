@@ -1,8 +1,22 @@
 use crate::environment::env_var::env_var_core::{
-    EnvVar, EnvVarHostMapping, EnvVarImportMode, EnvVarSource,
+    EnvVar, EnvVarHostMapping, EnvVarImportMode, EnvVarSource, EnvVarWriter,
 };
 use crate::environment::env_var::env_var_projector::{apply, project};
-use crate::environment::env_var::tests::env_var_test_fixtures::FakeEnvVarWriter;
+
+use std::collections::HashMap;
+
+/// In-memory writer whose environment is isolated from the real one of the
+/// test process, so that tests neither read nor change it.
+#[derive(Default)]
+struct FakeEnvVarWriter {
+    env: HashMap<String, String>,
+}
+
+impl EnvVarWriter for FakeEnvVarWriter {
+    fn write(&mut self, key: &str, value: &str) {
+        self.env.insert(key.to_string(), value.to_string());
+    }
+}
 
 #[test]
 fn project_emits_every_alias_export_with_the_resolved_value_in_order() {

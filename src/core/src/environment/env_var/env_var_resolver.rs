@@ -165,3 +165,7 @@ pub fn env_var_resolve_keys(env_var_mappings: &[EnvVarHostMapping]) -> EnvVarRes
         env_vars_keys_import,
     }
 }
+
+#[cfg(test)]
+#[path = "env_var_resolver_tests.rs"]
+mod tests;
