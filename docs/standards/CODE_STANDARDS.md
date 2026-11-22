@@ -42,16 +42,19 @@ scope:  ["**/*.rs"]
 
 This section defines the structure of Rust folder modules.
 
+### Terms
+
+- **Aggregator module**: a folder module whose submodules are other modules,
+  each with its own purpose, rather than parts of its own implementation.
+
 ### Rules
 
 - A Rust folder module MUST have its module file next to its folder and named
   after it, such as `foo.rs` for `foo/`, and MUST NOT use a `mod.rs` file.
-- The module file of a top-level module of a crate, declared in `lib.rs` or
-  `main.rs`, such as `environment.rs` or `process.rs`, MUST only declare or
-  re-export submodules, and MUST NOT hold types, logic, or implementation.
+- The module file of an aggregator module MUST only declare or re-export its
+  submodules, and MUST NOT hold types, logic, or implementation.
 - The module file of any other folder module MUST declare the submodules of its
-  folder, and MAY hold the main types and logic of the module, such as
-  `env_var_host.rs` for `env_var_host/`.
+  folder, and MAY hold the main types and logic of the module.
 - A submodule MUST NOT share its parent's exact name, such as `foo/foo.rs`,
   because that causes `clippy::module_inception`.
 - The tests of a Rust file `foo.rs` MUST be in a file named `foo_tests.rs` next
