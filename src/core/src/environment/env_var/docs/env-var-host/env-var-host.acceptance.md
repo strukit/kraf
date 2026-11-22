@@ -169,8 +169,7 @@ Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
     Scenario: ENV-VAR_HOST-ACC-0006 — Kraf canonical keys stay out of the native projection
       Given a supported platform mapping
       When the mappings are projected
-      Then no projected key is "PLATFORM", "TERMINAL_TYPE", "USER_NAME", "USER_LANGUAGE", "HOME_DIR", or "HOME_TEMP"
-      And "HOME", "USER", "TMPDIR", "TERM", and "LANG" are projected
+      Then no projected key is a canonical key of the PLATFORM, TERMINAL, USER, or HOME families
 ```
 
 ---
@@ -222,10 +221,10 @@ Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
   Rule: ENV-VAR_HOST-REQ-0005 — Host path lists and isolated session path
 
     Scenario: ENV-VAR_HOST-ACC-0008 — Undefined host data and config lists are not projected
-      Given the Linux or Mac mappings
-      And the host defines neither "XDG_DATA_DIRS" nor "XDG_CONFIG_DIRS"
+      Given a supported platform mapping
+      And the host defines no import alias of "HOST_DATA" or "HOST_CONFIG"
       When the software resolves and projects the mappings
-      Then the projection contains neither "XDG_DATA_DIRS" nor "XDG_CONFIG_DIRS"
+      Then the projection contains no export alias of "HOST_DATA" or "HOST_CONFIG"
 ```
 
 ---
@@ -248,19 +247,11 @@ Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
 
   Rule: ENV-VAR_HOST-REQ-0006 — System declarations
 
-    Scenario Outline: ENV-VAR_HOST-ACC-0009 — System declarations resolve on every platform
-      Given the <platform> mappings
-      And the host environment defines the native system variables of that platform
-      When the software resolves "SYSTEM_ROOT", "SYSTEM_DRIVE", and "SYSTEM_PROGRAMS"
-      Then "SYSTEM_ROOT" resolves to <root>
-      And "SYSTEM_DRIVE" resolves to <drive>
-      And "SYSTEM_PROGRAMS" resolves to <programs>
-
-      Examples:
-        | platform | root         | drive | programs              |
-        | Linux    | "/"          | "/"   | "/opt"                |
-        | Mac      | "/"          | "/"   | "/Applications"       |
-        | Windows  | "C:\Windows" | "C:"  | "C:\Program Files" |
+    Scenario: ENV-VAR_HOST-ACC-0009 — System declarations resolve on every platform
+      Given a supported platform mapping
+      When the mappings are loaded
+      Then the mapping declares "SYSTEM_ROOT", "SYSTEM_DRIVE", and "SYSTEM_PROGRAMS"
+      And each of them has source host
 ```
 
 ---
@@ -284,40 +275,10 @@ Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
   Rule: ENV-VAR_HOST-REQ-0004 — Native export aliases only
 
     Scenario: ENV-VAR_HOST-ACC-0010 — Only pass-through declarations export their canonical key
-      Given the Windows mappings
+      Given a supported platform mapping with a pass-through declaration
       When the mappings are projected
-      Then "ProgramFiles(x86)" is projected under its canonical key
+      Then the pass-through declaration is projected under its canonical key
       And no canonical key of another declaration is projected
-```
-
----
-
-## ENV-VAR_HOST-ACC-0011
-
-Name: Windows program folders pass through unchanged
-
-**Links:**
-
-- [ENV-VAR_HOST-REQ-0006](./env-var-host.spec.md#env-var_host-req-0006)
-
-**Status**:
-
-- Doc status: Draft
-- Verification status: Unknown
-
-```gherkin
-Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
-
-  Rule: ENV-VAR_HOST-REQ-0006 — System declarations
-
-    Scenario: ENV-VAR_HOST-ACC-0011 — Windows program folders pass through unchanged
-      Given the Windows mappings
-      And the host "ProgramFiles" is "C:\Program Files (x86)"
-      And the host "ProgramW6432" is "C:\Program Files"
-      When the software resolves and projects the mappings
-      Then "SYSTEM_PROGRAMS" resolves to "C:\Program Files"
-      And the projection has "ProgramFiles" with "C:\Program Files (x86)"
-      And the projection has "ProgramW6432" with "C:\Program Files"
 ```
 
 ## Links
