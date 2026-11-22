@@ -39,15 +39,15 @@ fn project_emits_every_alias_export_with_the_resolved_value_in_order() {
 #[test]
 fn project_skips_canonical_key_not_declared_as_export_alias() {
     let mapping = EnvVarHostMapping {
-        key: "LOGNAME",
+        key: "USER",
         source: EnvVarSource::Host,
         alias_import: &["USER", "LOGNAME"],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &["USER"],
+        alias_export: &["LOGNAME"],
         fallback: None,
     };
     let env_var_resolved = [EnvVar {
-        key: "LOGNAME",
+        key: "USER",
         value: Some("bart".to_string()),
     }];
 
@@ -59,8 +59,42 @@ fn project_skips_canonical_key_not_declared_as_export_alias() {
         .map(|env_var| env_var.key)
         .collect();
 
-    assert_eq!(keys, vec!["USER"]);
+    assert_eq!(keys, vec!["LOGNAME"]);
     assert_eq!(result.env_vars()[0].value, Some("bart".to_string()));
+}
+
+// Regression for LOGNAME=root with USER=bart, fixed in pull request: #47: the projection
+// exports LOGNAME with the resolved USER value, as the production mapping declares.
+#[test]
+fn project_exports_logname_with_the_user_value() {
+    let mapping = EnvVarHostMapping {
+        key: "USER",
+        source: EnvVarSource::Host,
+        alias_import: &["USER", "LOGNAME"],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &["USER", "LOGNAME"],
+        fallback: None,
+    };
+    let env_var_resolved = [EnvVar {
+        key: "USER",
+        value: Some("bart".to_string()),
+    }];
+
+    let result = project(&[mapping], &env_var_resolved);
+
+    let keys: Vec<&str> = result
+        .env_vars()
+        .iter()
+        .map(|env_var| env_var.key)
+        .collect();
+    let values: Vec<Option<String>> = result
+        .env_vars()
+        .iter()
+        .map(|env_var| env_var.value.clone())
+        .collect();
+
+    assert_eq!(keys, vec!["USER", "LOGNAME"]);
+    assert_eq!(values, vec![Some("bart".to_string()); 2]);
 }
 
 #[test]

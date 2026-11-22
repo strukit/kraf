@@ -163,44 +163,22 @@ fn resolve_alias_keeps_tilde_when_home_is_missing() {
     assert_eq!(result, "~/.tmp");
 }
 
-#[test]
-fn resolve_keeps_logname_in_sync_with_user() {
-    let env_var_mapping = EnvVarHostMapping {
-        key: "LOGNAME",
-        source: EnvVarSource::Host,
-        alias_import: &["USER", "LOGNAME"],
-        alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &["USER"],
-        fallback: None,
-    };
-    let env_var_collected = vec![EnvVar {
-        key: "USER",
-        value: Some("alex".to_string()),
-    }];
-
-    let result = resolve(&[env_var_mapping], &env_var_collected, &[]);
-    let resolved_logname = result.iter().find(|env_var| env_var.key == "LOGNAME");
-
-    assert_eq!(
-        resolved_logname.and_then(|env_var| env_var.value.clone()),
-        Some("alex".to_string())
-    );
-}
-
+// Regression for LOGNAME=root with USER=bart, fixed in #47: USER is resolved
+// from its own value before its LOGNAME alias, as the production mapping declares.
 #[test]
 fn resolve_keeps_conflicting_aliases_from_overwriting_user() {
     let env_var_mapping = EnvVarHostMapping {
-        key: "LOGNAME",
+        key: "USER",
         source: EnvVarSource::Host,
         alias_import: &["USER", "LOGNAME"],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &["USER"],
+        alias_export: &["USER", "LOGNAME"],
         fallback: None,
     };
     let env_var_collected = vec![
         EnvVar {
             key: "USER",
-            value: Some("alex".to_string()),
+            value: Some("bart".to_string()),
         },
         EnvVar {
             key: "LOGNAME",
@@ -209,12 +187,8 @@ fn resolve_keeps_conflicting_aliases_from_overwriting_user() {
     ];
 
     let result = resolve(&[env_var_mapping], &env_var_collected, &[]);
-    let resolved_logname = result.iter().find(|env_var| env_var.key == "LOGNAME");
 
-    assert_eq!(
-        resolved_logname.and_then(|env_var| env_var.value.clone()),
-        Some("alex".to_string())
-    );
+    assert_eq!(result[0].value, Some("bart".to_string()));
 }
 
 #[test]
