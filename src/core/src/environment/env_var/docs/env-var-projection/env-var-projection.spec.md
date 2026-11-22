@@ -69,6 +69,29 @@ THE SOFTWARE SHALL assign the declaration's resolved value to every export alias
 the declaration produces.
 ```
 
+---
+
+### ENV-VAR_PROJECTION-REQ-0003
+
+Name: Projected output order
+
+**Links:**
+
+- [Intent](../env-var-intent.md): module intent.
+- [ENV-VAR_PROJECTION-ACC-0004](./env-var-projection.acceptance.md#env-var_projection-acc-0004)
+
+**Status**:
+
+- Doc status: Draft
+- Implementation status: Implemented
+
+```text
+THE SOFTWARE SHALL emit projected declarations in active mapping order.
+
+THE SOFTWARE SHALL emit, for each declaration, its export aliases in declaration
+order.
+```
+
 ## Links
 
 - [Intent](../env-var-intent.md): Why Kraf resolves and projects environment

@@ -187,14 +187,9 @@ fn resolve_keeps_logname_in_sync_with_user() {
 
     let result = resolve(&[env_var_mapping], &env_var_collected);
     let resolved_logname = result.iter().find(|env_var| env_var.key == "LOGNAME");
-    let resolved_user = result.iter().find(|env_var| env_var.key == "USER");
 
     assert_eq!(
         resolved_logname.and_then(|env_var| env_var.value.clone()),
-        Some("alex".to_string())
-    );
-    assert_eq!(
-        resolved_user.and_then(|env_var| env_var.value.clone()),
         Some("alex".to_string())
     );
 }
@@ -251,7 +246,7 @@ fn lookup_env_var_value_returns_none_when_missing() {
 }
 
 #[test]
-fn resolve_emits_an_entry_for_key_and_for_every_alias_export() {
+fn resolve_emits_only_the_canonical_key() {
     let mapping = EnvVarHostMapping {
         key: "HOME_TEMP",
         source: EnvVarSource::Provided,
@@ -264,18 +259,9 @@ fn resolve_emits_an_entry_for_key_and_for_every_alias_export() {
     let result = resolve(&[mapping], &[]);
 
     let keys: Vec<&str> = result.iter().map(|env_var| env_var.key).collect();
-    let values: Vec<Option<String>> = result.iter().map(|env_var| env_var.value.clone()).collect();
 
-    assert_eq!(keys, vec!["HOME_TEMP", "TEMP", "TMPDIR", "TMP"]);
-    assert_eq!(
-        values,
-        vec![
-            Some("/tmp".to_string()),
-            Some("/tmp".to_string()),
-            Some("/tmp".to_string()),
-            Some("/tmp".to_string())
-        ]
-    );
+    assert_eq!(keys, vec!["HOME_TEMP"]);
+    assert_eq!(result[0].value, Some("/tmp".to_string()));
 }
 
 #[test]

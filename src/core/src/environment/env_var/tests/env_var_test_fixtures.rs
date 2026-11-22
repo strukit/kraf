@@ -1,45 +1,19 @@
 use crate::environment::env_var::env_var_core::{
-    EnvVar, EnvVarHostMapping, EnvVarImportMode, EnvVarSource,
+    EnvVar, EnvVarHostMapping, EnvVarImportMode, EnvVarReader, EnvVarSource,
 };
 
-use crate::Process;
 use std::collections::HashMap;
 
-/// In-memory process whose environment is isolated from the real one of the
+/// In-memory reader whose environment is isolated from the real one of the
 /// test process, so that tests neither read nor change it.
 #[derive(Default)]
-pub(super) struct FakeProcess {
+pub(super) struct FakeEnvVarReader {
     pub(super) env: HashMap<String, String>,
 }
 
-impl Process for FakeProcess {
-    fn read_env_vars(&self) -> Vec<(String, String)> {
-        self.env
-            .iter()
-            .map(|(key, value)| (key.clone(), value.clone()))
-            .collect()
-    }
-
-    fn read_env_var(&self, name: &str) -> Option<String> {
-        self.env.get(name).cloned()
-    }
-
-    fn get_current_dir(&self) -> Option<String> {
-        None
-    }
-
-    fn get_temp_dir_random(&self) -> Option<String> {
-        None
-    }
-
-    fn set_env_var(&mut self, key: &str, value: &str) -> &mut Self {
-        self.env.insert(key.to_string(), value.to_string());
-        self
-    }
-
-    fn clean_env(&mut self) -> &mut Self {
-        self.env.clear();
-        self
+impl EnvVarReader for FakeEnvVarReader {
+    fn read(&self, key: &str) -> Option<String> {
+        self.env.get(key).cloned()
     }
 }
 

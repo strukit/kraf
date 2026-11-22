@@ -2,9 +2,8 @@
 // Do not review it or treat it as a reference for correct behavior.
 
 use kraf_core::environment::env_var::env_var_core::EnvVar;
-use kraf_core::environment::env_var::env_var_host::{
-    HOST_ENV_VAR_MAPPINGS, env_var_collect, env_var_process_apply,
-};
+use kraf_core::environment::env_var::env_var_host::{HOST_ENV_VAR_MAPPINGS, env_var_collect};
+use kraf_core::environment::env_var::env_var_projector::project;
 use kraf_core::environment::env_var::env_var_resolver::resolve;
 use kraf_core::{ChildProcess, HostProcess, Process};
 
@@ -54,7 +53,7 @@ fn main() {
     child.current_dir(&workdir);
     child.clean_env();
 
-    env_var_process_apply(HOST_ENV_VAR_MAPPINGS, &resolved, &mut child);
+    child.apply_env_vars(&project(HOST_ENV_VAR_MAPPINGS, &resolved));
 
     println!("[kraf] trap ready");
 

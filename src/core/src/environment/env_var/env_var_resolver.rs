@@ -63,7 +63,7 @@ pub fn resolve(
 
     env_var_mappings
         .iter()
-        .flat_map(|env_var_unresolved| {
+        .map(|env_var_unresolved| {
             let env_var_value = if env_var_unresolved.alias_import.is_empty() {
                 let from_env_var_collected = (env_var_unresolved.source == EnvVarSource::Provided)
                     .then(|| lookup_env_var_value(env_var_unresolved.key, env_var_collected))
@@ -80,16 +80,10 @@ pub fn resolve(
                 resolve_alias(env_var_unresolved, env_var_collected)
             };
 
-            std::iter::once(EnvVar {
+            EnvVar {
                 key: env_var_unresolved.key,
-                value: Some(env_var_value.clone()),
-            })
-            .chain(env_var_unresolved.alias_export.iter().copied().map(
-                move |alias_export| EnvVar {
-                    key: alias_export,
-                    value: Some(env_var_value.clone()),
-                },
-            ))
+                value: Some(env_var_value),
+            }
         })
         .collect()
 }

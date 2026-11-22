@@ -648,7 +648,7 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ## ENV-VAR_RESOLUTION-ACC-0024
 
-Name: Resolved output preserves declaration and export order
+Name: Resolved output holds only the canonical key
 
 **Links:**
 
@@ -664,12 +664,12 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
   Rule: ENV-VAR_RESOLUTION-REQ-0007 — Resolved output order
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0024 — Resolved output preserves declaration and export order
+    Scenario: ENV-VAR_RESOLUTION-ACC-0024 — Resolved output holds only the canonical key
       Given "HOME_TEMP" resolves to "/workspace/.tmp"
-      And its export aliases are "TEMP", "TMPDIR", and "TMP" in that order
+      And its export aliases are "TEMP", "TMPDIR", and "TMP"
       When the software resolves the declaration
-      Then the resolved keys are "HOME_TEMP", "TEMP", "TMPDIR", and "TMP" in that order
-      And each resolved key has the value "/workspace/.tmp"
+      Then the only resolved key is "HOME_TEMP"
+      And it has the value "/workspace/.tmp"
 ```
 
 ---

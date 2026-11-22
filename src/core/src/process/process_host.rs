@@ -1,6 +1,13 @@
+use crate::environment::env_var::env_var_core::EnvVarReader;
 use crate::process::Process;
 
 pub struct HostProcess;
+
+impl EnvVarReader for HostProcess {
+    fn read(&self, key: &str) -> Option<String> {
+        std::env::var(key).ok()
+    }
+}
 
 impl Process for HostProcess {
     fn read_env_vars(&self) -> Vec<(String, String)> {

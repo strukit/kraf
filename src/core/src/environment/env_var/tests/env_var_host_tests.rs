@@ -1,25 +1,26 @@
 use crate::environment::env_var::env_var_core::{
-    EnvVar, EnvVarHostMapping, EnvVarImportMode, EnvVarSource,
+    EnvVarHostMapping, EnvVarImportMode, EnvVarSource,
 };
 use crate::environment::env_var::env_var_host::{
     ENV_VAR_HOST_KEYS, env_var_collect, env_var_host_linux, env_var_host_mac, env_var_host_windows,
-    env_var_process_apply,
 };
 use crate::environment::env_var::tests::env_var_test_fixtures::{
-    ENV_VAR_MAPPING_FIXTURE, FakeProcess,
+    ENV_VAR_MAPPING_FIXTURE, FakeEnvVarReader,
 };
 
 pub const LINUX_MAPPINGS: &[EnvVarHostMapping] = env_var_host_linux::HOST_ENV_VAR_MAPPINGS;
 pub const MACOS_MAPPINGS: &[EnvVarHostMapping] = env_var_host_mac::HOST_ENV_VAR_MAPPINGS;
 pub const WINDOWS_MAPPINGS: &[EnvVarHostMapping] = env_var_host_windows::HOST_ENV_VAR_MAPPINGS;
 
-use crate::Process;
 use std::collections::HashSet;
 
 #[test]
 fn collect_picks_up_a_declared_env_var() {
-    let mut process = FakeProcess::default();
-    process.set_env_var("ENV_VAR_TEST_COLLECT", "built-value");
+    let mut reader = FakeEnvVarReader::default();
+    reader.env.insert(
+        "ENV_VAR_TEST_COLLECT".to_string(),
+        "built-value".to_string(),
+    );
 
     let mappings = [EnvVarHostMapping {
         key: "MY_VAR",
@@ -30,7 +31,7 @@ fn collect_picks_up_a_declared_env_var() {
         fallback: None,
     }];
 
-    let collected = env_var_collect(&mappings, &process);
+    let collected = env_var_collect(&mappings, &reader);
 
     let found = collected
         .iter()
@@ -99,61 +100,6 @@ fn mappings_merge_mode_has_multiple_aliases() {
     assert_merge_mode_has_multiple_aliases(LINUX_MAPPINGS);
     assert_merge_mode_has_multiple_aliases(WINDOWS_MAPPINGS);
     assert_merge_mode_has_multiple_aliases(ENV_VAR_MAPPING_FIXTURE);
-}
-
-#[test]
-fn apply_writes_empty_string_for_entries_with_no_value() {
-    let mappings = [EnvVarHostMapping {
-        key: "HOME_TEMP",
-        source: EnvVarSource::Provided,
-        alias_import: &[],
-        alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &["ENV_VAR_TEST_APPLY_EMPTY"],
-        fallback: None,
-    }];
-    let env_vars = [EnvVar {
-        key: "ENV_VAR_TEST_APPLY_EMPTY",
-        value: None,
-    }];
-
-    let mut process = FakeProcess::default();
-    env_var_process_apply(&mappings, &env_vars, &mut process);
-
-    assert_eq!(
-        process.read_env_var("ENV_VAR_TEST_APPLY_EMPTY"),
-        Some(String::new())
-    );
-}
-
-#[test]
-fn apply_writes_only_what_is_declared_exportable() {
-    let mappings = [EnvVarHostMapping {
-        key: "ENV_VAR_TEST_APPLY_CANONICAL",
-        source: EnvVarSource::Provided,
-        alias_import: &[],
-        alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &["ENV_VAR_TEST_APPLY_EXPORTABLE"],
-        fallback: None,
-    }];
-    let env_vars = [
-        EnvVar {
-            key: "ENV_VAR_TEST_APPLY_CANONICAL",
-            value: Some("/tmp".to_string()),
-        },
-        EnvVar {
-            key: "ENV_VAR_TEST_APPLY_EXPORTABLE",
-            value: Some("/tmp".to_string()),
-        },
-    ];
-
-    let mut process = FakeProcess::default();
-    env_var_process_apply(&mappings, &env_vars, &mut process);
-
-    assert_eq!(process.read_env_var("ENV_VAR_TEST_APPLY_CANONICAL"), None);
-    assert_eq!(
-        process.read_env_var("ENV_VAR_TEST_APPLY_EXPORTABLE"),
-        Some("/tmp".to_string())
-    );
 }
 
 #[test]

@@ -237,8 +237,8 @@ Name: Resolved output order
 ```text
 THE SOFTWARE SHALL emit resolved declarations in active mapping order.
 
-THE SOFTWARE SHALL emit, for each declaration, the canonical key first, followed
-by its export aliases in declaration order, all with the same resolved value.
+THE SOFTWARE SHALL emit, for each declaration, only its canonical key with its
+resolved value.
 ```
 
 ## Links
