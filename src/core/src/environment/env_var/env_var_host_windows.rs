@@ -167,7 +167,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
     EnvVarHostMapping {
         key: TERMINAL_ENV_VAR.key,
         source: EnvVarSource::Host,
-        alias_import: &[TERMINAL_ENV_VAR.key, "COMSPEC", "SHELL"],
+        alias_import: &[TERMINAL_ENV_VAR.key, "SHELL", "COMSPEC"],
         alias_import_mode: EnvVarImportMode::FirstFound,
         alias_export: &["COMSPEC", "SHELL"],
         fallback: Some("cmd.exe"),
@@ -325,6 +325,14 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         alias_import: &["CommonProgramFiles"],
         alias_import_mode: EnvVarImportMode::PassThrough,
         alias_export: &["CommonProgramFiles"],
+        fallback: None,
+    },
+    EnvVarHostMapping {
+        key: "CommonProgramFiles(Arm)",
+        source: EnvVarSource::Host,
+        alias_import: &["CommonProgramFiles(Arm)"],
+        alias_import_mode: EnvVarImportMode::PassThrough,
+        alias_export: &["CommonProgramFiles(Arm)"],
         fallback: None,
     },
     EnvVarHostMapping {
