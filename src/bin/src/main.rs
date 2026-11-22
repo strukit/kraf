@@ -1,7 +1,7 @@
 // EXPERIMENTAL: this code is a work in progress and MUST NOT be verified.
 // Do not review it or treat it as a reference for correct behavior.
 
-use kraf_core::environment::env_var::env_var_core::EnvVar;
+use kraf_core::environment::env_var::env_var_core::{EnvVar, EnvVarWriter};
 use kraf_core::environment::env_var::env_var_host::{
     HOME_DIR_ENV_VAR, HOST_ENV_VAR_MAPPINGS, HOST_HOME_ENV_VAR, HostEnvVarReader, WORK_DIR_ENV_VAR,
     env_var_collect,
@@ -85,6 +85,18 @@ fn main() {
     child.clean_env();
 
     apply(&project(HOST_ENV_VAR_MAPPINGS, &resolved), &mut child);
+
+    // Temporary: mark the cmd prompt as a Kraf session, keeping the host prompt.
+    if cfg!(windows) {
+        let prompt = resolved
+            .iter()
+            .find(|env_var| env_var.key == "PROMPT")
+            .and_then(|env_var| env_var.value.clone())
+            .filter(|value| !value.is_empty())
+            .unwrap_or_else(|| "$P$G".to_string());
+
+        child.write("PROMPT", &format!("[kraf] {prompt}"));
+    }
 
     println!("[kraf] trap ready");
 
