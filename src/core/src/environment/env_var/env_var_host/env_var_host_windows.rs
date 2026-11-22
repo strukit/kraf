@@ -38,7 +38,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         alias_import_mode: EnvVarImportMode::FirstFound,
         alias_export: &["PATH"],
         fallback: Some(
-            r"~\.local\bin;C:\Windows\System32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\",
+            r"~\AppData\Local\Programs;C:\Windows\System32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\",
         ),
     },
     EnvVarHostMapping {
@@ -137,7 +137,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
         alias_export: &[],
-        fallback: Some(r"~\.local\bin"),
+        fallback: Some(r"~\AppData\Local\Programs"),
     },
     EnvVarHostMapping {
         key: HOME_CACHE_ENV_VAR.key,
@@ -145,7 +145,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
         alias_export: &["CACHE"],
-        fallback: Some(r"~\AppData\Local\Temp"),
+        fallback: Some(r"~\AppData\Local"),
     },
     EnvVarHostMapping {
         key: HOME_STATE_ENV_VAR.key,
@@ -167,9 +167,9 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
     EnvVarHostMapping {
         key: TERMINAL_ENV_VAR.key,
         source: EnvVarSource::Host,
-        alias_import: &[TERMINAL_ENV_VAR.key, "SHELL", "COMSPEC"],
+        alias_import: &[TERMINAL_ENV_VAR.key, "SHELL"],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &["COMSPEC", "SHELL"],
+        alias_export: &["SHELL"],
         fallback: Some("cmd.exe"),
     },
     EnvVarHostMapping {
@@ -287,6 +287,14 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         fallback: None,
     },
     // Windows specific (no cross-platform equivalent)
+    EnvVarHostMapping {
+        key: "COMSPEC",
+        source: EnvVarSource::Host,
+        alias_import: &["COMSPEC"],
+        alias_import_mode: EnvVarImportMode::PassThrough,
+        alias_export: &["COMSPEC"],
+        fallback: None,
+    },
     EnvVarHostMapping {
         key: "ProgramFiles",
         source: EnvVarSource::Host,
