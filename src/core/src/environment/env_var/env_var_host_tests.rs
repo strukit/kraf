@@ -349,3 +349,21 @@ fn pass_through_keys_belong_to_one_platform() {
         }
     }
 }
+
+#[test]
+fn host_home_is_imported_from_the_host_and_not_exported() {
+    fn assert_host_home(mappings: &[EnvVarHostMapping], native_home: &str, name: &str) {
+        let host_home = mappings
+            .iter()
+            .find(|mapping| mapping.key == "HOST_HOME")
+            .unwrap_or_else(|| panic!("{name}: missing HOST_HOME mapping"));
+
+        assert_eq!(host_home.source, EnvVarSource::Host, "{name}");
+        assert_eq!(host_home.alias_import, &[native_home], "{name}");
+        assert!(host_home.alias_export.is_empty(), "{name}");
+    }
+
+    assert_host_home(MACOS_MAPPINGS, "HOME", "MACOS_MAPPINGS");
+    assert_host_home(LINUX_MAPPINGS, "HOME", "LINUX_MAPPINGS");
+    assert_host_home(WINDOWS_MAPPINGS, "USERPROFILE", "WINDOWS_MAPPINGS");
+}

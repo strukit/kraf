@@ -585,3 +585,107 @@ fn resolve_dollar_var_does_not_read_collected_host_values() {
 
     assert_eq!(result[0].value, Some("$SECRET_TOKEN".to_string()));
 }
+
+#[test]
+fn resolve_ignores_the_collected_canonical_value_of_a_host_declaration_without_aliases() {
+    let mappings = [EnvVarHostMapping {
+        key: "PLATFORM_KERNEL",
+        source: EnvVarSource::Host,
+        alias_import: &[],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &[],
+        fallback: Some("Darwin"),
+    }];
+    let env_var_collected = [EnvVar {
+        key: "PLATFORM_KERNEL",
+        value: Some("Linux".to_string()),
+    }];
+
+    let result = resolve(&mappings, &env_var_collected, &[]);
+
+    assert_eq!(
+        lookup_env_var_value("PLATFORM_KERNEL", &result),
+        Some("Darwin".to_string())
+    );
+}
+
+#[test]
+fn resolve_is_empty_when_a_host_declaration_has_no_aliases_and_no_fallback() {
+    let mappings = [EnvVarHostMapping {
+        key: "PLATFORM_VERSION",
+        source: EnvVarSource::Host,
+        alias_import: &[],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &[],
+        fallback: None,
+    }];
+
+    let result = resolve(&mappings, &[], &[]);
+
+    assert_eq!(
+        lookup_env_var_value("PLATFORM_VERSION", &result),
+        Some(String::new())
+    );
+}
+
+#[test]
+fn resolve_alias_merge_ignores_empty_values() {
+    let env_var_mapping = EnvVarHostMapping {
+        key: "PATH",
+        source: EnvVarSource::Host,
+        alias_import: &["BIN_A", "BIN_B"],
+        alias_import_mode: EnvVarImportMode::Merge,
+        alias_export: &[],
+        fallback: None,
+    };
+    let env_var_collected = [
+        EnvVar {
+            key: "BIN_A",
+            value: Some(String::new()),
+        },
+        EnvVar {
+            key: "BIN_B",
+            value: Some("/usr/bin".to_string()),
+        },
+    ];
+
+    let result = resolve_alias(&env_var_mapping, &env_var_collected, &[], "");
+
+    assert_eq!(result, "/usr/bin");
+}
+
+#[test]
+fn resolve_alias_pass_through_forwards_the_collected_value() {
+    let env_var_mapping = EnvVarHostMapping {
+        key: "SystemRoot",
+        source: EnvVarSource::Host,
+        alias_import: &["SystemRoot"],
+        alias_import_mode: EnvVarImportMode::PassThrough,
+        alias_export: &["SystemRoot"],
+        fallback: None,
+    };
+    let env_var_collected = [EnvVar {
+        key: "SystemRoot",
+        value: Some(r"C:\Windows".to_string()),
+    }];
+
+    let result = resolve_alias(&env_var_mapping, &env_var_collected, &[], "");
+
+    assert_eq!(result, r"C:\Windows");
+}
+
+#[test]
+fn resolve_alias_pass_through_is_empty_when_the_value_is_missing() {
+    let env_var_mapping = EnvVarHostMapping {
+        key: "SystemRoot",
+        source: EnvVarSource::Host,
+        alias_import: &["SystemRoot"],
+        alias_import_mode: EnvVarImportMode::PassThrough,
+        alias_export: &["SystemRoot"],
+        fallback: None,
+    };
+
+    let result = resolve_alias(&env_var_mapping, &[], &[], "");
+
+    assert_eq!(result, "");
+}
