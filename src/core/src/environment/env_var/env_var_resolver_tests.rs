@@ -689,3 +689,26 @@ fn resolve_alias_pass_through_is_empty_when_the_value_is_missing() {
 
     assert_eq!(result, "");
 }
+
+#[test]
+fn resolve_empty_provided_value_precedes_the_fallback() {
+    let mappings = [EnvVarHostMapping {
+        key: "EXAMPLE_KEY",
+        source: EnvVarSource::Provided,
+        alias_import: &[],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &[],
+        fallback: Some("/default/example"),
+    }];
+    let env_var_provided = [EnvVar {
+        key: "EXAMPLE_KEY",
+        value: Some(String::new()),
+    }];
+
+    let result = resolve(&mappings, &[], &env_var_provided);
+
+    assert_eq!(
+        lookup_env_var_value("EXAMPLE_KEY", &result),
+        Some(String::new())
+    );
+}

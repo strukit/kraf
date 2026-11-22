@@ -631,7 +631,7 @@ Name: Empty provided canonical value precedes fallback
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -639,9 +639,9 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
   Rule: ENV-VAR_RESOLUTION-REQ-0005 — Source precedence and absence
 
     Scenario: ENV-VAR_RESOLUTION-ACC-0023 — Empty provided canonical value precedes fallback
-      Given a provided declaration has no import aliases
-      And its canonical key has the collected value ""
-      And its fallback is "/default/tmp"
+      Given a provided declaration "EXAMPLE_KEY" has no import aliases
+      And its fallback is "/default/example"
+      And "EXAMPLE_KEY" has the provided value ""
       When the software resolves the declaration
       Then the declaration resolves to ""
 ```
