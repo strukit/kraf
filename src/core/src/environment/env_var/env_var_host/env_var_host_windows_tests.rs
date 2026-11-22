@@ -33,3 +33,33 @@ fn windows_program_folders_pass_through_unchanged() {
         Some(r"C:\Program Files".to_string())
     );
 }
+
+#[test]
+fn windows_comspec_keeps_the_host_value_when_the_terminal_is_another_shell() {
+    let collected = [
+        EnvVar {
+            key: "SHELL",
+            value: Some(r"C:\Program Files\Git\usr\bin\bash.exe".to_string()),
+        },
+        EnvVar {
+            key: "COMSPEC",
+            value: Some(r"C:\WINDOWS\system32\cmd.exe".to_string()),
+        },
+    ];
+
+    let resolved = resolve(WINDOWS_MAPPINGS, &collected, &[]);
+    let projected = project(WINDOWS_MAPPINGS, &resolved);
+
+    assert_eq!(
+        lookup_env_var_value("TERMINAL", &resolved),
+        Some(r"C:\Program Files\Git\usr\bin\bash.exe".to_string())
+    );
+    assert_eq!(
+        lookup_env_var_value("SHELL", projected.env_vars()),
+        Some(r"C:\Program Files\Git\usr\bin\bash.exe".to_string())
+    );
+    assert_eq!(
+        lookup_env_var_value("COMSPEC", projected.env_vars()),
+        Some(r"C:\WINDOWS\system32\cmd.exe".to_string())
+    );
+}
