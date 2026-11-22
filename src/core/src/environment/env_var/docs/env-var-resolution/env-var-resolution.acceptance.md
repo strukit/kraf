@@ -116,9 +116,9 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
     Scenario: ENV-VAR_RESOLUTION-ACC-0004 — Fallback is used when no import alias has a value
       Given no import alias provides a value
-      And the declaration fallback is "C.UTF-8"
+      And the declaration fallback is "en_US.UTF-8"
       When the software resolves the declaration
-      Then the declaration resolves to "C.UTF-8"
+      Then the declaration resolves to "en_US.UTF-8"
 ```
 
 ---

@@ -78,7 +78,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         alias_import: &[USER_LANGUAGE_ENV_VAR.key, "LANG"],
         alias_import_mode: EnvVarImportMode::FirstFound,
         alias_export: &["LANG"],
-        fallback: Some("C.UTF-8"),
+        fallback: Some("en_US.UTF-8"),
     },
     EnvVarHostMapping {
         key: USER_TIMEZONE_ENV_VAR.key,
