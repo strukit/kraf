@@ -55,6 +55,11 @@ pub const USER_TIMEZONE_ENV_VAR: EnvVar = EnvVar {
 };
 
 // Home directories
+pub const HOST_HOME_ENV_VAR: EnvVar = EnvVar {
+    key: "HOST_HOME",
+    value: None,
+};
+
 pub const HOME_ENV_VAR: EnvVar = EnvVar {
     key: "HOME",
     value: None,
@@ -165,6 +170,7 @@ pub const ENV_VAR_HOST_KEYS: &[&str] = &[
     LOGNAME_ENV_VAR.key,
     USER_LANGUAGE_ENV_VAR.key,
     USER_TIMEZONE_ENV_VAR.key,
+    HOST_HOME_ENV_VAR.key,
     HOME_ENV_VAR.key,
     HOME_TEMP_ENV_VAR.key,
     HOME_CONFIG_ENV_VAR.key,
@@ -186,6 +192,14 @@ pub const ENV_VAR_HOST_KEYS: &[&str] = &[
     PLATFORM_KERNEL_ENV_VAR.key,
     PLATFORM_KERNEL_VERSION_ENV_VAR.key,
 ];
+
+pub struct HostEnvVarReader;
+
+impl EnvVarReader for HostEnvVarReader {
+    fn read(&self, key: &str) -> Option<String> {
+        std::env::var(key).ok()
+    }
+}
 
 pub fn env_var_collect(
     env_var_mappings: &[EnvVarHostMapping],

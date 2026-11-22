@@ -7,7 +7,7 @@ use crate::environment::env_var::env_var_resolver::{
     resolve_alias,
 };
 use crate::environment::env_var::tests::env_var_test_fixtures::{
-    ENV_VAR_MAPPING_FIXTURE, env_var_collected_fixture,
+    ENV_VAR_MAPPING_FIXTURE, env_var_collected_fixture, env_var_provided_fixture,
 };
 
 #[test]
@@ -15,7 +15,6 @@ fn resolve_keys_are_empty_when_no_mappings_declare_any() {
     let keys = env_var_resolve_keys(&[]);
 
     assert_eq!(keys.env_vars_keys_import, Vec::<&str>::new());
-    assert_eq!(keys.env_vars_keys_export, Vec::<&str>::new());
 }
 
 #[test]
@@ -34,10 +33,6 @@ fn resolve_keys_collects_alias_import_and_dollar_var_in_fallback() {
     assert_eq!(
         keys.env_vars_keys_import,
         vec!["FOO_BASE", "MY_CONFIG_DIR", "XDG_CONFIG_HOME"]
-    );
-    assert_eq!(
-        keys.env_vars_keys_export,
-        vec!["CONFIG_DIR", "MY_CONFIG_DIR_EXPORT"]
     );
 }
 
@@ -115,7 +110,7 @@ fn resolves_to_fallback_when_no_alias_import() {
         fallback: Some("test-fallback"),
     };
 
-    let result = resolve_alias(&env_var_mapping, &[]);
+    let result = resolve_alias(&env_var_mapping, &[], "");
 
     assert_eq!(result, "test-fallback");
 }
@@ -130,9 +125,7 @@ fn resolve_alias_expands_tilde_in_fallback() {
         alias_export: &[],
         fallback: Some("~/.tmp"),
     };
-    let env_var_collected = env_var_collected_fixture("/workspace");
-
-    let result = resolve_alias(&env_var_mapping, &env_var_collected);
+    let result = resolve_alias(&env_var_mapping, &[], "/workspace");
 
     assert_eq!(result, "/workspace/.tmp");
 }
@@ -149,7 +142,7 @@ fn resolve_alias_expands_dollar_home_in_fallback() {
     };
     let env_var_collected = env_var_collected_fixture("/workspace");
 
-    let result = resolve_alias(&env_var_mapping, &env_var_collected);
+    let result = resolve_alias(&env_var_mapping, &env_var_collected, "");
 
     assert_eq!(result, "/workspace/.cache");
 }
@@ -165,7 +158,7 @@ fn resolve_alias_keeps_tilde_when_home_is_missing() {
         fallback: Some("~/.tmp"),
     };
 
-    let result = resolve_alias(&env_var_mapping, &[]);
+    let result = resolve_alias(&env_var_mapping, &[], "");
 
     assert_eq!(result, "~/.tmp");
 }
@@ -185,7 +178,7 @@ fn resolve_keeps_logname_in_sync_with_user() {
         value: Some("alex".to_string()),
     }];
 
-    let result = resolve(&[env_var_mapping], &env_var_collected);
+    let result = resolve(&[env_var_mapping], &env_var_collected, &[]);
     let resolved_logname = result.iter().find(|env_var| env_var.key == "LOGNAME");
 
     assert_eq!(
@@ -215,7 +208,7 @@ fn resolve_keeps_conflicting_aliases_from_overwriting_user() {
         },
     ];
 
-    let result = resolve(&[env_var_mapping], &env_var_collected);
+    let result = resolve(&[env_var_mapping], &env_var_collected, &[]);
     let resolved_logname = result.iter().find(|env_var| env_var.key == "LOGNAME");
 
     assert_eq!(
@@ -256,7 +249,7 @@ fn resolve_emits_only_the_canonical_key() {
         fallback: Some("/tmp"),
     };
 
-    let result = resolve(&[mapping], &[]);
+    let result = resolve(&[mapping], &[], &[]);
 
     let keys: Vec<&str> = result.iter().map(|env_var| env_var.key).collect();
 
@@ -266,8 +259,13 @@ fn resolve_emits_only_the_canonical_key() {
 
 #[test]
 fn resolve_handles_every_mapping_case_at_once() {
-    let env_var_collected = env_var_collected_fixture("/workspace");
-    let result = resolve(ENV_VAR_MAPPING_FIXTURE, &env_var_collected);
+    let env_var_collected = env_var_collected_fixture("/host");
+    let env_var_provided = env_var_provided_fixture("/workspace");
+    let result = resolve(
+        ENV_VAR_MAPPING_FIXTURE,
+        &env_var_collected,
+        &env_var_provided,
+    );
 
     #[cfg(host = "windows")]
     let path_expected = "/workspace/.local/bin;/usr/bin:/bin";
@@ -280,7 +278,7 @@ fn resolve_handles_every_mapping_case_at_once() {
         ("USER_LANGUAGE", "pt_BR.UTF-8"),
         ("TERMINAL_TYPE", "xterm-256color"),
         ("TMP_DIR", "/workspace/.tmp"),
-        ("CACHE_DIR", "/workspace/.cache"),
+        ("CACHE_DIR", "/host/.cache"),
         ("PATH", path_expected),
         ("LD_LIBRARY_PATH", "/usr/local/lib"),
         ("MANPATH", "/usr/share/man"),
@@ -325,7 +323,7 @@ fn resolve_alias_merges_multiple_paths_with_colon_separator() {
         },
     ];
 
-    let result = resolve_alias(&env_var_mapping, &env_var_collected);
+    let result = resolve_alias(&env_var_mapping, &env_var_collected, "");
 
     #[cfg(host = "windows")]
     let expected = "/custom/bin;/usr/bin".to_string();
@@ -334,4 +332,42 @@ fn resolve_alias_merges_multiple_paths_with_colon_separator() {
     let expected = "/custom/bin:/usr/bin".to_string();
 
     assert_eq!(result, expected);
+}
+
+#[test]
+fn resolve_reads_provided_canonical_values_apart_from_collected_host_values() {
+    let mappings = [
+        EnvVarHostMapping {
+            key: "HOST_HOME",
+            source: EnvVarSource::Host,
+            alias_import: &["HOME"],
+            alias_import_mode: EnvVarImportMode::FirstFound,
+            alias_export: &[],
+            fallback: None,
+        },
+        EnvVarHostMapping {
+            key: "HOME",
+            source: EnvVarSource::Provided,
+            alias_import: &[],
+            alias_import_mode: EnvVarImportMode::FirstFound,
+            alias_export: &["HOME"],
+            fallback: None,
+        },
+    ];
+    let env_var_collected = [EnvVar {
+        key: "HOME",
+        value: Some("/Users/host".to_string()),
+    }];
+    let env_var_provided = [EnvVar {
+        key: "HOME",
+        value: Some("/Users/host/.kraf/workspace/session/1".to_string()),
+    }];
+
+    let result = resolve(&mappings, &env_var_collected, &env_var_provided);
+
+    assert_eq!(result[0].value, Some("/Users/host".to_string()));
+    assert_eq!(
+        result[1].value,
+        Some("/Users/host/.kraf/workspace/session/1".to_string())
+    );
 }

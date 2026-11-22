@@ -137,14 +137,14 @@ Name: Placeholder expansion
 - Implementation status: Implemented
 
 ```text
-WHEN a fallback contains a tilde and a non-empty collected `HOME` value is
+WHEN a fallback contains a tilde and a non-empty provided `HOME` value is
 available,
 THE SOFTWARE SHALL replace the first tilde with that value.
 
-WHEN a non-empty collected `HOME` value is available,
+WHEN a non-empty provided `HOME` value is available,
 THE SOFTWARE SHALL give tilde expansion precedence over dollar expansion.
 
-WHEN a fallback contains a tilde but no non-empty collected `HOME` value is
+WHEN a fallback contains a tilde but no non-empty provided `HOME` value is
 available,
 THE SOFTWARE SHALL leave the tilde unchanged and evaluate a dollar
 placeholder when one is present.
@@ -172,6 +172,7 @@ Name: Source precedence and absence
 - [ENV-VAR_RESOLUTION-ACC-0013](./env-var-resolution.acceptance.md#env-var_resolution-acc-0013)
 - [ENV-VAR_RESOLUTION-ACC-0022](./env-var-resolution.acceptance.md#env-var_resolution-acc-0022)
 - [ENV-VAR_RESOLUTION-ACC-0023](./env-var-resolution.acceptance.md#env-var_resolution-acc-0023)
+- [ENV-VAR_RESOLUTION-ACC-0026](./env-var-resolution.acceptance.md#env-var_resolution-acc-0026)
 
 **Status**:
 
@@ -180,14 +181,19 @@ Name: Source precedence and absence
 
 ```text
 WHEN a declaration without import aliases and with source `Provided` has a
-collected canonical value, including an empty value,
+provided canonical value, including an empty value,
 THE SOFTWARE SHALL resolve the declaration to that value.
+
+THE SOFTWARE SHALL read the canonical value of a declaration with source
+`Provided` only from provided values, and SHALL NOT read it from values
+collected from the host.
 
 WHEN that provided canonical value is absent,
 THE SOFTWARE SHALL resolve the declaration fallback.
 
 THE SOFTWARE SHALL resolve a declaration without import aliases and with source
-`Host` to its fallback without reading a collected value for its canonical key.
+`Host` to its fallback without reading a collected or provided value for its
+canonical key.
 
 WHEN the selected source and fallback provide no value,
 THE SOFTWARE SHALL resolve the declaration to an empty string.

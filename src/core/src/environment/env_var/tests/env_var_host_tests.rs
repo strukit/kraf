@@ -106,7 +106,7 @@ fn mappings_merge_mode_has_multiple_aliases() {
 fn host_source_mappings_export_every_native_imported_alias() {
     fn assert_exports_every_native_import(mappings: &[EnvVarHostMapping], name: &str) {
         for mapping in mappings {
-            if mapping.source != EnvVarSource::Host {
+            if mapping.source != EnvVarSource::Host || mapping.alias_export.is_empty() {
                 continue;
             }
 

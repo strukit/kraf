@@ -70,6 +70,30 @@ THE SOFTWARE SHALL resolve the WORKDIR and HOME declaration families from
 provided values rather than from values imported from the host.
 ```
 
+---
+
+### ENV-VAR_HOST-REQ-0003
+
+Name: Host home import
+
+**Links:**
+
+- [Intent](../env-var-intent.md): module intent.
+- [ENV-VAR_HOST-ACC-0005](./env-var-host.acceptance.md#env-var_host-acc-0005)
+
+**Status**:
+
+- Doc status: Draft
+- Implementation status: Implemented
+
+```text
+THE SOFTWARE SHALL declare, in every supported platform mapping, a `HOST_HOME`
+declaration with source `Host` that imports the home directory of the host
+user.
+
+THE SOFTWARE SHALL NOT export the `HOST_HOME` declaration to a managed process.
+```
+
 ## Links
 
 - [Intent](../env-var-intent.md): Why Kraf resolves and projects environment

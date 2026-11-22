@@ -1,5 +1,5 @@
 use crate::environment::env_var::env_var_core::{
-    EnvVar, EnvVarHostMapping, EnvVarImportMode, EnvVarReader, EnvVarSource,
+    EnvVar, EnvVarHostMapping, EnvVarImportMode, EnvVarReader, EnvVarSource, EnvVarWriter,
 };
 
 use std::collections::HashMap;
@@ -14,6 +14,19 @@ pub(super) struct FakeEnvVarReader {
 impl EnvVarReader for FakeEnvVarReader {
     fn read(&self, key: &str) -> Option<String> {
         self.env.get(key).cloned()
+    }
+}
+
+/// In-memory writer whose environment is isolated from the real one of the
+/// test process, so that tests neither read nor change it.
+#[derive(Default)]
+pub(super) struct FakeEnvVarWriter {
+    pub(super) env: HashMap<String, String>,
+}
+
+impl EnvVarWriter for FakeEnvVarWriter {
+    fn write(&mut self, key: &str, value: &str) {
+        self.env.insert(key.to_string(), value.to_string());
     }
 }
 
@@ -143,16 +156,25 @@ pub(super) fn env_var_collected_fixture(home: &str) -> Vec<EnvVar> {
             value: Some("/usr/local/lib".to_string()),
         },
         EnvVar {
+            key: "PLATFORM_KERNEL",
+            value: Some("Linux".to_string()),
+        },
+    ]
+}
+
+pub(super) fn env_var_provided_fixture(home: &str) -> Vec<EnvVar> {
+    vec![
+        EnvVar {
+            key: "HOME",
+            value: Some(home.to_string()),
+        },
+        EnvVar {
             key: "WORKDIR",
             value: Some("/workspace/project".to_string()),
         },
         EnvVar {
             key: "HOME_TEMP",
             value: Some("/custom/tmp".to_string()),
-        },
-        EnvVar {
-            key: "PLATFORM_KERNEL",
-            value: Some("Linux".to_string()),
         },
     ]
 }

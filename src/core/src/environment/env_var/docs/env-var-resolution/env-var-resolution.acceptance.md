@@ -196,7 +196,7 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
   Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
 
     Scenario: ENV-VAR_RESOLUTION-ACC-0007 — Tilde fallback expands from resolved home
-      Given "HOME" resolves to "/workspace"
+      Given "HOME" has the provided value "/workspace"
       And a declaration fallback is "~/.cache"
       When the software resolves the declaration
       Then the declaration resolves to "/workspace/.cache"
@@ -306,7 +306,7 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
     Scenario: ENV-VAR_RESOLUTION-ACC-0011 — Provided canonical value precedes fallback
       Given a provided declaration has no import aliases
-      And its canonical key has the collected value "/custom/tmp"
+      And its canonical key has the provided value "/custom/tmp"
       And its fallback is "/default/tmp"
       When the software resolves the declaration
       Then the declaration resolves to "/custom/tmp"
@@ -334,7 +334,7 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
     Scenario: ENV-VAR_RESOLUTION-ACC-0012 — Provided fallback is used when canonical value is absent
       Given a provided declaration has no import aliases
-      And its canonical key has no collected value
+      And its canonical key has no provided value
       And its fallback is "/default/tmp"
       When the software resolves the declaration
       Then the declaration resolves to "/default/tmp"
@@ -696,6 +696,34 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
       Given active mappings declare the import aliases "SHELL", "EDITOR", and "SHELL"
       When the software collects import dependencies
       Then the collected import keys are "EDITOR" and "SHELL" in that order
+```
+
+---
+
+## ENV-VAR_RESOLUTION-ACC-0026
+
+Name: Provided value is not read from collected host values
+
+**Links:**
+
+- [ENV-VAR_RESOLUTION-REQ-0005](./env-var-resolution.spec.md#env-var_resolution-req-0005)
+
+**Status**:
+
+- Doc status: Draft
+- Verification status: Unknown
+
+```gherkin
+Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+
+  Rule: ENV-VAR_RESOLUTION-REQ-0005 — Source precedence and absence
+
+    Scenario: ENV-VAR_RESOLUTION-ACC-0026 — Provided value is not read from collected host values
+      Given a provided declaration "HOME" has no import aliases
+      And "HOME" has the collected value "/Users/host"
+      And "HOME" has the provided value "/Users/host/.kraf/workspace/session/1"
+      When the software resolves the declaration
+      Then the declaration resolves to "/Users/host/.kraf/workspace/session/1"
 ```
 
 ## Links

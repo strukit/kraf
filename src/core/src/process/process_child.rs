@@ -1,4 +1,4 @@
-use crate::process::Process;
+use crate::environment::env_var::env_var_core::EnvVarWriter;
 
 pub struct ChildProcess {
     command: std::process::Command,
@@ -17,6 +17,11 @@ impl ChildProcess {
         self
     }
 
+    pub fn clean_env(&mut self) -> &mut Self {
+        self.command.env_clear();
+        self
+    }
+
     /// # Errors
     /// Returns an error if the process fails to spawn, matching
     /// `std::process::Command::status`.
@@ -25,30 +30,8 @@ impl ChildProcess {
     }
 }
 
-impl Process for ChildProcess {
-    fn read_env_vars(&self) -> Vec<(String, String)> {
-        Vec::new()
-    }
-
-    fn read_env_var(&self, _name: &str) -> Option<String> {
-        None
-    }
-
-    fn get_current_dir(&self) -> Option<String> {
-        None
-    }
-
-    fn get_temp_dir_random(&self) -> Option<String> {
-        None
-    }
-
-    fn set_env_var(&mut self, key: &str, value: &str) -> &mut Self {
+impl EnvVarWriter for ChildProcess {
+    fn write(&mut self, key: &str, value: &str) {
         self.command.env(key, value);
-        self
-    }
-
-    fn clean_env(&mut self) -> &mut Self {
-        self.command.env_clear();
-        self
     }
 }
