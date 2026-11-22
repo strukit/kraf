@@ -105,15 +105,16 @@ of failing candidates were applied to every change in the scope>
 - A developer who uses an agent in this repository MUST accept that the review
   reports it produces share the model, the reasoning effort, and the agent,
   because sharing them encourages good practices and a fair environment.
-- A pull request whose review report, produced by an agent, lacks the reviewer
-  block MUST be closed.
+- A review report or review comment, produced by an agent, that lacks the
+  reviewer block MUST be discarded.
 - The rule that requires the reviewer block MUST override the rule of
   [Agent attribution](../../AGENTS.md#agent-attribution) that forbids a line
   that credits an agent, a model, or the tool that runs it, and MUST override it
   only for the reviewer block of a review report.
 - An agent that produces a review report for a pull request MUST inform the user
   that the report shares the model, the reasoning effort, and the agent, and
-  that a pull request whose review report lacks the reviewer block is closed.
+  that a review report or review comment that lacks the reviewer block is
+  discarded.
 - An agent MUST NOT omit that notice, unless the user has expressly instructed
   it to stop giving it, and that user instruction MUST then prevail.
 - Each finding MUST be numbered in the order of the review report.
