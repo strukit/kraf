@@ -41,14 +41,14 @@ pub fn lookup_env_var_value(env_var_key: &str, env_var_collected: &[EnvVar]) -> 
 fn resolve_expand(
     env_var_key_raw: &str,
     env_var_home: &str,
-    env_var_collected: &[EnvVar],
+    env_var_provided: &[EnvVar],
 ) -> String {
     if env_var_key_raw.contains('~') && !env_var_home.is_empty() {
         return expand_tilde_var(env_var_key_raw, env_var_home);
     }
 
     if env_var_key_raw.contains('$') {
-        return expand_dollar_var(env_var_key_raw, env_var_collected);
+        return expand_dollar_var(env_var_key_raw, env_var_provided);
     }
 
     env_var_key_raw.to_string()
@@ -58,38 +58,38 @@ fn resolve_expand(
 pub fn resolve(
     env_var_mappings: &[EnvVarHostMapping],
     env_var_collected: &[EnvVar],
+    env_var_provided: &[EnvVar],
 ) -> Vec<EnvVar> {
-    let home = lookup_env_var_value(HOME_ENV_VAR.key, env_var_collected).unwrap_or_default();
+    let home = lookup_env_var_value(HOME_ENV_VAR.key, env_var_provided).unwrap_or_default();
 
     env_var_mappings
         .iter()
-        .flat_map(|env_var_unresolved| {
+        .map(|env_var_unresolved| {
             let env_var_value = if env_var_unresolved.alias_import.is_empty() {
-                let from_env_var_collected = (env_var_unresolved.source == EnvVarSource::Provided)
-                    .then(|| lookup_env_var_value(env_var_unresolved.key, env_var_collected))
+                let from_env_var_provided = (env_var_unresolved.source == EnvVarSource::Provided)
+                    .then(|| lookup_env_var_value(env_var_unresolved.key, env_var_provided))
                     .flatten();
 
-                from_env_var_collected.unwrap_or_else(|| {
+                from_env_var_provided.unwrap_or_else(|| {
                     resolve_expand(
                         env_var_unresolved.fallback.unwrap_or_default(),
                         &home,
-                        env_var_collected,
+                        env_var_provided,
                     )
                 })
             } else {
-                resolve_alias(env_var_unresolved, env_var_collected)
+                resolve_alias(
+                    env_var_unresolved,
+                    env_var_collected,
+                    env_var_provided,
+                    &home,
+                )
             };
 
-            std::iter::once(EnvVar {
+            EnvVar {
                 key: env_var_unresolved.key,
-                value: Some(env_var_value.clone()),
-            })
-            .chain(env_var_unresolved.alias_export.iter().copied().map(
-                move |alias_export| EnvVar {
-                    key: alias_export,
-                    value: Some(env_var_value.clone()),
-                },
-            ))
+                value: Some(env_var_value),
+            }
         })
         .collect()
 }
@@ -97,9 +97,9 @@ pub fn resolve(
 pub fn resolve_alias(
     env_var_unresolved: &EnvVarHostMapping,
     env_var_collected: &[EnvVar],
+    env_var_provided: &[EnvVar],
+    home: &str,
 ) -> String {
-    let home = lookup_env_var_value(HOME_ENV_VAR.key, env_var_collected).unwrap_or_default();
-
     let value = match env_var_unresolved.alias_import_mode {
         EnvVarImportMode::FirstFound => env_var_unresolved
             .alias_import
@@ -108,8 +108,8 @@ pub fn resolve_alias(
             .or_else(|| {
                 Some(resolve_expand(
                     env_var_unresolved.fallback.unwrap_or_default(),
-                    &home,
-                    env_var_collected,
+                    home,
+                    env_var_provided,
                 ))
             }),
 
@@ -132,8 +132,8 @@ pub fn resolve_alias(
             if paths.is_empty() {
                 Some(resolve_expand(
                     env_var_unresolved.fallback.unwrap_or_default(),
-                    &home,
-                    env_var_collected,
+                    home,
+                    env_var_provided,
                 ))
             } else {
                 std::env::join_paths(paths)
@@ -148,29 +148,20 @@ pub fn resolve_alias(
 
 pub struct EnvVarResolveKeys {
     pub env_vars_keys_import: Vec<&'static str>,
-    pub env_vars_keys_export: Vec<&'static str>,
 }
 
+#[must_use]
 pub fn env_var_resolve_keys(env_var_mappings: &[EnvVarHostMapping]) -> EnvVarResolveKeys {
     let mut env_vars_keys_import = Vec::new();
-    let mut env_vars_keys_export = Vec::new();
 
     for mapping in env_var_mappings {
         env_vars_keys_import.extend(mapping.alias_import.iter().copied());
-        env_vars_keys_export.extend(mapping.alias_export.iter().copied());
-
-        if let Some(dollar_key) = mapping.fallback.and_then(extract_dollar_var_key) {
-            env_vars_keys_import.push(dollar_key);
-        }
     }
 
     env_vars_keys_import.sort_unstable();
     env_vars_keys_import.dedup();
-    env_vars_keys_export.sort_unstable();
-    env_vars_keys_export.dedup();
 
     EnvVarResolveKeys {
         env_vars_keys_import,
-        env_vars_keys_export,
     }
 }

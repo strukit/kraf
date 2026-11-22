@@ -4,8 +4,8 @@ use crate::environment::env_var::env_var_core::{
 
 use crate::environment::env_var::env_var_host::{
     HOME_CACHE_ENV_VAR, HOME_CONFIG_ENV_VAR, HOME_DATA_BIN_ENV_VAR, HOME_DATA_ENV_VAR,
-    HOME_ENV_VAR, HOME_SESSION_ENV_VAR, HOME_STATE_ENV_VAR, HOME_TEMP_ENV_VAR, HOSTNAME_ENV_VAR,
-    LOGNAME_ENV_VAR, PATH_ENV_VAR, PLATFORM_ARCH_ENV_VAR, PLATFORM_ENV_VAR,
+    HOME_ENV_VAR, HOME_SESSION_ENV_VAR, HOME_STATE_ENV_VAR, HOME_TEMP_ENV_VAR, HOST_HOME_ENV_VAR,
+    HOSTNAME_ENV_VAR, PATH_ENV_VAR, PLATFORM_ARCH_ENV_VAR, PLATFORM_ENV_VAR,
     PLATFORM_FAMILY_ENV_VAR, PLATFORM_KERNEL_ENV_VAR, PLATFORM_KERNEL_VERSION_ENV_VAR,
     PLATFORM_VERSION_ENV_VAR, TERMINAL_COLOR_ENV_VAR, TERMINAL_ENV_VAR, TERMINAL_NOCOLOR_ENV_VAR,
     TERMINAL_PROGRAM_ENV_VAR, TERMINAL_PROGRAM_VERSION_ENV_VAR, TERMINAL_TYPE_ENV_VAR,
@@ -47,14 +47,6 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         fallback: None,
     },
     EnvVarHostMapping {
-        key: LOGNAME_ENV_VAR.key,
-        source: EnvVarSource::Host,
-        alias_import: &[USER_ENV_VAR.key, "USERNAME", LOGNAME_ENV_VAR.key],
-        alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[USER_ENV_VAR.key, "USERNAME"],
-        fallback: None,
-    },
-    EnvVarHostMapping {
         key: USER_LANGUAGE_ENV_VAR.key,
         source: EnvVarSource::Host,
         alias_import: &[USER_LANGUAGE_ENV_VAR.key, "LANG"],
@@ -71,6 +63,14 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         fallback: None,
     },
     // Home directories
+    EnvVarHostMapping {
+        key: HOST_HOME_ENV_VAR.key,
+        source: EnvVarSource::Host,
+        alias_import: &["USERPROFILE"],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &[],
+        fallback: None,
+    },
     EnvVarHostMapping {
         key: HOME_ENV_VAR.key,
         source: EnvVarSource::Provided,

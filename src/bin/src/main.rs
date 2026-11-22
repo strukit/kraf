@@ -3,30 +3,37 @@
 
 use kraf_core::environment::env_var::env_var_core::EnvVar;
 use kraf_core::environment::env_var::env_var_host::{
-    HOST_ENV_VAR_MAPPINGS, env_var_collect, env_var_process_apply,
+    HOME_ENV_VAR, HOST_ENV_VAR_MAPPINGS, HOST_HOME_ENV_VAR, HostEnvVarReader, WORKDIR_ENV_VAR,
+    env_var_collect,
 };
+use kraf_core::environment::env_var::env_var_projector::{apply, project};
 use kraf_core::environment::env_var::env_var_resolver::resolve;
 use kraf_core::{ChildProcess, HostProcess, Process};
 
 fn main() {
-    let workdir = HostProcess.get_current_dir();
-    let homedir = HostProcess.get_temp_dir_random();
-
     println!("[kraf] trap init");
 
-    let mut collected = env_var_collect(HOST_ENV_VAR_MAPPINGS, &HostProcess);
+    let collected = env_var_collect(HOST_ENV_VAR_MAPPINGS, &HostEnvVarReader);
 
-    collected.push(EnvVar {
-        key: "WORKDIR",
-        value: workdir.clone(),
-    });
+    let host_home = resolve(HOST_ENV_VAR_MAPPINGS, &collected, &[])
+        .into_iter()
+        .find(|env_var| env_var.key == HOST_HOME_ENV_VAR.key)
+        .and_then(|env_var| env_var.value)
+        .filter(|value| !value.is_empty())
+        .expect("[kraf] error: $HOST_HOME is required, failed to resolve (internal)");
 
-    collected.push(EnvVar {
-        key: "HOME",
-        value: homedir,
-    });
+    let provided = [
+        EnvVar {
+            key: WORKDIR_ENV_VAR.key,
+            value: HostProcess.get_current_dir(),
+        },
+        EnvVar {
+            key: HOME_ENV_VAR.key,
+            value: HostProcess.create_session_dir(&host_home),
+        },
+    ];
 
-    let resolved = resolve(HOST_ENV_VAR_MAPPINGS, &collected);
+    let resolved = resolve(HOST_ENV_VAR_MAPPINGS, &collected, &provided);
 
     let workdir = resolved
         .iter()
@@ -54,7 +61,7 @@ fn main() {
     child.current_dir(&workdir);
     child.clean_env();
 
-    env_var_process_apply(HOST_ENV_VAR_MAPPINGS, &resolved, &mut child);
+    apply(&project(HOST_ENV_VAR_MAPPINGS, &resolved), &mut child);
 
     println!("[kraf] trap ready");
 

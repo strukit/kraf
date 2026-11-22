@@ -91,8 +91,36 @@ Feature: ENV-VAR_PROJECTION-FEAT-0001 — Environment variable projection
     Scenario: ENV-VAR_PROJECTION-ACC-0003 — Export aliases receive the canonical resolved value
       Given "HOME_TEMP" resolves to "/workspace/.tmp"
       And "TMPDIR" is an export alias of "HOME_TEMP"
-      When the software resolves the declaration
-      Then "TMPDIR" resolves to "/workspace/.tmp"
+      When the software projects the declaration
+      Then "TMPDIR" is projected with the value "/workspace/.tmp"
+```
+
+---
+
+## ENV-VAR_PROJECTION-ACC-0004
+
+Name: Projected output preserves export order
+
+**Links:**
+
+- [ENV-VAR_PROJECTION-REQ-0003](./env-var-projection.spec.md#env-var_projection-req-0003)
+
+**Status**:
+
+- Doc status: Draft
+- Verification status: Unknown
+
+```gherkin
+Feature: ENV-VAR_PROJECTION-FEAT-0001 — Environment variable projection
+
+  Rule: ENV-VAR_PROJECTION-REQ-0003 — Projected output order
+
+    Scenario: ENV-VAR_PROJECTION-ACC-0004 — Projected output preserves export order
+      Given "HOME_TEMP" resolves to "/workspace/.tmp"
+      And its export aliases are "TEMP", "TMPDIR", and "TMP" in that order
+      When the software projects the declaration
+      Then the projected keys are "TEMP", "TMPDIR", and "TMP" in that order
+      And each projected key has the value "/workspace/.tmp"
 ```
 
 ## Links

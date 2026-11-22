@@ -1,45 +1,32 @@
 use crate::environment::env_var::env_var_core::{
-    EnvVar, EnvVarHostMapping, EnvVarImportMode, EnvVarSource,
+    EnvVar, EnvVarHostMapping, EnvVarImportMode, EnvVarReader, EnvVarSource, EnvVarWriter,
 };
 
-use crate::Process;
 use std::collections::HashMap;
 
-/// In-memory process whose environment is isolated from the real one of the
+/// In-memory reader whose environment is isolated from the real one of the
 /// test process, so that tests neither read nor change it.
 #[derive(Default)]
-pub(super) struct FakeProcess {
+pub(super) struct FakeEnvVarReader {
     pub(super) env: HashMap<String, String>,
 }
 
-impl Process for FakeProcess {
-    fn read_env_vars(&self) -> Vec<(String, String)> {
-        self.env
-            .iter()
-            .map(|(key, value)| (key.clone(), value.clone()))
-            .collect()
+impl EnvVarReader for FakeEnvVarReader {
+    fn read(&self, key: &str) -> Option<String> {
+        self.env.get(key).cloned()
     }
+}
 
-    fn read_env_var(&self, name: &str) -> Option<String> {
-        self.env.get(name).cloned()
-    }
+/// In-memory writer whose environment is isolated from the real one of the
+/// test process, so that tests neither read nor change it.
+#[derive(Default)]
+pub(super) struct FakeEnvVarWriter {
+    pub(super) env: HashMap<String, String>,
+}
 
-    fn get_current_dir(&self) -> Option<String> {
-        None
-    }
-
-    fn get_temp_dir_random(&self) -> Option<String> {
-        None
-    }
-
-    fn set_env_var(&mut self, key: &str, value: &str) -> &mut Self {
+impl EnvVarWriter for FakeEnvVarWriter {
+    fn write(&mut self, key: &str, value: &str) {
         self.env.insert(key.to_string(), value.to_string());
-        self
-    }
-
-    fn clean_env(&mut self) -> &mut Self {
-        self.env.clear();
-        self
     }
 }
 
@@ -169,16 +156,25 @@ pub(super) fn env_var_collected_fixture(home: &str) -> Vec<EnvVar> {
             value: Some("/usr/local/lib".to_string()),
         },
         EnvVar {
+            key: "PLATFORM_KERNEL",
+            value: Some("Linux".to_string()),
+        },
+    ]
+}
+
+pub(super) fn env_var_provided_fixture(home: &str) -> Vec<EnvVar> {
+    vec![
+        EnvVar {
+            key: "HOME",
+            value: Some(home.to_string()),
+        },
+        EnvVar {
             key: "WORKDIR",
             value: Some("/workspace/project".to_string()),
         },
         EnvVar {
             key: "HOME_TEMP",
             value: Some("/custom/tmp".to_string()),
-        },
-        EnvVar {
-            key: "PLATFORM_KERNEL",
-            value: Some("Linux".to_string()),
         },
     ]
 }

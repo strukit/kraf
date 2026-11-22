@@ -118,6 +118,34 @@ Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
       Then the declaration source is provided
 ```
 
+---
+
+## ENV-VAR_HOST-ACC-0005
+
+Name: Host home is imported and not exported
+
+**Links:**
+
+- [ENV-VAR_HOST-REQ-0003](./env-var-host.spec.md#env-var_host-req-0003)
+
+**Status**:
+
+- Doc status: Draft
+- Verification status: Unknown
+
+```gherkin
+Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
+
+  Rule: ENV-VAR_HOST-REQ-0003 — Host home import
+
+    Scenario: ENV-VAR_HOST-ACC-0005 — Host home is imported and not exported
+      Given a supported platform mapping
+      When the mapping declares "HOST_HOME"
+      Then the declaration source is host
+      And the declaration imports the home directory of the host user
+      And the declaration has no export aliases
+```
+
 ## Links
 
 - [Specification](./env-var-host.spec.md): Requirements for platform-specific

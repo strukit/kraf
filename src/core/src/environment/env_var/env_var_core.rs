@@ -4,6 +4,14 @@ pub struct EnvVar {
     pub value: Option<String>,
 }
 
+pub trait EnvVarReader {
+    fn read(&self, key: &str) -> Option<String>;
+}
+
+pub trait EnvVarWriter {
+    fn write(&mut self, key: &str, value: &str);
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum EnvVarSource {
     Host,

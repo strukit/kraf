@@ -1,4 +1,4 @@
-use crate::environment::env_var::env_var_core::{EnvVar, EnvVarHostMapping};
+use crate::environment::env_var::env_var_core::{EnvVar, EnvVarHostMapping, EnvVarReader};
 use crate::environment::env_var::env_var_resolver::env_var_resolve_keys;
 
 #[path = "env_var_host_linux.rs"]
@@ -16,8 +16,6 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = env_var_host_linux::HOST
 pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = env_var_host_mac::HOST_ENV_VAR_MAPPINGS;
 #[cfg(host = "windows")]
 pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = env_var_host_windows::HOST_ENV_VAR_MAPPINGS;
-
-use crate::Process;
 
 // General
 pub const HOSTNAME_ENV_VAR: EnvVar = EnvVar {
@@ -41,11 +39,6 @@ pub const USER_ENV_VAR: EnvVar = EnvVar {
     value: None,
 };
 
-pub const LOGNAME_ENV_VAR: EnvVar = EnvVar {
-    key: "LOGNAME",
-    value: None,
-};
-
 pub const USER_LANGUAGE_ENV_VAR: EnvVar = EnvVar {
     key: "USER_LANGUAGE",
     value: None,
@@ -57,6 +50,11 @@ pub const USER_TIMEZONE_ENV_VAR: EnvVar = EnvVar {
 };
 
 // Home directories
+pub const HOST_HOME_ENV_VAR: EnvVar = EnvVar {
+    key: "HOST_HOME",
+    value: None,
+};
+
 pub const HOME_ENV_VAR: EnvVar = EnvVar {
     key: "HOME",
     value: None,
@@ -164,9 +162,9 @@ pub const ENV_VAR_HOST_KEYS: &[&str] = &[
     WORKDIR_ENV_VAR.key,
     PATH_ENV_VAR.key,
     USER_ENV_VAR.key,
-    LOGNAME_ENV_VAR.key,
     USER_LANGUAGE_ENV_VAR.key,
     USER_TIMEZONE_ENV_VAR.key,
+    HOST_HOME_ENV_VAR.key,
     HOME_ENV_VAR.key,
     HOME_TEMP_ENV_VAR.key,
     HOME_CONFIG_ENV_VAR.key,
@@ -189,26 +187,17 @@ pub const ENV_VAR_HOST_KEYS: &[&str] = &[
     PLATFORM_KERNEL_VERSION_ENV_VAR.key,
 ];
 
-pub fn env_var_process_apply(
-    env_var_mappings: &[EnvVarHostMapping],
-    env_vars: &[EnvVar],
-    process: &mut impl Process,
-) {
-    let keys = env_var_resolve_keys(env_var_mappings);
+pub struct HostEnvVarReader;
 
-    for env_var in env_vars {
-        if !keys.env_vars_keys_export.contains(&env_var.key) {
-            continue;
-        }
-
-        let value = env_var.value.as_deref().unwrap_or("");
-        process.set_env_var(env_var.key, value);
+impl EnvVarReader for HostEnvVarReader {
+    fn read(&self, key: &str) -> Option<String> {
+        std::env::var(key).ok()
     }
 }
 
 pub fn env_var_collect(
     env_var_mappings: &[EnvVarHostMapping],
-    process: &impl Process,
+    reader: &impl EnvVarReader,
 ) -> Vec<EnvVar> {
     let keys = env_var_resolve_keys(env_var_mappings);
 
@@ -216,7 +205,7 @@ pub fn env_var_collect(
         .iter()
         .map(|&key| EnvVar {
             key,
-            value: process.read_env_var(key),
+            value: reader.read(key),
         })
         .collect()
 }
