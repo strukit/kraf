@@ -41,6 +41,7 @@ pub fn lookup_env_var_value(env_var_key: &str, env_var_collected: &[EnvVar]) -> 
 fn resolve_expand(
     env_var_key_raw: &str,
     env_var_home: &str,
+    env_var_provided: &[EnvVar],
     env_var_collected: &[EnvVar],
 ) -> String {
     if env_var_key_raw.contains('~') && !env_var_home.is_empty() {
@@ -48,7 +49,8 @@ fn resolve_expand(
     }
 
     if env_var_key_raw.contains('$') {
-        return expand_dollar_var(env_var_key_raw, env_var_collected);
+        let env_var_known = [env_var_provided, env_var_collected].concat();
+        return expand_dollar_var(env_var_key_raw, &env_var_known);
     }
 
     env_var_key_raw.to_string()
@@ -74,11 +76,17 @@ pub fn resolve(
                     resolve_expand(
                         env_var_unresolved.fallback.unwrap_or_default(),
                         &home,
+                        env_var_provided,
                         env_var_collected,
                     )
                 })
             } else {
-                resolve_alias(env_var_unresolved, env_var_collected, &home)
+                resolve_alias(
+                    env_var_unresolved,
+                    env_var_collected,
+                    env_var_provided,
+                    &home,
+                )
             };
 
             EnvVar {
@@ -92,6 +100,7 @@ pub fn resolve(
 pub fn resolve_alias(
     env_var_unresolved: &EnvVarHostMapping,
     env_var_collected: &[EnvVar],
+    env_var_provided: &[EnvVar],
     home: &str,
 ) -> String {
     let value = match env_var_unresolved.alias_import_mode {
@@ -103,6 +112,7 @@ pub fn resolve_alias(
                 Some(resolve_expand(
                     env_var_unresolved.fallback.unwrap_or_default(),
                     home,
+                    env_var_provided,
                     env_var_collected,
                 ))
             }),
@@ -127,6 +137,7 @@ pub fn resolve_alias(
                 Some(resolve_expand(
                     env_var_unresolved.fallback.unwrap_or_default(),
                     home,
+                    env_var_provided,
                     env_var_collected,
                 ))
             } else {

@@ -130,6 +130,7 @@ Name: Placeholder expansion
 - [ENV-VAR_RESOLUTION-ACC-0016](./env-var-resolution.acceptance.md#env-var_resolution-acc-0016)
 - [ENV-VAR_RESOLUTION-ACC-0017](./env-var-resolution.acceptance.md#env-var_resolution-acc-0017)
 - [ENV-VAR_RESOLUTION-ACC-0018](./env-var-resolution.acceptance.md#env-var_resolution-acc-0018)
+- [ENV-VAR_RESOLUTION-ACC-0027](./env-var-resolution.acceptance.md#env-var_resolution-acc-0027)
 
 **Status**:
 
@@ -151,10 +152,12 @@ placeholder when one is present.
 
 THE SOFTWARE SHALL evaluate only the first dollar sign and, when it is followed
 by one or more ASCII letters, digits, or underscores, replace that placeholder
-with the collected value whose key matches its name, including an empty value.
+with the provided value whose key matches its name or, when no provided value
+matches, with the collected value whose key matches its name, including an
+empty value.
 
 IF a dollar sign has no valid placeholder name or a dollar placeholder has no
-collected value,
+provided or collected value,
 THEN THE SOFTWARE SHALL preserve it literally.
 ```
 

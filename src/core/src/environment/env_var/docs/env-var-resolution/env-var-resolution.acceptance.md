@@ -726,6 +726,33 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
       Then the declaration resolves to "/Users/host/.kraf/workspace/session/1"
 ```
 
+---
+
+## ENV-VAR_RESOLUTION-ACC-0027
+
+Name: Dollar home and tilde use the same provided home
+
+**Links:**
+
+- [ENV-VAR_RESOLUTION-REQ-0004](./env-var-resolution.spec.md#env-var_resolution-req-0004)
+
+**Status**:
+
+- Doc status: Draft
+- Verification status: Unknown
+
+```gherkin
+Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+
+  Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
+
+    Scenario: ENV-VAR_RESOLUTION-ACC-0027 — Dollar home and tilde use the same provided home
+      Given "HOME" has the collected value "/host"
+      And "HOME" has the provided value "/workspace"
+      When the software resolves the fallbacks "$HOME/.cache" and "~/.cache"
+      Then both resolve to "/workspace/.cache"
+```
+
 ## Links
 
 - [Specification](./env-var-resolution.spec.md): Requirements for resolving

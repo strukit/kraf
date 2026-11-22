@@ -110,7 +110,7 @@ fn resolves_to_fallback_when_no_alias_import() {
         fallback: Some("test-fallback"),
     };
 
-    let result = resolve_alias(&env_var_mapping, &[], "");
+    let result = resolve_alias(&env_var_mapping, &[], &[], "");
 
     assert_eq!(result, "test-fallback");
 }
@@ -125,7 +125,7 @@ fn resolve_alias_expands_tilde_in_fallback() {
         alias_export: &[],
         fallback: Some("~/.tmp"),
     };
-    let result = resolve_alias(&env_var_mapping, &[], "/workspace");
+    let result = resolve_alias(&env_var_mapping, &[], &[], "/workspace");
 
     assert_eq!(result, "/workspace/.tmp");
 }
@@ -142,7 +142,7 @@ fn resolve_alias_expands_dollar_home_in_fallback() {
     };
     let env_var_collected = env_var_collected_fixture("/workspace");
 
-    let result = resolve_alias(&env_var_mapping, &env_var_collected, "");
+    let result = resolve_alias(&env_var_mapping, &env_var_collected, &[], "");
 
     assert_eq!(result, "/workspace/.cache");
 }
@@ -158,7 +158,7 @@ fn resolve_alias_keeps_tilde_when_home_is_missing() {
         fallback: Some("~/.tmp"),
     };
 
-    let result = resolve_alias(&env_var_mapping, &[], "");
+    let result = resolve_alias(&env_var_mapping, &[], &[], "");
 
     assert_eq!(result, "~/.tmp");
 }
@@ -252,7 +252,7 @@ fn resolve_handles_every_mapping_case_at_once() {
         ("USER_LANGUAGE", "pt_BR.UTF-8"),
         ("TERMINAL_TYPE", "xterm-256color"),
         ("TMP_DIR", "/workspace/.tmp"),
-        ("CACHE_DIR", "/host/.cache"),
+        ("CACHE_DIR", "/workspace/.cache"),
         ("PATH", path_expected),
         ("LD_LIBRARY_PATH", "/usr/local/lib"),
         ("MANPATH", "/usr/share/man"),
@@ -297,7 +297,7 @@ fn resolve_alias_merges_multiple_paths_with_colon_separator() {
         },
     ];
 
-    let result = resolve_alias(&env_var_mapping, &env_var_collected, "");
+    let result = resolve_alias(&env_var_mapping, &env_var_collected, &[], "");
 
     #[cfg(host = "windows")]
     let expected = "/custom/bin;/usr/bin".to_string();
@@ -344,4 +344,39 @@ fn resolve_reads_provided_canonical_values_apart_from_collected_host_values() {
         result[1].value,
         Some("/Users/host/.kraf/workspace/session/1".to_string())
     );
+}
+
+#[test]
+fn resolve_dollar_home_uses_the_provided_home_like_tilde() {
+    let mappings = [
+        EnvVarHostMapping {
+            key: "CACHE_DIR",
+            source: EnvVarSource::Host,
+            alias_import: &[],
+            alias_import_mode: EnvVarImportMode::FirstFound,
+            alias_export: &[],
+            fallback: Some("$HOME/.cache"),
+        },
+        EnvVarHostMapping {
+            key: "TMP_DIR",
+            source: EnvVarSource::Host,
+            alias_import: &[],
+            alias_import_mode: EnvVarImportMode::FirstFound,
+            alias_export: &[],
+            fallback: Some("~/.cache"),
+        },
+    ];
+    let env_var_collected = vec![EnvVar {
+        key: "HOME",
+        value: Some("/host".to_string()),
+    }];
+    let env_var_provided = vec![EnvVar {
+        key: "HOME",
+        value: Some("/workspace".to_string()),
+    }];
+
+    let result = resolve(&mappings, &env_var_collected, &env_var_provided);
+
+    assert_eq!(result[0].value, Some("/workspace/.cache".to_string()));
+    assert_eq!(result[0].value, result[1].value);
 }
