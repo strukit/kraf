@@ -123,7 +123,7 @@ Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
 
 ## ENV-VAR_DECLARATIONS-ACC-0005
 
-Name: Pass-through mapping imports only its canonical key
+Name: Pass-through mapping imports and exports only its canonical key
 
 **Links:**
 
@@ -139,9 +139,9 @@ Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
 
   Rule: ENV-VAR_DECLARATIONS-REQ-0003 — Mapping mode validity
 
-    Scenario: ENV-VAR_DECLARATIONS-ACC-0005 — Pass-through mapping imports only its canonical key
+    Scenario: ENV-VAR_DECLARATIONS-ACC-0005 — Pass-through mapping imports and exports only its canonical key
       Given a declaration uses pass-through import mode
-      When the declaration imports an alias other than its canonical key
+      When the declaration imports or exports an alias other than its canonical key
       Then the software rejects the declaration
 ```
 

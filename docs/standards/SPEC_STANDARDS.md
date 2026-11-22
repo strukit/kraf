@@ -81,6 +81,10 @@ This section defines the identifiers of requirements and acceptance scenarios.
 - Identifiers MUST use an uppercase feature area, followed by a type and a
   four-digit sequence number, as the format of
   [Docs identifiers](#docs-identifiers) shows.
+- A citation of a requirement or an acceptance scenario, in a document, code, a
+  commit message, a pull request, a comment, or a message to the user, MUST use
+  its full identifier, with the feature and area (e.g. `ENV-VAR_HOST-REQ-0004`,
+  not `REQ-0004`).
 
 ### Examples
 

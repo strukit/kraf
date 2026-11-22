@@ -114,7 +114,7 @@ Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
 
     Scenario: ENV-VAR_HOST-ACC-0004 — Home and work-directory declarations use provided values
       Given a supported platform mapping
-      When the mapping declares WORKDIR or a HOME family key
+      When the mapping declares WORK_DIR or a HOME_DIR family key
       Then the declaration source is provided
 ```
 
@@ -144,6 +144,141 @@ Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
       Then the declaration source is host
       And the declaration imports the home directory of the host user
       And the declaration has no export aliases
+```
+
+---
+
+## ENV-VAR_HOST-ACC-0006
+
+Name: Kraf canonical keys stay out of the native projection
+
+**Links:**
+
+- [ENV-VAR_HOST-REQ-0004](./env-var-host.spec.md#env-var_host-req-0004)
+
+**Status**:
+
+- Doc status: Draft
+- Verification status: Unknown
+
+```gherkin
+Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
+
+  Rule: ENV-VAR_HOST-REQ-0004 — Native export aliases only
+
+    Scenario: ENV-VAR_HOST-ACC-0006 — Kraf canonical keys stay out of the native projection
+      Given a supported platform mapping
+      When the mappings are projected
+      Then no projected key is a canonical key of the PLATFORM, TERMINAL, USER, or HOME families
+```
+
+---
+
+## ENV-VAR_HOST-ACC-0007
+
+Name: Session path does not import the host path
+
+**Links:**
+
+- [ENV-VAR_HOST-REQ-0005](./env-var-host.spec.md#env-var_host-req-0005)
+
+**Status**:
+
+- Doc status: Draft
+- Verification status: Unknown
+
+```gherkin
+Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
+
+  Rule: ENV-VAR_HOST-REQ-0005 — Host path lists and isolated session path
+
+    Scenario: ENV-VAR_HOST-ACC-0007 — Session path does not import the host path
+      Given a supported platform mapping
+      And the host "PATH" is "/opt/tools/bin:/usr/bin"
+      When the software resolves "HOME_PATH"
+      Then "HOME_PATH" does not contain "/opt/tools/bin"
+      And "HOST_PATH" resolves to "/opt/tools/bin:/usr/bin"
+```
+
+---
+
+## ENV-VAR_HOST-ACC-0008
+
+Name: Undefined host data and config lists are not projected
+
+**Links:**
+
+- [ENV-VAR_HOST-REQ-0005](./env-var-host.spec.md#env-var_host-req-0005)
+
+**Status**:
+
+- Doc status: Draft
+- Verification status: Unknown
+
+```gherkin
+Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
+
+  Rule: ENV-VAR_HOST-REQ-0005 — Host path lists and isolated session path
+
+    Scenario: ENV-VAR_HOST-ACC-0008 — Undefined host data and config lists are not projected
+      Given a supported platform mapping
+      And the host defines no import alias of "HOST_DATA" or "HOST_CONFIG"
+      When the software resolves and projects the mappings
+      Then the projection contains no export alias of "HOST_DATA" or "HOST_CONFIG"
+```
+
+---
+
+## ENV-VAR_HOST-ACC-0009
+
+Name: System declarations resolve on every platform
+
+**Links:**
+
+- [ENV-VAR_HOST-REQ-0006](./env-var-host.spec.md#env-var_host-req-0006)
+
+**Status**:
+
+- Doc status: Draft
+- Verification status: Unknown
+
+```gherkin
+Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
+
+  Rule: ENV-VAR_HOST-REQ-0006 — System declarations
+
+    Scenario: ENV-VAR_HOST-ACC-0009 — System declarations resolve on every platform
+      Given a supported platform mapping
+      When the mappings are loaded
+      Then the mapping declares "SYSTEM_ROOT", "SYSTEM_DRIVE", and "SYSTEM_PROGRAMS"
+      And each of them has source host
+```
+
+---
+
+## ENV-VAR_HOST-ACC-0010
+
+Name: Only pass-through declarations export their canonical key
+
+**Links:**
+
+- [ENV-VAR_HOST-REQ-0004](./env-var-host.spec.md#env-var_host-req-0004)
+
+**Status**:
+
+- Doc status: Draft
+- Verification status: Unknown
+
+```gherkin
+Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
+
+  Rule: ENV-VAR_HOST-REQ-0004 — Native export aliases only
+
+    Scenario: ENV-VAR_HOST-ACC-0010 — Only pass-through declarations export their canonical key
+      Given a supported platform mapping with a pass-through declaration
+      When the mappings are projected
+      Then the pass-through declaration is projected under its canonical key
+      And no canonical key of another declaration is projected
 ```
 
 ## Links

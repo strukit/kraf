@@ -61,10 +61,10 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
   Rule: ENV-VAR_RESOLUTION-REQ-0001 — Declared import dependency collection
 
     Scenario: ENV-VAR_RESOLUTION-ACC-0002 — Fallback variable reference is not collected
-      Given a declaration fallback references "$HOME"
-      And no declaration imports "HOME"
+      Given a declaration fallback references "$BASE_DIR"
+      And no declaration imports "BASE_DIR"
       When the software collects import dependencies
-      Then "HOME" is not collected
+      Then "BASE_DIR" is not collected
 ```
 
 ---
@@ -116,9 +116,9 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
     Scenario: ENV-VAR_RESOLUTION-ACC-0004 — Fallback is used when no import alias has a value
       Given no import alias provides a value
-      And the declaration fallback is "C.UTF-8"
+      And the declaration fallback is "en_US.UTF-8"
       When the software resolves the declaration
-      Then the declaration resolves to "C.UTF-8"
+      Then the declaration resolves to "en_US.UTF-8"
 ```
 
 ---
@@ -197,7 +197,7 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
   Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
 
     Scenario: ENV-VAR_RESOLUTION-ACC-0007 — Tilde fallback expands from resolved home
-      Given "HOME" has the provided value "/workspace"
+      Given "HOME_DIR" has the provided value "/workspace"
       And a declaration fallback is "~/.cache"
       When the software resolves the declaration
       Then the declaration resolves to "/workspace/.cache"
@@ -224,8 +224,8 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
   Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
 
     Scenario: ENV-VAR_RESOLUTION-ACC-0008 — Dollar fallback expands from a provided value
-      Given "HOME" has the provided value "/workspace"
-      And a declaration fallback is "$HOME/.cache"
+      Given "BASE_DIR" has the provided value "/workspace"
+      And a declaration fallback is "$BASE_DIR/.cache"
       When the software resolves the declaration
       Then the declaration resolves to "/workspace/.cache"
 ```
@@ -445,10 +445,11 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
   Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
 
     Scenario: ENV-VAR_RESOLUTION-ACC-0016 — Tilde expansion takes precedence and replaces only the first tilde
-      Given "HOME" has the provided value "/workspace"
-      And a declaration fallback is "~/$HOME/~"
+      Given "HOME_DIR" has the provided value "/workspace"
+      And "BASE_DIR" has the provided value "/base"
+      And a declaration fallback is "~/$BASE_DIR/~"
       When the software resolves the declaration
-      Then the declaration resolves to "/workspace/$HOME/~"
+      Then the declaration resolves to "/workspace/$BASE_DIR/~"
 ```
 
 ---
@@ -480,7 +481,7 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
         | fallback       |
         | $              |
         | $/cache        |
-        | ${HOME}/cache  |
+        | ${BASE_DIR}/cache |
 ```
 
 ---
@@ -504,10 +505,10 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
   Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
 
     Scenario: ENV-VAR_RESOLUTION-ACC-0018 — Dollar expansion replaces only the first placeholder
-      Given "HOME" has the provided value "/workspace"
-      And a declaration fallback is "$HOME/$HOME"
+      Given "BASE_DIR" has the provided value "/workspace"
+      And a declaration fallback is "$BASE_DIR/$BASE_DIR"
       When the software resolves the declaration
-      Then the declaration resolves to "/workspace/$HOME"
+      Then the declaration resolves to "/workspace/$BASE_DIR"
 ```
 
 ---
@@ -720,9 +721,9 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
   Rule: ENV-VAR_RESOLUTION-REQ-0005 — Source precedence and absence
 
     Scenario: ENV-VAR_RESOLUTION-ACC-0026 — Provided value is not read from collected host values
-      Given a provided declaration "HOME" has no import aliases
-      And "HOME" has the collected value "/Users/host"
-      And "HOME" has the provided value "/Users/host/.kraf/workspace/session/1"
+      Given a provided declaration "HOME_DIR" has no import aliases
+      And "HOME_DIR" has the collected value "/Users/host"
+      And "HOME_DIR" has the provided value "/Users/host/.kraf/workspace/session/1"
       When the software resolves the declaration
       Then the declaration resolves to "/Users/host/.kraf/workspace/session/1"
 ```
@@ -731,7 +732,7 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ## ENV-VAR_RESOLUTION-ACC-0027
 
-Name: Dollar home and tilde use the same provided home
+Name: Dollar export alias and tilde use the same provided home
 
 **Links:**
 
@@ -747,10 +748,10 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
   Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0027 — Dollar home and tilde use the same provided home
-      Given "HOME" has the collected value "/host"
-      And "HOME" has the provided value "/workspace"
-      When the software resolves the fallbacks "$HOME/.cache" and "~/.cache"
+    Scenario: ENV-VAR_RESOLUTION-ACC-0027 — Dollar export alias and tilde use the same provided home
+      Given "SESSION_HOME" has the collected value "/host"
+      And "HOME_DIR" exports "SESSION_HOME" and has the provided value "/workspace"
+      When the software resolves the fallbacks "$SESSION_HOME/.cache" and "~/.cache"
       Then both resolve to "/workspace/.cache"
 ```
 
