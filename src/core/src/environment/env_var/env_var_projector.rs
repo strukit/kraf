@@ -20,16 +20,19 @@ pub fn project(
 ) -> EnvVarProjection {
     let env_vars = env_var_mappings
         .iter()
-        .flat_map(|env_var_mapping| {
-            let env_var_value = lookup_env_var_value(env_var_mapping.key, env_var_resolved);
-
+        .filter_map(|env_var_mapping| {
+            lookup_env_var_value(env_var_mapping.key, env_var_resolved)
+                .filter(|env_var_value| !env_var_value.is_empty())
+                .map(|env_var_value| (env_var_mapping, env_var_value))
+        })
+        .flat_map(|(env_var_mapping, env_var_value)| {
             env_var_mapping
                 .alias_export
                 .iter()
                 .copied()
                 .map(move |alias_export| EnvVar {
                     key: alias_export,
-                    value: env_var_value.clone(),
+                    value: Some(env_var_value.clone()),
                 })
         })
         .collect();

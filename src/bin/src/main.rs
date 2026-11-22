@@ -3,14 +3,21 @@
 
 mod process;
 
-use kraf_core::environment::env_var::env_var_core::EnvVar;
+use kraf_core::environment::env_var::env_var_core::{EnvVar, EnvVarReader, EnvVarWriter};
 use kraf_core::environment::env_var::env_var_host::{
-    HOME_ENV_VAR, HOST_ENV_VAR_MAPPINGS, HOST_HOME_ENV_VAR, HostEnvVarReader, WORKDIR_ENV_VAR,
-    env_var_collect,
+    HOME_DIR_ENV_VAR, HOST_ENV_VAR_MAPPINGS, HOST_HOME_ENV_VAR, WORK_DIR_ENV_VAR, env_var_collect,
 };
 use kraf_core::environment::env_var::env_var_projector::{apply, project};
 use kraf_core::environment::env_var::env_var_resolver::resolve;
 use process::{ChildProcess, HostProcess, Process};
+
+pub struct HostEnvVarReader;
+
+impl EnvVarReader for HostEnvVarReader {
+    fn read(&self, key: &str) -> Option<String> {
+        std::env::var(key).ok()
+    }
+}
 
 fn main() {
     println!("[kraf] trap init");
@@ -26,22 +33,45 @@ fn main() {
 
     let provided = [
         EnvVar {
-            key: WORKDIR_ENV_VAR.key,
+            key: WORK_DIR_ENV_VAR.key,
             value: HostProcess.get_current_dir(),
         },
         EnvVar {
-            key: HOME_ENV_VAR.key,
+            key: HOME_DIR_ENV_VAR.key,
             value: HostProcess.create_session_dir(&host_home),
         },
     ];
 
     let resolved = resolve(HOST_ENV_VAR_MAPPINGS, &collected, &provided);
 
+    // Session directories that programs expect to exist, such as TEMP.
+    for key in [
+        "HOME_TEMP",
+        "HOME_CONFIG",
+        "HOME_DATA",
+        "HOME_DATA_BIN",
+        "HOME_CACHE",
+        "HOME_STATE",
+        "HOME_SESSION",
+    ] {
+        let dir = resolved
+            .iter()
+            .find(|env_var| env_var.key == key)
+            .and_then(|env_var| env_var.value.clone())
+            .filter(|value| !value.is_empty());
+
+        if let Some(dir) = dir
+            && !HostProcess.create_dir(&dir)
+        {
+            eprintln!("[kraf] warning: failed to create ${key} at {dir}");
+        }
+    }
+
     let workdir = resolved
         .iter()
-        .find(|env_var| env_var.key == "WORKDIR")
+        .find(|env_var| env_var.key == "WORK_DIR")
         .and_then(|env_var| env_var.value.clone())
-        .expect("[kraf] error: $WORKDIR is required, failed to resolve (internal)");
+        .expect("[kraf] error: $WORK_DIR is required, failed to resolve (internal)");
 
     let terminal = resolved
         .iter()
@@ -51,12 +81,12 @@ fn main() {
 
     let home = resolved
         .iter()
-        .find(|env_var| env_var.key == "HOME")
+        .find(|env_var| env_var.key == "HOME_DIR")
         .and_then(|env_var| env_var.value.clone())
-        .expect("[kraf] error: $HOME is required, failed to resolve (internal)");
+        .expect("[kraf] error: $HOME_DIR is required, failed to resolve (internal)");
 
-    println!("[kraf]   HOME={home}");
-    println!("[kraf]   WORKDIR={workdir}");
+    println!("[kraf]   HOME_DIR={home}");
+    println!("[kraf]   WORK_DIR={workdir}");
 
     let mut child = ChildProcess::new(&terminal);
 
@@ -64,6 +94,18 @@ fn main() {
     child.clean_env();
 
     apply(&project(HOST_ENV_VAR_MAPPINGS, &resolved), &mut child);
+
+    // Temporary: mark the cmd prompt as a Kraf session, keeping the host prompt.
+    if cfg!(windows) {
+        let prompt = resolved
+            .iter()
+            .find(|env_var| env_var.key == "PROMPT")
+            .and_then(|env_var| env_var.value.clone())
+            .filter(|value| !value.is_empty())
+            .unwrap_or_else(|| "$P$G".to_string());
+
+        child.write("PROMPT", &format!("[kraf] {prompt}"));
+    }
 
     println!("[kraf] trap ready");
 

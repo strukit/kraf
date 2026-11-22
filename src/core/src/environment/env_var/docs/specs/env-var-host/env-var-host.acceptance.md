@@ -27,7 +27,7 @@ Name: Every shared canonical key has a Linux mapping
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
@@ -53,7 +53,7 @@ Name: Every shared canonical key has a Mac mapping
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
@@ -79,7 +79,7 @@ Name: Every shared canonical key has a Windows mapping
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
@@ -105,7 +105,7 @@ Name: Home and work-directory declarations use provided values
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
@@ -131,7 +131,7 @@ Name: Host home is imported and not exported
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
@@ -159,7 +159,7 @@ Name: Kraf canonical keys stay out of the native projection
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
@@ -185,7 +185,7 @@ Name: Session path does not import the host path
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
@@ -213,7 +213,7 @@ Name: Undefined host data and config lists are not projected
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
@@ -240,7 +240,7 @@ Name: System declarations resolve on every platform
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
@@ -267,7 +267,7 @@ Name: Only pass-through declarations export their canonical key
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
