@@ -46,9 +46,9 @@ Name: Static declaration
 - Implementation status: Not Implemented
 
 ```text
-THE SOFTWARE SHALL fix the set of declarations before resolution starts, from
-source code, immutable plugin metadata, or configuration files loaded at
-startup.
+THE SOFTWARE SHALL determine the complete set of declarations before resolution
+starts, from source code, immutable plugin metadata, or configuration files
+loaded at startup.
 
 WHILE a session is running,
 THE SOFTWARE SHALL NOT accept new declarations, import aliases, export aliases,
