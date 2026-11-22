@@ -391,4 +391,12 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         alias_export: &["LOGONSERVER"],
         fallback: None,
     },
+    EnvVarHostMapping {
+        key: "PROMPT",
+        source: EnvVarSource::Host,
+        alias_import: &["PROMPT"],
+        alias_import_mode: EnvVarImportMode::PassThrough,
+        alias_export: &["PROMPT"],
+        fallback: None,
+    },
 ];
