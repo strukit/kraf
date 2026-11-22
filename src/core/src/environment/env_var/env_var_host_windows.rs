@@ -327,4 +327,12 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         alias_export: &["CommonProgramW6432"],
         fallback: None,
     },
+    EnvVarHostMapping {
+        key: "HOMEDRIVE",
+        source: EnvVarSource::Host,
+        alias_import: &["HOMEDRIVE"],
+        alias_import_mode: EnvVarImportMode::PassThrough,
+        alias_export: &["HOMEDRIVE"],
+        fallback: None,
+    },
 ];
