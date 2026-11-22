@@ -42,7 +42,7 @@ Name: Declared value access
 **Status**:
 
 - Doc status: Draft
-- Implementation status: Unknown
+- Implementation status: Not Implemented
 
 ```text
 WHEN a module or plugin requests a resolved value for a declaration it owns or

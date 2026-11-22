@@ -63,7 +63,7 @@ Name: Session-owned directory sources
 **Status**:
 
 - Doc status: Draft
-- Implementation status: Partially Implemented
+- Implementation status: Implemented
 
 ```text
 THE SOFTWARE SHALL resolve the WORK_DIR and HOME_DIR declaration families from
@@ -109,7 +109,7 @@ Name: Native export aliases only
 **Status**:
 
 - Doc status: Draft
-- Implementation status: Not Implemented
+- Implementation status: Implemented
 
 ```text
 THE SOFTWARE SHALL NOT declare, in a supported platform mapping, a canonical key
@@ -135,7 +135,7 @@ Name: Host path lists and isolated session path
 **Status**:
 
 - Doc status: Draft
-- Implementation status: Not Implemented
+- Implementation status: Implemented
 
 ```text
 THE SOFTWARE SHALL declare, in every supported platform mapping, the
@@ -164,7 +164,7 @@ Name: System declarations
 **Status**:
 
 - Doc status: Draft
-- Implementation status: Not Implemented
+- Implementation status: Implemented
 
 ```text
 THE SOFTWARE SHALL declare, in every supported platform mapping, the

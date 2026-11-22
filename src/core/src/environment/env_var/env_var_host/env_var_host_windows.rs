@@ -4,46 +4,74 @@ use crate::environment::env_var::env_var_core::{
 
 use crate::environment::env_var::env_var_host::{
     HOME_CACHE_ENV_VAR, HOME_CONFIG_ENV_VAR, HOME_DATA_BIN_ENV_VAR, HOME_DATA_ENV_VAR,
-    HOME_ENV_VAR, HOME_SESSION_ENV_VAR, HOME_STATE_ENV_VAR, HOME_TEMP_ENV_VAR, HOST_HOME_ENV_VAR,
-    HOSTNAME_ENV_VAR, PATH_ENV_VAR, PLATFORM_ARCH_ENV_VAR, PLATFORM_ENV_VAR,
+    HOME_DIR_ENV_VAR, HOME_PATH_ENV_VAR, HOME_SESSION_ENV_VAR, HOME_STATE_ENV_VAR,
+    HOME_TEMP_ENV_VAR, HOST_CONFIG_ENV_VAR, HOST_DATA_ENV_VAR, HOST_HOME_ENV_VAR,
+    HOST_NAME_ENV_VAR, HOST_PATH_ENV_VAR, PLATFORM_ARCH_ENV_VAR, PLATFORM_ENV_VAR,
     PLATFORM_FAMILY_ENV_VAR, PLATFORM_KERNEL_ENV_VAR, PLATFORM_KERNEL_VERSION_ENV_VAR,
-    PLATFORM_VERSION_ENV_VAR, TERMINAL_COLOR_ENV_VAR, TERMINAL_ENV_VAR, TERMINAL_NOCOLOR_ENV_VAR,
-    TERMINAL_PROGRAM_ENV_VAR, TERMINAL_PROGRAM_VERSION_ENV_VAR, TERMINAL_TYPE_ENV_VAR,
-    USER_ENV_VAR, USER_LANGUAGE_ENV_VAR, USER_TIMEZONE_ENV_VAR, WORKDIR_ENV_VAR,
+    PLATFORM_VERSION_ENV_VAR, SYSTEM_DRIVE_ENV_VAR, SYSTEM_PROGRAMS_ENV_VAR, SYSTEM_ROOT_ENV_VAR,
+    TERMINAL_COLOR_ENV_VAR, TERMINAL_ENV_VAR, TERMINAL_NOCOLOR_ENV_VAR, TERMINAL_PROGRAM_ENV_VAR,
+    TERMINAL_PROGRAM_VERSION_ENV_VAR, TERMINAL_TYPE_ENV_VAR, USER_LANGUAGE_ENV_VAR,
+    USER_NAME_ENV_VAR, USER_TIMEZONE_ENV_VAR, WORK_DIR_ENV_VAR,
 };
 
 pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
     EnvVarHostMapping {
-        key: HOSTNAME_ENV_VAR.key,
+        key: HOST_NAME_ENV_VAR.key,
         source: EnvVarSource::Host,
-        alias_import: &[HOSTNAME_ENV_VAR.key, "COMPUTERNAME"],
+        alias_import: &["HOSTNAME", "COMPUTERNAME"],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[HOSTNAME_ENV_VAR.key, "COMPUTERNAME"],
+        alias_export: &["HOSTNAME", "COMPUTERNAME"],
         fallback: None,
     },
     EnvVarHostMapping {
-        key: WORKDIR_ENV_VAR.key,
+        key: WORK_DIR_ENV_VAR.key,
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[WORKDIR_ENV_VAR.key, "CD"],
+        alias_export: &[],
         fallback: None,
     },
     EnvVarHostMapping {
-        key: PATH_ENV_VAR.key,
+        key: HOME_PATH_ENV_VAR.key,
         source: EnvVarSource::Provided,
-        alias_import: &[HOME_DATA_BIN_ENV_VAR.key, PATH_ENV_VAR.key],
-        alias_import_mode: EnvVarImportMode::Merge,
-        alias_export: &[PATH_ENV_VAR.key],
+        alias_import: &[],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &["PATH"],
+        fallback: Some(
+            r"~\.local\bin;C:\Windows\System32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\",
+        ),
+    },
+    EnvVarHostMapping {
+        key: HOST_PATH_ENV_VAR.key,
+        source: EnvVarSource::Host,
+        alias_import: &["PATH"],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &[],
+        fallback: None,
+    },
+    EnvVarHostMapping {
+        key: HOST_DATA_ENV_VAR.key,
+        source: EnvVarSource::Host,
+        alias_import: &["ProgramData", "ALLUSERSPROFILE"],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &["ProgramData", "ALLUSERSPROFILE"],
+        fallback: None,
+    },
+    EnvVarHostMapping {
+        key: HOST_CONFIG_ENV_VAR.key,
+        source: EnvVarSource::Host,
+        alias_import: &[],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &[],
         fallback: None,
     },
     // User
     EnvVarHostMapping {
-        key: USER_ENV_VAR.key,
+        key: USER_NAME_ENV_VAR.key,
         source: EnvVarSource::Host,
-        alias_import: &[USER_ENV_VAR.key, "USERNAME"],
+        alias_import: &["USER", "USERNAME"],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[USER_ENV_VAR.key, "USERNAME"],
+        alias_export: &["USER", "USERNAME"],
         fallback: None,
     },
     EnvVarHostMapping {
@@ -51,7 +79,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Host,
         alias_import: &[USER_LANGUAGE_ENV_VAR.key, "LANG"],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[USER_LANGUAGE_ENV_VAR.key, "LANG"],
+        alias_export: &["LANG"],
         fallback: Some("en_US.UTF-8"),
     },
     EnvVarHostMapping {
@@ -59,7 +87,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Host,
         alias_import: &[USER_TIMEZONE_ENV_VAR.key, "TZ"],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[USER_TIMEZONE_ENV_VAR.key, "TZ"],
+        alias_export: &["TZ"],
         fallback: None,
     },
     // Home directories
@@ -72,11 +100,11 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         fallback: None,
     },
     EnvVarHostMapping {
-        key: HOME_ENV_VAR.key,
+        key: HOME_DIR_ENV_VAR.key,
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[HOME_ENV_VAR.key, "USERPROFILE", "HOMEPATH"],
+        alias_export: &["HOME", "USERPROFILE"],
         fallback: None,
     },
     EnvVarHostMapping {
@@ -84,7 +112,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[HOME_TEMP_ENV_VAR.key, "TEMP", "TMP"],
+        alias_export: &["TEMP", "TMP"],
         fallback: Some(r"~\AppData\Local\Temp"),
     },
     EnvVarHostMapping {
@@ -92,7 +120,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[HOME_CONFIG_ENV_VAR.key, "APPDATA"],
+        alias_export: &["APPDATA"],
         fallback: Some(r"~\AppData\Roaming"),
     },
     EnvVarHostMapping {
@@ -100,7 +128,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[HOME_DATA_ENV_VAR.key, "LOCALAPPDATA"],
+        alias_export: &["LOCALAPPDATA"],
         fallback: Some(r"~\AppData\Local"),
     },
     EnvVarHostMapping {
@@ -108,7 +136,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[HOME_DATA_BIN_ENV_VAR.key],
+        alias_export: &[],
         fallback: Some(r"~\.local\bin"),
     },
     EnvVarHostMapping {
@@ -116,7 +144,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[HOME_CACHE_ENV_VAR.key, "CACHE"],
+        alias_export: &["CACHE"],
         fallback: Some(r"~\AppData\Local\Temp"),
     },
     EnvVarHostMapping {
@@ -124,7 +152,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[HOME_STATE_ENV_VAR.key],
+        alias_export: &[],
         fallback: Some(r"~\AppData\Local"),
     },
     EnvVarHostMapping {
@@ -132,14 +160,14 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[HOME_SESSION_ENV_VAR.key],
+        alias_export: &[],
         fallback: Some(r"~\AppData\Local\Temp"),
     },
     // Terminal
     EnvVarHostMapping {
         key: TERMINAL_ENV_VAR.key,
         source: EnvVarSource::Host,
-        alias_import: &[TERMINAL_ENV_VAR.key, "COMSPEC", "SHELL"],
+        alias_import: &[TERMINAL_ENV_VAR.key, "SHELL", "COMSPEC"],
         alias_import_mode: EnvVarImportMode::FirstFound,
         alias_export: &["COMSPEC", "SHELL"],
         fallback: Some("cmd.exe"),
@@ -190,7 +218,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Host,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[PLATFORM_ENV_VAR.key],
+        alias_export: &[],
         fallback: Some(std::env::consts::OS),
     },
     EnvVarHostMapping {
@@ -198,7 +226,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Host,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[PLATFORM_FAMILY_ENV_VAR.key],
+        alias_export: &[],
         fallback: Some(std::env::consts::FAMILY),
     },
     EnvVarHostMapping {
@@ -206,7 +234,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Host,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[PLATFORM_ARCH_ENV_VAR.key],
+        alias_export: &[],
         fallback: Some(std::env::consts::ARCH),
     },
     EnvVarHostMapping {
@@ -214,7 +242,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Host,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[PLATFORM_VERSION_ENV_VAR.key],
+        alias_export: &[],
         fallback: None,
     },
     EnvVarHostMapping {
@@ -222,7 +250,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Host,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[PLATFORM_KERNEL_ENV_VAR.key],
+        alias_export: &["OS"],
         fallback: Some("Windows_NT"),
     },
     EnvVarHostMapping {
@@ -230,7 +258,32 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Host,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[PLATFORM_KERNEL_VERSION_ENV_VAR.key],
+        alias_export: &[],
+        fallback: None,
+    },
+    // System
+    EnvVarHostMapping {
+        key: SYSTEM_ROOT_ENV_VAR.key,
+        source: EnvVarSource::Host,
+        alias_import: &["SystemRoot", "windir"],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &["SystemRoot", "windir"],
+        fallback: None,
+    },
+    EnvVarHostMapping {
+        key: SYSTEM_DRIVE_ENV_VAR.key,
+        source: EnvVarSource::Host,
+        alias_import: &["SystemDrive"],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &["SystemDrive"],
+        fallback: None,
+    },
+    EnvVarHostMapping {
+        key: SYSTEM_PROGRAMS_ENV_VAR.key,
+        source: EnvVarSource::Host,
+        alias_import: &["ProgramW6432", "ProgramFiles"],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &[],
         fallback: None,
     },
     // Windows specific (no cross-platform equivalent)
@@ -240,6 +293,14 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         alias_import: &["ProgramFiles"],
         alias_import_mode: EnvVarImportMode::PassThrough,
         alias_export: &["ProgramFiles"],
+        fallback: None,
+    },
+    EnvVarHostMapping {
+        key: "ProgramW6432",
+        source: EnvVarSource::Host,
+        alias_import: &["ProgramW6432"],
+        alias_import_mode: EnvVarImportMode::PassThrough,
+        alias_export: &["ProgramW6432"],
         fallback: None,
     },
     EnvVarHostMapping {
@@ -256,14 +317,6 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         alias_import: &["ProgramFiles(Arm)"],
         alias_import_mode: EnvVarImportMode::PassThrough,
         alias_export: &["ProgramFiles(Arm)"],
-        fallback: None,
-    },
-    EnvVarHostMapping {
-        key: "ProgramW6432",
-        source: EnvVarSource::Host,
-        alias_import: &["ProgramW6432"],
-        alias_import_mode: EnvVarImportMode::PassThrough,
-        alias_export: &["ProgramW6432"],
         fallback: None,
     },
     EnvVarHostMapping {
@@ -296,46 +349,6 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         alias_import: &["CommonProgramW6432"],
         alias_import_mode: EnvVarImportMode::PassThrough,
         alias_export: &["CommonProgramW6432"],
-        fallback: None,
-    },
-    EnvVarHostMapping {
-        key: "ProgramData",
-        source: EnvVarSource::Provided,
-        alias_import: &[],
-        alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &["ProgramData", "ALLUSERSPROFILE"],
-        fallback: Some(r"~\AppData\ProgramData"),
-    },
-    EnvVarHostMapping {
-        key: "SystemRoot",
-        source: EnvVarSource::Host,
-        alias_import: &["SystemRoot"],
-        alias_import_mode: EnvVarImportMode::PassThrough,
-        alias_export: &["SystemRoot"],
-        fallback: None,
-    },
-    EnvVarHostMapping {
-        key: "windir",
-        source: EnvVarSource::Host,
-        alias_import: &["windir"],
-        alias_import_mode: EnvVarImportMode::PassThrough,
-        alias_export: &["windir"],
-        fallback: None,
-    },
-    EnvVarHostMapping {
-        key: "SystemDrive",
-        source: EnvVarSource::Host,
-        alias_import: &["SystemDrive"],
-        alias_import_mode: EnvVarImportMode::PassThrough,
-        alias_export: &["SystemDrive"],
-        fallback: None,
-    },
-    EnvVarHostMapping {
-        key: "PATHEXT",
-        source: EnvVarSource::Host,
-        alias_import: &["PATHEXT"],
-        alias_import_mode: EnvVarImportMode::PassThrough,
-        alias_export: &["PATHEXT"],
         fallback: None,
     },
     EnvVarHostMapping {
@@ -387,3 +400,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         fallback: None,
     },
 ];
+
+#[cfg(test)]
+#[path = "env_var_host_windows_tests.rs"]
+mod tests;

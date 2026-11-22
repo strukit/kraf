@@ -140,8 +140,8 @@ fn host_source_mappings_export_every_native_imported_alias() {
 #[test]
 fn home_and_workdir_family_are_always_provided() {
     const ISOLATED_KEYS: &[&str] = &[
-        "WORKDIR",
-        "HOME",
+        "WORK_DIR",
+        "HOME_DIR",
         "HOME_TEMP",
         "HOME_CONFIG",
         "HOME_DATA",
@@ -160,7 +160,7 @@ fn home_and_workdir_family_are_always_provided() {
             assert_eq!(
                 mapping.source,
                 EnvVarSource::Provided,
-                "{name}: mapping '{}' is part of the isolated HOME/WORKDIR family but is source: Host",
+                "{name}: mapping '{}' is part of the isolated HOME_DIR/WORK_DIR family but is source: Host",
                 mapping.key
             );
         }
@@ -185,6 +185,12 @@ fn pass_through_mappings_only_forward_their_own_key() {
                 "{name}: PassThrough mapping '{}' must import exactly its own key",
                 mapping.key
             );
+            assert_eq!(
+                mapping.alias_export,
+                &[mapping.key],
+                "{name}: PassThrough mapping '{}' must export exactly its own key",
+                mapping.key
+            );
             assert!(
                 mapping.fallback.is_none(),
                 "{name}: PassThrough mapping '{}' must not have a fallback",
@@ -196,4 +202,168 @@ fn pass_through_mappings_only_forward_their_own_key() {
     assert_pass_through_shape(MACOS_MAPPINGS, "MACOS_MAPPINGS");
     assert_pass_through_shape(LINUX_MAPPINGS, "LINUX_MAPPINGS");
     assert_pass_through_shape(WINDOWS_MAPPINGS, "WINDOWS_MAPPINGS");
+}
+
+#[test]
+fn derived_canonical_keys_are_not_exported() {
+    fn is_derived(key: &str) -> bool {
+        key.starts_with("PLATFORM")
+            || key.starts_with("TERMINAL")
+            || key.starts_with("USER_")
+            || key.starts_with("HOME_")
+    }
+
+    fn assert_derived_keys_are_not_exported(mappings: &[EnvVarHostMapping], name: &str) {
+        for mapping in mappings {
+            for alias_export in mapping.alias_export {
+                assert!(
+                    !is_derived(alias_export),
+                    "{name}: mapping '{}' exports the derived canonical key '{alias_export}'",
+                    mapping.key
+                );
+            }
+        }
+    }
+
+    assert_derived_keys_are_not_exported(MACOS_MAPPINGS, "MACOS_MAPPINGS");
+    assert_derived_keys_are_not_exported(LINUX_MAPPINGS, "LINUX_MAPPINGS");
+    assert_derived_keys_are_not_exported(WINDOWS_MAPPINGS, "WINDOWS_MAPPINGS");
+}
+
+#[test]
+fn canonical_keys_are_never_exported() {
+    fn assert_canonical_keys_are_not_exported(mappings: &[EnvVarHostMapping], name: &str) {
+        let canonical_keys: HashSet<&str> = mappings.iter().map(|mapping| mapping.key).collect();
+
+        for mapping in mappings {
+            if mapping.alias_import_mode == EnvVarImportMode::PassThrough {
+                continue;
+            }
+
+            for alias_export in mapping.alias_export {
+                assert!(
+                    !canonical_keys.contains(alias_export),
+                    "{name}: mapping '{}' exports the canonical key '{alias_export}'",
+                    mapping.key
+                );
+            }
+        }
+    }
+
+    assert_canonical_keys_are_not_exported(MACOS_MAPPINGS, "MACOS_MAPPINGS");
+    assert_canonical_keys_are_not_exported(LINUX_MAPPINGS, "LINUX_MAPPINGS");
+    assert_canonical_keys_are_not_exported(WINDOWS_MAPPINGS, "WINDOWS_MAPPINGS");
+}
+
+#[test]
+fn host_data_and_config_have_no_fallback() {
+    fn assert_no_fallback(mappings: &[EnvVarHostMapping], name: &str) {
+        for mapping in mappings {
+            if mapping.key != "HOST_DATA" && mapping.key != "HOST_CONFIG" {
+                continue;
+            }
+
+            assert!(
+                mapping.fallback.is_none(),
+                "{name}: mapping '{}' declares a fallback",
+                mapping.key
+            );
+        }
+    }
+
+    assert_no_fallback(MACOS_MAPPINGS, "MACOS_MAPPINGS");
+    assert_no_fallback(LINUX_MAPPINGS, "LINUX_MAPPINGS");
+    assert_no_fallback(WINDOWS_MAPPINGS, "WINDOWS_MAPPINGS");
+}
+
+#[test]
+fn home_path_does_not_import_the_host_path() {
+    fn assert_home_path_is_isolated(mappings: &[EnvVarHostMapping], name: &str) {
+        let home_path = mappings
+            .iter()
+            .find(|mapping| mapping.key == "HOME_PATH")
+            .unwrap_or_else(|| panic!("{name}: missing HOME_PATH mapping"));
+
+        assert!(
+            home_path.alias_import.is_empty() && home_path.fallback.is_some(),
+            "{name}: HOME_PATH imports from the host or has no fallback"
+        );
+    }
+
+    assert_home_path_is_isolated(MACOS_MAPPINGS, "MACOS_MAPPINGS");
+    assert_home_path_is_isolated(LINUX_MAPPINGS, "LINUX_MAPPINGS");
+    assert_home_path_is_isolated(WINDOWS_MAPPINGS, "WINDOWS_MAPPINGS");
+}
+
+#[test]
+fn system_declarations_import_only_on_windows() {
+    const SYSTEM_KEYS: &[&str] = &["SYSTEM_ROOT", "SYSTEM_DRIVE", "SYSTEM_PROGRAMS"];
+
+    fn system_mappings(mappings: &[EnvVarHostMapping]) -> Vec<&EnvVarHostMapping> {
+        mappings
+            .iter()
+            .filter(|mapping| SYSTEM_KEYS.contains(&mapping.key))
+            .collect()
+    }
+
+    for mapping in system_mappings(MACOS_MAPPINGS)
+        .into_iter()
+        .chain(system_mappings(LINUX_MAPPINGS))
+    {
+        assert!(
+            mapping.alias_import.is_empty() && mapping.fallback.is_some(),
+            "mapping '{}' imports from the host or has no fallback",
+            mapping.key
+        );
+    }
+
+    for mapping in system_mappings(WINDOWS_MAPPINGS) {
+        assert!(
+            !mapping.alias_import.is_empty() && mapping.fallback.is_none(),
+            "WINDOWS_MAPPINGS: mapping '{}' does not import or has a fallback",
+            mapping.key
+        );
+    }
+}
+
+#[test]
+fn pass_through_keys_belong_to_one_platform() {
+    let platforms = [MACOS_MAPPINGS, LINUX_MAPPINGS, WINDOWS_MAPPINGS];
+
+    for mappings in platforms {
+        for mapping in mappings {
+            if mapping.alias_import_mode != EnvVarImportMode::PassThrough {
+                continue;
+            }
+
+            let declared_in = platforms
+                .iter()
+                .filter(|other| other.iter().any(|other| other.key == mapping.key))
+                .count();
+
+            assert_eq!(
+                declared_in, 1,
+                "PassThrough mapping '{}' is declared by more than one platform",
+                mapping.key
+            );
+        }
+    }
+}
+
+#[test]
+fn host_home_is_imported_from_the_host_and_not_exported() {
+    fn assert_host_home(mappings: &[EnvVarHostMapping], native_home: &str, name: &str) {
+        let host_home = mappings
+            .iter()
+            .find(|mapping| mapping.key == "HOST_HOME")
+            .unwrap_or_else(|| panic!("{name}: missing HOST_HOME mapping"));
+
+        assert_eq!(host_home.source, EnvVarSource::Host, "{name}");
+        assert_eq!(host_home.alias_import, &[native_home], "{name}");
+        assert!(host_home.alias_export.is_empty(), "{name}");
+    }
+
+    assert_host_home(MACOS_MAPPINGS, "HOME", "MACOS_MAPPINGS");
+    assert_host_home(LINUX_MAPPINGS, "HOME", "LINUX_MAPPINGS");
+    assert_host_home(WINDOWS_MAPPINGS, "USERPROFILE", "WINDOWS_MAPPINGS");
 }
