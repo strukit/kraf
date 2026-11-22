@@ -177,6 +177,12 @@ fn pass_through_mappings_only_forward_their_own_key() {
                 "{name}: PassThrough mapping '{}' must import exactly its own key",
                 mapping.key
             );
+            assert_eq!(
+                mapping.alias_export,
+                &[mapping.key],
+                "{name}: PassThrough mapping '{}' must export exactly its own key",
+                mapping.key
+            );
             assert!(
                 mapping.fallback.is_none(),
                 "{name}: PassThrough mapping '{}' must not have a fallback",
@@ -222,6 +228,10 @@ fn canonical_keys_are_never_exported() {
         let canonical_keys: HashSet<&str> = mappings.iter().map(|mapping| mapping.key).collect();
 
         for mapping in mappings {
+            if mapping.alias_import_mode == EnvVarImportMode::PassThrough {
+                continue;
+            }
+
             for alias_export in mapping.alias_export {
                 assert!(
                     !canonical_keys.contains(alias_export),
@@ -234,6 +244,7 @@ fn canonical_keys_are_never_exported() {
 
     assert_canonical_keys_are_not_exported(MACOS_MAPPINGS, "MACOS_MAPPINGS");
     assert_canonical_keys_are_not_exported(LINUX_MAPPINGS, "LINUX_MAPPINGS");
+    assert_canonical_keys_are_not_exported(WINDOWS_MAPPINGS, "WINDOWS_MAPPINGS");
 }
 
 #[test]
@@ -304,5 +315,29 @@ fn system_declarations_import_only_on_windows() {
             "WINDOWS_MAPPINGS: mapping '{}' does not import or has a fallback",
             mapping.key
         );
+    }
+}
+
+#[test]
+fn pass_through_keys_belong_to_one_platform() {
+    let platforms = [MACOS_MAPPINGS, LINUX_MAPPINGS, WINDOWS_MAPPINGS];
+
+    for mappings in platforms {
+        for mapping in mappings {
+            if mapping.alias_import_mode != EnvVarImportMode::PassThrough {
+                continue;
+            }
+
+            let declared_in = platforms
+                .iter()
+                .filter(|other| other.iter().any(|other| other.key == mapping.key))
+                .count();
+
+            assert_eq!(
+                declared_in, 1,
+                "PassThrough mapping '{}' is declared by more than one platform",
+                mapping.key
+            );
+        }
     }
 }

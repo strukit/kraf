@@ -284,4 +284,29 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         alias_export: &[],
         fallback: Some("/opt"),
     },
+    // Linux specific (no cross-platform equivalent)
+    EnvVarHostMapping {
+        key: "DBUS_SESSION_BUS_ADDRESS",
+        source: EnvVarSource::Host,
+        alias_import: &["DBUS_SESSION_BUS_ADDRESS"],
+        alias_import_mode: EnvVarImportMode::PassThrough,
+        alias_export: &["DBUS_SESSION_BUS_ADDRESS"],
+        fallback: None,
+    },
+    EnvVarHostMapping {
+        key: "WAYLAND_DISPLAY",
+        source: EnvVarSource::Host,
+        alias_import: &["WAYLAND_DISPLAY"],
+        alias_import_mode: EnvVarImportMode::PassThrough,
+        alias_export: &["WAYLAND_DISPLAY"],
+        fallback: None,
+    },
+    EnvVarHostMapping {
+        key: "DISPLAY",
+        source: EnvVarSource::Host,
+        alias_import: &["DISPLAY"],
+        alias_import_mode: EnvVarImportMode::PassThrough,
+        alias_export: &["DISPLAY"],
+        fallback: None,
+    },
 ];

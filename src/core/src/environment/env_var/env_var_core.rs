@@ -22,6 +22,8 @@ pub enum EnvVarSource {
 pub enum EnvVarImportMode {
     FirstFound,
     Merge,
+    /// A declaration that only one platform mapping has: its canonical key is
+    /// the native name, which it imports and exports unchanged.
     PassThrough,
 }
 

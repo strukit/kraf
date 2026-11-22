@@ -104,6 +104,7 @@ Name: Native export aliases only
 
 - [Intent](../env-var-intent.md): module intent.
 - [ENV-VAR_HOST-ACC-0006](./env-var-host.acceptance.md#env-var_host-acc-0006)
+- [ENV-VAR_HOST-ACC-0010](./env-var-host.acceptance.md#env-var_host-acc-0010)
 
 **Status**:
 
@@ -114,9 +115,9 @@ Name: Native export aliases only
 THE SOFTWARE SHALL NOT declare, in a supported platform mapping, a canonical key
 of the PLATFORM, TERMINAL, USER, or HOME families as an export alias.
 
-WHERE the Linux or Mac mappings are included,
-THE SOFTWARE SHALL NOT declare any canonical key of those mappings as an export
-alias.
+THE SOFTWARE SHALL NOT declare any canonical key of a supported platform
+mapping as an export alias, unless the declaration uses the pass-through import
+mode.
 ```
 
 ---

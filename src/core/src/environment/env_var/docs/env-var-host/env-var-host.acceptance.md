@@ -263,6 +263,33 @@ Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
         | Windows  | "C:\Windows" | "C:"  | "C:\Program Files" |
 ```
 
+---
+
+## ENV-VAR_HOST-ACC-0010
+
+Name: Only pass-through declarations export their canonical key
+
+**Links:**
+
+- [ENV-VAR_HOST-REQ-0004](./env-var-host.spec.md#env-var_host-req-0004)
+
+**Status**:
+
+- Doc status: Draft
+- Verification status: Unknown
+
+```gherkin
+Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
+
+  Rule: ENV-VAR_HOST-REQ-0004 — Native export aliases only
+
+    Scenario: ENV-VAR_HOST-ACC-0010 — Only pass-through declarations export their canonical key
+      Given the Windows mappings
+      When the mappings are projected
+      Then "ProgramFiles(x86)" is projected under its canonical key
+      And no canonical key of another declaration is projected
+```
+
 ## Links
 
 - [Specification](./env-var-host.spec.md): Requirements for platform-specific

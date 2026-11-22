@@ -284,4 +284,13 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         alias_export: &[],
         fallback: Some("/Applications"),
     },
+    // Mac specific (no cross-platform equivalent)
+    EnvVarHostMapping {
+        key: "__CF_USER_TEXT_ENCODING",
+        source: EnvVarSource::Host,
+        alias_import: &["__CF_USER_TEXT_ENCODING"],
+        alias_import_mode: EnvVarImportMode::PassThrough,
+        alias_export: &["__CF_USER_TEXT_ENCODING"],
+        fallback: None,
+    },
 ];
