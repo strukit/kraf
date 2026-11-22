@@ -4,46 +4,71 @@ use crate::environment::env_var::env_var_core::{
 
 use crate::environment::env_var::env_var_host::{
     HOME_CACHE_ENV_VAR, HOME_CONFIG_ENV_VAR, HOME_DATA_BIN_ENV_VAR, HOME_DATA_ENV_VAR,
-    HOME_ENV_VAR, HOME_SESSION_ENV_VAR, HOME_STATE_ENV_VAR, HOME_TEMP_ENV_VAR, HOST_HOME_ENV_VAR,
-    HOSTNAME_ENV_VAR, PATH_ENV_VAR, PLATFORM_ARCH_ENV_VAR, PLATFORM_ENV_VAR,
+    HOME_DIR_ENV_VAR, HOME_PATH_ENV_VAR, HOME_SESSION_ENV_VAR, HOME_STATE_ENV_VAR,
+    HOME_TEMP_ENV_VAR, HOST_CONFIG_ENV_VAR, HOST_DATA_ENV_VAR, HOST_HOME_ENV_VAR,
+    HOST_NAME_ENV_VAR, HOST_PATH_ENV_VAR, PLATFORM_ARCH_ENV_VAR, PLATFORM_ENV_VAR,
     PLATFORM_FAMILY_ENV_VAR, PLATFORM_KERNEL_ENV_VAR, PLATFORM_KERNEL_VERSION_ENV_VAR,
     PLATFORM_VERSION_ENV_VAR, TERMINAL_COLOR_ENV_VAR, TERMINAL_ENV_VAR, TERMINAL_NOCOLOR_ENV_VAR,
     TERMINAL_PROGRAM_ENV_VAR, TERMINAL_PROGRAM_VERSION_ENV_VAR, TERMINAL_TYPE_ENV_VAR,
-    USER_ENV_VAR, USER_LANGUAGE_ENV_VAR, USER_TIMEZONE_ENV_VAR, WORKDIR_ENV_VAR,
+    USER_LANGUAGE_ENV_VAR, USER_NAME_ENV_VAR, USER_TIMEZONE_ENV_VAR, WORK_DIR_ENV_VAR,
 };
 
 pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
     EnvVarHostMapping {
-        key: HOSTNAME_ENV_VAR.key,
+        key: HOST_NAME_ENV_VAR.key,
         source: EnvVarSource::Host,
-        alias_import: &[HOSTNAME_ENV_VAR.key],
+        alias_import: &["HOSTNAME"],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[HOSTNAME_ENV_VAR.key],
+        alias_export: &["HOSTNAME"],
         fallback: None,
     },
     EnvVarHostMapping {
-        key: WORKDIR_ENV_VAR.key,
+        key: WORK_DIR_ENV_VAR.key,
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[WORKDIR_ENV_VAR.key, "PWD"],
+        alias_export: &["PWD"],
         fallback: None,
     },
     EnvVarHostMapping {
-        key: PATH_ENV_VAR.key,
+        key: HOME_PATH_ENV_VAR.key,
         source: EnvVarSource::Provided,
-        alias_import: &[HOME_DATA_BIN_ENV_VAR.key, PATH_ENV_VAR.key],
-        alias_import_mode: EnvVarImportMode::Merge,
-        alias_export: &[PATH_ENV_VAR.key],
+        alias_import: &[],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &["PATH"],
+        fallback: Some("~/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"),
+    },
+    EnvVarHostMapping {
+        key: HOST_PATH_ENV_VAR.key,
+        source: EnvVarSource::Host,
+        alias_import: &["PATH"],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &[],
+        fallback: None,
+    },
+    EnvVarHostMapping {
+        key: HOST_DATA_ENV_VAR.key,
+        source: EnvVarSource::Host,
+        alias_import: &["XDG_DATA_DIRS"],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &["XDG_DATA_DIRS"],
+        fallback: None,
+    },
+    EnvVarHostMapping {
+        key: HOST_CONFIG_ENV_VAR.key,
+        source: EnvVarSource::Host,
+        alias_import: &["XDG_CONFIG_DIRS"],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &["XDG_CONFIG_DIRS"],
         fallback: None,
     },
     // User
     EnvVarHostMapping {
-        key: USER_ENV_VAR.key,
+        key: USER_NAME_ENV_VAR.key,
         source: EnvVarSource::Host,
-        alias_import: &[USER_ENV_VAR.key, "LOGNAME"],
+        alias_import: &["USER", "LOGNAME"],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[USER_ENV_VAR.key, "LOGNAME"],
+        alias_export: &["USER", "LOGNAME"],
         fallback: None,
     },
     EnvVarHostMapping {
@@ -51,7 +76,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Host,
         alias_import: &[USER_LANGUAGE_ENV_VAR.key, "LANG"],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[USER_LANGUAGE_ENV_VAR.key, "LANG"],
+        alias_export: &["LANG"],
         fallback: Some("en_US.UTF-8"),
     },
     EnvVarHostMapping {
@@ -59,24 +84,24 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Host,
         alias_import: &[USER_TIMEZONE_ENV_VAR.key, "TZ"],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[USER_TIMEZONE_ENV_VAR.key, "TZ"],
+        alias_export: &["TZ"],
         fallback: None,
     },
     // Home directories
     EnvVarHostMapping {
         key: HOST_HOME_ENV_VAR.key,
         source: EnvVarSource::Host,
-        alias_import: &[HOME_ENV_VAR.key],
+        alias_import: &["HOME"],
         alias_import_mode: EnvVarImportMode::FirstFound,
         alias_export: &[],
         fallback: None,
     },
     EnvVarHostMapping {
-        key: HOME_ENV_VAR.key,
+        key: HOME_DIR_ENV_VAR.key,
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[HOME_ENV_VAR.key],
+        alias_export: &["HOME"],
         fallback: None,
     },
     EnvVarHostMapping {
@@ -84,7 +109,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[HOME_TEMP_ENV_VAR.key, "TEMP", "TMPDIR", "TMP"],
+        alias_export: &["TEMP", "TMPDIR", "TMP"],
         fallback: Some("~/.tmp"),
     },
     EnvVarHostMapping {
@@ -92,7 +117,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[HOME_CONFIG_ENV_VAR.key, "XDG_CONFIG_HOME"],
+        alias_export: &["XDG_CONFIG_HOME"],
         fallback: Some("~/.config"),
     },
     EnvVarHostMapping {
@@ -100,7 +125,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[HOME_DATA_ENV_VAR.key, "XDG_DATA_HOME"],
+        alias_export: &["XDG_DATA_HOME"],
         fallback: Some("~/.local/share"),
     },
     EnvVarHostMapping {
@@ -108,7 +133,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[HOME_DATA_BIN_ENV_VAR.key],
+        alias_export: &[],
         fallback: Some("~/.local/bin"),
     },
     EnvVarHostMapping {
@@ -116,7 +141,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[HOME_CACHE_ENV_VAR.key, "XDG_CACHE_HOME", "CACHE"],
+        alias_export: &["XDG_CACHE_HOME", "CACHE"],
         fallback: Some("~/.cache"),
     },
     EnvVarHostMapping {
@@ -124,7 +149,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[HOME_STATE_ENV_VAR.key, "XDG_STATE_HOME"],
+        alias_export: &["XDG_STATE_HOME"],
         fallback: Some("~/.local/state"),
     },
     EnvVarHostMapping {
@@ -132,7 +157,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[HOME_SESSION_ENV_VAR.key, "XDG_RUNTIME_DIR"],
+        alias_export: &["XDG_RUNTIME_DIR"],
         fallback: Some("~/.session"),
     },
     // Terminal
@@ -190,7 +215,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Host,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[PLATFORM_ENV_VAR.key],
+        alias_export: &[],
         fallback: Some(std::env::consts::OS),
     },
     EnvVarHostMapping {
@@ -198,7 +223,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Host,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[PLATFORM_FAMILY_ENV_VAR.key],
+        alias_export: &[],
         fallback: Some(std::env::consts::FAMILY),
     },
     EnvVarHostMapping {
@@ -206,7 +231,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Host,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[PLATFORM_ARCH_ENV_VAR.key],
+        alias_export: &[],
         fallback: Some(std::env::consts::ARCH),
     },
     EnvVarHostMapping {
@@ -214,7 +239,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Host,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[PLATFORM_VERSION_ENV_VAR.key],
+        alias_export: &[],
         fallback: None,
     },
     EnvVarHostMapping {
@@ -222,7 +247,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Host,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[PLATFORM_KERNEL_ENV_VAR.key],
+        alias_export: &[],
         fallback: Some("Darwin"),
     },
     EnvVarHostMapping {
@@ -230,7 +255,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Host,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[PLATFORM_KERNEL_VERSION_ENV_VAR.key],
+        alias_export: &[],
         fallback: None,
     },
 ];

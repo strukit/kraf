@@ -66,7 +66,7 @@ Name: Session-owned directory sources
 - Implementation status: Implemented
 
 ```text
-THE SOFTWARE SHALL resolve the WORKDIR and HOME declaration families from
+THE SOFTWARE SHALL resolve the WORK_DIR and HOME_DIR declaration families from
 provided values rather than from values imported from the host.
 ```
 
@@ -92,6 +92,62 @@ declaration with source `Host` that imports the home directory of the host
 user.
 
 THE SOFTWARE SHALL NOT export the `HOST_HOME` declaration to a managed process.
+```
+
+---
+
+### ENV-VAR_HOST-REQ-0004
+
+Name: Native export aliases only
+
+**Links:**
+
+- [Intent](../env-var-intent.md): module intent.
+- [ENV-VAR_HOST-ACC-0006](./env-var-host.acceptance.md#env-var_host-acc-0006)
+
+**Status**:
+
+- Doc status: Draft
+- Implementation status: Implemented
+
+```text
+THE SOFTWARE SHALL NOT declare, in a supported platform mapping, a canonical key
+of the PLATFORM, TERMINAL, USER, or HOME families as an export alias.
+
+WHERE the Linux or Mac mappings are included,
+THE SOFTWARE SHALL NOT declare any canonical key of those mappings as an export
+alias.
+```
+
+---
+
+### ENV-VAR_HOST-REQ-0005
+
+Name: Host path lists and isolated session path
+
+**Links:**
+
+- [Intent](../env-var-intent.md): module intent.
+- [ENV-VAR_HOST-ACC-0007](./env-var-host.acceptance.md#env-var_host-acc-0007)
+- [ENV-VAR_HOST-ACC-0008](./env-var-host.acceptance.md#env-var_host-acc-0008)
+
+**Status**:
+
+- Doc status: Draft
+- Implementation status: Implemented
+
+```text
+THE SOFTWARE SHALL declare, in every supported platform mapping, the
+`HOST_PATH`, `HOST_DATA`, and `HOST_CONFIG` declarations with source `Host`.
+
+THE SOFTWARE SHALL NOT export the `HOST_PATH` declaration to a managed process.
+
+WHERE the Linux or Mac mappings are included,
+THE SOFTWARE SHALL resolve the `HOME_PATH` declaration from its fallback, without
+importing the `PATH` of the host.
+
+THE SOFTWARE SHALL NOT give the `HOST_DATA` and `HOST_CONFIG` declarations a
+fallback, so that a value the host does not define is not projected.
 ```
 
 ## Links

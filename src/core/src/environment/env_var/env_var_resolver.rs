@@ -1,7 +1,7 @@
 use crate::environment::env_var::env_var_core::{
     EnvVar, EnvVarHostMapping, EnvVarImportMode, EnvVarSource,
 };
-use crate::environment::env_var::env_var_host::HOME_ENV_VAR;
+use crate::environment::env_var::env_var_host::HOME_DIR_ENV_VAR;
 
 #[must_use]
 pub fn expand_tilde_var(env_var_value: &str, home_value: &str) -> String {
@@ -38,6 +38,28 @@ pub fn lookup_env_var_value(env_var_key: &str, env_var_collected: &[EnvVar]) -> 
         .and_then(|env_var| env_var.value.clone())
 }
 
+/// Provided values under their canonical keys and under the export aliases of
+/// their declarations, so that `$HOME` and `$HOME_DIR` name the same value.
+fn provided_with_export_aliases(
+    env_var_mappings: &[EnvVarHostMapping],
+    env_var_provided: &[EnvVar],
+) -> Vec<EnvVar> {
+    let aliases = env_var_mappings.iter().flat_map(|mapping| {
+        let value = lookup_env_var_value(mapping.key, env_var_provided);
+
+        mapping.alias_export.iter().map(move |&alias| EnvVar {
+            key: alias,
+            value: value.clone(),
+        })
+    });
+
+    env_var_provided
+        .iter()
+        .cloned()
+        .chain(aliases.filter(|env_var| env_var.value.is_some()))
+        .collect()
+}
+
 fn resolve_expand(
     env_var_key_raw: &str,
     env_var_home: &str,
@@ -60,7 +82,8 @@ pub fn resolve(
     env_var_collected: &[EnvVar],
     env_var_provided: &[EnvVar],
 ) -> Vec<EnvVar> {
-    let home = lookup_env_var_value(HOME_ENV_VAR.key, env_var_provided).unwrap_or_default();
+    let home = lookup_env_var_value(HOME_DIR_ENV_VAR.key, env_var_provided).unwrap_or_default();
+    let placeholders = provided_with_export_aliases(env_var_mappings, env_var_provided);
 
     env_var_mappings
         .iter()
@@ -74,16 +97,11 @@ pub fn resolve(
                     resolve_expand(
                         env_var_unresolved.fallback.unwrap_or_default(),
                         &home,
-                        env_var_provided,
+                        &placeholders,
                     )
                 })
             } else {
-                resolve_alias(
-                    env_var_unresolved,
-                    env_var_collected,
-                    env_var_provided,
-                    &home,
-                )
+                resolve_alias(env_var_unresolved, env_var_collected, &placeholders, &home)
             };
 
             EnvVar {

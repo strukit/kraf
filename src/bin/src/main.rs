@@ -3,7 +3,7 @@
 
 use kraf_core::environment::env_var::env_var_core::EnvVar;
 use kraf_core::environment::env_var::env_var_host::{
-    HOME_ENV_VAR, HOST_ENV_VAR_MAPPINGS, HOST_HOME_ENV_VAR, HostEnvVarReader, WORKDIR_ENV_VAR,
+    HOME_DIR_ENV_VAR, HOST_ENV_VAR_MAPPINGS, HOST_HOME_ENV_VAR, HostEnvVarReader, WORK_DIR_ENV_VAR,
     env_var_collect,
 };
 use kraf_core::environment::env_var::env_var_projector::{apply, project};
@@ -24,11 +24,11 @@ fn main() {
 
     let provided = [
         EnvVar {
-            key: WORKDIR_ENV_VAR.key,
+            key: WORK_DIR_ENV_VAR.key,
             value: HostProcess.get_current_dir(),
         },
         EnvVar {
-            key: HOME_ENV_VAR.key,
+            key: HOME_DIR_ENV_VAR.key,
             value: HostProcess.create_session_dir(&host_home),
         },
     ];
@@ -37,9 +37,9 @@ fn main() {
 
     let workdir = resolved
         .iter()
-        .find(|env_var| env_var.key == "WORKDIR")
+        .find(|env_var| env_var.key == "WORK_DIR")
         .and_then(|env_var| env_var.value.clone())
-        .expect("[kraf] error: $WORKDIR is required, failed to resolve (internal)");
+        .expect("[kraf] error: $WORK_DIR is required, failed to resolve (internal)");
 
     let terminal = resolved
         .iter()
@@ -49,12 +49,12 @@ fn main() {
 
     let home = resolved
         .iter()
-        .find(|env_var| env_var.key == "HOME")
+        .find(|env_var| env_var.key == "HOME_DIR")
         .and_then(|env_var| env_var.value.clone())
-        .expect("[kraf] error: $HOME is required, failed to resolve (internal)");
+        .expect("[kraf] error: $HOME_DIR is required, failed to resolve (internal)");
 
-    println!("[kraf]   HOME={home}");
-    println!("[kraf]   WORKDIR={workdir}");
+    println!("[kraf]   HOME_DIR={home}");
+    println!("[kraf]   WORK_DIR={workdir}");
 
     let mut child = ChildProcess::new(&terminal);
 

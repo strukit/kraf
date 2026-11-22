@@ -123,6 +123,33 @@ Feature: ENV-VAR_PROJECTION-FEAT-0001 — Environment variable projection
       And each projected key has the value "/workspace/.tmp"
 ```
 
+---
+
+## ENV-VAR_PROJECTION-ACC-0005
+
+Name: Empty resolved value leaves its export aliases unset
+
+**Links:**
+
+- [ENV-VAR_PROJECTION-REQ-0004](./env-var-projection.spec.md#env-var_projection-req-0004)
+
+**Status**:
+
+- Doc status: Draft
+- Verification status: Unknown
+
+```gherkin
+Feature: ENV-VAR_PROJECTION-FEAT-0001 — Environment variable projection
+
+  Rule: ENV-VAR_PROJECTION-REQ-0004 — Empty values are not projected
+
+    Scenario: ENV-VAR_PROJECTION-ACC-0005 — Empty resolved value leaves its export aliases unset
+      Given "USER_TIMEZONE" resolves to ""
+      And "TZ" is an export alias of "USER_TIMEZONE"
+      When the software projects the declaration
+      Then the projection does not contain "TZ"
+```
+
 ## Links
 
 - [Specification](./env-var-projection.spec.md): Requirements for projecting

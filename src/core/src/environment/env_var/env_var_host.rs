@@ -18,24 +18,24 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = env_var_host_mac::HOST_E
 pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = env_var_host_windows::HOST_ENV_VAR_MAPPINGS;
 
 // General
-pub const HOSTNAME_ENV_VAR: EnvVar = EnvVar {
-    key: "HOSTNAME",
+pub const HOST_NAME_ENV_VAR: EnvVar = EnvVar {
+    key: "HOST_NAME",
     value: None,
 };
 
-pub const WORKDIR_ENV_VAR: EnvVar = EnvVar {
-    key: "WORKDIR",
+pub const WORK_DIR_ENV_VAR: EnvVar = EnvVar {
+    key: "WORK_DIR",
     value: None,
 };
 
-pub const PATH_ENV_VAR: EnvVar = EnvVar {
-    key: "PATH",
+pub const HOME_PATH_ENV_VAR: EnvVar = EnvVar {
+    key: "HOME_PATH",
     value: None,
 };
 
 // User
-pub const USER_ENV_VAR: EnvVar = EnvVar {
-    key: "USER",
+pub const USER_NAME_ENV_VAR: EnvVar = EnvVar {
+    key: "USER_NAME",
     value: None,
 };
 
@@ -55,8 +55,23 @@ pub const HOST_HOME_ENV_VAR: EnvVar = EnvVar {
     value: None,
 };
 
-pub const HOME_ENV_VAR: EnvVar = EnvVar {
-    key: "HOME",
+pub const HOST_PATH_ENV_VAR: EnvVar = EnvVar {
+    key: "HOST_PATH",
+    value: None,
+};
+
+pub const HOST_DATA_ENV_VAR: EnvVar = EnvVar {
+    key: "HOST_DATA",
+    value: None,
+};
+
+pub const HOST_CONFIG_ENV_VAR: EnvVar = EnvVar {
+    key: "HOST_CONFIG",
+    value: None,
+};
+
+pub const HOME_DIR_ENV_VAR: EnvVar = EnvVar {
+    key: "HOME_DIR",
     value: None,
 };
 
@@ -158,14 +173,17 @@ pub const PLATFORM_KERNEL_VERSION_ENV_VAR: EnvVar = EnvVar {
 };
 
 pub const ENV_VAR_HOST_KEYS: &[&str] = &[
-    HOSTNAME_ENV_VAR.key,
-    WORKDIR_ENV_VAR.key,
-    PATH_ENV_VAR.key,
-    USER_ENV_VAR.key,
+    HOST_NAME_ENV_VAR.key,
+    WORK_DIR_ENV_VAR.key,
+    HOME_PATH_ENV_VAR.key,
+    USER_NAME_ENV_VAR.key,
     USER_LANGUAGE_ENV_VAR.key,
     USER_TIMEZONE_ENV_VAR.key,
     HOST_HOME_ENV_VAR.key,
-    HOME_ENV_VAR.key,
+    HOST_PATH_ENV_VAR.key,
+    HOST_DATA_ENV_VAR.key,
+    HOST_CONFIG_ENV_VAR.key,
+    HOME_DIR_ENV_VAR.key,
     HOME_TEMP_ENV_VAR.key,
     HOME_CONFIG_ENV_VAR.key,
     HOME_DATA_ENV_VAR.key,

@@ -69,7 +69,7 @@ pub(super) const ENV_VAR_MAPPING_FIXTURE: &[EnvVarHostMapping] = &[
         alias_import: &["XDG_CACHE_HOME"],
         alias_import_mode: EnvVarImportMode::FirstFound,
         alias_export: &[],
-        fallback: Some("$HOME/.cache"),
+        fallback: Some("$HOME_DIR/.cache"),
     },
     EnvVarHostMapping {
         key: "PATH",
@@ -96,7 +96,7 @@ pub(super) const ENV_VAR_MAPPING_FIXTURE: &[EnvVarHostMapping] = &[
         fallback: Some("/usr/share/man"),
     },
     EnvVarHostMapping {
-        key: "WORKDIR",
+        key: "WORK_DIR",
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
@@ -165,11 +165,11 @@ pub(super) fn env_var_collected_fixture(home: &str) -> Vec<EnvVar> {
 pub(super) fn env_var_provided_fixture(home: &str) -> Vec<EnvVar> {
     vec![
         EnvVar {
-            key: "HOME",
+            key: "HOME_DIR",
             value: Some(home.to_string()),
         },
         EnvVar {
-            key: "WORKDIR",
+            key: "WORK_DIR",
             value: Some("/workspace/project".to_string()),
         },
         EnvVar {

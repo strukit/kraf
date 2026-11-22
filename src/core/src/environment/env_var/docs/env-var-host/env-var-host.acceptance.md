@@ -114,7 +114,7 @@ Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
 
     Scenario: ENV-VAR_HOST-ACC-0004 — Home and work-directory declarations use provided values
       Given a supported platform mapping
-      When the mapping declares WORKDIR or a HOME family key
+      When the mapping declares WORK_DIR or a HOME_DIR family key
       Then the declaration source is provided
 ```
 
@@ -144,6 +144,88 @@ Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
       Then the declaration source is host
       And the declaration imports the home directory of the host user
       And the declaration has no export aliases
+```
+
+---
+
+## ENV-VAR_HOST-ACC-0006
+
+Name: Kraf canonical keys stay out of the native projection
+
+**Links:**
+
+- [ENV-VAR_HOST-REQ-0004](./env-var-host.spec.md#env-var_host-req-0004)
+
+**Status**:
+
+- Doc status: Draft
+- Verification status: Unknown
+
+```gherkin
+Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
+
+  Rule: ENV-VAR_HOST-REQ-0004 — Native export aliases only
+
+    Scenario: ENV-VAR_HOST-ACC-0006 — Kraf canonical keys stay out of the native projection
+      Given a supported platform mapping
+      When the mappings are projected
+      Then no projected key is "PLATFORM", "TERMINAL_TYPE", "USER_NAME", "USER_LANGUAGE", "HOME_DIR", or "HOME_TEMP"
+      And "HOME", "USER", "TMPDIR", "TERM", and "LANG" are projected
+```
+
+---
+
+## ENV-VAR_HOST-ACC-0007
+
+Name: Session path does not import the host path
+
+**Links:**
+
+- [ENV-VAR_HOST-REQ-0005](./env-var-host.spec.md#env-var_host-req-0005)
+
+**Status**:
+
+- Doc status: Draft
+- Verification status: Unknown
+
+```gherkin
+Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
+
+  Rule: ENV-VAR_HOST-REQ-0005 — Host path lists and isolated session path
+
+    Scenario: ENV-VAR_HOST-ACC-0007 — Session path does not import the host path
+      Given the Linux or Mac mappings
+      And the host "PATH" is "/opt/tools/bin:/usr/bin"
+      When the software resolves "HOME_PATH"
+      Then "HOME_PATH" does not contain "/opt/tools/bin"
+      And "HOST_PATH" resolves to "/opt/tools/bin:/usr/bin"
+```
+
+---
+
+## ENV-VAR_HOST-ACC-0008
+
+Name: Undefined host data and config lists are not projected
+
+**Links:**
+
+- [ENV-VAR_HOST-REQ-0005](./env-var-host.spec.md#env-var_host-req-0005)
+
+**Status**:
+
+- Doc status: Draft
+- Verification status: Unknown
+
+```gherkin
+Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
+
+  Rule: ENV-VAR_HOST-REQ-0005 — Host path lists and isolated session path
+
+    Scenario: ENV-VAR_HOST-ACC-0008 — Undefined host data and config lists are not projected
+      Given the Linux or Mac mappings
+      And the host defines neither "XDG_DATA_DIRS" nor "XDG_CONFIG_DIRS"
+      When the software resolves and projects the mappings
+      Then the projection contains neither "XDG_DATA_DIRS" nor "XDG_CONFIG_DIRS"
 ```
 
 ## Links

@@ -197,7 +197,7 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
   Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
 
     Scenario: ENV-VAR_RESOLUTION-ACC-0007 — Tilde fallback expands from resolved home
-      Given "HOME" has the provided value "/workspace"
+      Given "HOME_DIR" has the provided value "/workspace"
       And a declaration fallback is "~/.cache"
       When the software resolves the declaration
       Then the declaration resolves to "/workspace/.cache"
@@ -445,7 +445,7 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
   Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
 
     Scenario: ENV-VAR_RESOLUTION-ACC-0016 — Tilde expansion takes precedence and replaces only the first tilde
-      Given "HOME" has the provided value "/workspace"
+      Given "HOME_DIR" has the provided value "/workspace"
       And a declaration fallback is "~/$HOME/~"
       When the software resolves the declaration
       Then the declaration resolves to "/workspace/$HOME/~"
@@ -720,9 +720,9 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
   Rule: ENV-VAR_RESOLUTION-REQ-0005 — Source precedence and absence
 
     Scenario: ENV-VAR_RESOLUTION-ACC-0026 — Provided value is not read from collected host values
-      Given a provided declaration "HOME" has no import aliases
-      And "HOME" has the collected value "/Users/host"
-      And "HOME" has the provided value "/Users/host/.kraf/workspace/session/1"
+      Given a provided declaration "HOME_DIR" has no import aliases
+      And "HOME_DIR" has the collected value "/Users/host"
+      And "HOME_DIR" has the provided value "/Users/host/.kraf/workspace/session/1"
       When the software resolves the declaration
       Then the declaration resolves to "/Users/host/.kraf/workspace/session/1"
 ```
@@ -749,7 +749,7 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
     Scenario: ENV-VAR_RESOLUTION-ACC-0027 — Dollar home and tilde use the same provided home
       Given "HOME" has the collected value "/host"
-      And "HOME" has the provided value "/workspace"
+      And "HOME_DIR" exports "HOME" and has the provided value "/workspace"
       When the software resolves the fallbacks "$HOME/.cache" and "~/.cache"
       Then both resolve to "/workspace/.cache"
 ```

@@ -132,8 +132,8 @@ fn host_source_mappings_export_every_native_imported_alias() {
 #[test]
 fn home_and_workdir_family_are_always_provided() {
     const ISOLATED_KEYS: &[&str] = &[
-        "WORKDIR",
-        "HOME",
+        "WORK_DIR",
+        "HOME_DIR",
         "HOME_TEMP",
         "HOME_CONFIG",
         "HOME_DATA",
@@ -152,7 +152,7 @@ fn home_and_workdir_family_are_always_provided() {
             assert_eq!(
                 mapping.source,
                 EnvVarSource::Provided,
-                "{name}: mapping '{}' is part of the isolated HOME/WORKDIR family but is source: Host",
+                "{name}: mapping '{}' is part of the isolated HOME_DIR/WORK_DIR family but is source: Host",
                 mapping.key
             );
         }
@@ -188,4 +188,71 @@ fn pass_through_mappings_only_forward_their_own_key() {
     assert_pass_through_shape(MACOS_MAPPINGS, "MACOS_MAPPINGS");
     assert_pass_through_shape(LINUX_MAPPINGS, "LINUX_MAPPINGS");
     assert_pass_through_shape(WINDOWS_MAPPINGS, "WINDOWS_MAPPINGS");
+}
+
+#[test]
+fn derived_canonical_keys_are_not_exported() {
+    fn is_derived(key: &str) -> bool {
+        key.starts_with("PLATFORM")
+            || key.starts_with("TERMINAL")
+            || key.starts_with("USER_")
+            || key.starts_with("HOME_")
+    }
+
+    fn assert_derived_keys_are_not_exported(mappings: &[EnvVarHostMapping], name: &str) {
+        for mapping in mappings {
+            for alias_export in mapping.alias_export {
+                assert!(
+                    !is_derived(alias_export),
+                    "{name}: mapping '{}' exports the derived canonical key '{alias_export}'",
+                    mapping.key
+                );
+            }
+        }
+    }
+
+    assert_derived_keys_are_not_exported(MACOS_MAPPINGS, "MACOS_MAPPINGS");
+    assert_derived_keys_are_not_exported(LINUX_MAPPINGS, "LINUX_MAPPINGS");
+    assert_derived_keys_are_not_exported(WINDOWS_MAPPINGS, "WINDOWS_MAPPINGS");
+}
+
+#[test]
+fn canonical_keys_are_never_exported() {
+    fn assert_canonical_keys_are_not_exported(mappings: &[EnvVarHostMapping], name: &str) {
+        let canonical_keys: HashSet<&str> = mappings.iter().map(|mapping| mapping.key).collect();
+
+        for mapping in mappings {
+            for alias_export in mapping.alias_export {
+                assert!(
+                    !canonical_keys.contains(alias_export),
+                    "{name}: mapping '{}' exports the canonical key '{alias_export}'",
+                    mapping.key
+                );
+            }
+        }
+    }
+
+    assert_canonical_keys_are_not_exported(MACOS_MAPPINGS, "MACOS_MAPPINGS");
+    assert_canonical_keys_are_not_exported(LINUX_MAPPINGS, "LINUX_MAPPINGS");
+}
+
+#[test]
+fn host_data_and_config_have_no_fallback() {
+    fn assert_no_fallback(mappings: &[EnvVarHostMapping], name: &str) {
+        for mapping in mappings {
+            if mapping.key != "HOST_DATA" && mapping.key != "HOST_CONFIG" {
+                continue;
+            }
+
+            assert!(
+                mapping.fallback.is_none(),
+                "{name}: mapping '{}' declares a fallback",
+                mapping.key
+            );
+        }
+    }
+
+    assert_no_fallback(MACOS_MAPPINGS, "MACOS_MAPPINGS");
+    assert_no_fallback(LINUX_MAPPINGS, "LINUX_MAPPINGS");
+    assert_no_fallback(WINDOWS_MAPPINGS, "WINDOWS_MAPPINGS");
 }
