@@ -35,6 +35,29 @@ fn main() {
 
     let resolved = resolve(HOST_ENV_VAR_MAPPINGS, &collected, &provided);
 
+    // Session directories that programs expect to exist, such as TEMP.
+    for key in [
+        "HOME_TEMP",
+        "HOME_CONFIG",
+        "HOME_DATA",
+        "HOME_DATA_BIN",
+        "HOME_CACHE",
+        "HOME_STATE",
+        "HOME_SESSION",
+    ] {
+        let dir = resolved
+            .iter()
+            .find(|env_var| env_var.key == key)
+            .and_then(|env_var| env_var.value.clone())
+            .filter(|value| !value.is_empty());
+
+        if let Some(dir) = dir
+            && !HostProcess.create_dir(&dir)
+        {
+            eprintln!("[kraf] warning: failed to create ${key} at {dir}");
+        }
+    }
+
     let workdir = resolved
         .iter()
         .find(|env_var| env_var.key == "WORK_DIR")

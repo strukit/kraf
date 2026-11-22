@@ -25,4 +25,8 @@ impl Process for HostProcess {
 
         Some(dir.to_string_lossy().into_owned())
     }
+
+    fn create_dir(&self, path: &str) -> bool {
+        std::fs::create_dir_all(path).is_ok()
+    }
 }
