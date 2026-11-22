@@ -18,7 +18,7 @@ language: en
 
 ## ENV-VAR_DECLARATIONS-ACC-0001
 
-Name: Unknown runtime declaration is rejected
+Name: Value for an unknown declaration is rejected
 
 **Links:**
 
@@ -34,9 +34,9 @@ Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
 
   Rule: ENV-VAR_DECLARATIONS-REQ-0001 — Static declaration
 
-    Scenario: ENV-VAR_DECLARATIONS-ACC-0001 — Unknown runtime declaration is rejected
+    Scenario: ENV-VAR_DECLARATIONS-ACC-0001 — Value for an unknown declaration is rejected
       Given no declaration exists for "EXAMPLE_KEY"
-      When runtime configuration provides a value for "EXAMPLE_KEY"
+      When a configuration file provides a value for "EXAMPLE_KEY"
       Then the software rejects the configuration
       And "EXAMPLE_KEY" is not projected to a managed process
 ```
@@ -45,7 +45,7 @@ Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
 
 ## ENV-VAR_DECLARATIONS-ACC-0002
 
-Name: Known runtime declaration accepts a value
+Name: Known declaration accepts a value from a configuration file
 
 **Links:**
 
@@ -61,9 +61,9 @@ Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
 
   Rule: ENV-VAR_DECLARATIONS-REQ-0001 — Static declaration
 
-    Scenario: ENV-VAR_DECLARATIONS-ACC-0002 — Known runtime declaration accepts a value
+    Scenario: ENV-VAR_DECLARATIONS-ACC-0002 — Known declaration accepts a value from a configuration file
       Given a declaration exists for "EXAMPLE_KEY"
-      When runtime configuration provides a value for "EXAMPLE_KEY"
+      When a configuration file provides a value for "EXAMPLE_KEY"
       Then the software accepts the configuration
 ```
 
@@ -169,6 +169,59 @@ Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
       Given a declaration uses pass-through import mode
       When the declaration defines a fallback
       Then the software rejects the declaration
+```
+
+---
+
+## ENV-VAR_DECLARATIONS-ACC-0007
+
+Name: Configuration file declaration is accepted at startup
+
+**Links:**
+
+- [ENV-VAR_DECLARATIONS-REQ-0001](./env-var-declarations.spec.md#env-var_declarations-req-0001)
+
+**Status**:
+
+- Doc status: Draft
+- Verification status: Unknown
+
+```gherkin
+Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
+
+  Rule: ENV-VAR_DECLARATIONS-REQ-0001 — Static declaration
+
+    Scenario: ENV-VAR_DECLARATIONS-ACC-0007 — Configuration file declaration is accepted at startup
+      Given a configuration file declares "RUSTUP_HOME" with the export alias "RUSTUP_HOME"
+      When the software loads the configuration file before resolution starts
+      Then "RUSTUP_HOME" is part of the declaration set
+```
+
+---
+
+## ENV-VAR_DECLARATIONS-ACC-0008
+
+Name: Plugin declaration during a session is rejected
+
+**Links:**
+
+- [ENV-VAR_DECLARATIONS-REQ-0001](./env-var-declarations.spec.md#env-var_declarations-req-0001)
+
+**Status**:
+
+- Doc status: Draft
+- Verification status: Unknown
+
+```gherkin
+Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
+
+  Rule: ENV-VAR_DECLARATIONS-REQ-0001 — Static declaration
+
+    Scenario: ENV-VAR_DECLARATIONS-ACC-0008 — Plugin declaration during a session is rejected
+      Given a session is running
+      When a plugin requests a new declaration for "EXAMPLE_KEY"
+      Then the software rejects the request
+      And "EXAMPLE_KEY" is not projected to a managed process
 ```
 
 ## Links
