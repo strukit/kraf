@@ -110,7 +110,7 @@ THE SOFTWARE SHALL accept a declaration using merge import mode only when it
 declares at least two import aliases.
 
 THE SOFTWARE SHALL accept a declaration using pass-through import mode only when
-its canonical key is its only import alias.
+its canonical key is its only import alias and its only export alias.
 
 THE SOFTWARE SHALL NOT accept a declaration using pass-through import mode that
 declares a fallback.

@@ -134,24 +134,25 @@ Name: Placeholder expansion
 **Status**:
 
 - Doc status: Draft
-- Implementation status: Implemented
+- Implementation status: Partially Implemented
 
 ```text
-WHEN a fallback contains a tilde and a non-empty provided `HOME` value is
+WHEN a fallback contains a tilde and a non-empty provided `HOME_DIR` value is
 available,
 THE SOFTWARE SHALL replace the first tilde with that value.
 
-WHEN a non-empty provided `HOME` value is available,
+WHEN a non-empty provided `HOME_DIR` value is available,
 THE SOFTWARE SHALL give tilde expansion precedence over dollar expansion.
 
-WHEN a fallback contains a tilde but no non-empty provided `HOME` value is
+WHEN a fallback contains a tilde but no non-empty provided `HOME_DIR` value is
 available,
 THE SOFTWARE SHALL leave the tilde unchanged and evaluate a dollar
 placeholder when one is present.
 
 THE SOFTWARE SHALL evaluate only the first dollar sign and, when it is followed
 by one or more ASCII letters, digits, or underscores, replace that placeholder
-with the provided value whose key matches its name, including an empty value.
+with the provided value whose key matches its name, or with the provided value
+of the declaration that exports that name, including an empty value.
 
 THE SOFTWARE SHALL NOT replace a dollar placeholder with a collected value.
 

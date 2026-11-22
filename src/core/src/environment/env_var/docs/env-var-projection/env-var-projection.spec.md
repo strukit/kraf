@@ -92,6 +92,27 @@ THE SOFTWARE SHALL emit, for each declaration, its export aliases in declaration
 order.
 ```
 
+---
+
+### ENV-VAR_PROJECTION-REQ-0004
+
+Name: Empty values are not projected
+
+**Links:**
+
+- [Intent](../env-var-intent.md): module intent.
+- [ENV-VAR_PROJECTION-ACC-0005](./env-var-projection.acceptance.md#env-var_projection-acc-0005)
+
+**Status**:
+
+- Doc status: Draft
+- Implementation status: Not Implemented
+
+```text
+IF a declaration resolves to an empty value or has no resolved value,
+THEN THE SOFTWARE SHALL NOT project any of its export aliases.
+```
+
 ## Links
 
 - [Intent](../env-var-intent.md): Why Kraf resolves and projects environment
