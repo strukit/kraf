@@ -1,9 +1,10 @@
 use crate::environment::env_var::env_var_core::{
-    EnvVarHostMapping, EnvVarImportMode, EnvVarSource,
+    EnvVar, EnvVarHostMapping, EnvVarImportMode, EnvVarSource,
 };
 use crate::environment::env_var::env_var_host::{
     ENV_VAR_HOST_KEYS, env_var_collect, env_var_host_linux, env_var_host_mac, env_var_host_windows,
 };
+use crate::environment::env_var::env_var_resolver::{lookup_env_var_value, resolve};
 use crate::environment::env_var::tests::env_var_test_fixtures::{
     ENV_VAR_MAPPING_FIXTURE, FakeEnvVarReader,
 };
@@ -340,4 +341,25 @@ fn pass_through_keys_belong_to_one_platform() {
             );
         }
     }
+}
+
+#[test]
+fn windows_system_programs_prefers_the_native_program_files() {
+    let collected = [
+        EnvVar {
+            key: "ProgramFiles",
+            value: Some(r"C:\Program Files (x86)".to_string()),
+        },
+        EnvVar {
+            key: "ProgramW6432",
+            value: Some(r"C:\Program Files".to_string()),
+        },
+    ];
+
+    let resolved = resolve(WINDOWS_MAPPINGS, &collected, &[]);
+
+    assert_eq!(
+        lookup_env_var_value("SYSTEM_PROGRAMS", &resolved),
+        Some(r"C:\Program Files".to_string())
+    );
 }

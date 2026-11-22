@@ -281,7 +281,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
     EnvVarHostMapping {
         key: SYSTEM_PROGRAMS_ENV_VAR.key,
         source: EnvVarSource::Host,
-        alias_import: &["ProgramFiles", "ProgramW6432"],
+        alias_import: &["ProgramW6432", "ProgramFiles"],
         alias_import_mode: EnvVarImportMode::FirstFound,
         alias_export: &["ProgramFiles", "ProgramW6432"],
         fallback: None,
