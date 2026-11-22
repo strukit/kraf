@@ -275,3 +275,34 @@ fn home_path_does_not_import_the_host_path() {
     assert_home_path_is_isolated(LINUX_MAPPINGS, "LINUX_MAPPINGS");
     assert_home_path_is_isolated(WINDOWS_MAPPINGS, "WINDOWS_MAPPINGS");
 }
+
+#[test]
+fn system_declarations_import_only_on_windows() {
+    const SYSTEM_KEYS: &[&str] = &["SYSTEM_ROOT", "SYSTEM_DRIVE", "SYSTEM_PROGRAMS"];
+
+    fn system_mappings(mappings: &[EnvVarHostMapping]) -> Vec<&EnvVarHostMapping> {
+        mappings
+            .iter()
+            .filter(|mapping| SYSTEM_KEYS.contains(&mapping.key))
+            .collect()
+    }
+
+    for mapping in system_mappings(MACOS_MAPPINGS)
+        .into_iter()
+        .chain(system_mappings(LINUX_MAPPINGS))
+    {
+        assert!(
+            mapping.alias_import.is_empty() && mapping.fallback.is_some(),
+            "mapping '{}' imports from the host or has no fallback",
+            mapping.key
+        );
+    }
+
+    for mapping in system_mappings(WINDOWS_MAPPINGS) {
+        assert!(
+            !mapping.alias_import.is_empty() && mapping.fallback.is_none(),
+            "WINDOWS_MAPPINGS: mapping '{}' does not import or has a fallback",
+            mapping.key
+        );
+    }
+}

@@ -172,6 +172,22 @@ pub const PLATFORM_KERNEL_VERSION_ENV_VAR: EnvVar = EnvVar {
     value: None,
 };
 
+// System
+pub const SYSTEM_ROOT_ENV_VAR: EnvVar = EnvVar {
+    key: "SYSTEM_ROOT",
+    value: None,
+};
+
+pub const SYSTEM_DRIVE_ENV_VAR: EnvVar = EnvVar {
+    key: "SYSTEM_DRIVE",
+    value: None,
+};
+
+pub const SYSTEM_PROGRAMS_ENV_VAR: EnvVar = EnvVar {
+    key: "SYSTEM_PROGRAMS",
+    value: None,
+};
+
 pub const ENV_VAR_HOST_KEYS: &[&str] = &[
     HOST_NAME_ENV_VAR.key,
     WORK_DIR_ENV_VAR.key,
@@ -203,6 +219,9 @@ pub const ENV_VAR_HOST_KEYS: &[&str] = &[
     PLATFORM_VERSION_ENV_VAR.key,
     PLATFORM_KERNEL_ENV_VAR.key,
     PLATFORM_KERNEL_VERSION_ENV_VAR.key,
+    SYSTEM_ROOT_ENV_VAR.key,
+    SYSTEM_DRIVE_ENV_VAR.key,
+    SYSTEM_PROGRAMS_ENV_VAR.key,
 ];
 
 pub struct HostEnvVarReader;

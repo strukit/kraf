@@ -228,6 +228,41 @@ Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
       Then the projection contains neither "XDG_DATA_DIRS" nor "XDG_CONFIG_DIRS"
 ```
 
+---
+
+## ENV-VAR_HOST-ACC-0009
+
+Name: System declarations resolve on every platform
+
+**Links:**
+
+- [ENV-VAR_HOST-REQ-0006](./env-var-host.spec.md#env-var_host-req-0006)
+
+**Status**:
+
+- Doc status: Draft
+- Verification status: Unknown
+
+```gherkin
+Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
+
+  Rule: ENV-VAR_HOST-REQ-0006 — System declarations
+
+    Scenario Outline: ENV-VAR_HOST-ACC-0009 — System declarations resolve on every platform
+      Given the <platform> mappings
+      And the host environment defines the native system variables of that platform
+      When the software resolves "SYSTEM_ROOT", "SYSTEM_DRIVE", and "SYSTEM_PROGRAMS"
+      Then "SYSTEM_ROOT" resolves to <root>
+      And "SYSTEM_DRIVE" resolves to <drive>
+      And "SYSTEM_PROGRAMS" resolves to <programs>
+
+      Examples:
+        | platform | root         | drive | programs              |
+        | Linux    | "/"          | "/"   | "/opt"                |
+        | Mac      | "/"          | "/"   | "/Applications"       |
+        | Windows  | "C:\Windows" | "C:"  | "C:\Program Files" |
+```
+
 ## Links
 
 - [Specification](./env-var-host.spec.md): Requirements for platform-specific

@@ -149,6 +149,36 @@ THE SOFTWARE SHALL NOT give the `HOST_DATA` and `HOST_CONFIG` declarations a
 fallback, so that a value the host does not define is not projected.
 ```
 
+---
+
+### ENV-VAR_HOST-REQ-0006
+
+Name: System declarations
+
+**Links:**
+
+- [Intent](../env-var-intent.md): module intent.
+- [ENV-VAR_HOST-ACC-0009](./env-var-host.acceptance.md#env-var_host-acc-0009)
+
+**Status**:
+
+- Doc status: Draft
+- Implementation status: Implemented
+
+```text
+THE SOFTWARE SHALL declare, in every supported platform mapping, the
+`SYSTEM_ROOT`, `SYSTEM_DRIVE`, and `SYSTEM_PROGRAMS` declarations with source
+`Host`.
+
+WHERE the Windows mappings are included,
+THE SOFTWARE SHALL import the `SYSTEM_ROOT`, `SYSTEM_DRIVE`, and
+`SYSTEM_PROGRAMS` declarations from the native Windows variables of the host.
+
+WHERE the Linux or Mac mappings are included,
+THE SOFTWARE SHALL resolve the `SYSTEM_ROOT`, `SYSTEM_DRIVE`, and
+`SYSTEM_PROGRAMS` declarations from fallbacks, without import aliases.
+```
+
 ## Links
 
 - [Intent](../env-var-intent.md): Why Kraf resolves and projects environment

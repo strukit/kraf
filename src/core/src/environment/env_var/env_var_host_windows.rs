@@ -8,9 +8,10 @@ use crate::environment::env_var::env_var_host::{
     HOME_TEMP_ENV_VAR, HOST_CONFIG_ENV_VAR, HOST_DATA_ENV_VAR, HOST_HOME_ENV_VAR,
     HOST_NAME_ENV_VAR, HOST_PATH_ENV_VAR, PLATFORM_ARCH_ENV_VAR, PLATFORM_ENV_VAR,
     PLATFORM_FAMILY_ENV_VAR, PLATFORM_KERNEL_ENV_VAR, PLATFORM_KERNEL_VERSION_ENV_VAR,
-    PLATFORM_VERSION_ENV_VAR, TERMINAL_COLOR_ENV_VAR, TERMINAL_ENV_VAR, TERMINAL_NOCOLOR_ENV_VAR,
-    TERMINAL_PROGRAM_ENV_VAR, TERMINAL_PROGRAM_VERSION_ENV_VAR, TERMINAL_TYPE_ENV_VAR,
-    USER_LANGUAGE_ENV_VAR, USER_NAME_ENV_VAR, USER_TIMEZONE_ENV_VAR, WORK_DIR_ENV_VAR,
+    PLATFORM_VERSION_ENV_VAR, SYSTEM_DRIVE_ENV_VAR, SYSTEM_PROGRAMS_ENV_VAR, SYSTEM_ROOT_ENV_VAR,
+    TERMINAL_COLOR_ENV_VAR, TERMINAL_ENV_VAR, TERMINAL_NOCOLOR_ENV_VAR, TERMINAL_PROGRAM_ENV_VAR,
+    TERMINAL_PROGRAM_VERSION_ENV_VAR, TERMINAL_TYPE_ENV_VAR, USER_LANGUAGE_ENV_VAR,
+    USER_NAME_ENV_VAR, USER_TIMEZONE_ENV_VAR, WORK_DIR_ENV_VAR,
 };
 
 pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
@@ -260,15 +261,32 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         alias_export: &[],
         fallback: None,
     },
-    // Windows specific (no cross-platform equivalent)
+    // System
     EnvVarHostMapping {
-        key: "ProgramFiles",
+        key: SYSTEM_ROOT_ENV_VAR.key,
         source: EnvVarSource::Host,
-        alias_import: &["ProgramFiles"],
-        alias_import_mode: EnvVarImportMode::PassThrough,
-        alias_export: &["ProgramFiles"],
+        alias_import: &["SystemRoot", "windir"],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &["SystemRoot", "windir"],
         fallback: None,
     },
+    EnvVarHostMapping {
+        key: SYSTEM_DRIVE_ENV_VAR.key,
+        source: EnvVarSource::Host,
+        alias_import: &["SystemDrive"],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &["SystemDrive"],
+        fallback: None,
+    },
+    EnvVarHostMapping {
+        key: SYSTEM_PROGRAMS_ENV_VAR.key,
+        source: EnvVarSource::Host,
+        alias_import: &["ProgramFiles", "ProgramW6432"],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &["ProgramFiles", "ProgramW6432"],
+        fallback: None,
+    },
+    // Windows specific (no cross-platform equivalent)
     EnvVarHostMapping {
         key: "ProgramFiles(x86)",
         source: EnvVarSource::Host,
@@ -283,14 +301,6 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         alias_import: &["ProgramFiles(Arm)"],
         alias_import_mode: EnvVarImportMode::PassThrough,
         alias_export: &["ProgramFiles(Arm)"],
-        fallback: None,
-    },
-    EnvVarHostMapping {
-        key: "ProgramW6432",
-        source: EnvVarSource::Host,
-        alias_import: &["ProgramW6432"],
-        alias_import_mode: EnvVarImportMode::PassThrough,
-        alias_export: &["ProgramW6432"],
         fallback: None,
     },
     EnvVarHostMapping {
@@ -315,30 +325,6 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         alias_import: &["CommonProgramW6432"],
         alias_import_mode: EnvVarImportMode::PassThrough,
         alias_export: &["CommonProgramW6432"],
-        fallback: None,
-    },
-    EnvVarHostMapping {
-        key: "SystemRoot",
-        source: EnvVarSource::Host,
-        alias_import: &["SystemRoot"],
-        alias_import_mode: EnvVarImportMode::PassThrough,
-        alias_export: &["SystemRoot"],
-        fallback: None,
-    },
-    EnvVarHostMapping {
-        key: "windir",
-        source: EnvVarSource::Host,
-        alias_import: &["windir"],
-        alias_import_mode: EnvVarImportMode::PassThrough,
-        alias_export: &["windir"],
-        fallback: None,
-    },
-    EnvVarHostMapping {
-        key: "SystemDrive",
-        source: EnvVarSource::Host,
-        alias_import: &["SystemDrive"],
-        alias_import_mode: EnvVarImportMode::PassThrough,
-        alias_export: &["SystemDrive"],
         fallback: None,
     },
     EnvVarHostMapping {
