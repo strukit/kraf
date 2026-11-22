@@ -42,3 +42,7 @@ pub fn apply(env_var_projection: &EnvVarProjection, writer: &mut impl EnvVarWrit
         writer.write(env_var.key, env_var.value.as_deref().unwrap_or(""));
     }
 }
+
+#[cfg(test)]
+#[path = "env_var_projector_tests.rs"]
+mod tests;

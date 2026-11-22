@@ -1,13 +1,10 @@
 use crate::environment::env_var::env_var_core::{EnvVar, EnvVarHostMapping, EnvVarReader};
 use crate::environment::env_var::env_var_resolver::env_var_resolve_keys;
 
-#[path = "env_var_host_linux.rs"]
 pub mod env_var_host_linux;
 
-#[path = "env_var_host_mac.rs"]
 pub mod env_var_host_mac;
 
-#[path = "env_var_host_windows.rs"]
 pub mod env_var_host_windows;
 
 #[cfg(host = "linux")]
@@ -209,3 +206,7 @@ pub fn env_var_collect(
         })
         .collect()
 }
+
+#[cfg(test)]
+#[path = "env_var_host_tests.rs"]
+mod tests;
