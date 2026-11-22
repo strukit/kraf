@@ -160,6 +160,7 @@ Name: System declarations
 
 - [Intent](../env-var-intent.md): module intent.
 - [ENV-VAR_HOST-ACC-0009](./env-var-host.acceptance.md#env-var_host-acc-0009)
+- [ENV-VAR_HOST-ACC-0011](./env-var-host.acceptance.md#env-var_host-acc-0011)
 
 **Status**:
 
@@ -174,6 +175,11 @@ THE SOFTWARE SHALL declare, in every supported platform mapping, the
 WHERE the Windows mappings are included,
 THE SOFTWARE SHALL import the `SYSTEM_ROOT`, `SYSTEM_DRIVE`, and
 `SYSTEM_PROGRAMS` declarations from the native Windows variables of the host.
+
+WHERE the Windows mappings are included,
+THE SOFTWARE SHALL NOT export the `SYSTEM_PROGRAMS` declaration, and SHALL pass
+the `ProgramFiles` and `ProgramW6432` variables of the host through unchanged,
+because their values depend on the bitness of each process.
 
 WHERE the Linux or Mac mappings are included,
 THE SOFTWARE SHALL resolve the `SYSTEM_ROOT`, `SYSTEM_DRIVE`, and

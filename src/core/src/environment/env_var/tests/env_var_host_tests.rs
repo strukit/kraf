@@ -4,6 +4,7 @@ use crate::environment::env_var::env_var_core::{
 use crate::environment::env_var::env_var_host::{
     ENV_VAR_HOST_KEYS, env_var_collect, env_var_host_linux, env_var_host_mac, env_var_host_windows,
 };
+use crate::environment::env_var::env_var_projector::project;
 use crate::environment::env_var::env_var_resolver::{lookup_env_var_value, resolve};
 use crate::environment::env_var::tests::env_var_test_fixtures::{
     ENV_VAR_MAPPING_FIXTURE, FakeEnvVarReader,
@@ -344,7 +345,7 @@ fn pass_through_keys_belong_to_one_platform() {
 }
 
 #[test]
-fn windows_system_programs_prefers_the_native_program_files() {
+fn windows_program_folders_pass_through_unchanged() {
     let collected = [
         EnvVar {
             key: "ProgramFiles",
@@ -357,9 +358,18 @@ fn windows_system_programs_prefers_the_native_program_files() {
     ];
 
     let resolved = resolve(WINDOWS_MAPPINGS, &collected, &[]);
+    let projected = project(WINDOWS_MAPPINGS, &resolved);
 
     assert_eq!(
         lookup_env_var_value("SYSTEM_PROGRAMS", &resolved),
+        Some(r"C:\Program Files".to_string())
+    );
+    assert_eq!(
+        lookup_env_var_value("ProgramFiles", projected.env_vars()),
+        Some(r"C:\Program Files (x86)".to_string())
+    );
+    assert_eq!(
+        lookup_env_var_value("ProgramW6432", projected.env_vars()),
         Some(r"C:\Program Files".to_string())
     );
 }

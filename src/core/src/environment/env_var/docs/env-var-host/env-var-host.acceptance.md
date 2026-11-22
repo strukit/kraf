@@ -290,6 +290,36 @@ Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
       And no canonical key of another declaration is projected
 ```
 
+---
+
+## ENV-VAR_HOST-ACC-0011
+
+Name: Windows program folders pass through unchanged
+
+**Links:**
+
+- [ENV-VAR_HOST-REQ-0006](./env-var-host.spec.md#env-var_host-req-0006)
+
+**Status**:
+
+- Doc status: Draft
+- Verification status: Unknown
+
+```gherkin
+Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
+
+  Rule: ENV-VAR_HOST-REQ-0006 — System declarations
+
+    Scenario: ENV-VAR_HOST-ACC-0011 — Windows program folders pass through unchanged
+      Given the Windows mappings
+      And the host "ProgramFiles" is "C:\Program Files (x86)"
+      And the host "ProgramW6432" is "C:\Program Files"
+      When the software resolves and projects the mappings
+      Then "SYSTEM_PROGRAMS" resolves to "C:\Program Files"
+      And the projection has "ProgramFiles" with "C:\Program Files (x86)"
+      And the projection has "ProgramW6432" with "C:\Program Files"
+```
+
 ## Links
 
 - [Specification](./env-var-host.spec.md): Requirements for platform-specific

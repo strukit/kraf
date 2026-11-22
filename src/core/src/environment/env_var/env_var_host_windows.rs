@@ -283,10 +283,26 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Host,
         alias_import: &["ProgramW6432", "ProgramFiles"],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &["ProgramFiles", "ProgramW6432"],
+        alias_export: &[],
         fallback: None,
     },
     // Windows specific (no cross-platform equivalent)
+    EnvVarHostMapping {
+        key: "ProgramFiles",
+        source: EnvVarSource::Host,
+        alias_import: &["ProgramFiles"],
+        alias_import_mode: EnvVarImportMode::PassThrough,
+        alias_export: &["ProgramFiles"],
+        fallback: None,
+    },
+    EnvVarHostMapping {
+        key: "ProgramW6432",
+        source: EnvVarSource::Host,
+        alias_import: &["ProgramW6432"],
+        alias_import_mode: EnvVarImportMode::PassThrough,
+        alias_export: &["ProgramW6432"],
+        fallback: None,
+    },
     EnvVarHostMapping {
         key: "ProgramFiles(x86)",
         source: EnvVarSource::Host,
