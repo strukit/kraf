@@ -104,7 +104,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &["HOME", "USERPROFILE", "HOMEPATH"],
+        alias_export: &["HOME", "USERPROFILE"],
         fallback: None,
     },
     EnvVarHostMapping {
