@@ -168,7 +168,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         alias_import: &[TERMINAL_ENV_VAR.key, "SHELL"],
         alias_import_mode: EnvVarImportMode::FirstFound,
         alias_export: &["SHELL"],
-        fallback: Some("bash"),
+        fallback: Some("zsh"),
     },
     EnvVarHostMapping {
         key: TERMINAL_TYPE_ENV_VAR.key,
