@@ -27,7 +27,7 @@ Name: Import aliases are collected and deduplicated
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -53,7 +53,7 @@ Name: Fallback variable reference is not collected
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -80,7 +80,7 @@ Name: First available import alias is selected
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -107,7 +107,7 @@ Name: Fallback is used when no import alias has a value
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -134,7 +134,7 @@ Name: Non-empty path aliases are merged in declaration order
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -162,7 +162,7 @@ Name: Merge fallback is used when no path is available
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -189,7 +189,7 @@ Name: Tilde fallback expands from resolved home
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -216,7 +216,7 @@ Name: Dollar fallback expands from a provided value
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -243,7 +243,7 @@ Name: Unresolved placeholder remains literal
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -270,7 +270,7 @@ Name: Empty first-found value is selected
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -298,7 +298,7 @@ Name: Provided canonical value precedes fallback
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -326,7 +326,7 @@ Name: Provided fallback is used when canonical value is absent
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -354,7 +354,7 @@ Name: Host declaration without aliases ignores its canonical collected value
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -382,7 +382,7 @@ Name: Empty path values are ignored during merge
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -410,7 +410,7 @@ Name: Merged paths use the current platform separator
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -437,7 +437,7 @@ Name: Tilde expansion takes precedence and replaces only the first tilde
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -465,7 +465,7 @@ Name: Invalid dollar syntax remains literal
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -497,7 +497,7 @@ Name: Dollar expansion replaces only the first placeholder
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -524,7 +524,7 @@ Name: Pass-through forwards the first available value
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -551,7 +551,7 @@ Name: Pass-through absence resolves to an empty value
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -578,7 +578,7 @@ Name: Unjoinable merged paths resolve to an empty value
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -604,7 +604,7 @@ Name: Missing source and fallback resolve to an empty value
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -659,7 +659,7 @@ Name: Resolved output holds only the canonical key
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -687,7 +687,7 @@ Name: Collected keys are deduplicated and sorted
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -713,7 +713,7 @@ Name: Provided value is not read from collected host values
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
@@ -741,7 +741,7 @@ Name: Dollar export alias and tilde use the same provided home
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
