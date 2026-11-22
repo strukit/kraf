@@ -42,15 +42,13 @@ fn resolve_expand(
     env_var_key_raw: &str,
     env_var_home: &str,
     env_var_provided: &[EnvVar],
-    env_var_collected: &[EnvVar],
 ) -> String {
     if env_var_key_raw.contains('~') && !env_var_home.is_empty() {
         return expand_tilde_var(env_var_key_raw, env_var_home);
     }
 
     if env_var_key_raw.contains('$') {
-        let env_var_known = [env_var_provided, env_var_collected].concat();
-        return expand_dollar_var(env_var_key_raw, &env_var_known);
+        return expand_dollar_var(env_var_key_raw, env_var_provided);
     }
 
     env_var_key_raw.to_string()
@@ -77,7 +75,6 @@ pub fn resolve(
                         env_var_unresolved.fallback.unwrap_or_default(),
                         &home,
                         env_var_provided,
-                        env_var_collected,
                     )
                 })
             } else {
@@ -113,7 +110,6 @@ pub fn resolve_alias(
                     env_var_unresolved.fallback.unwrap_or_default(),
                     home,
                     env_var_provided,
-                    env_var_collected,
                 ))
             }),
 
@@ -138,7 +134,6 @@ pub fn resolve_alias(
                     env_var_unresolved.fallback.unwrap_or_default(),
                     home,
                     env_var_provided,
-                    env_var_collected,
                 ))
             } else {
                 std::env::join_paths(paths)
@@ -155,15 +150,12 @@ pub struct EnvVarResolveKeys {
     pub env_vars_keys_import: Vec<&'static str>,
 }
 
+#[must_use]
 pub fn env_var_resolve_keys(env_var_mappings: &[EnvVarHostMapping]) -> EnvVarResolveKeys {
     let mut env_vars_keys_import = Vec::new();
 
     for mapping in env_var_mappings {
         env_vars_keys_import.extend(mapping.alias_import.iter().copied());
-
-        if let Some(dollar_key) = mapping.fallback.and_then(extract_dollar_var_key) {
-            env_vars_keys_import.push(dollar_key);
-        }
     }
 
     env_vars_keys_import.sort_unstable();

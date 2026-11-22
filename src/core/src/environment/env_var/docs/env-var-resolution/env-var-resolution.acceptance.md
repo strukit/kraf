@@ -44,7 +44,7 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ## ENV-VAR_RESOLUTION-ACC-0002
 
-Name: Fallback variable reference is collected
+Name: Fallback variable reference is not collected
 
 **Links:**
 
@@ -60,10 +60,11 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
   Rule: ENV-VAR_RESOLUTION-REQ-0001 — Declared import dependency collection
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0002 — Fallback variable reference is collected
+    Scenario: ENV-VAR_RESOLUTION-ACC-0002 — Fallback variable reference is not collected
       Given a declaration fallback references "$HOME"
+      And no declaration imports "HOME"
       When the software collects import dependencies
-      Then "HOME" is collected
+      Then "HOME" is not collected
 ```
 
 ---
@@ -206,7 +207,7 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ## ENV-VAR_RESOLUTION-ACC-0008
 
-Name: Dollar fallback expands from a collected value
+Name: Dollar fallback expands from a provided value
 
 **Links:**
 
@@ -222,8 +223,8 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
   Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0008 — Dollar fallback expands from a collected value
-      Given "HOME" has the collected value "/workspace"
+    Scenario: ENV-VAR_RESOLUTION-ACC-0008 — Dollar fallback expands from a provided value
+      Given "HOME" has the provided value "/workspace"
       And a declaration fallback is "$HOME/.cache"
       When the software resolves the declaration
       Then the declaration resolves to "/workspace/.cache"
@@ -444,7 +445,7 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
   Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
 
     Scenario: ENV-VAR_RESOLUTION-ACC-0016 — Tilde expansion takes precedence and replaces only the first tilde
-      Given "HOME" has the collected value "/workspace"
+      Given "HOME" has the provided value "/workspace"
       And a declaration fallback is "~/$HOME/~"
       When the software resolves the declaration
       Then the declaration resolves to "/workspace/$HOME/~"
@@ -503,7 +504,7 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
   Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
 
     Scenario: ENV-VAR_RESOLUTION-ACC-0018 — Dollar expansion replaces only the first placeholder
-      Given "HOME" has the collected value "/workspace"
+      Given "HOME" has the provided value "/workspace"
       And a declaration fallback is "$HOME/$HOME"
       When the software resolves the declaration
       Then the declaration resolves to "/workspace/$HOME"

@@ -18,7 +18,7 @@ fn resolve_keys_are_empty_when_no_mappings_declare_any() {
 }
 
 #[test]
-fn resolve_keys_collects_alias_import_and_dollar_var_in_fallback() {
+fn resolve_keys_collects_alias_import_but_not_dollar_var_in_fallback() {
     let mappings = [EnvVarHostMapping {
         key: "CONFIG_DIR",
         source: EnvVarSource::Provided,
@@ -32,7 +32,7 @@ fn resolve_keys_collects_alias_import_and_dollar_var_in_fallback() {
 
     assert_eq!(
         keys.env_vars_keys_import,
-        vec!["FOO_BASE", "MY_CONFIG_DIR", "XDG_CONFIG_HOME"]
+        vec!["MY_CONFIG_DIR", "XDG_CONFIG_HOME"]
     );
 }
 
@@ -140,9 +140,12 @@ fn resolve_alias_expands_dollar_home_in_fallback() {
         alias_export: &[],
         fallback: Some("$HOME/.cache"),
     };
-    let env_var_collected = env_var_collected_fixture("/workspace");
+    let env_var_provided = vec![EnvVar {
+        key: "HOME",
+        value: Some("/workspace".to_string()),
+    }];
 
-    let result = resolve_alias(&env_var_mapping, &env_var_collected, &[], "");
+    let result = resolve_alias(&env_var_mapping, &[], &env_var_provided, "");
 
     assert_eq!(result, "/workspace/.cache");
 }
@@ -379,4 +382,24 @@ fn resolve_dollar_home_uses_the_provided_home_like_tilde() {
 
     assert_eq!(result[0].value, Some("/workspace/.cache".to_string()));
     assert_eq!(result[0].value, result[1].value);
+}
+
+#[test]
+fn resolve_dollar_var_does_not_read_collected_host_values() {
+    let mappings = [EnvVarHostMapping {
+        key: "LEAK",
+        source: EnvVarSource::Provided,
+        alias_import: &[],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &[],
+        fallback: Some("$SECRET_TOKEN"),
+    }];
+    let env_var_collected = vec![EnvVar {
+        key: "SECRET_TOKEN",
+        value: Some("host-secret".to_string()),
+    }];
+
+    let result = resolve(&mappings, &env_var_collected, &[]);
+
+    assert_eq!(result[0].value, Some("$SECRET_TOKEN".to_string()));
 }

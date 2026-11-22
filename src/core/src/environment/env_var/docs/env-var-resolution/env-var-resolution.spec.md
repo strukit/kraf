@@ -45,8 +45,7 @@ Name: Declared import dependency collection
 - Implementation status: Implemented
 
 ```text
-THE SOFTWARE SHALL collect only import aliases and the first valid dollar
-variable reference in a declaration fallback.
+THE SOFTWARE SHALL collect only import aliases.
 
 THE SOFTWARE SHALL deduplicate and lexicographically sort collected import and
 export keys.
@@ -152,12 +151,12 @@ placeholder when one is present.
 
 THE SOFTWARE SHALL evaluate only the first dollar sign and, when it is followed
 by one or more ASCII letters, digits, or underscores, replace that placeholder
-with the provided value whose key matches its name or, when no provided value
-matches, with the collected value whose key matches its name, including an
-empty value.
+with the provided value whose key matches its name, including an empty value.
+
+THE SOFTWARE SHALL NOT replace a dollar placeholder with a collected value.
 
 IF a dollar sign has no valid placeholder name or a dollar placeholder has no
-provided or collected value,
+provided value,
 THEN THE SOFTWARE SHALL preserve it literally.
 ```
 
