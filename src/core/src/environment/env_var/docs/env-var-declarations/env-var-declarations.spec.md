@@ -50,6 +50,9 @@ THE SOFTWARE SHALL determine the complete set of declarations before resolution
 starts, from source code, immutable plugin metadata, or configuration files
 loaded at startup.
 
+THE SOFTWARE MAY accept values for known declarations from configuration files
+loaded at startup and from dynamic sources while a session is running.
+
 WHILE a session is running,
 THE SOFTWARE SHALL NOT accept new declarations, import aliases, export aliases,
 or source eligibility.
