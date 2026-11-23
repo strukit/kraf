@@ -293,4 +293,12 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         alias_export: &["__CF_USER_TEXT_ENCODING"],
         fallback: None,
     },
+    EnvVarHostMapping {
+        key: "COMMAND_MODE",
+        source: EnvVarSource::Host,
+        alias_import: &["COMMAND_MODE"],
+        alias_import_mode: EnvVarImportMode::PassThrough,
+        alias_export: &["COMMAND_MODE"],
+        fallback: None,
+    },
 ];
