@@ -102,7 +102,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &["HOME"],
+        alias_export: &["HOME", "CFFIXED_USER_HOME"],
         fallback: None,
     },
     EnvVarHostMapping {
@@ -299,6 +299,14 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         alias_import: &["COMMAND_MODE"],
         alias_import_mode: EnvVarImportMode::PassThrough,
         alias_export: &["COMMAND_MODE"],
+        fallback: None,
+    },
+    EnvVarHostMapping {
+        key: "MallocNanoZone",
+        source: EnvVarSource::Host,
+        alias_import: &["MallocNanoZone"],
+        alias_import_mode: EnvVarImportMode::PassThrough,
+        alias_export: &["MallocNanoZone"],
         fallback: None,
     },
 ];
