@@ -52,9 +52,9 @@ This section defines where module documents live. The tree of
 ├── README.md
 └── docs/
     ├── <module>-intent.md
-    └── <module>-<area>/
-        ├── <module>-<area>.spec.md
-        └── <module>-<area>.acceptance.md
+    └── <module>-<feature>/
+        ├── <module>-<feature>.spec.md
+        └── <module>-<feature>.acceptance.md
 ```
 
 ### Rules
@@ -65,10 +65,10 @@ This section defines where module documents live. The tree of
   open its `<module>/docs/`, and that declares the module `<module>` by listing
   `module:<module>` in its `type`.
 - The intent of a module MUST be `<module>/docs/<module>-intent.md`, directly in
-  `<module>/docs/`, and MUST NOT be inside an area folder.
-- The specification and the acceptance document of an area MUST be in the
-  `<module>/docs/<module>-<area>/` folder of that area, and MUST NOT be directly
-  in `<module>/docs/`.
+  `<module>/docs/`, and MUST NOT be inside a feature folder.
+- The specification and the acceptance document of a feature MUST be in the
+  `<module>/docs/<module>-<feature>/` folder of that feature, and MUST NOT be
+  directly in `<module>/docs/`.
 - Documentation MAY map one-to-one to source files, platform files, or tests.
 - A document SHOULD be created when a domain behavior needs a durable contract.
 
@@ -77,28 +77,28 @@ This section defines where module documents live. The tree of
 This section defines the identifiers of requirements and acceptance scenarios.
 
 ```text
-<MODULE>_<AREA>-REQ-0001
-<MODULE>_<AREA>-ACC-0001
+<MODULE>_<FEATURE>-REQ-0001
+<MODULE>_<FEATURE>-ACC-0001
 ```
 
 ### Rules
 
 - Identifiers MUST use an uppercase module, an underscore, and an uppercase
-  area, followed by a type and a four-digit sequence number, as the format of
+  feature, followed by a type and a four-digit sequence number, as the format of
   [Docs identifiers](#docs-identifiers) shows.
-- The identifier of a Gherkin `Feature` MUST use the same module and area as its
-  requirements, with the type `FEAT` and a four-digit sequence number, as
-  `<MODULE>_<AREA>-FEAT-0001` shows. A `Feature` identifies the feature that an
-  area delivers, and it is not a name for the module or the area.
+- The identifier of a Gherkin `Feature` MUST use the same module and feature as
+  its requirements, with the type `FEAT` and a four-digit sequence number, as
+  `<MODULE>_<FEATURE>-FEAT-0001` shows. A `Feature` identifies the feature it
+  describes, and it is not a name for the module or the feature.
 - A citation of a requirement or an acceptance scenario, in a document, code, a
   commit message, a pull request, a comment, or a message to the user, MUST use
-  its full identifier, with the module and area (e.g. `ENV-VAR_HOST-REQ-0004`,
-  not `REQ-0004`).
+  its full identifier, with the module and feature (e.g.
+  `ENV-VAR_HOST-REQ-0004`, not `REQ-0004`).
 
 ### Examples
 
 - Module: ENV-VAR
-- Area: Declarations
+- Feature: Declarations
 
 ```text
 ENV-VAR_DECLARATIONS-REQ-0001
@@ -182,7 +182,8 @@ language: <language-code>
 ## Links
 
 - [README.md](path-to-nearest-index): <description of the nearest index>.
-- [<Area>](./<module>-<area>/<module>-<area>.spec.md): <area> Specification.
+- [<Feature>](./<module>-<feature>/<module>-<feature>.spec.md): <feature>
+  Specification.
 ```
 
 ### Specification (*.spec.md)
@@ -259,7 +260,7 @@ THE SOFTWARE SHALL <system response>.
 ````md
 ---
 description: <One-line summary of the requirements.>
-tags: [<module>, <area>, specification, spec]
+tags: [<module>, <feature>, specification, spec]
 type: ["spec"]
 scope: ["module:<module>"]
 language: <language-code>
@@ -287,13 +288,13 @@ language: <language-code>
 
 ## Requirements
 
-### <MODULE>_<AREA>-REQ-0001
+### <MODULE>_<FEATURE>-REQ-0001
 
 Name: <Requirement name>
 
 **Links:**
 
-- [<MODULE>_<AREA>-ACC-0001](./<module>-<area>.acceptance.md#<module>_<area>-acc-0001)
+- [<MODULE>_<FEATURE>-ACC-0001](./<module>-<feature>.acceptance.md#<module>_<feature>-acc-0001)
 - [Intent](../<module>-intent.md)
 
 **Status**:
@@ -360,16 +361,18 @@ Feature: <name>
   [Acceptance language](#acceptance-language) leave a doubt about Gherkin
   unresolved.
 - Acceptance scenarios MUST use Gherkin.
-- A `Feature` MUST group the scenarios of one area, a `Rule` MUST scope
+- A `Feature` MUST group the scenarios of one feature, a `Rule` MUST scope
   scenarios to the requirement they verify, and a `Scenario` MUST state one
   observable behavior as `Given`/`When`/`Then` steps.
+- The word `Feature` in a Gherkin document MUST be read as the Gherkin keyword,
+  and MUST NOT be read as the term `feature` of this document.
 
 #### Acceptance layout
 
 ````md
 ---
 description: <One-line summary of the acceptance scenarios.>
-tags: [<module>, <area>, acceptance, gherkin]
+tags: [<module>, <feature>, acceptance, gherkin]
 type: ["acceptance"]
 scope: ["module:<module>"]
 language: <language-code>
@@ -385,13 +388,13 @@ language: <language-code>
 > See
 > [GENERAL_STANDARDS.md](<repo>/docs/standards/GENERAL_STANDARDS.md#normative-language).
 
-## <MODULE>_<AREA>-ACC-0001
+## <MODULE>_<FEATURE>-ACC-0001
 
 Name: <Scenario name>
 
 **Links:**
 
-- [<MODULE>_<AREA>-REQ-0001](./<module>-<area>.spec.md#<module>_<area>-req-0001)
+- [<MODULE>_<FEATURE>-REQ-0001](./<module>-<feature>.spec.md#<module>_<feature>-req-0001)
 
 **Status**:
 
@@ -399,11 +402,11 @@ Name: <Scenario name>
 - Verification status: Unknown
 
 ```gherkin
-Feature: <MODULE>_<AREA>-FEAT-0001 — <Feature description>
+Feature: <MODULE>_<FEATURE>-FEAT-0001 — <Feature description>
 
-  Rule: <MODULE>_<AREA>-REQ-0001 — <Requirement name>
+  Rule: <MODULE>_<FEATURE>-REQ-0001 — <Requirement name>
 
-    Scenario: <MODULE>_<AREA>-ACC-0001 — <Scenario name>
+    Scenario: <MODULE>_<FEATURE>-ACC-0001 — <Scenario name>
       Given <precondition>
       When <action>
       Then <expected outcome>
@@ -411,7 +414,7 @@ Feature: <MODULE>_<AREA>-FEAT-0001 — <Feature description>
 
 ## Links
 
-- [Specification](./<module>-<area>.spec.md):
+- [Specification](./<module>-<feature>.spec.md):
   <description of the specification>.
 - [README.md](path-to-nearest-index): <description of the nearest index>.
 ````
