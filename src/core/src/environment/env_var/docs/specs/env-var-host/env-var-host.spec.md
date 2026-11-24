@@ -14,7 +14,7 @@ language: en
 > - **Optional:** MAY, OPTIONAL
 >
 > See
-> [GENERAL_STANDARDS.md](../../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
+> [GENERAL_STANDARDS.md](../../../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
 
 </br>
 
@@ -34,7 +34,7 @@ Name: Supported-platform mapping completeness
 
 **Links:**
 
-- [Intent](../env-var-intent.md): module intent.
+- [Intent](../../env-var-intent.md): module intent.
 - [ENV-VAR_HOST-ACC-0001](./env-var-host.acceptance.md#env-var_host-acc-0001)
 - [ENV-VAR_HOST-ACC-0002](./env-var-host.acceptance.md#env-var_host-acc-0002)
 - [ENV-VAR_HOST-ACC-0003](./env-var-host.acceptance.md#env-var_host-acc-0003)
@@ -57,7 +57,7 @@ Name: Session-owned directory sources
 
 **Links:**
 
-- [Intent](../env-var-intent.md): module intent.
+- [Intent](../../env-var-intent.md): module intent.
 - [ENV-VAR_HOST-ACC-0004](./env-var-host.acceptance.md#env-var_host-acc-0004)
 
 **Status**:
@@ -78,7 +78,7 @@ Name: Host home import
 
 **Links:**
 
-- [Intent](../env-var-intent.md): module intent.
+- [Intent](../../env-var-intent.md): module intent.
 - [ENV-VAR_HOST-ACC-0005](./env-var-host.acceptance.md#env-var_host-acc-0005)
 
 **Status**:
@@ -102,7 +102,7 @@ Name: Native export aliases only
 
 **Links:**
 
-- [Intent](../env-var-intent.md): module intent.
+- [Intent](../../env-var-intent.md): module intent.
 - [ENV-VAR_HOST-ACC-0006](./env-var-host.acceptance.md#env-var_host-acc-0006)
 - [ENV-VAR_HOST-ACC-0010](./env-var-host.acceptance.md#env-var_host-acc-0010)
 
@@ -128,7 +128,7 @@ Name: Host path lists and isolated session path
 
 **Links:**
 
-- [Intent](../env-var-intent.md): module intent.
+- [Intent](../../env-var-intent.md): module intent.
 - [ENV-VAR_HOST-ACC-0007](./env-var-host.acceptance.md#env-var_host-acc-0007)
 - [ENV-VAR_HOST-ACC-0008](./env-var-host.acceptance.md#env-var_host-acc-0008)
 
@@ -158,7 +158,7 @@ Name: System declarations
 
 **Links:**
 
-- [Intent](../env-var-intent.md): module intent.
+- [Intent](../../env-var-intent.md): module intent.
 - [ENV-VAR_HOST-ACC-0009](./env-var-host.acceptance.md#env-var_host-acc-0009)
 
 **Status**:
@@ -174,9 +174,9 @@ THE SOFTWARE SHALL declare, in every supported platform mapping, the
 
 ## Links
 
-- [Intent](../env-var-intent.md): Why Kraf resolves and projects environment
+- [Intent](../../env-var-intent.md): Why Kraf resolves and projects environment
   variables through a declarative model.
 - [Acceptance](./env-var-host.acceptance.md): Acceptance scenarios for
   platform-specific environment-variable mappings.
-- [README.md](../../README.md): Declarative model, resolution, and projection of
-  environment variables in Kraf.
+- [README.md](../../../README.md): Declarative model, resolution, and projection
+  of environment variables in Kraf.

@@ -14,7 +14,7 @@ language: en
 > - **Optional:** MAY, OPTIONAL
 >
 > See
-> [GENERAL_STANDARDS.md](../../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
+> [GENERAL_STANDARDS.md](../../../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
 
 ## ENV-VAR_PROJECTION-ACC-0001
 
@@ -154,5 +154,5 @@ Feature: ENV-VAR_PROJECTION-FEAT-0001 — Environment variable projection
 
 - [Specification](./env-var-projection.spec.md): Requirements for projecting
   resolved environment variables to managed processes.
-- [README.md](../../README.md): Declarative model, resolution, and projection of
-  environment variables in Kraf.
+- [README.md](../../../README.md): Declarative model, resolution, and projection
+  of environment variables in Kraf.
