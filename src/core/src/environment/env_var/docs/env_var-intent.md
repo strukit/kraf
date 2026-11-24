@@ -1,8 +1,8 @@
 ---
 description: Why Kraf resolves and projects environment variables through a declarative model.
-tags: [environment, env-var, intent, security, projection]
+tags: [environment, env_var, intent, security, projection]
 type: ["intent"]
-scope: ["module:env-var"]
+scope: ["module:env_var"]
 language: en
 ---
 
@@ -88,14 +88,14 @@ projection to its managed process.
 
 - [README.md](../README.md): Declarative model, resolution, and projection of
   environment variables in Kraf.
-- [Declarations](./specs/env-var-declarations/env-var-declarations.spec.md):
+- [Declarations](./specs/env_var-declarations/env_var-declarations.spec.md):
   Requirements for declaring environment variables.
-- [Resolution](./specs/env-var-resolution/env-var-resolution.spec.md):
+- [Resolution](./specs/env_var-resolution/env_var-resolution.spec.md):
   Requirements for resolving declared environment variables.
-- [Projection](./specs/env-var-projection/env-var-projection.spec.md):
+- [Projection](./specs/env_var-projection/env_var-projection.spec.md):
   Requirements for projecting resolved environment variables to managed
   processes.
-- [Host](./specs/env-var-host/env-var-host.spec.md): Requirements for
+- [Host](./specs/env_var-host/env_var-host.spec.md): Requirements for
   platform-specific environment-variable mappings.
-- [Access](./specs/env-var-access/env-var-access.spec.md): Requirements for how
+- [Access](./specs/env_var-access/env_var-access.spec.md): Requirements for how
   modules and plugins access resolved environment values.

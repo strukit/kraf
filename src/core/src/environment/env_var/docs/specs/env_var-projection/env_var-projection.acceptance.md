@@ -1,8 +1,8 @@
 ---
 description: Acceptance scenarios for projecting environment variables.
-tags: [environment, env-var, acceptance, projection, gherkin]
+tags: [environment, env_var, acceptance, projection, gherkin]
 type: ["acceptance"]
-scope: ["module:env-var"]
+scope: ["module:env_var"]
 language: en
 ---
 
@@ -16,13 +16,13 @@ language: en
 > See
 > [GENERAL_STANDARDS.md](../../../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
 
-## ENV-VAR_PROJECTION-ACC-0001
+## ENV_VAR-PROJECTION-ACC-0001
 
 Name: Declared export alias is projected
 
 **Links:**
 
-- [ENV-VAR_PROJECTION-REQ-0001](./env-var-projection.spec.md#env-var_projection-req-0001)
+- [ENV_VAR-PROJECTION-REQ-0001](./env_var-projection.spec.md#ENV_VAR-PROJECTION-REQ-0001)
 
 **Status**:
 
@@ -30,11 +30,11 @@ Name: Declared export alias is projected
 - Verification status: Unknown
 
 ```gherkin
-Feature: ENV-VAR_PROJECTION-FEAT-0001 — Environment variable projection
+Feature: ENV_VAR-PROJECTION-FEAT-0001 — Environment variable projection
 
-  Rule: ENV-VAR_PROJECTION-REQ-0001 — Explicit export authorization
+  Rule: ENV_VAR-PROJECTION-REQ-0001 — Explicit export authorization
 
-    Scenario: ENV-VAR_PROJECTION-ACC-0001 — Declared export alias is projected
+    Scenario: ENV_VAR-PROJECTION-ACC-0001 — Declared export alias is projected
       Given "EXAMPLE_KEY" is declared as an export alias
       And "EXAMPLE_KEY" has a resolved value
       When the software applies the projection to a managed process
@@ -43,13 +43,13 @@ Feature: ENV-VAR_PROJECTION-FEAT-0001 — Environment variable projection
 
 ---
 
-## ENV-VAR_PROJECTION-ACC-0002
+## ENV_VAR-PROJECTION-ACC-0002
 
 Name: Non-exportable resolved value is not projected
 
 **Links:**
 
-- [ENV-VAR_PROJECTION-REQ-0001](./env-var-projection.spec.md#env-var_projection-req-0001)
+- [ENV_VAR-PROJECTION-REQ-0001](./env_var-projection.spec.md#ENV_VAR-PROJECTION-REQ-0001)
 
 **Status**:
 
@@ -57,11 +57,11 @@ Name: Non-exportable resolved value is not projected
 - Verification status: Unknown
 
 ```gherkin
-Feature: ENV-VAR_PROJECTION-FEAT-0001 — Environment variable projection
+Feature: ENV_VAR-PROJECTION-FEAT-0001 — Environment variable projection
 
-  Rule: ENV-VAR_PROJECTION-REQ-0001 — Explicit export authorization
+  Rule: ENV_VAR-PROJECTION-REQ-0001 — Explicit export authorization
 
-    Scenario: ENV-VAR_PROJECTION-ACC-0002 — Non-exportable resolved value is not projected
+    Scenario: ENV_VAR-PROJECTION-ACC-0002 — Non-exportable resolved value is not projected
       Given "EXAMPLE_KEY" has a resolved value
       And "EXAMPLE_KEY" is not declared as an export alias
       When the software applies the projection to a managed process
@@ -70,13 +70,13 @@ Feature: ENV-VAR_PROJECTION-FEAT-0001 — Environment variable projection
 
 ---
 
-## ENV-VAR_PROJECTION-ACC-0003
+## ENV_VAR-PROJECTION-ACC-0003
 
 Name: Export aliases receive the canonical resolved value
 
 **Links:**
 
-- [ENV-VAR_PROJECTION-REQ-0002](./env-var-projection.spec.md#env-var_projection-req-0002)
+- [ENV_VAR-PROJECTION-REQ-0002](./env_var-projection.spec.md#ENV_VAR-PROJECTION-REQ-0002)
 
 **Status**:
 
@@ -84,11 +84,11 @@ Name: Export aliases receive the canonical resolved value
 - Verification status: Unknown
 
 ```gherkin
-Feature: ENV-VAR_PROJECTION-FEAT-0001 — Environment variable projection
+Feature: ENV_VAR-PROJECTION-FEAT-0001 — Environment variable projection
 
-  Rule: ENV-VAR_PROJECTION-REQ-0002 — Export value symmetry
+  Rule: ENV_VAR-PROJECTION-REQ-0002 — Export value symmetry
 
-    Scenario: ENV-VAR_PROJECTION-ACC-0003 — Export aliases receive the canonical resolved value
+    Scenario: ENV_VAR-PROJECTION-ACC-0003 — Export aliases receive the canonical resolved value
       Given "HOME_TEMP" resolves to "/workspace/.tmp"
       And "TMPDIR" is an export alias of "HOME_TEMP"
       When the software projects the declaration
@@ -97,13 +97,13 @@ Feature: ENV-VAR_PROJECTION-FEAT-0001 — Environment variable projection
 
 ---
 
-## ENV-VAR_PROJECTION-ACC-0004
+## ENV_VAR-PROJECTION-ACC-0004
 
 Name: Projected output preserves export order
 
 **Links:**
 
-- [ENV-VAR_PROJECTION-REQ-0003](./env-var-projection.spec.md#env-var_projection-req-0003)
+- [ENV_VAR-PROJECTION-REQ-0003](./env_var-projection.spec.md#ENV_VAR-PROJECTION-REQ-0003)
 
 **Status**:
 
@@ -111,11 +111,11 @@ Name: Projected output preserves export order
 - Verification status: Unknown
 
 ```gherkin
-Feature: ENV-VAR_PROJECTION-FEAT-0001 — Environment variable projection
+Feature: ENV_VAR-PROJECTION-FEAT-0001 — Environment variable projection
 
-  Rule: ENV-VAR_PROJECTION-REQ-0003 — Projected output order
+  Rule: ENV_VAR-PROJECTION-REQ-0003 — Projected output order
 
-    Scenario: ENV-VAR_PROJECTION-ACC-0004 — Projected output preserves export order
+    Scenario: ENV_VAR-PROJECTION-ACC-0004 — Projected output preserves export order
       Given "HOME_TEMP" resolves to "/workspace/.tmp"
       And its export aliases are "TEMP", "TMPDIR", and "TMP" in that order
       When the software projects the declaration
@@ -125,13 +125,13 @@ Feature: ENV-VAR_PROJECTION-FEAT-0001 — Environment variable projection
 
 ---
 
-## ENV-VAR_PROJECTION-ACC-0005
+## ENV_VAR-PROJECTION-ACC-0005
 
 Name: Empty resolved value leaves its export aliases unset
 
 **Links:**
 
-- [ENV-VAR_PROJECTION-REQ-0004](./env-var-projection.spec.md#env-var_projection-req-0004)
+- [ENV_VAR-PROJECTION-REQ-0004](./env_var-projection.spec.md#ENV_VAR-PROJECTION-REQ-0004)
 
 **Status**:
 
@@ -139,11 +139,11 @@ Name: Empty resolved value leaves its export aliases unset
 - Verification status: Unknown
 
 ```gherkin
-Feature: ENV-VAR_PROJECTION-FEAT-0001 — Environment variable projection
+Feature: ENV_VAR-PROJECTION-FEAT-0001 — Environment variable projection
 
-  Rule: ENV-VAR_PROJECTION-REQ-0004 — Empty values are not projected
+  Rule: ENV_VAR-PROJECTION-REQ-0004 — Empty values are not projected
 
-    Scenario: ENV-VAR_PROJECTION-ACC-0005 — Empty resolved value leaves its export aliases unset
+    Scenario: ENV_VAR-PROJECTION-ACC-0005 — Empty resolved value leaves its export aliases unset
       Given "USER_TIMEZONE" resolves to ""
       And "TZ" is an export alias of "USER_TIMEZONE"
       When the software projects the declaration
@@ -152,7 +152,7 @@ Feature: ENV-VAR_PROJECTION-FEAT-0001 — Environment variable projection
 
 ## Links
 
-- [Specification](./env-var-projection.spec.md): Requirements for projecting
+- [Specification](./env_var-projection.spec.md): Requirements for projecting
   resolved environment variables to managed processes.
 - [README.md](../../../README.md): Declarative model, resolution, and projection
   of environment variables in Kraf.

@@ -62,6 +62,10 @@ This section defines where module documents live. The tree of
 
 - Documentation MUST live with the module it describes, and MUST NOT be in
   `<repo>/docs`.
+- The name of a module MUST use `_` and MUST NOT use `-` (e.g. `env_var`, not
+  `env-var`).
+- A module folder MUST be named exactly as its module (e.g. `env_var/` for the
+  module `env_var`).
 - Every module folder MUST have a `README.md` that orients a reader before they
   open its `<module>/docs/`, and that declares the module `<module>` by listing
   `module:<module>` in its `type`.
@@ -78,32 +82,48 @@ This section defines where module documents live. The tree of
 This section defines the identifiers of requirements and acceptance scenarios.
 
 ```text
-<MODULE>_<FEATURE>-REQ-0001
-<MODULE>_<FEATURE>-ACC-0001
+<MODULE>-<FEATURE>-REQ-0001
+<MODULE>-<FEATURE>-ACC-0001
 ```
+
+### Terms
+
+- **Identifier part**: the name of a module or of a feature, in uppercase, with
+  each `-` of the name of a feature replaced by `_`, written `<MODULE>` or
+  `<FEATURE>`.
 
 ### Rules
 
-- Identifiers MUST use an uppercase module, an underscore, and an uppercase
-  feature, followed by a type and a four-digit sequence number, as the format of
-  [Docs identifiers](#docs-identifiers) shows.
+- Identifiers MUST be formed of the identifier part of the module, the
+  identifier part of the feature, a type, and a four-digit sequence number,
+  separated by `-`, as the format of [Docs identifiers](#docs-identifiers)
+  shows.
+- An identifier MUST use `-` only to separate its parts, and MUST use `_` in
+  place of each `-` of the name of a feature (e.g. `MY_FEATURE` for the feature
+  `my-feature`).
+- The type of an identifier MUST be `REQ` for a requirement, `ACC` for an
+  acceptance scenario, or `FEAT` for a Gherkin `Feature`.
+- Every part of an identifier MUST be written in uppercase wherever the
+  identifier appears, including headings, plain text, link text, link anchors,
+  Gherkin lines, code, and citations (e.g. `ENV_VAR-HOST-REQ-0004` and
+  `#ENV_VAR-HOST-REQ-0004`).
 - The identifier of a Gherkin `Feature` MUST use the same module and feature as
   its requirements, with the type `FEAT` and a four-digit sequence number, as
-  `<MODULE>_<FEATURE>-FEAT-0001` shows. A `Feature` identifies the feature it
+  `<MODULE>-<FEATURE>-FEAT-0001` shows. A `Feature` identifies the feature it
   describes, and it is not a name for the module or the feature.
 - A citation of a requirement or an acceptance scenario, in a document, code, a
   commit message, a pull request, a comment, or a message to the user, MUST use
   its full identifier, with the module and feature (e.g.
-  `ENV-VAR_HOST-REQ-0004`, not `REQ-0004`).
+  `ENV_VAR-HOST-REQ-0004`, not `REQ-0004`).
 
 ### Examples
 
-- Module: ENV-VAR
-- Feature: Declarations
+- Module: env_var
+- Feature: declarations
 
 ```text
-ENV-VAR_DECLARATIONS-REQ-0001
-ENV-VAR_DECLARATIONS-ACC-0001
+ENV_VAR-DECLARATIONS-REQ-0001
+ENV_VAR-DECLARATIONS-ACC-0001
 ```
 
 ## Docs graph
@@ -289,13 +309,13 @@ language: <language-code>
 
 ## Requirements
 
-### <MODULE>_<FEATURE>-REQ-0001
+### <MODULE>-<FEATURE>-REQ-0001
 
 Name: <Requirement name>
 
 **Links:**
 
-- [<MODULE>_<FEATURE>-ACC-0001](./<module>-<feature>.acceptance.md#<module>_<feature>-acc-0001)
+- [<MODULE>-<FEATURE>-ACC-0001](./<module>-<feature>.acceptance.md#<MODULE>-<FEATURE>-ACC-0001)
 - [Intent](../../<module>-intent.md)
 
 **Status**:
@@ -389,13 +409,13 @@ language: <language-code>
 > See
 > [GENERAL_STANDARDS.md](<path-to-docs>/GENERAL_STANDARDS.md#normative-language).
 
-## <MODULE>_<FEATURE>-ACC-0001
+## <MODULE>-<FEATURE>-ACC-0001
 
 Name: <Scenario name>
 
 **Links:**
 
-- [<MODULE>_<FEATURE>-REQ-0001](./<module>-<feature>.spec.md#<module>_<feature>-req-0001)
+- [<MODULE>-<FEATURE>-REQ-0001](./<module>-<feature>.spec.md#<MODULE>-<FEATURE>-REQ-0001)
 
 **Status**:
 
@@ -403,11 +423,11 @@ Name: <Scenario name>
 - Verification status: Unknown
 
 ```gherkin
-Feature: <MODULE>_<FEATURE>-FEAT-0001 — <Feature description>
+Feature: <MODULE>-<FEATURE>-FEAT-0001 — <Feature description>
 
-  Rule: <MODULE>_<FEATURE>-REQ-0001 — <Requirement name>
+  Rule: <MODULE>-<FEATURE>-REQ-0001 — <Requirement name>
 
-    Scenario: <MODULE>_<FEATURE>-ACC-0001 — <Scenario name>
+    Scenario: <MODULE>-<FEATURE>-ACC-0001 — <Scenario name>
       Given <precondition>
       When <action>
       Then <expected outcome>

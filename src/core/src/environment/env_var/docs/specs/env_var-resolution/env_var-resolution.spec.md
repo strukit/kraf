@@ -1,8 +1,8 @@
 ---
 description: Requirements for resolving declared environment variables.
-tags: [environment, env-var, specification, spec, resolution]
+tags: [environment, env_var, specification, spec, resolution]
 type: ["spec"]
-scope: ["module:env-var"]
+scope: ["module:env_var"]
 language: en
 ---
 
@@ -28,16 +28,16 @@ language: en
 
 ## Requirements
 
-### ENV-VAR_RESOLUTION-REQ-0001
+### ENV_VAR-RESOLUTION-REQ-0001
 
 Name: Declared import dependency collection
 
 **Links:**
 
-- [Intent](../../env-var-intent.md): module intent.
-- [ENV-VAR_RESOLUTION-ACC-0001](./env-var-resolution.acceptance.md#env-var_resolution-acc-0001)
-- [ENV-VAR_RESOLUTION-ACC-0002](./env-var-resolution.acceptance.md#env-var_resolution-acc-0002)
-- [ENV-VAR_RESOLUTION-ACC-0025](./env-var-resolution.acceptance.md#env-var_resolution-acc-0025)
+- [Intent](../../env_var-intent.md): module intent.
+- [ENV_VAR-RESOLUTION-ACC-0001](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0001)
+- [ENV_VAR-RESOLUTION-ACC-0002](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0002)
+- [ENV_VAR-RESOLUTION-ACC-0025](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0025)
 
 **Status**:
 
@@ -53,16 +53,16 @@ export keys.
 
 ---
 
-### ENV-VAR_RESOLUTION-REQ-0002
+### ENV_VAR-RESOLUTION-REQ-0002
 
 Name: First-found resolution
 
 **Links:**
 
-- [Intent](../../env-var-intent.md): module intent.
-- [ENV-VAR_RESOLUTION-ACC-0003](./env-var-resolution.acceptance.md#env-var_resolution-acc-0003)
-- [ENV-VAR_RESOLUTION-ACC-0004](./env-var-resolution.acceptance.md#env-var_resolution-acc-0004)
-- [ENV-VAR_RESOLUTION-ACC-0010](./env-var-resolution.acceptance.md#env-var_resolution-acc-0010)
+- [Intent](../../env_var-intent.md): module intent.
+- [ENV_VAR-RESOLUTION-ACC-0003](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0003)
+- [ENV_VAR-RESOLUTION-ACC-0004](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0004)
+- [ENV_VAR-RESOLUTION-ACC-0010](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0010)
 
 **Status**:
 
@@ -80,18 +80,18 @@ THE SOFTWARE SHALL resolve the declaration fallback.
 
 ---
 
-### ENV-VAR_RESOLUTION-REQ-0003
+### ENV_VAR-RESOLUTION-REQ-0003
 
 Name: Path merge resolution
 
 **Links:**
 
-- [Intent](../../env-var-intent.md): module intent.
-- [ENV-VAR_RESOLUTION-ACC-0005](./env-var-resolution.acceptance.md#env-var_resolution-acc-0005)
-- [ENV-VAR_RESOLUTION-ACC-0006](./env-var-resolution.acceptance.md#env-var_resolution-acc-0006)
-- [ENV-VAR_RESOLUTION-ACC-0014](./env-var-resolution.acceptance.md#env-var_resolution-acc-0014)
-- [ENV-VAR_RESOLUTION-ACC-0015](./env-var-resolution.acceptance.md#env-var_resolution-acc-0015)
-- [ENV-VAR_RESOLUTION-ACC-0021](./env-var-resolution.acceptance.md#env-var_resolution-acc-0021)
+- [Intent](../../env_var-intent.md): module intent.
+- [ENV_VAR-RESOLUTION-ACC-0005](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0005)
+- [ENV_VAR-RESOLUTION-ACC-0006](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0006)
+- [ENV_VAR-RESOLUTION-ACC-0014](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0014)
+- [ENV_VAR-RESOLUTION-ACC-0015](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0015)
+- [ENV_VAR-RESOLUTION-ACC-0021](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0021)
 
 **Status**:
 
@@ -116,20 +116,20 @@ THEN THE SOFTWARE SHALL resolve the declaration to an empty string.
 
 ---
 
-### ENV-VAR_RESOLUTION-REQ-0004
+### ENV_VAR-RESOLUTION-REQ-0004
 
 Name: Placeholder expansion
 
 **Links:**
 
-- [Intent](../../env-var-intent.md): module intent.
-- [ENV-VAR_RESOLUTION-ACC-0007](./env-var-resolution.acceptance.md#env-var_resolution-acc-0007)
-- [ENV-VAR_RESOLUTION-ACC-0008](./env-var-resolution.acceptance.md#env-var_resolution-acc-0008)
-- [ENV-VAR_RESOLUTION-ACC-0009](./env-var-resolution.acceptance.md#env-var_resolution-acc-0009)
-- [ENV-VAR_RESOLUTION-ACC-0016](./env-var-resolution.acceptance.md#env-var_resolution-acc-0016)
-- [ENV-VAR_RESOLUTION-ACC-0017](./env-var-resolution.acceptance.md#env-var_resolution-acc-0017)
-- [ENV-VAR_RESOLUTION-ACC-0018](./env-var-resolution.acceptance.md#env-var_resolution-acc-0018)
-- [ENV-VAR_RESOLUTION-ACC-0027](./env-var-resolution.acceptance.md#env-var_resolution-acc-0027)
+- [Intent](../../env_var-intent.md): module intent.
+- [ENV_VAR-RESOLUTION-ACC-0007](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0007)
+- [ENV_VAR-RESOLUTION-ACC-0008](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0008)
+- [ENV_VAR-RESOLUTION-ACC-0009](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0009)
+- [ENV_VAR-RESOLUTION-ACC-0016](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0016)
+- [ENV_VAR-RESOLUTION-ACC-0017](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0017)
+- [ENV_VAR-RESOLUTION-ACC-0018](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0018)
+- [ENV_VAR-RESOLUTION-ACC-0027](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0027)
 
 **Status**:
 
@@ -163,19 +163,19 @@ THEN THE SOFTWARE SHALL preserve it literally.
 
 ---
 
-### ENV-VAR_RESOLUTION-REQ-0005
+### ENV_VAR-RESOLUTION-REQ-0005
 
 Name: Source precedence and absence
 
 **Links:**
 
-- [Intent](../../env-var-intent.md): module intent.
-- [ENV-VAR_RESOLUTION-ACC-0011](./env-var-resolution.acceptance.md#env-var_resolution-acc-0011)
-- [ENV-VAR_RESOLUTION-ACC-0012](./env-var-resolution.acceptance.md#env-var_resolution-acc-0012)
-- [ENV-VAR_RESOLUTION-ACC-0013](./env-var-resolution.acceptance.md#env-var_resolution-acc-0013)
-- [ENV-VAR_RESOLUTION-ACC-0022](./env-var-resolution.acceptance.md#env-var_resolution-acc-0022)
-- [ENV-VAR_RESOLUTION-ACC-0023](./env-var-resolution.acceptance.md#env-var_resolution-acc-0023)
-- [ENV-VAR_RESOLUTION-ACC-0026](./env-var-resolution.acceptance.md#env-var_resolution-acc-0026)
+- [Intent](../../env_var-intent.md): module intent.
+- [ENV_VAR-RESOLUTION-ACC-0011](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0011)
+- [ENV_VAR-RESOLUTION-ACC-0012](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0012)
+- [ENV_VAR-RESOLUTION-ACC-0013](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0013)
+- [ENV_VAR-RESOLUTION-ACC-0022](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0022)
+- [ENV_VAR-RESOLUTION-ACC-0023](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0023)
+- [ENV_VAR-RESOLUTION-ACC-0026](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0026)
 
 **Status**:
 
@@ -204,15 +204,15 @@ THE SOFTWARE SHALL resolve the declaration to an empty string.
 
 ---
 
-### ENV-VAR_RESOLUTION-REQ-0006
+### ENV_VAR-RESOLUTION-REQ-0006
 
 Name: Pass-through resolution
 
 **Links:**
 
-- [Intent](../../env-var-intent.md): module intent.
-- [ENV-VAR_RESOLUTION-ACC-0019](./env-var-resolution.acceptance.md#env-var_resolution-acc-0019)
-- [ENV-VAR_RESOLUTION-ACC-0020](./env-var-resolution.acceptance.md#env-var_resolution-acc-0020)
+- [Intent](../../env_var-intent.md): module intent.
+- [ENV_VAR-RESOLUTION-ACC-0019](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0019)
+- [ENV_VAR-RESOLUTION-ACC-0020](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0020)
 
 **Status**:
 
@@ -229,14 +229,14 @@ THE SOFTWARE SHALL resolve the declaration to an empty string.
 
 ---
 
-### ENV-VAR_RESOLUTION-REQ-0007
+### ENV_VAR-RESOLUTION-REQ-0007
 
 Name: Resolved output order
 
 **Links:**
 
-- [Intent](../../env-var-intent.md): module intent.
-- [ENV-VAR_RESOLUTION-ACC-0024](./env-var-resolution.acceptance.md#env-var_resolution-acc-0024)
+- [Intent](../../env_var-intent.md): module intent.
+- [ENV_VAR-RESOLUTION-ACC-0024](./env_var-resolution.acceptance.md#ENV_VAR-RESOLUTION-ACC-0024)
 
 **Status**:
 
@@ -252,9 +252,9 @@ resolved value.
 
 ## Links
 
-- [Intent](../../env-var-intent.md): Why Kraf resolves and projects environment
+- [Intent](../../env_var-intent.md): Why Kraf resolves and projects environment
   variables through a declarative model.
-- [Acceptance](./env-var-resolution.acceptance.md): Acceptance scenarios for
+- [Acceptance](./env_var-resolution.acceptance.md): Acceptance scenarios for
   environment-variable resolution.
 - [README.md](../../../README.md): Declarative model, resolution, and projection
   of environment variables in Kraf.
