@@ -187,16 +187,21 @@ language: <language-code>
 
 #### Rules
 
-- A reference to the repository docs MUST be written `<repo>/docs`, including
-  the visible text of a link.
+- A reference to the repository docs MUST be written `<repo>/docs`.
 - A reference to the docs of a module MUST be written `<module>/docs`, with the
-  name of the module in place of `<module>`, including the visible text of a
-  link.
-- A link to a file in a docs folder MUST keep a relative path that resolves to
-  that file, while its visible text MUST be written with `<repo>/docs` or
-  `<module>/docs`, as this section requires.
-- A reference to a docs folder MUST NOT be written as `docs/` alone, because it
-  does not say which docs folder it means.
+  name of the module in place of `<module>`.
+- The target of a link MUST stay as it is written.
+- When the visible text of a link contains a relative path to the repository
+  docs, such as `./docs`, `docs/`, `/docs`, or `../docs`, that path MUST be
+  replaced by `<repo>/docs/`.
+- When the visible text of a link contains a relative path to the docs of a
+  module, that path MUST be replaced by `./<module>/docs/`.
+- The visible text of a link that contains no path to a docs folder MUST NOT be
+  changed by this section.
+- The rules of this section about the visible text of a link MUST NOT apply to
+  the text of a template, which MUST be kept as written under
+  [Templates](#templates), and MUST apply to the links of a document's content,
+  including its examples.
 - An entry `docs/` inside a tree of files MAY be written `docs/`, when its
   parent entry already names the folder that holds it.
 
