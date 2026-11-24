@@ -52,9 +52,10 @@ This section defines where module documents live. The tree of
 ├── README.md
 └── docs/
     ├── <module>-intent.md
-    └── <module>-<feature>/
-        ├── <module>-<feature>.spec.md
-        └── <module>-<feature>.acceptance.md
+    └── specs/
+        └── <module>-<feature>/
+            ├── <module>-<feature>.spec.md
+            └── <module>-<feature>.acceptance.md
 ```
 
 ### Rules
@@ -67,8 +68,8 @@ This section defines where module documents live. The tree of
 - The intent of a module MUST be `<module>/docs/<module>-intent.md`, directly in
   `<module>/docs/`, and MUST NOT be inside a feature folder.
 - The specification and the acceptance document of a feature MUST be in the
-  `<module>/docs/<module>-<feature>/` folder of that feature, and MUST NOT be
-  directly in `<module>/docs/`.
+  `<module>/docs/specs/<module>-<feature>/` folder of that feature, and MUST NOT
+  be directly in `<module>/docs/`.
 - Documentation MAY map one-to-one to source files, platform files, or tests.
 - A document SHOULD be created when a domain behavior needs a durable contract.
 
@@ -182,7 +183,7 @@ language: <language-code>
 ## Links
 
 - [README.md](path-to-nearest-index): <description of the nearest index>.
-- [<Feature>](./<module>-<feature>/<module>-<feature>.spec.md): <feature>
+- [<Feature>](./specs/<module>-<feature>/<module>-<feature>.spec.md): <feature>
   Specification.
 ```
 
@@ -295,7 +296,7 @@ Name: <Requirement name>
 **Links:**
 
 - [<MODULE>_<FEATURE>-ACC-0001](./<module>-<feature>.acceptance.md#<module>_<feature>-acc-0001)
-- [Intent](../<module>-intent.md)
+- [Intent](../../<module>-intent.md)
 
 **Status**:
 
@@ -309,7 +310,7 @@ THE SOFTWARE SHALL <system response>.
 
 ## Links
 
-- [Intent](../<module>-intent.md): <description of the intent>.
+- [Intent](../../<module>-intent.md): <description of the intent>.
 - [README.md](path-to-nearest-index): <description of the nearest index>.
 ````
 

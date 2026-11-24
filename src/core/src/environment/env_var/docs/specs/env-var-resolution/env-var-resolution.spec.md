@@ -14,7 +14,7 @@ language: en
 > - **Optional:** MAY, OPTIONAL
 >
 > See
-> [GENERAL_STANDARDS.md](../../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
+> [GENERAL_STANDARDS.md](../../../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
 
 </br>
 
@@ -34,7 +34,7 @@ Name: Declared import dependency collection
 
 **Links:**
 
-- [Intent](../env-var-intent.md): module intent.
+- [Intent](../../env-var-intent.md): module intent.
 - [ENV-VAR_RESOLUTION-ACC-0001](./env-var-resolution.acceptance.md#env-var_resolution-acc-0001)
 - [ENV-VAR_RESOLUTION-ACC-0002](./env-var-resolution.acceptance.md#env-var_resolution-acc-0002)
 - [ENV-VAR_RESOLUTION-ACC-0025](./env-var-resolution.acceptance.md#env-var_resolution-acc-0025)
@@ -59,7 +59,7 @@ Name: First-found resolution
 
 **Links:**
 
-- [Intent](../env-var-intent.md): module intent.
+- [Intent](../../env-var-intent.md): module intent.
 - [ENV-VAR_RESOLUTION-ACC-0003](./env-var-resolution.acceptance.md#env-var_resolution-acc-0003)
 - [ENV-VAR_RESOLUTION-ACC-0004](./env-var-resolution.acceptance.md#env-var_resolution-acc-0004)
 - [ENV-VAR_RESOLUTION-ACC-0010](./env-var-resolution.acceptance.md#env-var_resolution-acc-0010)
@@ -86,7 +86,7 @@ Name: Path merge resolution
 
 **Links:**
 
-- [Intent](../env-var-intent.md): module intent.
+- [Intent](../../env-var-intent.md): module intent.
 - [ENV-VAR_RESOLUTION-ACC-0005](./env-var-resolution.acceptance.md#env-var_resolution-acc-0005)
 - [ENV-VAR_RESOLUTION-ACC-0006](./env-var-resolution.acceptance.md#env-var_resolution-acc-0006)
 - [ENV-VAR_RESOLUTION-ACC-0014](./env-var-resolution.acceptance.md#env-var_resolution-acc-0014)
@@ -122,7 +122,7 @@ Name: Placeholder expansion
 
 **Links:**
 
-- [Intent](../env-var-intent.md): module intent.
+- [Intent](../../env-var-intent.md): module intent.
 - [ENV-VAR_RESOLUTION-ACC-0007](./env-var-resolution.acceptance.md#env-var_resolution-acc-0007)
 - [ENV-VAR_RESOLUTION-ACC-0008](./env-var-resolution.acceptance.md#env-var_resolution-acc-0008)
 - [ENV-VAR_RESOLUTION-ACC-0009](./env-var-resolution.acceptance.md#env-var_resolution-acc-0009)
@@ -169,7 +169,7 @@ Name: Source precedence and absence
 
 **Links:**
 
-- [Intent](../env-var-intent.md): module intent.
+- [Intent](../../env-var-intent.md): module intent.
 - [ENV-VAR_RESOLUTION-ACC-0011](./env-var-resolution.acceptance.md#env-var_resolution-acc-0011)
 - [ENV-VAR_RESOLUTION-ACC-0012](./env-var-resolution.acceptance.md#env-var_resolution-acc-0012)
 - [ENV-VAR_RESOLUTION-ACC-0013](./env-var-resolution.acceptance.md#env-var_resolution-acc-0013)
@@ -210,7 +210,7 @@ Name: Pass-through resolution
 
 **Links:**
 
-- [Intent](../env-var-intent.md): module intent.
+- [Intent](../../env-var-intent.md): module intent.
 - [ENV-VAR_RESOLUTION-ACC-0019](./env-var-resolution.acceptance.md#env-var_resolution-acc-0019)
 - [ENV-VAR_RESOLUTION-ACC-0020](./env-var-resolution.acceptance.md#env-var_resolution-acc-0020)
 
@@ -235,7 +235,7 @@ Name: Resolved output order
 
 **Links:**
 
-- [Intent](../env-var-intent.md): module intent.
+- [Intent](../../env-var-intent.md): module intent.
 - [ENV-VAR_RESOLUTION-ACC-0024](./env-var-resolution.acceptance.md#env-var_resolution-acc-0024)
 
 **Status**:
@@ -252,9 +252,9 @@ resolved value.
 
 ## Links
 
-- [Intent](../env-var-intent.md): Why Kraf resolves and projects environment
+- [Intent](../../env-var-intent.md): Why Kraf resolves and projects environment
   variables through a declarative model.
 - [Acceptance](./env-var-resolution.acceptance.md): Acceptance scenarios for
   environment-variable resolution.
-- [README.md](../../README.md): Declarative model, resolution, and projection of
-  environment variables in Kraf.
+- [README.md](../../../README.md): Declarative model, resolution, and projection
+  of environment variables in Kraf.

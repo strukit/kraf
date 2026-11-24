@@ -14,7 +14,7 @@ language: en
 > - **Optional:** MAY, OPTIONAL
 >
 > See
-> [GENERAL_STANDARDS.md](../../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
+> [GENERAL_STANDARDS.md](../../../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
 
 ## ENV-VAR_RESOLUTION-ACC-0001
 
@@ -759,5 +759,5 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 - [Specification](./env-var-resolution.spec.md): Requirements for resolving
   declared environment variables.
-- [README.md](../../README.md): Declarative model, resolution, and projection of
-  environment variables in Kraf.
+- [README.md](../../../README.md): Declarative model, resolution, and projection
+  of environment variables in Kraf.

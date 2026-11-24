@@ -14,7 +14,7 @@ language: en
 > - **Optional:** MAY, OPTIONAL
 >
 > See
-> [GENERAL_STANDARDS.md](../../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
+> [GENERAL_STANDARDS.md](../../../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
 
 </br>
 
@@ -34,7 +34,7 @@ Name: Static declaration
 
 **Links:**
 
-- [Intent](../env-var-intent.md): module intent.
+- [Intent](../../env-var-intent.md): module intent.
 - [ENV-VAR_DECLARATIONS-ACC-0001](./env-var-declarations.acceptance.md#env-var_declarations-acc-0001)
 - [ENV-VAR_DECLARATIONS-ACC-0002](./env-var-declarations.acceptance.md#env-var_declarations-acc-0002)
 - [ENV-VAR_DECLARATIONS-ACC-0007](./env-var-declarations.acceptance.md#env-var_declarations-acc-0007)
@@ -72,7 +72,7 @@ Name: Canonical key uniqueness
 
 **Links:**
 
-- [Intent](../env-var-intent.md): module intent.
+- [Intent](../../env-var-intent.md): module intent.
 - [ENV-VAR_DECLARATIONS-ACC-0003](./env-var-declarations.acceptance.md#env-var_declarations-acc-0003)
 
 **Status**:
@@ -95,7 +95,7 @@ Name: Mapping mode validity
 
 **Links:**
 
-- [Intent](../env-var-intent.md): module intent.
+- [Intent](../../env-var-intent.md): module intent.
 - [ENV-VAR_DECLARATIONS-ACC-0004](./env-var-declarations.acceptance.md#env-var_declarations-acc-0004)
 - [ENV-VAR_DECLARATIONS-ACC-0005](./env-var-declarations.acceptance.md#env-var_declarations-acc-0005)
 - [ENV-VAR_DECLARATIONS-ACC-0006](./env-var-declarations.acceptance.md#env-var_declarations-acc-0006)
@@ -118,9 +118,9 @@ declares a fallback.
 
 ## Links
 
-- [Intent](../env-var-intent.md): Why Kraf resolves and projects environment
+- [Intent](../../env-var-intent.md): Why Kraf resolves and projects environment
   variables through a declarative model.
 - [Acceptance](./env-var-declarations.acceptance.md): Acceptance scenarios for
   declaring environment variables.
-- [README.md](../../README.md): Declarative model, resolution, and projection of
-  environment variables in Kraf.
+- [README.md](../../../README.md): Declarative model, resolution, and projection
+  of environment variables in Kraf.

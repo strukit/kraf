@@ -14,7 +14,7 @@ language: en
 > - **Optional:** MAY, OPTIONAL
 >
 > See
-> [GENERAL_STANDARDS.md](../../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
+> [GENERAL_STANDARDS.md](../../../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
 
 </br>
 
@@ -34,7 +34,7 @@ Name: Declared value access
 
 **Links:**
 
-- [Intent](../env-var-intent.md): module intent.
+- [Intent](../../env-var-intent.md): module intent.
 - [ENV-VAR_ACCESS-ACC-0001](./env-var-access.acceptance.md#env-var_access-acc-0001)
 - [ENV-VAR_ACCESS-ACC-0002](./env-var-access.acceptance.md#env-var_access-acc-0002)
 - [ENV-VAR_ACCESS-ACC-0003](./env-var-access.acceptance.md#env-var_access-acc-0003)
@@ -56,9 +56,9 @@ THEN THE SOFTWARE SHALL reject the request.
 
 ## Links
 
-- [Intent](../env-var-intent.md): Why Kraf resolves and projects environment
+- [Intent](../../env-var-intent.md): Why Kraf resolves and projects environment
   variables through a declarative model.
 - [Acceptance](./env-var-access.acceptance.md): Acceptance scenarios for how
   modules and plugins access environment values.
-- [README.md](../../README.md): Declarative model, resolution, and projection of
-  environment variables in Kraf.
+- [README.md](../../../README.md): Declarative model, resolution, and projection
+  of environment variables in Kraf.
