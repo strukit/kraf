@@ -146,8 +146,8 @@ language: <language-code>
 - An item written as `type:code` MUST also match every code file, even when it
   has no metadata.
 - An index MAY declare a module by listing `module:<name>` in its `type`.
-- A `<name>` of a module MUST be written in lowercase kebab-case, and MUST be
-  declared by one index only.
+- A `<name>` of a module MUST be written in lowercase snake_case, MUST NOT use
+  `-`, and MUST be declared by one index only.
 - A document other than an index MUST NOT list `module:<name>` in its `type`.
 - An item written as `module:<name>` MUST match every file of the module
   `<name>`.

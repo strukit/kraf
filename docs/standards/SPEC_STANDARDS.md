@@ -64,11 +64,8 @@ This section defines where module documents live. The tree of
   `<repo>/docs`.
 - The name of a module MUST use `_` and MUST NOT use `-` (e.g. `env_var`, not
   `env-var`).
-- A module folder MUST be named after its module, with each `-` of the name
-  replaced by `_` (e.g. `my_module/` for the module `my-module`).
-- The `<module>/` folder of the tree in [Docs layout](#docs-layout) MUST be read
-  as the module folder named as the preceding rule states, and every other
-  `<module>` of that tree MUST be read as the name of the module, with its `-`.
+- A module folder MUST be named exactly as its module (e.g. `env_var/` for the
+  module `env_var`).
 - Every module folder MUST have a `README.md` that orients a reader before they
   open its `<module>/docs/`, and that declares the module `<module>` by listing
   `module:<module>` in its `type`.
@@ -92,7 +89,8 @@ This section defines the identifiers of requirements and acceptance scenarios.
 ### Terms
 
 - **Identifier part**: the name of a module or of a feature, in uppercase, with
-  each `-` of the name replaced by `_`, written `<MODULE>` or `<FEATURE>`.
+  each `-` of the name of a feature replaced by `_`, written `<MODULE>` or
+  `<FEATURE>`.
 
 ### Rules
 
@@ -101,8 +99,8 @@ This section defines the identifiers of requirements and acceptance scenarios.
   separated by `-`, as the format of [Docs identifiers](#docs-identifiers)
   shows.
 - An identifier MUST use `-` only to separate its parts, and MUST use `_` in
-  place of each `-` of the name of a module or a feature (e.g. `MY_MODULE` for
-  the module `my-module`).
+  place of each `-` of the name of a feature (e.g. `MY_FEATURE` for the feature
+  `my-feature`).
 - The anchor of an identifier in a link MUST be written in uppercase, as the
   identifier itself (e.g. `#ENV_VAR-HOST-REQ-0004`).
 - The identifier of a Gherkin `Feature` MUST use the same module and feature as
