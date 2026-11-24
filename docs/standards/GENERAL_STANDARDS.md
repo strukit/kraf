@@ -200,8 +200,7 @@ language: <language-code>
   changed by this section.
 - The rules of this section about the visible text of a link MUST NOT apply to
   the text of a template, which MUST be kept as written under
-  [Templates](#templates), and MUST apply to the links of a document's content,
-  including its examples.
+  [Templates](#templates), and MUST NOT apply to the examples of a document.
 - An entry `docs/` inside a tree of files MAY be written `docs/`, when its
   parent entry already names the folder that holds it.
 
