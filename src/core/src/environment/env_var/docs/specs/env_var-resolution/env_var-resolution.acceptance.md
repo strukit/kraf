@@ -1,8 +1,8 @@
 ---
 description: Acceptance scenarios for environment-variable resolution.
-tags: [environment, env-var, acceptance, resolution, gherkin]
+tags: [environment, env_var, acceptance, resolution, gherkin]
 type: ["acceptance"]
-scope: ["module:env-var"]
+scope: ["module:env_var"]
 language: en
 ---
 
@@ -16,13 +16,13 @@ language: en
 > See
 > [GENERAL_STANDARDS.md](../../../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
 
-## ENV-VAR_RESOLUTION-ACC-0001
+## ENV_VAR-RESOLUTION-ACC-0001
 
 Name: Import aliases are collected and deduplicated
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0001](./env-var-resolution.spec.md#env-var_resolution-req-0001)
+- [ENV_VAR-RESOLUTION-REQ-0001](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0001)
 
 **Status**:
 
@@ -30,11 +30,11 @@ Name: Import aliases are collected and deduplicated
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0001 — Declared import dependency collection
+  Rule: ENV_VAR-RESOLUTION-REQ-0001 — Declared import dependency collection
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0001 — Import aliases are collected and deduplicated
+    Scenario: ENV_VAR-RESOLUTION-ACC-0001 — Import aliases are collected and deduplicated
       Given multiple declarations import the alias "SHELL"
       When the software collects import dependencies
       Then "SHELL" is collected once
@@ -42,13 +42,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0002
+## ENV_VAR-RESOLUTION-ACC-0002
 
 Name: Fallback variable reference is not collected
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0001](./env-var-resolution.spec.md#env-var_resolution-req-0001)
+- [ENV_VAR-RESOLUTION-REQ-0001](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0001)
 
 **Status**:
 
@@ -56,11 +56,11 @@ Name: Fallback variable reference is not collected
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0001 — Declared import dependency collection
+  Rule: ENV_VAR-RESOLUTION-REQ-0001 — Declared import dependency collection
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0002 — Fallback variable reference is not collected
+    Scenario: ENV_VAR-RESOLUTION-ACC-0002 — Fallback variable reference is not collected
       Given a declaration fallback references "$BASE_DIR"
       And no declaration imports "BASE_DIR"
       When the software collects import dependencies
@@ -69,13 +69,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0003
+## ENV_VAR-RESOLUTION-ACC-0003
 
 Name: First available import alias is selected
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0002](./env-var-resolution.spec.md#env-var_resolution-req-0002)
+- [ENV_VAR-RESOLUTION-REQ-0002](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0002)
 
 **Status**:
 
@@ -83,11 +83,11 @@ Name: First available import alias is selected
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0002 — First-found resolution
+  Rule: ENV_VAR-RESOLUTION-REQ-0002 — First-found resolution
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0003 — First available import alias is selected
+    Scenario: ENV_VAR-RESOLUTION-ACC-0003 — First available import alias is selected
       Given a declaration imports "USER_LANGUAGE" before "LANG"
       And both aliases provide a value
       When the software resolves the declaration
@@ -96,13 +96,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0004
+## ENV_VAR-RESOLUTION-ACC-0004
 
 Name: Fallback is used when no import alias has a value
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0002](./env-var-resolution.spec.md#env-var_resolution-req-0002)
+- [ENV_VAR-RESOLUTION-REQ-0002](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0002)
 
 **Status**:
 
@@ -110,11 +110,11 @@ Name: Fallback is used when no import alias has a value
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0002 — First-found resolution
+  Rule: ENV_VAR-RESOLUTION-REQ-0002 — First-found resolution
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0004 — Fallback is used when no import alias has a value
+    Scenario: ENV_VAR-RESOLUTION-ACC-0004 — Fallback is used when no import alias has a value
       Given no import alias provides a value
       And the declaration fallback is "en_US.UTF-8"
       When the software resolves the declaration
@@ -123,13 +123,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0005
+## ENV_VAR-RESOLUTION-ACC-0005
 
 Name: Non-empty path aliases are merged in declaration order
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0003](./env-var-resolution.spec.md#env-var_resolution-req-0003)
+- [ENV_VAR-RESOLUTION-REQ-0003](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0003)
 
 **Status**:
 
@@ -137,11 +137,11 @@ Name: Non-empty path aliases are merged in declaration order
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0003 — Path merge resolution
+  Rule: ENV_VAR-RESOLUTION-REQ-0003 — Path merge resolution
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0005 — Non-empty path aliases are merged in declaration order
+    Scenario: ENV_VAR-RESOLUTION-ACC-0005 — Non-empty path aliases are merged in declaration order
       Given a declaration imports "BIN_A" before "BIN_B"
       And "BIN_A" provides "/custom/bin"
       And "BIN_B" provides "/usr/bin"
@@ -151,13 +151,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0006
+## ENV_VAR-RESOLUTION-ACC-0006
 
 Name: Merge fallback is used when no path is available
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0003](./env-var-resolution.spec.md#env-var_resolution-req-0003)
+- [ENV_VAR-RESOLUTION-REQ-0003](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0003)
 
 **Status**:
 
@@ -165,11 +165,11 @@ Name: Merge fallback is used when no path is available
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0003 — Path merge resolution
+  Rule: ENV_VAR-RESOLUTION-REQ-0003 — Path merge resolution
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0006 — Merge fallback is used when no path is available
+    Scenario: ENV_VAR-RESOLUTION-ACC-0006 — Merge fallback is used when no path is available
       Given no import alias provides a non-empty path value
       And the declaration fallback is "/usr/share/man"
       When the software resolves the declaration
@@ -178,13 +178,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0007
+## ENV_VAR-RESOLUTION-ACC-0007
 
 Name: Tilde fallback expands from resolved home
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0004](./env-var-resolution.spec.md#env-var_resolution-req-0004)
+- [ENV_VAR-RESOLUTION-REQ-0004](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0004)
 
 **Status**:
 
@@ -192,11 +192,11 @@ Name: Tilde fallback expands from resolved home
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
+  Rule: ENV_VAR-RESOLUTION-REQ-0004 — Placeholder expansion
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0007 — Tilde fallback expands from resolved home
+    Scenario: ENV_VAR-RESOLUTION-ACC-0007 — Tilde fallback expands from resolved home
       Given "HOME_DIR" has the provided value "/workspace"
       And a declaration fallback is "~/.cache"
       When the software resolves the declaration
@@ -205,13 +205,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0008
+## ENV_VAR-RESOLUTION-ACC-0008
 
 Name: Dollar fallback expands from a provided value
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0004](./env-var-resolution.spec.md#env-var_resolution-req-0004)
+- [ENV_VAR-RESOLUTION-REQ-0004](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0004)
 
 **Status**:
 
@@ -219,11 +219,11 @@ Name: Dollar fallback expands from a provided value
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
+  Rule: ENV_VAR-RESOLUTION-REQ-0004 — Placeholder expansion
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0008 — Dollar fallback expands from a provided value
+    Scenario: ENV_VAR-RESOLUTION-ACC-0008 — Dollar fallback expands from a provided value
       Given "BASE_DIR" has the provided value "/workspace"
       And a declaration fallback is "$BASE_DIR/.cache"
       When the software resolves the declaration
@@ -232,13 +232,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0009
+## ENV_VAR-RESOLUTION-ACC-0009
 
 Name: Unresolved placeholder remains literal
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0004](./env-var-resolution.spec.md#env-var_resolution-req-0004)
+- [ENV_VAR-RESOLUTION-REQ-0004](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0004)
 
 **Status**:
 
@@ -246,11 +246,11 @@ Name: Unresolved placeholder remains literal
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
+  Rule: ENV_VAR-RESOLUTION-REQ-0004 — Placeholder expansion
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0009 — Unresolved placeholder remains literal
+    Scenario: ENV_VAR-RESOLUTION-ACC-0009 — Unresolved placeholder remains literal
       Given a declaration fallback is "$UNKNOWN/.cache"
       And "UNKNOWN" has no resolved value
       When the software resolves the declaration
@@ -259,13 +259,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0010
+## ENV_VAR-RESOLUTION-ACC-0010
 
 Name: Empty first-found value is selected
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0002](./env-var-resolution.spec.md#env-var_resolution-req-0002)
+- [ENV_VAR-RESOLUTION-REQ-0002](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0002)
 
 **Status**:
 
@@ -273,11 +273,11 @@ Name: Empty first-found value is selected
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0002 — First-found resolution
+  Rule: ENV_VAR-RESOLUTION-REQ-0002 — First-found resolution
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0010 — Empty first-found value is selected
+    Scenario: ENV_VAR-RESOLUTION-ACC-0010 — Empty first-found value is selected
       Given a declaration imports "PRIMARY" before "SECONDARY"
       And "PRIMARY" has the collected value ""
       And "SECONDARY" has the collected value "fallback-value"
@@ -287,13 +287,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0011
+## ENV_VAR-RESOLUTION-ACC-0011
 
 Name: Provided canonical value precedes fallback
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0005](./env-var-resolution.spec.md#env-var_resolution-req-0005)
+- [ENV_VAR-RESOLUTION-REQ-0005](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0005)
 
 **Status**:
 
@@ -301,11 +301,11 @@ Name: Provided canonical value precedes fallback
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0005 — Source precedence and absence
+  Rule: ENV_VAR-RESOLUTION-REQ-0005 — Source precedence and absence
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0011 — Provided canonical value precedes fallback
+    Scenario: ENV_VAR-RESOLUTION-ACC-0011 — Provided canonical value precedes fallback
       Given a provided declaration has no import aliases
       And its canonical key has the provided value "/custom/tmp"
       And its fallback is "/default/tmp"
@@ -315,13 +315,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0012
+## ENV_VAR-RESOLUTION-ACC-0012
 
 Name: Provided fallback is used when canonical value is absent
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0005](./env-var-resolution.spec.md#env-var_resolution-req-0005)
+- [ENV_VAR-RESOLUTION-REQ-0005](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0005)
 
 **Status**:
 
@@ -329,11 +329,11 @@ Name: Provided fallback is used when canonical value is absent
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0005 — Source precedence and absence
+  Rule: ENV_VAR-RESOLUTION-REQ-0005 — Source precedence and absence
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0012 — Provided fallback is used when canonical value is absent
+    Scenario: ENV_VAR-RESOLUTION-ACC-0012 — Provided fallback is used when canonical value is absent
       Given a provided declaration has no import aliases
       And its canonical key has no provided value
       And its fallback is "/default/tmp"
@@ -343,13 +343,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0013
+## ENV_VAR-RESOLUTION-ACC-0013
 
 Name: Host declaration without aliases ignores its canonical collected value
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0005](./env-var-resolution.spec.md#env-var_resolution-req-0005)
+- [ENV_VAR-RESOLUTION-REQ-0005](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0005)
 
 **Status**:
 
@@ -357,11 +357,11 @@ Name: Host declaration without aliases ignores its canonical collected value
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0005 — Source precedence and absence
+  Rule: ENV_VAR-RESOLUTION-REQ-0005 — Source precedence and absence
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0013 — Host declaration without aliases ignores its canonical collected value
+    Scenario: ENV_VAR-RESOLUTION-ACC-0013 — Host declaration without aliases ignores its canonical collected value
       Given a host declaration has no import aliases
       And its canonical key has the collected value "Linux"
       And its fallback is "Darwin"
@@ -371,13 +371,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0014
+## ENV_VAR-RESOLUTION-ACC-0014
 
 Name: Empty path values are ignored during merge
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0003](./env-var-resolution.spec.md#env-var_resolution-req-0003)
+- [ENV_VAR-RESOLUTION-REQ-0003](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0003)
 
 **Status**:
 
@@ -385,11 +385,11 @@ Name: Empty path values are ignored during merge
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0003 — Path merge resolution
+  Rule: ENV_VAR-RESOLUTION-REQ-0003 — Path merge resolution
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0014 — Empty path values are ignored during merge
+    Scenario: ENV_VAR-RESOLUTION-ACC-0014 — Empty path values are ignored during merge
       Given a merge declaration imports "BIN_A" before "BIN_B"
       And "BIN_A" has the collected value ""
       And "BIN_B" has the collected value "/usr/bin"
@@ -399,13 +399,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0015
+## ENV_VAR-RESOLUTION-ACC-0015
 
 Name: Merged paths use the current platform separator
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0003](./env-var-resolution.spec.md#env-var_resolution-req-0003)
+- [ENV_VAR-RESOLUTION-REQ-0003](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0003)
 
 **Status**:
 
@@ -413,11 +413,11 @@ Name: Merged paths use the current platform separator
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0003 — Path merge resolution
+  Rule: ENV_VAR-RESOLUTION-REQ-0003 — Path merge resolution
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0015 — Merged paths use the current platform separator
+    Scenario: ENV_VAR-RESOLUTION-ACC-0015 — Merged paths use the current platform separator
       Given a merge declaration has two non-empty path values
       When the software resolves the declaration
       Then its paths are joined with the current platform path separator
@@ -426,13 +426,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0016
+## ENV_VAR-RESOLUTION-ACC-0016
 
 Name: Tilde expansion takes precedence and replaces only the first tilde
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0004](./env-var-resolution.spec.md#env-var_resolution-req-0004)
+- [ENV_VAR-RESOLUTION-REQ-0004](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0004)
 
 **Status**:
 
@@ -440,11 +440,11 @@ Name: Tilde expansion takes precedence and replaces only the first tilde
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
+  Rule: ENV_VAR-RESOLUTION-REQ-0004 — Placeholder expansion
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0016 — Tilde expansion takes precedence and replaces only the first tilde
+    Scenario: ENV_VAR-RESOLUTION-ACC-0016 — Tilde expansion takes precedence and replaces only the first tilde
       Given "HOME_DIR" has the provided value "/workspace"
       And "BASE_DIR" has the provided value "/base"
       And a declaration fallback is "~/$BASE_DIR/~"
@@ -454,13 +454,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0017
+## ENV_VAR-RESOLUTION-ACC-0017
 
 Name: Invalid dollar syntax remains literal
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0004](./env-var-resolution.spec.md#env-var_resolution-req-0004)
+- [ENV_VAR-RESOLUTION-REQ-0004](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0004)
 
 **Status**:
 
@@ -468,11 +468,11 @@ Name: Invalid dollar syntax remains literal
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
+  Rule: ENV_VAR-RESOLUTION-REQ-0004 — Placeholder expansion
 
-    Scenario Outline: ENV-VAR_RESOLUTION-ACC-0017 — Invalid dollar syntax remains literal
+    Scenario Outline: ENV_VAR-RESOLUTION-ACC-0017 — Invalid dollar syntax remains literal
       Given a declaration fallback is "<fallback>"
       When the software resolves the declaration
       Then the declaration resolves to "<fallback>"
@@ -486,13 +486,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0018
+## ENV_VAR-RESOLUTION-ACC-0018
 
 Name: Dollar expansion replaces only the first placeholder
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0004](./env-var-resolution.spec.md#env-var_resolution-req-0004)
+- [ENV_VAR-RESOLUTION-REQ-0004](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0004)
 
 **Status**:
 
@@ -500,11 +500,11 @@ Name: Dollar expansion replaces only the first placeholder
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
+  Rule: ENV_VAR-RESOLUTION-REQ-0004 — Placeholder expansion
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0018 — Dollar expansion replaces only the first placeholder
+    Scenario: ENV_VAR-RESOLUTION-ACC-0018 — Dollar expansion replaces only the first placeholder
       Given "BASE_DIR" has the provided value "/workspace"
       And a declaration fallback is "$BASE_DIR/$BASE_DIR"
       When the software resolves the declaration
@@ -513,13 +513,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0019
+## ENV_VAR-RESOLUTION-ACC-0019
 
 Name: Pass-through forwards the first available value
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0006](./env-var-resolution.spec.md#env-var_resolution-req-0006)
+- [ENV_VAR-RESOLUTION-REQ-0006](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0006)
 
 **Status**:
 
@@ -527,11 +527,11 @@ Name: Pass-through forwards the first available value
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0006 — Pass-through resolution
+  Rule: ENV_VAR-RESOLUTION-REQ-0006 — Pass-through resolution
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0019 — Pass-through forwards the first available value
+    Scenario: ENV_VAR-RESOLUTION-ACC-0019 — Pass-through forwards the first available value
       Given a pass-through declaration imports "SystemRoot"
       And "SystemRoot" has the collected value "C:\\Windows"
       When the software resolves the declaration
@@ -540,13 +540,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0020
+## ENV_VAR-RESOLUTION-ACC-0020
 
 Name: Pass-through absence resolves to an empty value
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0006](./env-var-resolution.spec.md#env-var_resolution-req-0006)
+- [ENV_VAR-RESOLUTION-REQ-0006](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0006)
 
 **Status**:
 
@@ -554,11 +554,11 @@ Name: Pass-through absence resolves to an empty value
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0006 — Pass-through resolution
+  Rule: ENV_VAR-RESOLUTION-REQ-0006 — Pass-through resolution
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0020 — Pass-through absence resolves to an empty value
+    Scenario: ENV_VAR-RESOLUTION-ACC-0020 — Pass-through absence resolves to an empty value
       Given a pass-through declaration imports "SystemRoot"
       And "SystemRoot" has no collected value
       When the software resolves the declaration
@@ -567,13 +567,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0021
+## ENV_VAR-RESOLUTION-ACC-0021
 
 Name: Unjoinable merged paths resolve to an empty value
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0003](./env-var-resolution.spec.md#env-var_resolution-req-0003)
+- [ENV_VAR-RESOLUTION-REQ-0003](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0003)
 
 **Status**:
 
@@ -581,11 +581,11 @@ Name: Unjoinable merged paths resolve to an empty value
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0003 — Path merge resolution
+  Rule: ENV_VAR-RESOLUTION-REQ-0003 — Path merge resolution
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0021 — Unjoinable merged paths resolve to an empty value
+    Scenario: ENV_VAR-RESOLUTION-ACC-0021 — Unjoinable merged paths resolve to an empty value
       Given a merge declaration has paths that cannot be joined for the current platform
       When the software resolves the declaration
       Then the declaration resolves to ""
@@ -593,13 +593,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0022
+## ENV_VAR-RESOLUTION-ACC-0022
 
 Name: Missing source and fallback resolve to an empty value
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0005](./env-var-resolution.spec.md#env-var_resolution-req-0005)
+- [ENV_VAR-RESOLUTION-REQ-0005](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0005)
 
 **Status**:
 
@@ -607,11 +607,11 @@ Name: Missing source and fallback resolve to an empty value
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0005 — Source precedence and absence
+  Rule: ENV_VAR-RESOLUTION-REQ-0005 — Source precedence and absence
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0022 — Missing source and fallback resolve to an empty value
+    Scenario: ENV_VAR-RESOLUTION-ACC-0022 — Missing source and fallback resolve to an empty value
       Given a host declaration has no import aliases
       And the declaration has no fallback
       When the software resolves the declaration
@@ -620,13 +620,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0023
+## ENV_VAR-RESOLUTION-ACC-0023
 
 Name: Empty provided canonical value precedes fallback
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0005](./env-var-resolution.spec.md#env-var_resolution-req-0005)
+- [ENV_VAR-RESOLUTION-REQ-0005](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0005)
 
 **Status**:
 
@@ -634,27 +634,27 @@ Name: Empty provided canonical value precedes fallback
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0005 — Source precedence and absence
+  Rule: ENV_VAR-RESOLUTION-REQ-0005 — Source precedence and absence
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0023 — Empty provided canonical value precedes fallback
-      Given a provided declaration "EXAMPLE_KEY" has no import aliases
-      And its fallback is "/default/example"
-      And "EXAMPLE_KEY" has the provided value ""
+    Scenario: ENV_VAR-RESOLUTION-ACC-0023 — Empty provided canonical value precedes fallback
+      Given a provided declaration has no import aliases
+      And its canonical key has the collected value ""
+      And its fallback is "/default/tmp"
       When the software resolves the declaration
       Then the declaration resolves to ""
 ```
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0024
+## ENV_VAR-RESOLUTION-ACC-0024
 
 Name: Resolved output holds only the canonical key
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0007](./env-var-resolution.spec.md#env-var_resolution-req-0007)
+- [ENV_VAR-RESOLUTION-REQ-0007](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0007)
 
 **Status**:
 
@@ -662,11 +662,11 @@ Name: Resolved output holds only the canonical key
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0007 — Resolved output order
+  Rule: ENV_VAR-RESOLUTION-REQ-0007 — Resolved output order
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0024 — Resolved output holds only the canonical key
+    Scenario: ENV_VAR-RESOLUTION-ACC-0024 — Resolved output holds only the canonical key
       Given "HOME_TEMP" resolves to "/workspace/.tmp"
       And its export aliases are "TEMP", "TMPDIR", and "TMP"
       When the software resolves the declaration
@@ -676,13 +676,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0025
+## ENV_VAR-RESOLUTION-ACC-0025
 
 Name: Collected keys are deduplicated and sorted
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0001](./env-var-resolution.spec.md#env-var_resolution-req-0001)
+- [ENV_VAR-RESOLUTION-REQ-0001](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0001)
 
 **Status**:
 
@@ -690,11 +690,11 @@ Name: Collected keys are deduplicated and sorted
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0001 — Declared import dependency collection
+  Rule: ENV_VAR-RESOLUTION-REQ-0001 — Declared import dependency collection
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0025 — Collected keys are deduplicated and sorted
+    Scenario: ENV_VAR-RESOLUTION-ACC-0025 — Collected keys are deduplicated and sorted
       Given active mappings declare the import aliases "SHELL", "EDITOR", and "SHELL"
       When the software collects import dependencies
       Then the collected import keys are "EDITOR" and "SHELL" in that order
@@ -702,13 +702,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0026
+## ENV_VAR-RESOLUTION-ACC-0026
 
 Name: Provided value is not read from collected host values
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0005](./env-var-resolution.spec.md#env-var_resolution-req-0005)
+- [ENV_VAR-RESOLUTION-REQ-0005](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0005)
 
 **Status**:
 
@@ -716,11 +716,11 @@ Name: Provided value is not read from collected host values
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0005 — Source precedence and absence
+  Rule: ENV_VAR-RESOLUTION-REQ-0005 — Source precedence and absence
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0026 — Provided value is not read from collected host values
+    Scenario: ENV_VAR-RESOLUTION-ACC-0026 — Provided value is not read from collected host values
       Given a provided declaration "HOME_DIR" has no import aliases
       And "HOME_DIR" has the collected value "/Users/host"
       And "HOME_DIR" has the provided value "/Users/host/.kraf/workspace/session/1"
@@ -730,13 +730,13 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ---
 
-## ENV-VAR_RESOLUTION-ACC-0027
+## ENV_VAR-RESOLUTION-ACC-0027
 
 Name: Dollar export alias and tilde use the same provided home
 
 **Links:**
 
-- [ENV-VAR_RESOLUTION-REQ-0004](./env-var-resolution.spec.md#env-var_resolution-req-0004)
+- [ENV_VAR-RESOLUTION-REQ-0004](./env_var-resolution.spec.md#ENV_VAR-RESOLUTION-REQ-0004)
 
 **Status**:
 
@@ -744,11 +744,11 @@ Name: Dollar export alias and tilde use the same provided home
 - Verification status: Meets
 
 ```gherkin
-Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
+Feature: ENV_VAR-RESOLUTION-FEAT-0001 — Environment variable resolution
 
-  Rule: ENV-VAR_RESOLUTION-REQ-0004 — Placeholder expansion
+  Rule: ENV_VAR-RESOLUTION-REQ-0004 — Placeholder expansion
 
-    Scenario: ENV-VAR_RESOLUTION-ACC-0027 — Dollar export alias and tilde use the same provided home
+    Scenario: ENV_VAR-RESOLUTION-ACC-0027 — Dollar export alias and tilde use the same provided home
       Given "SESSION_HOME" has the collected value "/host"
       And "HOME_DIR" exports "SESSION_HOME" and has the provided value "/workspace"
       When the software resolves the fallbacks "$SESSION_HOME/.cache" and "~/.cache"
@@ -757,7 +757,7 @@ Feature: ENV-VAR_RESOLUTION-FEAT-0001 — Environment variable resolution
 
 ## Links
 
-- [Specification](./env-var-resolution.spec.md): Requirements for resolving
+- [Specification](./env_var-resolution.spec.md): Requirements for resolving
   declared environment variables.
 - [README.md](../../../README.md): Declarative model, resolution, and projection
   of environment variables in Kraf.

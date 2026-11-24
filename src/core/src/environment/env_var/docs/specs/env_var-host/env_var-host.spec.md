@@ -1,8 +1,8 @@
 ---
 description: Requirements for platform-specific environment-variable mappings.
-tags: [environment, env-var, specification, spec, host, platform]
+tags: [environment, env_var, specification, spec, host, platform]
 type: ["spec"]
-scope: ["module:env-var"]
+scope: ["module:env_var"]
 language: en
 ---
 
@@ -28,16 +28,16 @@ language: en
 
 ## Requirements
 
-### ENV-VAR_HOST-REQ-0001
+### ENV_VAR-HOST-REQ-0001
 
 Name: Supported-platform mapping completeness
 
 **Links:**
 
-- [Intent](../../env-var-intent.md): module intent.
-- [ENV-VAR_HOST-ACC-0001](./env-var-host.acceptance.md#env-var_host-acc-0001)
-- [ENV-VAR_HOST-ACC-0002](./env-var-host.acceptance.md#env-var_host-acc-0002)
-- [ENV-VAR_HOST-ACC-0003](./env-var-host.acceptance.md#env-var_host-acc-0003)
+- [Intent](../../env_var-intent.md): module intent.
+- [ENV_VAR-HOST-ACC-0001](./env_var-host.acceptance.md#ENV_VAR-HOST-ACC-0001)
+- [ENV_VAR-HOST-ACC-0002](./env_var-host.acceptance.md#ENV_VAR-HOST-ACC-0002)
+- [ENV_VAR-HOST-ACC-0003](./env_var-host.acceptance.md#ENV_VAR-HOST-ACC-0003)
 
 **Status**:
 
@@ -51,14 +51,14 @@ every supported platform mapping.
 
 ---
 
-### ENV-VAR_HOST-REQ-0002
+### ENV_VAR-HOST-REQ-0002
 
 Name: Session-owned directory sources
 
 **Links:**
 
-- [Intent](../../env-var-intent.md): module intent.
-- [ENV-VAR_HOST-ACC-0004](./env-var-host.acceptance.md#env-var_host-acc-0004)
+- [Intent](../../env_var-intent.md): module intent.
+- [ENV_VAR-HOST-ACC-0004](./env_var-host.acceptance.md#ENV_VAR-HOST-ACC-0004)
 
 **Status**:
 
@@ -72,14 +72,14 @@ provided values rather than from values imported from the host.
 
 ---
 
-### ENV-VAR_HOST-REQ-0003
+### ENV_VAR-HOST-REQ-0003
 
 Name: Host home import
 
 **Links:**
 
-- [Intent](../../env-var-intent.md): module intent.
-- [ENV-VAR_HOST-ACC-0005](./env-var-host.acceptance.md#env-var_host-acc-0005)
+- [Intent](../../env_var-intent.md): module intent.
+- [ENV_VAR-HOST-ACC-0005](./env_var-host.acceptance.md#ENV_VAR-HOST-ACC-0005)
 
 **Status**:
 
@@ -96,15 +96,15 @@ THE SOFTWARE SHALL NOT export the `HOST_HOME` declaration to a managed process.
 
 ---
 
-### ENV-VAR_HOST-REQ-0004
+### ENV_VAR-HOST-REQ-0004
 
 Name: Native export aliases only
 
 **Links:**
 
-- [Intent](../../env-var-intent.md): module intent.
-- [ENV-VAR_HOST-ACC-0006](./env-var-host.acceptance.md#env-var_host-acc-0006)
-- [ENV-VAR_HOST-ACC-0010](./env-var-host.acceptance.md#env-var_host-acc-0010)
+- [Intent](../../env_var-intent.md): module intent.
+- [ENV_VAR-HOST-ACC-0006](./env_var-host.acceptance.md#ENV_VAR-HOST-ACC-0006)
+- [ENV_VAR-HOST-ACC-0010](./env_var-host.acceptance.md#ENV_VAR-HOST-ACC-0010)
 
 **Status**:
 
@@ -122,15 +122,15 @@ mode.
 
 ---
 
-### ENV-VAR_HOST-REQ-0005
+### ENV_VAR-HOST-REQ-0005
 
 Name: Host path lists and isolated session path
 
 **Links:**
 
-- [Intent](../../env-var-intent.md): module intent.
-- [ENV-VAR_HOST-ACC-0007](./env-var-host.acceptance.md#env-var_host-acc-0007)
-- [ENV-VAR_HOST-ACC-0008](./env-var-host.acceptance.md#env-var_host-acc-0008)
+- [Intent](../../env_var-intent.md): module intent.
+- [ENV_VAR-HOST-ACC-0007](./env_var-host.acceptance.md#ENV_VAR-HOST-ACC-0007)
+- [ENV_VAR-HOST-ACC-0008](./env_var-host.acceptance.md#ENV_VAR-HOST-ACC-0008)
 
 **Status**:
 
@@ -152,14 +152,14 @@ fallback, so that a value the host does not define is not projected.
 
 ---
 
-### ENV-VAR_HOST-REQ-0006
+### ENV_VAR-HOST-REQ-0006
 
 Name: Windows system variables
 
 **Links:**
 
-- [Intent](../../env-var-intent.md): module intent.
-- [ENV-VAR_HOST-ACC-0009](./env-var-host.acceptance.md#env-var_host-acc-0009)
+- [Intent](../../env_var-intent.md): module intent.
+- [ENV_VAR-HOST-ACC-0009](./env_var-host.acceptance.md#ENV_VAR-HOST-ACC-0009)
 
 **Status**:
 
@@ -173,9 +173,9 @@ pass-through declarations in the Windows platform mapping only.
 
 ## Links
 
-- [Intent](../../env-var-intent.md): Why Kraf resolves and projects environment
+- [Intent](../../env_var-intent.md): Why Kraf resolves and projects environment
   variables through a declarative model.
-- [Acceptance](./env-var-host.acceptance.md): Acceptance scenarios for
+- [Acceptance](./env_var-host.acceptance.md): Acceptance scenarios for
   platform-specific environment-variable mappings.
 - [README.md](../../../README.md): Declarative model, resolution, and projection
   of environment variables in Kraf.

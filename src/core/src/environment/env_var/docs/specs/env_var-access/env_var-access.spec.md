@@ -1,8 +1,8 @@
 ---
 description: Requirements for how modules and plugins access resolved environment values.
-tags: [environment, env-var, specification, spec, access, security]
+tags: [environment, env_var, specification, spec, access, security]
 type: ["spec"]
-scope: ["module:env-var"]
+scope: ["module:env_var"]
 language: en
 ---
 
@@ -28,16 +28,16 @@ language: en
 
 ## Requirements
 
-### ENV-VAR_ACCESS-REQ-0001
+### ENV_VAR-ACCESS-REQ-0001
 
 Name: Declared value access
 
 **Links:**
 
-- [Intent](../../env-var-intent.md): module intent.
-- [ENV-VAR_ACCESS-ACC-0001](./env-var-access.acceptance.md#env-var_access-acc-0001)
-- [ENV-VAR_ACCESS-ACC-0002](./env-var-access.acceptance.md#env-var_access-acc-0002)
-- [ENV-VAR_ACCESS-ACC-0003](./env-var-access.acceptance.md#env-var_access-acc-0003)
+- [Intent](../../env_var-intent.md): module intent.
+- [ENV_VAR-ACCESS-ACC-0001](./env_var-access.acceptance.md#ENV_VAR-ACCESS-ACC-0001)
+- [ENV_VAR-ACCESS-ACC-0002](./env_var-access.acceptance.md#ENV_VAR-ACCESS-ACC-0002)
+- [ENV_VAR-ACCESS-ACC-0003](./env_var-access.acceptance.md#ENV_VAR-ACCESS-ACC-0003)
 
 **Status**:
 
@@ -56,9 +56,9 @@ THEN THE SOFTWARE SHALL reject the request.
 
 ## Links
 
-- [Intent](../../env-var-intent.md): Why Kraf resolves and projects environment
+- [Intent](../../env_var-intent.md): Why Kraf resolves and projects environment
   variables through a declarative model.
-- [Acceptance](./env-var-access.acceptance.md): Acceptance scenarios for how
+- [Acceptance](./env_var-access.acceptance.md): Acceptance scenarios for how
   modules and plugins access environment values.
 - [README.md](../../../README.md): Declarative model, resolution, and projection
   of environment variables in Kraf.
