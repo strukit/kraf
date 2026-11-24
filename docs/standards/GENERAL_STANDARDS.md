@@ -176,6 +176,30 @@ language: <language-code>
 - `*` MUST match any characters except `/`.
 - `**` MUST match any number of directories, including none.
 
+### Docs Folders
+
+#### Terms
+
+- **Repository docs**: the `docs` folder at the root of the repository, written
+  `<repo>/docs`.
+- **Module docs**: the `docs` folder inside the folder of a module, written
+  `<module>/docs`, where `<module>` is the name of that module's folder.
+
+#### Rules
+
+- A reference to the repository docs MUST be written `<repo>/docs`, including
+  the visible text of a link.
+- A reference to the docs of a module MUST be written `<module>/docs`, with the
+  name of the module in place of `<module>`, including the visible text of a
+  link.
+- A link to a file in a docs folder MUST keep a relative path that resolves to
+  that file, while its visible text MUST be written with `<repo>/docs` or
+  `<module>/docs`, as this section requires.
+- A reference to a docs folder MUST NOT be written as `docs/` alone, because it
+  does not say which docs folder it means.
+- An entry `docs/` inside a tree of files MAY be written `docs/`, when its
+  parent entry already names the folder that holds it.
+
 ## Language Standards
 
 ### Normative Language
@@ -230,7 +254,7 @@ Normative keywords express three levels of force:
 ### Normative-Language Note
 
 ```yaml
-scope: ["**/*.md", "!type:root", "!type:index"]
+scope: ["**/*.md", "!type:root", "!type:index", "!type:readme"]
 ```
 
 #### Normative-Language Note - Template
@@ -252,6 +276,8 @@ scope: ["**/*.md", "!type:root", "!type:index"]
   following the [template](#normative-language-note---template) above, as the
   first of the notes of the [layout](#document-layout), even when it uses no
   normative keyword.
+- A document whose `type` lists `readme` or `index` MUST NOT carry the note,
+  whatever the `scope` of this section says.
 
 ### Standard Note
 
