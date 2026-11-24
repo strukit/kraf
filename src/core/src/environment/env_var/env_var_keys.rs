@@ -1,38 +1,16 @@
 use crate::environment::env_var::env_var_core::EnvVar;
 
-// General
+// Host
 pub const HOST_NAME_ENV_VAR: EnvVar = EnvVar {
     key: "HOST_NAME",
     value: None,
 };
 
-pub const WORK_DIR_ENV_VAR: EnvVar = EnvVar {
-    key: "WORK_DIR",
+pub const HOST_WORKDIR_ENV_VAR: EnvVar = EnvVar {
+    key: "HOST_WORKDIR",
     value: None,
 };
 
-pub const HOME_PATH_ENV_VAR: EnvVar = EnvVar {
-    key: "HOME_PATH",
-    value: None,
-};
-
-// User
-pub const USER_NAME_ENV_VAR: EnvVar = EnvVar {
-    key: "USER_NAME",
-    value: None,
-};
-
-pub const USER_LANGUAGE_ENV_VAR: EnvVar = EnvVar {
-    key: "USER_LANGUAGE",
-    value: None,
-};
-
-pub const USER_TIMEZONE_ENV_VAR: EnvVar = EnvVar {
-    key: "USER_TIMEZONE",
-    value: None,
-};
-
-// Home directories
 pub const HOST_HOME_ENV_VAR: EnvVar = EnvVar {
     key: "HOST_HOME",
     value: None,
@@ -53,8 +31,30 @@ pub const HOST_CONFIG_ENV_VAR: EnvVar = EnvVar {
     value: None,
 };
 
+// User
+pub const USER_NAME_ENV_VAR: EnvVar = EnvVar {
+    key: "USER_NAME",
+    value: None,
+};
+
+pub const USER_LANGUAGE_ENV_VAR: EnvVar = EnvVar {
+    key: "USER_LANGUAGE",
+    value: None,
+};
+
+pub const USER_TIMEZONE_ENV_VAR: EnvVar = EnvVar {
+    key: "USER_TIMEZONE",
+    value: None,
+};
+
+// Home directories
 pub const HOME_DIR_ENV_VAR: EnvVar = EnvVar {
     key: "HOME_DIR",
+    value: None,
+};
+
+pub const HOME_PATH_ENV_VAR: EnvVar = EnvVar {
+    key: "HOME_PATH",
     value: None,
 };
 
@@ -155,34 +155,21 @@ pub const PLATFORM_KERNEL_VERSION_ENV_VAR: EnvVar = EnvVar {
     value: None,
 };
 
-// System
-pub const SYSTEM_ROOT_ENV_VAR: EnvVar = EnvVar {
-    key: "SYSTEM_ROOT",
-    value: None,
-};
-
-pub const SYSTEM_DRIVE_ENV_VAR: EnvVar = EnvVar {
-    key: "SYSTEM_DRIVE",
-    value: None,
-};
-
-pub const SYSTEM_PROGRAMS_ENV_VAR: EnvVar = EnvVar {
-    key: "SYSTEM_PROGRAMS",
-    value: None,
-};
-
-pub const ENV_VAR_HOST_KEYS: &[&str] = &[
+pub const ENV_VAR_KEYS: &[&str] = &[
+    // Host
     HOST_NAME_ENV_VAR.key,
-    WORK_DIR_ENV_VAR.key,
-    HOME_PATH_ENV_VAR.key,
-    USER_NAME_ENV_VAR.key,
-    USER_LANGUAGE_ENV_VAR.key,
-    USER_TIMEZONE_ENV_VAR.key,
+    HOST_WORKDIR_ENV_VAR.key,
     HOST_HOME_ENV_VAR.key,
     HOST_PATH_ENV_VAR.key,
     HOST_DATA_ENV_VAR.key,
     HOST_CONFIG_ENV_VAR.key,
+    // User
+    USER_NAME_ENV_VAR.key,
+    USER_LANGUAGE_ENV_VAR.key,
+    USER_TIMEZONE_ENV_VAR.key,
+    // Home directories
     HOME_DIR_ENV_VAR.key,
+    HOME_PATH_ENV_VAR.key,
     HOME_TEMP_ENV_VAR.key,
     HOME_CONFIG_ENV_VAR.key,
     HOME_DATA_ENV_VAR.key,
@@ -190,19 +177,18 @@ pub const ENV_VAR_HOST_KEYS: &[&str] = &[
     HOME_CACHE_ENV_VAR.key,
     HOME_STATE_ENV_VAR.key,
     HOME_SESSION_ENV_VAR.key,
+    // Terminal
     TERMINAL_ENV_VAR.key,
     TERMINAL_TYPE_ENV_VAR.key,
     TERMINAL_COLOR_ENV_VAR.key,
     TERMINAL_PROGRAM_ENV_VAR.key,
     TERMINAL_PROGRAM_VERSION_ENV_VAR.key,
     TERMINAL_NOCOLOR_ENV_VAR.key,
+    // Platform
     PLATFORM_ENV_VAR.key,
     PLATFORM_FAMILY_ENV_VAR.key,
     PLATFORM_ARCH_ENV_VAR.key,
     PLATFORM_VERSION_ENV_VAR.key,
     PLATFORM_KERNEL_ENV_VAR.key,
     PLATFORM_KERNEL_VERSION_ENV_VAR.key,
-    SYSTEM_ROOT_ENV_VAR.key,
-    SYSTEM_DRIVE_ENV_VAR.key,
-    SYSTEM_PROGRAMS_ENV_VAR.key,
 ];

@@ -1,5 +1,5 @@
 use crate::environment::env_var::env_var_core::{EnvVar, EnvVarHostMapping};
-use crate::environment::env_var::env_var_projector::project;
+use crate::environment::env_var::env_var_projector::EnvVarWriteSet;
 use crate::environment::env_var::env_var_resolver::{lookup_env_var_value, resolve};
 
 const WINDOWS_MAPPINGS: &[EnvVarHostMapping] = super::HOST_ENV_VAR_MAPPINGS;
@@ -18,12 +18,8 @@ fn windows_program_folders_pass_through_unchanged() {
     ];
 
     let resolved = resolve(WINDOWS_MAPPINGS, &collected, &[]);
-    let projected = project(WINDOWS_MAPPINGS, &resolved);
+    let projected = EnvVarWriteSet::new(WINDOWS_MAPPINGS, &resolved);
 
-    assert_eq!(
-        lookup_env_var_value("SYSTEM_PROGRAMS", &resolved),
-        Some(r"C:\Program Files".to_string())
-    );
     assert_eq!(
         lookup_env_var_value("ProgramFiles", projected.env_vars()),
         Some(r"C:\Program Files (x86)".to_string())
@@ -48,7 +44,7 @@ fn windows_comspec_keeps_the_host_value_when_the_terminal_is_another_shell() {
     ];
 
     let resolved = resolve(WINDOWS_MAPPINGS, &collected, &[]);
-    let projected = project(WINDOWS_MAPPINGS, &resolved);
+    let projected = EnvVarWriteSet::new(WINDOWS_MAPPINGS, &resolved);
 
     assert_eq!(
         lookup_env_var_value("TERMINAL", &resolved),

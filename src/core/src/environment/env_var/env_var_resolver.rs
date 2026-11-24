@@ -1,7 +1,7 @@
 use crate::environment::env_var::env_var_core::{
     EnvVar, EnvVarHostMapping, EnvVarImportMode, EnvVarSource,
 };
-use crate::environment::env_var::env_var_host::HOME_DIR_ENV_VAR;
+use crate::environment::env_var::env_var_keys::HOME_DIR_ENV_VAR;
 
 #[must_use]
 pub fn expand_tilde_var(env_var_value: &str, home_value: &str) -> String {
@@ -162,26 +162,6 @@ pub fn resolve_alias(
     };
 
     value.unwrap_or_default()
-}
-
-pub struct EnvVarResolveKeys {
-    pub env_vars_keys_import: Vec<&'static str>,
-}
-
-#[must_use]
-pub fn env_var_resolve_keys(env_var_mappings: &[EnvVarHostMapping]) -> EnvVarResolveKeys {
-    let mut env_vars_keys_import = Vec::new();
-
-    for mapping in env_var_mappings {
-        env_vars_keys_import.extend(mapping.alias_import.iter().copied());
-    }
-
-    env_vars_keys_import.sort_unstable();
-    env_vars_keys_import.dedup();
-
-    EnvVarResolveKeys {
-        env_vars_keys_import,
-    }
 }
 
 #[cfg(test)]

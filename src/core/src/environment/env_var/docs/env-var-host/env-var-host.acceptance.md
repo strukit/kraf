@@ -114,7 +114,7 @@ Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
 
     Scenario: ENV-VAR_HOST-ACC-0004 — Home and work-directory declarations use provided values
       Given a supported platform mapping
-      When the mapping declares WORK_DIR or a HOME_DIR family key
+      When the mapping declares HOST_WORKDIR or a HOME_DIR family key
       Then the declaration source is provided
 ```
 
@@ -231,7 +231,7 @@ Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
 
 ## ENV-VAR_HOST-ACC-0009
 
-Name: System declarations resolve on every platform
+Name: Windows system variables pass through only on Windows
 
 **Links:**
 
@@ -245,13 +245,14 @@ Name: System declarations resolve on every platform
 ```gherkin
 Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
 
-  Rule: ENV-VAR_HOST-REQ-0006 — System declarations
+  Rule: ENV-VAR_HOST-REQ-0006 — Windows system variables
 
-    Scenario: ENV-VAR_HOST-ACC-0009 — System declarations resolve on every platform
-      Given a supported platform mapping
+    Scenario: ENV-VAR_HOST-ACC-0009 — Windows system variables pass through only on Windows
+      Given the supported platform mappings
       When the mappings are loaded
-      Then the mapping declares "SYSTEM_ROOT", "SYSTEM_DRIVE", and "SYSTEM_PROGRAMS"
-      And each of them has source host
+      Then the Windows mapping declares "SystemRoot", "windir", and "SystemDrive"
+      And each of them uses the pass-through import mode
+      And no other platform mapping declares them
 ```
 
 ---

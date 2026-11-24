@@ -66,7 +66,7 @@ Name: Session-owned directory sources
 - Implementation status: Implemented
 
 ```text
-THE SOFTWARE SHALL resolve the WORK_DIR and HOME_DIR declaration families from
+THE SOFTWARE SHALL resolve the HOST_WORKDIR and HOME_DIR declaration families from
 provided values rather than from values imported from the host.
 ```
 
@@ -154,7 +154,7 @@ fallback, so that a value the host does not define is not projected.
 
 ### ENV-VAR_HOST-REQ-0006
 
-Name: System declarations
+Name: Windows system variables
 
 **Links:**
 
@@ -167,9 +167,8 @@ Name: System declarations
 - Implementation status: Implemented
 
 ```text
-THE SOFTWARE SHALL declare, in every supported platform mapping, the
-`SYSTEM_ROOT`, `SYSTEM_DRIVE`, and `SYSTEM_PROGRAMS` declarations with source
-`Host`.
+THE SOFTWARE SHALL declare `SystemRoot`, `windir`, and `SystemDrive` as
+pass-through declarations in the Windows platform mapping only.
 ```
 
 ## Links
