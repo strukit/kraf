@@ -2,16 +2,16 @@ use crate::environment::env_var::env_var_core::{
     EnvVarHostMapping, EnvVarImportMode, EnvVarSource,
 };
 
-use crate::environment::env_var::env_var_host::{
+use crate::environment::env_var::env_var_keys::{
     HOME_CACHE_ENV_VAR, HOME_CONFIG_ENV_VAR, HOME_DATA_BIN_ENV_VAR, HOME_DATA_ENV_VAR,
     HOME_DIR_ENV_VAR, HOME_PATH_ENV_VAR, HOME_SESSION_ENV_VAR, HOME_STATE_ENV_VAR,
     HOME_TEMP_ENV_VAR, HOST_CONFIG_ENV_VAR, HOST_DATA_ENV_VAR, HOST_HOME_ENV_VAR,
-    HOST_NAME_ENV_VAR, HOST_PATH_ENV_VAR, PLATFORM_ARCH_ENV_VAR, PLATFORM_ENV_VAR,
-    PLATFORM_FAMILY_ENV_VAR, PLATFORM_KERNEL_ENV_VAR, PLATFORM_KERNEL_VERSION_ENV_VAR,
-    PLATFORM_VERSION_ENV_VAR, SYSTEM_DRIVE_ENV_VAR, SYSTEM_PROGRAMS_ENV_VAR, SYSTEM_ROOT_ENV_VAR,
-    TERMINAL_COLOR_ENV_VAR, TERMINAL_ENV_VAR, TERMINAL_NOCOLOR_ENV_VAR, TERMINAL_PROGRAM_ENV_VAR,
+    HOST_NAME_ENV_VAR, HOST_PATH_ENV_VAR, HOST_WORKDIR_ENV_VAR, PLATFORM_ARCH_ENV_VAR,
+    PLATFORM_ENV_VAR, PLATFORM_FAMILY_ENV_VAR, PLATFORM_KERNEL_ENV_VAR,
+    PLATFORM_KERNEL_VERSION_ENV_VAR, PLATFORM_VERSION_ENV_VAR, TERMINAL_COLOR_ENV_VAR,
+    TERMINAL_ENV_VAR, TERMINAL_NOCOLOR_ENV_VAR, TERMINAL_PROGRAM_ENV_VAR,
     TERMINAL_PROGRAM_VERSION_ENV_VAR, TERMINAL_TYPE_ENV_VAR, USER_LANGUAGE_ENV_VAR,
-    USER_NAME_ENV_VAR, USER_TIMEZONE_ENV_VAR, WORK_DIR_ENV_VAR,
+    USER_NAME_ENV_VAR, USER_TIMEZONE_ENV_VAR,
 };
 
 pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
@@ -24,7 +24,7 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         fallback: None,
     },
     EnvVarHostMapping {
-        key: WORK_DIR_ENV_VAR.key,
+        key: HOST_WORKDIR_ENV_VAR.key,
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
@@ -258,31 +258,6 @@ pub const HOST_ENV_VAR_MAPPINGS: &[EnvVarHostMapping] = &[
         alias_import_mode: EnvVarImportMode::FirstFound,
         alias_export: &[],
         fallback: None,
-    },
-    // System
-    EnvVarHostMapping {
-        key: SYSTEM_ROOT_ENV_VAR.key,
-        source: EnvVarSource::Host,
-        alias_import: &[],
-        alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[],
-        fallback: Some("/"),
-    },
-    EnvVarHostMapping {
-        key: SYSTEM_DRIVE_ENV_VAR.key,
-        source: EnvVarSource::Host,
-        alias_import: &[],
-        alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[],
-        fallback: Some("/"),
-    },
-    EnvVarHostMapping {
-        key: SYSTEM_PROGRAMS_ENV_VAR.key,
-        source: EnvVarSource::Host,
-        alias_import: &[],
-        alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[],
-        fallback: Some("/Applications"),
     },
     // Mac specific (no cross-platform equivalent)
     EnvVarHostMapping {

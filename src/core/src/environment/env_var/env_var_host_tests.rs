@@ -1,57 +1,16 @@
 use crate::environment::env_var::env_var_core::{
-    EnvVarHostMapping, EnvVarImportMode, EnvVarReader, EnvVarSource,
+    EnvVarHostMapping, EnvVarImportMode, EnvVarSource,
 };
 use crate::environment::env_var::env_var_host::{
-    ENV_VAR_HOST_KEYS, env_var_collect, env_var_host_linux, env_var_host_mac, env_var_host_windows,
+    env_var_host_linux, env_var_host_mac, env_var_host_windows,
 };
+use crate::environment::env_var::env_var_keys::ENV_VAR_KEYS;
 
 pub const LINUX_MAPPINGS: &[EnvVarHostMapping] = env_var_host_linux::HOST_ENV_VAR_MAPPINGS;
 pub const MACOS_MAPPINGS: &[EnvVarHostMapping] = env_var_host_mac::HOST_ENV_VAR_MAPPINGS;
 pub const WINDOWS_MAPPINGS: &[EnvVarHostMapping] = env_var_host_windows::HOST_ENV_VAR_MAPPINGS;
 
-use std::collections::{HashMap, HashSet};
-
-/// In-memory reader whose environment is isolated from the real one of the
-/// test process, so that tests neither read nor change it.
-#[derive(Default)]
-struct FakeEnvVarReader {
-    env: HashMap<String, String>,
-}
-
-impl EnvVarReader for FakeEnvVarReader {
-    fn read(&self, key: &str) -> Option<String> {
-        self.env.get(key).cloned()
-    }
-}
-
-#[test]
-fn collect_picks_up_a_declared_env_var() {
-    let mut reader = FakeEnvVarReader::default();
-    reader.env.insert(
-        "ENV_VAR_TEST_COLLECT".to_string(),
-        "built-value".to_string(),
-    );
-
-    let mappings = [EnvVarHostMapping {
-        key: "MY_VAR",
-        source: EnvVarSource::Host,
-        alias_import: &["ENV_VAR_TEST_COLLECT"],
-        alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &[],
-        fallback: None,
-    }];
-
-    let collected = env_var_collect(&mappings, &reader);
-
-    let found = collected
-        .iter()
-        .find(|var| var.key == "ENV_VAR_TEST_COLLECT");
-
-    assert_eq!(
-        found.and_then(|var| var.value.clone()),
-        Some("built-value".to_string())
-    );
-}
+use std::collections::HashSet;
 
 #[test]
 fn mappings_have_unique_keys() {
@@ -77,10 +36,10 @@ fn mappings_include_all_known_keys() {
     fn assert_includes_all_known_keys(mappings: &[EnvVarHostMapping], name: &str) {
         let mapping_keys: HashSet<&str> = mappings.iter().map(|mapping| mapping.key).collect();
 
-        for known_key in ENV_VAR_HOST_KEYS {
+        for known_key in ENV_VAR_KEYS {
             assert!(
                 mapping_keys.contains(known_key),
-                "{name} is missing known key '{known_key}' from env_var_host.rs (ENV_VAR_HOST_KEYS)"
+                "{name} is missing known key '{known_key}' from env_var_keys.rs (ENV_VAR_KEYS)"
             );
         }
     }
@@ -140,7 +99,7 @@ fn host_source_mappings_export_every_native_imported_alias() {
 #[test]
 fn home_and_workdir_family_are_always_provided() {
     const ISOLATED_KEYS: &[&str] = &[
-        "WORK_DIR",
+        "HOST_WORKDIR",
         "HOME_DIR",
         "HOME_TEMP",
         "HOME_CONFIG",
@@ -160,7 +119,7 @@ fn home_and_workdir_family_are_always_provided() {
             assert_eq!(
                 mapping.source,
                 EnvVarSource::Provided,
-                "{name}: mapping '{}' is part of the isolated HOME_DIR/WORK_DIR family but is source: Host",
+                "{name}: mapping '{}' is part of the isolated HOME_DIR/HOST_WORKDIR family but is source: Host",
                 mapping.key
             );
         }
@@ -296,31 +255,26 @@ fn home_path_does_not_import_the_host_path() {
 }
 
 #[test]
-fn system_declarations_import_only_on_windows() {
-    const SYSTEM_KEYS: &[&str] = &["SYSTEM_ROOT", "SYSTEM_DRIVE", "SYSTEM_PROGRAMS"];
+fn windows_system_variables_pass_through_only_on_windows() {
+    const WINDOWS_SYSTEM_KEYS: &[&str] = &["SystemRoot", "windir", "SystemDrive"];
 
-    fn system_mappings(mappings: &[EnvVarHostMapping]) -> Vec<&EnvVarHostMapping> {
-        mappings
+    for key in WINDOWS_SYSTEM_KEYS {
+        let mapping = WINDOWS_MAPPINGS
             .iter()
-            .filter(|mapping| SYSTEM_KEYS.contains(&mapping.key))
-            .collect()
-    }
+            .find(|mapping| mapping.key == *key)
+            .unwrap_or_else(|| panic!("WINDOWS_MAPPINGS: missing mapping '{key}'"));
 
-    for mapping in system_mappings(MACOS_MAPPINGS)
-        .into_iter()
-        .chain(system_mappings(LINUX_MAPPINGS))
-    {
-        assert!(
-            mapping.alias_import.is_empty() && mapping.fallback.is_some(),
-            "mapping '{}' imports from the host or has no fallback",
-            mapping.key
+        assert_eq!(
+            mapping.alias_import_mode,
+            EnvVarImportMode::PassThrough,
+            "WINDOWS_MAPPINGS: mapping '{key}' does not pass through"
         );
     }
 
-    for mapping in system_mappings(WINDOWS_MAPPINGS) {
+    for mapping in MACOS_MAPPINGS.iter().chain(LINUX_MAPPINGS) {
         assert!(
-            !mapping.alias_import.is_empty() && mapping.fallback.is_none(),
-            "WINDOWS_MAPPINGS: mapping '{}' does not import or has a fallback",
+            !WINDOWS_SYSTEM_KEYS.contains(&mapping.key),
+            "mapping '{}' is declared outside the Windows mapping",
             mapping.key
         );
     }

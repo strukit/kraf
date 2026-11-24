@@ -3,8 +3,7 @@ use crate::environment::env_var::env_var_core::{
 };
 
 use crate::environment::env_var::env_var_resolver::{
-    env_var_resolve_keys, expand_dollar_var, expand_tilde_var, lookup_env_var_value, resolve,
-    resolve_alias,
+    expand_dollar_var, expand_tilde_var, lookup_env_var_value, resolve, resolve_alias,
 };
 
 const ENV_VAR_MAPPING_FIXTURE: &[EnvVarHostMapping] = &[
@@ -73,7 +72,7 @@ const ENV_VAR_MAPPING_FIXTURE: &[EnvVarHostMapping] = &[
         fallback: Some("/usr/share/man"),
     },
     EnvVarHostMapping {
-        key: "WORK_DIR",
+        key: "HOST_WORKDIR",
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
@@ -146,7 +145,7 @@ fn env_var_provided_fixture(home: &str) -> Vec<EnvVar> {
             value: Some(home.to_string()),
         },
         EnvVar {
-            key: "WORK_DIR",
+            key: "HOST_WORKDIR",
             value: Some("/workspace/project".to_string()),
         },
         EnvVar {
@@ -179,58 +178,6 @@ fn mapping_fixture_is_well_formed() {
             );
         }
     }
-}
-
-#[test]
-fn resolve_keys_are_empty_when_no_mappings_declare_any() {
-    let keys = env_var_resolve_keys(&[]);
-
-    assert_eq!(keys.env_vars_keys_import, Vec::<&str>::new());
-}
-
-#[test]
-fn resolve_keys_collects_alias_import_but_not_dollar_var_in_fallback() {
-    let mappings = [EnvVarHostMapping {
-        key: "CONFIG_DIR",
-        source: EnvVarSource::Provided,
-        alias_import: &["XDG_CONFIG_HOME", "MY_CONFIG_DIR"],
-        alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &["CONFIG_DIR", "MY_CONFIG_DIR_EXPORT"],
-        fallback: Some("$FOO_BASE/config"),
-    }];
-
-    let keys = env_var_resolve_keys(&mappings);
-
-    assert_eq!(
-        keys.env_vars_keys_import,
-        vec!["MY_CONFIG_DIR", "XDG_CONFIG_HOME"]
-    );
-}
-
-#[test]
-fn resolve_keys_deduplicates_repeated_names() {
-    let mappings = [
-        EnvVarHostMapping {
-            key: "A",
-            source: EnvVarSource::Host,
-            alias_import: &["SHELL"],
-            alias_import_mode: EnvVarImportMode::FirstFound,
-            alias_export: &[],
-            fallback: None,
-        },
-        EnvVarHostMapping {
-            key: "B",
-            source: EnvVarSource::Host,
-            alias_import: &["SHELL"],
-            alias_import_mode: EnvVarImportMode::FirstFound,
-            alias_export: &[],
-            fallback: Some("$SHELL/fallback"),
-        },
-    ];
-
-    let keys = env_var_resolve_keys(&mappings);
-
-    assert_eq!(keys.env_vars_keys_import, vec!["SHELL"]);
 }
 
 #[test]
@@ -433,7 +380,7 @@ fn resolve_handles_every_mapping_case_at_once() {
         ("PATH", path_expected),
         ("LD_LIBRARY_PATH", "/usr/local/lib"),
         ("MANPATH", "/usr/share/man"),
-        ("WORK_DIR", "/workspace/project"),
+        ("HOST_WORKDIR", "/workspace/project"),
         ("HOME_TEMP", "/custom/tmp"),
         ("PLATFORM_KERNEL", "Darwin"),
         ("PLATFORM_VERSION", ""),
