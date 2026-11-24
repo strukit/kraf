@@ -28,21 +28,4 @@ impl Process for HostProcess {
 
         Some(dir.to_string_lossy().into_owned())
     }
-
-    fn create_dir(&self, path: &str) -> bool {
-        std::fs::create_dir_all(path).is_ok()
-    }
-
-    fn create_dir_link(&self, target: &str, link: &str) -> bool {
-        #[cfg(any(host = "linux", host = "mac"))]
-        let linked = std::os::unix::fs::symlink(target, link);
-
-        #[cfg(host = "windows")]
-        let linked = std::os::windows::fs::symlink_dir(target, link);
-
-        #[cfg(not(any(host = "linux", host = "mac", host = "windows")))]
-        let linked: std::io::Result<()> = Err(std::io::ErrorKind::Unsupported.into());
-
-        linked.is_ok()
-    }
 }
