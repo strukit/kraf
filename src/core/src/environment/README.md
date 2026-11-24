@@ -1,6 +1,6 @@
 ---
 description: Cross-platform environment variable resolution and mapping in Kraf.
-tags: [kraf, environment, env-var, resolution]
+tags: [kraf, environment, env_var, resolution]
 type: ["readme", "index"]
 scope: ["src/core/src/environment/**/*"]
 language: en

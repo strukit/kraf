@@ -1,8 +1,8 @@
 ---
 description: Acceptance scenarios for declaring environment variables.
-tags: [environment, env-var, acceptance, declaration, gherkin]
+tags: [environment, env_var, acceptance, declaration, gherkin]
 type: ["acceptance"]
-scope: ["module:env-var"]
+scope: ["module:env_var"]
 language: en
 ---
 
@@ -16,13 +16,13 @@ language: en
 > See
 > [GENERAL_STANDARDS.md](../../../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
 
-## ENV-VAR_DECLARATIONS-ACC-0001
+## ENV_VAR-DECLARATIONS-ACC-0001
 
 Name: Value for an unknown declaration is rejected
 
 **Links:**
 
-- [ENV-VAR_DECLARATIONS-REQ-0001](./env-var-declarations.spec.md#env-var_declarations-req-0001)
+- [ENV_VAR-DECLARATIONS-REQ-0001](./env_var-declarations.spec.md#ENV_VAR-DECLARATIONS-REQ-0001)
 
 **Status**:
 
@@ -30,11 +30,11 @@ Name: Value for an unknown declaration is rejected
 - Verification status: Unknown
 
 ```gherkin
-Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
+Feature: ENV_VAR-DECLARATIONS-FEAT-0001 — Environment variable declarations
 
-  Rule: ENV-VAR_DECLARATIONS-REQ-0001 — Static declaration
+  Rule: ENV_VAR-DECLARATIONS-REQ-0001 — Static declaration
 
-    Scenario: ENV-VAR_DECLARATIONS-ACC-0001 — Value for an unknown declaration is rejected
+    Scenario: ENV_VAR-DECLARATIONS-ACC-0001 — Value for an unknown declaration is rejected
       Given no declaration exists for "EXAMPLE_KEY"
       When a configuration file provides a value for "EXAMPLE_KEY"
       Then the software rejects the configuration
@@ -43,13 +43,13 @@ Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
 
 ---
 
-## ENV-VAR_DECLARATIONS-ACC-0002
+## ENV_VAR-DECLARATIONS-ACC-0002
 
 Name: Known declaration accepts a value from a configuration file
 
 **Links:**
 
-- [ENV-VAR_DECLARATIONS-REQ-0001](./env-var-declarations.spec.md#env-var_declarations-req-0001)
+- [ENV_VAR-DECLARATIONS-REQ-0001](./env_var-declarations.spec.md#ENV_VAR-DECLARATIONS-REQ-0001)
 
 **Status**:
 
@@ -57,11 +57,11 @@ Name: Known declaration accepts a value from a configuration file
 - Verification status: Unknown
 
 ```gherkin
-Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
+Feature: ENV_VAR-DECLARATIONS-FEAT-0001 — Environment variable declarations
 
-  Rule: ENV-VAR_DECLARATIONS-REQ-0001 — Static declaration
+  Rule: ENV_VAR-DECLARATIONS-REQ-0001 — Static declaration
 
-    Scenario: ENV-VAR_DECLARATIONS-ACC-0002 — Known declaration accepts a value from a configuration file
+    Scenario: ENV_VAR-DECLARATIONS-ACC-0002 — Known declaration accepts a value from a configuration file
       Given a declaration exists for "EXAMPLE_KEY"
       When a configuration file provides a value for "EXAMPLE_KEY"
       Then the software accepts the configuration
@@ -69,13 +69,13 @@ Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
 
 ---
 
-## ENV-VAR_DECLARATIONS-ACC-0003
+## ENV_VAR-DECLARATIONS-ACC-0003
 
 Name: Duplicate canonical key is rejected
 
 **Links:**
 
-- [ENV-VAR_DECLARATIONS-REQ-0002](./env-var-declarations.spec.md#env-var_declarations-req-0002)
+- [ENV_VAR-DECLARATIONS-REQ-0002](./env_var-declarations.spec.md#ENV_VAR-DECLARATIONS-REQ-0002)
 
 **Status**:
 
@@ -83,11 +83,11 @@ Name: Duplicate canonical key is rejected
 - Verification status: Unknown
 
 ```gherkin
-Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
+Feature: ENV_VAR-DECLARATIONS-FEAT-0001 — Environment variable declarations
 
-  Rule: ENV-VAR_DECLARATIONS-REQ-0002 — Canonical key uniqueness
+  Rule: ENV_VAR-DECLARATIONS-REQ-0002 — Canonical key uniqueness
 
-    Scenario: ENV-VAR_DECLARATIONS-ACC-0003 — Duplicate canonical key is rejected
+    Scenario: ENV_VAR-DECLARATIONS-ACC-0003 — Duplicate canonical key is rejected
       Given two declarations use the canonical key "EXAMPLE_KEY"
       When the software loads the declaration set
       Then the software rejects the declaration set
@@ -95,13 +95,13 @@ Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
 
 ---
 
-## ENV-VAR_DECLARATIONS-ACC-0004
+## ENV_VAR-DECLARATIONS-ACC-0004
 
 Name: Merge mapping declares multiple import aliases
 
 **Links:**
 
-- [ENV-VAR_DECLARATIONS-REQ-0003](./env-var-declarations.spec.md#env-var_declarations-req-0003)
+- [ENV_VAR-DECLARATIONS-REQ-0003](./env_var-declarations.spec.md#ENV_VAR-DECLARATIONS-REQ-0003)
 
 **Status**:
 
@@ -109,11 +109,11 @@ Name: Merge mapping declares multiple import aliases
 - Verification status: Unknown
 
 ```gherkin
-Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
+Feature: ENV_VAR-DECLARATIONS-FEAT-0001 — Environment variable declarations
 
-  Rule: ENV-VAR_DECLARATIONS-REQ-0003 — Mapping mode validity
+  Rule: ENV_VAR-DECLARATIONS-REQ-0003 — Mapping mode validity
 
-    Scenario: ENV-VAR_DECLARATIONS-ACC-0004 — Merge mapping declares multiple import aliases
+    Scenario: ENV_VAR-DECLARATIONS-ACC-0004 — Merge mapping declares multiple import aliases
       Given a declaration uses merge import mode
       When the declaration defines fewer than two import aliases
       Then the software rejects the declaration
@@ -121,13 +121,13 @@ Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
 
 ---
 
-## ENV-VAR_DECLARATIONS-ACC-0005
+## ENV_VAR-DECLARATIONS-ACC-0005
 
 Name: Pass-through mapping imports and exports only its canonical key
 
 **Links:**
 
-- [ENV-VAR_DECLARATIONS-REQ-0003](./env-var-declarations.spec.md#env-var_declarations-req-0003)
+- [ENV_VAR-DECLARATIONS-REQ-0003](./env_var-declarations.spec.md#ENV_VAR-DECLARATIONS-REQ-0003)
 
 **Status**:
 
@@ -135,11 +135,11 @@ Name: Pass-through mapping imports and exports only its canonical key
 - Verification status: Unknown
 
 ```gherkin
-Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
+Feature: ENV_VAR-DECLARATIONS-FEAT-0001 — Environment variable declarations
 
-  Rule: ENV-VAR_DECLARATIONS-REQ-0003 — Mapping mode validity
+  Rule: ENV_VAR-DECLARATIONS-REQ-0003 — Mapping mode validity
 
-    Scenario: ENV-VAR_DECLARATIONS-ACC-0005 — Pass-through mapping imports and exports only its canonical key
+    Scenario: ENV_VAR-DECLARATIONS-ACC-0005 — Pass-through mapping imports and exports only its canonical key
       Given a declaration uses pass-through import mode
       When the declaration imports or exports an alias other than its canonical key
       Then the software rejects the declaration
@@ -147,13 +147,13 @@ Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
 
 ---
 
-## ENV-VAR_DECLARATIONS-ACC-0006
+## ENV_VAR-DECLARATIONS-ACC-0006
 
 Name: Pass-through mapping has no fallback
 
 **Links:**
 
-- [ENV-VAR_DECLARATIONS-REQ-0003](./env-var-declarations.spec.md#env-var_declarations-req-0003)
+- [ENV_VAR-DECLARATIONS-REQ-0003](./env_var-declarations.spec.md#ENV_VAR-DECLARATIONS-REQ-0003)
 
 **Status**:
 
@@ -161,11 +161,11 @@ Name: Pass-through mapping has no fallback
 - Verification status: Unknown
 
 ```gherkin
-Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
+Feature: ENV_VAR-DECLARATIONS-FEAT-0001 — Environment variable declarations
 
-  Rule: ENV-VAR_DECLARATIONS-REQ-0003 — Mapping mode validity
+  Rule: ENV_VAR-DECLARATIONS-REQ-0003 — Mapping mode validity
 
-    Scenario: ENV-VAR_DECLARATIONS-ACC-0006 — Pass-through mapping has no fallback
+    Scenario: ENV_VAR-DECLARATIONS-ACC-0006 — Pass-through mapping has no fallback
       Given a declaration uses pass-through import mode
       When the declaration defines a fallback
       Then the software rejects the declaration
@@ -173,13 +173,13 @@ Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
 
 ---
 
-## ENV-VAR_DECLARATIONS-ACC-0007
+## ENV_VAR-DECLARATIONS-ACC-0007
 
 Name: Configuration file declaration is accepted at startup
 
 **Links:**
 
-- [ENV-VAR_DECLARATIONS-REQ-0001](./env-var-declarations.spec.md#env-var_declarations-req-0001)
+- [ENV_VAR-DECLARATIONS-REQ-0001](./env_var-declarations.spec.md#ENV_VAR-DECLARATIONS-REQ-0001)
 
 **Status**:
 
@@ -187,11 +187,11 @@ Name: Configuration file declaration is accepted at startup
 - Verification status: Unknown
 
 ```gherkin
-Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
+Feature: ENV_VAR-DECLARATIONS-FEAT-0001 — Environment variable declarations
 
-  Rule: ENV-VAR_DECLARATIONS-REQ-0001 — Static declaration
+  Rule: ENV_VAR-DECLARATIONS-REQ-0001 — Static declaration
 
-    Scenario: ENV-VAR_DECLARATIONS-ACC-0007 — Configuration file declaration is accepted at startup
+    Scenario: ENV_VAR-DECLARATIONS-ACC-0007 — Configuration file declaration is accepted at startup
       Given a configuration file declares "RUSTUP_HOME" with the export alias "RUSTUP_HOME"
       When the software loads the configuration file before resolution starts
       Then "RUSTUP_HOME" is part of the declaration set
@@ -199,13 +199,13 @@ Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
 
 ---
 
-## ENV-VAR_DECLARATIONS-ACC-0008
+## ENV_VAR-DECLARATIONS-ACC-0008
 
 Name: Plugin declaration during a session is rejected
 
 **Links:**
 
-- [ENV-VAR_DECLARATIONS-REQ-0001](./env-var-declarations.spec.md#env-var_declarations-req-0001)
+- [ENV_VAR-DECLARATIONS-REQ-0001](./env_var-declarations.spec.md#ENV_VAR-DECLARATIONS-REQ-0001)
 
 **Status**:
 
@@ -213,11 +213,11 @@ Name: Plugin declaration during a session is rejected
 - Verification status: Unknown
 
 ```gherkin
-Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
+Feature: ENV_VAR-DECLARATIONS-FEAT-0001 — Environment variable declarations
 
-  Rule: ENV-VAR_DECLARATIONS-REQ-0001 — Static declaration
+  Rule: ENV_VAR-DECLARATIONS-REQ-0001 — Static declaration
 
-    Scenario: ENV-VAR_DECLARATIONS-ACC-0008 — Plugin declaration during a session is rejected
+    Scenario: ENV_VAR-DECLARATIONS-ACC-0008 — Plugin declaration during a session is rejected
       Given a session is running
       When a plugin requests a new declaration for "EXAMPLE_KEY"
       Then the software rejects the request
@@ -226,7 +226,7 @@ Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
 
 ## Links
 
-- [Specification](./env-var-declarations.spec.md): Requirements for declaring
+- [Specification](./env_var-declarations.spec.md): Requirements for declaring
   environment variables.
 - [README.md](../../../README.md): Declarative model, resolution, and projection
   of environment variables in Kraf.
