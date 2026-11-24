@@ -1,8 +1,8 @@
 ---
 description: Requirements for projecting resolved environment variables to managed processes.
-tags: [environment, env-var, specification, spec, projection]
+tags: [environment, env_var, specification, spec, projection]
 type: ["spec"]
-scope: ["module:env-var"]
+scope: ["module:env_var"]
 language: en
 ---
 
@@ -28,15 +28,15 @@ language: en
 
 ## Requirements
 
-### ENV-VAR_PROJECTION-REQ-0001
+### ENV_VAR-PROJECTION-REQ-0001
 
 Name: Explicit export authorization
 
 **Links:**
 
-- [Intent](../../env-var-intent.md): module intent.
-- [ENV-VAR_PROJECTION-ACC-0001](./env-var-projection.acceptance.md#env-var_projection-acc-0001)
-- [ENV-VAR_PROJECTION-ACC-0002](./env-var-projection.acceptance.md#env-var_projection-acc-0002)
+- [Intent](../../env_var-intent.md): module intent.
+- [ENV_VAR-PROJECTION-ACC-0001](./env_var-projection.acceptance.md#ENV_VAR-PROJECTION-ACC-0001)
+- [ENV_VAR-PROJECTION-ACC-0002](./env_var-projection.acceptance.md#ENV_VAR-PROJECTION-ACC-0002)
 
 **Status**:
 
@@ -50,14 +50,14 @@ mappings.
 
 ---
 
-### ENV-VAR_PROJECTION-REQ-0002
+### ENV_VAR-PROJECTION-REQ-0002
 
 Name: Export value symmetry
 
 **Links:**
 
-- [Intent](../../env-var-intent.md): module intent.
-- [ENV-VAR_PROJECTION-ACC-0003](./env-var-projection.acceptance.md#env-var_projection-acc-0003)
+- [Intent](../../env_var-intent.md): module intent.
+- [ENV_VAR-PROJECTION-ACC-0003](./env_var-projection.acceptance.md#ENV_VAR-PROJECTION-ACC-0003)
 
 **Status**:
 
@@ -71,14 +71,14 @@ the declaration produces.
 
 ---
 
-### ENV-VAR_PROJECTION-REQ-0003
+### ENV_VAR-PROJECTION-REQ-0003
 
 Name: Projected output order
 
 **Links:**
 
-- [Intent](../../env-var-intent.md): module intent.
-- [ENV-VAR_PROJECTION-ACC-0004](./env-var-projection.acceptance.md#env-var_projection-acc-0004)
+- [Intent](../../env_var-intent.md): module intent.
+- [ENV_VAR-PROJECTION-ACC-0004](./env_var-projection.acceptance.md#ENV_VAR-PROJECTION-ACC-0004)
 
 **Status**:
 
@@ -94,14 +94,14 @@ order.
 
 ---
 
-### ENV-VAR_PROJECTION-REQ-0004
+### ENV_VAR-PROJECTION-REQ-0004
 
 Name: Empty values are not projected
 
 **Links:**
 
-- [Intent](../../env-var-intent.md): module intent.
-- [ENV-VAR_PROJECTION-ACC-0005](./env-var-projection.acceptance.md#env-var_projection-acc-0005)
+- [Intent](../../env_var-intent.md): module intent.
+- [ENV_VAR-PROJECTION-ACC-0005](./env_var-projection.acceptance.md#ENV_VAR-PROJECTION-ACC-0005)
 
 **Status**:
 
@@ -115,9 +115,9 @@ THEN THE SOFTWARE SHALL NOT project any of its export aliases.
 
 ## Links
 
-- [Intent](../../env-var-intent.md): Why Kraf resolves and projects environment
+- [Intent](../../env_var-intent.md): Why Kraf resolves and projects environment
   variables through a declarative model.
-- [Acceptance](./env-var-projection.acceptance.md): Acceptance scenarios for
+- [Acceptance](./env_var-projection.acceptance.md): Acceptance scenarios for
   projecting environment variables.
 - [README.md](../../../README.md): Declarative model, resolution, and projection
   of environment variables in Kraf.

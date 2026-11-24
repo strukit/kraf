@@ -62,8 +62,10 @@ This section defines where module documents live. The tree of
 
 - Documentation MUST live with the module it describes, and MUST NOT be in
   `<repo>/docs`.
+- The name of a module MUST use `_` and MUST NOT use `-` (e.g. `env_var`, not
+  `env-var`).
 - A module folder MUST be named after its module, with each `-` of the name
-  replaced by `_` (e.g. `env_var/` for the module `env-var`).
+  replaced by `_` (e.g. `my_module/` for the module `my-module`).
 - The `<module>/` folder of the tree in [Docs layout](#docs-layout) MUST be read
   as the module folder named as the preceding rule states, and every other
   `<module>` of that tree MUST be read as the name of the module, with its `-`.
@@ -99,8 +101,8 @@ This section defines the identifiers of requirements and acceptance scenarios.
   separated by `-`, as the format of [Docs identifiers](#docs-identifiers)
   shows.
 - An identifier MUST use `-` only to separate its parts, and MUST use `_` in
-  place of each `-` of the name of a module or a feature (e.g. `ENV_VAR` for the
-  module `env-var`).
+  place of each `-` of the name of a module or a feature (e.g. `MY_MODULE` for
+  the module `my-module`).
 - The anchor of an identifier in a link MUST be written in uppercase, as the
   identifier itself (e.g. `#ENV_VAR-HOST-REQ-0004`).
 - The identifier of a Gherkin `Feature` MUST use the same module and feature as
@@ -114,7 +116,7 @@ This section defines the identifiers of requirements and acceptance scenarios.
 
 ### Examples
 
-- Module: env-var
+- Module: env_var
 - Feature: Declarations
 
 ```text
