@@ -14,7 +14,7 @@ language: en
 > - **Optional:** MAY, OPTIONAL
 >
 > See
-> [GENERAL_STANDARDS.md](../../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
+> [GENERAL_STANDARDS.md](../../../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
 
 ## ENV-VAR_HOST-ACC-0001
 
@@ -285,5 +285,5 @@ Feature: ENV-VAR_HOST-FEAT-0001 — Environment variable host mappings
 
 - [Specification](./env-var-host.spec.md): Requirements for platform-specific
   environment-variable mappings.
-- [README.md](../../README.md): Declarative model, resolution, and projection of
-  environment variables in Kraf.
+- [README.md](../../../README.md): Declarative model, resolution, and projection
+  of environment variables in Kraf.

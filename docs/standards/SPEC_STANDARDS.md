@@ -1,5 +1,5 @@
 ---
-description: Standards for documenting feature intent, requirements, and acceptance scenarios.
+description: Standards for documenting module intent, requirements, and acceptance scenarios.
 tags: [specification, requirements, acceptance, ears, documentation]
 type: ["standard"]
 scope: ["module:*", "type:intent", "type:spec", "type:acceptance"]
@@ -30,10 +30,10 @@ language: en
 
 ## Overview
 
-This document defines how this repo records feature intent, behavioral
+This document defines how this repo records module intent, behavioral
 requirements, and acceptance scenarios. It defines the documentation protocol,
-not the behavior of a specific feature. It defines the product-level
-documentation of a feature, not its architecture.
+not the behavior of a specific module. It defines the product-level
+documentation of a module, not its architecture.
 
 ### Rules
 
@@ -44,26 +44,32 @@ documentation of a feature, not its architecture.
 
 ## Docs layout
 
-This section defines where feature documents live. The tree of
-[Docs layout](#docs-layout) shows the layout of a feature folder.
+This section defines where module documents live. The tree of
+[Docs layout](#docs-layout) shows the layout of a module folder.
 
 ```text
-<feature>/
+<module>/
 ├── README.md
 └── docs/
-    ├── <feature>-intent.md
-    └── <feature>-<area>/
-        ├── <feature>-<area>.spec.md
-        └── <feature>-<area>.acceptance.md
+    ├── <module>-intent.md
+    └── specs/
+        └── <module>-<feature>/
+            ├── <module>-<feature>.spec.md
+            └── <module>-<feature>.acceptance.md
 ```
 
 ### Rules
 
-- Documentation MUST live with the feature it describes, and MUST NOT be in root
-  `/docs`.
-- Every feature folder MUST have a `README.md` that orients a reader before they
-  open its `docs/`, and that declares the module `<feature>` by listing
-  `module:<feature>` in its `type`.
+- Documentation MUST live with the module it describes, and MUST NOT be in
+  `<repo>/docs`.
+- Every module folder MUST have a `README.md` that orients a reader before they
+  open its `<module>/docs/`, and that declares the module `<module>` by listing
+  `module:<module>` in its `type`.
+- The intent of a module MUST be `<module>/docs/<module>-intent.md`, directly in
+  `<module>/docs/`, and MUST NOT be inside a feature folder.
+- The specification and the acceptance document of a feature MUST be in the
+  `<module>/docs/specs/<module>-<feature>/` folder of that feature, and MUST NOT
+  be directly in `<module>/docs/`.
 - Documentation MAY map one-to-one to source files, platform files, or tests.
 - A document SHOULD be created when a domain behavior needs a durable contract.
 
@@ -72,24 +78,28 @@ This section defines where feature documents live. The tree of
 This section defines the identifiers of requirements and acceptance scenarios.
 
 ```text
-<FEATURE>_<AREA>-REQ-0001
-<FEATURE>_<AREA>-ACC-0001
+<MODULE>_<FEATURE>-REQ-0001
+<MODULE>_<FEATURE>-ACC-0001
 ```
 
 ### Rules
 
-- Identifiers MUST use an uppercase feature area, followed by a type and a
-  four-digit sequence number, as the format of
+- Identifiers MUST use an uppercase module, an underscore, and an uppercase
+  feature, followed by a type and a four-digit sequence number, as the format of
   [Docs identifiers](#docs-identifiers) shows.
+- The identifier of a Gherkin `Feature` MUST use the same module and feature as
+  its requirements, with the type `FEAT` and a four-digit sequence number, as
+  `<MODULE>_<FEATURE>-FEAT-0001` shows. A `Feature` identifies the feature it
+  describes, and it is not a name for the module or the feature.
 - A citation of a requirement or an acceptance scenario, in a document, code, a
   commit message, a pull request, a comment, or a message to the user, MUST use
-  its full identifier, with the feature and area (e.g. `ENV-VAR_HOST-REQ-0004`,
-  not `REQ-0004`).
+  its full identifier, with the module and feature (e.g.
+  `ENV-VAR_HOST-REQ-0004`, not `REQ-0004`).
 
 ### Examples
 
-- Feature: ENV-VAR
-- Area: Declarations
+- Module: ENV-VAR
+- Feature: Declarations
 
 ```text
 ENV-VAR_DECLARATIONS-REQ-0001
@@ -98,8 +108,8 @@ ENV-VAR_DECLARATIONS-ACC-0001
 
 ## Docs graph
 
-This section defines the links between feature documents, so the full set forms
-a navigable graph instead of files nobody points into. This lets graph-based
+This section defines the links between module documents, so the full set forms a
+navigable graph instead of files nobody points into. This lets graph-based
 retrieval (graph RAG) walk from any document to related context without a
 full-text search.
 
@@ -113,13 +123,13 @@ full-text search.
   matching **Acceptance** scenarios.
 - An **Acceptance** document MUST link back to the **Specification** requirement
   it verifies.
-- Feature documents MUST use the relationship sections defined by their type.
+- Module documents MUST use the relationship sections defined by their type.
 - Repo-level documents MUST follow the
   [Link Navigation](./GENERAL_STANDARDS.md#link-navigation) rules.
 
 ## Docs types
 
-This section defines each type of feature document, its rules, and its layout.
+This section defines each type of module document, its rules, and its layout.
 
 ### Rules
 
@@ -130,7 +140,7 @@ This section defines each type of feature document, its rules, and its layout.
 
 ### Intent (*-intent.md)
 
-An intent explains why a feature exists, the problem it addresses, its
+An intent explains why a module exists, the problem it addresses, its
 boundaries, and its non-goals. An intent is an idea that still needs refinement.
 
 #### Rules
@@ -151,29 +161,30 @@ boundaries, and its non-goals. An intent is an idea that still needs refinement.
 
 ```md
 ---
-description: <One-line summary of why the feature exists.>
+description: <One-line summary of why the module exists.>
 tags: [<tag1>, <tag2>, ...]
 type: ["intent"]
-scope: ["module:<feature>"]
+scope: ["module:<module>"]
 language: <language-code>
 ---
 
 ## Problem
 
-<What is difficult, inconsistent, or unsafe without this feature.>
+<What is difficult, inconsistent, or unsafe without this module.>
 
 ## Intent
 
-<What the feature is intended to make possible or guarantee.>
+<What the module is intended to make possible or guarantee.>
 
 ## Boundaries
 
-<What this feature does not own; where responsibility moves elsewhere.>
+<What this module does not own; where responsibility moves elsewhere.>
 
 ## Links
 
 - [README.md](path-to-nearest-index): <description of the nearest index>.
-- [<Area>](./<feature>-<area>/<feature>-<area>.spec.md): <area> Specification.
+- [<Feature>](./specs/<module>-<feature>/<module>-<feature>.spec.md): <feature>
+  Specification.
 ```
 
 ### Specification (*.spec.md)
@@ -250,9 +261,9 @@ THE SOFTWARE SHALL <system response>.
 ````md
 ---
 description: <One-line summary of the requirements.>
-tags: [<feature>, <area>, specification, spec]
+tags: [<module>, <feature>, specification, spec]
 type: ["spec"]
-scope: ["module:<feature>"]
+scope: ["module:<module>"]
 language: <language-code>
 ---
 
@@ -278,14 +289,14 @@ language: <language-code>
 
 ## Requirements
 
-### <FEATURE>_<AREA>-REQ-0001
+### <MODULE>_<FEATURE>-REQ-0001
 
 Name: <Requirement name>
 
 **Links:**
 
-- [<FEATURE>_<AREA>-ACC-0001](./<feature>-<area>.acceptance.md#<feature>_<area>-acc-0001)
-- [Intent](../<feature>-intent.md)
+- [<MODULE>_<FEATURE>-ACC-0001](./<module>-<feature>.acceptance.md#<module>_<feature>-acc-0001)
+- [Intent](../../<module>-intent.md)
 
 **Status**:
 
@@ -299,7 +310,7 @@ THE SOFTWARE SHALL <system response>.
 
 ## Links
 
-- [Intent](../<feature>-intent.md): <description of the intent>.
+- [Intent](../../<module>-intent.md): <description of the intent>.
 - [README.md](path-to-nearest-index): <description of the nearest index>.
 ````
 
@@ -315,6 +326,11 @@ An acceptance document defines observable scenarios derived from requirements.
   - **Doc status:** `Draft`, `Accepted`, or `Superseded`.
   - **Verification status:** `Not Meets`, `Partially Meets`, `Meets`, or
     `Unknown`.
+- An acceptance scenario MUST have the verification status `Meets` only when an
+  automated check runs its `When` steps and asserts each `Then` step on the
+  value that the software produces.
+- A check that only validates the format of the data MUST give the verification
+  status `Partially Meets`.
 - The implementation status MUST be declared by the requirement, and MUST NOT be
   declared by each scenario.
 - A requirement MAY have multiple acceptance scenarios.
@@ -346,18 +362,20 @@ Feature: <name>
   [Acceptance language](#acceptance-language) leave a doubt about Gherkin
   unresolved.
 - Acceptance scenarios MUST use Gherkin.
-- A `Feature` MUST group the scenarios of one area, a `Rule` MUST scope
+- A `Feature` MUST group the scenarios of one feature, a `Rule` MUST scope
   scenarios to the requirement they verify, and a `Scenario` MUST state one
   observable behavior as `Given`/`When`/`Then` steps.
+- The word `Feature` in a Gherkin document MUST be read as the Gherkin keyword,
+  and MUST NOT be read as the term `feature` of this document.
 
 #### Acceptance layout
 
 ````md
 ---
 description: <One-line summary of the acceptance scenarios.>
-tags: [<feature>, <area>, acceptance, gherkin]
+tags: [<module>, <feature>, acceptance, gherkin]
 type: ["acceptance"]
-scope: ["module:<feature>"]
+scope: ["module:<module>"]
 language: <language-code>
 ---
 
@@ -371,13 +389,13 @@ language: <language-code>
 > See
 > [GENERAL_STANDARDS.md](<path-to-docs>/GENERAL_STANDARDS.md#normative-language).
 
-## <FEATURE>_<AREA>-ACC-0001
+## <MODULE>_<FEATURE>-ACC-0001
 
 Name: <Scenario name>
 
 **Links:**
 
-- [<FEATURE>_<AREA>-REQ-0001](./<feature>-<area>.spec.md#<feature>_<area>-req-0001)
+- [<MODULE>_<FEATURE>-REQ-0001](./<module>-<feature>.spec.md#<module>_<feature>-req-0001)
 
 **Status**:
 
@@ -385,11 +403,11 @@ Name: <Scenario name>
 - Verification status: Unknown
 
 ```gherkin
-Feature: <FEATURE>_<AREA>-FEAT-0001 — <Feature description>
+Feature: <MODULE>_<FEATURE>-FEAT-0001 — <Feature description>
 
-  Rule: <FEATURE>_<AREA>-REQ-0001 — <Requirement name>
+  Rule: <MODULE>_<FEATURE>-REQ-0001 — <Requirement name>
 
-    Scenario: <FEATURE>_<AREA>-ACC-0001 — <Scenario name>
+    Scenario: <MODULE>_<FEATURE>-ACC-0001 — <Scenario name>
       Given <precondition>
       When <action>
       Then <expected outcome>
@@ -397,7 +415,7 @@ Feature: <FEATURE>_<AREA>-FEAT-0001 — <Feature description>
 
 ## Links
 
-- [Specification](./<feature>-<area>.spec.md):
+- [Specification](./<module>-<feature>.spec.md):
   <description of the specification>.
 - [README.md](path-to-nearest-index): <description of the nearest index>.
 ````

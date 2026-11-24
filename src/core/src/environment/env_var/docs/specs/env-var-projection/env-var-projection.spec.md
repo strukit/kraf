@@ -14,7 +14,7 @@ language: en
 > - **Optional:** MAY, OPTIONAL
 >
 > See
-> [GENERAL_STANDARDS.md](../../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
+> [GENERAL_STANDARDS.md](../../../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
 
 </br>
 
@@ -34,7 +34,7 @@ Name: Explicit export authorization
 
 **Links:**
 
-- [Intent](../env-var-intent.md): module intent.
+- [Intent](../../env-var-intent.md): module intent.
 - [ENV-VAR_PROJECTION-ACC-0001](./env-var-projection.acceptance.md#env-var_projection-acc-0001)
 - [ENV-VAR_PROJECTION-ACC-0002](./env-var-projection.acceptance.md#env-var_projection-acc-0002)
 
@@ -56,7 +56,7 @@ Name: Export value symmetry
 
 **Links:**
 
-- [Intent](../env-var-intent.md): module intent.
+- [Intent](../../env-var-intent.md): module intent.
 - [ENV-VAR_PROJECTION-ACC-0003](./env-var-projection.acceptance.md#env-var_projection-acc-0003)
 
 **Status**:
@@ -77,7 +77,7 @@ Name: Projected output order
 
 **Links:**
 
-- [Intent](../env-var-intent.md): module intent.
+- [Intent](../../env-var-intent.md): module intent.
 - [ENV-VAR_PROJECTION-ACC-0004](./env-var-projection.acceptance.md#env-var_projection-acc-0004)
 
 **Status**:
@@ -100,7 +100,7 @@ Name: Empty values are not projected
 
 **Links:**
 
-- [Intent](../env-var-intent.md): module intent.
+- [Intent](../../env-var-intent.md): module intent.
 - [ENV-VAR_PROJECTION-ACC-0005](./env-var-projection.acceptance.md#env-var_projection-acc-0005)
 
 **Status**:
@@ -115,9 +115,9 @@ THEN THE SOFTWARE SHALL NOT project any of its export aliases.
 
 ## Links
 
-- [Intent](../env-var-intent.md): Why Kraf resolves and projects environment
+- [Intent](../../env-var-intent.md): Why Kraf resolves and projects environment
   variables through a declarative model.
 - [Acceptance](./env-var-projection.acceptance.md): Acceptance scenarios for
   projecting environment variables.
-- [README.md](../../README.md): Declarative model, resolution, and projection of
-  environment variables in Kraf.
+- [README.md](../../../README.md): Declarative model, resolution, and projection
+  of environment variables in Kraf.

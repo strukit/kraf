@@ -14,7 +14,7 @@ language: en
 > - **Optional:** MAY, OPTIONAL
 >
 > See
-> [GENERAL_STANDARDS.md](../../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
+> [GENERAL_STANDARDS.md](../../../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
 
 ## ENV-VAR_DECLARATIONS-ACC-0001
 
@@ -228,5 +228,5 @@ Feature: ENV-VAR_DECLARATIONS-FEAT-0001 — Environment variable declarations
 
 - [Specification](./env-var-declarations.spec.md): Requirements for declaring
   environment variables.
-- [README.md](../../README.md): Declarative model, resolution, and projection of
-  environment variables in Kraf.
+- [README.md](../../../README.md): Declarative model, resolution, and projection
+  of environment variables in Kraf.

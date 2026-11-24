@@ -14,7 +14,7 @@ language: en
 > - **Optional:** MAY, OPTIONAL
 >
 > See
-> [GENERAL_STANDARDS.md](../../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
+> [GENERAL_STANDARDS.md](../../../../../../../../docs/standards/GENERAL_STANDARDS.md#normative-language).
 
 ## ENV-VAR_ACCESS-ACC-0001
 
@@ -98,5 +98,5 @@ Feature: ENV-VAR_ACCESS-FEAT-0001 — Environment variable access
 
 - [Specification](./env-var-access.spec.md): Requirements for how modules and
   plugins access resolved environment values.
-- [README.md](../../README.md): Declarative model, resolution, and projection of
-  environment variables in Kraf.
+- [README.md](../../../README.md): Declarative model, resolution, and projection
+  of environment variables in Kraf.

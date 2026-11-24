@@ -176,6 +176,34 @@ language: <language-code>
 - `*` MUST match any characters except `/`.
 - `**` MUST match any number of directories, including none.
 
+### Docs Folders
+
+#### Terms
+
+- **Repository docs**: the `docs` folder at the root of the repository, written
+  `<repo>/docs`.
+- **Module docs**: the `docs` folder inside the folder of a module, written
+  `<module>/docs`, where `<module>` is the name of that module's folder.
+
+#### Rules
+
+- A reference to the repository docs MUST be written `<repo>/docs`.
+- A reference to the docs of a module MUST be written `<module>/docs`, with the
+  name of the module in place of `<module>`.
+- The target of a link MUST stay as it is written.
+- When the visible text of a link contains a relative path to the repository
+  docs, such as `./docs`, `docs/`, `/docs`, or `../docs`, that path MUST be
+  replaced by `<repo>/docs/`.
+- When the visible text of a link contains a relative path to the docs of a
+  module, that path MUST be replaced by `./<module>/docs/`.
+- The visible text of a link that contains no path to a docs folder MUST NOT be
+  changed by this section.
+- The rules of this section about the visible text of a link MUST NOT apply to
+  the text of a template, which MUST be kept as written under
+  [Templates](#templates), and MUST NOT apply to the examples of a document.
+- An entry `docs/` inside a tree of files MAY be written `docs/`, when its
+  parent entry already names the folder that holds it.
+
 ## Language Standards
 
 ### Normative Language
@@ -230,7 +258,7 @@ Normative keywords express three levels of force:
 ### Normative-Language Note
 
 ```yaml
-scope: ["**/*.md", "!type:root", "!type:index"]
+scope: ["**/*.md", "!type:root", "!type:index", "!type:readme"]
 ```
 
 #### Normative-Language Note - Template
@@ -252,6 +280,8 @@ scope: ["**/*.md", "!type:root", "!type:index"]
   following the [template](#normative-language-note---template) above, as the
   first of the notes of the [layout](#document-layout), even when it uses no
   normative keyword.
+- A document whose `type` lists `readme` or `index` MUST NOT carry the note,
+  whatever the `scope` of this section says.
 
 ### Standard Note
 
