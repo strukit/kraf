@@ -101,8 +101,12 @@ This section defines the identifiers of requirements and acceptance scenarios.
 - An identifier MUST use `-` only to separate its parts, and MUST use `_` in
   place of each `-` of the name of a feature (e.g. `MY_FEATURE` for the feature
   `my-feature`).
-- The anchor of an identifier in a link MUST be written in uppercase, as the
-  identifier itself (e.g. `#ENV_VAR-HOST-REQ-0004`).
+- The type of an identifier MUST be `REQ` for a requirement, `ACC` for an
+  acceptance scenario, or `FEAT` for a Gherkin `Feature`.
+- Every part of an identifier MUST be written in uppercase wherever the
+  identifier appears, including headings, plain text, link text, link anchors,
+  Gherkin lines, code, and citations (e.g. `ENV_VAR-HOST-REQ-0004` and
+  `#ENV_VAR-HOST-REQ-0004`).
 - The identifier of a Gherkin `Feature` MUST use the same module and feature as
   its requirements, with the type `FEAT` and a four-digit sequence number, as
   `<MODULE>-<FEATURE>-FEAT-0001` shows. A `Feature` identifies the feature it
@@ -115,7 +119,7 @@ This section defines the identifiers of requirements and acceptance scenarios.
 ### Examples
 
 - Module: env_var
-- Feature: Declarations
+- Feature: declarations
 
 ```text
 ENV_VAR-DECLARATIONS-REQ-0001
