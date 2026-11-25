@@ -54,8 +54,7 @@ follows, and how it presents its findings. What a report contains is defined in
 
 ````md
 ```yaml
-model: <full identifier of the model: name, version, and date or revision>
-effort: <low | medium | high | extra-high | max | unknown>
+model: <full identifier of the model: name, version, and date or revision of model>
 agent: <name of the harness or command-line client that ran the review>
 ```
 
@@ -63,7 +62,8 @@ agent: <name of the harness or command-line client that ran the review>
 
 ## Findings
 
-<findings, or, in a review posted to a pull request, its title only>
+<one `### Finding NN: title` section per finding, in order of severity, or, in a
+review posted to a pull request, only its title>
 ````
 
 #### Finding - Template
@@ -140,7 +140,7 @@ agent: <name of the harness or command-line client that ran the review>
   inline review comments, when there is one, such as the review tools of the
   hosting service or its command-line client.
 - A review report with no findings MUST replace the finding placeholder under
-  `## Findings`, and the `...` that follows it, with the line `None.`
+  `## Findings`, with the line `None.`
 - The unverified and dropped candidates MUST NOT be posted to a pull request.
 
 #### Examples
