@@ -42,7 +42,7 @@ follows, and how it presents its findings. What a report contains is defined in
   **[Dropped candidate](./REVIEW_STANDARDS.md#terms)**, and
   **[Force of a finding](./REVIEW_STANDARDS.md#terms)**: defined in
   [REVIEW_STANDARDS.md](./REVIEW_STANDARDS.md#terms).
-- **Reviewer block**: the YAML block that opens the
+- **Reviewer block**: the YAML block that follows the title of the
   [review report template](#review-report---template), with the model, the
   reasoning effort, and the agent that ran the review.
 
@@ -52,18 +52,21 @@ follows, and how it presents its findings. What a report contains is defined in
 
 #### Review Report - Template
 
-`````md
-```yaml
-model: <full identifier of the model: name, version, and date or revision of model>
-agent: <name of the harness or command-line client that ran the review>
-```
-
+````md
 # Review
+
+```yaml
+model: <name of the model>(<full identifier of model with revision if available>)
+agent: <name of the agent harness>
+```
 
 ## Findings
 
 <one `### Finding NN: title` section per finding, in order of severity, or, in a
 review posted to a pull request, only its title as a link to its comment>
+````
+
+#### Finding - Template
 
 ````md
 ### Finding <number>: <one-sentence statement of the issue>
@@ -85,7 +88,6 @@ review posted to a pull request, only its title as a link to its comment>
 + <suggested content>
 ```
 ````
-`````
 
 #### Rules
 
@@ -100,6 +102,9 @@ review posted to a pull request, only its title as a link to its comment>
   because sharing them encourages good practices and a fair environment.
 - A review report or review comment, produced by an agent, that lacks the
   reviewer block MUST be discarded.
+- An inline review comment that belongs to a review whose body holds the review
+  report, with its reviewer block, MUST NOT repeat the reviewer block, and MUST
+  NOT be discarded for lacking it.
 - The rule that requires the reviewer block MUST override the rule of
   [Agent attribution](../../AGENTS.md#agent-attribution) that forbids a line
   that credits an agent, a model, or the tool that runs it, and MUST override it
