@@ -103,11 +103,11 @@ agents follow to perform it.
   that it has no source, and MUST NOT be an unverified candidate.
 - When no standard document or specification states the expected result of a
   candidate whose source is a defect, the review MUST reproduce the candidate
-  with a check that the user can run, where the review can run one. A
-  reproduction that confirms the defect makes the candidate a finding. A
-  reproduction that does not confirm it makes the candidate a dropped candidate.
-  When the review cannot run the check, the candidate MUST be an unverified
-  candidate, with the check that would settle it.
+  with a check that the user can run, where the review can run one. A candidate
+  whose reproduction confirms the defect MUST be a finding. A candidate whose
+  reproduction does not confirm it MUST be a dropped candidate. When the review
+  cannot run the check, the candidate MUST be an unverified candidate, with the
+  check that would settle it.
 - A finding about a behavior-preserving change MUST concern only whether the
   behavior is preserved, whether references to anything renamed still resolve,
   or whether the content follows the normative-language rules.

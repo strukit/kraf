@@ -152,8 +152,8 @@ review comment, or a `diff` block elsewhere>
 - A review report with no findings MUST replace the finding placeholder under
   `## Findings`, with the line `None.`
 - The unverified and dropped candidates MUST NOT be posted to a pull request.
-- Agents MUST post to a pull request only the findings of the review report, and
-  MUST NOT post notes, limitations, or other content outside that report.
+- Agents MUST post to a pull request only the review report and its findings,
+  and MUST NOT post notes, limitations, or other content outside that report.
 - Agents MUST check each comment that they are about to post to a pull request
   against the two rules above before posting it.
 
