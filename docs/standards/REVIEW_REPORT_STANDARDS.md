@@ -63,7 +63,7 @@ agent: <name of the harness or command-line client that ran the review>
 ## Findings
 
 <one `### Finding NN: title` section per finding, in order of severity, or, in a
-review posted to a pull request, only its title>
+review posted to a pull request, only its title as a link to its inline comment>
 ````
 
 #### Finding - Template
