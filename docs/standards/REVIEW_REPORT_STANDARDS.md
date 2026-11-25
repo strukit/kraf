@@ -56,8 +56,9 @@ follows, and how it presents its findings. What a report contains is defined in
 # Review
 
 ```yaml
-model: <name of the model>(<full identifier of model with revision if available>)
 agent: <name of the agent harness>
+model: <name of the model>(<full identifier of model with revision if available>)
+effort: <reasoning effort of the review: low | medium | high | extra-high | max | unknown>
 ```
 
 ## Findings
