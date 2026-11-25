@@ -1,5 +1,5 @@
 ---
-description: Standards for the format of a review report, with its templates and examples.
+description: Standards for the content and format of a review report, with its templates and examples.
 tags: [review, report, findings, templates, standards]
 type: ["standard"]
 scope: ["**/*"]
@@ -31,9 +31,9 @@ language: en
 
 ## Overview
 
-This document defines the format of a review report: the templates that it
-follows, and how it presents its findings. What a report contains is defined in
-[REVIEW_STANDARDS.md](./REVIEW_STANDARDS.md#report).
+This document defines the content and format of a review report: the findings
+that it contains, the templates that it follows, and how it presents its
+findings.
 
 ## Terms
 
@@ -47,6 +47,34 @@ follows, and how it presents its findings. What a report contains is defined in
   agent that ran the review.
 
 ## Rules
+
+### Report Content
+
+This section defines which findings a review report contains, and how agents
+report the candidates that it leaves out.
+
+#### Rules
+
+- A review report MUST contain every finding that meets the rules of
+  [REVIEW_STANDARDS.md](./REVIEW_STANDARDS.md), and only those.
+- The findings of a review report MUST NOT depend on a target number of
+  findings.
+- A review of the same change under the same rules MUST yield the same findings.
+- A review report MUST state, for each finding, its source and the rule or
+  defect it cites.
+- A review report MUST NOT list an unverified or a dropped candidate among its
+  findings.
+- Agents MUST keep each unverified and dropped candidate, with its reason and
+  the rule it was checked against, in their session context.
+- Agents MUST list each unverified and dropped candidate to the user in the
+  reply that reports the review, after the review report and outside it, without
+  waiting for the user to ask. Each entry MUST state the candidate, its status
+  (`unverified` or `dropped`), the rule or defect it was checked against, why it
+  is not a finding, what would settle it, and how to reproduce the check: the
+  command, file, or steps that the user can run to repeat it.
+- When a review has no reply to a user, its unverified and dropped candidates
+  MUST be reported in the context where the review runs, such as in the output
+  of the command that runs it, and MUST NOT be added to the review report.
 
 ### Report Templates
 
@@ -174,4 +202,4 @@ review posted to a pull request, only its title as a link to its comment>
 - [README.md](./README.md): Index of the standards that govern this repository,
   to help people and agents navigate it on their own through the document graph.
 - [REVIEW_STANDARDS.md](./REVIEW_STANDARDS.md): Standards for what a valid
-  review contains, its scope, its findings, and its report.
+  review contains, its scope, and its findings.
