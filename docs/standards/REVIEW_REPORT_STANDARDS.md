@@ -52,21 +52,18 @@ follows, and how it presents its findings. What a report contains is defined in
 
 #### Review Report - Template
 
-````md
+`````md
 ```yaml
 model: <full identifier of the model: name, version, and date or revision of model>
 agent: <name of the harness or command-line client that ran the review>
 ```
 
-# Review report MacOS
+# Review
 
 ## Findings
 
 <one `### Finding NN: title` section per finding, in order of severity, or, in a
 review posted to a pull request, only its title as a link to its comment>
-````
-
-#### Finding - Template
 
 ````md
 ### Finding <number>: <one-sentence statement of the issue>
@@ -88,6 +85,7 @@ review posted to a pull request, only its title as a link to its comment>
 + <suggested content>
 ```
 ````
+`````
 
 #### Rules
 
