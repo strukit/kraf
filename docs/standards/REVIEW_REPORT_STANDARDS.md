@@ -83,8 +83,8 @@ review posted to a pull request, only its title as a link to its comment>
   recommendation>
 - **Failure scenario**: <the content or input that leads to the wrong result>
 
-<OPTIONAL, the change that fixes the finding: a `suggestion` block in an inline
-review comment, or a `diff` block elsewhere>
+<OPTIONAL, the block below, with the change that fixes the finding: a
+`suggestion` block in an inline review comment, or a `diff` block elsewhere>
 
 ```suggestion
 <content that replaces the lines that the inline review comment is attached to>
