@@ -88,11 +88,6 @@ review posted to a pull request, only its title as a link to its comment>
 ```suggestion
 <content that replaces the lines that the inline review comment is attached to>
 ```
-
-```diff
-- <current content>
-+ <suggested content>
-```
 ````
 
 #### Rules
