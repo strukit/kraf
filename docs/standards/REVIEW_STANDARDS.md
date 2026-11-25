@@ -164,8 +164,6 @@ content and format of its report are defined in
    require, and MUST list the unverified and dropped candidates to the user, as
    the [Report Content](./REVIEW_REPORT_STANDARDS.md#report-content) section of
    REVIEW_REPORT_STANDARDS.md requires.
-7. Agents MUST state in the review report that they applied steps 2 to 5 to
-   every change in the scope.
 
 ## Links
 
