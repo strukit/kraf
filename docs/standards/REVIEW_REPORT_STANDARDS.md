@@ -43,8 +43,8 @@ follows, and how it presents its findings. What a report contains is defined in
   **[Force of a finding](./REVIEW_STANDARDS.md#terms)**: defined in
   [REVIEW_STANDARDS.md](./REVIEW_STANDARDS.md#terms).
 - **Reviewer block**: the YAML block that follows the title of the
-  [review report template](#review-report---template), with the model, the
-  reasoning effort, and the agent that ran the review.
+  [review report template](#review-report---template), with the model and the
+  agent that ran the review.
 
 ## Rules
 
@@ -58,7 +58,6 @@ follows, and how it presents its findings. What a report contains is defined in
 ```yaml
 agent: <name of the agent harness>
 model: <name of the model> (<full identifier of model>)
-effort: <reasoning effort of the agent/subagent review: low | medium | high | extra-high | max | unknown>
 ```
 
 ## Findings
@@ -72,7 +71,8 @@ review posted to a pull request, only its title as a link to its comment>
 ````md
 ### Finding <number>: <one-sentence statement of the issue>
 
-- **Location**: [<file>:<line>:<column>](<link to the file at that line>)
+- **Location**: [<file>:<line or range of lines>](<link to the file at that line
+  or range of lines, e.g. `#L10` or `#L10-L12`>)
 - **Source**: <defect | rule violation | repository tool failure |
   <name of an external skill or agent>>
 - **Original code**: <OPTIONAL, the code or category that the repository tool,
@@ -96,12 +96,11 @@ review posted to a pull request, only its title as a link to its comment>
 - A review report MUST follow the
   [review report template](#review-report---template), and each finding MUST
   follow the [finding template](#finding---template).
-- A review report MUST state, in its reviewer block, the model, the reasoning
-  effort, and the agent that ran the review, and MUST write `unknown` for the
-  effort when the agent cannot determine it.
+- A review report MUST state, in its reviewer block, the model and the agent
+  that ran the review.
 - A developer who uses an agent in this repository MUST accept that the review
-  reports it produces share the model, the reasoning effort, and the agent,
-  because sharing them encourages good practices and a fair environment.
+  reports it produces share the model and the agent, because sharing them
+  encourages good practices and a fair environment.
 - A review report or review comment, produced by an agent, that lacks the
   reviewer block MUST be discarded.
 - An inline review comment that belongs to a review whose body holds the review
@@ -112,9 +111,8 @@ review posted to a pull request, only its title as a link to its comment>
   that credits an agent, a model, or the tool that runs it, and MUST override it
   only for the reviewer block of a review report.
 - An agent that produces a review report for a pull request MUST inform the user
-  that the report shares the model, the reasoning effort, and the agent, and
-  that a review report or review comment that lacks the reviewer block is
-  discarded.
+  that the report shares the model and the agent, and that a review report or
+  review comment that lacks the reviewer block is discarded.
 - An agent MUST NOT omit that notice, unless the user has expressly instructed
   it to stop giving it, and that user instruction MUST then prevail.
 - Each finding MUST be numbered in the order of the review report.
@@ -125,11 +123,12 @@ review posted to a pull request, only its title as a link to its comment>
 - A review report MUST follow the templates of this document when it is posted,
   and MUST NOT follow the format of the tool, skill, or agent that produced a
   finding.
-- A finding MUST state its location as a Markdown link to the file at that line,
-  relative to the root of the repository.
+- A finding MUST state its location as a Markdown link to the file at that line
+  or range of lines, relative to the root of the repository.
 - A finding posted to a pull request MUST instead link its location to the file
   at the reviewed commit (e.g.
-  `https://github.com/<owner>/<repo>/blob/<commit>/<file>#L<line>`).
+  `https://github.com/<owner>/<repo>/blob/<commit>/<file>#L<line>` or
+  `#L<start>-L<end>`).
 - A review report posted to a pull request MUST post each finding as an inline
   review comment attached to the file and the line of its location, or to its
   range of lines, and MUST list in the report only the title of each finding, as
@@ -162,8 +161,8 @@ review posted to a pull request, only its title as a link to its comment>
 ```md
 ### Finding 01: A loop skips the last element of the list
 
-- **Location**: [src/example.rs:10:8](src/example.rs#L10)
-- **Source**: code-review skill
+- **Location**: [src/example.rs:10-12](src/example.rs#L10-L12)
+- **Source**: skill: code-review
 - **Original code**: `correctness`
 - **Rule or defect**: the loop bound excludes the last index
 - **Force**: non-blocking recommendation
