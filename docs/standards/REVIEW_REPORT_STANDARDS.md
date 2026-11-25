@@ -165,6 +165,10 @@ review posted to a pull request, only its title as a link to its comment>
   range of lines, and MUST list in the report only the title of each finding, as
   a link to its comment, which is either the inline comment or its comment in
   the discussion of the pull request.
+- A review report posted to a pull request MUST be submitted as a single review
+  that contains the report in its body and every new inline finding as an inline
+  comment of that review, updating the review body with the comment links after
+  submission when needed.
 - A finding posted as an inline review comment MUST state its suggestion, when
   it has one, as a `suggestion` block whose content replaces exactly the lines
   that the comment is attached to, and MUST use a `diff` block only when the
