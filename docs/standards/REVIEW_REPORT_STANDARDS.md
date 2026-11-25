@@ -152,27 +152,15 @@ review comment, or a `diff` block elsewhere>
 - A review report with no findings MUST replace the finding placeholder under
   `## Findings`, with the line `None.`
 - The unverified and dropped candidates MUST NOT be posted to a pull request.
+- Agents MUST post to a pull request only the findings of the review report, and
+  MUST NOT post notes, limitations, or other content outside that report.
+- Agents MUST check each comment that they are about to post to a pull request
+  against the two rules above before posting it.
 
 #### Examples
 
-````md
-### Finding 01: A rule item has a sentence without a normative keyword
-
-- **Location**: [docs/standards/EXAMPLE.md:42:3](docs/standards/EXAMPLE.md#L42)
-- **Source**: rule violation
-- **Rule or defect**: [Rule language](./DOC_STANDARDS.md#rule-language)
-- **Force**: blocking finding
-- **Failure scenario**: the sentence "The agent reads the file first." cannot be
-  classified as an instruction or a description.
-
-```diff
-- - The agent reads the file first.
-+ - Agents MUST read the file first.
-```
-````
-
 ```md
-### Finding 02: A loop skips the last element of the list
+### Finding 01: A loop skips the last element of the list
 
 - **Location**: [src/example.rs:10:8](src/example.rs#L10)
 - **Source**: code-review skill

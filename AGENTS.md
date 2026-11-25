@@ -373,30 +373,21 @@ terms, rules, bootstrap, and procedures that agents follow in each task.
 
 ### Review
 
-- Agents MUST apply the rules of
-  [REVIEW_STANDARDS.md](./docs/standards/REVIEW_STANDARDS.md) literally, as
-  written, when they review a change, and MUST NOT extend a rule beyond its
-  text, narrow it, or replace it with their own reading of its intent.
-- Agents MAY run a repository tool during a review when they have a plausible
-  reason, such as verifying a finding.
-- Agents MUST NOT run a repository tool during a review only to check what that
-  tool is expected to check on its own, such as through CI or a hook.
-- Agents MUST keep each unverified and dropped candidate, with its reason and
-  the rule it was checked against, in their session context.
-- Agents MUST list each unverified and dropped candidate to the user in the
-  reply that reports the review, after the review report and outside it, without
-  waiting for the user to ask. When the review has no reply to a user, they MUST
-  report the candidates in the context where the review runs, as
-  [REVIEW_STANDARDS.md](./docs/standards/REVIEW_STANDARDS.md) requires. Each
-  entry MUST state the candidate, its status (`unverified` or `dropped`), the
-  rule or defect it was checked against, why it is not a finding, what would
-  settle it, and how to reproduce the check: the command, file, or steps that
-  the user can run to repeat it.
-- Agents MUST NOT post the unverified and dropped candidates to a pull request.
-- Agents MUST post to a pull request only the findings of the review report, and
-  MUST NOT post notes, limitations, or other content outside that report.
-- Agents MUST check each comment that they are about to post to a pull request
-  against the two rules above before posting it.
+> [!WARNING]
+> An agent that has not read, in their current version, the sections that the
+> rules below require MUST pause the review and MUST tell the user which ones it
+> did not read, unless another instruction states what to do.
+
+- Agents MUST follow [REVIEW_STANDARDS.md](./docs/standards/REVIEW_STANDARDS.md)
+  when the task is a review, and MUST follow
+  [REVIEW_REPORT_STANDARDS.md](./docs/standards/REVIEW_REPORT_STANDARDS.md) when
+  they post a review report.
+- Agents MUST find every standard document whose `task` lists `review`, and MUST
+  read in full each of its sections whose `scope` matches a file in the scope of
+  the review, as [Standards](#standards) requires.
+  - Agents MUST keep, in their session context, a list of the standard documents
+    they found, to check that they read every pertinent one, and MUST NOT put
+    that list in the review report.
 
 ## Procedures
 
@@ -419,38 +410,6 @@ terms, rules, bootstrap, and procedures that agents follow in each task.
    and permissions that would lapse.
 9. Agents MUST treat the previous task as continuing when the user moves on
    without answering.
-
-### Review
-
-#### Rules
-
-- Agents MUST follow this procedure when the task is a review.
-
-> [!WARNING]
-> An agent that has not read, in their current version, the sections that step 2
-> requires MUST pause the review and MUST tell the user which ones it did not
-> read, unless another instruction states what to do.
-
-1. Agents MUST determine the scope of the review.
-2. Agents MUST find every standard document whose `task` lists `review`, such as
-   [REVIEW_STANDARDS.md](./docs/standards/REVIEW_STANDARDS.md), and MUST read in
-   full each of its sections whose `scope` matches a file in the scope of the
-   review, as [Standards](#standards) requires. Agents MUST keep, in their
-   session context, a list of the standard documents they found, to check that
-   they read every pertinent one, and MUST NOT put that list in the review
-   report.
-3. Agents MUST classify each change in the scope as behavior-preserving or
-   behavior-changing.
-4. Agents MUST check, for each change in the scope, that its content follows the
-   normative-language rules that apply to its document.
-5. Agents MUST collect the candidate findings, MUST drop each one that fails a
-   rule of [REVIEW_STANDARDS.md](./docs/standards/REVIEW_STANDARDS.md), and MUST
-   try to verify each remaining one against the content as written.
-6. Agents MUST report the findings as the standard documents found in step 2
-   require, and MUST list the unverified and dropped candidates to the user, as
-   the Review rules above require.
-7. Agents MUST state in the review report that they applied steps 2 to 5 to
-   every change in the scope.
 
 ## Links
 

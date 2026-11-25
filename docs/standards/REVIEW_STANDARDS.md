@@ -32,7 +32,8 @@ language: en
 ## Overview
 
 This document defines what a valid review contains: its scope, the conditions
-that each finding meets, and the content of its report.
+that each finding meets, the content of its report, and the procedure that
+agents follow to perform it.
 
 ## Terms
 
@@ -145,14 +146,47 @@ that each finding meets, and the content of its report.
   defect it cites.
 - A review report MUST NOT list an unverified or a dropped candidate among its
   findings.
-- The unverified and dropped candidates of a review MUST be listed to the user,
-  outside the review report, each with its status, the rule or defect it was
-  checked against, its reason, and how to reproduce the check, such as the
-  command, file, or steps that repeat it, as [AGENTS.md](../../AGENTS.md)
-  requires.
+- Agents MUST keep each unverified and dropped candidate, with its reason and
+  the rule it was checked against, in their session context.
+- Agents MUST list each unverified and dropped candidate to the user in the
+  reply that reports the review, after the review report and outside it, without
+  waiting for the user to ask. Each entry MUST state the candidate, its status
+  (`unverified` or `dropped`), the rule or defect it was checked against, why it
+  is not a finding, what would settle it, and how to reproduce the check: the
+  command, file, or steps that the user can run to repeat it.
 - When a review has no reply to a user, its unverified and dropped candidates
   MUST be reported in the context where the review runs, such as in the output
   of the command that runs it, and MUST NOT be added to the review report.
+
+### Agents
+
+- Agents MUST apply the rules of this document literally, as written, when they
+  review a change, and MUST NOT extend a rule beyond its text, narrow it, or
+  replace it with their own reading of its intent.
+- Agents MAY run a repository tool during a review when they have a plausible
+  reason, such as verifying a finding.
+- Agents MUST NOT run a repository tool during a review only to check what that
+  tool is expected to check on its own, such as through CI or a hook.
+
+### Procedure
+
+- Agents MUST follow this procedure when the task is a review.
+
+1. Agents MUST determine the scope of the review.
+2. Agents MUST find and read the standard documents of the review, as
+   [AGENTS.md](../../AGENTS.md#review) requires.
+3. Agents MUST classify each change in the scope as behavior-preserving or
+   behavior-changing.
+4. Agents MUST check, for each change in the scope, that its content follows the
+   normative-language rules that apply to its document.
+5. Agents MUST collect the candidate findings, MUST drop each one that fails a
+   rule of this document, and MUST try to verify each remaining one against the
+   content as written.
+6. Agents MUST report the findings as the standard documents found in step 2
+   require, and MUST list the unverified and dropped candidates to the user, as
+   the [Report](#report) section requires.
+7. Agents MUST state in the review report that they applied steps 2 to 5 to
+   every change in the scope.
 
 ## Links
 
