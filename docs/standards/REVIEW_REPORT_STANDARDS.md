@@ -80,7 +80,7 @@ report the candidates that it leaves out.
 
 #### Review Report - Template
 
-````md
+`````md
 # Review
 
 ```yaml
@@ -92,11 +92,10 @@ model: <name of the model> (<full identifier of model>)
 
 <one - `Finding NN: title` section per finding, in order of severity, or, in a
 review posted to a pull request, only its title as a link to its comment>
-````
-
-#### Finding - Template
 
 ````md
+<!-- finding template -->
+
 ### Finding <number>: <one-sentence statement of the issue>
 
 - **Location**: [<file>:<line or range of lines>](<link to the file at that line
@@ -112,18 +111,22 @@ review posted to a pull request, only its title as a link to its comment>
 - **Failure scenario**: <the content or input that leads to the wrong result>
 
 <OPTIONAL, the block below, with the change that fixes the finding: a
-`suggestion` block in an inline review comment, or a `diff` block elsewhere>
+`suggestion` block in an inline review comment>
 
 ```suggestion
 <content that replaces the lines that the inline review comment is attached to>
 ```
+
+```
+```
 ````
+`````
 
 #### Rules
 
 - A review report MUST follow the
   [review report template](#review-report---template), and each finding MUST
-  follow the [finding template](#finding---template).
+  follow the finding template.
 - A review report MUST state, in its reviewer block, the model and the agent
   that ran the review.
 - A developer who uses an agent in this repository MUST accept that the review
@@ -203,3 +206,6 @@ review posted to a pull request, only its title as a link to its comment>
   to help people and agents navigate it on their own through the document graph.
 - [REVIEW_STANDARDS.md](./REVIEW_STANDARDS.md): Standards for what a valid
   review contains, its scope, and its findings.
+
+```
+```
