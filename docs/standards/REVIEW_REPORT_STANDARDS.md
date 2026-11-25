@@ -58,7 +58,7 @@ follows, and how it presents its findings. What a report contains is defined in
 ```yaml
 agent: <name of the agent harness>
 model: <name of the model>(<full identifier of model with revision if available>)
-effort: <reasoning effort of the review: low | medium | high | extra-high | max | unknown>
+effort: <reasoning effort of the agent/subagent review: low | medium | high | extra-high | max | unknown>
 ```
 
 ## Findings
@@ -82,7 +82,12 @@ review posted to a pull request, only its title as a link to its comment>
 - **Force**: <blocking finding | non-blocking recommendation | strong
   recommendation>
 - **Failure scenario**: <the content or input that leads to the wrong result>
-- **Suggestion**: <OPTIONAL, the change that fixes the finding, as a diff>
+- **Suggestion**: <OPTIONAL, the change that fixes the finding, as a
+  `suggestion` block in an inline review comment, or as a `diff` block>
+
+```suggestion
+<content that replaces the lines that the inline review comment is attached to>
+```
 
 ```diff
 - <current content>
@@ -134,6 +139,10 @@ review posted to a pull request, only its title as a link to its comment>
   range of lines, and MUST list in the report only the title of each finding, as
   a link to its comment, which is either the inline comment or its comment in
   the discussion of the pull request.
+- A finding posted as an inline review comment MUST state its suggestion, when
+  it has one, as a `suggestion` block whose content replaces exactly the lines
+  that the comment is attached to, and MUST use a `diff` block only when the
+  change cannot be applied to those lines.
 - A review posted to a pull request MUST read, before it posts a finding, every
   review thread on the location of that finding, including resolved ones.
 - A finding whose issue an open thread already discusses MUST be posted as a
