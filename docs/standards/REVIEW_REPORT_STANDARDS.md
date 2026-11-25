@@ -58,7 +58,7 @@ model: <full identifier of the model: name, version, and date or revision of mod
 agent: <name of the harness or command-line client that ran the review>
 ```
 
-# Review report
+# Review report MacOS
 
 ## Findings
 
