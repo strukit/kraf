@@ -63,7 +63,7 @@ agent: <name of the harness or command-line client that ran the review>
 ## Findings
 
 <one `### Finding NN: title` section per finding, in order of severity, or, in a
-review posted to a pull request, only its title as a link to its inline comment>
+review posted to a pull request, only its title as a link to its comment>
 ````
 
 #### Finding - Template
@@ -128,7 +128,8 @@ review posted to a pull request, only its title as a link to its inline comment>
 - A review report posted to a pull request MUST post each finding as an inline
   review comment attached to the file and the line of its location, or to its
   range of lines, and MUST list in the report only the title of each finding, as
-  a link to its inline comment.
+  a link to its comment, which is either the inline comment or its comment in
+  the discussion of the pull request.
 - A review posted to a pull request MUST read, before it posts a finding, every
   review thread on the location of that finding, including resolved ones.
 - A finding whose issue an open thread already discusses MUST be posted as a
