@@ -85,7 +85,7 @@ report the candidates that it leaves out.
 
 ```yaml
 agent: <name of the agent harness>
-model: <name of the model> (<full identifier of model>)
+model: <name of the model> (<full identifier of model not effort>)
 ```
 
 ## Findings
