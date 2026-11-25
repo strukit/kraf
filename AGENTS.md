@@ -458,9 +458,10 @@ terms, rules, bootstrap, and procedures that agents follow in each task.
 - [TOOLS.md](./docs/TOOLS.md): Tools declared in this repository, with their
   purpose, configuration, capabilities, and version.
 - [REVIEW_STANDARDS.md](./docs/standards/REVIEW_STANDARDS.md): Standards for
-  what a valid review contains, its scope, its findings, and its report.
+  what a valid review contains, its scope, and its findings.
 - [REVIEW_REPORT_STANDARDS.md](./docs/standards/REVIEW_REPORT_STANDARDS.md):
-  Standards for the format of a review report, with its templates and examples.
+  Standards for the content and format of a review report, with its templates
+  and examples.
 - [ADR_STANDARDS.md](./docs/standards/ADR_STANDARDS.md): Standards for
   architecture decision records, their location, identifiers, status,
   immutability, and layout.
