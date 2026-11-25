@@ -393,8 +393,8 @@ terms, rules, bootstrap, and procedures that agents follow in each task.
   settle it, and how to reproduce the check: the command, file, or steps that
   the user can run to repeat it.
 - Agents MUST NOT post the unverified and dropped candidates to a pull request.
-- Agents MUST post to a pull request only the findings of the review report, and
-  MUST NOT post notes, limitations, or other content outside that report.
+- Agents MUST post to a pull request only the review report and its findings,
+  and MUST NOT post notes, limitations, or other content outside that report.
 - Agents MUST check each comment that they are about to post to a pull request
   against the two rules above before posting it.
 
