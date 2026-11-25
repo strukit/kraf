@@ -63,12 +63,7 @@ agent: <name of the harness or command-line client that ran the review>
 
 ## Findings
 
-<finding, or, in a review posted to a pull request, its title only>
-
-...
-
-<statement that the classification, the normative-language check, and the drop
-of failing candidates were applied to every change in the scope>
+<findings, or, in a review posted to a pull request, its title only>
 ````
 
 #### Finding - Template

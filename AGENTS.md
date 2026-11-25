@@ -381,10 +381,22 @@ terms, rules, bootstrap, and procedures that agents follow in each task.
   reason, such as verifying a finding.
 - Agents MUST NOT run a repository tool during a review only to check what that
   tool is expected to check on its own, such as through CI or a hook.
-- Agents MUST keep each unverified and dropped candidate, with the reason, in
-  their session context, and MUST list it to the user at the end of the review,
-  outside the review report.
+- Agents MUST keep each unverified and dropped candidate, with its reason and
+  the rule it was checked against, in their session context.
+- Agents MUST list each unverified and dropped candidate to the user in the
+  reply that reports the review, after the review report and outside it, without
+  waiting for the user to ask. When the review has no reply to a user, they MUST
+  report the candidates in the context where the review runs, as
+  [REVIEW_STANDARDS.md](./docs/standards/REVIEW_STANDARDS.md) requires. Each
+  entry MUST state the candidate, its status (`unverified` or `dropped`), the
+  rule or defect it was checked against, why it is not a finding, what would
+  settle it, and how to reproduce the check: the command, file, or steps that
+  the user can run to repeat it.
 - Agents MUST NOT post the unverified and dropped candidates to a pull request.
+- Agents MUST post to a pull request only the findings of the review report, and
+  MUST NOT post notes, limitations, or other content outside that report.
+- Agents MUST check each comment that they are about to post to a pull request
+  against the two rules above before posting it.
 
 ## Procedures
 
@@ -435,8 +447,8 @@ terms, rules, bootstrap, and procedures that agents follow in each task.
    rule of [REVIEW_STANDARDS.md](./docs/standards/REVIEW_STANDARDS.md), and MUST
    try to verify each remaining one against the content as written.
 6. Agents MUST report the findings as the standard documents found in step 2
-   require, and MUST list the unverified and dropped candidates to the user,
-   outside the review report.
+   require, and MUST list the unverified and dropped candidates to the user, as
+   the Review rules above require.
 7. Agents MUST state in the review report that they applied steps 2 to 5 to
    every change in the scope.
 

@@ -49,11 +49,14 @@ that each finding meets, and the content of its report.
   renames, and, for a behavior-changing change, the content that depends on it.
 - **Finding**: an issue that a review report states, whose source the review
   confirmed against the content as written.
-- **Unverified candidate**: a candidate finding that meets the rules of
-  [Scope](#scope) and [Findings](#findings), except that the review did not
-  confirm whether its source applies, because it could not or did not verify it.
+- **Unverified candidate**: a candidate finding that has a source, a rule or a
+  defect that could apply to the content, and that meets the rules of
+  [Scope](#scope) and [Findings](#findings), except that the review could not
+  confirm whether that source applies to the content as written.
 - **Dropped candidate**: a candidate finding that the review confirmed does not
-  meet a rule of [Scope](#scope) or [Findings](#findings).
+  meet a rule of [Scope](#scope) or [Findings](#findings), that has no source:
+  no rule of a standard document covers the content, and the content has no
+  defect as written, or that predates the change.
 - **Force of a finding**: whether a finding blocks the change: a blocking
   finding, a non-blocking recommendation, or a strong recommendation.
 - **Blocking finding**: a finding that blocks the change until it is fixed.
@@ -73,7 +76,12 @@ that each finding meets, and the content of its report.
 
 - A finding MUST concern content within the scope of the review.
 - A finding MUST NOT concern a defect or a rule violation that predates the
-  change.
+  change. Such a defect or violation MUST be a dropped candidate, with the
+  reason that it predates the change.
+- A rule that a change adds or changes MUST apply to all content that it covers,
+  including content that the change does not modify. A violation of that rule in
+  such content MUST be within the scope of the review, and the exclusion of
+  defects and violations that predate the change MUST NOT apply to it.
 - Content that the change relies on but does not modify (e.g. a configuration
   file, a tool, or the review environment) MUST be outside the scope of the
   review, even when the change makes it more relevant.
@@ -90,6 +98,15 @@ that each finding meets, and the content of its report.
   as written.
 - A finding MUST NOT concern a matter that is neither a defect nor defined by a
   rule (e.g. a choice of approach, name, or style).
+- A candidate that has no source MUST be a dropped candidate, with the reason
+  that it has no source, and MUST NOT be an unverified candidate.
+- When no standard document or specification states the expected result of a
+  candidate whose source is a defect, the review MUST reproduce the candidate
+  with a check that the user can run, where the review can run one. A
+  reproduction that confirms the defect makes the candidate a finding. A
+  reproduction that does not confirm it makes the candidate a dropped candidate.
+  When the review cannot run the check, the candidate MUST be an unverified
+  candidate, with the check that would settle it.
 - A finding about a behavior-preserving change MUST concern only whether the
   behavior is preserved, whether references to anything renamed still resolve,
   or whether the content follows the normative-language rules.
@@ -128,6 +145,14 @@ that each finding meets, and the content of its report.
   defect it cites.
 - A review report MUST NOT list an unverified or a dropped candidate among its
   findings.
+- The unverified and dropped candidates of a review MUST be listed to the user,
+  outside the review report, each with its status, the rule or defect it was
+  checked against, its reason, and how to reproduce the check, such as the
+  command, file, or steps that repeat it, as [AGENTS.md](../../AGENTS.md)
+  requires.
+- When a review has no reply to a user, its unverified and dropped candidates
+  MUST be reported in the context where the review runs, such as in the output
+  of the command that runs it, and MUST NOT be added to the review report.
 
 ## Links
 
