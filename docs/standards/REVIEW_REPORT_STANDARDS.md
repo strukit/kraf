@@ -57,13 +57,13 @@ follows, and how it presents its findings. What a report contains is defined in
 
 ```yaml
 agent: <name of the agent harness>
-model: <name of the model> (<full identifier of model with revision if available>)
+model: <name of the model> (<full identifier of model>)
 effort: <reasoning effort of the agent/subagent review: low | medium | high | extra-high | max | unknown>
 ```
 
 ## Findings
 
-<one `### Finding NN: title` section per finding, in order of severity, or, in a
+<one - `Finding NN: title` section per finding, in order of severity, or, in a
 review posted to a pull request, only its title as a link to its comment>
 ````
 
