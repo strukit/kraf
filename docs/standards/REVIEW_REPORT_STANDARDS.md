@@ -82,8 +82,9 @@ review posted to a pull request, only its title as a link to its comment>
 - **Force**: <blocking finding | non-blocking recommendation | strong
   recommendation>
 - **Failure scenario**: <the content or input that leads to the wrong result>
-- **Suggestion**: <OPTIONAL, the change that fixes the finding, as a
-  `suggestion` block in an inline review comment, or as a `diff` block>
+
+<OPTIONAL, the change that fixes the finding: a `suggestion` block in an inline
+review comment, or a `diff` block elsewhere>
 
 ```suggestion
 <content that replaces the lines that the inline review comment is attached to>
@@ -163,7 +164,6 @@ review posted to a pull request, only its title as a link to its comment>
 - **Force**: blocking finding
 - **Failure scenario**: the sentence "The agent reads the file first." cannot be
   classified as an instruction or a description.
-- **Suggestion**:
 
 ```diff
 - - The agent reads the file first.
