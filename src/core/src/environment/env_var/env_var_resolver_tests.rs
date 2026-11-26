@@ -3,8 +3,7 @@ use crate::environment::env_var::env_var_core::{
 };
 
 use crate::environment::env_var::env_var_resolver::{
-    env_var_resolve_keys, expand_dollar_var, expand_tilde_var, lookup_env_var_value, resolve,
-    resolve_alias,
+    expand_dollar_var, expand_tilde_var, lookup_env_var_value, resolve, resolve_alias,
 };
 
 const ENV_VAR_MAPPING_FIXTURE: &[EnvVarHostMapping] = &[
@@ -46,7 +45,7 @@ const ENV_VAR_MAPPING_FIXTURE: &[EnvVarHostMapping] = &[
         alias_import: &["XDG_CACHE_HOME"],
         alias_import_mode: EnvVarImportMode::FirstFound,
         alias_export: &[],
-        fallback: Some("$HOME/.cache"),
+        fallback: Some("$HOME_DIR/.cache"),
     },
     EnvVarHostMapping {
         key: "PATH",
@@ -73,7 +72,7 @@ const ENV_VAR_MAPPING_FIXTURE: &[EnvVarHostMapping] = &[
         fallback: Some("/usr/share/man"),
     },
     EnvVarHostMapping {
-        key: "WORKDIR",
+        key: "HOST_WORKDIR",
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
@@ -142,11 +141,11 @@ fn env_var_collected_fixture(home: &str) -> Vec<EnvVar> {
 fn env_var_provided_fixture(home: &str) -> Vec<EnvVar> {
     vec![
         EnvVar {
-            key: "HOME",
+            key: "HOME_DIR",
             value: Some(home.to_string()),
         },
         EnvVar {
-            key: "WORKDIR",
+            key: "HOST_WORKDIR",
             value: Some("/workspace/project".to_string()),
         },
         EnvVar {
@@ -182,58 +181,6 @@ fn mapping_fixture_is_well_formed() {
 }
 
 #[test]
-fn resolve_keys_are_empty_when_no_mappings_declare_any() {
-    let keys = env_var_resolve_keys(&[]);
-
-    assert_eq!(keys.env_vars_keys_import, Vec::<&str>::new());
-}
-
-#[test]
-fn resolve_keys_collects_alias_import_but_not_dollar_var_in_fallback() {
-    let mappings = [EnvVarHostMapping {
-        key: "CONFIG_DIR",
-        source: EnvVarSource::Provided,
-        alias_import: &["XDG_CONFIG_HOME", "MY_CONFIG_DIR"],
-        alias_import_mode: EnvVarImportMode::FirstFound,
-        alias_export: &["CONFIG_DIR", "MY_CONFIG_DIR_EXPORT"],
-        fallback: Some("$FOO_BASE/config"),
-    }];
-
-    let keys = env_var_resolve_keys(&mappings);
-
-    assert_eq!(
-        keys.env_vars_keys_import,
-        vec!["MY_CONFIG_DIR", "XDG_CONFIG_HOME"]
-    );
-}
-
-#[test]
-fn resolve_keys_deduplicates_repeated_names() {
-    let mappings = [
-        EnvVarHostMapping {
-            key: "A",
-            source: EnvVarSource::Host,
-            alias_import: &["SHELL"],
-            alias_import_mode: EnvVarImportMode::FirstFound,
-            alias_export: &[],
-            fallback: None,
-        },
-        EnvVarHostMapping {
-            key: "B",
-            source: EnvVarSource::Host,
-            alias_import: &["SHELL"],
-            alias_import_mode: EnvVarImportMode::FirstFound,
-            alias_export: &[],
-            fallback: Some("$SHELL/fallback"),
-        },
-    ];
-
-    let keys = env_var_resolve_keys(&mappings);
-
-    assert_eq!(keys.env_vars_keys_import, vec!["SHELL"]);
-}
-
-#[test]
 fn expands_leading_tilde_with_preresolved_home() {
     let result = expand_tilde_var("~/.tmp", "/workspace");
 
@@ -242,18 +189,21 @@ fn expands_leading_tilde_with_preresolved_home() {
 
 #[test]
 fn expands_dollar_var_reference() {
-    let env_var_collected = env_var_collected_fixture("/workspace");
+    let env_var_provided = [EnvVar {
+        key: "BASE_DIR",
+        value: Some("/workspace".to_string()),
+    }];
 
-    let result = expand_dollar_var("$HOME/.cache", &env_var_collected);
+    let result = expand_dollar_var("$BASE_DIR/.cache", &env_var_provided);
 
     assert_eq!(result, "/workspace/.cache");
 }
 
 #[test]
 fn expand_dollar_var_keeps_value_when_var_is_missing() {
-    let result = expand_dollar_var("$HOME/.cache", &[]);
+    let result = expand_dollar_var("$BASE_DIR/.cache", &[]);
 
-    assert_eq!(result, "$HOME/.cache");
+    assert_eq!(result, "$BASE_DIR/.cache");
 }
 
 #[test]
@@ -302,17 +252,17 @@ fn resolve_alias_expands_tilde_in_fallback() {
 }
 
 #[test]
-fn resolve_alias_expands_dollar_home_in_fallback() {
+fn resolve_alias_expands_dollar_var_in_fallback() {
     let env_var_mapping = EnvVarHostMapping {
         key: "CACHE_DIR",
         source: EnvVarSource::Provided,
         alias_import: &[],
         alias_import_mode: EnvVarImportMode::FirstFound,
         alias_export: &[],
-        fallback: Some("$HOME/.cache"),
+        fallback: Some("$BASE_DIR/.cache"),
     };
     let env_var_provided = vec![EnvVar {
-        key: "HOME",
+        key: "BASE_DIR",
         value: Some("/workspace".to_string()),
     }];
 
@@ -430,7 +380,7 @@ fn resolve_handles_every_mapping_case_at_once() {
         ("PATH", path_expected),
         ("LD_LIBRARY_PATH", "/usr/local/lib"),
         ("MANPATH", "/usr/share/man"),
-        ("WORKDIR", "/workspace/project"),
+        ("HOST_WORKDIR", "/workspace/project"),
         ("HOME_TEMP", "/custom/tmp"),
         ("PLATFORM_KERNEL", "Darwin"),
         ("PLATFORM_VERSION", ""),
@@ -494,7 +444,7 @@ fn resolve_reads_provided_canonical_values_apart_from_collected_host_values() {
             fallback: None,
         },
         EnvVarHostMapping {
-            key: "HOME",
+            key: "HOME_DIR",
             source: EnvVarSource::Provided,
             alias_import: &[],
             alias_import_mode: EnvVarImportMode::FirstFound,
@@ -507,7 +457,7 @@ fn resolve_reads_provided_canonical_values_apart_from_collected_host_values() {
         value: Some("/Users/host".to_string()),
     }];
     let env_var_provided = [EnvVar {
-        key: "HOME",
+        key: "HOME_DIR",
         value: Some("/Users/host/.kraf/workspace/session/1".to_string()),
     }];
 
@@ -521,7 +471,7 @@ fn resolve_reads_provided_canonical_values_apart_from_collected_host_values() {
 }
 
 #[test]
-fn resolve_dollar_home_uses_the_provided_home_like_tilde() {
+fn resolve_dollar_export_alias_uses_the_provided_home_like_tilde() {
     let mappings = [
         EnvVarHostMapping {
             key: "CACHE_DIR",
@@ -529,7 +479,7 @@ fn resolve_dollar_home_uses_the_provided_home_like_tilde() {
             alias_import: &[],
             alias_import_mode: EnvVarImportMode::FirstFound,
             alias_export: &[],
-            fallback: Some("$HOME/.cache"),
+            fallback: Some("$SESSION_HOME/.cache"),
         },
         EnvVarHostMapping {
             key: "TMP_DIR",
@@ -539,13 +489,21 @@ fn resolve_dollar_home_uses_the_provided_home_like_tilde() {
             alias_export: &[],
             fallback: Some("~/.cache"),
         },
+        EnvVarHostMapping {
+            key: "HOME_DIR",
+            source: EnvVarSource::Provided,
+            alias_import: &[],
+            alias_import_mode: EnvVarImportMode::FirstFound,
+            alias_export: &["SESSION_HOME"],
+            fallback: None,
+        },
     ];
     let env_var_collected = vec![EnvVar {
-        key: "HOME",
+        key: "SESSION_HOME",
         value: Some("/host".to_string()),
     }];
     let env_var_provided = vec![EnvVar {
-        key: "HOME",
+        key: "HOME_DIR",
         value: Some("/workspace".to_string()),
     }];
 
@@ -573,4 +531,131 @@ fn resolve_dollar_var_does_not_read_collected_host_values() {
     let result = resolve(&mappings, &env_var_collected, &[]);
 
     assert_eq!(result[0].value, Some("$SECRET_TOKEN".to_string()));
+}
+
+#[test]
+fn resolve_ignores_the_collected_canonical_value_of_a_host_declaration_without_aliases() {
+    let mappings = [EnvVarHostMapping {
+        key: "PLATFORM_KERNEL",
+        source: EnvVarSource::Host,
+        alias_import: &[],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &[],
+        fallback: Some("Darwin"),
+    }];
+    let env_var_collected = [EnvVar {
+        key: "PLATFORM_KERNEL",
+        value: Some("Linux".to_string()),
+    }];
+
+    let result = resolve(&mappings, &env_var_collected, &[]);
+
+    assert_eq!(
+        lookup_env_var_value("PLATFORM_KERNEL", &result),
+        Some("Darwin".to_string())
+    );
+}
+
+#[test]
+fn resolve_is_empty_when_a_host_declaration_has_no_aliases_and_no_fallback() {
+    let mappings = [EnvVarHostMapping {
+        key: "PLATFORM_VERSION",
+        source: EnvVarSource::Host,
+        alias_import: &[],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &[],
+        fallback: None,
+    }];
+
+    let result = resolve(&mappings, &[], &[]);
+
+    assert_eq!(
+        lookup_env_var_value("PLATFORM_VERSION", &result),
+        Some(String::new())
+    );
+}
+
+#[test]
+fn resolve_alias_merge_ignores_empty_values() {
+    let env_var_mapping = EnvVarHostMapping {
+        key: "PATH",
+        source: EnvVarSource::Host,
+        alias_import: &["BIN_A", "BIN_B"],
+        alias_import_mode: EnvVarImportMode::Merge,
+        alias_export: &[],
+        fallback: None,
+    };
+    let env_var_collected = [
+        EnvVar {
+            key: "BIN_A",
+            value: Some(String::new()),
+        },
+        EnvVar {
+            key: "BIN_B",
+            value: Some("/usr/bin".to_string()),
+        },
+    ];
+
+    let result = resolve_alias(&env_var_mapping, &env_var_collected, &[], "");
+
+    assert_eq!(result, "/usr/bin");
+}
+
+#[test]
+fn resolve_alias_pass_through_forwards_the_collected_value() {
+    let env_var_mapping = EnvVarHostMapping {
+        key: "SystemRoot",
+        source: EnvVarSource::Host,
+        alias_import: &["SystemRoot"],
+        alias_import_mode: EnvVarImportMode::PassThrough,
+        alias_export: &["SystemRoot"],
+        fallback: None,
+    };
+    let env_var_collected = [EnvVar {
+        key: "SystemRoot",
+        value: Some(r"C:\Windows".to_string()),
+    }];
+
+    let result = resolve_alias(&env_var_mapping, &env_var_collected, &[], "");
+
+    assert_eq!(result, r"C:\Windows");
+}
+
+#[test]
+fn resolve_alias_pass_through_is_empty_when_the_value_is_missing() {
+    let env_var_mapping = EnvVarHostMapping {
+        key: "SystemRoot",
+        source: EnvVarSource::Host,
+        alias_import: &["SystemRoot"],
+        alias_import_mode: EnvVarImportMode::PassThrough,
+        alias_export: &["SystemRoot"],
+        fallback: None,
+    };
+
+    let result = resolve_alias(&env_var_mapping, &[], &[], "");
+
+    assert_eq!(result, "");
+}
+
+#[test]
+fn resolve_empty_provided_value_precedes_the_fallback() {
+    let mappings = [EnvVarHostMapping {
+        key: "EXAMPLE_KEY",
+        source: EnvVarSource::Provided,
+        alias_import: &[],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &[],
+        fallback: Some("/default/example"),
+    }];
+    let env_var_provided = [EnvVar {
+        key: "EXAMPLE_KEY",
+        value: Some(String::new()),
+    }];
+
+    let result = resolve(&mappings, &[], &env_var_provided);
+
+    assert_eq!(
+        lookup_env_var_value("EXAMPLE_KEY", &result),
+        Some(String::new())
+    );
 }

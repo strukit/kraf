@@ -1,7 +1,7 @@
 use crate::environment::env_var::env_var_core::{
     EnvVar, EnvVarHostMapping, EnvVarImportMode, EnvVarSource, EnvVarWriter,
 };
-use crate::environment::env_var::env_var_projector::{apply, project};
+use crate::environment::env_var::env_var_projector::{EnvVarWriteSet, project};
 
 use std::collections::HashMap;
 
@@ -19,7 +19,7 @@ impl EnvVarWriter for FakeEnvVarWriter {
 }
 
 #[test]
-fn project_emits_every_alias_export_with_the_resolved_value_in_order() {
+fn write_set_emits_every_alias_export_with_the_resolved_value_in_order() {
     let mapping = EnvVarHostMapping {
         key: "HOME_TEMP",
         source: EnvVarSource::Provided,
@@ -33,7 +33,7 @@ fn project_emits_every_alias_export_with_the_resolved_value_in_order() {
         value: Some("/workspace/.tmp".to_string()),
     }];
 
-    let result = project(&[mapping], &env_var_resolved);
+    let result = EnvVarWriteSet::new(&[mapping], &env_var_resolved);
 
     let keys: Vec<&str> = result
         .env_vars()
@@ -51,7 +51,7 @@ fn project_emits_every_alias_export_with_the_resolved_value_in_order() {
 }
 
 #[test]
-fn project_skips_canonical_key_not_declared_as_export_alias() {
+fn write_set_skips_canonical_key_not_declared_as_export_alias() {
     let mapping = EnvVarHostMapping {
         key: "USER",
         source: EnvVarSource::Host,
@@ -65,7 +65,7 @@ fn project_skips_canonical_key_not_declared_as_export_alias() {
         value: Some("bart".to_string()),
     }];
 
-    let result = project(&[mapping], &env_var_resolved);
+    let result = EnvVarWriteSet::new(&[mapping], &env_var_resolved);
 
     let keys: Vec<&str> = result
         .env_vars()
@@ -80,7 +80,7 @@ fn project_skips_canonical_key_not_declared_as_export_alias() {
 // Regression for LOGNAME=root with USER=bart, fixed in pull request: #47: the projection
 // exports LOGNAME with the resolved USER value, as the production mapping declares.
 #[test]
-fn project_exports_logname_with_the_user_value() {
+fn write_set_exports_logname_with_the_user_value() {
     let mapping = EnvVarHostMapping {
         key: "USER",
         source: EnvVarSource::Host,
@@ -94,7 +94,7 @@ fn project_exports_logname_with_the_user_value() {
         value: Some("bart".to_string()),
     }];
 
-    let result = project(&[mapping], &env_var_resolved);
+    let result = EnvVarWriteSet::new(&[mapping], &env_var_resolved);
 
     let keys: Vec<&str> = result
         .env_vars()
@@ -112,7 +112,7 @@ fn project_exports_logname_with_the_user_value() {
 }
 
 #[test]
-fn project_emits_nothing_for_mapping_without_alias_export() {
+fn write_set_emits_nothing_for_mapping_without_alias_export() {
     let mapping = EnvVarHostMapping {
         key: "TERMINAL",
         source: EnvVarSource::Host,
@@ -126,13 +126,13 @@ fn project_emits_nothing_for_mapping_without_alias_export() {
         value: Some("/bin/zsh".to_string()),
     }];
 
-    let result = project(&[mapping], &env_var_resolved);
+    let result = EnvVarWriteSet::new(&[mapping], &env_var_resolved);
 
     assert!(result.env_vars().is_empty());
 }
 
 #[test]
-fn apply_writes_every_projected_entry() {
+fn project_writes_every_projected_entry() {
     let mapping = EnvVarHostMapping {
         key: "HOME_TEMP",
         source: EnvVarSource::Provided,
@@ -147,14 +147,37 @@ fn apply_writes_every_projected_entry() {
     }];
 
     let mut writer = FakeEnvVarWriter::default();
-    apply(&project(&[mapping], &env_var_resolved), &mut writer);
+    project(
+        &EnvVarWriteSet::new(&[mapping], &env_var_resolved),
+        &mut writer,
+    );
 
     assert_eq!(writer.env.get("TMPDIR"), Some(&"/tmp".to_string()));
     assert_eq!(writer.env.get("HOME_TEMP"), None);
 }
 
 #[test]
-fn apply_writes_empty_string_for_entries_with_no_value() {
+fn write_set_skips_declaration_with_empty_value() {
+    let mapping = EnvVarHostMapping {
+        key: "USER_TIMEZONE",
+        source: EnvVarSource::Host,
+        alias_import: &["USER_TIMEZONE", "TZ"],
+        alias_import_mode: EnvVarImportMode::FirstFound,
+        alias_export: &["TZ"],
+        fallback: None,
+    };
+    let env_var_resolved = [EnvVar {
+        key: "USER_TIMEZONE",
+        value: Some(String::new()),
+    }];
+
+    let result = EnvVarWriteSet::new(&[mapping], &env_var_resolved);
+
+    assert!(result.env_vars().is_empty());
+}
+
+#[test]
+fn project_writes_nothing_for_declaration_without_resolved_value() {
     let mapping = EnvVarHostMapping {
         key: "HOME_TEMP",
         source: EnvVarSource::Provided,
@@ -165,7 +188,7 @@ fn apply_writes_empty_string_for_entries_with_no_value() {
     };
 
     let mut writer = FakeEnvVarWriter::default();
-    apply(&project(&[mapping], &[]), &mut writer);
+    project(&EnvVarWriteSet::new(&[mapping], &[]), &mut writer);
 
-    assert_eq!(writer.env.get("TMPDIR"), Some(&String::new()));
+    assert_eq!(writer.env.get("TMPDIR"), None);
 }

@@ -3,19 +3,31 @@
 
 mod process;
 
-use kraf_core::environment::env_var::env_var_core::EnvVar;
-use kraf_core::environment::env_var::env_var_host::{
-    HOME_ENV_VAR, HOST_ENV_VAR_MAPPINGS, HOST_HOME_ENV_VAR, HostEnvVarReader, WORKDIR_ENV_VAR,
-    env_var_collect,
+use kraf_core::environment::env_var::env_var_collector::{EnvVarReadSet, collect};
+use kraf_core::environment::env_var::env_var_core::{EnvVar, EnvVarReader};
+use kraf_core::environment::env_var::env_var_host::HOST_ENV_VAR_MAPPINGS;
+use kraf_core::environment::env_var::env_var_keys::{
+    HOME_DIR_ENV_VAR, HOST_HOME_ENV_VAR, HOST_WORKDIR_ENV_VAR,
 };
-use kraf_core::environment::env_var::env_var_projector::{apply, project};
+use kraf_core::environment::env_var::env_var_projector::{EnvVarWriteSet, project};
 use kraf_core::environment::env_var::env_var_resolver::resolve;
 use process::{ChildProcess, HostProcess, Process};
+
+pub struct HostEnvVarReader;
+
+impl EnvVarReader for HostEnvVarReader {
+    fn read(&self, key: &str) -> Option<String> {
+        std::env::var(key).ok()
+    }
+}
 
 fn main() {
     println!("[kraf] trap init");
 
-    let collected = env_var_collect(HOST_ENV_VAR_MAPPINGS, &HostEnvVarReader);
+    let collected = collect(
+        &EnvVarReadSet::new(HOST_ENV_VAR_MAPPINGS),
+        &HostEnvVarReader,
+    );
 
     let host_home = resolve(HOST_ENV_VAR_MAPPINGS, &collected, &[])
         .into_iter()
@@ -26,11 +38,11 @@ fn main() {
 
     let provided = [
         EnvVar {
-            key: WORKDIR_ENV_VAR.key,
+            key: HOST_WORKDIR_ENV_VAR.key,
             value: HostProcess.get_current_dir(),
         },
         EnvVar {
-            key: HOME_ENV_VAR.key,
+            key: HOME_DIR_ENV_VAR.key,
             value: HostProcess.create_session_dir(&host_home),
         },
     ];
@@ -39,7 +51,7 @@ fn main() {
 
     let workdir = resolved
         .iter()
-        .find(|env_var| env_var.key == "WORKDIR")
+        .find(|env_var| env_var.key == HOST_WORKDIR_ENV_VAR.key)
         .and_then(|env_var| env_var.value.clone())
         .expect("[kraf] error: $WORKDIR is required, failed to resolve (internal)");
 
@@ -51,7 +63,7 @@ fn main() {
 
     let home = resolved
         .iter()
-        .find(|env_var| env_var.key == "HOME")
+        .find(|env_var| env_var.key == HOME_DIR_ENV_VAR.key)
         .and_then(|env_var| env_var.value.clone())
         .expect("[kraf] error: $HOME is required, failed to resolve (internal)");
 
@@ -63,7 +75,10 @@ fn main() {
     child.current_dir(&workdir);
     child.clean_env();
 
-    apply(&project(HOST_ENV_VAR_MAPPINGS, &resolved), &mut child);
+    project(
+        &EnvVarWriteSet::new(HOST_ENV_VAR_MAPPINGS, &resolved),
+        &mut child,
+    );
 
     println!("[kraf] trap ready");
 

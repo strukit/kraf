@@ -27,7 +27,7 @@ Name: Declared export alias is projected
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV_VAR-PROJECTION-FEAT-0001 — Environment variable projection
@@ -54,7 +54,7 @@ Name: Non-exportable resolved value is not projected
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV_VAR-PROJECTION-FEAT-0001 — Environment variable projection
@@ -81,7 +81,7 @@ Name: Export aliases receive the canonical resolved value
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV_VAR-PROJECTION-FEAT-0001 — Environment variable projection
@@ -108,7 +108,7 @@ Name: Projected output preserves export order
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV_VAR-PROJECTION-FEAT-0001 — Environment variable projection
@@ -136,7 +136,7 @@ Name: Empty resolved value leaves its export aliases unset
 **Status**:
 
 - Doc status: Draft
-- Verification status: Unknown
+- Verification status: Meets
 
 ```gherkin
 Feature: ENV_VAR-PROJECTION-FEAT-0001 — Environment variable projection
