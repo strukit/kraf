@@ -56,10 +56,10 @@ This section defines where an ADR lives.
 
 ### Rules
 
-- An architecture ADR MUST live in `docs/adr/`, next to
+- An architecture ADR MUST live in `<repo>/docs/adr/`, next to
   [ARCHITECTURE.md](../ARCHITECTURE.md).
-- A module ADR MUST live in `docs/<module>-adr/` inside the module that owns the
-  decision.
+- A module ADR MUST live in `<module>/docs/<module>-adr/`, where `<module>` is
+  the module that owns the decision.
 - A decision that affects several modules and that one of them owns MUST be a
   module ADR of that module, and the other modules MUST link to it.
 - A decision that affects several modules and that none of them owns MUST be an
@@ -71,7 +71,7 @@ This section defines where an ADR lives.
 This section defines the identifier and the file name of an ADR.
 
 ```text
-ARCH-ADR-0001                          docs/adr/arch-adr-0001-<slug>.md
+ARCH-ADR-0001                          <repo>/docs/adr/arch-adr-0001-<slug>.md
 <MODULE>-ADR-0001       <module>/docs/<module>-adr/<module>-adr-0001-<slug>.md
 ```
 
@@ -183,5 +183,5 @@ language: <language-code>
   to help people and agents navigate it on their own through the document graph.
 - [ARCHITECTURE.md](../ARCHITECTURE.md): Cross-domain map of Kraf's system
   context, modules, and how they depend on each other.
-- [SPEC_STANDARDS.md](./SPEC_STANDARDS.md): Standards for documenting feature
+- [SPEC_STANDARDS.md](./SPEC_STANDARDS.md): Standards for documenting module
   intent, requirements, and acceptance scenarios.
