@@ -301,7 +301,7 @@ terms, rules, bootstrap, and procedures that agents follow in each task.
 
 ### Agent delegation
 
-- Agents MUST NOT delegate work unless a user instruction authorizes it.
+- Agents MAY delegate work without a user instruction that authorizes it.
 - Agents MAY pass, in a delegating prompt, to a delegate that works on the same
   task the permissions that the user granted for that task, including those that
   another delegate states in its result, and MUST state each with its scope.
