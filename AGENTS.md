@@ -435,10 +435,9 @@ terms, rules, bootstrap, and procedures that agents follow in each task.
    rule of [REVIEW_STANDARDS.md](./docs/standards/REVIEW_STANDARDS.md), and MUST
    try to verify each remaining one against the content as written.
 6. Agents MUST report the findings as the standard documents found in step 2
-   require, and MUST list the unverified and dropped candidates to the user,
-   outside the review report.
-7. Agents MUST state in the review report that they applied steps 2 to 5 to
-   every change in the scope.
+   require, and MUST list the unverified and dropped candidates to the user
+   only, outside the review report.
+7. Agents MUST check if they applied steps 2 to 5 to every change in the scope.
 
 ## Links
 
@@ -460,8 +459,7 @@ terms, rules, bootstrap, and procedures that agents follow in each task.
 - [REVIEW_STANDARDS.md](./docs/standards/REVIEW_STANDARDS.md): Standards for
   what a valid review contains, its scope, and its findings.
 - [REVIEW_REPORT_STANDARDS.md](./docs/standards/REVIEW_REPORT_STANDARDS.md):
-  Standards for the content and format of a review report, with its templates
-  and examples.
+  Standards for the content and format of a review report, with its templates.
 - [ADR_STANDARDS.md](./docs/standards/ADR_STANDARDS.md): Standards for
   architecture decision records, their location, identifiers, status,
   immutability, and layout.

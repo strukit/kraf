@@ -1,5 +1,5 @@
 ---
-description: Standards for the content and format of a review report, with its templates and examples.
+description: Standards for the content and format of a review report, with its templates.
 tags: [review, report, findings, templates, standards]
 type: ["standard"]
 scope: ["**/*"]
@@ -42,9 +42,9 @@ findings.
   **[Dropped candidate](./REVIEW_STANDARDS.md#terms)**, and
   **[Force of a finding](./REVIEW_STANDARDS.md#terms)**: defined in
   [REVIEW_STANDARDS.md](./REVIEW_STANDARDS.md#terms).
-- **Reviewer block**: the YAML block that opens the
-  [review report template](#review-report---template), with the model, the
-  reasoning effort, and the agent that ran the review.
+- **Reviewer block**: the YAML block that follows the title of the
+  [review report template](#review-report---template), with the model and the
+  agent that ran the review.
 
 ## Rules
 
@@ -69,32 +69,29 @@ This section defines which findings a review report contains.
 #### Review Report - Template
 
 ````md
-```yaml
-model: <full identifier of the model: name, version, and date or revision>
-effort: <low | medium | high | extra-high | max | unknown>
-agent: <name of the harness or command-line client that ran the review>
-```
+# Review
 
-# Review report
+```yaml
+agent: <name of the agent harness>
+model: <name of the model> (<full identifier of the model>)
+```
 
 ## Findings
 
-<finding, or, in a review posted to a pull request, its title only>
-
-...
-
-<statement that the classification, the normative-language check, and the drop
-of failing candidates were applied to every change in the scope>
+<one section per finding, following the finding template, in order of severity,
+or, in a review posted to a pull request, only its title as a link to its
+comment>
 ````
 
 #### Finding - Template
 
-````md
+```md
 ### Finding <number>: <one-sentence statement of the issue>
 
-- **Location**: [<file>:<line>:<column>](<link to the file at that line>)
-- **Source**: <defect | rule violation | repository tool failure |
-  <name of an external skill or agent>>
+- **Location**: [<file>:<line or range of lines>](<link to the file at that line
+  or range of lines, e.g. `#L10` or `#L10-L12`>)
+- **Source**: <defect | rule violation | repository tool failure | skill: <name>
+  (user | built-in) | agent: <name> (user | built-in)>
 - **Original code**: <OPTIONAL, the code or category that the repository tool,
   skill, or agent reports for the issue, e.g. `correctness`>
 - **Rule or defect**: <link to the rule that the content violates, or statement
@@ -102,35 +99,36 @@ of failing candidates were applied to every change in the scope>
 - **Force**: <blocking finding | non-blocking recommendation | strong
   recommendation>
 - **Failure scenario**: <the content or input that leads to the wrong result>
-- **Suggestion**: <OPTIONAL, the change that fixes the finding, as a diff>
 
-```diff
-- <current content>
-+ <suggested content>
+<OPTIONAL, the change that fixes the finding: in an inline review comment, a
+`suggestion` block whose content replaces the lines that the comment is attached
+to>
 ```
-````
 
 #### Rules
 
 - A review report MUST follow the
   [review report template](#review-report---template), and each finding MUST
   follow the [finding template](#finding---template).
-- A review report MUST state, in its reviewer block, the model, the reasoning
-  effort, and the agent that ran the review, and MUST write `unknown` for the
-  effort when the agent cannot determine it.
+- A review report MUST state, in its reviewer block, the model and the agent
+  that ran the review.
 - A developer who uses an agent in this repository MUST accept that the review
-  reports it produces share the model, the reasoning effort, and the agent,
-  because sharing them encourages good practices and a fair environment.
+  reports it produces share the model and the agent, because sharing them
+  encourages good practices and a fair environment.
 - A review report or review comment, produced by an agent, that lacks the
   reviewer block MUST be discarded.
+- An inline review comment that belongs to a review whose body holds the review
+  report, with its reviewer block, MUST NOT repeat the reviewer block, and MUST
+  NOT be discarded for lacking it. This rule MUST override, only for such a
+  comment, the rule above that discards a review comment that lacks the reviewer
+  block.
 - The rule that requires the reviewer block MUST override the rule of
   [Agent attribution](../../AGENTS.md#agent-attribution) that forbids a line
   that credits an agent, a model, or the tool that runs it, and MUST override it
   only for the reviewer block of a review report.
 - An agent that produces a review report for a pull request MUST inform the user
-  that the report shares the model, the reasoning effort, and the agent, and
-  that a review report or review comment that lacks the reviewer block is
-  discarded.
+  that the report shares the model and the agent, and that a review report or
+  review comment that lacks the reviewer block is discarded.
 - An agent MUST NOT omit that notice, unless the user has expressly instructed
   it to stop giving it, and that user instruction MUST then prevail.
 - Each finding MUST be numbered in the order of the review report.
@@ -141,15 +139,24 @@ of failing candidates were applied to every change in the scope>
 - A review report MUST follow the templates of this document when it is posted,
   and MUST NOT follow the format of the tool, skill, or agent that produced a
   finding.
-- A finding MUST state its location as a Markdown link to the file at that line,
-  relative to the root of the repository.
+- A finding MUST state its location as a Markdown link to the file at that line
+  or range of lines, relative to the root of the repository.
 - A finding posted to a pull request MUST instead link its location to the file
   at the reviewed commit (e.g.
-  `https://github.com/<owner>/<repo>/blob/<commit>/<file>#L<line>`).
+  `https://github.com/<owner>/<repo>/blob/<commit>/<file>#L<line>` or
+  `#L<start>-L<end>`).
 - A review report posted to a pull request MUST post each finding as an inline
   review comment attached to the file and the line of its location, or to its
   range of lines, and MUST list in the report only the title of each finding, as
-  a link to its inline comment.
+  a link to its comment, which is either the inline comment or its comment in
+  the discussion of the pull request.
+- A review report posted to a pull request MUST be submitted as a single review
+  that contains the report in its body and every new inline finding as an inline
+  comment of that review, and its body MUST be updated with the comment links
+  after submission when it lacks them.
+- A finding posted as an inline review comment MUST state its suggestion, when
+  it has one, as a `suggestion` block whose content replaces exactly the lines
+  that the comment is attached to.
 - A review posted to a pull request MUST read, before it posts a finding, every
   review thread on the location of that finding, including resolved ones.
 - A finding whose issue an open thread already discusses MUST be posted as a
@@ -161,38 +168,12 @@ of failing candidates were applied to every change in the scope>
   inline review comments, when there is one, such as the review tools of the
   hosting service or its command-line client.
 - A review report with no findings MUST replace the finding placeholder under
-  `## Findings`, and the `...` that follows it, with the line `None.`
+  `## Findings` with the line `None.`
 - The unverified and dropped candidates MUST NOT be posted to a pull request.
-
-#### Examples
-
-````md
-### Finding 01: A rule item has a sentence without a normative keyword
-
-- **Location**: [docs/standards/EXAMPLE.md:42:3](docs/standards/EXAMPLE.md#L42)
-- **Source**: rule violation
-- **Rule or defect**: [Rule language](./DOC_STANDARDS.md#rule-language)
-- **Force**: blocking finding
-- **Failure scenario**: the sentence "The agent reads the file first." cannot be
-  classified as an instruction or a description.
-- **Suggestion**:
-
-```diff
-- - The agent reads the file first.
-+ - Agents MUST read the file first.
-```
-````
-
-```md
-### Finding 02: A loop skips the last element of the list
-
-- **Location**: [src/example.rs:10:8](src/example.rs#L10)
-- **Source**: code-review skill
-- **Original code**: `correctness`
-- **Rule or defect**: the loop bound excludes the last index
-- **Force**: non-blocking recommendation
-- **Failure scenario**: a list of three items yields only the first two.
-```
+- Agents MUST post to a pull request only the review report and its findings,
+  and MUST NOT post notes, limitations, or other content outside that report.
+- Agents MUST check each comment that they are about to post to a pull request
+  against the two rules above before posting it.
 
 ## Links
 

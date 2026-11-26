@@ -72,7 +72,8 @@ This section defines how Rust code selects code for a platform.
 ### Rules
 
 - Rust source code MUST select platform-specific code with `#[cfg(host =
-  "...")]`, and MUST NOT read the `CARGO_CFG_TARGET_*` environment variables.
+  "...")]` or `cfg!(host = "...")`, and MUST NOT read the `CARGO_CFG_TARGET_*`
+  environment variables.
 - The `CARGO_CFG_TARGET_*` environment variables MUST only be read in
   `build.rs`, which emits the `host` cfg.
 
