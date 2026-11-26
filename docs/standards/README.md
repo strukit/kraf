@@ -34,6 +34,6 @@ navigate the repository on their own through its document graph.
 - [REVIEW_STANDARDS.md](./REVIEW_STANDARDS.md): Standards for what a valid
   review contains, its scope, and its findings.
 - [REVIEW_REPORT_STANDARDS.md](./REVIEW_REPORT_STANDARDS.md): Standards for the
-  content and format of a review report, with its templates and examples.
+  content and format of a review report, with its templates.
 - [ADR_STANDARDS.md](./ADR_STANDARDS.md): Standards for architecture decision
   records, their location, identifiers, status, immutability, and layout.
