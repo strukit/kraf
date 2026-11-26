@@ -1,5 +1,5 @@
 ---
-description: Standards for the format of a review report, with its templates and examples.
+description: Standards for the content and format of a review report, with its templates and examples.
 tags: [review, report, findings, templates, standards]
 type: ["standard"]
 scope: ["**/*"]
@@ -31,9 +31,9 @@ language: en
 
 ## Overview
 
-This document defines the format of a review report: the templates that it
-follows, and how it presents its findings. What a report contains is defined in
-[REVIEW_STANDARDS.md](./REVIEW_STANDARDS.md#report).
+This document defines the content and format of a review report: the findings
+that it contains, the templates that it follows, and how it presents its
+findings.
 
 ## Terms
 
@@ -47,6 +47,22 @@ follows, and how it presents its findings. What a report contains is defined in
   reasoning effort, and the agent that ran the review.
 
 ## Rules
+
+### Report Content
+
+This section defines which findings a review report contains.
+
+#### Rules
+
+- A review report MUST contain every finding that meets the rules of
+  [REVIEW_STANDARDS.md](./REVIEW_STANDARDS.md), and only those.
+- The findings of a review report MUST NOT depend on a target number of
+  findings.
+- A review of the same change under the same rules MUST yield the same findings.
+- A review report MUST state, for each finding, its source and the rule or
+  defect it cites.
+- A review report MUST NOT list an unverified or a dropped candidate among its
+  findings.
 
 ### Report Templates
 
@@ -183,4 +199,4 @@ of failing candidates were applied to every change in the scope>
 - [README.md](./README.md): Index of the standards that govern this repository,
   to help people and agents navigate it on their own through the document graph.
 - [REVIEW_STANDARDS.md](./REVIEW_STANDARDS.md): Standards for what a valid
-  review contains, its scope, its findings, and its report.
+  review contains, its scope, and its findings.
